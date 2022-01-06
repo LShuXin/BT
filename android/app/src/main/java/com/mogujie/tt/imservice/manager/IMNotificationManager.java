@@ -7,8 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationCompat.Builder;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationCompat.Builder;
 import android.view.View;
 
 import com.mogujie.tt.DB.entity.GroupEntity;

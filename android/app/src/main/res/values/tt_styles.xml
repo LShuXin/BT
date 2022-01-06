@@ -23,7 +23,12 @@
         <item name="android:layout_height">wrap_content</item>
         
     </style>
-
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
     <style name="displayImage" parent="android:Theme.Translucent.NoTitleBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>

@@ -1,19 +1,22 @@
 apply plugin: 'com.android.application'
 
 repositories {
+    google()
     mavenCentral()
 }
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "21.1.1"
+    compileSdkVersion 28
 
     defaultConfig {
         applicationId "com.mogujie.tt"
-        minSdkVersion 11
-        targetSdkVersion 19
+        minSdkVersion 14
+        versionCode 5
+        versionName "2.0.0"
+        ndk {
+            abiFilters "armeabi-v7a", "x86", "armeabi", "mips"
+        }
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -21,11 +24,11 @@ android {
         }
     }
 
-    sourceSets.main.jni.srcDirs = [] //disable automatic ndk-build call
+    //disable automatic ndk-build call
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     lintOptions {
@@ -39,14 +42,24 @@ android {
 }
 
 dependencies {
-    compile project(':mgimlibs')
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:19.+'
-    compile 'com.google.protobuf:protobuf-java:2.6.1'
-    compile 'de.greenrobot:eventbus:2.4.0'
-    compile 'de.greenrobot:greendao:1.3.7'
-    compile 'com.google.code.gson:gson:2.3.1'
-    compile 'com.squareup.okhttp:okhttp:2.0.0'
-    compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
-    compile 'commons-io:commons-io:2.4'
+    implementation project(':mgimlibs')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.loopj.android:android-async-http:1.4.11'
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.google.protobuf:protobuf-java:2.6.1'
+    implementation 'de.greenrobot:eventbus:2.4.0'
+    implementation 'de.greenrobot:greendao:1.3.7'
+    implementation 'com.google.code.gson:gson:2.3.1'
+    implementation 'com.squareup.okhttp:okhttp:2.0.0'
+    implementation 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
+    implementation 'commons-io:commons-io:2.4'
+    implementation 'org.jboss.netty:netty:3.2.10.Final'
 }
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+

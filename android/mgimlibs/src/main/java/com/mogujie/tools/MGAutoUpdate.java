@@ -12,12 +12,12 @@ import android.os.Message;
 
 import com.mogujie.im.libs.R;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+import cz.msebera.android.httpclient.HttpEntity;
+import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.client.ClientProtocolException;
+import cz.msebera.android.httpclient.client.HttpClient;
+import cz.msebera.android.httpclient.client.methods.HttpGet;
+import cz.msebera.android.httpclient.impl.client.HttpClientBuilder;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -72,7 +72,7 @@ public class MGAutoUpdate {
     public void startDown(final String url) {  
         new Thread() {  
             public void run() {  
-                HttpClient client = new DefaultHttpClient();  
+                HttpClient client = HttpClientBuilder.create().build();
                 // params[0]代表连接的url  
                 HttpGet get = new HttpGet(url);  
                 HttpResponse response;  

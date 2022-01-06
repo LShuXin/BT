@@ -13,7 +13,7 @@ import com.mogujie.tt.DB.sp.SystemConfigSp;
 import com.mogujie.tt.R;
 import com.mogujie.tt.utils.Logger;
 
-import org.apache.http.Header;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Comparator;
 import java.util.Collections;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by zhujian on 15/3/12.

@@ -1,16 +1,25 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
-        jcenter()
+        google()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.0.1'
+        classpath 'com.android.tools.build:gradle:7.0.4'
     }
 }
 
 allprojects {
     repositories {
-        mavenLocal()
-        jcenter()
+        google()
+        mavenCentral()
     }
+//    gradle.projectsEvaluated {
+//        tasks.withType(JavaCompile) {
+//            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+//        }
+//    }
+}
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }

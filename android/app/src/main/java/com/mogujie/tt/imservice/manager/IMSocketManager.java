@@ -22,12 +22,12 @@ import com.mogujie.tt.protobuf.base.DataBuffer;
 import com.mogujie.tt.protobuf.base.DefaultHeader;
 import com.mogujie.tt.utils.Logger;
 
-import org.apache.http.Header;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBufferInputStream;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import cz.msebera.android.httpclient.Header;
 import de.greenrobot.event.EventBus;
 
 /**

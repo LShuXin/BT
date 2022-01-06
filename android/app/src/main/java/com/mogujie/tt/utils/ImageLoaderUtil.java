@@ -8,7 +8,7 @@ import android.view.WindowManager;
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.SysConstant;
 import com.mogujie.tt.ui.helper.CircleBitmapDisplayer;
-import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -53,7 +53,7 @@ public class ImageLoaderUtil {
                     .diskCacheFileNameGenerator(new Md5FileNameGenerator())
                     .tasksProcessingOrder(QueueProcessingType.LIFO)
                     .diskCacheExtraOptions(metrics.widthPixels, metrics.heightPixels, null)
-                    .diskCache(new UnlimitedDiscCache(cacheDir,reserveCacheDir,new Md5FileNameGenerator()))
+                    .diskCache(new UnlimitedDiskCache(cacheDir,reserveCacheDir,new Md5FileNameGenerator()))
                     .diskCacheSize(1024 * 1024 * 1024)
                     .diskCacheFileCount(1000)
                     .build();
