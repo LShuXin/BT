@@ -1,5 +1,7 @@
 .vs
-/.vscode
+.vscode
+.idea
+.gradle
 /win-cliient/3rdParty/src/http/httpclient/x64/Debug
 /win-cliient/3rdParty/src/libogg/x64/Debug
 /win-cliient/3rdParty/src/libsecurity/win/security.dir/Debug
@@ -26,9 +28,13 @@
 /win-cliient/lib
 
 /android/mgimlibs/build
-
+/android/app/build
+/android/local.properties
+/android/daogenerator/build
+/android/daogenerator/bin
 /server/solution
 /server/src/libsecurity/android/jni/out/build/x64-Debug
 /server/src/libsecurity/src/out/build/x64-Debug
 /server/src/lib
 *.log
+
