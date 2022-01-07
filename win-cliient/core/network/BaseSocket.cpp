@@ -1,7 +1,7 @@
 #include "BaseSocket.h"
 #include "EventDispatch.h"
 
-typedef hash_map<net_handle_t, CBaseSocket*> SocketMap;
+typedef unordered_map<net_handle_t, CBaseSocket*> SocketMap;
 SocketMap	g_socket_map;
 
 void AddBaseSocket(CBaseSocket* pSocket)
@@ -283,17 +283,16 @@ void CBaseSocket::_SetAddr(const char* ip, const uint16_t port, sockaddr_in* pAd
 	memset(pAddr, 0, sizeof(sockaddr_in));
 	pAddr->sin_family = AF_INET;
 	pAddr->sin_port = htons(port);
-	pAddr->sin_addr.s_addr = inet_addr(ip);
+	inet_pton(AF_INET, ip, &pAddr->sin_addr.s_addr);
 	if (pAddr->sin_addr.s_addr == INADDR_NONE)
 	{
-		hostent* host = gethostbyname(ip);
+		int host = gethostname((char*)ip,255);
 		if (host == NULL)
 		{
 			LOGA__(NET, "gethostbyname failed, ip=%s", ip);
 			return;
 		}
-
-		pAddr->sin_addr.s_addr = *(uint32_t*)host->h_addr;
+		inet_pton(AF_INET, (char*)ip, &pAddr->sin_addr.s_addr);
 	}
 }
 

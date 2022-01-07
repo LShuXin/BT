@@ -14,19 +14,20 @@
     <ProjectGuid>{6E182BBC-17D4-4E11-8580-44A546D6ACF0}</ProjectGuid>
     <RootNamespace>Modules</RootNamespace>
     <Keyword>MFCDLLProj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
@@ -56,18 +57,22 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_USRDLL;MODULE_DLL;JSON_DLL;_SCL_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;_CRT_SECURE_NO_WARNINGS;_CRT_NON_CONFORMING_SWPRINTFS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_HAS_STD_BYTE=0;_WINDOWS;_DEBUG;_USRDLL;MODULE_DLL;SECURITY_WIN32;JSON_DLL;_SCL_SECURE_NO_WARNINGS;_CRTDBG_MAP_ALLOC;_CRT_SECURE_NO_WARNINGS;_CRT_NON_CONFORMING_SWPRINTFS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\;$(SolutionDir)..\include;$(SolutionDir)..\3rdParty\include;$(SolutionDir)..\3rdParty\src\;$(SolutionDir)..\3rdParty\src\cximage\cxImage\;$(SolutionDir)..\3rdParty\src\cximage\cxImage\zlib;$(SolutionDir)..\3rdParty\src\json\include\;$(SolutionDir)\..\core\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;$(SolutionDir)..\include;$(SolutionDir)..\3rdParty\include;$(SolutionDir)..\3rdParty\src\;$(SolutionDir)..\3rdParty\src\cximage\cxImage\;$(SolutionDir)..\3rdParty\src\cximage\cxImage\zlib;$(SolutionDir)..\3rdParty\src\json\include\;$(SolutionDir)..\core\</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/FS %(AdditionalOptions) </AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ModuleDefinitionFile>.\Modules.def</ModuleDefinitionFile>
       <ImportLibrary>$(SolutionDir)..\lib\$(Configuration)\$(TargetName).lib</ImportLibrary>
-      <AdditionalDependencies>utility.lib;network.lib;httpclient.lib;Winmm.lib;DuiLib.lib;libprotobuf-lite.lib;mfcs120ud.lib;MSVCRTD.lib;security.lib</AdditionalDependencies>
+      <AdditionalDependencies>utility.lib;network.lib;httpclient.lib;Winmm.lib;DuiLib.lib;libprotobuf-lited.lib;mfcs140ud.lib;MSVCRTD.lib;security.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\..\lib\$(Configuration);$(SolutionDir)\..\3rdParty\lib\$(Configuration)</AdditionalLibraryDirectories>
-      <IgnoreSpecificDefaultLibraries>MSVCRTD.lib;mfcs120ud.lib</IgnoreSpecificDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>MSVCRTD.lib;mfcs140ud.lib</IgnoreSpecificDefaultLibraries>
+      <PerUserRedirection>false</PerUserRedirection>
+      <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -91,7 +96,9 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_USRDLL;MODULE_DLL;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_CRT_NON_CONFORMING_SWPRINTFS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\;$(SolutionDir)..\include;$(SolutionDir)..\3rdParty\include;$(SolutionDir)..\3rdParty\src\;$(SolutionDir)..\3rdParty\src\cximage\cxImage\;$(SolutionDir)..\3rdParty\src\json\include\;$(SolutionDir)\..\core\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;$(SolutionDir)..\include;$(SolutionDir)..\3rdParty\include;$(SolutionDir)..\3rdParty\src\;$(SolutionDir)..\3rdParty\src\cximage\cxImage\;$(SolutionDir)..\3rdParty\src\json\include\;$(SolutionDir)..\core\</AdditionalIncludeDirectories>
+      <AdditionalOptions>/FS %(AdditionalOptions) </AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -100,9 +107,11 @@
       <OptimizeReferences>true</OptimizeReferences>
       <ModuleDefinitionFile>.\Modules.def</ModuleDefinitionFile>
       <ImportLibrary>$(SolutionDir)..\lib\$(Configuration)\$(TargetName).lib</ImportLibrary>
-      <AdditionalDependencies>utility.lib;network.lib;httpclient.lib;Winmm.lib;DuiLib.lib;libprotobuf-lite.lib;mfcs120u.lib;MSVCRT.lib;security.lib</AdditionalDependencies>
+      <AdditionalDependencies>utility.lib;network.lib;httpclient.lib;Winmm.lib;DuiLib.lib;mfcs140u.lib;MSVCRT.lib;security.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\..\lib\$(Configuration);$(SolutionDir)\..\3rdParty\lib\$(Configuration)</AdditionalLibraryDirectories>
-      <IgnoreSpecificDefaultLibraries>MSVCRT.lib;mfcs120u.lib</IgnoreSpecificDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>MSVCRT.lib;mfcs140u.lib</IgnoreSpecificDefaultLibraries>
+      <PerUserRedirection>false</PerUserRedirection>
+      <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -613,6 +622,7 @@
     <ClInclude Include="..\..\include\Modules\IDatabaseModule.h" />
     <ClInclude Include="..\..\include\Modules\IEmotionModule.h" />
     <ClInclude Include="..\..\include\Modules\IEvent.h" />
+    <ClInclude Include="..\..\include\Modules\IFileTransferModule.h" />
     <ClInclude Include="..\..\include\Modules\IGroupListModule.h" />
     <ClInclude Include="..\..\include\Modules\IHttpPoolModule.h" />
     <ClInclude Include="..\..\include\Modules\ILoginModule.h" />
@@ -620,6 +630,7 @@
     <ClInclude Include="..\..\include\Modules\IMiscModule.h" />
     <ClInclude Include="..\..\include\Modules\IModuleInterface.h" />
     <ClInclude Include="..\..\include\Modules\IP2PCmdModule.h" />
+    <ClInclude Include="..\..\include\Modules\IScreenCaptureModule.h" />
     <ClInclude Include="..\..\include\Modules\ISessionModule.h" />
     <ClInclude Include="..\..\include\Modules\ISysConfigModule.h" />
     <ClInclude Include="..\..\include\Modules\ITcpClientModule.h" />
@@ -653,6 +664,12 @@
     <ClInclude Include="Emotion\EmotionDialog.h" />
     <ClInclude Include="Emotion\EmotionModule_Impl.h" />
     <ClInclude Include="Emotion\EmoCfgParseTool.h" />
+    <ClInclude Include="FileTransfer\FileTransferDialog.h" />
+    <ClInclude Include="FileTransfer\FileTransferModule_Impl.h" />
+    <ClInclude Include="FileTransfer\FileTransferSocket.h" />
+    <ClInclude Include="FileTransfer\FileTransferUIThread.h" />
+    <ClInclude Include="FileTransfer\TransferFile.h" />
+    <ClInclude Include="FileTransfer\TransferManager.h" />
     <ClInclude Include="GroupList\GroupListModule_Impl.h" />
     <ClInclude Include="GroupList\UI\ChangeDiscussionGrpMemberDialog.h" />
     <ClInclude Include="GroupList\UI\CreateDiscussionGrpDialog.h" />
@@ -669,6 +686,19 @@
     <ClInclude Include="Modules.h" />
     <ClInclude Include="P2PCmd\P2PCmdModule_Impl.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="ScreenCapture\ScreenCaptureModule_Impl.h" />
+    <ClInclude Include="ScreenCapture\ScreenCapture\CaptureMode\AutoSelectMode.h" />
+    <ClInclude Include="ScreenCapture\ScreenCapture\CaptureMode\CaptureMode.h" />
+    <ClInclude Include="ScreenCapture\ScreenCapture\CaptureMode\ManalEditMode.h" />
+    <ClInclude Include="ScreenCapture\ScreenCapture\CaptureMode\ManalSelectMode.h" />
+    <ClInclude Include="ScreenCapture\ScreenCapture\CaptureMode\ModeComm.h" />
+    <ClInclude Include="ScreenCapture\ScreenCapture\Common.h" />
+    <ClInclude Include="ScreenCapture\ScreenCapture\ScreenCapture.h" />
+    <ClInclude Include="ScreenCapture\ScreenCapture\ScreenSnapshot.h" />
+    <ClInclude Include="ScreenCapture\ScreenCapture\UI\BkgroundUI.h" />
+    <ClInclude Include="ScreenCapture\ScreenCapture\UI\Dlgbase.h" />
+    <ClInclude Include="ScreenCapture\ScreenCapture\UI\EditToolbarUI.h" />
+    <ClInclude Include="ScreenCapture\ScreenCapture\UI\UIMgr.h" />
     <ClInclude Include="Session\Operation\DownloadAvatarHttpOperation.h" />
     <ClInclude Include="Session\Operation\SendImgHttpOperation.h" />
     <ClInclude Include="Session\Operation\SyncTimerTimer.h" />

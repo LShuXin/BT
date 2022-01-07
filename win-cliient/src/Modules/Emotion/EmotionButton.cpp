@@ -266,7 +266,7 @@ void CEmotionButton::DoEvent(TEventUI& event)
 						CxImage* pFrame = pImg->GetFrame(curFrame);
 
 						//QQ表情的帧延时通常是10毫秒，显示速度过快，因此增大到50毫秒
-						if(pFrame != NULL) frameDelay = max(frameDelay, pFrame->GetFrameDelay());
+						if(pFrame != NULL) frameDelay = max((long)frameDelay, (long)pFrame->GetFrameDelay());
 
 						frameCount = pImg->GetNumFrames();
  
@@ -316,7 +316,7 @@ void CEmotionButton::DoEvent(TEventUI& event)
 				//QQ表情的帧延时通常是10毫秒，显示速度过快，因此增大到100毫秒
 				pFrame = pImg->GetFrame(curFrame);
 				
-				if(pFrame) frameDelay = max(frameDelay, pFrame->GetFrameDelay());
+				if(pFrame) frameDelay = max((long)frameDelay, (long)pFrame->GetFrameDelay());
  
 				UpdateSelectedFace(curPage, curSel, curFrame, pvstatus);
 				this->Invalidate();

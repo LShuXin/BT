@@ -203,6 +203,11 @@ void SessionLayout::_CreateMenu(IN const TNotifyUI& msg)
 	CListUI* pList = static_cast<CListUI*>(msg.pSender);
 	PTR_VOID(pList);
 	int nPos = pList->GetCurSel();
+	if (nPos == -1)
+	{
+		LOG__(DEBG, _T("SessionLayout::_CreateMenu pList->GetCurSel() = %d"), nPos);
+		return;
+	}
 	CControlUI* pControl = pList->GetItemAt(nPos);
 	PTR_VOID(pControl);
 	CDuiString csId = pControl->GetUserData();
