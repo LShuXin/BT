@@ -12,6 +12,7 @@
 #include <mutex>
 #include <list>
 #include <thread>
+#include <functional>
 /******************************************************************************/
 NAMESPACE_BEGIN(imcore)
 

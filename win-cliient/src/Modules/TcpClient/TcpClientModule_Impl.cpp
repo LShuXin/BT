@@ -202,12 +202,12 @@ void TcpClientModule_Impl::sendPacket(UInt16 moduleId, UInt16 cmdId, UInt16 seq,
 
 void TcpClientModule_Impl::_sendPacket(google::protobuf::MessageLite* pbBody)
 {
-	UInt32 length = imcore::HEADER_LENGTH + pbBody->ByteSize();
+	UInt32 length = imcore::HEADER_LENGTH + pbBody->ByteSizeLong();
 	m_TTPBHeader.setLength(length);
 	std::unique_ptr<byte> data(new byte[length]);
 	memset(data.get(), 0, length);
 	memcpy(data.get(), m_TTPBHeader.getSerializeBuffer(), imcore::HEADER_LENGTH);
-	if (!pbBody->SerializeToArray(data.get() + imcore::HEADER_LENGTH, pbBody->ByteSize()))
+	if (!pbBody->SerializeToArray(data.get() + imcore::HEADER_LENGTH, pbBody->ByteSizeLong()))
 	{
 		LOG__(ERR, _T("pbBody SerializeToArray failed"));
 		return;

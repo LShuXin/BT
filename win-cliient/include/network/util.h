@@ -39,7 +39,7 @@ template<> struct hash<std::string> {
 };
 }
 #else
-#include <hash_map>
+#include <unordered_map>
 using namespace stdext;
 #endif
 #ifdef ANDROID

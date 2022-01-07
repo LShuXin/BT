@@ -8,6 +8,14 @@ https://blog.csdn.net/lsqtzj/article/details/119456161</br>
 2022年1月6日 项目更新到 Android Studio 2020.3.1.26 版本</br>
 Android Gradle Plugin   7.0.4</br>
 Gradle                  7.0.2
+## Windows
+更新到 Visual Studio 2019 (v142)  ISO C++17 标准 (/std:c++17)</br>
+win-cliient\solution\teamtalk.sln(需要管理员模式打开)
+### 库安装
+需要安装 vcpkg https://github.com/microsoft/vcpkg#quick-start-windows</br>
+vcpkg install protobuf[core]:x86-windows</br>
+protobuf    -> 3.18.0</br>
+protobuf 更新后可以替换/pb/protoc.exe 后重新运行make_PB_Files.bat 生成PB协议文件
 ## 命令行转换
 下载https://sourceforge.net/projects/dos2unix/</br>
 

@@ -20,7 +20,7 @@
 #include "utility/utilCommonAPI.h"
 #include "utility/utilStrCodingAPI.h"
 #include "network/ImCore.h"
-#include "security.h"
+#include <libsecurity/include/security.h>
 
 DUI_BEGIN_MESSAGE_MAP(LoginDialog, WindowImplBase)
 	DUI_ON_MSGTYPE(DUI_MSGTYPE_WINDOWINIT, OnWindowInitialized)

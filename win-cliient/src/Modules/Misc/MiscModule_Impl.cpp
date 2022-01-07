@@ -14,6 +14,7 @@
 #include "network/ImCore.h"
 #include "security.h"
 #include <MMSystem.h>
+#include <libsecurity/include/security.h>
 /******************************************************************************/
 namespace module
 {
