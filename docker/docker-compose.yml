@@ -1,4 +1,5 @@
 version: "3.8"
+  
 services:
   develop_server:
     image: lsqtzj/teamtalk_develop_server
@@ -320,7 +321,7 @@ services:
     hostname: mariadb_server
     volumes:
       - ./mysql_data:/var/lib/mysql
-      - ./auto_setup/mariadb/conf:/docker-entrypoint-initdb.d
+      - ../auto_setup/mariadb/conf:/docker-entrypoint-initdb.d
     networks:
       teamtalk:
         ipv4_address: 6.1.0.8

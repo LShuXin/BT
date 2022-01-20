@@ -38,4 +38,4 @@
 /server/src/lib
 *.log
 
-/mysql_data
+/docker/mysql_data

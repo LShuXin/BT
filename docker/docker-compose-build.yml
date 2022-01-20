@@ -1,9 +1,10 @@
 version: "3.8"
+
 services:
   develop_server:
     image: lsqtzj/teamtalk_develop_server
     build:
-      context: .
+      context: ../
       dockerfile: docker/develop_server/Dockerfile
     restart: always
     container_name: develop_server
@@ -30,7 +31,7 @@ services:
   web_server:
     image: lsqtzj/teamtalk_web_server
     build:
-      context: .
+      context: ../
       dockerfile: docker/web_server/Dockerfile
     restart: always
     container_name: web_server
@@ -69,7 +70,7 @@ services:
   login_server:
     image: lsqtzj/teamtalk_login_server
     build:
-      context: .
+      context: ../
       dockerfile: docker/login_server/Dockerfile
     restart: always
     container_name: login_server
@@ -105,7 +106,7 @@ services:
   msg_server:
     image: lsqtzj/teamtalk_msg_server
     build:
-      context: .
+      context: ../
       dockerfile: docker/msg_server/Dockerfile
     restart: always
     container_name: msg_server
@@ -145,7 +146,7 @@ services:
   db_proxy_server:
     image: lsqtzj/teamtalk_db_proxy_server
     build:
-      context: .
+      context: ../
       dockerfile: docker/db_proxy_server/Dockerfile
     restart: always
     container_name: db_proxy_server
@@ -188,7 +189,7 @@ services:
   route_server:
     image: lsqtzj/teamtalk_route_server
     build:
-      context: .
+      context: ../
       dockerfile: docker/route_server/Dockerfile
     restart: always
     container_name: route_server
@@ -221,7 +222,7 @@ services:
   http_msg_server:
     image: lsqtzj/teamtalk_http_msg_server
     build:
-      context: .
+      context: ../
       dockerfile: docker/http_msg_server/Dockerfile
     restart: always
     container_name: http_msg_server
@@ -256,7 +257,7 @@ services:
   push_server:
     image: lsqtzj/teamtalk_push_server
     build:
-      context: .
+      context: ../
       dockerfile: docker/push_server/Dockerfile
     restart: always
     container_name: push_server
@@ -289,7 +290,7 @@ services:
   file_server:
     image: lsqtzj/teamtalk_file_server
     build:
-      context: .
+      context: ../
       dockerfile: docker/file_server/Dockerfile
     restart: always
     container_name: file_server
@@ -322,7 +323,7 @@ services:
   msfs_server:
     image: lsqtzj/teamtalk_msfs_server
     build:
-      context: .
+      context: ../
       dockerfile: docker/msfs_server/Dockerfile
     restart: always
     container_name: msfs_server
@@ -359,7 +360,7 @@ services:
     hostname: mariadb_server
     volumes:
       - ./mysql_data:/var/lib/mysql
-      - ./auto_setup/mariadb/conf:/docker-entrypoint-initdb.d
+      - ../auto_setup/mariadb/conf:/docker-entrypoint-initdb.d
     networks:
       teamtalk:
         ipv4_address: 6.1.0.8

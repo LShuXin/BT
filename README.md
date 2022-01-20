@@ -21,8 +21,10 @@ protobuf 更新后可以替换/pb/protoc.exe 后重新运行make_PB_Files.bat �
 基于 openeuler/openeuler:20.03 系统的 docker 容器系统，方便快速调试。
 ![image](https://user-images.githubusercontent.com/4635861/150361679-a56f862f-ff1f-4c99-bcf3-2d4e4719d143.png)
 ## 直接运行版本
+cd docker</br>
 docker-compose up -d
 ## 编译版本
+cd docker</br>
 docker-compose -f "docker-compose-build.yml" up -d --build
 ### b'i/o timeout' 问题
 重复执行 docker-compose *** 命令就可以解决。
