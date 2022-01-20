@@ -1,6 +1,6 @@
 #基本
 CC = g++
-CFLAGS=-Wall -Wno-deprecated -g -std=c++11
+CFLAGS=-Wall -Wno-deprecated -g -std=c++17
 LDFLAGS= -lbase -lpthread -lprotobuf-lite -lslog -lcurl
 ifeq ($(shell uname), Darwin)
 #CFLAGS := $(CFLAGS) -Os -framework Cocoa

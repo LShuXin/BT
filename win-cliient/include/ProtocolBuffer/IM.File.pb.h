@@ -141,13 +141,6 @@ class IMFileLoginReq final :
     return *this;
   }
 
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
-  }
-
   static const IMFileLoginReq& default_instance() {
     return *internal_default_instance();
   }
@@ -225,11 +218,7 @@ class IMFileLoginReq final :
     kUserIdFieldNumber = 1,
     kFileRoleFieldNumber = 3,
   };
-  // required string task_id = 2;
-  bool has_task_id() const;
-  private:
-  bool _internal_has_task_id() const;
-  public:
+  // string task_id = 2;
   void clear_task_id();
   const std::string& task_id() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -243,11 +232,7 @@ class IMFileLoginReq final :
   std::string* _internal_mutable_task_id();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -256,11 +241,7 @@ class IMFileLoginReq final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required .IM.BaseDefine.ClientFileRole file_role = 3;
-  bool has_file_role() const;
-  private:
-  bool _internal_has_file_role() const;
-  public:
+  // .IM.BaseDefine.ClientFileRole file_role = 3;
   void clear_file_role();
   ::IM::BaseDefine::ClientFileRole file_role() const;
   void set_file_role(::IM::BaseDefine::ClientFileRole value);
@@ -273,17 +254,13 @@ class IMFileLoginReq final :
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr task_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
   int file_role_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eFile_2eproto;
 };
 // -------------------------------------------------------------------
@@ -317,13 +294,6 @@ class IMFileLoginRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMFileLoginRsp& default_instance() {
@@ -402,11 +372,7 @@ class IMFileLoginRsp final :
     kTaskIdFieldNumber = 2,
     kResultCodeFieldNumber = 1,
   };
-  // required string task_id = 2;
-  bool has_task_id() const;
-  private:
-  bool _internal_has_task_id() const;
-  public:
+  // string task_id = 2;
   void clear_task_id();
   const std::string& task_id() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -420,11 +386,7 @@ class IMFileLoginRsp final :
   std::string* _internal_mutable_task_id();
   public:
 
-  // required uint32 result_code = 1;
-  bool has_result_code() const;
-  private:
-  bool _internal_has_result_code() const;
-  public:
+  // uint32 result_code = 1;
   void clear_result_code();
   ::PROTOBUF_NAMESPACE_ID::uint32 result_code() const;
   void set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -437,16 +399,12 @@ class IMFileLoginRsp final :
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr task_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 result_code_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eFile_2eproto;
 };
 // -------------------------------------------------------------------
@@ -480,13 +438,6 @@ class IMFileState final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMFileState& default_instance() {
@@ -566,11 +517,7 @@ class IMFileState final :
     kStateFieldNumber = 1,
     kUserIdFieldNumber = 3,
   };
-  // required string task_id = 2;
-  bool has_task_id() const;
-  private:
-  bool _internal_has_task_id() const;
-  public:
+  // string task_id = 2;
   void clear_task_id();
   const std::string& task_id() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -584,11 +531,7 @@ class IMFileState final :
   std::string* _internal_mutable_task_id();
   public:
 
-  // required .IM.BaseDefine.ClientFileState state = 1;
-  bool has_state() const;
-  private:
-  bool _internal_has_state() const;
-  public:
+  // .IM.BaseDefine.ClientFileState state = 1;
   void clear_state();
   ::IM::BaseDefine::ClientFileState state() const;
   void set_state(::IM::BaseDefine::ClientFileState value);
@@ -597,11 +540,7 @@ class IMFileState final :
   void _internal_set_state(::IM::BaseDefine::ClientFileState value);
   public:
 
-  // required uint32 user_id = 3;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 3;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -614,17 +553,13 @@ class IMFileState final :
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr task_id_;
   int state_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eFile_2eproto;
 };
 // -------------------------------------------------------------------
@@ -658,13 +593,6 @@ class IMFilePullDataReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMFilePullDataReq& default_instance() {
@@ -742,15 +670,11 @@ class IMFilePullDataReq final :
   enum : int {
     kTaskIdFieldNumber = 1,
     kUserIdFieldNumber = 2,
+    kTransModeFieldNumber = 3,
     kOffsetFieldNumber = 4,
     kDataSizeFieldNumber = 5,
-    kTransModeFieldNumber = 3,
   };
-  // required string task_id = 1;
-  bool has_task_id() const;
-  private:
-  bool _internal_has_task_id() const;
-  public:
+  // string task_id = 1;
   void clear_task_id();
   const std::string& task_id() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -764,11 +688,7 @@ class IMFilePullDataReq final :
   std::string* _internal_mutable_task_id();
   public:
 
-  // required uint32 user_id = 2;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 2;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -777,37 +697,7 @@ class IMFilePullDataReq final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 offset = 4;
-  bool has_offset() const;
-  private:
-  bool _internal_has_offset() const;
-  public:
-  void clear_offset();
-  ::PROTOBUF_NAMESPACE_ID::uint32 offset() const;
-  void set_offset(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_offset() const;
-  void _internal_set_offset(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required uint32 data_size = 5;
-  bool has_data_size() const;
-  private:
-  bool _internal_has_data_size() const;
-  public:
-  void clear_data_size();
-  ::PROTOBUF_NAMESPACE_ID::uint32 data_size() const;
-  void set_data_size(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_data_size() const;
-  void _internal_set_data_size(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required .IM.BaseDefine.FileType trans_mode = 3;
-  bool has_trans_mode() const;
-  private:
-  bool _internal_has_trans_mode() const;
-  public:
+  // .IM.BaseDefine.FileType trans_mode = 3;
   void clear_trans_mode();
   ::IM::BaseDefine::FileType trans_mode() const;
   void set_trans_mode(::IM::BaseDefine::FileType value);
@@ -816,23 +706,37 @@ class IMFilePullDataReq final :
   void _internal_set_trans_mode(::IM::BaseDefine::FileType value);
   public:
 
+  // uint32 offset = 4;
+  void clear_offset();
+  ::PROTOBUF_NAMESPACE_ID::uint32 offset() const;
+  void set_offset(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_offset() const;
+  void _internal_set_offset(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // uint32 data_size = 5;
+  void clear_data_size();
+  ::PROTOBUF_NAMESPACE_ID::uint32 data_size() const;
+  void set_data_size(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_data_size() const;
+  void _internal_set_data_size(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:IM.File.IMFilePullDataReq)
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr task_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
+  int trans_mode_;
   ::PROTOBUF_NAMESPACE_ID::uint32 offset_;
   ::PROTOBUF_NAMESPACE_ID::uint32 data_size_;
-  int trans_mode_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eFile_2eproto;
 };
 // -------------------------------------------------------------------
@@ -866,13 +770,6 @@ class IMFilePullDataRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMFilePullDataRsp& default_instance() {
@@ -954,11 +851,7 @@ class IMFilePullDataRsp final :
     kUserIdFieldNumber = 3,
     kOffsetFieldNumber = 4,
   };
-  // required string task_id = 2;
-  bool has_task_id() const;
-  private:
-  bool _internal_has_task_id() const;
-  public:
+  // string task_id = 2;
   void clear_task_id();
   const std::string& task_id() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -972,11 +865,7 @@ class IMFilePullDataRsp final :
   std::string* _internal_mutable_task_id();
   public:
 
-  // required bytes data = 5;
-  bool has_data() const;
-  private:
-  bool _internal_has_data() const;
-  public:
+  // bytes data = 5;
   void clear_data();
   const std::string& data() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -990,11 +879,7 @@ class IMFilePullDataRsp final :
   std::string* _internal_mutable_data();
   public:
 
-  // required uint32 result_code = 1;
-  bool has_result_code() const;
-  private:
-  bool _internal_has_result_code() const;
-  public:
+  // uint32 result_code = 1;
   void clear_result_code();
   ::PROTOBUF_NAMESPACE_ID::uint32 result_code() const;
   void set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1003,11 +888,7 @@ class IMFilePullDataRsp final :
   void _internal_set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 user_id = 3;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 3;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1016,11 +897,7 @@ class IMFilePullDataRsp final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 offset = 4;
-  bool has_offset() const;
-  private:
-  bool _internal_has_offset() const;
-  public:
+  // uint32 offset = 4;
   void clear_offset();
   ::PROTOBUF_NAMESPACE_ID::uint32 offset() const;
   void set_offset(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1033,19 +910,15 @@ class IMFilePullDataRsp final :
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr task_id_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr data_;
   ::PROTOBUF_NAMESPACE_ID::uint32 result_code_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 offset_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eFile_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1079,13 +952,6 @@ class IMFileReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMFileReq& default_instance() {
@@ -1167,11 +1033,7 @@ class IMFileReq final :
     kFileSizeFieldNumber = 4,
     kTransModeFieldNumber = 5,
   };
-  // required string file_name = 3;
-  bool has_file_name() const;
-  private:
-  bool _internal_has_file_name() const;
-  public:
+  // string file_name = 3;
   void clear_file_name();
   const std::string& file_name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1185,11 +1047,7 @@ class IMFileReq final :
   std::string* _internal_mutable_file_name();
   public:
 
-  // required uint32 from_user_id = 1;
-  bool has_from_user_id() const;
-  private:
-  bool _internal_has_from_user_id() const;
-  public:
+  // uint32 from_user_id = 1;
   void clear_from_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 from_user_id() const;
   void set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1198,11 +1056,7 @@ class IMFileReq final :
   void _internal_set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 to_user_id = 2;
-  bool has_to_user_id() const;
-  private:
-  bool _internal_has_to_user_id() const;
-  public:
+  // uint32 to_user_id = 2;
   void clear_to_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 to_user_id() const;
   void set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1211,11 +1065,7 @@ class IMFileReq final :
   void _internal_set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 file_size = 4;
-  bool has_file_size() const;
-  private:
-  bool _internal_has_file_size() const;
-  public:
+  // uint32 file_size = 4;
   void clear_file_size();
   ::PROTOBUF_NAMESPACE_ID::uint32 file_size() const;
   void set_file_size(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1224,11 +1074,7 @@ class IMFileReq final :
   void _internal_set_file_size(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required .IM.BaseDefine.FileType trans_mode = 5;
-  bool has_trans_mode() const;
-  private:
-  bool _internal_has_trans_mode() const;
-  public:
+  // .IM.BaseDefine.FileType trans_mode = 5;
   void clear_trans_mode();
   ::IM::BaseDefine::FileType trans_mode() const;
   void set_trans_mode(::IM::BaseDefine::FileType value);
@@ -1241,19 +1087,15 @@ class IMFileReq final :
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr file_name_;
   ::PROTOBUF_NAMESPACE_ID::uint32 from_user_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 to_user_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 file_size_;
   int trans_mode_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eFile_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1287,13 +1129,6 @@ class IMFileRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMFileRsp& default_instance() {
@@ -1395,11 +1230,7 @@ class IMFileRsp final :
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::IM::BaseDefine::IpAddr >&
       ip_addr_list() const;
 
-  // required string file_name = 4;
-  bool has_file_name() const;
-  private:
-  bool _internal_has_file_name() const;
-  public:
+  // string file_name = 4;
   void clear_file_name();
   const std::string& file_name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1413,11 +1244,7 @@ class IMFileRsp final :
   std::string* _internal_mutable_file_name();
   public:
 
-  // required string task_id = 5;
-  bool has_task_id() const;
-  private:
-  bool _internal_has_task_id() const;
-  public:
+  // string task_id = 5;
   void clear_task_id();
   const std::string& task_id() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1431,11 +1258,7 @@ class IMFileRsp final :
   std::string* _internal_mutable_task_id();
   public:
 
-  // required uint32 result_code = 1;
-  bool has_result_code() const;
-  private:
-  bool _internal_has_result_code() const;
-  public:
+  // uint32 result_code = 1;
   void clear_result_code();
   ::PROTOBUF_NAMESPACE_ID::uint32 result_code() const;
   void set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1444,11 +1267,7 @@ class IMFileRsp final :
   void _internal_set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 from_user_id = 2;
-  bool has_from_user_id() const;
-  private:
-  bool _internal_has_from_user_id() const;
-  public:
+  // uint32 from_user_id = 2;
   void clear_from_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 from_user_id() const;
   void set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1457,11 +1276,7 @@ class IMFileRsp final :
   void _internal_set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 to_user_id = 3;
-  bool has_to_user_id() const;
-  private:
-  bool _internal_has_to_user_id() const;
-  public:
+  // uint32 to_user_id = 3;
   void clear_to_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 to_user_id() const;
   void set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1470,11 +1285,7 @@ class IMFileRsp final :
   void _internal_set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required .IM.BaseDefine.FileType trans_mode = 7;
-  bool has_trans_mode() const;
-  private:
-  bool _internal_has_trans_mode() const;
-  public:
+  // .IM.BaseDefine.FileType trans_mode = 7;
   void clear_trans_mode();
   ::IM::BaseDefine::FileType trans_mode() const;
   void set_trans_mode(::IM::BaseDefine::FileType value);
@@ -1487,14 +1298,9 @@ class IMFileRsp final :
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::IM::BaseDefine::IpAddr > ip_addr_list_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr file_name_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr task_id_;
@@ -1502,6 +1308,7 @@ class IMFileRsp final :
   ::PROTOBUF_NAMESPACE_ID::uint32 from_user_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 to_user_id_;
   int trans_mode_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eFile_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1535,13 +1342,6 @@ class IMFileNotify final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMFileNotify& default_instance() {
@@ -1623,8 +1423,8 @@ class IMFileNotify final :
     kFromUserIdFieldNumber = 1,
     kToUserIdFieldNumber = 2,
     kFileSizeFieldNumber = 4,
-    kOfflineReadyFieldNumber = 8,
     kTransModeFieldNumber = 7,
+    kOfflineReadyFieldNumber = 8,
   };
   // repeated .IM.BaseDefine.IpAddr ip_addr_list = 6;
   int ip_addr_list_size() const;
@@ -1644,11 +1444,7 @@ class IMFileNotify final :
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::IM::BaseDefine::IpAddr >&
       ip_addr_list() const;
 
-  // required string file_name = 3;
-  bool has_file_name() const;
-  private:
-  bool _internal_has_file_name() const;
-  public:
+  // string file_name = 3;
   void clear_file_name();
   const std::string& file_name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1662,11 +1458,7 @@ class IMFileNotify final :
   std::string* _internal_mutable_file_name();
   public:
 
-  // required string task_id = 5;
-  bool has_task_id() const;
-  private:
-  bool _internal_has_task_id() const;
-  public:
+  // string task_id = 5;
   void clear_task_id();
   const std::string& task_id() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1680,11 +1472,7 @@ class IMFileNotify final :
   std::string* _internal_mutable_task_id();
   public:
 
-  // required uint32 from_user_id = 1;
-  bool has_from_user_id() const;
-  private:
-  bool _internal_has_from_user_id() const;
-  public:
+  // uint32 from_user_id = 1;
   void clear_from_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 from_user_id() const;
   void set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1693,11 +1481,7 @@ class IMFileNotify final :
   void _internal_set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 to_user_id = 2;
-  bool has_to_user_id() const;
-  private:
-  bool _internal_has_to_user_id() const;
-  public:
+  // uint32 to_user_id = 2;
   void clear_to_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 to_user_id() const;
   void set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1706,11 +1490,7 @@ class IMFileNotify final :
   void _internal_set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 file_size = 4;
-  bool has_file_size() const;
-  private:
-  bool _internal_has_file_size() const;
-  public:
+  // uint32 file_size = 4;
   void clear_file_size();
   ::PROTOBUF_NAMESPACE_ID::uint32 file_size() const;
   void set_file_size(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1719,24 +1499,7 @@ class IMFileNotify final :
   void _internal_set_file_size(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 offline_ready = 8;
-  bool has_offline_ready() const;
-  private:
-  bool _internal_has_offline_ready() const;
-  public:
-  void clear_offline_ready();
-  ::PROTOBUF_NAMESPACE_ID::uint32 offline_ready() const;
-  void set_offline_ready(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_offline_ready() const;
-  void _internal_set_offline_ready(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required .IM.BaseDefine.FileType trans_mode = 7;
-  bool has_trans_mode() const;
-  private:
-  bool _internal_has_trans_mode() const;
-  public:
+  // .IM.BaseDefine.FileType trans_mode = 7;
   void clear_trans_mode();
   ::IM::BaseDefine::FileType trans_mode() const;
   void set_trans_mode(::IM::BaseDefine::FileType value);
@@ -1745,26 +1508,31 @@ class IMFileNotify final :
   void _internal_set_trans_mode(::IM::BaseDefine::FileType value);
   public:
 
+  // uint32 offline_ready = 8;
+  void clear_offline_ready();
+  ::PROTOBUF_NAMESPACE_ID::uint32 offline_ready() const;
+  void set_offline_ready(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_offline_ready() const;
+  void _internal_set_offline_ready(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:IM.File.IMFileNotify)
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::IM::BaseDefine::IpAddr > ip_addr_list_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr file_name_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr task_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 from_user_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 to_user_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 file_size_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 offline_ready_;
   int trans_mode_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 offline_ready_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eFile_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1798,13 +1566,6 @@ class IMFileHasOfflineReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMFileHasOfflineReq& default_instance() {
@@ -1901,11 +1662,7 @@ class IMFileHasOfflineReq final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1958,13 +1715,6 @@ class IMFileHasOfflineRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMFileHasOfflineRsp& default_instance() {
@@ -2099,11 +1849,7 @@ class IMFileHasOfflineRsp final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2158,13 +1904,6 @@ class IMFileAddOfflineReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMFileAddOfflineReq& default_instance() {
@@ -2246,11 +1985,7 @@ class IMFileAddOfflineReq final :
     kToUserIdFieldNumber = 2,
     kFileSizeFieldNumber = 5,
   };
-  // required string task_id = 3;
-  bool has_task_id() const;
-  private:
-  bool _internal_has_task_id() const;
-  public:
+  // string task_id = 3;
   void clear_task_id();
   const std::string& task_id() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -2264,11 +1999,7 @@ class IMFileAddOfflineReq final :
   std::string* _internal_mutable_task_id();
   public:
 
-  // required string file_name = 4;
-  bool has_file_name() const;
-  private:
-  bool _internal_has_file_name() const;
-  public:
+  // string file_name = 4;
   void clear_file_name();
   const std::string& file_name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -2282,11 +2013,7 @@ class IMFileAddOfflineReq final :
   std::string* _internal_mutable_file_name();
   public:
 
-  // required uint32 from_user_id = 1;
-  bool has_from_user_id() const;
-  private:
-  bool _internal_has_from_user_id() const;
-  public:
+  // uint32 from_user_id = 1;
   void clear_from_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 from_user_id() const;
   void set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2295,11 +2022,7 @@ class IMFileAddOfflineReq final :
   void _internal_set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 to_user_id = 2;
-  bool has_to_user_id() const;
-  private:
-  bool _internal_has_to_user_id() const;
-  public:
+  // uint32 to_user_id = 2;
   void clear_to_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 to_user_id() const;
   void set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2308,11 +2031,7 @@ class IMFileAddOfflineReq final :
   void _internal_set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 file_size = 5;
-  bool has_file_size() const;
-  private:
-  bool _internal_has_file_size() const;
-  public:
+  // uint32 file_size = 5;
   void clear_file_size();
   ::PROTOBUF_NAMESPACE_ID::uint32 file_size() const;
   void set_file_size(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2325,19 +2044,15 @@ class IMFileAddOfflineReq final :
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr task_id_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr file_name_;
   ::PROTOBUF_NAMESPACE_ID::uint32 from_user_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 to_user_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 file_size_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eFile_2eproto;
 };
 // -------------------------------------------------------------------
@@ -2371,13 +2086,6 @@ class IMFileDelOfflineReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMFileDelOfflineReq& default_instance() {
@@ -2457,11 +2165,7 @@ class IMFileDelOfflineReq final :
     kFromUserIdFieldNumber = 1,
     kToUserIdFieldNumber = 2,
   };
-  // required string task_id = 3;
-  bool has_task_id() const;
-  private:
-  bool _internal_has_task_id() const;
-  public:
+  // string task_id = 3;
   void clear_task_id();
   const std::string& task_id() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -2475,11 +2179,7 @@ class IMFileDelOfflineReq final :
   std::string* _internal_mutable_task_id();
   public:
 
-  // required uint32 from_user_id = 1;
-  bool has_from_user_id() const;
-  private:
-  bool _internal_has_from_user_id() const;
-  public:
+  // uint32 from_user_id = 1;
   void clear_from_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 from_user_id() const;
   void set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2488,11 +2188,7 @@ class IMFileDelOfflineReq final :
   void _internal_set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 to_user_id = 2;
-  bool has_to_user_id() const;
-  private:
-  bool _internal_has_to_user_id() const;
-  public:
+  // uint32 to_user_id = 2;
   void clear_to_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 to_user_id() const;
   void set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2505,17 +2201,13 @@ class IMFileDelOfflineReq final :
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr task_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 from_user_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 to_user_id_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eFile_2eproto;
 };
 // ===================================================================
@@ -2529,17 +2221,9 @@ class IMFileDelOfflineReq final :
 #endif  // __GNUC__
 // IMFileLoginReq
 
-// required uint32 user_id = 1;
-inline bool IMFileLoginReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMFileLoginReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMFileLoginReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileLoginReq::_internal_user_id() const {
   return user_id_;
@@ -2549,7 +2233,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileLoginReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMFileLoginReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMFileLoginReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2557,17 +2241,9 @@ inline void IMFileLoginReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:IM.File.IMFileLoginReq.user_id)
 }
 
-// required string task_id = 2;
-inline bool IMFileLoginReq::_internal_has_task_id() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMFileLoginReq::has_task_id() const {
-  return _internal_has_task_id();
-}
+// string task_id = 2;
 inline void IMFileLoginReq::clear_task_id() {
   task_id_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMFileLoginReq::task_id() const {
   // @@protoc_insertion_point(field_get:IM.File.IMFileLoginReq.task_id)
@@ -2576,7 +2252,7 @@ inline const std::string& IMFileLoginReq::task_id() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMFileLoginReq::set_task_id(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000001u;
+ 
  task_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.File.IMFileLoginReq.task_id)
 }
@@ -2589,43 +2265,31 @@ inline const std::string& IMFileLoginReq::_internal_task_id() const {
   return task_id_.Get();
 }
 inline void IMFileLoginReq::_internal_set_task_id(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   task_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMFileLoginReq::_internal_mutable_task_id() {
-  _has_bits_[0] |= 0x00000001u;
+  
   return task_id_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMFileLoginReq::release_task_id() {
   // @@protoc_insertion_point(field_release:IM.File.IMFileLoginReq.task_id)
-  if (!_internal_has_task_id()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return task_id_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return task_id_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMFileLoginReq::set_allocated_task_id(std::string* task_id) {
   if (task_id != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    
   }
   task_id_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), task_id,
       GetArenaForAllocation());
   // @@protoc_insertion_point(field_set_allocated:IM.File.IMFileLoginReq.task_id)
 }
 
-// required .IM.BaseDefine.ClientFileRole file_role = 3;
-inline bool IMFileLoginReq::_internal_has_file_role() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMFileLoginReq::has_file_role() const {
-  return _internal_has_file_role();
-}
+// .IM.BaseDefine.ClientFileRole file_role = 3;
 inline void IMFileLoginReq::clear_file_role() {
-  file_role_ = 1;
-  _has_bits_[0] &= ~0x00000004u;
+  file_role_ = 0;
 }
 inline ::IM::BaseDefine::ClientFileRole IMFileLoginReq::_internal_file_role() const {
   return static_cast< ::IM::BaseDefine::ClientFileRole >(file_role_);
@@ -2635,8 +2299,7 @@ inline ::IM::BaseDefine::ClientFileRole IMFileLoginReq::file_role() const {
   return _internal_file_role();
 }
 inline void IMFileLoginReq::_internal_set_file_role(::IM::BaseDefine::ClientFileRole value) {
-  assert(::IM::BaseDefine::ClientFileRole_IsValid(value));
-  _has_bits_[0] |= 0x00000004u;
+  
   file_role_ = value;
 }
 inline void IMFileLoginReq::set_file_role(::IM::BaseDefine::ClientFileRole value) {
@@ -2648,17 +2311,9 @@ inline void IMFileLoginReq::set_file_role(::IM::BaseDefine::ClientFileRole value
 
 // IMFileLoginRsp
 
-// required uint32 result_code = 1;
-inline bool IMFileLoginRsp::_internal_has_result_code() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMFileLoginRsp::has_result_code() const {
-  return _internal_has_result_code();
-}
+// uint32 result_code = 1;
 inline void IMFileLoginRsp::clear_result_code() {
   result_code_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileLoginRsp::_internal_result_code() const {
   return result_code_;
@@ -2668,7 +2323,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileLoginRsp::result_code() const {
   return _internal_result_code();
 }
 inline void IMFileLoginRsp::_internal_set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   result_code_ = value;
 }
 inline void IMFileLoginRsp::set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2676,17 +2331,9 @@ inline void IMFileLoginRsp::set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 valu
   // @@protoc_insertion_point(field_set:IM.File.IMFileLoginRsp.result_code)
 }
 
-// required string task_id = 2;
-inline bool IMFileLoginRsp::_internal_has_task_id() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMFileLoginRsp::has_task_id() const {
-  return _internal_has_task_id();
-}
+// string task_id = 2;
 inline void IMFileLoginRsp::clear_task_id() {
   task_id_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMFileLoginRsp::task_id() const {
   // @@protoc_insertion_point(field_get:IM.File.IMFileLoginRsp.task_id)
@@ -2695,7 +2342,7 @@ inline const std::string& IMFileLoginRsp::task_id() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMFileLoginRsp::set_task_id(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000001u;
+ 
  task_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.File.IMFileLoginRsp.task_id)
 }
@@ -2708,26 +2355,22 @@ inline const std::string& IMFileLoginRsp::_internal_task_id() const {
   return task_id_.Get();
 }
 inline void IMFileLoginRsp::_internal_set_task_id(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   task_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMFileLoginRsp::_internal_mutable_task_id() {
-  _has_bits_[0] |= 0x00000001u;
+  
   return task_id_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMFileLoginRsp::release_task_id() {
   // @@protoc_insertion_point(field_release:IM.File.IMFileLoginRsp.task_id)
-  if (!_internal_has_task_id()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return task_id_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return task_id_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMFileLoginRsp::set_allocated_task_id(std::string* task_id) {
   if (task_id != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    
   }
   task_id_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), task_id,
       GetArenaForAllocation());
@@ -2738,17 +2381,9 @@ inline void IMFileLoginRsp::set_allocated_task_id(std::string* task_id) {
 
 // IMFileState
 
-// required .IM.BaseDefine.ClientFileState state = 1;
-inline bool IMFileState::_internal_has_state() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMFileState::has_state() const {
-  return _internal_has_state();
-}
+// .IM.BaseDefine.ClientFileState state = 1;
 inline void IMFileState::clear_state() {
   state_ = 0;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::IM::BaseDefine::ClientFileState IMFileState::_internal_state() const {
   return static_cast< ::IM::BaseDefine::ClientFileState >(state_);
@@ -2758,8 +2393,7 @@ inline ::IM::BaseDefine::ClientFileState IMFileState::state() const {
   return _internal_state();
 }
 inline void IMFileState::_internal_set_state(::IM::BaseDefine::ClientFileState value) {
-  assert(::IM::BaseDefine::ClientFileState_IsValid(value));
-  _has_bits_[0] |= 0x00000002u;
+  
   state_ = value;
 }
 inline void IMFileState::set_state(::IM::BaseDefine::ClientFileState value) {
@@ -2767,17 +2401,9 @@ inline void IMFileState::set_state(::IM::BaseDefine::ClientFileState value) {
   // @@protoc_insertion_point(field_set:IM.File.IMFileState.state)
 }
 
-// required string task_id = 2;
-inline bool IMFileState::_internal_has_task_id() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMFileState::has_task_id() const {
-  return _internal_has_task_id();
-}
+// string task_id = 2;
 inline void IMFileState::clear_task_id() {
   task_id_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMFileState::task_id() const {
   // @@protoc_insertion_point(field_get:IM.File.IMFileState.task_id)
@@ -2786,7 +2412,7 @@ inline const std::string& IMFileState::task_id() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMFileState::set_task_id(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000001u;
+ 
  task_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.File.IMFileState.task_id)
 }
@@ -2799,43 +2425,31 @@ inline const std::string& IMFileState::_internal_task_id() const {
   return task_id_.Get();
 }
 inline void IMFileState::_internal_set_task_id(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   task_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMFileState::_internal_mutable_task_id() {
-  _has_bits_[0] |= 0x00000001u;
+  
   return task_id_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMFileState::release_task_id() {
   // @@protoc_insertion_point(field_release:IM.File.IMFileState.task_id)
-  if (!_internal_has_task_id()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return task_id_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return task_id_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMFileState::set_allocated_task_id(std::string* task_id) {
   if (task_id != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    
   }
   task_id_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), task_id,
       GetArenaForAllocation());
   // @@protoc_insertion_point(field_set_allocated:IM.File.IMFileState.task_id)
 }
 
-// required uint32 user_id = 3;
-inline bool IMFileState::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMFileState::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 3;
 inline void IMFileState::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileState::_internal_user_id() const {
   return user_id_;
@@ -2845,7 +2459,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileState::user_id() const {
   return _internal_user_id();
 }
 inline void IMFileState::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   user_id_ = value;
 }
 inline void IMFileState::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2857,17 +2471,9 @@ inline void IMFileState::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
 
 // IMFilePullDataReq
 
-// required string task_id = 1;
-inline bool IMFilePullDataReq::_internal_has_task_id() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMFilePullDataReq::has_task_id() const {
-  return _internal_has_task_id();
-}
+// string task_id = 1;
 inline void IMFilePullDataReq::clear_task_id() {
   task_id_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMFilePullDataReq::task_id() const {
   // @@protoc_insertion_point(field_get:IM.File.IMFilePullDataReq.task_id)
@@ -2876,7 +2482,7 @@ inline const std::string& IMFilePullDataReq::task_id() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMFilePullDataReq::set_task_id(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000001u;
+ 
  task_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.File.IMFilePullDataReq.task_id)
 }
@@ -2889,43 +2495,31 @@ inline const std::string& IMFilePullDataReq::_internal_task_id() const {
   return task_id_.Get();
 }
 inline void IMFilePullDataReq::_internal_set_task_id(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   task_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMFilePullDataReq::_internal_mutable_task_id() {
-  _has_bits_[0] |= 0x00000001u;
+  
   return task_id_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMFilePullDataReq::release_task_id() {
   // @@protoc_insertion_point(field_release:IM.File.IMFilePullDataReq.task_id)
-  if (!_internal_has_task_id()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return task_id_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return task_id_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMFilePullDataReq::set_allocated_task_id(std::string* task_id) {
   if (task_id != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    
   }
   task_id_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), task_id,
       GetArenaForAllocation());
   // @@protoc_insertion_point(field_set_allocated:IM.File.IMFilePullDataReq.task_id)
 }
 
-// required uint32 user_id = 2;
-inline bool IMFilePullDataReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMFilePullDataReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 2;
 inline void IMFilePullDataReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFilePullDataReq::_internal_user_id() const {
   return user_id_;
@@ -2935,7 +2529,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFilePullDataReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMFilePullDataReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMFilePullDataReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2943,17 +2537,9 @@ inline void IMFilePullDataReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value
   // @@protoc_insertion_point(field_set:IM.File.IMFilePullDataReq.user_id)
 }
 
-// required .IM.BaseDefine.FileType trans_mode = 3;
-inline bool IMFilePullDataReq::_internal_has_trans_mode() const {
-  bool value = (_has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool IMFilePullDataReq::has_trans_mode() const {
-  return _internal_has_trans_mode();
-}
+// .IM.BaseDefine.FileType trans_mode = 3;
 inline void IMFilePullDataReq::clear_trans_mode() {
-  trans_mode_ = 1;
-  _has_bits_[0] &= ~0x00000010u;
+  trans_mode_ = 0;
 }
 inline ::IM::BaseDefine::FileType IMFilePullDataReq::_internal_trans_mode() const {
   return static_cast< ::IM::BaseDefine::FileType >(trans_mode_);
@@ -2963,8 +2549,7 @@ inline ::IM::BaseDefine::FileType IMFilePullDataReq::trans_mode() const {
   return _internal_trans_mode();
 }
 inline void IMFilePullDataReq::_internal_set_trans_mode(::IM::BaseDefine::FileType value) {
-  assert(::IM::BaseDefine::FileType_IsValid(value));
-  _has_bits_[0] |= 0x00000010u;
+  
   trans_mode_ = value;
 }
 inline void IMFilePullDataReq::set_trans_mode(::IM::BaseDefine::FileType value) {
@@ -2972,17 +2557,9 @@ inline void IMFilePullDataReq::set_trans_mode(::IM::BaseDefine::FileType value) 
   // @@protoc_insertion_point(field_set:IM.File.IMFilePullDataReq.trans_mode)
 }
 
-// required uint32 offset = 4;
-inline bool IMFilePullDataReq::_internal_has_offset() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMFilePullDataReq::has_offset() const {
-  return _internal_has_offset();
-}
+// uint32 offset = 4;
 inline void IMFilePullDataReq::clear_offset() {
   offset_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFilePullDataReq::_internal_offset() const {
   return offset_;
@@ -2992,7 +2569,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFilePullDataReq::offset() const {
   return _internal_offset();
 }
 inline void IMFilePullDataReq::_internal_set_offset(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   offset_ = value;
 }
 inline void IMFilePullDataReq::set_offset(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3000,17 +2577,9 @@ inline void IMFilePullDataReq::set_offset(::PROTOBUF_NAMESPACE_ID::uint32 value)
   // @@protoc_insertion_point(field_set:IM.File.IMFilePullDataReq.offset)
 }
 
-// required uint32 data_size = 5;
-inline bool IMFilePullDataReq::_internal_has_data_size() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMFilePullDataReq::has_data_size() const {
-  return _internal_has_data_size();
-}
+// uint32 data_size = 5;
 inline void IMFilePullDataReq::clear_data_size() {
   data_size_ = 0u;
-  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFilePullDataReq::_internal_data_size() const {
   return data_size_;
@@ -3020,7 +2589,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFilePullDataReq::data_size() const {
   return _internal_data_size();
 }
 inline void IMFilePullDataReq::_internal_set_data_size(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  
   data_size_ = value;
 }
 inline void IMFilePullDataReq::set_data_size(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3032,17 +2601,9 @@ inline void IMFilePullDataReq::set_data_size(::PROTOBUF_NAMESPACE_ID::uint32 val
 
 // IMFilePullDataRsp
 
-// required uint32 result_code = 1;
-inline bool IMFilePullDataRsp::_internal_has_result_code() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMFilePullDataRsp::has_result_code() const {
-  return _internal_has_result_code();
-}
+// uint32 result_code = 1;
 inline void IMFilePullDataRsp::clear_result_code() {
   result_code_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFilePullDataRsp::_internal_result_code() const {
   return result_code_;
@@ -3052,7 +2613,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFilePullDataRsp::result_code() const {
   return _internal_result_code();
 }
 inline void IMFilePullDataRsp::_internal_set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   result_code_ = value;
 }
 inline void IMFilePullDataRsp::set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3060,17 +2621,9 @@ inline void IMFilePullDataRsp::set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 v
   // @@protoc_insertion_point(field_set:IM.File.IMFilePullDataRsp.result_code)
 }
 
-// required string task_id = 2;
-inline bool IMFilePullDataRsp::_internal_has_task_id() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMFilePullDataRsp::has_task_id() const {
-  return _internal_has_task_id();
-}
+// string task_id = 2;
 inline void IMFilePullDataRsp::clear_task_id() {
   task_id_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMFilePullDataRsp::task_id() const {
   // @@protoc_insertion_point(field_get:IM.File.IMFilePullDataRsp.task_id)
@@ -3079,7 +2632,7 @@ inline const std::string& IMFilePullDataRsp::task_id() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMFilePullDataRsp::set_task_id(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000001u;
+ 
  task_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.File.IMFilePullDataRsp.task_id)
 }
@@ -3092,43 +2645,31 @@ inline const std::string& IMFilePullDataRsp::_internal_task_id() const {
   return task_id_.Get();
 }
 inline void IMFilePullDataRsp::_internal_set_task_id(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   task_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMFilePullDataRsp::_internal_mutable_task_id() {
-  _has_bits_[0] |= 0x00000001u;
+  
   return task_id_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMFilePullDataRsp::release_task_id() {
   // @@protoc_insertion_point(field_release:IM.File.IMFilePullDataRsp.task_id)
-  if (!_internal_has_task_id()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return task_id_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return task_id_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMFilePullDataRsp::set_allocated_task_id(std::string* task_id) {
   if (task_id != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    
   }
   task_id_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), task_id,
       GetArenaForAllocation());
   // @@protoc_insertion_point(field_set_allocated:IM.File.IMFilePullDataRsp.task_id)
 }
 
-// required uint32 user_id = 3;
-inline bool IMFilePullDataRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMFilePullDataRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 3;
 inline void IMFilePullDataRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFilePullDataRsp::_internal_user_id() const {
   return user_id_;
@@ -3138,7 +2679,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFilePullDataRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMFilePullDataRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  
   user_id_ = value;
 }
 inline void IMFilePullDataRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3146,17 +2687,9 @@ inline void IMFilePullDataRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value
   // @@protoc_insertion_point(field_set:IM.File.IMFilePullDataRsp.user_id)
 }
 
-// required uint32 offset = 4;
-inline bool IMFilePullDataRsp::_internal_has_offset() const {
-  bool value = (_has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool IMFilePullDataRsp::has_offset() const {
-  return _internal_has_offset();
-}
+// uint32 offset = 4;
 inline void IMFilePullDataRsp::clear_offset() {
   offset_ = 0u;
-  _has_bits_[0] &= ~0x00000010u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFilePullDataRsp::_internal_offset() const {
   return offset_;
@@ -3166,7 +2699,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFilePullDataRsp::offset() const {
   return _internal_offset();
 }
 inline void IMFilePullDataRsp::_internal_set_offset(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000010u;
+  
   offset_ = value;
 }
 inline void IMFilePullDataRsp::set_offset(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3174,17 +2707,9 @@ inline void IMFilePullDataRsp::set_offset(::PROTOBUF_NAMESPACE_ID::uint32 value)
   // @@protoc_insertion_point(field_set:IM.File.IMFilePullDataRsp.offset)
 }
 
-// required bytes data = 5;
-inline bool IMFilePullDataRsp::_internal_has_data() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMFilePullDataRsp::has_data() const {
-  return _internal_has_data();
-}
+// bytes data = 5;
 inline void IMFilePullDataRsp::clear_data() {
   data_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& IMFilePullDataRsp::data() const {
   // @@protoc_insertion_point(field_get:IM.File.IMFilePullDataRsp.data)
@@ -3193,7 +2718,7 @@ inline const std::string& IMFilePullDataRsp::data() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMFilePullDataRsp::set_data(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000002u;
+ 
  data_.SetBytes(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.File.IMFilePullDataRsp.data)
 }
@@ -3206,26 +2731,22 @@ inline const std::string& IMFilePullDataRsp::_internal_data() const {
   return data_.Get();
 }
 inline void IMFilePullDataRsp::_internal_set_data(const std::string& value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   data_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMFilePullDataRsp::_internal_mutable_data() {
-  _has_bits_[0] |= 0x00000002u;
+  
   return data_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMFilePullDataRsp::release_data() {
   // @@protoc_insertion_point(field_release:IM.File.IMFilePullDataRsp.data)
-  if (!_internal_has_data()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000002u;
-  return data_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return data_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMFilePullDataRsp::set_allocated_data(std::string* data) {
   if (data != nullptr) {
-    _has_bits_[0] |= 0x00000002u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000002u;
+    
   }
   data_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), data,
       GetArenaForAllocation());
@@ -3236,17 +2757,9 @@ inline void IMFilePullDataRsp::set_allocated_data(std::string* data) {
 
 // IMFileReq
 
-// required uint32 from_user_id = 1;
-inline bool IMFileReq::_internal_has_from_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMFileReq::has_from_user_id() const {
-  return _internal_has_from_user_id();
-}
+// uint32 from_user_id = 1;
 inline void IMFileReq::clear_from_user_id() {
   from_user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileReq::_internal_from_user_id() const {
   return from_user_id_;
@@ -3256,7 +2769,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileReq::from_user_id() const {
   return _internal_from_user_id();
 }
 inline void IMFileReq::_internal_set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   from_user_id_ = value;
 }
 inline void IMFileReq::set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3264,17 +2777,9 @@ inline void IMFileReq::set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:IM.File.IMFileReq.from_user_id)
 }
 
-// required uint32 to_user_id = 2;
-inline bool IMFileReq::_internal_has_to_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMFileReq::has_to_user_id() const {
-  return _internal_has_to_user_id();
-}
+// uint32 to_user_id = 2;
 inline void IMFileReq::clear_to_user_id() {
   to_user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileReq::_internal_to_user_id() const {
   return to_user_id_;
@@ -3284,7 +2789,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileReq::to_user_id() const {
   return _internal_to_user_id();
 }
 inline void IMFileReq::_internal_set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   to_user_id_ = value;
 }
 inline void IMFileReq::set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3292,17 +2797,9 @@ inline void IMFileReq::set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:IM.File.IMFileReq.to_user_id)
 }
 
-// required string file_name = 3;
-inline bool IMFileReq::_internal_has_file_name() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMFileReq::has_file_name() const {
-  return _internal_has_file_name();
-}
+// string file_name = 3;
 inline void IMFileReq::clear_file_name() {
   file_name_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMFileReq::file_name() const {
   // @@protoc_insertion_point(field_get:IM.File.IMFileReq.file_name)
@@ -3311,7 +2808,7 @@ inline const std::string& IMFileReq::file_name() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMFileReq::set_file_name(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000001u;
+ 
  file_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.File.IMFileReq.file_name)
 }
@@ -3324,43 +2821,31 @@ inline const std::string& IMFileReq::_internal_file_name() const {
   return file_name_.Get();
 }
 inline void IMFileReq::_internal_set_file_name(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   file_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMFileReq::_internal_mutable_file_name() {
-  _has_bits_[0] |= 0x00000001u;
+  
   return file_name_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMFileReq::release_file_name() {
   // @@protoc_insertion_point(field_release:IM.File.IMFileReq.file_name)
-  if (!_internal_has_file_name()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return file_name_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return file_name_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMFileReq::set_allocated_file_name(std::string* file_name) {
   if (file_name != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    
   }
   file_name_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), file_name,
       GetArenaForAllocation());
   // @@protoc_insertion_point(field_set_allocated:IM.File.IMFileReq.file_name)
 }
 
-// required uint32 file_size = 4;
-inline bool IMFileReq::_internal_has_file_size() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMFileReq::has_file_size() const {
-  return _internal_has_file_size();
-}
+// uint32 file_size = 4;
 inline void IMFileReq::clear_file_size() {
   file_size_ = 0u;
-  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileReq::_internal_file_size() const {
   return file_size_;
@@ -3370,7 +2855,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileReq::file_size() const {
   return _internal_file_size();
 }
 inline void IMFileReq::_internal_set_file_size(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  
   file_size_ = value;
 }
 inline void IMFileReq::set_file_size(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3378,17 +2863,9 @@ inline void IMFileReq::set_file_size(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:IM.File.IMFileReq.file_size)
 }
 
-// required .IM.BaseDefine.FileType trans_mode = 5;
-inline bool IMFileReq::_internal_has_trans_mode() const {
-  bool value = (_has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool IMFileReq::has_trans_mode() const {
-  return _internal_has_trans_mode();
-}
+// .IM.BaseDefine.FileType trans_mode = 5;
 inline void IMFileReq::clear_trans_mode() {
-  trans_mode_ = 1;
-  _has_bits_[0] &= ~0x00000010u;
+  trans_mode_ = 0;
 }
 inline ::IM::BaseDefine::FileType IMFileReq::_internal_trans_mode() const {
   return static_cast< ::IM::BaseDefine::FileType >(trans_mode_);
@@ -3398,8 +2875,7 @@ inline ::IM::BaseDefine::FileType IMFileReq::trans_mode() const {
   return _internal_trans_mode();
 }
 inline void IMFileReq::_internal_set_trans_mode(::IM::BaseDefine::FileType value) {
-  assert(::IM::BaseDefine::FileType_IsValid(value));
-  _has_bits_[0] |= 0x00000010u;
+  
   trans_mode_ = value;
 }
 inline void IMFileReq::set_trans_mode(::IM::BaseDefine::FileType value) {
@@ -3411,17 +2887,9 @@ inline void IMFileReq::set_trans_mode(::IM::BaseDefine::FileType value) {
 
 // IMFileRsp
 
-// required uint32 result_code = 1;
-inline bool IMFileRsp::_internal_has_result_code() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMFileRsp::has_result_code() const {
-  return _internal_has_result_code();
-}
+// uint32 result_code = 1;
 inline void IMFileRsp::clear_result_code() {
   result_code_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileRsp::_internal_result_code() const {
   return result_code_;
@@ -3431,7 +2899,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileRsp::result_code() const {
   return _internal_result_code();
 }
 inline void IMFileRsp::_internal_set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   result_code_ = value;
 }
 inline void IMFileRsp::set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3439,17 +2907,9 @@ inline void IMFileRsp::set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:IM.File.IMFileRsp.result_code)
 }
 
-// required uint32 from_user_id = 2;
-inline bool IMFileRsp::_internal_has_from_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMFileRsp::has_from_user_id() const {
-  return _internal_has_from_user_id();
-}
+// uint32 from_user_id = 2;
 inline void IMFileRsp::clear_from_user_id() {
   from_user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileRsp::_internal_from_user_id() const {
   return from_user_id_;
@@ -3459,7 +2919,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileRsp::from_user_id() const {
   return _internal_from_user_id();
 }
 inline void IMFileRsp::_internal_set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  
   from_user_id_ = value;
 }
 inline void IMFileRsp::set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3467,17 +2927,9 @@ inline void IMFileRsp::set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:IM.File.IMFileRsp.from_user_id)
 }
 
-// required uint32 to_user_id = 3;
-inline bool IMFileRsp::_internal_has_to_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool IMFileRsp::has_to_user_id() const {
-  return _internal_has_to_user_id();
-}
+// uint32 to_user_id = 3;
 inline void IMFileRsp::clear_to_user_id() {
   to_user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000010u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileRsp::_internal_to_user_id() const {
   return to_user_id_;
@@ -3487,7 +2939,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileRsp::to_user_id() const {
   return _internal_to_user_id();
 }
 inline void IMFileRsp::_internal_set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000010u;
+  
   to_user_id_ = value;
 }
 inline void IMFileRsp::set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3495,17 +2947,9 @@ inline void IMFileRsp::set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:IM.File.IMFileRsp.to_user_id)
 }
 
-// required string file_name = 4;
-inline bool IMFileRsp::_internal_has_file_name() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMFileRsp::has_file_name() const {
-  return _internal_has_file_name();
-}
+// string file_name = 4;
 inline void IMFileRsp::clear_file_name() {
   file_name_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMFileRsp::file_name() const {
   // @@protoc_insertion_point(field_get:IM.File.IMFileRsp.file_name)
@@ -3514,7 +2958,7 @@ inline const std::string& IMFileRsp::file_name() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMFileRsp::set_file_name(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000001u;
+ 
  file_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.File.IMFileRsp.file_name)
 }
@@ -3527,43 +2971,31 @@ inline const std::string& IMFileRsp::_internal_file_name() const {
   return file_name_.Get();
 }
 inline void IMFileRsp::_internal_set_file_name(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   file_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMFileRsp::_internal_mutable_file_name() {
-  _has_bits_[0] |= 0x00000001u;
+  
   return file_name_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMFileRsp::release_file_name() {
   // @@protoc_insertion_point(field_release:IM.File.IMFileRsp.file_name)
-  if (!_internal_has_file_name()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return file_name_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return file_name_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMFileRsp::set_allocated_file_name(std::string* file_name) {
   if (file_name != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    
   }
   file_name_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), file_name,
       GetArenaForAllocation());
   // @@protoc_insertion_point(field_set_allocated:IM.File.IMFileRsp.file_name)
 }
 
-// required string task_id = 5;
-inline bool IMFileRsp::_internal_has_task_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMFileRsp::has_task_id() const {
-  return _internal_has_task_id();
-}
+// string task_id = 5;
 inline void IMFileRsp::clear_task_id() {
   task_id_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& IMFileRsp::task_id() const {
   // @@protoc_insertion_point(field_get:IM.File.IMFileRsp.task_id)
@@ -3572,7 +3004,7 @@ inline const std::string& IMFileRsp::task_id() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMFileRsp::set_task_id(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000002u;
+ 
  task_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.File.IMFileRsp.task_id)
 }
@@ -3585,26 +3017,22 @@ inline const std::string& IMFileRsp::_internal_task_id() const {
   return task_id_.Get();
 }
 inline void IMFileRsp::_internal_set_task_id(const std::string& value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   task_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMFileRsp::_internal_mutable_task_id() {
-  _has_bits_[0] |= 0x00000002u;
+  
   return task_id_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMFileRsp::release_task_id() {
   // @@protoc_insertion_point(field_release:IM.File.IMFileRsp.task_id)
-  if (!_internal_has_task_id()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000002u;
-  return task_id_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return task_id_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMFileRsp::set_allocated_task_id(std::string* task_id) {
   if (task_id != nullptr) {
-    _has_bits_[0] |= 0x00000002u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000002u;
+    
   }
   task_id_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), task_id,
       GetArenaForAllocation());
@@ -3648,17 +3076,9 @@ IMFileRsp::ip_addr_list() const {
   return ip_addr_list_;
 }
 
-// required .IM.BaseDefine.FileType trans_mode = 7;
-inline bool IMFileRsp::_internal_has_trans_mode() const {
-  bool value = (_has_bits_[0] & 0x00000020u) != 0;
-  return value;
-}
-inline bool IMFileRsp::has_trans_mode() const {
-  return _internal_has_trans_mode();
-}
+// .IM.BaseDefine.FileType trans_mode = 7;
 inline void IMFileRsp::clear_trans_mode() {
-  trans_mode_ = 1;
-  _has_bits_[0] &= ~0x00000020u;
+  trans_mode_ = 0;
 }
 inline ::IM::BaseDefine::FileType IMFileRsp::_internal_trans_mode() const {
   return static_cast< ::IM::BaseDefine::FileType >(trans_mode_);
@@ -3668,8 +3088,7 @@ inline ::IM::BaseDefine::FileType IMFileRsp::trans_mode() const {
   return _internal_trans_mode();
 }
 inline void IMFileRsp::_internal_set_trans_mode(::IM::BaseDefine::FileType value) {
-  assert(::IM::BaseDefine::FileType_IsValid(value));
-  _has_bits_[0] |= 0x00000020u;
+  
   trans_mode_ = value;
 }
 inline void IMFileRsp::set_trans_mode(::IM::BaseDefine::FileType value) {
@@ -3681,17 +3100,9 @@ inline void IMFileRsp::set_trans_mode(::IM::BaseDefine::FileType value) {
 
 // IMFileNotify
 
-// required uint32 from_user_id = 1;
-inline bool IMFileNotify::_internal_has_from_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMFileNotify::has_from_user_id() const {
-  return _internal_has_from_user_id();
-}
+// uint32 from_user_id = 1;
 inline void IMFileNotify::clear_from_user_id() {
   from_user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileNotify::_internal_from_user_id() const {
   return from_user_id_;
@@ -3701,7 +3112,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileNotify::from_user_id() const {
   return _internal_from_user_id();
 }
 inline void IMFileNotify::_internal_set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   from_user_id_ = value;
 }
 inline void IMFileNotify::set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3709,17 +3120,9 @@ inline void IMFileNotify::set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value
   // @@protoc_insertion_point(field_set:IM.File.IMFileNotify.from_user_id)
 }
 
-// required uint32 to_user_id = 2;
-inline bool IMFileNotify::_internal_has_to_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMFileNotify::has_to_user_id() const {
-  return _internal_has_to_user_id();
-}
+// uint32 to_user_id = 2;
 inline void IMFileNotify::clear_to_user_id() {
   to_user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileNotify::_internal_to_user_id() const {
   return to_user_id_;
@@ -3729,7 +3132,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileNotify::to_user_id() const {
   return _internal_to_user_id();
 }
 inline void IMFileNotify::_internal_set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  
   to_user_id_ = value;
 }
 inline void IMFileNotify::set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3737,17 +3140,9 @@ inline void IMFileNotify::set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) 
   // @@protoc_insertion_point(field_set:IM.File.IMFileNotify.to_user_id)
 }
 
-// required string file_name = 3;
-inline bool IMFileNotify::_internal_has_file_name() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMFileNotify::has_file_name() const {
-  return _internal_has_file_name();
-}
+// string file_name = 3;
 inline void IMFileNotify::clear_file_name() {
   file_name_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMFileNotify::file_name() const {
   // @@protoc_insertion_point(field_get:IM.File.IMFileNotify.file_name)
@@ -3756,7 +3151,7 @@ inline const std::string& IMFileNotify::file_name() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMFileNotify::set_file_name(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000001u;
+ 
  file_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.File.IMFileNotify.file_name)
 }
@@ -3769,43 +3164,31 @@ inline const std::string& IMFileNotify::_internal_file_name() const {
   return file_name_.Get();
 }
 inline void IMFileNotify::_internal_set_file_name(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   file_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMFileNotify::_internal_mutable_file_name() {
-  _has_bits_[0] |= 0x00000001u;
+  
   return file_name_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMFileNotify::release_file_name() {
   // @@protoc_insertion_point(field_release:IM.File.IMFileNotify.file_name)
-  if (!_internal_has_file_name()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return file_name_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return file_name_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMFileNotify::set_allocated_file_name(std::string* file_name) {
   if (file_name != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    
   }
   file_name_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), file_name,
       GetArenaForAllocation());
   // @@protoc_insertion_point(field_set_allocated:IM.File.IMFileNotify.file_name)
 }
 
-// required uint32 file_size = 4;
-inline bool IMFileNotify::_internal_has_file_size() const {
-  bool value = (_has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool IMFileNotify::has_file_size() const {
-  return _internal_has_file_size();
-}
+// uint32 file_size = 4;
 inline void IMFileNotify::clear_file_size() {
   file_size_ = 0u;
-  _has_bits_[0] &= ~0x00000010u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileNotify::_internal_file_size() const {
   return file_size_;
@@ -3815,7 +3198,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileNotify::file_size() const {
   return _internal_file_size();
 }
 inline void IMFileNotify::_internal_set_file_size(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000010u;
+  
   file_size_ = value;
 }
 inline void IMFileNotify::set_file_size(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3823,17 +3206,9 @@ inline void IMFileNotify::set_file_size(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:IM.File.IMFileNotify.file_size)
 }
 
-// required string task_id = 5;
-inline bool IMFileNotify::_internal_has_task_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMFileNotify::has_task_id() const {
-  return _internal_has_task_id();
-}
+// string task_id = 5;
 inline void IMFileNotify::clear_task_id() {
   task_id_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& IMFileNotify::task_id() const {
   // @@protoc_insertion_point(field_get:IM.File.IMFileNotify.task_id)
@@ -3842,7 +3217,7 @@ inline const std::string& IMFileNotify::task_id() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMFileNotify::set_task_id(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000002u;
+ 
  task_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.File.IMFileNotify.task_id)
 }
@@ -3855,26 +3230,22 @@ inline const std::string& IMFileNotify::_internal_task_id() const {
   return task_id_.Get();
 }
 inline void IMFileNotify::_internal_set_task_id(const std::string& value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   task_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMFileNotify::_internal_mutable_task_id() {
-  _has_bits_[0] |= 0x00000002u;
+  
   return task_id_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMFileNotify::release_task_id() {
   // @@protoc_insertion_point(field_release:IM.File.IMFileNotify.task_id)
-  if (!_internal_has_task_id()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000002u;
-  return task_id_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return task_id_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMFileNotify::set_allocated_task_id(std::string* task_id) {
   if (task_id != nullptr) {
-    _has_bits_[0] |= 0x00000002u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000002u;
+    
   }
   task_id_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), task_id,
       GetArenaForAllocation());
@@ -3918,17 +3289,9 @@ IMFileNotify::ip_addr_list() const {
   return ip_addr_list_;
 }
 
-// required .IM.BaseDefine.FileType trans_mode = 7;
-inline bool IMFileNotify::_internal_has_trans_mode() const {
-  bool value = (_has_bits_[0] & 0x00000040u) != 0;
-  return value;
-}
-inline bool IMFileNotify::has_trans_mode() const {
-  return _internal_has_trans_mode();
-}
+// .IM.BaseDefine.FileType trans_mode = 7;
 inline void IMFileNotify::clear_trans_mode() {
-  trans_mode_ = 1;
-  _has_bits_[0] &= ~0x00000040u;
+  trans_mode_ = 0;
 }
 inline ::IM::BaseDefine::FileType IMFileNotify::_internal_trans_mode() const {
   return static_cast< ::IM::BaseDefine::FileType >(trans_mode_);
@@ -3938,8 +3301,7 @@ inline ::IM::BaseDefine::FileType IMFileNotify::trans_mode() const {
   return _internal_trans_mode();
 }
 inline void IMFileNotify::_internal_set_trans_mode(::IM::BaseDefine::FileType value) {
-  assert(::IM::BaseDefine::FileType_IsValid(value));
-  _has_bits_[0] |= 0x00000040u;
+  
   trans_mode_ = value;
 }
 inline void IMFileNotify::set_trans_mode(::IM::BaseDefine::FileType value) {
@@ -3947,17 +3309,9 @@ inline void IMFileNotify::set_trans_mode(::IM::BaseDefine::FileType value) {
   // @@protoc_insertion_point(field_set:IM.File.IMFileNotify.trans_mode)
 }
 
-// required uint32 offline_ready = 8;
-inline bool IMFileNotify::_internal_has_offline_ready() const {
-  bool value = (_has_bits_[0] & 0x00000020u) != 0;
-  return value;
-}
-inline bool IMFileNotify::has_offline_ready() const {
-  return _internal_has_offline_ready();
-}
+// uint32 offline_ready = 8;
 inline void IMFileNotify::clear_offline_ready() {
   offline_ready_ = 0u;
-  _has_bits_[0] &= ~0x00000020u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileNotify::_internal_offline_ready() const {
   return offline_ready_;
@@ -3967,7 +3321,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileNotify::offline_ready() const {
   return _internal_offline_ready();
 }
 inline void IMFileNotify::_internal_set_offline_ready(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000020u;
+  
   offline_ready_ = value;
 }
 inline void IMFileNotify::set_offline_ready(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3979,17 +3333,9 @@ inline void IMFileNotify::set_offline_ready(::PROTOBUF_NAMESPACE_ID::uint32 valu
 
 // IMFileHasOfflineReq
 
-// required uint32 user_id = 1;
-inline bool IMFileHasOfflineReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMFileHasOfflineReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMFileHasOfflineReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileHasOfflineReq::_internal_user_id() const {
   return user_id_;
@@ -3999,7 +3345,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileHasOfflineReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMFileHasOfflineReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMFileHasOfflineReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4069,17 +3415,9 @@ inline void IMFileHasOfflineReq::set_allocated_attach_data(std::string* attach_d
 
 // IMFileHasOfflineRsp
 
-// required uint32 user_id = 1;
-inline bool IMFileHasOfflineRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMFileHasOfflineRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMFileHasOfflineRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileHasOfflineRsp::_internal_user_id() const {
   return user_id_;
@@ -4089,7 +3427,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileHasOfflineRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMFileHasOfflineRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMFileHasOfflineRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4233,17 +3571,9 @@ inline void IMFileHasOfflineRsp::set_allocated_attach_data(std::string* attach_d
 
 // IMFileAddOfflineReq
 
-// required uint32 from_user_id = 1;
-inline bool IMFileAddOfflineReq::_internal_has_from_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMFileAddOfflineReq::has_from_user_id() const {
-  return _internal_has_from_user_id();
-}
+// uint32 from_user_id = 1;
 inline void IMFileAddOfflineReq::clear_from_user_id() {
   from_user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileAddOfflineReq::_internal_from_user_id() const {
   return from_user_id_;
@@ -4253,7 +3583,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileAddOfflineReq::from_user_id() const
   return _internal_from_user_id();
 }
 inline void IMFileAddOfflineReq::_internal_set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   from_user_id_ = value;
 }
 inline void IMFileAddOfflineReq::set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4261,17 +3591,9 @@ inline void IMFileAddOfflineReq::set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint3
   // @@protoc_insertion_point(field_set:IM.File.IMFileAddOfflineReq.from_user_id)
 }
 
-// required uint32 to_user_id = 2;
-inline bool IMFileAddOfflineReq::_internal_has_to_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMFileAddOfflineReq::has_to_user_id() const {
-  return _internal_has_to_user_id();
-}
+// uint32 to_user_id = 2;
 inline void IMFileAddOfflineReq::clear_to_user_id() {
   to_user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileAddOfflineReq::_internal_to_user_id() const {
   return to_user_id_;
@@ -4281,7 +3603,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileAddOfflineReq::to_user_id() const {
   return _internal_to_user_id();
 }
 inline void IMFileAddOfflineReq::_internal_set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  
   to_user_id_ = value;
 }
 inline void IMFileAddOfflineReq::set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4289,17 +3611,9 @@ inline void IMFileAddOfflineReq::set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 
   // @@protoc_insertion_point(field_set:IM.File.IMFileAddOfflineReq.to_user_id)
 }
 
-// required string task_id = 3;
-inline bool IMFileAddOfflineReq::_internal_has_task_id() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMFileAddOfflineReq::has_task_id() const {
-  return _internal_has_task_id();
-}
+// string task_id = 3;
 inline void IMFileAddOfflineReq::clear_task_id() {
   task_id_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMFileAddOfflineReq::task_id() const {
   // @@protoc_insertion_point(field_get:IM.File.IMFileAddOfflineReq.task_id)
@@ -4308,7 +3622,7 @@ inline const std::string& IMFileAddOfflineReq::task_id() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMFileAddOfflineReq::set_task_id(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000001u;
+ 
  task_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.File.IMFileAddOfflineReq.task_id)
 }
@@ -4321,43 +3635,31 @@ inline const std::string& IMFileAddOfflineReq::_internal_task_id() const {
   return task_id_.Get();
 }
 inline void IMFileAddOfflineReq::_internal_set_task_id(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   task_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMFileAddOfflineReq::_internal_mutable_task_id() {
-  _has_bits_[0] |= 0x00000001u;
+  
   return task_id_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMFileAddOfflineReq::release_task_id() {
   // @@protoc_insertion_point(field_release:IM.File.IMFileAddOfflineReq.task_id)
-  if (!_internal_has_task_id()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return task_id_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return task_id_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMFileAddOfflineReq::set_allocated_task_id(std::string* task_id) {
   if (task_id != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    
   }
   task_id_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), task_id,
       GetArenaForAllocation());
   // @@protoc_insertion_point(field_set_allocated:IM.File.IMFileAddOfflineReq.task_id)
 }
 
-// required string file_name = 4;
-inline bool IMFileAddOfflineReq::_internal_has_file_name() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMFileAddOfflineReq::has_file_name() const {
-  return _internal_has_file_name();
-}
+// string file_name = 4;
 inline void IMFileAddOfflineReq::clear_file_name() {
   file_name_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& IMFileAddOfflineReq::file_name() const {
   // @@protoc_insertion_point(field_get:IM.File.IMFileAddOfflineReq.file_name)
@@ -4366,7 +3668,7 @@ inline const std::string& IMFileAddOfflineReq::file_name() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMFileAddOfflineReq::set_file_name(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000002u;
+ 
  file_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.File.IMFileAddOfflineReq.file_name)
 }
@@ -4379,43 +3681,31 @@ inline const std::string& IMFileAddOfflineReq::_internal_file_name() const {
   return file_name_.Get();
 }
 inline void IMFileAddOfflineReq::_internal_set_file_name(const std::string& value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   file_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMFileAddOfflineReq::_internal_mutable_file_name() {
-  _has_bits_[0] |= 0x00000002u;
+  
   return file_name_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMFileAddOfflineReq::release_file_name() {
   // @@protoc_insertion_point(field_release:IM.File.IMFileAddOfflineReq.file_name)
-  if (!_internal_has_file_name()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000002u;
-  return file_name_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return file_name_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMFileAddOfflineReq::set_allocated_file_name(std::string* file_name) {
   if (file_name != nullptr) {
-    _has_bits_[0] |= 0x00000002u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000002u;
+    
   }
   file_name_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), file_name,
       GetArenaForAllocation());
   // @@protoc_insertion_point(field_set_allocated:IM.File.IMFileAddOfflineReq.file_name)
 }
 
-// required uint32 file_size = 5;
-inline bool IMFileAddOfflineReq::_internal_has_file_size() const {
-  bool value = (_has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool IMFileAddOfflineReq::has_file_size() const {
-  return _internal_has_file_size();
-}
+// uint32 file_size = 5;
 inline void IMFileAddOfflineReq::clear_file_size() {
   file_size_ = 0u;
-  _has_bits_[0] &= ~0x00000010u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileAddOfflineReq::_internal_file_size() const {
   return file_size_;
@@ -4425,7 +3715,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileAddOfflineReq::file_size() const {
   return _internal_file_size();
 }
 inline void IMFileAddOfflineReq::_internal_set_file_size(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000010u;
+  
   file_size_ = value;
 }
 inline void IMFileAddOfflineReq::set_file_size(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4437,17 +3727,9 @@ inline void IMFileAddOfflineReq::set_file_size(::PROTOBUF_NAMESPACE_ID::uint32 v
 
 // IMFileDelOfflineReq
 
-// required uint32 from_user_id = 1;
-inline bool IMFileDelOfflineReq::_internal_has_from_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMFileDelOfflineReq::has_from_user_id() const {
-  return _internal_has_from_user_id();
-}
+// uint32 from_user_id = 1;
 inline void IMFileDelOfflineReq::clear_from_user_id() {
   from_user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileDelOfflineReq::_internal_from_user_id() const {
   return from_user_id_;
@@ -4457,7 +3739,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileDelOfflineReq::from_user_id() const
   return _internal_from_user_id();
 }
 inline void IMFileDelOfflineReq::_internal_set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   from_user_id_ = value;
 }
 inline void IMFileDelOfflineReq::set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4465,17 +3747,9 @@ inline void IMFileDelOfflineReq::set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint3
   // @@protoc_insertion_point(field_set:IM.File.IMFileDelOfflineReq.from_user_id)
 }
 
-// required uint32 to_user_id = 2;
-inline bool IMFileDelOfflineReq::_internal_has_to_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMFileDelOfflineReq::has_to_user_id() const {
-  return _internal_has_to_user_id();
-}
+// uint32 to_user_id = 2;
 inline void IMFileDelOfflineReq::clear_to_user_id() {
   to_user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileDelOfflineReq::_internal_to_user_id() const {
   return to_user_id_;
@@ -4485,7 +3759,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMFileDelOfflineReq::to_user_id() const {
   return _internal_to_user_id();
 }
 inline void IMFileDelOfflineReq::_internal_set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   to_user_id_ = value;
 }
 inline void IMFileDelOfflineReq::set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4493,17 +3767,9 @@ inline void IMFileDelOfflineReq::set_to_user_id(::PROTOBUF_NAMESPACE_ID::uint32 
   // @@protoc_insertion_point(field_set:IM.File.IMFileDelOfflineReq.to_user_id)
 }
 
-// required string task_id = 3;
-inline bool IMFileDelOfflineReq::_internal_has_task_id() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMFileDelOfflineReq::has_task_id() const {
-  return _internal_has_task_id();
-}
+// string task_id = 3;
 inline void IMFileDelOfflineReq::clear_task_id() {
   task_id_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMFileDelOfflineReq::task_id() const {
   // @@protoc_insertion_point(field_get:IM.File.IMFileDelOfflineReq.task_id)
@@ -4512,7 +3778,7 @@ inline const std::string& IMFileDelOfflineReq::task_id() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMFileDelOfflineReq::set_task_id(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000001u;
+ 
  task_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.File.IMFileDelOfflineReq.task_id)
 }
@@ -4525,26 +3791,22 @@ inline const std::string& IMFileDelOfflineReq::_internal_task_id() const {
   return task_id_.Get();
 }
 inline void IMFileDelOfflineReq::_internal_set_task_id(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   task_id_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMFileDelOfflineReq::_internal_mutable_task_id() {
-  _has_bits_[0] |= 0x00000001u;
+  
   return task_id_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMFileDelOfflineReq::release_task_id() {
   // @@protoc_insertion_point(field_release:IM.File.IMFileDelOfflineReq.task_id)
-  if (!_internal_has_task_id()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return task_id_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return task_id_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMFileDelOfflineReq::set_allocated_task_id(std::string* task_id) {
   if (task_id != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    
   }
   task_id_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), task_id,
       GetArenaForAllocation());

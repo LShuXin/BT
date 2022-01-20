@@ -2,15 +2,23 @@
 # author: luoning
 # date: 03/24/2015
 
-LOG4CXX=apache-log4cxx-0.10.0
-LOG4CXX_PATH=http://mirror.bit.edu.cn/apache/logging/log4cxx/0.10.0/$LOG4CXX.tar.gz
+
+APR=apr-1.7.0
+APR_PATH=https://mirrors.tuna.tsinghua.edu.cn/apache/apr/apr-1.7.0.tar.gz
+
+APR_UTIL=apr-util-1.6.1
+APR_UTIL_PATH=https://mirrors.tuna.tsinghua.edu.cn/apache/apr/apr-util-1.6.1.tar.gz
+
+LOG4CXX=apache-log4cxx-0.12.1
+#LOG4CXX_PATH=http://mirror.bit.edu.cn/apache/logging/log4cxx/0.10.0/$LOG4CXX.tar.gz
+LOG4CXX_PATH=https://archive.apache.org/dist/logging/log4cxx/0.12.1/$LOG4CXX.tar.gz
 CUR_DIR=
 download() {
     if [ -f "$1" ]; then
         echo "$1 existed."
     else
         echo "$1 not existed, begin to download..."
-        wget $2
+        wget -c $2
         if [ $? -eq 0 ]; then
             echo "download $1 successed";
         else
@@ -77,23 +85,56 @@ get_cur_dir() {
     CUR_DIR=$(dirname "${REALPATH}")
 }
 
+build_apr(){
+    
+    download $APR.tar.gz $APR_PATH
+    tar -xf $APR.tar.gz
+    cd $APR
+    # rm: cannot remove 'libtoolT': No such file or directory
+    sed -i "s/RM='\$RM'/RM='\$RM -f'/g" configure
+    ./configure --prefix=/usr/local/apr
+    make -j4 && make install
+    cd ..
+}
+
+build_apr_util(){    
+    download $APR_UTIL.tar.gz $APR_UTIL_PATH
+    tar -xf $APR_UTIL.tar.gz
+    cd $APR_UTIL
+    ./configure --prefix=/usr/local/apr --with-apr=/usr/local/apr/bin/apr-1-config
+    make -j4 && make install
+    cd ..
+}
+
 build_log4cxx(){
-    yum -y install apr-devel
-    yum -y install apr-util-devel
     cd log4cxx
+    #yum -y update
+    local VERSION_ID=`grep "VERSION_ID" /etc/os-release | cut -f 2 -d '='`
+    local NumOnly=$(cut -f2 <<< "$VERSION_ID")
+    if [ NumOnly>7 ]; then
+        yum -y install apr-devel
+        yum -y install apr-util-devel
+    else
+    # centos:7 需要编译安装
+        yum -y uninstall apr-devel
+        yum -y uninstall apr-util-devel
+        build_apr    
+        build_apr_util
+    fi
+
     download $LOG4CXX.tar.gz $LOG4CXX_PATH
     tar -xf $LOG4CXX.tar.gz
     cd $LOG4CXX
-    ./configure --prefix=$CUR_DIR/log4cxx --with-apr=/usr --with-apr-util=/usr
-    cp ../inputstreamreader.cpp ./src/main/cpp/
-    cp ../socketoutputstream.cpp ./src/main/cpp/
-    cp ../console.cpp ./src/examples/cpp/
-    make
-    make install
+    #./configure --prefix=$CUR_DIR/log4cxx --with-apr=/usr --with-apr-util=/usr
+    cmake  -DCMAKE_INSTALL_PREFIX:PATH=$CUR_DIR/log4cxx .
+    /bin/cp -rf ../inputstreamreader.cpp ./src/main/cpp/
+    /bin/cp -rf ../socketoutputstream.cpp ./src/main/cpp/
+    /bin/cp -rf ../console.cpp ./src/examples/cpp/
+    make -j4 && make install
     cd ../../
     cp -rf log4cxx/include slog/
     mkdir -p slog/lib/
-    cp -f log4cxx/lib/liblog4cxx.so* slog/lib/
+    cp -f log4cxx/lib64/liblog4cxx.so* slog/lib/
 }
 
 check_user

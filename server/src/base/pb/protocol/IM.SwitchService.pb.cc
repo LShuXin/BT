@@ -38,19 +38,6 @@ namespace SwitchService {
 
 class IMP2PCmdMsg::_Internal {
  public:
-  using HasBits = decltype(std::declval<IMP2PCmdMsg>()._has_bits_);
-  static void set_has_from_user_id(HasBits* has_bits) {
-    (*has_bits)[0] |= 2u;
-  }
-  static void set_has_to_user_id(HasBits* has_bits) {
-    (*has_bits)[0] |= 4u;
-  }
-  static void set_has_cmd_msg_data(HasBits* has_bits) {
-    (*has_bits)[0] |= 1u;
-  }
-  static bool MissingRequiredFields(const HasBits& has_bits) {
-    return ((has_bits[0] & 0x00000007) ^ 0x00000007) != 0;
-  }
 };
 
 IMP2PCmdMsg::IMP2PCmdMsg(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -63,11 +50,10 @@ IMP2PCmdMsg::IMP2PCmdMsg(::PROTOBUF_NAMESPACE_ID::Arena* arena,
   // @@protoc_insertion_point(arena_constructor:IM.SwitchService.IMP2PCmdMsg)
 }
 IMP2PCmdMsg::IMP2PCmdMsg(const IMP2PCmdMsg& from)
-  : ::PROTOBUF_NAMESPACE_ID::MessageLite(),
-      _has_bits_(from._has_bits_) {
+  : ::PROTOBUF_NAMESPACE_ID::MessageLite() {
   _internal_metadata_.MergeFrom<std::string>(from._internal_metadata_);
   cmd_msg_data_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from._internal_has_cmd_msg_data()) {
+  if (!from._internal_cmd_msg_data().empty()) {
     cmd_msg_data_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_cmd_msg_data(), 
       GetArenaForAllocation());
   }
@@ -113,49 +99,41 @@ void IMP2PCmdMsg::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    cmd_msg_data_.ClearNonDefaultToEmpty();
-  }
-  if (cached_has_bits & 0x00000006u) {
-    ::memset(&from_user_id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&to_user_id_) -
-        reinterpret_cast<char*>(&from_user_id_)) + sizeof(to_user_id_));
-  }
-  _has_bits_.Clear();
+  cmd_msg_data_.ClearToEmpty();
+  ::memset(&from_user_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&to_user_id_) -
+      reinterpret_cast<char*>(&from_user_id_)) + sizeof(to_user_id_));
   _internal_metadata_.Clear<std::string>();
 }
 
 const char* IMP2PCmdMsg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // required uint32 from_user_id = 1;
+      // uint32 from_user_id = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          _Internal::set_has_from_user_id(&has_bits);
           from_user_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // required uint32 to_user_id = 2;
+      // uint32 to_user_id = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          _Internal::set_has_to_user_id(&has_bits);
           to_user_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // required string cmd_msg_data = 3;
+      // string cmd_msg_data = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
           auto str = _internal_mutable_cmd_msg_data();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, nullptr));
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -176,7 +154,6 @@ const char* IMP2PCmdMsg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
     CHK_(ptr != nullptr);
   }  // while
 message_done:
-  _has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -190,21 +167,24 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
-  // required uint32 from_user_id = 1;
-  if (cached_has_bits & 0x00000002u) {
+  // uint32 from_user_id = 1;
+  if (this->_internal_from_user_id() != 0) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->_internal_from_user_id(), target);
   }
 
-  // required uint32 to_user_id = 2;
-  if (cached_has_bits & 0x00000004u) {
+  // uint32 to_user_id = 2;
+  if (this->_internal_to_user_id() != 0) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_to_user_id(), target);
   }
 
-  // required string cmd_msg_data = 3;
-  if (cached_has_bits & 0x00000001u) {
+  // string cmd_msg_data = 3;
+  if (!this->_internal_cmd_msg_data().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_cmd_msg_data().data(), static_cast<int>(this->_internal_cmd_msg_data().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "IM.SwitchService.IMP2PCmdMsg.cmd_msg_data");
     target = stream->WriteStringMaybeAliased(
         3, this->_internal_cmd_msg_data(), target);
   }
@@ -217,51 +197,30 @@ failure:
   return target;
 }
 
-size_t IMP2PCmdMsg::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:IM.SwitchService.IMP2PCmdMsg)
-  size_t total_size = 0;
-
-  if (_internal_has_cmd_msg_data()) {
-    // required string cmd_msg_data = 3;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_cmd_msg_data());
-  }
-
-  if (_internal_has_from_user_id()) {
-    // required uint32 from_user_id = 1;
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_from_user_id());
-  }
-
-  if (_internal_has_to_user_id()) {
-    // required uint32 to_user_id = 2;
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_to_user_id());
-  }
-
-  return total_size;
-}
 size_t IMP2PCmdMsg::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:IM.SwitchService.IMP2PCmdMsg)
   size_t total_size = 0;
 
-  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
-    // required string cmd_msg_data = 3;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_cmd_msg_data());
-
-    // required uint32 from_user_id = 1;
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_from_user_id());
-
-    // required uint32 to_user_id = 2;
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_to_user_id());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
+
+  // string cmd_msg_data = 3;
+  if (!this->_internal_cmd_msg_data().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_cmd_msg_data());
+  }
+
+  // uint32 from_user_id = 1;
+  if (this->_internal_from_user_id() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_from_user_id());
+  }
+
+  // uint32 to_user_id = 2;
+  if (this->_internal_to_user_id() != 0) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_to_user_id());
+  }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     total_size += _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString).size();
@@ -283,18 +242,14 @@ void IMP2PCmdMsg::MergeFrom(const IMP2PCmdMsg& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
-    if (cached_has_bits & 0x00000001u) {
-      _internal_set_cmd_msg_data(from._internal_cmd_msg_data());
-    }
-    if (cached_has_bits & 0x00000002u) {
-      from_user_id_ = from.from_user_id_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      to_user_id_ = from.to_user_id_;
-    }
-    _has_bits_[0] |= cached_has_bits;
+  if (!from._internal_cmd_msg_data().empty()) {
+    _internal_set_cmd_msg_data(from._internal_cmd_msg_data());
+  }
+  if (from._internal_from_user_id() != 0) {
+    _internal_set_from_user_id(from._internal_from_user_id());
+  }
+  if (from._internal_to_user_id() != 0) {
+    _internal_set_to_user_id(from._internal_to_user_id());
   }
   _internal_metadata_.MergeFrom<std::string>(from._internal_metadata_);
 }
@@ -307,7 +262,6 @@ void IMP2PCmdMsg::CopyFrom(const IMP2PCmdMsg& from) {
 }
 
 bool IMP2PCmdMsg::IsInitialized() const {
-  if (_Internal::MissingRequiredFields(_has_bits_)) return false;
   return true;
 }
 
@@ -316,7 +270,6 @@ void IMP2PCmdMsg::InternalSwap(IMP2PCmdMsg* other) {
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       &cmd_msg_data_, lhs_arena,

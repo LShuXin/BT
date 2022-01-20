@@ -149,13 +149,6 @@ class IMMsgData final :
     return *this;
   }
 
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
-  }
-
   static const IMMsgData& default_instance() {
     return *internal_default_instance();
   }
@@ -237,11 +230,7 @@ class IMMsgData final :
     kCreateTimeFieldNumber = 4,
     kMsgTypeFieldNumber = 5,
   };
-  // required bytes msg_data = 6;
-  bool has_msg_data() const;
-  private:
-  bool _internal_has_msg_data() const;
-  public:
+  // bytes msg_data = 6;
   void clear_msg_data();
   const std::string& msg_data() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -273,11 +262,7 @@ class IMMsgData final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 from_user_id = 1;
-  bool has_from_user_id() const;
-  private:
-  bool _internal_has_from_user_id() const;
-  public:
+  // uint32 from_user_id = 1;
   void clear_from_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 from_user_id() const;
   void set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -286,11 +271,7 @@ class IMMsgData final :
   void _internal_set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 to_session_id = 2;
-  bool has_to_session_id() const;
-  private:
-  bool _internal_has_to_session_id() const;
-  public:
+  // uint32 to_session_id = 2;
   void clear_to_session_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 to_session_id() const;
   void set_to_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -299,11 +280,7 @@ class IMMsgData final :
   void _internal_set_to_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 msg_id = 3;
-  bool has_msg_id() const;
-  private:
-  bool _internal_has_msg_id() const;
-  public:
+  // uint32 msg_id = 3;
   void clear_msg_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 msg_id() const;
   void set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -312,11 +289,7 @@ class IMMsgData final :
   void _internal_set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 create_time = 4;
-  bool has_create_time() const;
-  private:
-  bool _internal_has_create_time() const;
-  public:
+  // uint32 create_time = 4;
   void clear_create_time();
   ::PROTOBUF_NAMESPACE_ID::uint32 create_time() const;
   void set_create_time(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -325,11 +298,7 @@ class IMMsgData final :
   void _internal_set_create_time(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required .IM.BaseDefine.MsgType msg_type = 5;
-  bool has_msg_type() const;
-  private:
-  bool _internal_has_msg_type() const;
-  public:
+  // .IM.BaseDefine.MsgType msg_type = 5;
   void clear_msg_type();
   ::IM::BaseDefine::MsgType msg_type() const;
   void set_msg_type(::IM::BaseDefine::MsgType value);
@@ -341,9 +310,6 @@ class IMMsgData final :
   // @@protoc_insertion_point(class_scope:IM.Message.IMMsgData)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -390,13 +356,6 @@ class IMMsgDataAck final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMMsgDataAck& default_instance() {
@@ -477,11 +436,7 @@ class IMMsgDataAck final :
     kMsgIdFieldNumber = 3,
     kSessionTypeFieldNumber = 4,
   };
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -490,11 +445,7 @@ class IMMsgDataAck final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 session_id = 2;
-  bool has_session_id() const;
-  private:
-  bool _internal_has_session_id() const;
-  public:
+  // uint32 session_id = 2;
   void clear_session_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
   void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -503,11 +454,7 @@ class IMMsgDataAck final :
   void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 msg_id = 3;
-  bool has_msg_id() const;
-  private:
-  bool _internal_has_msg_id() const;
-  public:
+  // uint32 msg_id = 3;
   void clear_msg_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 msg_id() const;
   void set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -516,11 +463,7 @@ class IMMsgDataAck final :
   void _internal_set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required .IM.BaseDefine.SessionType session_type = 4;
-  bool has_session_type() const;
-  private:
-  bool _internal_has_session_type() const;
-  public:
+  // .IM.BaseDefine.SessionType session_type = 4;
   void clear_session_type();
   ::IM::BaseDefine::SessionType session_type() const;
   void set_session_type(::IM::BaseDefine::SessionType value);
@@ -533,18 +476,14 @@ class IMMsgDataAck final :
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 session_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 msg_id_;
   int session_type_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eMessage_2eproto;
 };
 // -------------------------------------------------------------------
@@ -578,13 +517,6 @@ class IMMsgDataReadAck final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMMsgDataReadAck& default_instance() {
@@ -665,11 +597,7 @@ class IMMsgDataReadAck final :
     kMsgIdFieldNumber = 3,
     kSessionTypeFieldNumber = 4,
   };
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -678,11 +606,7 @@ class IMMsgDataReadAck final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 session_id = 2;
-  bool has_session_id() const;
-  private:
-  bool _internal_has_session_id() const;
-  public:
+  // uint32 session_id = 2;
   void clear_session_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
   void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -691,11 +615,7 @@ class IMMsgDataReadAck final :
   void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 msg_id = 3;
-  bool has_msg_id() const;
-  private:
-  bool _internal_has_msg_id() const;
-  public:
+  // uint32 msg_id = 3;
   void clear_msg_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 msg_id() const;
   void set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -704,11 +624,7 @@ class IMMsgDataReadAck final :
   void _internal_set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required .IM.BaseDefine.SessionType session_type = 4;
-  bool has_session_type() const;
-  private:
-  bool _internal_has_session_type() const;
-  public:
+  // .IM.BaseDefine.SessionType session_type = 4;
   void clear_session_type();
   ::IM::BaseDefine::SessionType session_type() const;
   void set_session_type(::IM::BaseDefine::SessionType value);
@@ -721,18 +637,14 @@ class IMMsgDataReadAck final :
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 session_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 msg_id_;
   int session_type_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eMessage_2eproto;
 };
 // -------------------------------------------------------------------
@@ -766,13 +678,6 @@ class IMMsgDataReadNotify final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMMsgDataReadNotify& default_instance() {
@@ -853,11 +758,7 @@ class IMMsgDataReadNotify final :
     kMsgIdFieldNumber = 3,
     kSessionTypeFieldNumber = 4,
   };
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -866,11 +767,7 @@ class IMMsgDataReadNotify final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 session_id = 2;
-  bool has_session_id() const;
-  private:
-  bool _internal_has_session_id() const;
-  public:
+  // uint32 session_id = 2;
   void clear_session_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
   void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -879,11 +776,7 @@ class IMMsgDataReadNotify final :
   void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 msg_id = 3;
-  bool has_msg_id() const;
-  private:
-  bool _internal_has_msg_id() const;
-  public:
+  // uint32 msg_id = 3;
   void clear_msg_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 msg_id() const;
   void set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -892,11 +785,7 @@ class IMMsgDataReadNotify final :
   void _internal_set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required .IM.BaseDefine.SessionType session_type = 4;
-  bool has_session_type() const;
-  private:
-  bool _internal_has_session_type() const;
-  public:
+  // .IM.BaseDefine.SessionType session_type = 4;
   void clear_session_type();
   ::IM::BaseDefine::SessionType session_type() const;
   void set_session_type(::IM::BaseDefine::SessionType value);
@@ -909,18 +798,14 @@ class IMMsgDataReadNotify final :
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 session_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 msg_id_;
   int session_type_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eMessage_2eproto;
 };
 // -------------------------------------------------------------------
@@ -954,13 +839,6 @@ class IMClientTimeReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMClientTimeReq& default_instance() {
@@ -1078,13 +956,6 @@ class IMClientTimeRsp final :
     return *this;
   }
 
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
-  }
-
   static const IMClientTimeRsp& default_instance() {
     return *internal_default_instance();
   }
@@ -1160,11 +1031,7 @@ class IMClientTimeRsp final :
   enum : int {
     kServerTimeFieldNumber = 1,
   };
-  // required uint32 server_time = 1;
-  bool has_server_time() const;
-  private:
-  bool _internal_has_server_time() const;
-  public:
+  // uint32 server_time = 1;
   void clear_server_time();
   ::PROTOBUF_NAMESPACE_ID::uint32 server_time() const;
   void set_server_time(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1180,9 +1047,8 @@ class IMClientTimeRsp final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::uint32 server_time_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eMessage_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1216,13 +1082,6 @@ class IMUnreadMsgCntReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMUnreadMsgCntReq& default_instance() {
@@ -1319,11 +1178,7 @@ class IMUnreadMsgCntReq final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1376,13 +1231,6 @@ class IMUnreadMsgCntRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMUnreadMsgCntRsp& default_instance() {
@@ -1499,11 +1347,7 @@ class IMUnreadMsgCntRsp final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1512,11 +1356,7 @@ class IMUnreadMsgCntRsp final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 total_cnt = 2;
-  bool has_total_cnt() const;
-  private:
-  bool _internal_has_total_cnt() const;
-  public:
+  // uint32 total_cnt = 2;
   void clear_total_cnt();
   ::PROTOBUF_NAMESPACE_ID::uint32 total_cnt() const;
   void set_total_cnt(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1528,9 +1368,6 @@ class IMUnreadMsgCntRsp final :
   // @@protoc_insertion_point(class_scope:IM.Message.IMUnreadMsgCntRsp)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -1574,13 +1411,6 @@ class IMGetMsgListReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMGetMsgListReq& default_instance() {
@@ -1658,10 +1488,10 @@ class IMGetMsgListReq final :
   enum : int {
     kAttachDataFieldNumber = 20,
     kUserIdFieldNumber = 1,
+    kSessionTypeFieldNumber = 2,
     kSessionIdFieldNumber = 3,
     kMsgIdBeginFieldNumber = 4,
     kMsgCntFieldNumber = 5,
-    kSessionTypeFieldNumber = 2,
   };
   // optional bytes attach_data = 20;
   bool has_attach_data() const;
@@ -1681,11 +1511,7 @@ class IMGetMsgListReq final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1694,50 +1520,7 @@ class IMGetMsgListReq final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 session_id = 3;
-  bool has_session_id() const;
-  private:
-  bool _internal_has_session_id() const;
-  public:
-  void clear_session_id();
-  ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
-  void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_session_id() const;
-  void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required uint32 msg_id_begin = 4;
-  bool has_msg_id_begin() const;
-  private:
-  bool _internal_has_msg_id_begin() const;
-  public:
-  void clear_msg_id_begin();
-  ::PROTOBUF_NAMESPACE_ID::uint32 msg_id_begin() const;
-  void set_msg_id_begin(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_msg_id_begin() const;
-  void _internal_set_msg_id_begin(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required uint32 msg_cnt = 5;
-  bool has_msg_cnt() const;
-  private:
-  bool _internal_has_msg_cnt() const;
-  public:
-  void clear_msg_cnt();
-  ::PROTOBUF_NAMESPACE_ID::uint32 msg_cnt() const;
-  void set_msg_cnt(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_msg_cnt() const;
-  void _internal_set_msg_cnt(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required .IM.BaseDefine.SessionType session_type = 2;
-  bool has_session_type() const;
-  private:
-  bool _internal_has_session_type() const;
-  public:
+  // .IM.BaseDefine.SessionType session_type = 2;
   void clear_session_type();
   ::IM::BaseDefine::SessionType session_type() const;
   void set_session_type(::IM::BaseDefine::SessionType value);
@@ -1746,12 +1529,36 @@ class IMGetMsgListReq final :
   void _internal_set_session_type(::IM::BaseDefine::SessionType value);
   public:
 
+  // uint32 session_id = 3;
+  void clear_session_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
+  void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_session_id() const;
+  void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // uint32 msg_id_begin = 4;
+  void clear_msg_id_begin();
+  ::PROTOBUF_NAMESPACE_ID::uint32 msg_id_begin() const;
+  void set_msg_id_begin(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_msg_id_begin() const;
+  void _internal_set_msg_id_begin(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // uint32 msg_cnt = 5;
+  void clear_msg_cnt();
+  ::PROTOBUF_NAMESPACE_ID::uint32 msg_cnt() const;
+  void set_msg_cnt(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_msg_cnt() const;
+  void _internal_set_msg_cnt(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:IM.Message.IMGetMsgListReq)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -1760,10 +1567,10 @@ class IMGetMsgListReq final :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr attach_data_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
+  int session_type_;
   ::PROTOBUF_NAMESPACE_ID::uint32 session_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 msg_id_begin_;
   ::PROTOBUF_NAMESPACE_ID::uint32 msg_cnt_;
-  int session_type_;
   friend struct ::TableStruct_IM_2eMessage_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1797,13 +1604,6 @@ class IMGetMsgListRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMGetMsgListRsp& default_instance() {
@@ -1882,9 +1682,9 @@ class IMGetMsgListRsp final :
     kMsgListFieldNumber = 5,
     kAttachDataFieldNumber = 20,
     kUserIdFieldNumber = 1,
+    kSessionTypeFieldNumber = 2,
     kSessionIdFieldNumber = 3,
     kMsgIdBeginFieldNumber = 4,
-    kSessionTypeFieldNumber = 2,
   };
   // repeated .IM.BaseDefine.MsgInfo msg_list = 5;
   int msg_list_size() const;
@@ -1922,11 +1722,7 @@ class IMGetMsgListRsp final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1935,37 +1731,7 @@ class IMGetMsgListRsp final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 session_id = 3;
-  bool has_session_id() const;
-  private:
-  bool _internal_has_session_id() const;
-  public:
-  void clear_session_id();
-  ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
-  void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_session_id() const;
-  void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required uint32 msg_id_begin = 4;
-  bool has_msg_id_begin() const;
-  private:
-  bool _internal_has_msg_id_begin() const;
-  public:
-  void clear_msg_id_begin();
-  ::PROTOBUF_NAMESPACE_ID::uint32 msg_id_begin() const;
-  void set_msg_id_begin(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_msg_id_begin() const;
-  void _internal_set_msg_id_begin(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required .IM.BaseDefine.SessionType session_type = 2;
-  bool has_session_type() const;
-  private:
-  bool _internal_has_session_type() const;
-  public:
+  // .IM.BaseDefine.SessionType session_type = 2;
   void clear_session_type();
   ::IM::BaseDefine::SessionType session_type() const;
   void set_session_type(::IM::BaseDefine::SessionType value);
@@ -1974,12 +1740,27 @@ class IMGetMsgListRsp final :
   void _internal_set_session_type(::IM::BaseDefine::SessionType value);
   public:
 
+  // uint32 session_id = 3;
+  void clear_session_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
+  void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_session_id() const;
+  void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // uint32 msg_id_begin = 4;
+  void clear_msg_id_begin();
+  ::PROTOBUF_NAMESPACE_ID::uint32 msg_id_begin() const;
+  void set_msg_id_begin(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_msg_id_begin() const;
+  void _internal_set_msg_id_begin(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:IM.Message.IMGetMsgListRsp)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -1989,9 +1770,9 @@ class IMGetMsgListRsp final :
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::IM::BaseDefine::MsgInfo > msg_list_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr attach_data_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
+  int session_type_;
   ::PROTOBUF_NAMESPACE_ID::uint32 session_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 msg_id_begin_;
-  int session_type_;
   friend struct ::TableStruct_IM_2eMessage_2eproto;
 };
 // -------------------------------------------------------------------
@@ -2025,13 +1806,6 @@ class IMGetLatestMsgIdReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMGetLatestMsgIdReq& default_instance() {
@@ -2109,8 +1883,8 @@ class IMGetLatestMsgIdReq final :
   enum : int {
     kAttachDataFieldNumber = 20,
     kUserIdFieldNumber = 1,
-    kSessionIdFieldNumber = 3,
     kSessionTypeFieldNumber = 2,
+    kSessionIdFieldNumber = 3,
   };
   // optional bytes attach_data = 20;
   bool has_attach_data() const;
@@ -2130,11 +1904,7 @@ class IMGetLatestMsgIdReq final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2143,24 +1913,7 @@ class IMGetLatestMsgIdReq final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 session_id = 3;
-  bool has_session_id() const;
-  private:
-  bool _internal_has_session_id() const;
-  public:
-  void clear_session_id();
-  ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
-  void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_session_id() const;
-  void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required .IM.BaseDefine.SessionType session_type = 2;
-  bool has_session_type() const;
-  private:
-  bool _internal_has_session_type() const;
-  public:
+  // .IM.BaseDefine.SessionType session_type = 2;
   void clear_session_type();
   ::IM::BaseDefine::SessionType session_type() const;
   void set_session_type(::IM::BaseDefine::SessionType value);
@@ -2169,12 +1922,18 @@ class IMGetLatestMsgIdReq final :
   void _internal_set_session_type(::IM::BaseDefine::SessionType value);
   public:
 
+  // uint32 session_id = 3;
+  void clear_session_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
+  void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_session_id() const;
+  void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:IM.Message.IMGetLatestMsgIdReq)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -2183,8 +1942,8 @@ class IMGetLatestMsgIdReq final :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr attach_data_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 session_id_;
   int session_type_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_id_;
   friend struct ::TableStruct_IM_2eMessage_2eproto;
 };
 // -------------------------------------------------------------------
@@ -2218,13 +1977,6 @@ class IMGetLatestMsgIdRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMGetLatestMsgIdRsp& default_instance() {
@@ -2302,9 +2054,9 @@ class IMGetLatestMsgIdRsp final :
   enum : int {
     kAttachDataFieldNumber = 20,
     kUserIdFieldNumber = 1,
+    kSessionTypeFieldNumber = 2,
     kSessionIdFieldNumber = 3,
     kLatestMsgIdFieldNumber = 4,
-    kSessionTypeFieldNumber = 2,
   };
   // optional bytes attach_data = 20;
   bool has_attach_data() const;
@@ -2324,11 +2076,7 @@ class IMGetLatestMsgIdRsp final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2337,37 +2085,7 @@ class IMGetLatestMsgIdRsp final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 session_id = 3;
-  bool has_session_id() const;
-  private:
-  bool _internal_has_session_id() const;
-  public:
-  void clear_session_id();
-  ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
-  void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_session_id() const;
-  void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required uint32 latest_msg_id = 4;
-  bool has_latest_msg_id() const;
-  private:
-  bool _internal_has_latest_msg_id() const;
-  public:
-  void clear_latest_msg_id();
-  ::PROTOBUF_NAMESPACE_ID::uint32 latest_msg_id() const;
-  void set_latest_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_latest_msg_id() const;
-  void _internal_set_latest_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required .IM.BaseDefine.SessionType session_type = 2;
-  bool has_session_type() const;
-  private:
-  bool _internal_has_session_type() const;
-  public:
+  // .IM.BaseDefine.SessionType session_type = 2;
   void clear_session_type();
   ::IM::BaseDefine::SessionType session_type() const;
   void set_session_type(::IM::BaseDefine::SessionType value);
@@ -2376,12 +2094,27 @@ class IMGetLatestMsgIdRsp final :
   void _internal_set_session_type(::IM::BaseDefine::SessionType value);
   public:
 
+  // uint32 session_id = 3;
+  void clear_session_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
+  void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_session_id() const;
+  void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // uint32 latest_msg_id = 4;
+  void clear_latest_msg_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 latest_msg_id() const;
+  void set_latest_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_latest_msg_id() const;
+  void _internal_set_latest_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:IM.Message.IMGetLatestMsgIdRsp)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -2390,9 +2123,9 @@ class IMGetLatestMsgIdRsp final :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr attach_data_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
+  int session_type_;
   ::PROTOBUF_NAMESPACE_ID::uint32 session_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 latest_msg_id_;
-  int session_type_;
   friend struct ::TableStruct_IM_2eMessage_2eproto;
 };
 // -------------------------------------------------------------------
@@ -2426,13 +2159,6 @@ class IMGetMsgByIdReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMGetMsgByIdReq& default_instance() {
@@ -2511,8 +2237,8 @@ class IMGetMsgByIdReq final :
     kMsgIdListFieldNumber = 4,
     kAttachDataFieldNumber = 20,
     kUserIdFieldNumber = 1,
-    kSessionIdFieldNumber = 3,
     kSessionTypeFieldNumber = 2,
+    kSessionIdFieldNumber = 3,
   };
   // repeated uint32 msg_id_list = 4;
   int msg_id_list_size() const;
@@ -2554,11 +2280,7 @@ class IMGetMsgByIdReq final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2567,24 +2289,7 @@ class IMGetMsgByIdReq final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 session_id = 3;
-  bool has_session_id() const;
-  private:
-  bool _internal_has_session_id() const;
-  public:
-  void clear_session_id();
-  ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
-  void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_session_id() const;
-  void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required .IM.BaseDefine.SessionType session_type = 2;
-  bool has_session_type() const;
-  private:
-  bool _internal_has_session_type() const;
-  public:
+  // .IM.BaseDefine.SessionType session_type = 2;
   void clear_session_type();
   ::IM::BaseDefine::SessionType session_type() const;
   void set_session_type(::IM::BaseDefine::SessionType value);
@@ -2593,12 +2298,18 @@ class IMGetMsgByIdReq final :
   void _internal_set_session_type(::IM::BaseDefine::SessionType value);
   public:
 
+  // uint32 session_id = 3;
+  void clear_session_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
+  void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_session_id() const;
+  void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:IM.Message.IMGetMsgByIdReq)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -2606,10 +2317,11 @@ class IMGetMsgByIdReq final :
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 > msg_id_list_;
+  mutable std::atomic<int> _msg_id_list_cached_byte_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr attach_data_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 session_id_;
   int session_type_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_id_;
   friend struct ::TableStruct_IM_2eMessage_2eproto;
 };
 // -------------------------------------------------------------------
@@ -2643,13 +2355,6 @@ class IMGetMsgByIdRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMGetMsgByIdRsp& default_instance() {
@@ -2728,8 +2433,8 @@ class IMGetMsgByIdRsp final :
     kMsgListFieldNumber = 4,
     kAttachDataFieldNumber = 20,
     kUserIdFieldNumber = 1,
-    kSessionIdFieldNumber = 3,
     kSessionTypeFieldNumber = 2,
+    kSessionIdFieldNumber = 3,
   };
   // repeated .IM.BaseDefine.MsgInfo msg_list = 4;
   int msg_list_size() const;
@@ -2767,11 +2472,7 @@ class IMGetMsgByIdRsp final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2780,24 +2481,7 @@ class IMGetMsgByIdRsp final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 session_id = 3;
-  bool has_session_id() const;
-  private:
-  bool _internal_has_session_id() const;
-  public:
-  void clear_session_id();
-  ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
-  void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_session_id() const;
-  void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required .IM.BaseDefine.SessionType session_type = 2;
-  bool has_session_type() const;
-  private:
-  bool _internal_has_session_type() const;
-  public:
+  // .IM.BaseDefine.SessionType session_type = 2;
   void clear_session_type();
   ::IM::BaseDefine::SessionType session_type() const;
   void set_session_type(::IM::BaseDefine::SessionType value);
@@ -2806,12 +2490,18 @@ class IMGetMsgByIdRsp final :
   void _internal_set_session_type(::IM::BaseDefine::SessionType value);
   public:
 
+  // uint32 session_id = 3;
+  void clear_session_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
+  void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_session_id() const;
+  void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:IM.Message.IMGetMsgByIdRsp)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -2821,8 +2511,8 @@ class IMGetMsgByIdRsp final :
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::IM::BaseDefine::MsgInfo > msg_list_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr attach_data_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 session_id_;
   int session_type_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_id_;
   friend struct ::TableStruct_IM_2eMessage_2eproto;
 };
 // ===================================================================
@@ -2836,17 +2526,9 @@ class IMGetMsgByIdRsp final :
 #endif  // __GNUC__
 // IMMsgData
 
-// required uint32 from_user_id = 1;
-inline bool IMMsgData::_internal_has_from_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMMsgData::has_from_user_id() const {
-  return _internal_has_from_user_id();
-}
+// uint32 from_user_id = 1;
 inline void IMMsgData::clear_from_user_id() {
   from_user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgData::_internal_from_user_id() const {
   return from_user_id_;
@@ -2856,7 +2538,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgData::from_user_id() const {
   return _internal_from_user_id();
 }
 inline void IMMsgData::_internal_set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   from_user_id_ = value;
 }
 inline void IMMsgData::set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2864,17 +2546,9 @@ inline void IMMsgData::set_from_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:IM.Message.IMMsgData.from_user_id)
 }
 
-// required uint32 to_session_id = 2;
-inline bool IMMsgData::_internal_has_to_session_id() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMMsgData::has_to_session_id() const {
-  return _internal_has_to_session_id();
-}
+// uint32 to_session_id = 2;
 inline void IMMsgData::clear_to_session_id() {
   to_session_id_ = 0u;
-  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgData::_internal_to_session_id() const {
   return to_session_id_;
@@ -2884,7 +2558,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgData::to_session_id() const {
   return _internal_to_session_id();
 }
 inline void IMMsgData::_internal_set_to_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  
   to_session_id_ = value;
 }
 inline void IMMsgData::set_to_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2892,17 +2566,9 @@ inline void IMMsgData::set_to_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) 
   // @@protoc_insertion_point(field_set:IM.Message.IMMsgData.to_session_id)
 }
 
-// required uint32 msg_id = 3;
-inline bool IMMsgData::_internal_has_msg_id() const {
-  bool value = (_has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool IMMsgData::has_msg_id() const {
-  return _internal_has_msg_id();
-}
+// uint32 msg_id = 3;
 inline void IMMsgData::clear_msg_id() {
   msg_id_ = 0u;
-  _has_bits_[0] &= ~0x00000010u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgData::_internal_msg_id() const {
   return msg_id_;
@@ -2912,7 +2578,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgData::msg_id() const {
   return _internal_msg_id();
 }
 inline void IMMsgData::_internal_set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000010u;
+  
   msg_id_ = value;
 }
 inline void IMMsgData::set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2920,17 +2586,9 @@ inline void IMMsgData::set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:IM.Message.IMMsgData.msg_id)
 }
 
-// required uint32 create_time = 4;
-inline bool IMMsgData::_internal_has_create_time() const {
-  bool value = (_has_bits_[0] & 0x00000020u) != 0;
-  return value;
-}
-inline bool IMMsgData::has_create_time() const {
-  return _internal_has_create_time();
-}
+// uint32 create_time = 4;
 inline void IMMsgData::clear_create_time() {
   create_time_ = 0u;
-  _has_bits_[0] &= ~0x00000020u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgData::_internal_create_time() const {
   return create_time_;
@@ -2940,7 +2598,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgData::create_time() const {
   return _internal_create_time();
 }
 inline void IMMsgData::_internal_set_create_time(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000020u;
+  
   create_time_ = value;
 }
 inline void IMMsgData::set_create_time(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2948,17 +2606,9 @@ inline void IMMsgData::set_create_time(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:IM.Message.IMMsgData.create_time)
 }
 
-// required .IM.BaseDefine.MsgType msg_type = 5;
-inline bool IMMsgData::_internal_has_msg_type() const {
-  bool value = (_has_bits_[0] & 0x00000040u) != 0;
-  return value;
-}
-inline bool IMMsgData::has_msg_type() const {
-  return _internal_has_msg_type();
-}
+// .IM.BaseDefine.MsgType msg_type = 5;
 inline void IMMsgData::clear_msg_type() {
-  msg_type_ = 1;
-  _has_bits_[0] &= ~0x00000040u;
+  msg_type_ = 0;
 }
 inline ::IM::BaseDefine::MsgType IMMsgData::_internal_msg_type() const {
   return static_cast< ::IM::BaseDefine::MsgType >(msg_type_);
@@ -2968,8 +2618,7 @@ inline ::IM::BaseDefine::MsgType IMMsgData::msg_type() const {
   return _internal_msg_type();
 }
 inline void IMMsgData::_internal_set_msg_type(::IM::BaseDefine::MsgType value) {
-  assert(::IM::BaseDefine::MsgType_IsValid(value));
-  _has_bits_[0] |= 0x00000040u;
+  
   msg_type_ = value;
 }
 inline void IMMsgData::set_msg_type(::IM::BaseDefine::MsgType value) {
@@ -2977,17 +2626,9 @@ inline void IMMsgData::set_msg_type(::IM::BaseDefine::MsgType value) {
   // @@protoc_insertion_point(field_set:IM.Message.IMMsgData.msg_type)
 }
 
-// required bytes msg_data = 6;
-inline bool IMMsgData::_internal_has_msg_data() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMMsgData::has_msg_data() const {
-  return _internal_has_msg_data();
-}
+// bytes msg_data = 6;
 inline void IMMsgData::clear_msg_data() {
   msg_data_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMMsgData::msg_data() const {
   // @@protoc_insertion_point(field_get:IM.Message.IMMsgData.msg_data)
@@ -2996,7 +2637,7 @@ inline const std::string& IMMsgData::msg_data() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMMsgData::set_msg_data(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000001u;
+ 
  msg_data_.SetBytes(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.Message.IMMsgData.msg_data)
 }
@@ -3009,26 +2650,22 @@ inline const std::string& IMMsgData::_internal_msg_data() const {
   return msg_data_.Get();
 }
 inline void IMMsgData::_internal_set_msg_data(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   msg_data_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMMsgData::_internal_mutable_msg_data() {
-  _has_bits_[0] |= 0x00000001u;
+  
   return msg_data_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMMsgData::release_msg_data() {
   // @@protoc_insertion_point(field_release:IM.Message.IMMsgData.msg_data)
-  if (!_internal_has_msg_data()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return msg_data_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return msg_data_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMMsgData::set_allocated_msg_data(std::string* msg_data) {
   if (msg_data != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    
   }
   msg_data_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), msg_data,
       GetArenaForAllocation());
@@ -3037,7 +2674,7 @@ inline void IMMsgData::set_allocated_msg_data(std::string* msg_data) {
 
 // optional bytes attach_data = 20;
 inline bool IMMsgData::_internal_has_attach_data() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
+  bool value = (_has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
 inline bool IMMsgData::has_attach_data() const {
@@ -3045,7 +2682,7 @@ inline bool IMMsgData::has_attach_data() const {
 }
 inline void IMMsgData::clear_attach_data() {
   attach_data_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMMsgData::attach_data() const {
   // @@protoc_insertion_point(field_get:IM.Message.IMMsgData.attach_data)
@@ -3054,7 +2691,7 @@ inline const std::string& IMMsgData::attach_data() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMMsgData::set_attach_data(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000002u;
+ _has_bits_[0] |= 0x00000001u;
  attach_data_.SetBytes(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.Message.IMMsgData.attach_data)
 }
@@ -3067,11 +2704,11 @@ inline const std::string& IMMsgData::_internal_attach_data() const {
   return attach_data_.Get();
 }
 inline void IMMsgData::_internal_set_attach_data(const std::string& value) {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000001u;
   attach_data_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMMsgData::_internal_mutable_attach_data() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000001u;
   return attach_data_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMMsgData::release_attach_data() {
@@ -3079,14 +2716,14 @@ inline std::string* IMMsgData::release_attach_data() {
   if (!_internal_has_attach_data()) {
     return nullptr;
   }
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
   return attach_data_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMMsgData::set_allocated_attach_data(std::string* attach_data) {
   if (attach_data != nullptr) {
-    _has_bits_[0] |= 0x00000002u;
+    _has_bits_[0] |= 0x00000001u;
   } else {
-    _has_bits_[0] &= ~0x00000002u;
+    _has_bits_[0] &= ~0x00000001u;
   }
   attach_data_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), attach_data,
       GetArenaForAllocation());
@@ -3097,17 +2734,9 @@ inline void IMMsgData::set_allocated_attach_data(std::string* attach_data) {
 
 // IMMsgDataAck
 
-// required uint32 user_id = 1;
-inline bool IMMsgDataAck::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMMsgDataAck::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMMsgDataAck::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgDataAck::_internal_user_id() const {
   return user_id_;
@@ -3117,7 +2746,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgDataAck::user_id() const {
   return _internal_user_id();
 }
 inline void IMMsgDataAck::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   user_id_ = value;
 }
 inline void IMMsgDataAck::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3125,17 +2754,9 @@ inline void IMMsgDataAck::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:IM.Message.IMMsgDataAck.user_id)
 }
 
-// required uint32 session_id = 2;
-inline bool IMMsgDataAck::_internal_has_session_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMMsgDataAck::has_session_id() const {
-  return _internal_has_session_id();
-}
+// uint32 session_id = 2;
 inline void IMMsgDataAck::clear_session_id() {
   session_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgDataAck::_internal_session_id() const {
   return session_id_;
@@ -3145,7 +2766,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgDataAck::session_id() const {
   return _internal_session_id();
 }
 inline void IMMsgDataAck::_internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   session_id_ = value;
 }
 inline void IMMsgDataAck::set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3153,17 +2774,9 @@ inline void IMMsgDataAck::set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) 
   // @@protoc_insertion_point(field_set:IM.Message.IMMsgDataAck.session_id)
 }
 
-// required uint32 msg_id = 3;
-inline bool IMMsgDataAck::_internal_has_msg_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMMsgDataAck::has_msg_id() const {
-  return _internal_has_msg_id();
-}
+// uint32 msg_id = 3;
 inline void IMMsgDataAck::clear_msg_id() {
   msg_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgDataAck::_internal_msg_id() const {
   return msg_id_;
@@ -3173,7 +2786,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgDataAck::msg_id() const {
   return _internal_msg_id();
 }
 inline void IMMsgDataAck::_internal_set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   msg_id_ = value;
 }
 inline void IMMsgDataAck::set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3181,17 +2794,9 @@ inline void IMMsgDataAck::set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:IM.Message.IMMsgDataAck.msg_id)
 }
 
-// required .IM.BaseDefine.SessionType session_type = 4;
-inline bool IMMsgDataAck::_internal_has_session_type() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMMsgDataAck::has_session_type() const {
-  return _internal_has_session_type();
-}
+// .IM.BaseDefine.SessionType session_type = 4;
 inline void IMMsgDataAck::clear_session_type() {
-  session_type_ = 1;
-  _has_bits_[0] &= ~0x00000008u;
+  session_type_ = 0;
 }
 inline ::IM::BaseDefine::SessionType IMMsgDataAck::_internal_session_type() const {
   return static_cast< ::IM::BaseDefine::SessionType >(session_type_);
@@ -3201,8 +2806,7 @@ inline ::IM::BaseDefine::SessionType IMMsgDataAck::session_type() const {
   return _internal_session_type();
 }
 inline void IMMsgDataAck::_internal_set_session_type(::IM::BaseDefine::SessionType value) {
-  assert(::IM::BaseDefine::SessionType_IsValid(value));
-  _has_bits_[0] |= 0x00000008u;
+  
   session_type_ = value;
 }
 inline void IMMsgDataAck::set_session_type(::IM::BaseDefine::SessionType value) {
@@ -3214,17 +2818,9 @@ inline void IMMsgDataAck::set_session_type(::IM::BaseDefine::SessionType value) 
 
 // IMMsgDataReadAck
 
-// required uint32 user_id = 1;
-inline bool IMMsgDataReadAck::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMMsgDataReadAck::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMMsgDataReadAck::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgDataReadAck::_internal_user_id() const {
   return user_id_;
@@ -3234,7 +2830,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgDataReadAck::user_id() const {
   return _internal_user_id();
 }
 inline void IMMsgDataReadAck::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   user_id_ = value;
 }
 inline void IMMsgDataReadAck::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3242,17 +2838,9 @@ inline void IMMsgDataReadAck::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value)
   // @@protoc_insertion_point(field_set:IM.Message.IMMsgDataReadAck.user_id)
 }
 
-// required uint32 session_id = 2;
-inline bool IMMsgDataReadAck::_internal_has_session_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMMsgDataReadAck::has_session_id() const {
-  return _internal_has_session_id();
-}
+// uint32 session_id = 2;
 inline void IMMsgDataReadAck::clear_session_id() {
   session_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgDataReadAck::_internal_session_id() const {
   return session_id_;
@@ -3262,7 +2850,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgDataReadAck::session_id() const {
   return _internal_session_id();
 }
 inline void IMMsgDataReadAck::_internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   session_id_ = value;
 }
 inline void IMMsgDataReadAck::set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3270,17 +2858,9 @@ inline void IMMsgDataReadAck::set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 val
   // @@protoc_insertion_point(field_set:IM.Message.IMMsgDataReadAck.session_id)
 }
 
-// required uint32 msg_id = 3;
-inline bool IMMsgDataReadAck::_internal_has_msg_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMMsgDataReadAck::has_msg_id() const {
-  return _internal_has_msg_id();
-}
+// uint32 msg_id = 3;
 inline void IMMsgDataReadAck::clear_msg_id() {
   msg_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgDataReadAck::_internal_msg_id() const {
   return msg_id_;
@@ -3290,7 +2870,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgDataReadAck::msg_id() const {
   return _internal_msg_id();
 }
 inline void IMMsgDataReadAck::_internal_set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   msg_id_ = value;
 }
 inline void IMMsgDataReadAck::set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3298,17 +2878,9 @@ inline void IMMsgDataReadAck::set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value) 
   // @@protoc_insertion_point(field_set:IM.Message.IMMsgDataReadAck.msg_id)
 }
 
-// required .IM.BaseDefine.SessionType session_type = 4;
-inline bool IMMsgDataReadAck::_internal_has_session_type() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMMsgDataReadAck::has_session_type() const {
-  return _internal_has_session_type();
-}
+// .IM.BaseDefine.SessionType session_type = 4;
 inline void IMMsgDataReadAck::clear_session_type() {
-  session_type_ = 1;
-  _has_bits_[0] &= ~0x00000008u;
+  session_type_ = 0;
 }
 inline ::IM::BaseDefine::SessionType IMMsgDataReadAck::_internal_session_type() const {
   return static_cast< ::IM::BaseDefine::SessionType >(session_type_);
@@ -3318,8 +2890,7 @@ inline ::IM::BaseDefine::SessionType IMMsgDataReadAck::session_type() const {
   return _internal_session_type();
 }
 inline void IMMsgDataReadAck::_internal_set_session_type(::IM::BaseDefine::SessionType value) {
-  assert(::IM::BaseDefine::SessionType_IsValid(value));
-  _has_bits_[0] |= 0x00000008u;
+  
   session_type_ = value;
 }
 inline void IMMsgDataReadAck::set_session_type(::IM::BaseDefine::SessionType value) {
@@ -3331,17 +2902,9 @@ inline void IMMsgDataReadAck::set_session_type(::IM::BaseDefine::SessionType val
 
 // IMMsgDataReadNotify
 
-// required uint32 user_id = 1;
-inline bool IMMsgDataReadNotify::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMMsgDataReadNotify::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMMsgDataReadNotify::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgDataReadNotify::_internal_user_id() const {
   return user_id_;
@@ -3351,7 +2914,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgDataReadNotify::user_id() const {
   return _internal_user_id();
 }
 inline void IMMsgDataReadNotify::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   user_id_ = value;
 }
 inline void IMMsgDataReadNotify::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3359,17 +2922,9 @@ inline void IMMsgDataReadNotify::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 val
   // @@protoc_insertion_point(field_set:IM.Message.IMMsgDataReadNotify.user_id)
 }
 
-// required uint32 session_id = 2;
-inline bool IMMsgDataReadNotify::_internal_has_session_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMMsgDataReadNotify::has_session_id() const {
-  return _internal_has_session_id();
-}
+// uint32 session_id = 2;
 inline void IMMsgDataReadNotify::clear_session_id() {
   session_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgDataReadNotify::_internal_session_id() const {
   return session_id_;
@@ -3379,7 +2934,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgDataReadNotify::session_id() const {
   return _internal_session_id();
 }
 inline void IMMsgDataReadNotify::_internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   session_id_ = value;
 }
 inline void IMMsgDataReadNotify::set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3387,17 +2942,9 @@ inline void IMMsgDataReadNotify::set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 
   // @@protoc_insertion_point(field_set:IM.Message.IMMsgDataReadNotify.session_id)
 }
 
-// required uint32 msg_id = 3;
-inline bool IMMsgDataReadNotify::_internal_has_msg_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMMsgDataReadNotify::has_msg_id() const {
-  return _internal_has_msg_id();
-}
+// uint32 msg_id = 3;
 inline void IMMsgDataReadNotify::clear_msg_id() {
   msg_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgDataReadNotify::_internal_msg_id() const {
   return msg_id_;
@@ -3407,7 +2954,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgDataReadNotify::msg_id() const {
   return _internal_msg_id();
 }
 inline void IMMsgDataReadNotify::_internal_set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   msg_id_ = value;
 }
 inline void IMMsgDataReadNotify::set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3415,17 +2962,9 @@ inline void IMMsgDataReadNotify::set_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 valu
   // @@protoc_insertion_point(field_set:IM.Message.IMMsgDataReadNotify.msg_id)
 }
 
-// required .IM.BaseDefine.SessionType session_type = 4;
-inline bool IMMsgDataReadNotify::_internal_has_session_type() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMMsgDataReadNotify::has_session_type() const {
-  return _internal_has_session_type();
-}
+// .IM.BaseDefine.SessionType session_type = 4;
 inline void IMMsgDataReadNotify::clear_session_type() {
-  session_type_ = 1;
-  _has_bits_[0] &= ~0x00000008u;
+  session_type_ = 0;
 }
 inline ::IM::BaseDefine::SessionType IMMsgDataReadNotify::_internal_session_type() const {
   return static_cast< ::IM::BaseDefine::SessionType >(session_type_);
@@ -3435,8 +2974,7 @@ inline ::IM::BaseDefine::SessionType IMMsgDataReadNotify::session_type() const {
   return _internal_session_type();
 }
 inline void IMMsgDataReadNotify::_internal_set_session_type(::IM::BaseDefine::SessionType value) {
-  assert(::IM::BaseDefine::SessionType_IsValid(value));
-  _has_bits_[0] |= 0x00000008u;
+  
   session_type_ = value;
 }
 inline void IMMsgDataReadNotify::set_session_type(::IM::BaseDefine::SessionType value) {
@@ -3452,17 +2990,9 @@ inline void IMMsgDataReadNotify::set_session_type(::IM::BaseDefine::SessionType 
 
 // IMClientTimeRsp
 
-// required uint32 server_time = 1;
-inline bool IMClientTimeRsp::_internal_has_server_time() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMClientTimeRsp::has_server_time() const {
-  return _internal_has_server_time();
-}
+// uint32 server_time = 1;
 inline void IMClientTimeRsp::clear_server_time() {
   server_time_ = 0u;
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMClientTimeRsp::_internal_server_time() const {
   return server_time_;
@@ -3472,7 +3002,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMClientTimeRsp::server_time() const {
   return _internal_server_time();
 }
 inline void IMClientTimeRsp::_internal_set_server_time(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   server_time_ = value;
 }
 inline void IMClientTimeRsp::set_server_time(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3484,17 +3014,9 @@ inline void IMClientTimeRsp::set_server_time(::PROTOBUF_NAMESPACE_ID::uint32 val
 
 // IMUnreadMsgCntReq
 
-// required uint32 user_id = 1;
-inline bool IMUnreadMsgCntReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMUnreadMsgCntReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMUnreadMsgCntReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMUnreadMsgCntReq::_internal_user_id() const {
   return user_id_;
@@ -3504,7 +3026,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMUnreadMsgCntReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMUnreadMsgCntReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMUnreadMsgCntReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3574,17 +3096,9 @@ inline void IMUnreadMsgCntReq::set_allocated_attach_data(std::string* attach_dat
 
 // IMUnreadMsgCntRsp
 
-// required uint32 user_id = 1;
-inline bool IMUnreadMsgCntRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMUnreadMsgCntRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMUnreadMsgCntRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMUnreadMsgCntRsp::_internal_user_id() const {
   return user_id_;
@@ -3594,7 +3108,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMUnreadMsgCntRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMUnreadMsgCntRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMUnreadMsgCntRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3602,17 +3116,9 @@ inline void IMUnreadMsgCntRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value
   // @@protoc_insertion_point(field_set:IM.Message.IMUnreadMsgCntRsp.user_id)
 }
 
-// required uint32 total_cnt = 2;
-inline bool IMUnreadMsgCntRsp::_internal_has_total_cnt() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMUnreadMsgCntRsp::has_total_cnt() const {
-  return _internal_has_total_cnt();
-}
+// uint32 total_cnt = 2;
 inline void IMUnreadMsgCntRsp::clear_total_cnt() {
   total_cnt_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMUnreadMsgCntRsp::_internal_total_cnt() const {
   return total_cnt_;
@@ -3622,7 +3128,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMUnreadMsgCntRsp::total_cnt() const {
   return _internal_total_cnt();
 }
 inline void IMUnreadMsgCntRsp::_internal_set_total_cnt(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   total_cnt_ = value;
 }
 inline void IMUnreadMsgCntRsp::set_total_cnt(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3729,17 +3235,9 @@ inline void IMUnreadMsgCntRsp::set_allocated_attach_data(std::string* attach_dat
 
 // IMGetMsgListReq
 
-// required uint32 user_id = 1;
-inline bool IMGetMsgListReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMGetMsgListReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMGetMsgListReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgListReq::_internal_user_id() const {
   return user_id_;
@@ -3749,7 +3247,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgListReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMGetMsgListReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMGetMsgListReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3757,17 +3255,9 @@ inline void IMGetMsgListReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) 
   // @@protoc_insertion_point(field_set:IM.Message.IMGetMsgListReq.user_id)
 }
 
-// required .IM.BaseDefine.SessionType session_type = 2;
-inline bool IMGetMsgListReq::_internal_has_session_type() const {
-  bool value = (_has_bits_[0] & 0x00000020u) != 0;
-  return value;
-}
-inline bool IMGetMsgListReq::has_session_type() const {
-  return _internal_has_session_type();
-}
+// .IM.BaseDefine.SessionType session_type = 2;
 inline void IMGetMsgListReq::clear_session_type() {
-  session_type_ = 1;
-  _has_bits_[0] &= ~0x00000020u;
+  session_type_ = 0;
 }
 inline ::IM::BaseDefine::SessionType IMGetMsgListReq::_internal_session_type() const {
   return static_cast< ::IM::BaseDefine::SessionType >(session_type_);
@@ -3777,8 +3267,7 @@ inline ::IM::BaseDefine::SessionType IMGetMsgListReq::session_type() const {
   return _internal_session_type();
 }
 inline void IMGetMsgListReq::_internal_set_session_type(::IM::BaseDefine::SessionType value) {
-  assert(::IM::BaseDefine::SessionType_IsValid(value));
-  _has_bits_[0] |= 0x00000020u;
+  
   session_type_ = value;
 }
 inline void IMGetMsgListReq::set_session_type(::IM::BaseDefine::SessionType value) {
@@ -3786,17 +3275,9 @@ inline void IMGetMsgListReq::set_session_type(::IM::BaseDefine::SessionType valu
   // @@protoc_insertion_point(field_set:IM.Message.IMGetMsgListReq.session_type)
 }
 
-// required uint32 session_id = 3;
-inline bool IMGetMsgListReq::_internal_has_session_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMGetMsgListReq::has_session_id() const {
-  return _internal_has_session_id();
-}
+// uint32 session_id = 3;
 inline void IMGetMsgListReq::clear_session_id() {
   session_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgListReq::_internal_session_id() const {
   return session_id_;
@@ -3806,7 +3287,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgListReq::session_id() const {
   return _internal_session_id();
 }
 inline void IMGetMsgListReq::_internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   session_id_ = value;
 }
 inline void IMGetMsgListReq::set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3814,17 +3295,9 @@ inline void IMGetMsgListReq::set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 valu
   // @@protoc_insertion_point(field_set:IM.Message.IMGetMsgListReq.session_id)
 }
 
-// required uint32 msg_id_begin = 4;
-inline bool IMGetMsgListReq::_internal_has_msg_id_begin() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMGetMsgListReq::has_msg_id_begin() const {
-  return _internal_has_msg_id_begin();
-}
+// uint32 msg_id_begin = 4;
 inline void IMGetMsgListReq::clear_msg_id_begin() {
   msg_id_begin_ = 0u;
-  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgListReq::_internal_msg_id_begin() const {
   return msg_id_begin_;
@@ -3834,7 +3307,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgListReq::msg_id_begin() const {
   return _internal_msg_id_begin();
 }
 inline void IMGetMsgListReq::_internal_set_msg_id_begin(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  
   msg_id_begin_ = value;
 }
 inline void IMGetMsgListReq::set_msg_id_begin(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3842,17 +3315,9 @@ inline void IMGetMsgListReq::set_msg_id_begin(::PROTOBUF_NAMESPACE_ID::uint32 va
   // @@protoc_insertion_point(field_set:IM.Message.IMGetMsgListReq.msg_id_begin)
 }
 
-// required uint32 msg_cnt = 5;
-inline bool IMGetMsgListReq::_internal_has_msg_cnt() const {
-  bool value = (_has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool IMGetMsgListReq::has_msg_cnt() const {
-  return _internal_has_msg_cnt();
-}
+// uint32 msg_cnt = 5;
 inline void IMGetMsgListReq::clear_msg_cnt() {
   msg_cnt_ = 0u;
-  _has_bits_[0] &= ~0x00000010u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgListReq::_internal_msg_cnt() const {
   return msg_cnt_;
@@ -3862,7 +3327,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgListReq::msg_cnt() const {
   return _internal_msg_cnt();
 }
 inline void IMGetMsgListReq::_internal_set_msg_cnt(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000010u;
+  
   msg_cnt_ = value;
 }
 inline void IMGetMsgListReq::set_msg_cnt(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3932,17 +3397,9 @@ inline void IMGetMsgListReq::set_allocated_attach_data(std::string* attach_data)
 
 // IMGetMsgListRsp
 
-// required uint32 user_id = 1;
-inline bool IMGetMsgListRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMGetMsgListRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMGetMsgListRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgListRsp::_internal_user_id() const {
   return user_id_;
@@ -3952,7 +3409,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgListRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMGetMsgListRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMGetMsgListRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3960,17 +3417,9 @@ inline void IMGetMsgListRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) 
   // @@protoc_insertion_point(field_set:IM.Message.IMGetMsgListRsp.user_id)
 }
 
-// required .IM.BaseDefine.SessionType session_type = 2;
-inline bool IMGetMsgListRsp::_internal_has_session_type() const {
-  bool value = (_has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool IMGetMsgListRsp::has_session_type() const {
-  return _internal_has_session_type();
-}
+// .IM.BaseDefine.SessionType session_type = 2;
 inline void IMGetMsgListRsp::clear_session_type() {
-  session_type_ = 1;
-  _has_bits_[0] &= ~0x00000010u;
+  session_type_ = 0;
 }
 inline ::IM::BaseDefine::SessionType IMGetMsgListRsp::_internal_session_type() const {
   return static_cast< ::IM::BaseDefine::SessionType >(session_type_);
@@ -3980,8 +3429,7 @@ inline ::IM::BaseDefine::SessionType IMGetMsgListRsp::session_type() const {
   return _internal_session_type();
 }
 inline void IMGetMsgListRsp::_internal_set_session_type(::IM::BaseDefine::SessionType value) {
-  assert(::IM::BaseDefine::SessionType_IsValid(value));
-  _has_bits_[0] |= 0x00000010u;
+  
   session_type_ = value;
 }
 inline void IMGetMsgListRsp::set_session_type(::IM::BaseDefine::SessionType value) {
@@ -3989,17 +3437,9 @@ inline void IMGetMsgListRsp::set_session_type(::IM::BaseDefine::SessionType valu
   // @@protoc_insertion_point(field_set:IM.Message.IMGetMsgListRsp.session_type)
 }
 
-// required uint32 session_id = 3;
-inline bool IMGetMsgListRsp::_internal_has_session_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMGetMsgListRsp::has_session_id() const {
-  return _internal_has_session_id();
-}
+// uint32 session_id = 3;
 inline void IMGetMsgListRsp::clear_session_id() {
   session_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgListRsp::_internal_session_id() const {
   return session_id_;
@@ -4009,7 +3449,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgListRsp::session_id() const {
   return _internal_session_id();
 }
 inline void IMGetMsgListRsp::_internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   session_id_ = value;
 }
 inline void IMGetMsgListRsp::set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4017,17 +3457,9 @@ inline void IMGetMsgListRsp::set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 valu
   // @@protoc_insertion_point(field_set:IM.Message.IMGetMsgListRsp.session_id)
 }
 
-// required uint32 msg_id_begin = 4;
-inline bool IMGetMsgListRsp::_internal_has_msg_id_begin() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMGetMsgListRsp::has_msg_id_begin() const {
-  return _internal_has_msg_id_begin();
-}
+// uint32 msg_id_begin = 4;
 inline void IMGetMsgListRsp::clear_msg_id_begin() {
   msg_id_begin_ = 0u;
-  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgListRsp::_internal_msg_id_begin() const {
   return msg_id_begin_;
@@ -4037,7 +3469,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgListRsp::msg_id_begin() const {
   return _internal_msg_id_begin();
 }
 inline void IMGetMsgListRsp::_internal_set_msg_id_begin(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  
   msg_id_begin_ = value;
 }
 inline void IMGetMsgListRsp::set_msg_id_begin(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4144,17 +3576,9 @@ inline void IMGetMsgListRsp::set_allocated_attach_data(std::string* attach_data)
 
 // IMGetLatestMsgIdReq
 
-// required uint32 user_id = 1;
-inline bool IMGetLatestMsgIdReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMGetLatestMsgIdReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMGetLatestMsgIdReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetLatestMsgIdReq::_internal_user_id() const {
   return user_id_;
@@ -4164,7 +3588,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetLatestMsgIdReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMGetLatestMsgIdReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMGetLatestMsgIdReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4172,17 +3596,9 @@ inline void IMGetLatestMsgIdReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 val
   // @@protoc_insertion_point(field_set:IM.Message.IMGetLatestMsgIdReq.user_id)
 }
 
-// required .IM.BaseDefine.SessionType session_type = 2;
-inline bool IMGetLatestMsgIdReq::_internal_has_session_type() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMGetLatestMsgIdReq::has_session_type() const {
-  return _internal_has_session_type();
-}
+// .IM.BaseDefine.SessionType session_type = 2;
 inline void IMGetLatestMsgIdReq::clear_session_type() {
-  session_type_ = 1;
-  _has_bits_[0] &= ~0x00000008u;
+  session_type_ = 0;
 }
 inline ::IM::BaseDefine::SessionType IMGetLatestMsgIdReq::_internal_session_type() const {
   return static_cast< ::IM::BaseDefine::SessionType >(session_type_);
@@ -4192,8 +3608,7 @@ inline ::IM::BaseDefine::SessionType IMGetLatestMsgIdReq::session_type() const {
   return _internal_session_type();
 }
 inline void IMGetLatestMsgIdReq::_internal_set_session_type(::IM::BaseDefine::SessionType value) {
-  assert(::IM::BaseDefine::SessionType_IsValid(value));
-  _has_bits_[0] |= 0x00000008u;
+  
   session_type_ = value;
 }
 inline void IMGetLatestMsgIdReq::set_session_type(::IM::BaseDefine::SessionType value) {
@@ -4201,17 +3616,9 @@ inline void IMGetLatestMsgIdReq::set_session_type(::IM::BaseDefine::SessionType 
   // @@protoc_insertion_point(field_set:IM.Message.IMGetLatestMsgIdReq.session_type)
 }
 
-// required uint32 session_id = 3;
-inline bool IMGetLatestMsgIdReq::_internal_has_session_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMGetLatestMsgIdReq::has_session_id() const {
-  return _internal_has_session_id();
-}
+// uint32 session_id = 3;
 inline void IMGetLatestMsgIdReq::clear_session_id() {
   session_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetLatestMsgIdReq::_internal_session_id() const {
   return session_id_;
@@ -4221,7 +3628,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetLatestMsgIdReq::session_id() const {
   return _internal_session_id();
 }
 inline void IMGetLatestMsgIdReq::_internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   session_id_ = value;
 }
 inline void IMGetLatestMsgIdReq::set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4291,17 +3698,9 @@ inline void IMGetLatestMsgIdReq::set_allocated_attach_data(std::string* attach_d
 
 // IMGetLatestMsgIdRsp
 
-// required uint32 user_id = 1;
-inline bool IMGetLatestMsgIdRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMGetLatestMsgIdRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMGetLatestMsgIdRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetLatestMsgIdRsp::_internal_user_id() const {
   return user_id_;
@@ -4311,7 +3710,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetLatestMsgIdRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMGetLatestMsgIdRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMGetLatestMsgIdRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4319,17 +3718,9 @@ inline void IMGetLatestMsgIdRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 val
   // @@protoc_insertion_point(field_set:IM.Message.IMGetLatestMsgIdRsp.user_id)
 }
 
-// required .IM.BaseDefine.SessionType session_type = 2;
-inline bool IMGetLatestMsgIdRsp::_internal_has_session_type() const {
-  bool value = (_has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool IMGetLatestMsgIdRsp::has_session_type() const {
-  return _internal_has_session_type();
-}
+// .IM.BaseDefine.SessionType session_type = 2;
 inline void IMGetLatestMsgIdRsp::clear_session_type() {
-  session_type_ = 1;
-  _has_bits_[0] &= ~0x00000010u;
+  session_type_ = 0;
 }
 inline ::IM::BaseDefine::SessionType IMGetLatestMsgIdRsp::_internal_session_type() const {
   return static_cast< ::IM::BaseDefine::SessionType >(session_type_);
@@ -4339,8 +3730,7 @@ inline ::IM::BaseDefine::SessionType IMGetLatestMsgIdRsp::session_type() const {
   return _internal_session_type();
 }
 inline void IMGetLatestMsgIdRsp::_internal_set_session_type(::IM::BaseDefine::SessionType value) {
-  assert(::IM::BaseDefine::SessionType_IsValid(value));
-  _has_bits_[0] |= 0x00000010u;
+  
   session_type_ = value;
 }
 inline void IMGetLatestMsgIdRsp::set_session_type(::IM::BaseDefine::SessionType value) {
@@ -4348,17 +3738,9 @@ inline void IMGetLatestMsgIdRsp::set_session_type(::IM::BaseDefine::SessionType 
   // @@protoc_insertion_point(field_set:IM.Message.IMGetLatestMsgIdRsp.session_type)
 }
 
-// required uint32 session_id = 3;
-inline bool IMGetLatestMsgIdRsp::_internal_has_session_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMGetLatestMsgIdRsp::has_session_id() const {
-  return _internal_has_session_id();
-}
+// uint32 session_id = 3;
 inline void IMGetLatestMsgIdRsp::clear_session_id() {
   session_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetLatestMsgIdRsp::_internal_session_id() const {
   return session_id_;
@@ -4368,7 +3750,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetLatestMsgIdRsp::session_id() const {
   return _internal_session_id();
 }
 inline void IMGetLatestMsgIdRsp::_internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   session_id_ = value;
 }
 inline void IMGetLatestMsgIdRsp::set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4376,17 +3758,9 @@ inline void IMGetLatestMsgIdRsp::set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 
   // @@protoc_insertion_point(field_set:IM.Message.IMGetLatestMsgIdRsp.session_id)
 }
 
-// required uint32 latest_msg_id = 4;
-inline bool IMGetLatestMsgIdRsp::_internal_has_latest_msg_id() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMGetLatestMsgIdRsp::has_latest_msg_id() const {
-  return _internal_has_latest_msg_id();
-}
+// uint32 latest_msg_id = 4;
 inline void IMGetLatestMsgIdRsp::clear_latest_msg_id() {
   latest_msg_id_ = 0u;
-  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetLatestMsgIdRsp::_internal_latest_msg_id() const {
   return latest_msg_id_;
@@ -4396,7 +3770,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetLatestMsgIdRsp::latest_msg_id() cons
   return _internal_latest_msg_id();
 }
 inline void IMGetLatestMsgIdRsp::_internal_set_latest_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  
   latest_msg_id_ = value;
 }
 inline void IMGetLatestMsgIdRsp::set_latest_msg_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4466,17 +3840,9 @@ inline void IMGetLatestMsgIdRsp::set_allocated_attach_data(std::string* attach_d
 
 // IMGetMsgByIdReq
 
-// required uint32 user_id = 1;
-inline bool IMGetMsgByIdReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMGetMsgByIdReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMGetMsgByIdReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgByIdReq::_internal_user_id() const {
   return user_id_;
@@ -4486,7 +3852,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgByIdReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMGetMsgByIdReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMGetMsgByIdReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4494,17 +3860,9 @@ inline void IMGetMsgByIdReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) 
   // @@protoc_insertion_point(field_set:IM.Message.IMGetMsgByIdReq.user_id)
 }
 
-// required .IM.BaseDefine.SessionType session_type = 2;
-inline bool IMGetMsgByIdReq::_internal_has_session_type() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMGetMsgByIdReq::has_session_type() const {
-  return _internal_has_session_type();
-}
+// .IM.BaseDefine.SessionType session_type = 2;
 inline void IMGetMsgByIdReq::clear_session_type() {
-  session_type_ = 1;
-  _has_bits_[0] &= ~0x00000008u;
+  session_type_ = 0;
 }
 inline ::IM::BaseDefine::SessionType IMGetMsgByIdReq::_internal_session_type() const {
   return static_cast< ::IM::BaseDefine::SessionType >(session_type_);
@@ -4514,8 +3872,7 @@ inline ::IM::BaseDefine::SessionType IMGetMsgByIdReq::session_type() const {
   return _internal_session_type();
 }
 inline void IMGetMsgByIdReq::_internal_set_session_type(::IM::BaseDefine::SessionType value) {
-  assert(::IM::BaseDefine::SessionType_IsValid(value));
-  _has_bits_[0] |= 0x00000008u;
+  
   session_type_ = value;
 }
 inline void IMGetMsgByIdReq::set_session_type(::IM::BaseDefine::SessionType value) {
@@ -4523,17 +3880,9 @@ inline void IMGetMsgByIdReq::set_session_type(::IM::BaseDefine::SessionType valu
   // @@protoc_insertion_point(field_set:IM.Message.IMGetMsgByIdReq.session_type)
 }
 
-// required uint32 session_id = 3;
-inline bool IMGetMsgByIdReq::_internal_has_session_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMGetMsgByIdReq::has_session_id() const {
-  return _internal_has_session_id();
-}
+// uint32 session_id = 3;
 inline void IMGetMsgByIdReq::clear_session_id() {
   session_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgByIdReq::_internal_session_id() const {
   return session_id_;
@@ -4543,7 +3892,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgByIdReq::session_id() const {
   return _internal_session_id();
 }
 inline void IMGetMsgByIdReq::_internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   session_id_ = value;
 }
 inline void IMGetMsgByIdReq::set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4660,17 +4009,9 @@ inline void IMGetMsgByIdReq::set_allocated_attach_data(std::string* attach_data)
 
 // IMGetMsgByIdRsp
 
-// required uint32 user_id = 1;
-inline bool IMGetMsgByIdRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMGetMsgByIdRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMGetMsgByIdRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgByIdRsp::_internal_user_id() const {
   return user_id_;
@@ -4680,7 +4021,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgByIdRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMGetMsgByIdRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMGetMsgByIdRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4688,17 +4029,9 @@ inline void IMGetMsgByIdRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) 
   // @@protoc_insertion_point(field_set:IM.Message.IMGetMsgByIdRsp.user_id)
 }
 
-// required .IM.BaseDefine.SessionType session_type = 2;
-inline bool IMGetMsgByIdRsp::_internal_has_session_type() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMGetMsgByIdRsp::has_session_type() const {
-  return _internal_has_session_type();
-}
+// .IM.BaseDefine.SessionType session_type = 2;
 inline void IMGetMsgByIdRsp::clear_session_type() {
-  session_type_ = 1;
-  _has_bits_[0] &= ~0x00000008u;
+  session_type_ = 0;
 }
 inline ::IM::BaseDefine::SessionType IMGetMsgByIdRsp::_internal_session_type() const {
   return static_cast< ::IM::BaseDefine::SessionType >(session_type_);
@@ -4708,8 +4041,7 @@ inline ::IM::BaseDefine::SessionType IMGetMsgByIdRsp::session_type() const {
   return _internal_session_type();
 }
 inline void IMGetMsgByIdRsp::_internal_set_session_type(::IM::BaseDefine::SessionType value) {
-  assert(::IM::BaseDefine::SessionType_IsValid(value));
-  _has_bits_[0] |= 0x00000008u;
+  
   session_type_ = value;
 }
 inline void IMGetMsgByIdRsp::set_session_type(::IM::BaseDefine::SessionType value) {
@@ -4717,17 +4049,9 @@ inline void IMGetMsgByIdRsp::set_session_type(::IM::BaseDefine::SessionType valu
   // @@protoc_insertion_point(field_set:IM.Message.IMGetMsgByIdRsp.session_type)
 }
 
-// required uint32 session_id = 3;
-inline bool IMGetMsgByIdRsp::_internal_has_session_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMGetMsgByIdRsp::has_session_id() const {
-  return _internal_has_session_id();
-}
+// uint32 session_id = 3;
 inline void IMGetMsgByIdRsp::clear_session_id() {
   session_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgByIdRsp::_internal_session_id() const {
   return session_id_;
@@ -4737,7 +4061,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGetMsgByIdRsp::session_id() const {
   return _internal_session_id();
 }
 inline void IMGetMsgByIdRsp::_internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   session_id_ = value;
 }
 inline void IMGetMsgByIdRsp::set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {

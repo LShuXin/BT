@@ -16,11 +16,22 @@ win-cliient\solution\teamtalk.sln(需要管理员模式打开)
 vcpkg install protobuf[core]:x86-windows</br>
 protobuf    -> 3.18.0</br>
 protobuf 更新后可以替换/pb/protoc.exe 后重新运行make_PB_Files.bat 生成PB协议文件
+
+# 服务端 Docker 支持
+基于 openeuler/openeuler:20.03 系统的 docker 容器系统，方便快速调试。
+![image](https://user-images.githubusercontent.com/4635861/150361679-a56f862f-ff1f-4c99-bcf3-2d4e4719d143.png)
+## 直接运行版本
+docker-compose up -d
+## 编译版本
+docker-compose -f "docker-compose-build.yml" up -d --build
+### b'i/o timeout' 问题
+重复执行 docker-compose *** 命令就可以解决。
+# 其他
 ## 命令行转换
 下载https://sourceforge.net/projects/dos2unix/</br>
 
 命令行运行</br>
 for /R %G in (*.c *.cc *.h *.mk *.cpp) do unix2dos "%G" 
-# linux换行问题
+## linux换行问题
 yum install dos2unix</br>
 find ./ -type f -print0 | xargs -0 dos2unix --

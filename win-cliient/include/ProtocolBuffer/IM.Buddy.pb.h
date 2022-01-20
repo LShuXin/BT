@@ -161,13 +161,6 @@ class IMRecentContactSessionReq final :
     return *this;
   }
 
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
-  }
-
   static const IMRecentContactSessionReq& default_instance() {
     return *internal_default_instance();
   }
@@ -263,11 +256,7 @@ class IMRecentContactSessionReq final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -276,11 +265,7 @@ class IMRecentContactSessionReq final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 latest_update_time = 2;
-  bool has_latest_update_time() const;
-  private:
-  bool _internal_has_latest_update_time() const;
-  public:
+  // uint32 latest_update_time = 2;
   void clear_latest_update_time();
   ::PROTOBUF_NAMESPACE_ID::uint32 latest_update_time() const;
   void set_latest_update_time(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -292,9 +277,6 @@ class IMRecentContactSessionReq final :
   // @@protoc_insertion_point(class_scope:IM.Buddy.IMRecentContactSessionReq)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -337,13 +319,6 @@ class IMRecentContactSessionRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMRecentContactSessionRsp& default_instance() {
@@ -459,11 +434,7 @@ class IMRecentContactSessionRsp final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -517,13 +488,6 @@ class IMUserStatNotify final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMUserStatNotify& default_instance() {
@@ -601,7 +565,7 @@ class IMUserStatNotify final :
   enum : int {
     kUserStatFieldNumber = 1,
   };
-  // required .IM.BaseDefine.UserStat user_stat = 1;
+  // .IM.BaseDefine.UserStat user_stat = 1;
   bool has_user_stat() const;
   private:
   bool _internal_has_user_stat() const;
@@ -626,9 +590,8 @@ class IMUserStatNotify final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::IM::BaseDefine::UserStat* user_stat_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eBuddy_2eproto;
 };
 // -------------------------------------------------------------------
@@ -662,13 +625,6 @@ class IMUsersInfoReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMUsersInfoReq& default_instance() {
@@ -788,11 +744,7 @@ class IMUsersInfoReq final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -811,6 +763,7 @@ class IMUsersInfoReq final :
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 > user_id_list_;
+  mutable std::atomic<int> _user_id_list_cached_byte_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr attach_data_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
   friend struct ::TableStruct_IM_2eBuddy_2eproto;
@@ -846,13 +799,6 @@ class IMUsersInfoRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMUsersInfoRsp& default_instance() {
@@ -968,11 +914,7 @@ class IMUsersInfoRsp final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1026,13 +968,6 @@ class IMRemoveSessionReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMRemoveSessionReq& default_instance() {
@@ -1110,8 +1045,8 @@ class IMRemoveSessionReq final :
   enum : int {
     kAttachDataFieldNumber = 20,
     kUserIdFieldNumber = 1,
-    kSessionIdFieldNumber = 3,
     kSessionTypeFieldNumber = 2,
+    kSessionIdFieldNumber = 3,
   };
   // optional bytes attach_data = 20;
   bool has_attach_data() const;
@@ -1131,11 +1066,7 @@ class IMRemoveSessionReq final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1144,24 +1075,7 @@ class IMRemoveSessionReq final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 session_id = 3;
-  bool has_session_id() const;
-  private:
-  bool _internal_has_session_id() const;
-  public:
-  void clear_session_id();
-  ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
-  void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_session_id() const;
-  void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required .IM.BaseDefine.SessionType session_type = 2;
-  bool has_session_type() const;
-  private:
-  bool _internal_has_session_type() const;
-  public:
+  // .IM.BaseDefine.SessionType session_type = 2;
   void clear_session_type();
   ::IM::BaseDefine::SessionType session_type() const;
   void set_session_type(::IM::BaseDefine::SessionType value);
@@ -1170,12 +1084,18 @@ class IMRemoveSessionReq final :
   void _internal_set_session_type(::IM::BaseDefine::SessionType value);
   public:
 
+  // uint32 session_id = 3;
+  void clear_session_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
+  void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_session_id() const;
+  void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:IM.Buddy.IMRemoveSessionReq)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -1184,8 +1104,8 @@ class IMRemoveSessionReq final :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr attach_data_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 session_id_;
   int session_type_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_id_;
   friend struct ::TableStruct_IM_2eBuddy_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1219,13 +1139,6 @@ class IMRemoveSessionRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMRemoveSessionRsp& default_instance() {
@@ -1304,8 +1217,8 @@ class IMRemoveSessionRsp final :
     kAttachDataFieldNumber = 20,
     kUserIdFieldNumber = 1,
     kResultCodeFieldNumber = 2,
-    kSessionIdFieldNumber = 4,
     kSessionTypeFieldNumber = 3,
+    kSessionIdFieldNumber = 4,
   };
   // optional bytes attach_data = 20;
   bool has_attach_data() const;
@@ -1325,11 +1238,7 @@ class IMRemoveSessionRsp final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1338,11 +1247,7 @@ class IMRemoveSessionRsp final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 result_code = 2;
-  bool has_result_code() const;
-  private:
-  bool _internal_has_result_code() const;
-  public:
+  // uint32 result_code = 2;
   void clear_result_code();
   ::PROTOBUF_NAMESPACE_ID::uint32 result_code() const;
   void set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1351,24 +1256,7 @@ class IMRemoveSessionRsp final :
   void _internal_set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 session_id = 4;
-  bool has_session_id() const;
-  private:
-  bool _internal_has_session_id() const;
-  public:
-  void clear_session_id();
-  ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
-  void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_session_id() const;
-  void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required .IM.BaseDefine.SessionType session_type = 3;
-  bool has_session_type() const;
-  private:
-  bool _internal_has_session_type() const;
-  public:
+  // .IM.BaseDefine.SessionType session_type = 3;
   void clear_session_type();
   ::IM::BaseDefine::SessionType session_type() const;
   void set_session_type(::IM::BaseDefine::SessionType value);
@@ -1377,12 +1265,18 @@ class IMRemoveSessionRsp final :
   void _internal_set_session_type(::IM::BaseDefine::SessionType value);
   public:
 
+  // uint32 session_id = 4;
+  void clear_session_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
+  void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_session_id() const;
+  void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:IM.Buddy.IMRemoveSessionRsp)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -1392,8 +1286,8 @@ class IMRemoveSessionRsp final :
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr attach_data_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 result_code_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 session_id_;
   int session_type_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_id_;
   friend struct ::TableStruct_IM_2eBuddy_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1427,13 +1321,6 @@ class IMAllUserReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMAllUserReq& default_instance() {
@@ -1531,11 +1418,7 @@ class IMAllUserReq final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1544,11 +1427,7 @@ class IMAllUserReq final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 latest_update_time = 2;
-  bool has_latest_update_time() const;
-  private:
-  bool _internal_has_latest_update_time() const;
-  public:
+  // uint32 latest_update_time = 2;
   void clear_latest_update_time();
   ::PROTOBUF_NAMESPACE_ID::uint32 latest_update_time() const;
   void set_latest_update_time(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1560,9 +1439,6 @@ class IMAllUserReq final :
   // @@protoc_insertion_point(class_scope:IM.Buddy.IMAllUserReq)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -1605,13 +1481,6 @@ class IMAllUserRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMAllUserRsp& default_instance() {
@@ -1728,11 +1597,7 @@ class IMAllUserRsp final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1741,11 +1606,7 @@ class IMAllUserRsp final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 latest_update_time = 2;
-  bool has_latest_update_time() const;
-  private:
-  bool _internal_has_latest_update_time() const;
-  public:
+  // uint32 latest_update_time = 2;
   void clear_latest_update_time();
   ::PROTOBUF_NAMESPACE_ID::uint32 latest_update_time() const;
   void set_latest_update_time(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1757,9 +1618,6 @@ class IMAllUserRsp final :
   // @@protoc_insertion_point(class_scope:IM.Buddy.IMAllUserRsp)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -1803,13 +1661,6 @@ class IMUsersStatReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMUsersStatReq& default_instance() {
@@ -1929,11 +1780,7 @@ class IMUsersStatReq final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1952,6 +1799,7 @@ class IMUsersStatReq final :
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 > user_id_list_;
+  mutable std::atomic<int> _user_id_list_cached_byte_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr attach_data_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
   friend struct ::TableStruct_IM_2eBuddy_2eproto;
@@ -1987,13 +1835,6 @@ class IMUsersStatRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMUsersStatRsp& default_instance() {
@@ -2109,11 +1950,7 @@ class IMUsersStatRsp final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2167,13 +2004,6 @@ class IMChangeAvatarReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMChangeAvatarReq& default_instance() {
@@ -2253,11 +2083,7 @@ class IMChangeAvatarReq final :
     kAttachDataFieldNumber = 20,
     kUserIdFieldNumber = 1,
   };
-  // required string avatar_url = 2;
-  bool has_avatar_url() const;
-  private:
-  bool _internal_has_avatar_url() const;
-  public:
+  // string avatar_url = 2;
   void clear_avatar_url();
   const std::string& avatar_url() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -2289,11 +2115,7 @@ class IMChangeAvatarReq final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2305,9 +2127,6 @@ class IMChangeAvatarReq final :
   // @@protoc_insertion_point(class_scope:IM.Buddy.IMChangeAvatarReq)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -2350,13 +2169,6 @@ class IMChangeAvatarRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMChangeAvatarRsp& default_instance() {
@@ -2454,11 +2266,7 @@ class IMChangeAvatarRsp final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2467,11 +2275,7 @@ class IMChangeAvatarRsp final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 result_code = 2;
-  bool has_result_code() const;
-  private:
-  bool _internal_has_result_code() const;
-  public:
+  // uint32 result_code = 2;
   void clear_result_code();
   ::PROTOBUF_NAMESPACE_ID::uint32 result_code() const;
   void set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2483,9 +2287,6 @@ class IMChangeAvatarRsp final :
   // @@protoc_insertion_point(class_scope:IM.Buddy.IMChangeAvatarRsp)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -2528,13 +2329,6 @@ class IMPCLoginStatusNotify final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMPCLoginStatusNotify& default_instance() {
@@ -2613,11 +2407,7 @@ class IMPCLoginStatusNotify final :
     kUserIdFieldNumber = 1,
     kLoginStatFieldNumber = 2,
   };
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2626,11 +2416,7 @@ class IMPCLoginStatusNotify final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required .IM.BaseDefine.UserStatType login_stat = 2;
-  bool has_login_stat() const;
-  private:
-  bool _internal_has_login_stat() const;
-  public:
+  // .IM.BaseDefine.UserStatType login_stat = 2;
   void clear_login_stat();
   ::IM::BaseDefine::UserStatType login_stat() const;
   void set_login_stat(::IM::BaseDefine::UserStatType value);
@@ -2643,16 +2429,12 @@ class IMPCLoginStatusNotify final :
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
   int login_stat_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eBuddy_2eproto;
 };
 // -------------------------------------------------------------------
@@ -2686,13 +2468,6 @@ class IMRemoveSessionNotify final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMRemoveSessionNotify& default_instance() {
@@ -2769,14 +2544,10 @@ class IMRemoveSessionNotify final :
 
   enum : int {
     kUserIdFieldNumber = 1,
-    kSessionIdFieldNumber = 3,
     kSessionTypeFieldNumber = 2,
+    kSessionIdFieldNumber = 3,
   };
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2785,24 +2556,7 @@ class IMRemoveSessionNotify final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 session_id = 3;
-  bool has_session_id() const;
-  private:
-  bool _internal_has_session_id() const;
-  public:
-  void clear_session_id();
-  ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
-  void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_session_id() const;
-  void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required .IM.BaseDefine.SessionType session_type = 2;
-  bool has_session_type() const;
-  private:
-  bool _internal_has_session_type() const;
-  public:
+  // .IM.BaseDefine.SessionType session_type = 2;
   void clear_session_type();
   ::IM::BaseDefine::SessionType session_type() const;
   void set_session_type(::IM::BaseDefine::SessionType value);
@@ -2811,21 +2565,26 @@ class IMRemoveSessionNotify final :
   void _internal_set_session_type(::IM::BaseDefine::SessionType value);
   public:
 
+  // uint32 session_id = 3;
+  void clear_session_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_id() const;
+  void set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_session_id() const;
+  void _internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:IM.Buddy.IMRemoveSessionNotify)
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 session_id_;
   int session_type_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 session_id_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eBuddy_2eproto;
 };
 // -------------------------------------------------------------------
@@ -2859,13 +2618,6 @@ class IMDepartmentReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMDepartmentReq& default_instance() {
@@ -2963,11 +2715,7 @@ class IMDepartmentReq final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2976,11 +2724,7 @@ class IMDepartmentReq final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 latest_update_time = 2;
-  bool has_latest_update_time() const;
-  private:
-  bool _internal_has_latest_update_time() const;
-  public:
+  // uint32 latest_update_time = 2;
   void clear_latest_update_time();
   ::PROTOBUF_NAMESPACE_ID::uint32 latest_update_time() const;
   void set_latest_update_time(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2992,9 +2736,6 @@ class IMDepartmentReq final :
   // @@protoc_insertion_point(class_scope:IM.Buddy.IMDepartmentReq)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -3037,13 +2778,6 @@ class IMDepartmentRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMDepartmentRsp& default_instance() {
@@ -3160,11 +2894,7 @@ class IMDepartmentRsp final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -3173,11 +2903,7 @@ class IMDepartmentRsp final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 latest_update_time = 2;
-  bool has_latest_update_time() const;
-  private:
-  bool _internal_has_latest_update_time() const;
-  public:
+  // uint32 latest_update_time = 2;
   void clear_latest_update_time();
   ::PROTOBUF_NAMESPACE_ID::uint32 latest_update_time() const;
   void set_latest_update_time(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -3189,9 +2915,6 @@ class IMDepartmentRsp final :
   // @@protoc_insertion_point(class_scope:IM.Buddy.IMDepartmentRsp)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -3215,17 +2938,9 @@ class IMDepartmentRsp final :
 #endif  // __GNUC__
 // IMRecentContactSessionReq
 
-// required uint32 user_id = 1;
-inline bool IMRecentContactSessionReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMRecentContactSessionReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMRecentContactSessionReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRecentContactSessionReq::_internal_user_id() const {
   return user_id_;
@@ -3235,7 +2950,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRecentContactSessionReq::user_id() cons
   return _internal_user_id();
 }
 inline void IMRecentContactSessionReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMRecentContactSessionReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3243,17 +2958,9 @@ inline void IMRecentContactSessionReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint
   // @@protoc_insertion_point(field_set:IM.Buddy.IMRecentContactSessionReq.user_id)
 }
 
-// required uint32 latest_update_time = 2;
-inline bool IMRecentContactSessionReq::_internal_has_latest_update_time() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMRecentContactSessionReq::has_latest_update_time() const {
-  return _internal_has_latest_update_time();
-}
+// uint32 latest_update_time = 2;
 inline void IMRecentContactSessionReq::clear_latest_update_time() {
   latest_update_time_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRecentContactSessionReq::_internal_latest_update_time() const {
   return latest_update_time_;
@@ -3263,7 +2970,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRecentContactSessionReq::latest_update_
   return _internal_latest_update_time();
 }
 inline void IMRecentContactSessionReq::_internal_set_latest_update_time(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   latest_update_time_ = value;
 }
 inline void IMRecentContactSessionReq::set_latest_update_time(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3333,17 +3040,9 @@ inline void IMRecentContactSessionReq::set_allocated_attach_data(std::string* at
 
 // IMRecentContactSessionRsp
 
-// required uint32 user_id = 1;
-inline bool IMRecentContactSessionRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMRecentContactSessionRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMRecentContactSessionRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRecentContactSessionRsp::_internal_user_id() const {
   return user_id_;
@@ -3353,7 +3052,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRecentContactSessionRsp::user_id() cons
   return _internal_user_id();
 }
 inline void IMRecentContactSessionRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMRecentContactSessionRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3460,11 +3159,9 @@ inline void IMRecentContactSessionRsp::set_allocated_attach_data(std::string* at
 
 // IMUserStatNotify
 
-// required .IM.BaseDefine.UserStat user_stat = 1;
+// .IM.BaseDefine.UserStat user_stat = 1;
 inline bool IMUserStatNotify::_internal_has_user_stat() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  PROTOBUF_ASSUME(!value || user_stat_ != nullptr);
-  return value;
+  return this != internal_default_instance() && user_stat_ != nullptr;
 }
 inline bool IMUserStatNotify::has_user_stat() const {
   return _internal_has_user_stat();
@@ -3485,14 +3182,14 @@ inline void IMUserStatNotify::unsafe_arena_set_allocated_user_stat(
   }
   user_stat_ = user_stat;
   if (user_stat) {
-    _has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:IM.Buddy.IMUserStatNotify.user_stat)
 }
 inline ::IM::BaseDefine::UserStat* IMUserStatNotify::release_user_stat() {
-  _has_bits_[0] &= ~0x00000001u;
+  
   ::IM::BaseDefine::UserStat* temp = user_stat_;
   user_stat_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
@@ -3508,13 +3205,13 @@ inline ::IM::BaseDefine::UserStat* IMUserStatNotify::release_user_stat() {
 }
 inline ::IM::BaseDefine::UserStat* IMUserStatNotify::unsafe_arena_release_user_stat() {
   // @@protoc_insertion_point(field_release:IM.Buddy.IMUserStatNotify.user_stat)
-  _has_bits_[0] &= ~0x00000001u;
+  
   ::IM::BaseDefine::UserStat* temp = user_stat_;
   user_stat_ = nullptr;
   return temp;
 }
 inline ::IM::BaseDefine::UserStat* IMUserStatNotify::_internal_mutable_user_stat() {
-  _has_bits_[0] |= 0x00000001u;
+  
   if (user_stat_ == nullptr) {
     auto* p = CreateMaybeMessage<::IM::BaseDefine::UserStat>(GetArenaForAllocation());
     user_stat_ = p;
@@ -3540,9 +3237,9 @@ inline void IMUserStatNotify::set_allocated_user_stat(::IM::BaseDefine::UserStat
       user_stat = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, user_stat, submessage_arena);
     }
-    _has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    
   }
   user_stat_ = user_stat;
   // @@protoc_insertion_point(field_set_allocated:IM.Buddy.IMUserStatNotify.user_stat)
@@ -3552,17 +3249,9 @@ inline void IMUserStatNotify::set_allocated_user_stat(::IM::BaseDefine::UserStat
 
 // IMUsersInfoReq
 
-// required uint32 user_id = 1;
-inline bool IMUsersInfoReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMUsersInfoReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMUsersInfoReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMUsersInfoReq::_internal_user_id() const {
   return user_id_;
@@ -3572,7 +3261,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMUsersInfoReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMUsersInfoReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMUsersInfoReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3689,17 +3378,9 @@ inline void IMUsersInfoReq::set_allocated_attach_data(std::string* attach_data) 
 
 // IMUsersInfoRsp
 
-// required uint32 user_id = 1;
-inline bool IMUsersInfoRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMUsersInfoRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMUsersInfoRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMUsersInfoRsp::_internal_user_id() const {
   return user_id_;
@@ -3709,7 +3390,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMUsersInfoRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMUsersInfoRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMUsersInfoRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3816,17 +3497,9 @@ inline void IMUsersInfoRsp::set_allocated_attach_data(std::string* attach_data) 
 
 // IMRemoveSessionReq
 
-// required uint32 user_id = 1;
-inline bool IMRemoveSessionReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMRemoveSessionReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMRemoveSessionReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRemoveSessionReq::_internal_user_id() const {
   return user_id_;
@@ -3836,7 +3509,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRemoveSessionReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMRemoveSessionReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMRemoveSessionReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3844,17 +3517,9 @@ inline void IMRemoveSessionReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 valu
   // @@protoc_insertion_point(field_set:IM.Buddy.IMRemoveSessionReq.user_id)
 }
 
-// required .IM.BaseDefine.SessionType session_type = 2;
-inline bool IMRemoveSessionReq::_internal_has_session_type() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMRemoveSessionReq::has_session_type() const {
-  return _internal_has_session_type();
-}
+// .IM.BaseDefine.SessionType session_type = 2;
 inline void IMRemoveSessionReq::clear_session_type() {
-  session_type_ = 1;
-  _has_bits_[0] &= ~0x00000008u;
+  session_type_ = 0;
 }
 inline ::IM::BaseDefine::SessionType IMRemoveSessionReq::_internal_session_type() const {
   return static_cast< ::IM::BaseDefine::SessionType >(session_type_);
@@ -3864,8 +3529,7 @@ inline ::IM::BaseDefine::SessionType IMRemoveSessionReq::session_type() const {
   return _internal_session_type();
 }
 inline void IMRemoveSessionReq::_internal_set_session_type(::IM::BaseDefine::SessionType value) {
-  assert(::IM::BaseDefine::SessionType_IsValid(value));
-  _has_bits_[0] |= 0x00000008u;
+  
   session_type_ = value;
 }
 inline void IMRemoveSessionReq::set_session_type(::IM::BaseDefine::SessionType value) {
@@ -3873,17 +3537,9 @@ inline void IMRemoveSessionReq::set_session_type(::IM::BaseDefine::SessionType v
   // @@protoc_insertion_point(field_set:IM.Buddy.IMRemoveSessionReq.session_type)
 }
 
-// required uint32 session_id = 3;
-inline bool IMRemoveSessionReq::_internal_has_session_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMRemoveSessionReq::has_session_id() const {
-  return _internal_has_session_id();
-}
+// uint32 session_id = 3;
 inline void IMRemoveSessionReq::clear_session_id() {
   session_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRemoveSessionReq::_internal_session_id() const {
   return session_id_;
@@ -3893,7 +3549,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRemoveSessionReq::session_id() const {
   return _internal_session_id();
 }
 inline void IMRemoveSessionReq::_internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   session_id_ = value;
 }
 inline void IMRemoveSessionReq::set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3963,17 +3619,9 @@ inline void IMRemoveSessionReq::set_allocated_attach_data(std::string* attach_da
 
 // IMRemoveSessionRsp
 
-// required uint32 user_id = 1;
-inline bool IMRemoveSessionRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMRemoveSessionRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMRemoveSessionRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRemoveSessionRsp::_internal_user_id() const {
   return user_id_;
@@ -3983,7 +3631,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRemoveSessionRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMRemoveSessionRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMRemoveSessionRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3991,17 +3639,9 @@ inline void IMRemoveSessionRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 valu
   // @@protoc_insertion_point(field_set:IM.Buddy.IMRemoveSessionRsp.user_id)
 }
 
-// required uint32 result_code = 2;
-inline bool IMRemoveSessionRsp::_internal_has_result_code() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMRemoveSessionRsp::has_result_code() const {
-  return _internal_has_result_code();
-}
+// uint32 result_code = 2;
 inline void IMRemoveSessionRsp::clear_result_code() {
   result_code_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRemoveSessionRsp::_internal_result_code() const {
   return result_code_;
@@ -4011,7 +3651,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRemoveSessionRsp::result_code() const {
   return _internal_result_code();
 }
 inline void IMRemoveSessionRsp::_internal_set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   result_code_ = value;
 }
 inline void IMRemoveSessionRsp::set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4019,17 +3659,9 @@ inline void IMRemoveSessionRsp::set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 
   // @@protoc_insertion_point(field_set:IM.Buddy.IMRemoveSessionRsp.result_code)
 }
 
-// required .IM.BaseDefine.SessionType session_type = 3;
-inline bool IMRemoveSessionRsp::_internal_has_session_type() const {
-  bool value = (_has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool IMRemoveSessionRsp::has_session_type() const {
-  return _internal_has_session_type();
-}
+// .IM.BaseDefine.SessionType session_type = 3;
 inline void IMRemoveSessionRsp::clear_session_type() {
-  session_type_ = 1;
-  _has_bits_[0] &= ~0x00000010u;
+  session_type_ = 0;
 }
 inline ::IM::BaseDefine::SessionType IMRemoveSessionRsp::_internal_session_type() const {
   return static_cast< ::IM::BaseDefine::SessionType >(session_type_);
@@ -4039,8 +3671,7 @@ inline ::IM::BaseDefine::SessionType IMRemoveSessionRsp::session_type() const {
   return _internal_session_type();
 }
 inline void IMRemoveSessionRsp::_internal_set_session_type(::IM::BaseDefine::SessionType value) {
-  assert(::IM::BaseDefine::SessionType_IsValid(value));
-  _has_bits_[0] |= 0x00000010u;
+  
   session_type_ = value;
 }
 inline void IMRemoveSessionRsp::set_session_type(::IM::BaseDefine::SessionType value) {
@@ -4048,17 +3679,9 @@ inline void IMRemoveSessionRsp::set_session_type(::IM::BaseDefine::SessionType v
   // @@protoc_insertion_point(field_set:IM.Buddy.IMRemoveSessionRsp.session_type)
 }
 
-// required uint32 session_id = 4;
-inline bool IMRemoveSessionRsp::_internal_has_session_id() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMRemoveSessionRsp::has_session_id() const {
-  return _internal_has_session_id();
-}
+// uint32 session_id = 4;
 inline void IMRemoveSessionRsp::clear_session_id() {
   session_id_ = 0u;
-  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRemoveSessionRsp::_internal_session_id() const {
   return session_id_;
@@ -4068,7 +3691,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRemoveSessionRsp::session_id() const {
   return _internal_session_id();
 }
 inline void IMRemoveSessionRsp::_internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  
   session_id_ = value;
 }
 inline void IMRemoveSessionRsp::set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4138,17 +3761,9 @@ inline void IMRemoveSessionRsp::set_allocated_attach_data(std::string* attach_da
 
 // IMAllUserReq
 
-// required uint32 user_id = 1;
-inline bool IMAllUserReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMAllUserReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMAllUserReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMAllUserReq::_internal_user_id() const {
   return user_id_;
@@ -4158,7 +3773,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMAllUserReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMAllUserReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMAllUserReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4166,17 +3781,9 @@ inline void IMAllUserReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:IM.Buddy.IMAllUserReq.user_id)
 }
 
-// required uint32 latest_update_time = 2;
-inline bool IMAllUserReq::_internal_has_latest_update_time() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMAllUserReq::has_latest_update_time() const {
-  return _internal_has_latest_update_time();
-}
+// uint32 latest_update_time = 2;
 inline void IMAllUserReq::clear_latest_update_time() {
   latest_update_time_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMAllUserReq::_internal_latest_update_time() const {
   return latest_update_time_;
@@ -4186,7 +3793,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMAllUserReq::latest_update_time() const 
   return _internal_latest_update_time();
 }
 inline void IMAllUserReq::_internal_set_latest_update_time(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   latest_update_time_ = value;
 }
 inline void IMAllUserReq::set_latest_update_time(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4256,17 +3863,9 @@ inline void IMAllUserReq::set_allocated_attach_data(std::string* attach_data) {
 
 // IMAllUserRsp
 
-// required uint32 user_id = 1;
-inline bool IMAllUserRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMAllUserRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMAllUserRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMAllUserRsp::_internal_user_id() const {
   return user_id_;
@@ -4276,7 +3875,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMAllUserRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMAllUserRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMAllUserRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4284,17 +3883,9 @@ inline void IMAllUserRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:IM.Buddy.IMAllUserRsp.user_id)
 }
 
-// required uint32 latest_update_time = 2;
-inline bool IMAllUserRsp::_internal_has_latest_update_time() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMAllUserRsp::has_latest_update_time() const {
-  return _internal_has_latest_update_time();
-}
+// uint32 latest_update_time = 2;
 inline void IMAllUserRsp::clear_latest_update_time() {
   latest_update_time_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMAllUserRsp::_internal_latest_update_time() const {
   return latest_update_time_;
@@ -4304,7 +3895,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMAllUserRsp::latest_update_time() const 
   return _internal_latest_update_time();
 }
 inline void IMAllUserRsp::_internal_set_latest_update_time(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   latest_update_time_ = value;
 }
 inline void IMAllUserRsp::set_latest_update_time(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4411,17 +4002,9 @@ inline void IMAllUserRsp::set_allocated_attach_data(std::string* attach_data) {
 
 // IMUsersStatReq
 
-// required uint32 user_id = 1;
-inline bool IMUsersStatReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMUsersStatReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMUsersStatReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMUsersStatReq::_internal_user_id() const {
   return user_id_;
@@ -4431,7 +4014,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMUsersStatReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMUsersStatReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMUsersStatReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4548,17 +4131,9 @@ inline void IMUsersStatReq::set_allocated_attach_data(std::string* attach_data) 
 
 // IMUsersStatRsp
 
-// required uint32 user_id = 1;
-inline bool IMUsersStatRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMUsersStatRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMUsersStatRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMUsersStatRsp::_internal_user_id() const {
   return user_id_;
@@ -4568,7 +4143,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMUsersStatRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMUsersStatRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMUsersStatRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4675,17 +4250,9 @@ inline void IMUsersStatRsp::set_allocated_attach_data(std::string* attach_data) 
 
 // IMChangeAvatarReq
 
-// required uint32 user_id = 1;
-inline bool IMChangeAvatarReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMChangeAvatarReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMChangeAvatarReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMChangeAvatarReq::_internal_user_id() const {
   return user_id_;
@@ -4695,7 +4262,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMChangeAvatarReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMChangeAvatarReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   user_id_ = value;
 }
 inline void IMChangeAvatarReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4703,17 +4270,9 @@ inline void IMChangeAvatarReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value
   // @@protoc_insertion_point(field_set:IM.Buddy.IMChangeAvatarReq.user_id)
 }
 
-// required string avatar_url = 2;
-inline bool IMChangeAvatarReq::_internal_has_avatar_url() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMChangeAvatarReq::has_avatar_url() const {
-  return _internal_has_avatar_url();
-}
+// string avatar_url = 2;
 inline void IMChangeAvatarReq::clear_avatar_url() {
   avatar_url_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMChangeAvatarReq::avatar_url() const {
   // @@protoc_insertion_point(field_get:IM.Buddy.IMChangeAvatarReq.avatar_url)
@@ -4722,7 +4281,7 @@ inline const std::string& IMChangeAvatarReq::avatar_url() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMChangeAvatarReq::set_avatar_url(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000001u;
+ 
  avatar_url_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.Buddy.IMChangeAvatarReq.avatar_url)
 }
@@ -4735,26 +4294,22 @@ inline const std::string& IMChangeAvatarReq::_internal_avatar_url() const {
   return avatar_url_.Get();
 }
 inline void IMChangeAvatarReq::_internal_set_avatar_url(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   avatar_url_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMChangeAvatarReq::_internal_mutable_avatar_url() {
-  _has_bits_[0] |= 0x00000001u;
+  
   return avatar_url_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMChangeAvatarReq::release_avatar_url() {
   // @@protoc_insertion_point(field_release:IM.Buddy.IMChangeAvatarReq.avatar_url)
-  if (!_internal_has_avatar_url()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return avatar_url_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return avatar_url_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMChangeAvatarReq::set_allocated_avatar_url(std::string* avatar_url) {
   if (avatar_url != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    
   }
   avatar_url_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), avatar_url,
       GetArenaForAllocation());
@@ -4763,7 +4318,7 @@ inline void IMChangeAvatarReq::set_allocated_avatar_url(std::string* avatar_url)
 
 // optional bytes attach_data = 20;
 inline bool IMChangeAvatarReq::_internal_has_attach_data() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
+  bool value = (_has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
 inline bool IMChangeAvatarReq::has_attach_data() const {
@@ -4771,7 +4326,7 @@ inline bool IMChangeAvatarReq::has_attach_data() const {
 }
 inline void IMChangeAvatarReq::clear_attach_data() {
   attach_data_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMChangeAvatarReq::attach_data() const {
   // @@protoc_insertion_point(field_get:IM.Buddy.IMChangeAvatarReq.attach_data)
@@ -4780,7 +4335,7 @@ inline const std::string& IMChangeAvatarReq::attach_data() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMChangeAvatarReq::set_attach_data(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000002u;
+ _has_bits_[0] |= 0x00000001u;
  attach_data_.SetBytes(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.Buddy.IMChangeAvatarReq.attach_data)
 }
@@ -4793,11 +4348,11 @@ inline const std::string& IMChangeAvatarReq::_internal_attach_data() const {
   return attach_data_.Get();
 }
 inline void IMChangeAvatarReq::_internal_set_attach_data(const std::string& value) {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000001u;
   attach_data_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMChangeAvatarReq::_internal_mutable_attach_data() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000001u;
   return attach_data_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMChangeAvatarReq::release_attach_data() {
@@ -4805,14 +4360,14 @@ inline std::string* IMChangeAvatarReq::release_attach_data() {
   if (!_internal_has_attach_data()) {
     return nullptr;
   }
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
   return attach_data_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMChangeAvatarReq::set_allocated_attach_data(std::string* attach_data) {
   if (attach_data != nullptr) {
-    _has_bits_[0] |= 0x00000002u;
+    _has_bits_[0] |= 0x00000001u;
   } else {
-    _has_bits_[0] &= ~0x00000002u;
+    _has_bits_[0] &= ~0x00000001u;
   }
   attach_data_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), attach_data,
       GetArenaForAllocation());
@@ -4823,17 +4378,9 @@ inline void IMChangeAvatarReq::set_allocated_attach_data(std::string* attach_dat
 
 // IMChangeAvatarRsp
 
-// required uint32 user_id = 1;
-inline bool IMChangeAvatarRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMChangeAvatarRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMChangeAvatarRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMChangeAvatarRsp::_internal_user_id() const {
   return user_id_;
@@ -4843,7 +4390,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMChangeAvatarRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMChangeAvatarRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMChangeAvatarRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4851,17 +4398,9 @@ inline void IMChangeAvatarRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value
   // @@protoc_insertion_point(field_set:IM.Buddy.IMChangeAvatarRsp.user_id)
 }
 
-// required uint32 result_code = 2;
-inline bool IMChangeAvatarRsp::_internal_has_result_code() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMChangeAvatarRsp::has_result_code() const {
-  return _internal_has_result_code();
-}
+// uint32 result_code = 2;
 inline void IMChangeAvatarRsp::clear_result_code() {
   result_code_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMChangeAvatarRsp::_internal_result_code() const {
   return result_code_;
@@ -4871,7 +4410,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMChangeAvatarRsp::result_code() const {
   return _internal_result_code();
 }
 inline void IMChangeAvatarRsp::_internal_set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   result_code_ = value;
 }
 inline void IMChangeAvatarRsp::set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4941,17 +4480,9 @@ inline void IMChangeAvatarRsp::set_allocated_attach_data(std::string* attach_dat
 
 // IMPCLoginStatusNotify
 
-// required uint32 user_id = 1;
-inline bool IMPCLoginStatusNotify::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMPCLoginStatusNotify::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMPCLoginStatusNotify::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMPCLoginStatusNotify::_internal_user_id() const {
   return user_id_;
@@ -4961,7 +4492,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMPCLoginStatusNotify::user_id() const {
   return _internal_user_id();
 }
 inline void IMPCLoginStatusNotify::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   user_id_ = value;
 }
 inline void IMPCLoginStatusNotify::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4969,17 +4500,9 @@ inline void IMPCLoginStatusNotify::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 v
   // @@protoc_insertion_point(field_set:IM.Buddy.IMPCLoginStatusNotify.user_id)
 }
 
-// required .IM.BaseDefine.UserStatType login_stat = 2;
-inline bool IMPCLoginStatusNotify::_internal_has_login_stat() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMPCLoginStatusNotify::has_login_stat() const {
-  return _internal_has_login_stat();
-}
+// .IM.BaseDefine.UserStatType login_stat = 2;
 inline void IMPCLoginStatusNotify::clear_login_stat() {
-  login_stat_ = 1;
-  _has_bits_[0] &= ~0x00000002u;
+  login_stat_ = 0;
 }
 inline ::IM::BaseDefine::UserStatType IMPCLoginStatusNotify::_internal_login_stat() const {
   return static_cast< ::IM::BaseDefine::UserStatType >(login_stat_);
@@ -4989,8 +4512,7 @@ inline ::IM::BaseDefine::UserStatType IMPCLoginStatusNotify::login_stat() const 
   return _internal_login_stat();
 }
 inline void IMPCLoginStatusNotify::_internal_set_login_stat(::IM::BaseDefine::UserStatType value) {
-  assert(::IM::BaseDefine::UserStatType_IsValid(value));
-  _has_bits_[0] |= 0x00000002u;
+  
   login_stat_ = value;
 }
 inline void IMPCLoginStatusNotify::set_login_stat(::IM::BaseDefine::UserStatType value) {
@@ -5002,17 +4524,9 @@ inline void IMPCLoginStatusNotify::set_login_stat(::IM::BaseDefine::UserStatType
 
 // IMRemoveSessionNotify
 
-// required uint32 user_id = 1;
-inline bool IMRemoveSessionNotify::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMRemoveSessionNotify::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMRemoveSessionNotify::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRemoveSessionNotify::_internal_user_id() const {
   return user_id_;
@@ -5022,7 +4536,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRemoveSessionNotify::user_id() const {
   return _internal_user_id();
 }
 inline void IMRemoveSessionNotify::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   user_id_ = value;
 }
 inline void IMRemoveSessionNotify::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -5030,17 +4544,9 @@ inline void IMRemoveSessionNotify::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 v
   // @@protoc_insertion_point(field_set:IM.Buddy.IMRemoveSessionNotify.user_id)
 }
 
-// required .IM.BaseDefine.SessionType session_type = 2;
-inline bool IMRemoveSessionNotify::_internal_has_session_type() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMRemoveSessionNotify::has_session_type() const {
-  return _internal_has_session_type();
-}
+// .IM.BaseDefine.SessionType session_type = 2;
 inline void IMRemoveSessionNotify::clear_session_type() {
-  session_type_ = 1;
-  _has_bits_[0] &= ~0x00000004u;
+  session_type_ = 0;
 }
 inline ::IM::BaseDefine::SessionType IMRemoveSessionNotify::_internal_session_type() const {
   return static_cast< ::IM::BaseDefine::SessionType >(session_type_);
@@ -5050,8 +4556,7 @@ inline ::IM::BaseDefine::SessionType IMRemoveSessionNotify::session_type() const
   return _internal_session_type();
 }
 inline void IMRemoveSessionNotify::_internal_set_session_type(::IM::BaseDefine::SessionType value) {
-  assert(::IM::BaseDefine::SessionType_IsValid(value));
-  _has_bits_[0] |= 0x00000004u;
+  
   session_type_ = value;
 }
 inline void IMRemoveSessionNotify::set_session_type(::IM::BaseDefine::SessionType value) {
@@ -5059,17 +4564,9 @@ inline void IMRemoveSessionNotify::set_session_type(::IM::BaseDefine::SessionTyp
   // @@protoc_insertion_point(field_set:IM.Buddy.IMRemoveSessionNotify.session_type)
 }
 
-// required uint32 session_id = 3;
-inline bool IMRemoveSessionNotify::_internal_has_session_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMRemoveSessionNotify::has_session_id() const {
-  return _internal_has_session_id();
-}
+// uint32 session_id = 3;
 inline void IMRemoveSessionNotify::clear_session_id() {
   session_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRemoveSessionNotify::_internal_session_id() const {
   return session_id_;
@@ -5079,7 +4576,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMRemoveSessionNotify::session_id() const
   return _internal_session_id();
 }
 inline void IMRemoveSessionNotify::_internal_set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   session_id_ = value;
 }
 inline void IMRemoveSessionNotify::set_session_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -5091,17 +4588,9 @@ inline void IMRemoveSessionNotify::set_session_id(::PROTOBUF_NAMESPACE_ID::uint3
 
 // IMDepartmentReq
 
-// required uint32 user_id = 1;
-inline bool IMDepartmentReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMDepartmentReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMDepartmentReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMDepartmentReq::_internal_user_id() const {
   return user_id_;
@@ -5111,7 +4600,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMDepartmentReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMDepartmentReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMDepartmentReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -5119,17 +4608,9 @@ inline void IMDepartmentReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) 
   // @@protoc_insertion_point(field_set:IM.Buddy.IMDepartmentReq.user_id)
 }
 
-// required uint32 latest_update_time = 2;
-inline bool IMDepartmentReq::_internal_has_latest_update_time() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMDepartmentReq::has_latest_update_time() const {
-  return _internal_has_latest_update_time();
-}
+// uint32 latest_update_time = 2;
 inline void IMDepartmentReq::clear_latest_update_time() {
   latest_update_time_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMDepartmentReq::_internal_latest_update_time() const {
   return latest_update_time_;
@@ -5139,7 +4620,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMDepartmentReq::latest_update_time() con
   return _internal_latest_update_time();
 }
 inline void IMDepartmentReq::_internal_set_latest_update_time(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   latest_update_time_ = value;
 }
 inline void IMDepartmentReq::set_latest_update_time(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -5209,17 +4690,9 @@ inline void IMDepartmentReq::set_allocated_attach_data(std::string* attach_data)
 
 // IMDepartmentRsp
 
-// required uint32 user_id = 1;
-inline bool IMDepartmentRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMDepartmentRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMDepartmentRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMDepartmentRsp::_internal_user_id() const {
   return user_id_;
@@ -5229,7 +4702,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMDepartmentRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMDepartmentRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMDepartmentRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -5237,17 +4710,9 @@ inline void IMDepartmentRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) 
   // @@protoc_insertion_point(field_set:IM.Buddy.IMDepartmentRsp.user_id)
 }
 
-// required uint32 latest_update_time = 2;
-inline bool IMDepartmentRsp::_internal_has_latest_update_time() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMDepartmentRsp::has_latest_update_time() const {
-  return _internal_has_latest_update_time();
-}
+// uint32 latest_update_time = 2;
 inline void IMDepartmentRsp::clear_latest_update_time() {
   latest_update_time_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMDepartmentRsp::_internal_latest_update_time() const {
   return latest_update_time_;
@@ -5257,7 +4722,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMDepartmentRsp::latest_update_time() con
   return _internal_latest_update_time();
 }
 inline void IMDepartmentRsp::_internal_set_latest_update_time(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   latest_update_time_ = value;
 }
 inline void IMDepartmentRsp::set_latest_update_time(::PROTOBUF_NAMESPACE_ID::uint32 value) {

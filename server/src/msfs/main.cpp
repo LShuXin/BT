@@ -187,7 +187,7 @@ int main(int argc, char* argv[])
     printf("server start listen on: %s:%d\n", listen_ip, listen_port);
     init_http_conn();
     printf("now enter the event loop...\n");
-
+    writePid();
     netlib_eventloop();
     return 0;
 }

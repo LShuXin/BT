@@ -65,6 +65,8 @@ int main(int argc, char* argv[])
 
 	printf("now enter the event loop...\n");
 
+	writePid();
+	
 	netlib_eventloop();
 
 	return 0;

@@ -180,7 +180,7 @@ FileManager::getOrCreateEntry(const std::string& url, bool create) {
 	Entry *e = new Entry();
 	u64 fileSize = File::getFileSize(path.c_str());
 	e->m_fileSize = fileSize;
-	e->m_fileContent = new byte[fileSize];
+	e->m_fileContent = new ::byte[fileSize];
 	memset(e->m_fileContent, 0x0, fileSize);
 	e->m_lastAccess = time(NULL);
 	File* tmpFile = new File(path.c_str());
@@ -253,7 +253,7 @@ int FileManager::insertEntry(const std::string& url, size_t fileSize,
 	}
 	Entry *e = new Entry();
 	e->m_fileSize = fileSize;
-	e->m_fileContent = new byte[fileSize];
+	e->m_fileContent = new ::byte[fileSize];
 	e->m_lastAccess = time(NULL);
 	memcpy(e->m_fileContent, content, fileSize);
 	

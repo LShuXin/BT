@@ -137,13 +137,6 @@ class IMNormalGroupListReq final :
     return *this;
   }
 
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
-  }
-
   static const IMNormalGroupListReq& default_instance() {
     return *internal_default_instance();
   }
@@ -238,11 +231,7 @@ class IMNormalGroupListReq final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -295,13 +284,6 @@ class IMNormalGroupListRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMNormalGroupListRsp& default_instance() {
@@ -417,11 +399,7 @@ class IMNormalGroupListRsp final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -475,13 +453,6 @@ class IMGroupInfoListReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMGroupInfoListReq& default_instance() {
@@ -597,11 +568,7 @@ class IMGroupInfoListReq final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -655,13 +622,6 @@ class IMGroupInfoListRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMGroupInfoListRsp& default_instance() {
@@ -777,11 +737,7 @@ class IMGroupInfoListRsp final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -835,13 +791,6 @@ class IMGroupCreateReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMGroupCreateReq& default_instance() {
@@ -946,11 +895,7 @@ class IMGroupCreateReq final :
   ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 >*
       mutable_member_id_list();
 
-  // required string group_name = 3;
-  bool has_group_name() const;
-  private:
-  bool _internal_has_group_name() const;
-  public:
+  // string group_name = 3;
   void clear_group_name();
   const std::string& group_name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -964,11 +909,7 @@ class IMGroupCreateReq final :
   std::string* _internal_mutable_group_name();
   public:
 
-  // required string group_avatar = 4;
-  bool has_group_avatar() const;
-  private:
-  bool _internal_has_group_avatar() const;
-  public:
+  // string group_avatar = 4;
   void clear_group_avatar();
   const std::string& group_avatar() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1000,11 +941,7 @@ class IMGroupCreateReq final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1013,11 +950,7 @@ class IMGroupCreateReq final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required .IM.BaseDefine.GroupType group_type = 2 [default = GROUP_TYPE_TMP];
-  bool has_group_type() const;
-  private:
-  bool _internal_has_group_type() const;
-  public:
+  // .IM.BaseDefine.GroupType group_type = 2;
   void clear_group_type();
   ::IM::BaseDefine::GroupType group_type() const;
   void set_group_type(::IM::BaseDefine::GroupType value);
@@ -1030,15 +963,13 @@ class IMGroupCreateReq final :
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 > member_id_list_;
+  mutable std::atomic<int> _member_id_list_cached_byte_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr group_name_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr group_avatar_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr attach_data_;
@@ -1077,13 +1008,6 @@ class IMGroupCreateRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMGroupCreateRsp& default_instance() {
@@ -1188,11 +1112,7 @@ class IMGroupCreateRsp final :
   ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 >*
       mutable_user_id_list();
 
-  // required string group_name = 4;
-  bool has_group_name() const;
-  private:
-  bool _internal_has_group_name() const;
-  public:
+  // string group_name = 4;
   void clear_group_name();
   const std::string& group_name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1224,11 +1144,7 @@ class IMGroupCreateRsp final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1237,11 +1153,7 @@ class IMGroupCreateRsp final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 result_code = 2;
-  bool has_result_code() const;
-  private:
-  bool _internal_has_result_code() const;
-  public:
+  // uint32 result_code = 2;
   void clear_result_code();
   ::PROTOBUF_NAMESPACE_ID::uint32 result_code() const;
   void set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1267,15 +1179,13 @@ class IMGroupCreateRsp final :
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 > user_id_list_;
+  mutable std::atomic<int> _user_id_list_cached_byte_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr group_name_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr attach_data_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
@@ -1314,13 +1224,6 @@ class IMGroupChangeMemberReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMGroupChangeMemberReq& default_instance() {
@@ -1399,8 +1302,8 @@ class IMGroupChangeMemberReq final :
     kMemberIdListFieldNumber = 4,
     kAttachDataFieldNumber = 20,
     kUserIdFieldNumber = 1,
-    kGroupIdFieldNumber = 3,
     kChangeTypeFieldNumber = 2,
+    kGroupIdFieldNumber = 3,
   };
   // repeated uint32 member_id_list = 4;
   int member_id_list_size() const;
@@ -1442,11 +1345,7 @@ class IMGroupChangeMemberReq final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1455,24 +1354,7 @@ class IMGroupChangeMemberReq final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 group_id = 3;
-  bool has_group_id() const;
-  private:
-  bool _internal_has_group_id() const;
-  public:
-  void clear_group_id();
-  ::PROTOBUF_NAMESPACE_ID::uint32 group_id() const;
-  void set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_group_id() const;
-  void _internal_set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required .IM.BaseDefine.GroupModifyType change_type = 2;
-  bool has_change_type() const;
-  private:
-  bool _internal_has_change_type() const;
-  public:
+  // .IM.BaseDefine.GroupModifyType change_type = 2;
   void clear_change_type();
   ::IM::BaseDefine::GroupModifyType change_type() const;
   void set_change_type(::IM::BaseDefine::GroupModifyType value);
@@ -1481,12 +1363,18 @@ class IMGroupChangeMemberReq final :
   void _internal_set_change_type(::IM::BaseDefine::GroupModifyType value);
   public:
 
+  // uint32 group_id = 3;
+  void clear_group_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 group_id() const;
+  void set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_group_id() const;
+  void _internal_set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:IM.Group.IMGroupChangeMemberReq)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -1494,10 +1382,11 @@ class IMGroupChangeMemberReq final :
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 > member_id_list_;
+  mutable std::atomic<int> _member_id_list_cached_byte_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr attach_data_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 group_id_;
   int change_type_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 group_id_;
   friend struct ::TableStruct_IM_2eGroup_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1531,13 +1420,6 @@ class IMGroupChangeMemberRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMGroupChangeMemberRsp& default_instance() {
@@ -1617,9 +1499,9 @@ class IMGroupChangeMemberRsp final :
     kChgUserIdListFieldNumber = 6,
     kAttachDataFieldNumber = 20,
     kUserIdFieldNumber = 1,
+    kChangeTypeFieldNumber = 2,
     kResultCodeFieldNumber = 3,
     kGroupIdFieldNumber = 4,
-    kChangeTypeFieldNumber = 2,
   };
   // repeated uint32 cur_user_id_list = 5;
   int cur_user_id_list_size() const;
@@ -1683,11 +1565,7 @@ class IMGroupChangeMemberRsp final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1696,37 +1574,7 @@ class IMGroupChangeMemberRsp final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 result_code = 3;
-  bool has_result_code() const;
-  private:
-  bool _internal_has_result_code() const;
-  public:
-  void clear_result_code();
-  ::PROTOBUF_NAMESPACE_ID::uint32 result_code() const;
-  void set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_result_code() const;
-  void _internal_set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required uint32 group_id = 4;
-  bool has_group_id() const;
-  private:
-  bool _internal_has_group_id() const;
-  public:
-  void clear_group_id();
-  ::PROTOBUF_NAMESPACE_ID::uint32 group_id() const;
-  void set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_group_id() const;
-  void _internal_set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required .IM.BaseDefine.GroupModifyType change_type = 2;
-  bool has_change_type() const;
-  private:
-  bool _internal_has_change_type() const;
-  public:
+  // .IM.BaseDefine.GroupModifyType change_type = 2;
   void clear_change_type();
   ::IM::BaseDefine::GroupModifyType change_type() const;
   void set_change_type(::IM::BaseDefine::GroupModifyType value);
@@ -1735,12 +1583,27 @@ class IMGroupChangeMemberRsp final :
   void _internal_set_change_type(::IM::BaseDefine::GroupModifyType value);
   public:
 
+  // uint32 result_code = 3;
+  void clear_result_code();
+  ::PROTOBUF_NAMESPACE_ID::uint32 result_code() const;
+  void set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_result_code() const;
+  void _internal_set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // uint32 group_id = 4;
+  void clear_group_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 group_id() const;
+  void set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_group_id() const;
+  void _internal_set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:IM.Group.IMGroupChangeMemberRsp)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -1748,12 +1611,14 @@ class IMGroupChangeMemberRsp final :
   ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 > cur_user_id_list_;
+  mutable std::atomic<int> _cur_user_id_list_cached_byte_size_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 > chg_user_id_list_;
+  mutable std::atomic<int> _chg_user_id_list_cached_byte_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr attach_data_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
+  int change_type_;
   ::PROTOBUF_NAMESPACE_ID::uint32 result_code_;
   ::PROTOBUF_NAMESPACE_ID::uint32 group_id_;
-  int change_type_;
   friend struct ::TableStruct_IM_2eGroup_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1787,13 +1652,6 @@ class IMGroupShieldReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMGroupShieldReq& default_instance() {
@@ -1892,11 +1750,7 @@ class IMGroupShieldReq final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1905,11 +1759,7 @@ class IMGroupShieldReq final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 group_id = 2;
-  bool has_group_id() const;
-  private:
-  bool _internal_has_group_id() const;
-  public:
+  // uint32 group_id = 2;
   void clear_group_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 group_id() const;
   void set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1918,11 +1768,7 @@ class IMGroupShieldReq final :
   void _internal_set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 shield_status = 3;
-  bool has_shield_status() const;
-  private:
-  bool _internal_has_shield_status() const;
-  public:
+  // uint32 shield_status = 3;
   void clear_shield_status();
   ::PROTOBUF_NAMESPACE_ID::uint32 shield_status() const;
   void set_shield_status(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1934,9 +1780,6 @@ class IMGroupShieldReq final :
   // @@protoc_insertion_point(class_scope:IM.Group.IMGroupShieldReq)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -1980,13 +1823,6 @@ class IMGroupShieldRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMGroupShieldRsp& default_instance() {
@@ -2085,11 +1921,7 @@ class IMGroupShieldRsp final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2098,11 +1930,7 @@ class IMGroupShieldRsp final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 group_id = 2;
-  bool has_group_id() const;
-  private:
-  bool _internal_has_group_id() const;
-  public:
+  // uint32 group_id = 2;
   void clear_group_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 group_id() const;
   void set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2111,11 +1939,7 @@ class IMGroupShieldRsp final :
   void _internal_set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 result_code = 3;
-  bool has_result_code() const;
-  private:
-  bool _internal_has_result_code() const;
-  public:
+  // uint32 result_code = 3;
   void clear_result_code();
   ::PROTOBUF_NAMESPACE_ID::uint32 result_code() const;
   void set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2127,9 +1951,6 @@ class IMGroupShieldRsp final :
   // @@protoc_insertion_point(class_scope:IM.Group.IMGroupShieldRsp)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -2173,13 +1994,6 @@ class IMGroupChangeMemberNotify final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMGroupChangeMemberNotify& default_instance() {
@@ -2258,8 +2072,8 @@ class IMGroupChangeMemberNotify final :
     kCurUserIdListFieldNumber = 4,
     kChgUserIdListFieldNumber = 5,
     kUserIdFieldNumber = 1,
-    kGroupIdFieldNumber = 3,
     kChangeTypeFieldNumber = 2,
+    kGroupIdFieldNumber = 3,
   };
   // repeated uint32 cur_user_id_list = 4;
   int cur_user_id_list_size() const;
@@ -2305,11 +2119,7 @@ class IMGroupChangeMemberNotify final :
   ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 >*
       mutable_chg_user_id_list();
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -2318,24 +2128,7 @@ class IMGroupChangeMemberNotify final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 group_id = 3;
-  bool has_group_id() const;
-  private:
-  bool _internal_has_group_id() const;
-  public:
-  void clear_group_id();
-  ::PROTOBUF_NAMESPACE_ID::uint32 group_id() const;
-  void set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_group_id() const;
-  void _internal_set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // required .IM.BaseDefine.GroupModifyType change_type = 2;
-  bool has_change_type() const;
-  private:
-  bool _internal_has_change_type() const;
-  public:
+  // .IM.BaseDefine.GroupModifyType change_type = 2;
   void clear_change_type();
   ::IM::BaseDefine::GroupModifyType change_type() const;
   void set_change_type(::IM::BaseDefine::GroupModifyType value);
@@ -2344,23 +2137,30 @@ class IMGroupChangeMemberNotify final :
   void _internal_set_change_type(::IM::BaseDefine::GroupModifyType value);
   public:
 
+  // uint32 group_id = 3;
+  void clear_group_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 group_id() const;
+  void set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_group_id() const;
+  void _internal_set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:IM.Group.IMGroupChangeMemberNotify)
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 > cur_user_id_list_;
+  mutable std::atomic<int> _cur_user_id_list_cached_byte_size_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint32 > chg_user_id_list_;
+  mutable std::atomic<int> _chg_user_id_list_cached_byte_size_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 group_id_;
   int change_type_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 group_id_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eGroup_2eproto;
 };
 // ===================================================================
@@ -2374,17 +2174,9 @@ class IMGroupChangeMemberNotify final :
 #endif  // __GNUC__
 // IMNormalGroupListReq
 
-// required uint32 user_id = 1;
-inline bool IMNormalGroupListReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMNormalGroupListReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMNormalGroupListReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMNormalGroupListReq::_internal_user_id() const {
   return user_id_;
@@ -2394,7 +2186,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMNormalGroupListReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMNormalGroupListReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMNormalGroupListReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2464,17 +2256,9 @@ inline void IMNormalGroupListReq::set_allocated_attach_data(std::string* attach_
 
 // IMNormalGroupListRsp
 
-// required uint32 user_id = 1;
-inline bool IMNormalGroupListRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMNormalGroupListRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMNormalGroupListRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMNormalGroupListRsp::_internal_user_id() const {
   return user_id_;
@@ -2484,7 +2268,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMNormalGroupListRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMNormalGroupListRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMNormalGroupListRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2591,17 +2375,9 @@ inline void IMNormalGroupListRsp::set_allocated_attach_data(std::string* attach_
 
 // IMGroupInfoListReq
 
-// required uint32 user_id = 1;
-inline bool IMGroupInfoListReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMGroupInfoListReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMGroupInfoListReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupInfoListReq::_internal_user_id() const {
   return user_id_;
@@ -2611,7 +2387,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupInfoListReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMGroupInfoListReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMGroupInfoListReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2718,17 +2494,9 @@ inline void IMGroupInfoListReq::set_allocated_attach_data(std::string* attach_da
 
 // IMGroupInfoListRsp
 
-// required uint32 user_id = 1;
-inline bool IMGroupInfoListRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMGroupInfoListRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMGroupInfoListRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupInfoListRsp::_internal_user_id() const {
   return user_id_;
@@ -2738,7 +2506,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupInfoListRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMGroupInfoListRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMGroupInfoListRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2845,17 +2613,9 @@ inline void IMGroupInfoListRsp::set_allocated_attach_data(std::string* attach_da
 
 // IMGroupCreateReq
 
-// required uint32 user_id = 1;
-inline bool IMGroupCreateReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMGroupCreateReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMGroupCreateReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupCreateReq::_internal_user_id() const {
   return user_id_;
@@ -2865,7 +2625,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupCreateReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMGroupCreateReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  
   user_id_ = value;
 }
 inline void IMGroupCreateReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2873,17 +2633,9 @@ inline void IMGroupCreateReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value)
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupCreateReq.user_id)
 }
 
-// required .IM.BaseDefine.GroupType group_type = 2 [default = GROUP_TYPE_TMP];
-inline bool IMGroupCreateReq::_internal_has_group_type() const {
-  bool value = (_has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool IMGroupCreateReq::has_group_type() const {
-  return _internal_has_group_type();
-}
+// .IM.BaseDefine.GroupType group_type = 2;
 inline void IMGroupCreateReq::clear_group_type() {
-  group_type_ = 2;
-  _has_bits_[0] &= ~0x00000010u;
+  group_type_ = 0;
 }
 inline ::IM::BaseDefine::GroupType IMGroupCreateReq::_internal_group_type() const {
   return static_cast< ::IM::BaseDefine::GroupType >(group_type_);
@@ -2893,8 +2645,7 @@ inline ::IM::BaseDefine::GroupType IMGroupCreateReq::group_type() const {
   return _internal_group_type();
 }
 inline void IMGroupCreateReq::_internal_set_group_type(::IM::BaseDefine::GroupType value) {
-  assert(::IM::BaseDefine::GroupType_IsValid(value));
-  _has_bits_[0] |= 0x00000010u;
+  
   group_type_ = value;
 }
 inline void IMGroupCreateReq::set_group_type(::IM::BaseDefine::GroupType value) {
@@ -2902,17 +2653,9 @@ inline void IMGroupCreateReq::set_group_type(::IM::BaseDefine::GroupType value) 
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupCreateReq.group_type)
 }
 
-// required string group_name = 3;
-inline bool IMGroupCreateReq::_internal_has_group_name() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMGroupCreateReq::has_group_name() const {
-  return _internal_has_group_name();
-}
+// string group_name = 3;
 inline void IMGroupCreateReq::clear_group_name() {
   group_name_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMGroupCreateReq::group_name() const {
   // @@protoc_insertion_point(field_get:IM.Group.IMGroupCreateReq.group_name)
@@ -2921,7 +2664,7 @@ inline const std::string& IMGroupCreateReq::group_name() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMGroupCreateReq::set_group_name(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000001u;
+ 
  group_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupCreateReq.group_name)
 }
@@ -2934,43 +2677,31 @@ inline const std::string& IMGroupCreateReq::_internal_group_name() const {
   return group_name_.Get();
 }
 inline void IMGroupCreateReq::_internal_set_group_name(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   group_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMGroupCreateReq::_internal_mutable_group_name() {
-  _has_bits_[0] |= 0x00000001u;
+  
   return group_name_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMGroupCreateReq::release_group_name() {
   // @@protoc_insertion_point(field_release:IM.Group.IMGroupCreateReq.group_name)
-  if (!_internal_has_group_name()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return group_name_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return group_name_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMGroupCreateReq::set_allocated_group_name(std::string* group_name) {
   if (group_name != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    
   }
   group_name_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), group_name,
       GetArenaForAllocation());
   // @@protoc_insertion_point(field_set_allocated:IM.Group.IMGroupCreateReq.group_name)
 }
 
-// required string group_avatar = 4;
-inline bool IMGroupCreateReq::_internal_has_group_avatar() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMGroupCreateReq::has_group_avatar() const {
-  return _internal_has_group_avatar();
-}
+// string group_avatar = 4;
 inline void IMGroupCreateReq::clear_group_avatar() {
   group_avatar_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& IMGroupCreateReq::group_avatar() const {
   // @@protoc_insertion_point(field_get:IM.Group.IMGroupCreateReq.group_avatar)
@@ -2979,7 +2710,7 @@ inline const std::string& IMGroupCreateReq::group_avatar() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMGroupCreateReq::set_group_avatar(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000002u;
+ 
  group_avatar_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupCreateReq.group_avatar)
 }
@@ -2992,26 +2723,22 @@ inline const std::string& IMGroupCreateReq::_internal_group_avatar() const {
   return group_avatar_.Get();
 }
 inline void IMGroupCreateReq::_internal_set_group_avatar(const std::string& value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   group_avatar_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMGroupCreateReq::_internal_mutable_group_avatar() {
-  _has_bits_[0] |= 0x00000002u;
+  
   return group_avatar_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMGroupCreateReq::release_group_avatar() {
   // @@protoc_insertion_point(field_release:IM.Group.IMGroupCreateReq.group_avatar)
-  if (!_internal_has_group_avatar()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000002u;
-  return group_avatar_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return group_avatar_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMGroupCreateReq::set_allocated_group_avatar(std::string* group_avatar) {
   if (group_avatar != nullptr) {
-    _has_bits_[0] |= 0x00000002u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000002u;
+    
   }
   group_avatar_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), group_avatar,
       GetArenaForAllocation());
@@ -3067,7 +2794,7 @@ IMGroupCreateReq::mutable_member_id_list() {
 
 // optional bytes attach_data = 20;
 inline bool IMGroupCreateReq::_internal_has_attach_data() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
+  bool value = (_has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
 inline bool IMGroupCreateReq::has_attach_data() const {
@@ -3075,7 +2802,7 @@ inline bool IMGroupCreateReq::has_attach_data() const {
 }
 inline void IMGroupCreateReq::clear_attach_data() {
   attach_data_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMGroupCreateReq::attach_data() const {
   // @@protoc_insertion_point(field_get:IM.Group.IMGroupCreateReq.attach_data)
@@ -3084,7 +2811,7 @@ inline const std::string& IMGroupCreateReq::attach_data() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMGroupCreateReq::set_attach_data(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000004u;
+ _has_bits_[0] |= 0x00000001u;
  attach_data_.SetBytes(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupCreateReq.attach_data)
 }
@@ -3097,11 +2824,11 @@ inline const std::string& IMGroupCreateReq::_internal_attach_data() const {
   return attach_data_.Get();
 }
 inline void IMGroupCreateReq::_internal_set_attach_data(const std::string& value) {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000001u;
   attach_data_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMGroupCreateReq::_internal_mutable_attach_data() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000001u;
   return attach_data_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMGroupCreateReq::release_attach_data() {
@@ -3109,14 +2836,14 @@ inline std::string* IMGroupCreateReq::release_attach_data() {
   if (!_internal_has_attach_data()) {
     return nullptr;
   }
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000001u;
   return attach_data_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMGroupCreateReq::set_allocated_attach_data(std::string* attach_data) {
   if (attach_data != nullptr) {
-    _has_bits_[0] |= 0x00000004u;
+    _has_bits_[0] |= 0x00000001u;
   } else {
-    _has_bits_[0] &= ~0x00000004u;
+    _has_bits_[0] &= ~0x00000001u;
   }
   attach_data_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), attach_data,
       GetArenaForAllocation());
@@ -3127,17 +2854,9 @@ inline void IMGroupCreateReq::set_allocated_attach_data(std::string* attach_data
 
 // IMGroupCreateRsp
 
-// required uint32 user_id = 1;
-inline bool IMGroupCreateRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMGroupCreateRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMGroupCreateRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupCreateRsp::_internal_user_id() const {
   return user_id_;
@@ -3147,7 +2866,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupCreateRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMGroupCreateRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   user_id_ = value;
 }
 inline void IMGroupCreateRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3155,17 +2874,9 @@ inline void IMGroupCreateRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value)
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupCreateRsp.user_id)
 }
 
-// required uint32 result_code = 2;
-inline bool IMGroupCreateRsp::_internal_has_result_code() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMGroupCreateRsp::has_result_code() const {
-  return _internal_has_result_code();
-}
+// uint32 result_code = 2;
 inline void IMGroupCreateRsp::clear_result_code() {
   result_code_ = 0u;
-  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupCreateRsp::_internal_result_code() const {
   return result_code_;
@@ -3175,7 +2886,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupCreateRsp::result_code() const {
   return _internal_result_code();
 }
 inline void IMGroupCreateRsp::_internal_set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  
   result_code_ = value;
 }
 inline void IMGroupCreateRsp::set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3185,7 +2896,7 @@ inline void IMGroupCreateRsp::set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 va
 
 // optional uint32 group_id = 3;
 inline bool IMGroupCreateRsp::_internal_has_group_id() const {
-  bool value = (_has_bits_[0] & 0x00000010u) != 0;
+  bool value = (_has_bits_[0] & 0x00000002u) != 0;
   return value;
 }
 inline bool IMGroupCreateRsp::has_group_id() const {
@@ -3193,7 +2904,7 @@ inline bool IMGroupCreateRsp::has_group_id() const {
 }
 inline void IMGroupCreateRsp::clear_group_id() {
   group_id_ = 0u;
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupCreateRsp::_internal_group_id() const {
   return group_id_;
@@ -3203,7 +2914,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupCreateRsp::group_id() const {
   return _internal_group_id();
 }
 inline void IMGroupCreateRsp::_internal_set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000002u;
   group_id_ = value;
 }
 inline void IMGroupCreateRsp::set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3211,17 +2922,9 @@ inline void IMGroupCreateRsp::set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupCreateRsp.group_id)
 }
 
-// required string group_name = 4;
-inline bool IMGroupCreateRsp::_internal_has_group_name() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMGroupCreateRsp::has_group_name() const {
-  return _internal_has_group_name();
-}
+// string group_name = 4;
 inline void IMGroupCreateRsp::clear_group_name() {
   group_name_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMGroupCreateRsp::group_name() const {
   // @@protoc_insertion_point(field_get:IM.Group.IMGroupCreateRsp.group_name)
@@ -3230,7 +2933,7 @@ inline const std::string& IMGroupCreateRsp::group_name() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMGroupCreateRsp::set_group_name(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000001u;
+ 
  group_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupCreateRsp.group_name)
 }
@@ -3243,26 +2946,22 @@ inline const std::string& IMGroupCreateRsp::_internal_group_name() const {
   return group_name_.Get();
 }
 inline void IMGroupCreateRsp::_internal_set_group_name(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   group_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMGroupCreateRsp::_internal_mutable_group_name() {
-  _has_bits_[0] |= 0x00000001u;
+  
   return group_name_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMGroupCreateRsp::release_group_name() {
   // @@protoc_insertion_point(field_release:IM.Group.IMGroupCreateRsp.group_name)
-  if (!_internal_has_group_name()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return group_name_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return group_name_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMGroupCreateRsp::set_allocated_group_name(std::string* group_name) {
   if (group_name != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    
   }
   group_name_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), group_name,
       GetArenaForAllocation());
@@ -3318,7 +3017,7 @@ IMGroupCreateRsp::mutable_user_id_list() {
 
 // optional bytes attach_data = 20;
 inline bool IMGroupCreateRsp::_internal_has_attach_data() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
+  bool value = (_has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
 inline bool IMGroupCreateRsp::has_attach_data() const {
@@ -3326,7 +3025,7 @@ inline bool IMGroupCreateRsp::has_attach_data() const {
 }
 inline void IMGroupCreateRsp::clear_attach_data() {
   attach_data_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMGroupCreateRsp::attach_data() const {
   // @@protoc_insertion_point(field_get:IM.Group.IMGroupCreateRsp.attach_data)
@@ -3335,7 +3034,7 @@ inline const std::string& IMGroupCreateRsp::attach_data() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMGroupCreateRsp::set_attach_data(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000002u;
+ _has_bits_[0] |= 0x00000001u;
  attach_data_.SetBytes(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupCreateRsp.attach_data)
 }
@@ -3348,11 +3047,11 @@ inline const std::string& IMGroupCreateRsp::_internal_attach_data() const {
   return attach_data_.Get();
 }
 inline void IMGroupCreateRsp::_internal_set_attach_data(const std::string& value) {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000001u;
   attach_data_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMGroupCreateRsp::_internal_mutable_attach_data() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000001u;
   return attach_data_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMGroupCreateRsp::release_attach_data() {
@@ -3360,14 +3059,14 @@ inline std::string* IMGroupCreateRsp::release_attach_data() {
   if (!_internal_has_attach_data()) {
     return nullptr;
   }
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
   return attach_data_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMGroupCreateRsp::set_allocated_attach_data(std::string* attach_data) {
   if (attach_data != nullptr) {
-    _has_bits_[0] |= 0x00000002u;
+    _has_bits_[0] |= 0x00000001u;
   } else {
-    _has_bits_[0] &= ~0x00000002u;
+    _has_bits_[0] &= ~0x00000001u;
   }
   attach_data_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), attach_data,
       GetArenaForAllocation());
@@ -3378,17 +3077,9 @@ inline void IMGroupCreateRsp::set_allocated_attach_data(std::string* attach_data
 
 // IMGroupChangeMemberReq
 
-// required uint32 user_id = 1;
-inline bool IMGroupChangeMemberReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMGroupChangeMemberReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMGroupChangeMemberReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupChangeMemberReq::_internal_user_id() const {
   return user_id_;
@@ -3398,7 +3089,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupChangeMemberReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMGroupChangeMemberReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMGroupChangeMemberReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3406,17 +3097,9 @@ inline void IMGroupChangeMemberReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupChangeMemberReq.user_id)
 }
 
-// required .IM.BaseDefine.GroupModifyType change_type = 2;
-inline bool IMGroupChangeMemberReq::_internal_has_change_type() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMGroupChangeMemberReq::has_change_type() const {
-  return _internal_has_change_type();
-}
+// .IM.BaseDefine.GroupModifyType change_type = 2;
 inline void IMGroupChangeMemberReq::clear_change_type() {
-  change_type_ = 1;
-  _has_bits_[0] &= ~0x00000008u;
+  change_type_ = 0;
 }
 inline ::IM::BaseDefine::GroupModifyType IMGroupChangeMemberReq::_internal_change_type() const {
   return static_cast< ::IM::BaseDefine::GroupModifyType >(change_type_);
@@ -3426,8 +3109,7 @@ inline ::IM::BaseDefine::GroupModifyType IMGroupChangeMemberReq::change_type() c
   return _internal_change_type();
 }
 inline void IMGroupChangeMemberReq::_internal_set_change_type(::IM::BaseDefine::GroupModifyType value) {
-  assert(::IM::BaseDefine::GroupModifyType_IsValid(value));
-  _has_bits_[0] |= 0x00000008u;
+  
   change_type_ = value;
 }
 inline void IMGroupChangeMemberReq::set_change_type(::IM::BaseDefine::GroupModifyType value) {
@@ -3435,17 +3117,9 @@ inline void IMGroupChangeMemberReq::set_change_type(::IM::BaseDefine::GroupModif
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupChangeMemberReq.change_type)
 }
 
-// required uint32 group_id = 3;
-inline bool IMGroupChangeMemberReq::_internal_has_group_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMGroupChangeMemberReq::has_group_id() const {
-  return _internal_has_group_id();
-}
+// uint32 group_id = 3;
 inline void IMGroupChangeMemberReq::clear_group_id() {
   group_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupChangeMemberReq::_internal_group_id() const {
   return group_id_;
@@ -3455,7 +3129,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupChangeMemberReq::group_id() const 
   return _internal_group_id();
 }
 inline void IMGroupChangeMemberReq::_internal_set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   group_id_ = value;
 }
 inline void IMGroupChangeMemberReq::set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3572,17 +3246,9 @@ inline void IMGroupChangeMemberReq::set_allocated_attach_data(std::string* attac
 
 // IMGroupChangeMemberRsp
 
-// required uint32 user_id = 1;
-inline bool IMGroupChangeMemberRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMGroupChangeMemberRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMGroupChangeMemberRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupChangeMemberRsp::_internal_user_id() const {
   return user_id_;
@@ -3592,7 +3258,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupChangeMemberRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMGroupChangeMemberRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMGroupChangeMemberRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3600,17 +3266,9 @@ inline void IMGroupChangeMemberRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupChangeMemberRsp.user_id)
 }
 
-// required .IM.BaseDefine.GroupModifyType change_type = 2;
-inline bool IMGroupChangeMemberRsp::_internal_has_change_type() const {
-  bool value = (_has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool IMGroupChangeMemberRsp::has_change_type() const {
-  return _internal_has_change_type();
-}
+// .IM.BaseDefine.GroupModifyType change_type = 2;
 inline void IMGroupChangeMemberRsp::clear_change_type() {
-  change_type_ = 1;
-  _has_bits_[0] &= ~0x00000010u;
+  change_type_ = 0;
 }
 inline ::IM::BaseDefine::GroupModifyType IMGroupChangeMemberRsp::_internal_change_type() const {
   return static_cast< ::IM::BaseDefine::GroupModifyType >(change_type_);
@@ -3620,8 +3278,7 @@ inline ::IM::BaseDefine::GroupModifyType IMGroupChangeMemberRsp::change_type() c
   return _internal_change_type();
 }
 inline void IMGroupChangeMemberRsp::_internal_set_change_type(::IM::BaseDefine::GroupModifyType value) {
-  assert(::IM::BaseDefine::GroupModifyType_IsValid(value));
-  _has_bits_[0] |= 0x00000010u;
+  
   change_type_ = value;
 }
 inline void IMGroupChangeMemberRsp::set_change_type(::IM::BaseDefine::GroupModifyType value) {
@@ -3629,17 +3286,9 @@ inline void IMGroupChangeMemberRsp::set_change_type(::IM::BaseDefine::GroupModif
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupChangeMemberRsp.change_type)
 }
 
-// required uint32 result_code = 3;
-inline bool IMGroupChangeMemberRsp::_internal_has_result_code() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMGroupChangeMemberRsp::has_result_code() const {
-  return _internal_has_result_code();
-}
+// uint32 result_code = 3;
 inline void IMGroupChangeMemberRsp::clear_result_code() {
   result_code_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupChangeMemberRsp::_internal_result_code() const {
   return result_code_;
@@ -3649,7 +3298,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupChangeMemberRsp::result_code() con
   return _internal_result_code();
 }
 inline void IMGroupChangeMemberRsp::_internal_set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   result_code_ = value;
 }
 inline void IMGroupChangeMemberRsp::set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3657,17 +3306,9 @@ inline void IMGroupChangeMemberRsp::set_result_code(::PROTOBUF_NAMESPACE_ID::uin
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupChangeMemberRsp.result_code)
 }
 
-// required uint32 group_id = 4;
-inline bool IMGroupChangeMemberRsp::_internal_has_group_id() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMGroupChangeMemberRsp::has_group_id() const {
-  return _internal_has_group_id();
-}
+// uint32 group_id = 4;
 inline void IMGroupChangeMemberRsp::clear_group_id() {
   group_id_ = 0u;
-  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupChangeMemberRsp::_internal_group_id() const {
   return group_id_;
@@ -3677,7 +3318,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupChangeMemberRsp::group_id() const 
   return _internal_group_id();
 }
 inline void IMGroupChangeMemberRsp::_internal_set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  
   group_id_ = value;
 }
 inline void IMGroupChangeMemberRsp::set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3841,17 +3482,9 @@ inline void IMGroupChangeMemberRsp::set_allocated_attach_data(std::string* attac
 
 // IMGroupShieldReq
 
-// required uint32 user_id = 1;
-inline bool IMGroupShieldReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMGroupShieldReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMGroupShieldReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupShieldReq::_internal_user_id() const {
   return user_id_;
@@ -3861,7 +3494,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupShieldReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMGroupShieldReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMGroupShieldReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3869,17 +3502,9 @@ inline void IMGroupShieldReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value)
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupShieldReq.user_id)
 }
 
-// required uint32 group_id = 2;
-inline bool IMGroupShieldReq::_internal_has_group_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMGroupShieldReq::has_group_id() const {
-  return _internal_has_group_id();
-}
+// uint32 group_id = 2;
 inline void IMGroupShieldReq::clear_group_id() {
   group_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupShieldReq::_internal_group_id() const {
   return group_id_;
@@ -3889,7 +3514,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupShieldReq::group_id() const {
   return _internal_group_id();
 }
 inline void IMGroupShieldReq::_internal_set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   group_id_ = value;
 }
 inline void IMGroupShieldReq::set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3897,17 +3522,9 @@ inline void IMGroupShieldReq::set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupShieldReq.group_id)
 }
 
-// required uint32 shield_status = 3;
-inline bool IMGroupShieldReq::_internal_has_shield_status() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMGroupShieldReq::has_shield_status() const {
-  return _internal_has_shield_status();
-}
+// uint32 shield_status = 3;
 inline void IMGroupShieldReq::clear_shield_status() {
   shield_status_ = 0u;
-  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupShieldReq::_internal_shield_status() const {
   return shield_status_;
@@ -3917,7 +3534,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupShieldReq::shield_status() const {
   return _internal_shield_status();
 }
 inline void IMGroupShieldReq::_internal_set_shield_status(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  
   shield_status_ = value;
 }
 inline void IMGroupShieldReq::set_shield_status(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3987,17 +3604,9 @@ inline void IMGroupShieldReq::set_allocated_attach_data(std::string* attach_data
 
 // IMGroupShieldRsp
 
-// required uint32 user_id = 1;
-inline bool IMGroupShieldRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMGroupShieldRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMGroupShieldRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupShieldRsp::_internal_user_id() const {
   return user_id_;
@@ -4007,7 +3616,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupShieldRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMGroupShieldRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMGroupShieldRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4015,17 +3624,9 @@ inline void IMGroupShieldRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value)
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupShieldRsp.user_id)
 }
 
-// required uint32 group_id = 2;
-inline bool IMGroupShieldRsp::_internal_has_group_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMGroupShieldRsp::has_group_id() const {
-  return _internal_has_group_id();
-}
+// uint32 group_id = 2;
 inline void IMGroupShieldRsp::clear_group_id() {
   group_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupShieldRsp::_internal_group_id() const {
   return group_id_;
@@ -4035,7 +3636,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupShieldRsp::group_id() const {
   return _internal_group_id();
 }
 inline void IMGroupShieldRsp::_internal_set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   group_id_ = value;
 }
 inline void IMGroupShieldRsp::set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4043,17 +3644,9 @@ inline void IMGroupShieldRsp::set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupShieldRsp.group_id)
 }
 
-// required uint32 result_code = 3;
-inline bool IMGroupShieldRsp::_internal_has_result_code() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMGroupShieldRsp::has_result_code() const {
-  return _internal_has_result_code();
-}
+// uint32 result_code = 3;
 inline void IMGroupShieldRsp::clear_result_code() {
   result_code_ = 0u;
-  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupShieldRsp::_internal_result_code() const {
   return result_code_;
@@ -4063,7 +3656,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupShieldRsp::result_code() const {
   return _internal_result_code();
 }
 inline void IMGroupShieldRsp::_internal_set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  
   result_code_ = value;
 }
 inline void IMGroupShieldRsp::set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4133,17 +3726,9 @@ inline void IMGroupShieldRsp::set_allocated_attach_data(std::string* attach_data
 
 // IMGroupChangeMemberNotify
 
-// required uint32 user_id = 1;
-inline bool IMGroupChangeMemberNotify::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMGroupChangeMemberNotify::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMGroupChangeMemberNotify::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupChangeMemberNotify::_internal_user_id() const {
   return user_id_;
@@ -4153,7 +3738,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupChangeMemberNotify::user_id() cons
   return _internal_user_id();
 }
 inline void IMGroupChangeMemberNotify::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   user_id_ = value;
 }
 inline void IMGroupChangeMemberNotify::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -4161,17 +3746,9 @@ inline void IMGroupChangeMemberNotify::set_user_id(::PROTOBUF_NAMESPACE_ID::uint
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupChangeMemberNotify.user_id)
 }
 
-// required .IM.BaseDefine.GroupModifyType change_type = 2;
-inline bool IMGroupChangeMemberNotify::_internal_has_change_type() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMGroupChangeMemberNotify::has_change_type() const {
-  return _internal_has_change_type();
-}
+// .IM.BaseDefine.GroupModifyType change_type = 2;
 inline void IMGroupChangeMemberNotify::clear_change_type() {
-  change_type_ = 1;
-  _has_bits_[0] &= ~0x00000004u;
+  change_type_ = 0;
 }
 inline ::IM::BaseDefine::GroupModifyType IMGroupChangeMemberNotify::_internal_change_type() const {
   return static_cast< ::IM::BaseDefine::GroupModifyType >(change_type_);
@@ -4181,8 +3758,7 @@ inline ::IM::BaseDefine::GroupModifyType IMGroupChangeMemberNotify::change_type(
   return _internal_change_type();
 }
 inline void IMGroupChangeMemberNotify::_internal_set_change_type(::IM::BaseDefine::GroupModifyType value) {
-  assert(::IM::BaseDefine::GroupModifyType_IsValid(value));
-  _has_bits_[0] |= 0x00000004u;
+  
   change_type_ = value;
 }
 inline void IMGroupChangeMemberNotify::set_change_type(::IM::BaseDefine::GroupModifyType value) {
@@ -4190,17 +3766,9 @@ inline void IMGroupChangeMemberNotify::set_change_type(::IM::BaseDefine::GroupMo
   // @@protoc_insertion_point(field_set:IM.Group.IMGroupChangeMemberNotify.change_type)
 }
 
-// required uint32 group_id = 3;
-inline bool IMGroupChangeMemberNotify::_internal_has_group_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMGroupChangeMemberNotify::has_group_id() const {
-  return _internal_has_group_id();
-}
+// uint32 group_id = 3;
 inline void IMGroupChangeMemberNotify::clear_group_id() {
   group_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupChangeMemberNotify::_internal_group_id() const {
   return group_id_;
@@ -4210,7 +3778,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMGroupChangeMemberNotify::group_id() con
   return _internal_group_id();
 }
 inline void IMGroupChangeMemberNotify::_internal_set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   group_id_ = value;
 }
 inline void IMGroupChangeMemberNotify::set_group_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {

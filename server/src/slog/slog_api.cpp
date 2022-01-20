@@ -48,6 +48,7 @@ private:
 
 CLog4CXX::CLog4CXX(const char* module_name, int delay) : CSLogObject(module_name, delay)
 {
+    BasicConfigurator::configure();
     PropertyConfigurator::configureAndWatch("log4cxx.properties", delay);
     m_logger = Logger::getLogger(module_name);
 }

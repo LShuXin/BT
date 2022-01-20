@@ -8,7 +8,7 @@ protoc -I=$SRC_DIR --cpp_out=$DST_DIR/cpp/ $SRC_DIR/*.proto
 
 #JAVA
 mkdir -p $DST_DIR/java
-protoc -I=$SRC_DIR --java_out=$DST_DIR/java/ $SRC_DIR/*.proto
+protoc -I=$SRC_DIR --java_out=lite:$DST_DIR/java/ $SRC_DIR/*.proto
 
 #PYTHON
 mkdir -p $DST_DIR/python

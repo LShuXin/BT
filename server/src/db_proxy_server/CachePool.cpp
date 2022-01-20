@@ -138,7 +138,7 @@ string CacheConn::set(string key, string &value)
     
     redisReply* reply = (redisReply *)redisCommand(m_pContext, "SET %s %s", key.c_str(), value.c_str());
     if (!reply) {
-        log("redisCommand failed:%s", m_pContext->errstr);
+        log("redisCommand failed:%s (SET %s %s)", m_pContext->errstr,value.c_str());
         redisFree(m_pContext);
         m_pContext = NULL;
         return ret_value;
@@ -700,14 +700,14 @@ int CacheManager::Init()
 		char* str_cache_db = config_file.GetConfigName(db);
         char* str_max_conn_cnt = config_file.GetConfigName(maxconncnt);
 		if (!cache_host || !str_cache_port || !str_cache_db || !str_max_conn_cnt) {
-			log("not configure cache instance: %s", pool_name);
+			log("not configure cache instance: %s host:%s port:%s db:%s conn:%s", pool_name,cache_host,str_cache_port,str_cache_db,str_max_conn_cnt);
 			return 2;
 		}
 
 		CachePool* pCachePool = new CachePool(pool_name, cache_host, atoi(str_cache_port),
 				atoi(str_cache_db), atoi(str_max_conn_cnt));
 		if (pCachePool->Init()) {
-			log("Init cache pool failed");
+			log("Init cache pool failed: %s host:%s port:%s db:%s conn:%s", pool_name,cache_host,str_cache_port,str_cache_db,str_max_conn_cnt);
 			return 3;
 		}
 

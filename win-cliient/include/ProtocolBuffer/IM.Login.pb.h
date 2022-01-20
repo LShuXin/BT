@@ -137,13 +137,6 @@ class IMMsgServReq final :
     return *this;
   }
 
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
-  }
-
   static const IMMsgServReq& default_instance() {
     return *internal_default_instance();
   }
@@ -257,13 +250,6 @@ class IMMsgServRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMMsgServRsp& default_instance() {
@@ -380,11 +366,7 @@ class IMMsgServRsp final :
   std::string* _internal_mutable_backip_ip();
   public:
 
-  // required .IM.BaseDefine.ResultType result_code = 1;
-  bool has_result_code() const;
-  private:
-  bool _internal_has_result_code() const;
-  public:
+  // .IM.BaseDefine.ResultType result_code = 1;
   void clear_result_code();
   ::IM::BaseDefine::ResultType result_code() const;
   void set_result_code(::IM::BaseDefine::ResultType value);
@@ -452,13 +434,6 @@ class IMLoginReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMLoginReq& default_instance() {
@@ -540,11 +515,7 @@ class IMLoginReq final :
     kOnlineStatusFieldNumber = 3,
     kClientTypeFieldNumber = 4,
   };
-  // required string user_name = 1;
-  bool has_user_name() const;
-  private:
-  bool _internal_has_user_name() const;
-  public:
+  // string user_name = 1;
   void clear_user_name();
   const std::string& user_name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -558,11 +529,7 @@ class IMLoginReq final :
   std::string* _internal_mutable_user_name();
   public:
 
-  // required string password = 2;
-  bool has_password() const;
-  private:
-  bool _internal_has_password() const;
-  public:
+  // string password = 2;
   void clear_password();
   const std::string& password() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -594,11 +561,7 @@ class IMLoginReq final :
   std::string* _internal_mutable_client_version();
   public:
 
-  // required .IM.BaseDefine.UserStatType online_status = 3;
-  bool has_online_status() const;
-  private:
-  bool _internal_has_online_status() const;
-  public:
+  // .IM.BaseDefine.UserStatType online_status = 3;
   void clear_online_status();
   ::IM::BaseDefine::UserStatType online_status() const;
   void set_online_status(::IM::BaseDefine::UserStatType value);
@@ -607,11 +570,7 @@ class IMLoginReq final :
   void _internal_set_online_status(::IM::BaseDefine::UserStatType value);
   public:
 
-  // required .IM.BaseDefine.ClientType client_type = 4;
-  bool has_client_type() const;
-  private:
-  bool _internal_has_client_type() const;
-  public:
+  // .IM.BaseDefine.ClientType client_type = 4;
   void clear_client_type();
   ::IM::BaseDefine::ClientType client_type() const;
   void set_client_type(::IM::BaseDefine::ClientType value);
@@ -623,9 +582,6 @@ class IMLoginReq final :
   // @@protoc_insertion_point(class_scope:IM.Login.IMLoginReq)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -670,13 +626,6 @@ class IMLoginRes final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMLoginRes& default_instance() {
@@ -794,11 +743,7 @@ class IMLoginRes final :
       ::IM::BaseDefine::UserInfo* user_info);
   ::IM::BaseDefine::UserInfo* unsafe_arena_release_user_info();
 
-  // required uint32 server_time = 1;
-  bool has_server_time() const;
-  private:
-  bool _internal_has_server_time() const;
-  public:
+  // uint32 server_time = 1;
   void clear_server_time();
   ::PROTOBUF_NAMESPACE_ID::uint32 server_time() const;
   void set_server_time(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -807,11 +752,7 @@ class IMLoginRes final :
   void _internal_set_server_time(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required .IM.BaseDefine.ResultType result_code = 2;
-  bool has_result_code() const;
-  private:
-  bool _internal_has_result_code() const;
-  public:
+  // .IM.BaseDefine.ResultType result_code = 2;
   void clear_result_code();
   ::IM::BaseDefine::ResultType result_code() const;
   void set_result_code(::IM::BaseDefine::ResultType value);
@@ -836,9 +777,6 @@ class IMLoginRes final :
   // @@protoc_insertion_point(class_scope:IM.Login.IMLoginRes)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -883,13 +821,6 @@ class IMLogoutReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMLogoutReq& default_instance() {
@@ -1007,13 +938,6 @@ class IMLogoutRsp final :
     return *this;
   }
 
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
-  }
-
   static const IMLogoutRsp& default_instance() {
     return *internal_default_instance();
   }
@@ -1089,11 +1013,7 @@ class IMLogoutRsp final :
   enum : int {
     kResultCodeFieldNumber = 1,
   };
-  // required uint32 result_code = 1;
-  bool has_result_code() const;
-  private:
-  bool _internal_has_result_code() const;
-  public:
+  // uint32 result_code = 1;
   void clear_result_code();
   ::PROTOBUF_NAMESPACE_ID::uint32 result_code() const;
   void set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1109,9 +1029,8 @@ class IMLogoutRsp final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::uint32 result_code_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eLogin_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1145,13 +1064,6 @@ class IMKickUser final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMKickUser& default_instance() {
@@ -1230,11 +1142,7 @@ class IMKickUser final :
     kUserIdFieldNumber = 1,
     kKickReasonFieldNumber = 2,
   };
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1243,11 +1151,7 @@ class IMKickUser final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required .IM.BaseDefine.KickReasonType kick_reason = 2;
-  bool has_kick_reason() const;
-  private:
-  bool _internal_has_kick_reason() const;
-  public:
+  // .IM.BaseDefine.KickReasonType kick_reason = 2;
   void clear_kick_reason();
   ::IM::BaseDefine::KickReasonType kick_reason() const;
   void set_kick_reason(::IM::BaseDefine::KickReasonType value);
@@ -1260,16 +1164,12 @@ class IMKickUser final :
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
   int kick_reason_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eLogin_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1303,13 +1203,6 @@ class IMDeviceTokenReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMDeviceTokenReq& default_instance() {
@@ -1390,11 +1283,7 @@ class IMDeviceTokenReq final :
     kUserIdFieldNumber = 1,
     kClientTypeFieldNumber = 3,
   };
-  // required string device_token = 2;
-  bool has_device_token() const;
-  private:
-  bool _internal_has_device_token() const;
-  public:
+  // string device_token = 2;
   void clear_device_token();
   const std::string& device_token() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1426,11 +1315,7 @@ class IMDeviceTokenReq final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1455,9 +1340,6 @@ class IMDeviceTokenReq final :
   // @@protoc_insertion_point(class_scope:IM.Login.IMDeviceTokenReq)
  private:
   class _Internal;
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
@@ -1501,13 +1383,6 @@ class IMDeviceTokenRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMDeviceTokenRsp& default_instance() {
@@ -1604,11 +1479,7 @@ class IMDeviceTokenRsp final :
   std::string* _internal_mutable_attach_data();
   public:
 
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1661,13 +1532,6 @@ class IMKickPCClientReq final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMKickPCClientReq& default_instance() {
@@ -1745,11 +1609,7 @@ class IMKickPCClientReq final :
   enum : int {
     kUserIdFieldNumber = 1,
   };
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1765,9 +1625,8 @@ class IMKickPCClientReq final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eLogin_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1801,13 +1660,6 @@ class IMKickPCClientRsp final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const std::string& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
-  }
-  inline std::string* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
   static const IMKickPCClientRsp& default_instance() {
@@ -1886,11 +1738,7 @@ class IMKickPCClientRsp final :
     kUserIdFieldNumber = 1,
     kResultCodeFieldNumber = 2,
   };
-  // required uint32 user_id = 1;
-  bool has_user_id() const;
-  private:
-  bool _internal_has_user_id() const;
-  public:
+  // uint32 user_id = 1;
   void clear_user_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id() const;
   void set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1899,11 +1747,7 @@ class IMKickPCClientRsp final :
   void _internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // required uint32 result_code = 2;
-  bool has_result_code() const;
-  private:
-  bool _internal_has_result_code() const;
-  public:
+  // uint32 result_code = 2;
   void clear_result_code();
   ::PROTOBUF_NAMESPACE_ID::uint32 result_code() const;
   void set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1916,16 +1760,12 @@ class IMKickPCClientRsp final :
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::uint32 user_id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 result_code_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_IM_2eLogin_2eproto;
 };
 // ===================================================================
@@ -1943,17 +1783,9 @@ class IMKickPCClientRsp final :
 
 // IMMsgServRsp
 
-// required .IM.BaseDefine.ResultType result_code = 1;
-inline bool IMMsgServRsp::_internal_has_result_code() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMMsgServRsp::has_result_code() const {
-  return _internal_has_result_code();
-}
+// .IM.BaseDefine.ResultType result_code = 1;
 inline void IMMsgServRsp::clear_result_code() {
   result_code_ = 0;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::IM::BaseDefine::ResultType IMMsgServRsp::_internal_result_code() const {
   return static_cast< ::IM::BaseDefine::ResultType >(result_code_);
@@ -1963,8 +1795,7 @@ inline ::IM::BaseDefine::ResultType IMMsgServRsp::result_code() const {
   return _internal_result_code();
 }
 inline void IMMsgServRsp::_internal_set_result_code(::IM::BaseDefine::ResultType value) {
-  assert(::IM::BaseDefine::ResultType_IsValid(value));
-  _has_bits_[0] |= 0x00000004u;
+  
   result_code_ = value;
 }
 inline void IMMsgServRsp::set_result_code(::IM::BaseDefine::ResultType value) {
@@ -2090,7 +1921,7 @@ inline void IMMsgServRsp::set_allocated_backip_ip(std::string* backip_ip) {
 
 // optional uint32 port = 4;
 inline bool IMMsgServRsp::_internal_has_port() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
+  bool value = (_has_bits_[0] & 0x00000004u) != 0;
   return value;
 }
 inline bool IMMsgServRsp::has_port() const {
@@ -2098,7 +1929,7 @@ inline bool IMMsgServRsp::has_port() const {
 }
 inline void IMMsgServRsp::clear_port() {
   port_ = 0u;
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgServRsp::_internal_port() const {
   return port_;
@@ -2108,7 +1939,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMMsgServRsp::port() const {
   return _internal_port();
 }
 inline void IMMsgServRsp::_internal_set_port(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000004u;
   port_ = value;
 }
 inline void IMMsgServRsp::set_port(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2120,17 +1951,9 @@ inline void IMMsgServRsp::set_port(::PROTOBUF_NAMESPACE_ID::uint32 value) {
 
 // IMLoginReq
 
-// required string user_name = 1;
-inline bool IMLoginReq::_internal_has_user_name() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMLoginReq::has_user_name() const {
-  return _internal_has_user_name();
-}
+// string user_name = 1;
 inline void IMLoginReq::clear_user_name() {
   user_name_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMLoginReq::user_name() const {
   // @@protoc_insertion_point(field_get:IM.Login.IMLoginReq.user_name)
@@ -2139,7 +1962,7 @@ inline const std::string& IMLoginReq::user_name() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMLoginReq::set_user_name(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000001u;
+ 
  user_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.Login.IMLoginReq.user_name)
 }
@@ -2152,43 +1975,31 @@ inline const std::string& IMLoginReq::_internal_user_name() const {
   return user_name_.Get();
 }
 inline void IMLoginReq::_internal_set_user_name(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   user_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMLoginReq::_internal_mutable_user_name() {
-  _has_bits_[0] |= 0x00000001u;
+  
   return user_name_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMLoginReq::release_user_name() {
   // @@protoc_insertion_point(field_release:IM.Login.IMLoginReq.user_name)
-  if (!_internal_has_user_name()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return user_name_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return user_name_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMLoginReq::set_allocated_user_name(std::string* user_name) {
   if (user_name != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    
   }
   user_name_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), user_name,
       GetArenaForAllocation());
   // @@protoc_insertion_point(field_set_allocated:IM.Login.IMLoginReq.user_name)
 }
 
-// required string password = 2;
-inline bool IMLoginReq::_internal_has_password() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMLoginReq::has_password() const {
-  return _internal_has_password();
-}
+// string password = 2;
 inline void IMLoginReq::clear_password() {
   password_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& IMLoginReq::password() const {
   // @@protoc_insertion_point(field_get:IM.Login.IMLoginReq.password)
@@ -2197,7 +2008,7 @@ inline const std::string& IMLoginReq::password() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMLoginReq::set_password(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000002u;
+ 
  password_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.Login.IMLoginReq.password)
 }
@@ -2210,43 +2021,31 @@ inline const std::string& IMLoginReq::_internal_password() const {
   return password_.Get();
 }
 inline void IMLoginReq::_internal_set_password(const std::string& value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   password_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMLoginReq::_internal_mutable_password() {
-  _has_bits_[0] |= 0x00000002u;
+  
   return password_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMLoginReq::release_password() {
   // @@protoc_insertion_point(field_release:IM.Login.IMLoginReq.password)
-  if (!_internal_has_password()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000002u;
-  return password_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return password_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMLoginReq::set_allocated_password(std::string* password) {
   if (password != nullptr) {
-    _has_bits_[0] |= 0x00000002u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000002u;
+    
   }
   password_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), password,
       GetArenaForAllocation());
   // @@protoc_insertion_point(field_set_allocated:IM.Login.IMLoginReq.password)
 }
 
-// required .IM.BaseDefine.UserStatType online_status = 3;
-inline bool IMLoginReq::_internal_has_online_status() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMLoginReq::has_online_status() const {
-  return _internal_has_online_status();
-}
+// .IM.BaseDefine.UserStatType online_status = 3;
 inline void IMLoginReq::clear_online_status() {
-  online_status_ = 1;
-  _has_bits_[0] &= ~0x00000008u;
+  online_status_ = 0;
 }
 inline ::IM::BaseDefine::UserStatType IMLoginReq::_internal_online_status() const {
   return static_cast< ::IM::BaseDefine::UserStatType >(online_status_);
@@ -2256,8 +2055,7 @@ inline ::IM::BaseDefine::UserStatType IMLoginReq::online_status() const {
   return _internal_online_status();
 }
 inline void IMLoginReq::_internal_set_online_status(::IM::BaseDefine::UserStatType value) {
-  assert(::IM::BaseDefine::UserStatType_IsValid(value));
-  _has_bits_[0] |= 0x00000008u;
+  
   online_status_ = value;
 }
 inline void IMLoginReq::set_online_status(::IM::BaseDefine::UserStatType value) {
@@ -2265,17 +2063,9 @@ inline void IMLoginReq::set_online_status(::IM::BaseDefine::UserStatType value) 
   // @@protoc_insertion_point(field_set:IM.Login.IMLoginReq.online_status)
 }
 
-// required .IM.BaseDefine.ClientType client_type = 4;
-inline bool IMLoginReq::_internal_has_client_type() const {
-  bool value = (_has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool IMLoginReq::has_client_type() const {
-  return _internal_has_client_type();
-}
+// .IM.BaseDefine.ClientType client_type = 4;
 inline void IMLoginReq::clear_client_type() {
-  client_type_ = 1;
-  _has_bits_[0] &= ~0x00000010u;
+  client_type_ = 0;
 }
 inline ::IM::BaseDefine::ClientType IMLoginReq::_internal_client_type() const {
   return static_cast< ::IM::BaseDefine::ClientType >(client_type_);
@@ -2285,8 +2075,7 @@ inline ::IM::BaseDefine::ClientType IMLoginReq::client_type() const {
   return _internal_client_type();
 }
 inline void IMLoginReq::_internal_set_client_type(::IM::BaseDefine::ClientType value) {
-  assert(::IM::BaseDefine::ClientType_IsValid(value));
-  _has_bits_[0] |= 0x00000010u;
+  
   client_type_ = value;
 }
 inline void IMLoginReq::set_client_type(::IM::BaseDefine::ClientType value) {
@@ -2296,7 +2085,7 @@ inline void IMLoginReq::set_client_type(::IM::BaseDefine::ClientType value) {
 
 // optional string client_version = 5;
 inline bool IMLoginReq::_internal_has_client_version() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
+  bool value = (_has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
 inline bool IMLoginReq::has_client_version() const {
@@ -2304,7 +2093,7 @@ inline bool IMLoginReq::has_client_version() const {
 }
 inline void IMLoginReq::clear_client_version() {
   client_version_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMLoginReq::client_version() const {
   // @@protoc_insertion_point(field_get:IM.Login.IMLoginReq.client_version)
@@ -2313,7 +2102,7 @@ inline const std::string& IMLoginReq::client_version() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMLoginReq::set_client_version(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000004u;
+ _has_bits_[0] |= 0x00000001u;
  client_version_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.Login.IMLoginReq.client_version)
 }
@@ -2326,11 +2115,11 @@ inline const std::string& IMLoginReq::_internal_client_version() const {
   return client_version_.Get();
 }
 inline void IMLoginReq::_internal_set_client_version(const std::string& value) {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000001u;
   client_version_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMLoginReq::_internal_mutable_client_version() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000001u;
   return client_version_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMLoginReq::release_client_version() {
@@ -2338,14 +2127,14 @@ inline std::string* IMLoginReq::release_client_version() {
   if (!_internal_has_client_version()) {
     return nullptr;
   }
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000001u;
   return client_version_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMLoginReq::set_allocated_client_version(std::string* client_version) {
   if (client_version != nullptr) {
-    _has_bits_[0] |= 0x00000004u;
+    _has_bits_[0] |= 0x00000001u;
   } else {
-    _has_bits_[0] &= ~0x00000004u;
+    _has_bits_[0] &= ~0x00000001u;
   }
   client_version_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), client_version,
       GetArenaForAllocation());
@@ -2356,17 +2145,9 @@ inline void IMLoginReq::set_allocated_client_version(std::string* client_version
 
 // IMLoginRes
 
-// required uint32 server_time = 1;
-inline bool IMLoginRes::_internal_has_server_time() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMLoginRes::has_server_time() const {
-  return _internal_has_server_time();
-}
+// uint32 server_time = 1;
 inline void IMLoginRes::clear_server_time() {
   server_time_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMLoginRes::_internal_server_time() const {
   return server_time_;
@@ -2376,7 +2157,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMLoginRes::server_time() const {
   return _internal_server_time();
 }
 inline void IMLoginRes::_internal_set_server_time(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   server_time_ = value;
 }
 inline void IMLoginRes::set_server_time(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2384,17 +2165,9 @@ inline void IMLoginRes::set_server_time(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:IM.Login.IMLoginRes.server_time)
 }
 
-// required .IM.BaseDefine.ResultType result_code = 2;
-inline bool IMLoginRes::_internal_has_result_code() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool IMLoginRes::has_result_code() const {
-  return _internal_has_result_code();
-}
+// .IM.BaseDefine.ResultType result_code = 2;
 inline void IMLoginRes::clear_result_code() {
   result_code_ = 0;
-  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::IM::BaseDefine::ResultType IMLoginRes::_internal_result_code() const {
   return static_cast< ::IM::BaseDefine::ResultType >(result_code_);
@@ -2404,8 +2177,7 @@ inline ::IM::BaseDefine::ResultType IMLoginRes::result_code() const {
   return _internal_result_code();
 }
 inline void IMLoginRes::_internal_set_result_code(::IM::BaseDefine::ResultType value) {
-  assert(::IM::BaseDefine::ResultType_IsValid(value));
-  _has_bits_[0] |= 0x00000008u;
+  
   result_code_ = value;
 }
 inline void IMLoginRes::set_result_code(::IM::BaseDefine::ResultType value) {
@@ -2473,15 +2245,15 @@ inline void IMLoginRes::set_allocated_result_string(std::string* result_string) 
 
 // optional .IM.BaseDefine.UserStatType online_status = 4;
 inline bool IMLoginRes::_internal_has_online_status() const {
-  bool value = (_has_bits_[0] & 0x00000010u) != 0;
+  bool value = (_has_bits_[0] & 0x00000004u) != 0;
   return value;
 }
 inline bool IMLoginRes::has_online_status() const {
   return _internal_has_online_status();
 }
 inline void IMLoginRes::clear_online_status() {
-  online_status_ = 1;
-  _has_bits_[0] &= ~0x00000010u;
+  online_status_ = 0;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::IM::BaseDefine::UserStatType IMLoginRes::_internal_online_status() const {
   return static_cast< ::IM::BaseDefine::UserStatType >(online_status_);
@@ -2491,8 +2263,7 @@ inline ::IM::BaseDefine::UserStatType IMLoginRes::online_status() const {
   return _internal_online_status();
 }
 inline void IMLoginRes::_internal_set_online_status(::IM::BaseDefine::UserStatType value) {
-  assert(::IM::BaseDefine::UserStatType_IsValid(value));
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000004u;
   online_status_ = value;
 }
 inline void IMLoginRes::set_online_status(::IM::BaseDefine::UserStatType value) {
@@ -2596,17 +2367,9 @@ inline void IMLoginRes::set_allocated_user_info(::IM::BaseDefine::UserInfo* user
 
 // IMLogoutRsp
 
-// required uint32 result_code = 1;
-inline bool IMLogoutRsp::_internal_has_result_code() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMLogoutRsp::has_result_code() const {
-  return _internal_has_result_code();
-}
+// uint32 result_code = 1;
 inline void IMLogoutRsp::clear_result_code() {
   result_code_ = 0u;
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMLogoutRsp::_internal_result_code() const {
   return result_code_;
@@ -2616,7 +2379,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMLogoutRsp::result_code() const {
   return _internal_result_code();
 }
 inline void IMLogoutRsp::_internal_set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   result_code_ = value;
 }
 inline void IMLogoutRsp::set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2628,17 +2391,9 @@ inline void IMLogoutRsp::set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) 
 
 // IMKickUser
 
-// required uint32 user_id = 1;
-inline bool IMKickUser::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMKickUser::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMKickUser::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMKickUser::_internal_user_id() const {
   return user_id_;
@@ -2648,7 +2403,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMKickUser::user_id() const {
   return _internal_user_id();
 }
 inline void IMKickUser::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   user_id_ = value;
 }
 inline void IMKickUser::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2656,17 +2411,9 @@ inline void IMKickUser::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:IM.Login.IMKickUser.user_id)
 }
 
-// required .IM.BaseDefine.KickReasonType kick_reason = 2;
-inline bool IMKickUser::_internal_has_kick_reason() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMKickUser::has_kick_reason() const {
-  return _internal_has_kick_reason();
-}
+// .IM.BaseDefine.KickReasonType kick_reason = 2;
 inline void IMKickUser::clear_kick_reason() {
-  kick_reason_ = 1;
-  _has_bits_[0] &= ~0x00000002u;
+  kick_reason_ = 0;
 }
 inline ::IM::BaseDefine::KickReasonType IMKickUser::_internal_kick_reason() const {
   return static_cast< ::IM::BaseDefine::KickReasonType >(kick_reason_);
@@ -2676,8 +2423,7 @@ inline ::IM::BaseDefine::KickReasonType IMKickUser::kick_reason() const {
   return _internal_kick_reason();
 }
 inline void IMKickUser::_internal_set_kick_reason(::IM::BaseDefine::KickReasonType value) {
-  assert(::IM::BaseDefine::KickReasonType_IsValid(value));
-  _has_bits_[0] |= 0x00000002u;
+  
   kick_reason_ = value;
 }
 inline void IMKickUser::set_kick_reason(::IM::BaseDefine::KickReasonType value) {
@@ -2689,17 +2435,9 @@ inline void IMKickUser::set_kick_reason(::IM::BaseDefine::KickReasonType value) 
 
 // IMDeviceTokenReq
 
-// required uint32 user_id = 1;
-inline bool IMDeviceTokenReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool IMDeviceTokenReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMDeviceTokenReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMDeviceTokenReq::_internal_user_id() const {
   return user_id_;
@@ -2709,7 +2447,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMDeviceTokenReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMDeviceTokenReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  
   user_id_ = value;
 }
 inline void IMDeviceTokenReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2717,17 +2455,9 @@ inline void IMDeviceTokenReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value)
   // @@protoc_insertion_point(field_set:IM.Login.IMDeviceTokenReq.user_id)
 }
 
-// required string device_token = 2;
-inline bool IMDeviceTokenReq::_internal_has_device_token() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMDeviceTokenReq::has_device_token() const {
-  return _internal_has_device_token();
-}
+// string device_token = 2;
 inline void IMDeviceTokenReq::clear_device_token() {
   device_token_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMDeviceTokenReq::device_token() const {
   // @@protoc_insertion_point(field_get:IM.Login.IMDeviceTokenReq.device_token)
@@ -2736,7 +2466,7 @@ inline const std::string& IMDeviceTokenReq::device_token() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMDeviceTokenReq::set_device_token(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000001u;
+ 
  device_token_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.Login.IMDeviceTokenReq.device_token)
 }
@@ -2749,26 +2479,22 @@ inline const std::string& IMDeviceTokenReq::_internal_device_token() const {
   return device_token_.Get();
 }
 inline void IMDeviceTokenReq::_internal_set_device_token(const std::string& value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   device_token_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMDeviceTokenReq::_internal_mutable_device_token() {
-  _has_bits_[0] |= 0x00000001u;
+  
   return device_token_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMDeviceTokenReq::release_device_token() {
   // @@protoc_insertion_point(field_release:IM.Login.IMDeviceTokenReq.device_token)
-  if (!_internal_has_device_token()) {
-    return nullptr;
-  }
-  _has_bits_[0] &= ~0x00000001u;
-  return device_token_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+  return device_token_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMDeviceTokenReq::set_allocated_device_token(std::string* device_token) {
   if (device_token != nullptr) {
-    _has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _has_bits_[0] &= ~0x00000001u;
+    
   }
   device_token_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), device_token,
       GetArenaForAllocation());
@@ -2777,15 +2503,15 @@ inline void IMDeviceTokenReq::set_allocated_device_token(std::string* device_tok
 
 // optional .IM.BaseDefine.ClientType client_type = 3;
 inline bool IMDeviceTokenReq::_internal_has_client_type() const {
-  bool value = (_has_bits_[0] & 0x00000008u) != 0;
+  bool value = (_has_bits_[0] & 0x00000002u) != 0;
   return value;
 }
 inline bool IMDeviceTokenReq::has_client_type() const {
   return _internal_has_client_type();
 }
 inline void IMDeviceTokenReq::clear_client_type() {
-  client_type_ = 1;
-  _has_bits_[0] &= ~0x00000008u;
+  client_type_ = 0;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::IM::BaseDefine::ClientType IMDeviceTokenReq::_internal_client_type() const {
   return static_cast< ::IM::BaseDefine::ClientType >(client_type_);
@@ -2795,8 +2521,7 @@ inline ::IM::BaseDefine::ClientType IMDeviceTokenReq::client_type() const {
   return _internal_client_type();
 }
 inline void IMDeviceTokenReq::_internal_set_client_type(::IM::BaseDefine::ClientType value) {
-  assert(::IM::BaseDefine::ClientType_IsValid(value));
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000002u;
   client_type_ = value;
 }
 inline void IMDeviceTokenReq::set_client_type(::IM::BaseDefine::ClientType value) {
@@ -2806,7 +2531,7 @@ inline void IMDeviceTokenReq::set_client_type(::IM::BaseDefine::ClientType value
 
 // optional bytes attach_data = 20;
 inline bool IMDeviceTokenReq::_internal_has_attach_data() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
+  bool value = (_has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
 inline bool IMDeviceTokenReq::has_attach_data() const {
@@ -2814,7 +2539,7 @@ inline bool IMDeviceTokenReq::has_attach_data() const {
 }
 inline void IMDeviceTokenReq::clear_attach_data() {
   attach_data_.ClearToEmpty();
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& IMDeviceTokenReq::attach_data() const {
   // @@protoc_insertion_point(field_get:IM.Login.IMDeviceTokenReq.attach_data)
@@ -2823,7 +2548,7 @@ inline const std::string& IMDeviceTokenReq::attach_data() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void IMDeviceTokenReq::set_attach_data(ArgT0&& arg0, ArgT... args) {
- _has_bits_[0] |= 0x00000002u;
+ _has_bits_[0] |= 0x00000001u;
  attach_data_.SetBytes(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:IM.Login.IMDeviceTokenReq.attach_data)
 }
@@ -2836,11 +2561,11 @@ inline const std::string& IMDeviceTokenReq::_internal_attach_data() const {
   return attach_data_.Get();
 }
 inline void IMDeviceTokenReq::_internal_set_attach_data(const std::string& value) {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000001u;
   attach_data_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
 }
 inline std::string* IMDeviceTokenReq::_internal_mutable_attach_data() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000001u;
   return attach_data_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
 }
 inline std::string* IMDeviceTokenReq::release_attach_data() {
@@ -2848,14 +2573,14 @@ inline std::string* IMDeviceTokenReq::release_attach_data() {
   if (!_internal_has_attach_data()) {
     return nullptr;
   }
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
   return attach_data_.ReleaseNonDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
 }
 inline void IMDeviceTokenReq::set_allocated_attach_data(std::string* attach_data) {
   if (attach_data != nullptr) {
-    _has_bits_[0] |= 0x00000002u;
+    _has_bits_[0] |= 0x00000001u;
   } else {
-    _has_bits_[0] &= ~0x00000002u;
+    _has_bits_[0] &= ~0x00000001u;
   }
   attach_data_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), attach_data,
       GetArenaForAllocation());
@@ -2866,17 +2591,9 @@ inline void IMDeviceTokenReq::set_allocated_attach_data(std::string* attach_data
 
 // IMDeviceTokenRsp
 
-// required uint32 user_id = 1;
-inline bool IMDeviceTokenRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMDeviceTokenRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMDeviceTokenRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMDeviceTokenRsp::_internal_user_id() const {
   return user_id_;
@@ -2886,7 +2603,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMDeviceTokenRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMDeviceTokenRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   user_id_ = value;
 }
 inline void IMDeviceTokenRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2956,17 +2673,9 @@ inline void IMDeviceTokenRsp::set_allocated_attach_data(std::string* attach_data
 
 // IMKickPCClientReq
 
-// required uint32 user_id = 1;
-inline bool IMKickPCClientReq::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMKickPCClientReq::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMKickPCClientReq::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMKickPCClientReq::_internal_user_id() const {
   return user_id_;
@@ -2976,7 +2685,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMKickPCClientReq::user_id() const {
   return _internal_user_id();
 }
 inline void IMKickPCClientReq::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   user_id_ = value;
 }
 inline void IMKickPCClientReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -2988,17 +2697,9 @@ inline void IMKickPCClientReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value
 
 // IMKickPCClientRsp
 
-// required uint32 user_id = 1;
-inline bool IMKickPCClientRsp::_internal_has_user_id() const {
-  bool value = (_has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool IMKickPCClientRsp::has_user_id() const {
-  return _internal_has_user_id();
-}
+// uint32 user_id = 1;
 inline void IMKickPCClientRsp::clear_user_id() {
   user_id_ = 0u;
-  _has_bits_[0] &= ~0x00000001u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMKickPCClientRsp::_internal_user_id() const {
   return user_id_;
@@ -3008,7 +2709,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMKickPCClientRsp::user_id() const {
   return _internal_user_id();
 }
 inline void IMKickPCClientRsp::_internal_set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000001u;
+  
   user_id_ = value;
 }
 inline void IMKickPCClientRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
@@ -3016,17 +2717,9 @@ inline void IMKickPCClientRsp::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value
   // @@protoc_insertion_point(field_set:IM.Login.IMKickPCClientRsp.user_id)
 }
 
-// required uint32 result_code = 2;
-inline bool IMKickPCClientRsp::_internal_has_result_code() const {
-  bool value = (_has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool IMKickPCClientRsp::has_result_code() const {
-  return _internal_has_result_code();
-}
+// uint32 result_code = 2;
 inline void IMKickPCClientRsp::clear_result_code() {
   result_code_ = 0u;
-  _has_bits_[0] &= ~0x00000002u;
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint32 IMKickPCClientRsp::_internal_result_code() const {
   return result_code_;
@@ -3036,7 +2729,7 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 IMKickPCClientRsp::result_code() const {
   return _internal_result_code();
 }
 inline void IMKickPCClientRsp::_internal_set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _has_bits_[0] |= 0x00000002u;
+  
   result_code_ = value;
 }
 inline void IMKickPCClientRsp::set_result_code(::PROTOBUF_NAMESPACE_ID::uint32 value) {

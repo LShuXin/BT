@@ -31,45 +31,70 @@ function monitor() {
         return
     fi
     echo $$ > monitor.pid
-
-    if [ -e server.pid ]; then
-        while true
-        do
-            pid=`cat server.pid`  # get pid
-            process_count=`ps aux|grep $1|grep $pid|wc -l`
-            if [ $process_count == 0 ]
-            then
-                # send a SMS
-                sendSMS
-                # add log
-                date >> restart.log
-                echo "server stopped, pid=$pid, process_cnt=$process_count" >> restart.log
-                # restart server
-                ../daeml ./$1
-            fi
-            sleep 15
-        done
-    fi
+    local dot="."
+    while true
+    do
+        if [ -e server.pid ]; then
+            echo -e "\033[32m $1 ==> START SUCCESSFUL ... \033[0m"
+            while true
+            do
+                pid=`cat server.pid`  # get pid
+                process_count=`ps aux|grep $1|grep $pid|wc -l`
+                if [ $process_count == 0 ]
+                then
+                    # send a SMS
+                    sendSMS
+                    # add log
+                    date >> restart.log
+                    echo "server stopped, pid=$pid, process_cnt=$process_count" >> restart.log
+                    # restart server
+                    if [ "$2" == "log" ]; then
+                        ./$1
+                    else
+                        ../daeml ./$1
+                    fi
+                fi
+                sleep 15
+            done
+        else          
+            printf "%s %s\r" "$1=>Wait for start" "$dot"
+            dot+="."
+        fi
+        sleep 1
+    done
+    echo "$1=>Quit"
 }
 
 case $1 in
     login_server)
-        monitor $1
+        monitor $1 $2
         ;;
     msg_server)
-        monitor $1
+        monitor $1 $2
         ;;
     route_server)
-        monitor $1
+        monitor $1 $2
         ;;
     http_msg_server)
-        monitor $1
+        monitor $1 $2
+        ;;
+    db_proxy_server)
+        monitor $1 $2
+        ;;
+    file_server)
+        monitor $1 $2
+        ;;
+    push_server)
+        monitor $1 $2
+        ;;
+    msfs)
+        monitor $1 $2
         ;;
     test)
         sendSMS
         ;;
     *)
         echo "Usage: "
-        echo "  ./monitor.sh (login_server|msg_server|route_server|http_msg_server|db_proxy_server|test )"
+        echo "  ./monitor.sh (login_server|msg_server|route_server|http_msg_server|db_proxy_server|file_server|push_server|msfs|test ) [log]"
         ;;
 esac

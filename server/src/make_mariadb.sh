@@ -3,11 +3,11 @@
 # date: 03/24/2015
 
 MARIADB_DEVEL=MariaDB-10.0.17-centos6-x86_64-devel
-MARIADB_DEVEL_DOWNLOAD_PATH=http://sfo1.mirrors.digitalocean.com/mariadb/mariadb-10.0.17/yum/centos6-amd64/rpms/$MARIADB_DEVEL.rpm
+MARIADB_DEVEL_DOWNLOAD_PATH=https://archive.mariadb.org/mariadb-10.0.17/yum/rhel6-amd64/rpms/$MARIADB_DEVEL.rpm
 MARIADB_COMMON=MariaDB-10.0.17-centos6-x86_64-common
-MARIADB_COMMON_DOWNLOAD_PATH=http://sfo1.mirrors.digitalocean.com/mariadb/mariadb-10.0.17/yum/centos6-amd64/rpms/$MARIADB_COMMON.rpm
+MARIADB_COMMON_DOWNLOAD_PATH=https://archive.mariadb.org/mariadb-10.0.17/yum/rhel6-amd64/rpms/$MARIADB_COMMON.rpm
 MARIADB_COMPAT=MariaDB-10.0.17-centos6-x86_64-compat
-MARIADB_COMPAT_DOWNLOAD_PATH=http://sfo1.mirrors.digitalocean.com/mariadb/mariadb-10.0.17/yum/centos6-amd64/rpms/$MARIADB_COMPAT.rpm
+MARIADB_COMPAT_DOWNLOAD_PATH=https://archive.mariadb.org/mariadb-10.0.17/yum/rhel6-amd64/rpms/$MARIADB_COMPAT.rpm
 CUR_DIR=
 
 check_user() {
@@ -71,7 +71,7 @@ download() {
         echo "$1 existed."
     else
         echo "$1 not existed, begin to download..."
-        wget $2
+        wget -c $2
         if [ $? -eq 0 ]; then
             echo "download $1 successed";
         else
@@ -84,10 +84,12 @@ download() {
 
 build_mariadb_devel(){
     CENTOS_VERSION=$(less /etc/redhat-release)
-    #echo "$OS_VERSION, $OS_BIT bit..." 
-    if [[ $CENTOS_VERSION =~ "7.0" ]]; then
-        yum -y install mariadb-devel
+    local VERSION_ID=`grep "VERSION_ID" /etc/os-release | cut -f 2 -d '='`
+    local NumOnly=$(cut -f2 <<< "$VERSION_ID")
+    if [ NumOnly>7 ]; then
+        yum -y install openssl-devel mariadb-devel mariadb-common 
     else
+    # centos:7 需要编译安装
         download $MARIADB_DEVEL.rpm $MARIADB_DEVEL_DOWNLOAD_PATH
         if [ $? -eq 1 ]; then
             return 1
@@ -102,10 +104,7 @@ build_mariadb_devel(){
         if [ $? -eq 1 ]; then
             return 1
         fi
-
         yum -y install openssl-devel
-
-
         rpm -ivh MariaDB-*
         RET=$?
         if [ $RET -eq 0 ]; then

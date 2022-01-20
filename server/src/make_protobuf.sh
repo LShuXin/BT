@@ -2,9 +2,24 @@
 # author: luoning
 # date: 03/25/2015
 
-PROTOBUF=protobuf-2.6.1
+PROTOBUF=protobuf-3.18.0
+PROTOBUF_PATH=https://github.com/protocolbuffers/protobuf/archive/refs/tags/v3.18.0.tar.gz
 CUR_DIR=
-
+download() {
+    if [ -f "$1" ]; then
+        echo "$1 existed."
+    else
+        echo "$1 not existed, begin to download..."
+        wget -c $2 -O $PROTOBUF.tar.gz
+        if [ $? -eq 0 ]; then
+            echo "download $1 successed";
+        else
+            echo "Error: download $1 failed";
+            return 1;
+        fi
+    fi
+    return 0
+}
 check_user() {
     if [ $(id -u) != "0" ]; then
         echo "Error: You must be root to run this script, please use root to install im"
@@ -63,15 +78,17 @@ get_cur_dir() {
 
 build_protobuf(){
     cd protobuf
+    download $PROTOBUF.tar.gz $PROTOBUF_PATH
     tar -xf $PROTOBUF.tar.gz
     cd $PROTOBUF
-    ./configure --prefix=$CUR_DIR/protobuf
-    make
+    sh autogen.sh
+    ./configure --prefix=/usr/local/protobuf
+    make -j4
     make install
     cd ..
     mkdir -p ../base/pb/lib/linux/
-    cp lib/libprotobuf-lite.a ../base/pb/lib/linux/
-    cp  -r include/* ../base/pb/
+    cp /usr/local/protobuf/lib/libprotobuf-lite.a ../base/pb/lib/linux/
+    cp  -r /usr/local/protobuf/include/* ../base/pb/
 }
 
 check_user
