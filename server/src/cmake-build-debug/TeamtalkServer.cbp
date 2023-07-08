@@ -1,0 +1,1426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="TeamtalkServer"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="clang"/>
+		<Option virtualFolders="CMake Files\;CMake Files\base\;CMake Files\slog\;CMake Files\db_proxy_server\;CMake Files\file_server\;CMake Files\login_server\;CMake Files\msfs\;CMake Files\msg_server\;CMake Files\http_msg_server\;CMake Files\push_server\;CMake Files\route_server\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="slog">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/slog/libslog.dylib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/slog"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/slog/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/slog/./include"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/slog/./include/log4cxx"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/slog/Makefile&quot;  VERBOSE=1 slog"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/slog/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/slog/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/slog/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="slog/fast">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/slog/libslog.dylib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/slog"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/slog/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/slog/./include"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/slog/./include/log4cxx"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/slog/Makefile&quot;  VERBOSE=1 slog/fast"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/slog/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/slog/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/slog/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="base">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/base/libbase.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/base"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/base/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/base/.."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/base/./jsoncpp"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/base/./pb"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/base/./pb/protocol"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/base/Makefile&quot;  VERBOSE=1 base"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/base/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/base/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/base/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="base/fast">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/base/libbase.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/base"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/base/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/base/.."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/base/./jsoncpp"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/base/./pb"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/base/./pb/protocol"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/base/Makefile&quot;  VERBOSE=1 base/fast"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/base/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/base/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/base/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="db_proxy_server">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/db_proxy_server/db_proxy_server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add option="-DENCRYPT"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/./businiess"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/../base"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/../base/jsoncpp"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/../base/pb/protocol"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/../base/pb"/>
+					<Add directory="/usr/local/mysql/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/db_proxy_server/Makefile&quot;  VERBOSE=1 db_proxy_server"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/db_proxy_server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/db_proxy_server/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/db_proxy_server/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="db_proxy_server/fast">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/db_proxy_server/db_proxy_server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add option="-DENCRYPT"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/./businiess"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/../base"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/../base/jsoncpp"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/../base/pb/protocol"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/../base/pb"/>
+					<Add directory="/usr/local/mysql/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/db_proxy_server/Makefile&quot;  VERBOSE=1 db_proxy_server/fast"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/db_proxy_server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/db_proxy_server/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/db_proxy_server/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="file_server">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/file_server/file_server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/file_server/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/file_server/.."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/file_server/../base"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/file_server/../base/pb/protocol"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/file_server/../base/pb"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/file_server/Makefile&quot;  VERBOSE=1 file_server"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/file_server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/file_server/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/file_server/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="file_server/fast">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/file_server/file_server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/file_server/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/file_server/.."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/file_server/../base"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/file_server/../base/pb/protocol"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/file_server/../base/pb"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/file_server/Makefile&quot;  VERBOSE=1 file_server/fast"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/file_server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/file_server/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/file_server/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="login_server">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/login_server/login_server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/login_server/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/login_server/../base"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/login_server/../base/pb/protocol"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/login_server/../base/jsoncpp"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/login_server/../base/pb"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/login_server/Makefile&quot;  VERBOSE=1 login_server"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/login_server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/login_server/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/login_server/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="login_server/fast">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/login_server/login_server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/login_server/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/login_server/../base"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/login_server/../base/pb/protocol"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/login_server/../base/jsoncpp"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/login_server/../base/pb"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/login_server/Makefile&quot;  VERBOSE=1 login_server/fast"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/login_server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/login_server/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/login_server/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="msfs">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msfs/msfs" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/msfs/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/msfs/../base"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msfs/Makefile&quot;  VERBOSE=1 msfs"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msfs/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msfs/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msfs/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="msfs/fast">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msfs/msfs" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/msfs/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/msfs/../base"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msfs/Makefile&quot;  VERBOSE=1 msfs/fast"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msfs/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msfs/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msfs/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="msg_server">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msg_server/msg_server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/msg_server/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/msg_server/../base"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/msg_server/../base/pb/protocol"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/msg_server/../base/pb"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/msg_server/../base/security"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msg_server/Makefile&quot;  VERBOSE=1 msg_server"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msg_server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msg_server/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msg_server/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="msg_server/fast">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msg_server/msg_server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/msg_server/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/msg_server/../base"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/msg_server/../base/pb/protocol"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/msg_server/../base/pb"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/msg_server/../base/security"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msg_server/Makefile&quot;  VERBOSE=1 msg_server/fast"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msg_server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msg_server/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/msg_server/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="http_msg_server">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/http_msg_server/http_msg_server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add option="-DENCRYPT"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/../base"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/../base/jsoncpp"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/../base/pb/protocol"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/../base/pb"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/http_msg_server/Makefile&quot;  VERBOSE=1 http_msg_server"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/http_msg_server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/http_msg_server/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/http_msg_server/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="http_msg_server/fast">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/http_msg_server/http_msg_server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add option="-DENCRYPT"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/../base"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/../base/jsoncpp"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/../base/pb/protocol"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/../base/pb"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/http_msg_server/Makefile&quot;  VERBOSE=1 http_msg_server/fast"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/http_msg_server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/http_msg_server/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/http_msg_server/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="push_server">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/push_server/push_server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/push_server/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/push_server/../base/pb/protocol"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/push_server/../base/pb"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/push_server/../base/slog"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/push_server/Makefile&quot;  VERBOSE=1 push_server"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/push_server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/push_server/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/push_server/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="push_server/fast">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/push_server/push_server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/push_server/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/push_server/../base/pb/protocol"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/push_server/../base/pb"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/push_server/../base/slog"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/push_server/Makefile&quot;  VERBOSE=1 push_server/fast"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/push_server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/push_server/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/push_server/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="route_server">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/route_server/route_server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/route_server/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/route_server/../base"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/route_server/../base/pb/protocol"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/route_server/../base/jsoncpp"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/route_server/../base/pb"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/route_server/../base/pb/lib/mac"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/route_server/Makefile&quot;  VERBOSE=1 route_server"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/route_server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/route_server/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/route_server/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="route_server/fast">
+				<Option output="/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/route_server/route_server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add option="-D_REENTRANT"/>
+					<Add option="-D_FILE_OFFSET_BITS=64"/>
+					<Add option="-DAC_HAS_INFO"/>
+					<Add option="-DAC_HAS_WARNING"/>
+					<Add option="-DAC_HAS_ERROR"/>
+					<Add option="-DAC_HAS_CRITICAL"/>
+					<Add option="-DTIXML_USE_STL"/>
+					<Add option="-DAC_HAS_DEBUG"/>
+					<Add option="-DLINUX_DAEMON"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/route_server/."/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/route_server/../base"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/route_server/../base/pb/protocol"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/route_server/../base/jsoncpp"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/route_server/../base/pb"/>
+					<Add directory="/Users/apple/Desktop/TeamTalk/server/src/route_server/../base/pb/lib/mac"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/route_server/Makefile&quot;  VERBOSE=1 route_server/fast"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/route_server/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/route_server/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug/route_server/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/Base64.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/Base64.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/BaseSocket.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/BaseSocket.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/Condition.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/Condition.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/ConfigFileReader.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/ConfigFileReader.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/EncDec.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/EncDec.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/EventDispatch.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/EventDispatch.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/HttpClient.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/HttpClient.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/HttpParserWrapper.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/HttpParserWrapper.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/ImPduBase.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/ImPduBase.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/Lock.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/Lock.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/ServInfo.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/ServInfo.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/Thread.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/Thread.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/ThreadPool.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/ThreadPool.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/TokenValidator.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/TokenValidator.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/UtilPdu.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/UtilPdu.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/http_parser.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/http_parser.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/imconn.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/imconn.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/jsoncpp/json_reader.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/jsoncpp/json_value.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/jsoncpp/json_writer.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/log4z.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/log4z.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/netlib.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/netlib.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/pb/protocol/IM.BaseDefine.pb.cc">
+			<Option target="base"/>
+			<Option target="file_server"/>
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/pb/protocol/IM.Buddy.pb.cc">
+			<Option target="base"/>
+			<Option target="file_server"/>
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/pb/protocol/IM.File.pb.cc">
+			<Option target="base"/>
+			<Option target="file_server"/>
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/pb/protocol/IM.Group.pb.cc">
+			<Option target="base"/>
+			<Option target="file_server"/>
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/pb/protocol/IM.Internal.pb.cc">
+			<Option target="base"/>
+			<Option target="file_server"/>
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/pb/protocol/IM.Login.pb.cc">
+			<Option target="base"/>
+			<Option target="file_server"/>
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/pb/protocol/IM.Message.pb.cc">
+			<Option target="base"/>
+			<Option target="file_server"/>
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/pb/protocol/IM.Other.pb.cc">
+			<Option target="base"/>
+			<Option target="file_server"/>
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/pb/protocol/IM.Server.pb.cc">
+			<Option target="base"/>
+			<Option target="file_server"/>
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/pb/protocol/IM.SwitchService.pb.cc">
+			<Option target="base"/>
+			<Option target="file_server"/>
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/util.cpp">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/util.h">
+			<Option target="base"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/AutoPool.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/AutoPool.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/CachePool.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/CachePool.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/DBPool.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/DBPool.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/HandlerMap.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/HandlerMap.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/ProxyConn.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/ProxyConn.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/ProxyTask.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/ProxyTask.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/SyncCenter.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/SyncCenter.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/AudioModel.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/AudioModel.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/DepartAction.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/DepartAction.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/DepartModel.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/DepartModel.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/ExterLogin.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/ExterLogin.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/FileAction.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/FileAction.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/FileModel.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/FileModel.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/GroupAction.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/GroupAction.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/GroupMessageModel.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/GroupMessageModel.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/GroupModel.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/GroupModel.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/InterLogin.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/InterLogin.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/Login.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/Login.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/MessageContent.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/MessageContent.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/MessageCounter.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/MessageCounter.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/MessageModel.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/MessageModel.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/RecentSession.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/RecentSession.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/RelationModel.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/RelationModel.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/SessionModel.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/SessionModel.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/UserAction.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/UserAction.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/UserModel.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/business/UserModel.h">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/db_proxy_server.cpp">
+			<Option target="db_proxy_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/file_server/FileConn.cpp">
+			<Option target="file_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/file_server/FileConn.h">
+			<Option target="file_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/file_server/file_server.cpp">
+			<Option target="file_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/AttachData.cpp">
+			<Option target="http_msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/AttachData.h">
+			<Option target="http_msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/DBServConn.cpp">
+			<Option target="http_msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/DBServConn.h">
+			<Option target="http_msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/HttpConn.cpp">
+			<Option target="http_msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/HttpConn.h">
+			<Option target="http_msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/HttpPdu.cpp">
+			<Option target="http_msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/HttpPdu.h">
+			<Option target="http_msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/HttpQuery.cpp">
+			<Option target="http_msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/HttpQuery.h">
+			<Option target="http_msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/RouteServConn.cpp">
+			<Option target="http_msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/RouteServConn.h">
+			<Option target="http_msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/http_msg_server.cpp">
+			<Option target="http_msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/login_server/HttpConn.cpp">
+			<Option target="login_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/login_server/HttpConn.h">
+			<Option target="login_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/login_server/LoginConn.cpp">
+			<Option target="login_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/login_server/LoginConn.h">
+			<Option target="login_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/login_server/ipparser.cpp">
+			<Option target="login_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/login_server/ipparser.h">
+			<Option target="login_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/login_server/login_server.cpp">
+			<Option target="login_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msfs/FileLin.cpp">
+			<Option target="msfs"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msfs/FileLin.h">
+			<Option target="msfs"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msfs/FileManager.cpp">
+			<Option target="msfs"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msfs/FileManager.h">
+			<Option target="msfs"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msfs/HttpConn.cpp">
+			<Option target="msfs"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msfs/HttpConn.h">
+			<Option target="msfs"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msfs/StringUtils.cpp">
+			<Option target="msfs"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msfs/StringUtils.h">
+			<Option target="msfs"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msfs/main.cpp">
+			<Option target="msfs"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/AttachData.cpp">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/AttachData.h">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/DBServConn.cpp">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/DBServConn.h">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/FileHandler.cpp">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/FileHandler.h">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/FileServConn.cpp">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/FileServConn.h">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/GroupChat.cpp">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/GroupChat.h">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/ImUser.cpp">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/ImUser.h">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/LoginServConn.cpp">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/LoginServConn.h">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/MsgConn.cpp">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/MsgConn.h">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/PushServConn.cpp">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/PushServConn.h">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/RouteServConn.cpp">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/RouteServConn.h">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/jsonxx.cpp">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/jsonxx.h">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/msg_server.cpp">
+			<Option target="msg_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/ConfigFileReader.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/ConfigFileReader.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/apns_client.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/apns_client.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/apns_client_handler.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/apns_client_handler.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/apns_feedback_handler.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/apns_feedback_handler.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/apns_msg.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/apns_msg.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/byte_stream.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/byte_stream.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/jsonxx.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/jsonxx.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/main.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/pdu_msg.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/pdu_msg.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/push_app.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/push_app.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/push_server.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/push_server.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/push_server_handler.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/push_server_handler.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/push_session.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/push_session.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/push_session_handler.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/push_session_handler.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/session_manager.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/session_manager.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/socket/base_io_stream.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/socket/base_io_stream.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/socket/epoll_io_loop.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/socket/epoll_io_loop.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/socket/io_loop.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/socket/io_loop.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/socket/ssl_client_async.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/socket/ssl_client_async.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/socket/tcp_client_async.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/socket/tcp_client_async.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/socket/tcp_server.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/socket/tcp_server.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/socket/tcp_session_async.cpp">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/socket/tcp_session_async.h">
+			<Option target="push_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/route_server/RouteConn.cpp">
+			<Option target="route_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/route_server/RouteConn.h">
+			<Option target="route_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/route_server/UserInfo.cpp">
+			<Option target="route_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/route_server/UserInfo.h">
+			<Option target="route_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/route_server/route_server.cpp">
+			<Option target="route_server"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/slog/slog_api.cpp">
+			<Option target="slog"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/slog/slog_api.h">
+			<Option target="slog"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/base/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\base\"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/slog/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\slog\"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/db_proxy_server/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\db_proxy_server\"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/file_server/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\file_server\"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/login_server/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\login_server\"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msfs/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\msfs\"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/msg_server/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\msg_server\"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/http_msg_server/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\http_msg_server\"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/push_server/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\push_server\"/>
+		</Unit>
+		<Unit filename="/Users/apple/Desktop/TeamTalk/server/src/route_server/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\route_server\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

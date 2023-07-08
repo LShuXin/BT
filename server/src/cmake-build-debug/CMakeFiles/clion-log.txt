@@ -1,0 +1,1244 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/apple/Desktop/TeamTalk/server/src
+-- The C compiler identification is AppleClang 14.0.0.14000029
+-- The CXX compiler identification is AppleClang 14.0.0.14000029
+-- Check for working C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc
+-- Check for working C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc - works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++
+-- Check for working CXX compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ - works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Generated with config types: Debug;Release
+CMake Warning (dev) at slog/CMakeLists.txt:19 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    .
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at slog/CMakeLists.txt:19 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ./lib
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at base/CMakeLists.txt:31 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    .
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at base/CMakeLists.txt:31 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ./pb/lib/mac
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at base/CMakeLists.txt:31 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ./slog/lib
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at db_proxy_server/CMakeLists.txt:37 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    .
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at db_proxy_server/CMakeLists.txt:37 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at db_proxy_server/CMakeLists.txt:37 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base/pb/lib/mac
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at db_proxy_server/CMakeLists.txt:37 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base/slog/lib
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at file_server/CMakeLists.txt:29 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    .
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at file_server/CMakeLists.txt:29 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at file_server/CMakeLists.txt:29 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base/pb/lib/mac
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at file_server/CMakeLists.txt:29 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base/slog/lib
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at login_server/CMakeLists.txt:29 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    .
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at login_server/CMakeLists.txt:29 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at login_server/CMakeLists.txt:29 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base/pb/lib/mac
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at login_server/CMakeLists.txt:29 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base/slog/lib
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at msfs/CMakeLists.txt:28 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    .
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at msfs/CMakeLists.txt:28 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at msfs/CMakeLists.txt:28 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base/pb/lib/mac
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at msfs/CMakeLists.txt:28 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base/slog/lib
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at msg_server/CMakeLists.txt:30 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    .
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at msg_server/CMakeLists.txt:30 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at msg_server/CMakeLists.txt:30 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base/pb/lib/mac
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at msg_server/CMakeLists.txt:30 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base/slog/lib
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at msg_server/CMakeLists.txt:30 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base/security/lib/mac
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at http_msg_server/CMakeLists.txt:27 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    .
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at http_msg_server/CMakeLists.txt:27 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at http_msg_server/CMakeLists.txt:27 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base/pb/lib/mac
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at http_msg_server/CMakeLists.txt:27 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base/slog/lib
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at push_server/CMakeLists.txt:31 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    .
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at push_server/CMakeLists.txt:31 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base/pb/lib/mac
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at push_server/CMakeLists.txt:31 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base/slog/lib
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at route_server/CMakeLists.txt:28 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    .
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at route_server/CMakeLists.txt:28 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at route_server/CMakeLists.txt:28 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base/pb/lib/mac
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at route_server/CMakeLists.txt:28 (LINK_DIRECTORIES):
+  This command specifies the relative path
+
+    ../base/slog/lib
+
+  as a link directory.
+
+  Policy CMP0015 is not set: link_directories() treats paths relative to the
+  source dir.  Run "cmake --help-policy CMP0015" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Configuring done
+CMake Warning (dev) in slog/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "slog":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in slog/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "slog":
+
+    "./lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in slog/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "slog":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in slog/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "slog":
+
+    "./lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in base/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "base":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in base/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "base":
+
+    "./pb/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in base/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "base":
+
+    "./slog/lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in db_proxy_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "db_proxy_server":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in db_proxy_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "db_proxy_server":
+
+    "../base"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in db_proxy_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "db_proxy_server":
+
+    "../base/pb/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in db_proxy_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "db_proxy_server":
+
+    "../base/slog/lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in db_proxy_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "db_proxy_server":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in db_proxy_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "db_proxy_server":
+
+    "../base"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in db_proxy_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "db_proxy_server":
+
+    "../base/pb/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in db_proxy_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "db_proxy_server":
+
+    "../base/slog/lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in file_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "file_server":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in file_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "file_server":
+
+    "../base"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in file_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "file_server":
+
+    "../base/pb/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in file_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "file_server":
+
+    "../base/slog/lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in file_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "file_server":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in file_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "file_server":
+
+    "../base"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in file_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "file_server":
+
+    "../base/pb/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in file_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "file_server":
+
+    "../base/slog/lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in login_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "login_server":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in login_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "login_server":
+
+    "../base"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in login_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "login_server":
+
+    "../base/pb/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in login_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "login_server":
+
+    "../base/slog/lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in login_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "login_server":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in login_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "login_server":
+
+    "../base"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in login_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "login_server":
+
+    "../base/pb/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in login_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "login_server":
+
+    "../base/slog/lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in msfs/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "msfs":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in msfs/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "msfs":
+
+    "../base"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in msfs/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "msfs":
+
+    "../base/pb/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in msfs/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "msfs":
+
+    "../base/slog/lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in msfs/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "msfs":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in msfs/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "msfs":
+
+    "../base"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in msfs/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "msfs":
+
+    "../base/pb/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in msfs/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "msfs":
+
+    "../base/slog/lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in msg_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "msg_server":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in msg_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "msg_server":
+
+    "../base"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in msg_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "msg_server":
+
+    "../base/pb/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in msg_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "msg_server":
+
+    "../base/slog/lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in msg_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "msg_server":
+
+    "../base/security/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in msg_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "msg_server":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in msg_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "msg_server":
+
+    "../base"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in msg_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "msg_server":
+
+    "../base/pb/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in msg_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "msg_server":
+
+    "../base/slog/lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in msg_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "msg_server":
+
+    "../base/security/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in http_msg_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "http_msg_server":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in http_msg_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "http_msg_server":
+
+    "../base"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in http_msg_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "http_msg_server":
+
+    "../base/pb/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in http_msg_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "http_msg_server":
+
+    "../base/slog/lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in http_msg_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "http_msg_server":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in http_msg_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "http_msg_server":
+
+    "../base"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in http_msg_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "http_msg_server":
+
+    "../base/pb/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in http_msg_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "http_msg_server":
+
+    "../base/slog/lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in push_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "push_server":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in push_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "push_server":
+
+    "../base/pb/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in push_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "push_server":
+
+    "../base/slog/lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in push_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "push_server":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in push_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "push_server":
+
+    "../base/pb/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in push_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "push_server":
+
+    "../base/slog/lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in route_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "route_server":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in route_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "route_server":
+
+    "../base"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in route_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "route_server":
+
+    "../base/pb/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in route_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "route_server":
+
+    "../base/slog/lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in route_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "route_server":
+
+    "."
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in route_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "route_server":
+
+    "../base"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in route_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "route_server":
+
+    "../base/pb/lib/mac"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in route_server/CMakeLists.txt:
+  Policy CMP0081 is not set: Relative paths not allowed in LINK_DIRECTORIES
+  target property.  Run "cmake --help-policy CMP0081" for policy details.
+  Use the cmake_policy command to set the policy and suppress this warning.
+
+  Found relative path while evaluating link directories of "route_server":
+
+    "../base/slog/lib"
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Generating done
+-- Build files have been written to: /Users/apple/Desktop/TeamTalk/server/src/cmake-build-debug

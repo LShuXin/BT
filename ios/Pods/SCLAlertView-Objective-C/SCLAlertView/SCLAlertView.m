@@ -32,8 +32,8 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 @property (nonatomic, strong) NSMutableArray *buttons;
 @property (nonatomic, strong) UIImageView *circleIconImageView;
 @property (nonatomic, strong) UIView *circleView;
-@property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UIView *circleViewBackground;
+@property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UIImageView *backgroundView;
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 @property (nonatomic, strong) UITapGestureRecognizer *gestureRecognizer;
@@ -180,7 +180,7 @@ NSTimer *durationTimer;
 
 #pragma mark - View Cycle
 
--(void)viewWillLayoutSubviews
+- (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
     
@@ -471,18 +471,18 @@ NSTimer *durationTimer;
 
 -(SCLAlertViewResponder *)showTitle:(UIViewController *)vc image:(UIImage *)image color:(UIColor *)color title:(NSString *)title subTitle:(NSString *)subTitle duration:(NSTimeInterval)duration completeText:(NSString *)completeText style:(SCLAlertViewStyle)style
 {
-    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    UIViewController *rootViewController = vc;
     
     self.view.alpha = 0;
     
     [self setBackground];
     
-    _backgroundView.frame = vc.view.bounds;
+    self.backgroundView.frame = vc.view.bounds;
     
     // Add subviews
-    [window addSubview:_backgroundView];
-    [window addSubview:self.view];
-    [vc addChildViewController:self];
+    [rootViewController addChildViewController:self];
+    [rootViewController.view addSubview:_backgroundView];
+    [rootViewController.view addSubview:self.view];
 
     // Alert color/icon
     UIColor *viewColor;
@@ -703,6 +703,12 @@ NSTimer *durationTimer;
 }
 
 #pragma mark - Visibility
+
+- (void)removeTopCircle
+{
+    [_circleViewBackground removeFromSuperview];
+    [_circleView removeFromSuperview];
+}
 
 - (BOOL)isVisible
 {
