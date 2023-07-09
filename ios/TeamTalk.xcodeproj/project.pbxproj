@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		189C9C5B2A5A5B53003AA0CC /* ThirdParty in Resources */ = {isa = PBXBuildFile; fileRef = 189C9C5A2A5A5B53003AA0CC /* ThirdParty */; };
 		4C0C0F0C1A314E060094CCD2 /* SessionModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0C0F0B1A314E060094CCD2 /* SessionModule.m */; };
 		4C12E7F51A77920A00F1DD54 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C12E7F41A77920A00F1DD54 /* Launch Screen.xib */; };
 		4C1CEEC81A3581160015C355 /* GetMessageQueueAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1CEEC71A3581160015C355 /* GetMessageQueueAPI.m */; };
@@ -392,6 +393,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		189C9C5A2A5A5B53003AA0CC /* ThirdParty */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ThirdParty; sourceTree = "<group>"; };
 		411D7421AA70F7199FD58CA3 /* Pods-TeamTalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamTalk.debug.xcconfig"; path = "Target Support Files/Pods-TeamTalk/Pods-TeamTalk.debug.xcconfig"; sourceTree = "<group>"; };
 		4C0C0F0A1A314E060094CCD2 /* SessionModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionModule.h; sourceTree = "<group>"; };
 		4C0C0F0B1A314E060094CCD2 /* SessionModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionModule.m; sourceTree = "<group>"; };
@@ -2068,6 +2070,7 @@
 		C4EBA72B192F279100B72723 = {
 			isa = PBXGroup;
 			children = (
+				189C9C5A2A5A5B53003AA0CC /* ThirdParty */,
 				4C6BBC1D1A7F532F0028B892 /* Security */,
 				4C12E7F41A77920A00F1DD54 /* Launch Screen.xib */,
 				4C9C7FDB1A4A4CBC00A58066 /* LevelDB */,
@@ -2144,7 +2147,7 @@
 				C4EBA730192F279100B72723 /* Sources */,
 				C4EBA731192F279100B72723 /* Frameworks */,
 				C4EBA732192F279100B72723 /* Resources */,
-				FB20154718D86B9504DC5901 /* [CP] Copy Pods Resources */,
+				8AA05174B5A6B4D5B924EF7F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2201,6 +2204,7 @@
 				4CA6CE2D1A2C1F6E00405BB6 /* dd_left_voice_three.png in Resources */,
 				4CA6CE261A2C1F6E00405BB6 /* dd_has_unread_message@2x.png in Resources */,
 				4CA6CE751A2C1F6F00405BB6 /* username.png in Resources */,
+				189C9C5B2A5A5B53003AA0CC /* ThirdParty in Resources */,
 				4CA6CE281A2C1F6E00405BB6 /* dd_image_send@2x.png in Resources */,
 				4C3A74D81A8C84C9009400A2 /* 226.gif in Resources */,
 				4CA6CE521A2C1F6E00405BB6 /* delete.png in Resources */,
@@ -2385,7 +2389,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FB20154718D86B9504DC5901 /* [CP] Copy Pods Resources */ = {
+		8AA05174B5A6B4D5B924EF7F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2754,7 +2758,7 @@
 					"\"${PODS_ROOT}/leveldb-library/include\"",
 				);
 				INFOPLIST_FILE = "TeamTalk-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2801,7 +2805,7 @@
 					"\"${PODS_ROOT}/leveldb-library/include\"",
 				);
 				INFOPLIST_FILE = "TeamTalk-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

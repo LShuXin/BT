@@ -1,1 +1,1 @@
-../../../AFNetworking/AFNetworking/AFNetworkReachabilityManager.h
+../../../../ThirdParty/AFNetworking/AFNetworking/AFNetworkReachabilityManager.h

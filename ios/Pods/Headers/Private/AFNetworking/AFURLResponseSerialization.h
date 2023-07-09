@@ -1,1 +1,1 @@
-../../../AFNetworking/AFNetworking/AFURLResponseSerialization.h
+../../../../ThirdParty/AFNetworking/AFNetworking/AFURLResponseSerialization.h

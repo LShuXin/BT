@@ -1,1 +1,1 @@
-../../../AFNetworking/AFNetworking/AFHTTPSessionManager.h
+../../../../ThirdParty/AFNetworking/AFNetworking/AFHTTPSessionManager.h

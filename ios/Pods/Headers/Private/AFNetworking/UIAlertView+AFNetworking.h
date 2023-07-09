@@ -1,1 +1,1 @@
-../../../AFNetworking/UIKit+AFNetworking/UIAlertView+AFNetworking.h
+../../../../ThirdParty/AFNetworking/UIKit+AFNetworking/UIAlertView+AFNetworking.h

@@ -1,1 +1,1 @@
-../../../AFNetworking/AFNetworking/AFNetworking.h
+../../../../ThirdParty/AFNetworking/AFNetworking/AFNetworking.h

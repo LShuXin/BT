@@ -1,1 +1,1 @@
-../../../AFNetworking/AFNetworking/AFHTTPRequestOperationManager.h
+../../../../ThirdParty/AFNetworking/AFNetworking/AFHTTPRequestOperationManager.h
