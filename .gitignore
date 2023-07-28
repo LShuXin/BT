@@ -36,6 +36,9 @@
 /server/src/libsecurity/android/jni/out/build/x64-Debug
 /server/src/libsecurity/src/out/build/x64-Debug
 /server/src/lib
+/server/src/cmake-build-debug
+
 *.log
+
 
 /docker/mysql_data

@@ -13,7 +13,8 @@
 
 #include "../base/util.h"
 #include "ThreadPool.h"
-#include <mysql/mysql.h>
+// #include <mysql/mysql.h>
+#include <mysql.h>
 
 #define MAX_ESCAPE_STRING_LEN	10240
 
