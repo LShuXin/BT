@@ -14,7 +14,7 @@ import java.util.List;
 
 public class MoGuHttpClient {
 
-	private static Logger logger = Logger.getLogger(MoGuHttpClient.class);
+	private static final Logger logger = Logger.getLogger(MoGuHttpClient.class);
 
 	public String uploadImage3(String strUrl, byte[] bytes, String fileName) {
 		logger.d("pic#uploadImage3 strUlr:%s", strUrl);
@@ -42,15 +42,14 @@ public class MoGuHttpClient {
 			for (int i = 0; i < leng; i++) {
 				String fname = list.get(i);
 				File file = new File(fname);
-				StringBuilder sb = new StringBuilder();
-				sb.append("--");
-				sb.append(BOUNDARY);
-				sb.append("\r\n");
-				sb.append("Content-Disposition: form-data;name=\"file" + i
-						+ "\";filename=\"" + file.getName() + "\"\r\n");
-				sb.append("Content-Type:application/octet-stream\r\n\r\n");
+				String sb = "--" +
+						BOUNDARY +
+						"\r\n" +
+						"Content-Disposition: form-data;name=\"file" + i
+						+ "\";filename=\"" + file.getName() + "\"\r\n" +
+						"Content-Type:application/octet-stream\r\n\r\n";
 
-				byte[] data = sb.toString().getBytes();
+				byte[] data = sb.getBytes();
 				out.write(data);
 				out.write(bytes);
 				out.write("\r\n".getBytes()); // 多个文件时，二个文件之间加入这个

@@ -13,7 +13,7 @@ import org.jboss.netty.channel.SimpleChannelHandler;
 
 public class MsgServerHandler extends SimpleChannelHandler {
 
-    private Logger logger = Logger.getLogger(MsgServerHandler.class);
+    private final Logger logger = Logger.getLogger(MsgServerHandler.class);
 
 	@Override
 	public void channelConnected(ChannelHandlerContext ctx, ChannelStateEvent e)

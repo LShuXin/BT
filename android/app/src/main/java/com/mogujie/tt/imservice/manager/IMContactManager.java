@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 import de.greenrobot.event.EventBus;
@@ -30,20 +31,20 @@ import de.greenrobot.event.EventBus;
  * 具体请参见 服务端具体的pd协议
  */
 public class IMContactManager extends IMManager {
-    private Logger logger = Logger.getLogger(IMContactManager.class);
+    private final Logger logger = Logger.getLogger(IMContactManager.class);
 
     // 单例
-    private static IMContactManager inst = new IMContactManager();
+    private static final IMContactManager inst = new IMContactManager();
     public static IMContactManager instance() {
             return inst;
     }
-    private IMSocketManager imSocketManager = IMSocketManager.instance();
-    private DBInterface dbInterface = DBInterface.instance();
+    private final IMSocketManager imSocketManager = IMSocketManager.instance();
+    private final DBInterface dbInterface = DBInterface.instance();
 
     // 自身状态字段
     private boolean  userDataReady = false;
-    private Map<Integer,UserEntity> userMap = new ConcurrentHashMap<>();
-    private Map<Integer,DepartmentEntity> departmentMap = new ConcurrentHashMap<>();
+    private final Map<Integer,UserEntity> userMap = new ConcurrentHashMap<>();
+    private final Map<Integer,DepartmentEntity> departmentMap = new ConcurrentHashMap<>();
 
 
     @Override
@@ -112,10 +113,8 @@ public class IMContactManager extends IMManager {
      */
     public void triggerEvent(UserInfoEvent event) {
         //先更新自身的状态
-        switch (event){
-            case USER_INFO_OK:
-                userDataReady = true;
-                break;
+        if (Objects.requireNonNull(event) == UserInfoEvent.USER_INFO_OK) {
+            userDataReady = true;
         }
         EventBus.getDefault().postSticky(event);
     }

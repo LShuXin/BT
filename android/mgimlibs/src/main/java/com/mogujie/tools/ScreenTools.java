@@ -11,7 +11,7 @@ import java.lang.reflect.Field;
  * 2011-12-14 下午10:28:41
  */
 public class ScreenTools {
-	private Context mCtx;
+	private final Context mCtx;
 	private static ScreenTools mScreenTools;
 	
 	public static ScreenTools instance(Context ctx){
@@ -49,7 +49,7 @@ public class ScreenTools {
 	 * @return
 	 */
 	public int getScal(){
-		 return (int)(getScreenWidth() * 100 / 480);
+		 return getScreenWidth() * 100 / 480;
 	}
 	
 	 /**

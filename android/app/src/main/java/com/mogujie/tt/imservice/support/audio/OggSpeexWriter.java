@@ -51,7 +51,7 @@ import java.util.Random;
  * @version $Revision: 1.2 $
  */
 public class OggSpeexWriter extends AudioFileWriter {
-    private static Logger log = Logger.getLogger(OggSpeexWriter.class);
+    private static final Logger log = Logger.getLogger(OggSpeexWriter.class);
     /** Number of packets in an Ogg page (must be less than 255) */
     public static final int PACKETS_PER_OGG_PAGE = 250;
 
@@ -72,11 +72,11 @@ public class OggSpeexWriter extends AudioFileWriter {
     /** Ogg Stream Serial Number */
     private int streamSerialNumber;
     /** Data buffer */
-    private byte[] dataBuffer;
+    private final byte[] dataBuffer;
     /** Pointer within the Data buffer */
     private int dataBufferPtr;
     /** Header buffer */
-    private byte[] headerBuffer;
+    private final byte[] headerBuffer;
     /** Pointer within the Header buffer */
     private int headerBufferPtr;
     /** Ogg Page count */
@@ -233,7 +233,7 @@ public class OggSpeexWriter extends AudioFileWriter {
         dataBufferPtr += len;
         headerBuffer[headerBufferPtr++] = (byte) len;
         packetCount++;
-        granulepos += nframes * (mode == 2 ? 640 : (mode == 1 ? 320 : 160));
+        granulepos += (long) nframes * (mode == 2 ? 640 : (mode == 1 ? 320 : 160));
     }
 
     /**

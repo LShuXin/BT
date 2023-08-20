@@ -24,15 +24,17 @@ import com.mogujie.tt.ui.helper.AudioPlayerHandler;
  */
 public class MessageOperatePopup implements View.OnClickListener, View.OnTouchListener {
 
-    private PopupWindow mPopup;
+    private final PopupWindow mPopup;
     private static MessageOperatePopup messageOperatePopup;
     private OnItemClickListener mListener;
 
     private int mWidth;
-    private int mHeight;
+    private final int mHeight;
 
-    private int mParentTop;
-    private TextView copyBtn, resendBtn, speakerBtn;
+    private final int mParentTop;
+    private final TextView copyBtn;
+    private final TextView resendBtn;
+    private final TextView speakerBtn;
     private boolean bcopyShow, bresendShow, bspeakerShow;
 
     private Context context = null;
@@ -61,17 +63,17 @@ public class MessageOperatePopup implements View.OnClickListener, View.OnTouchLi
 
         // popView = (LinearLayout) view.findViewById(R.id.popup_list);
 
-        copyBtn = (TextView) view.findViewById(R.id.copy_btn);
+        copyBtn = view.findViewById(R.id.copy_btn);
         copyBtn.setOnClickListener(this);
         copyBtn.setOnTouchListener(this);
         copyBtn.setPadding(0, 13, 0, 8);
 
-        resendBtn = (TextView) view.findViewById(R.id.resend_btn);
+        resendBtn = view.findViewById(R.id.resend_btn);
         resendBtn.setOnClickListener(this);
         resendBtn.setOnTouchListener(this);
         resendBtn.setPadding(0, 13, 0, 8);
 
-        speakerBtn = (TextView) view.findViewById(R.id.speaker_btn);
+        speakerBtn = view.findViewById(R.id.speaker_btn);
         speakerBtn.setOnClickListener(this);
         speakerBtn.setOnTouchListener(this);
         speakerBtn.setPadding(0, 13, 0, 8);
@@ -229,7 +231,7 @@ public class MessageOperatePopup implements View.OnClickListener, View.OnTouchLi
                         - mHeight);
             } else {
                 mPopup.showAtLocation(item, Gravity.NO_GRAVITY, location[0]
-                        + (item.getWidth() / 2 - mWidth / 2), 0 + mHeight / 2);
+                        + (item.getWidth() / 2 - mWidth / 2), mHeight / 2);
             }
         } else {
             // TODO: 在下面弹出的时候需要翻转背景

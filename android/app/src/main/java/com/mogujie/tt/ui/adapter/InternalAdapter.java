@@ -29,9 +29,9 @@ import cz.msebera.android.httpclient.Header;
  */
 public class InternalAdapter extends BaseAdapter {
     private Context ctx = null;
-    private List<InternalItem> datalist = new ArrayList<>();
-    private Logger logger = Logger.getLogger(ChatAdapter.class);
-    private AsyncHttpClient client;
+    private final List<InternalItem> datalist = new ArrayList<>();
+    private final Logger logger = Logger.getLogger(ChatAdapter.class);
+    private final AsyncHttpClient client;
 
     public InternalAdapter(Context context) {
         ctx = context;
@@ -72,7 +72,7 @@ public class InternalAdapter extends BaseAdapter {
             if (null == convertView) {
                 convertView = LayoutInflater.from(ctx).inflate(R.layout.tt_item_internalitem, parent, false);
                 holder = new ViewHoler();
-                holder.title = (TextView) convertView.findViewById(R.id.tt_internal_item_title);
+                holder.title = convertView.findViewById(R.id.tt_internal_item_title);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHoler) convertView.getTag();

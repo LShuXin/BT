@@ -45,17 +45,17 @@ public abstract class TTBaseFragment extends Fragment {
 
 		topContentView = (ViewGroup) LayoutInflater.from(getActivity()).inflate(R.layout.tt_fragment_base, null);
 
-		topBar = (ViewGroup) topContentView.findViewById(R.id.topbar);
-		topTitleTxt = (TextView) topContentView.findViewById(R.id.base_fragment_title);
-		topLetTitleTxt = (TextView) topContentView.findViewById(R.id.left_txt);
-		topRightTitleTxt = (TextView) topContentView.findViewById(R.id.right_txt);
-		topLeftBtn = (ImageView) topContentView.findViewById(R.id.left_btn);
-		topRightBtn = (ImageView) topContentView.findViewById(R.id.right_btn);
-		topContactTitle = (TopTabButton) topContentView.findViewById(R.id.contact_tile);
-		topSearchEdt = (SearchEditText) topContentView.findViewById(R.id.chat_title_search);
-		topLeftContainerLayout=(RelativeLayout)topContentView.findViewById(R.id.top_left_container);
-		searchFrameLayout = (FrameLayout)topContentView.findViewById(R.id.searchbar);
-		topContactFrame = (FrameLayout)topContentView.findViewById(R.id.contactTopBar);
+		topBar = topContentView.findViewById(R.id.topbar);
+		topTitleTxt = topContentView.findViewById(R.id.base_fragment_title);
+		topLetTitleTxt = topContentView.findViewById(R.id.left_txt);
+		topRightTitleTxt = topContentView.findViewById(R.id.right_txt);
+		topLeftBtn = topContentView.findViewById(R.id.left_btn);
+		topRightBtn = topContentView.findViewById(R.id.right_btn);
+		topContactTitle = topContentView.findViewById(R.id.contact_tile);
+		topSearchEdt = topContentView.findViewById(R.id.chat_title_search);
+		topLeftContainerLayout= topContentView.findViewById(R.id.top_left_container);
+		searchFrameLayout = topContentView.findViewById(R.id.searchbar);
+		topContactFrame = topContentView.findViewById(R.id.contactTopBar);
 				
 		topTitleTxt.setVisibility(View.GONE);
 		topRightBtn.setVisibility(View.GONE);

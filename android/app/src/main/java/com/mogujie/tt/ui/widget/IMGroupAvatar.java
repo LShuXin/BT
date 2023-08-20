@@ -27,8 +27,8 @@ public class IMGroupAvatar extends LinearLayout {
     private int childCorner =0;
     private int defaultChildAvatarRes = R.drawable.group_default;
     private int defaultParentAvatarBk = R.drawable.group_avatar_bk;
-    private ArrayList<ImageView> mAvatarImages = new ArrayList<>();
-    private ArrayList<String> mImageUrls = new ArrayList<String>();
+    private final ArrayList<ImageView> mAvatarImages = new ArrayList<>();
+    private final ArrayList<String> mImageUrls = new ArrayList<String>();
 
     private static int DEFAULT_MAX_COLUMN_SIZE = 3;
     private static final int DEFAULT_PADDING_DIP = 3;
@@ -69,9 +69,7 @@ public class IMGroupAvatar extends LinearLayout {
                 if (null != this.mImageUrls && this.mImageUrls.size() > 0 && this.mImageUrls.size() == avatarUrls.size()) {
                     ArrayList<String> urls = new ArrayList<String>(this.mImageUrls);
                     for (String url : avatarUrls) {
-                        if (urls.contains(url)) {
-                            urls.remove(url);
-                        }
+                        urls.remove(url);
                     }
                     if (null != urls && urls.size() == 0) {
                         return;

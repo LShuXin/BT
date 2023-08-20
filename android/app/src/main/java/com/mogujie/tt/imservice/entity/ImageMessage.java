@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -31,7 +32,7 @@ public class ImageMessage extends MessageEntity implements Serializable {
     private int loadStatus;
 
     //存储图片消息
-    private static java.util.HashMap<Long,ImageMessage> imageMessageMap = new java.util.HashMap<Long,ImageMessage>();
+    private static final java.util.HashMap<Long,ImageMessage> imageMessageMap = new java.util.HashMap<Long,ImageMessage>();
     private static ArrayList<ImageMessage> imageList=null;
     /**
      * 添加一条图片消息
@@ -241,12 +242,7 @@ public class ImageMessage extends MessageEntity implements Serializable {
          */
        String  encrySendContent =new String(com.mogujie.tt.Security.getInstance().EncryptMsg(sendContent));
 
-        try {
-            return encrySendContent.getBytes("utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return encrySendContent.getBytes(StandardCharsets.UTF_8);
     }
 
     /**-----------------------set/get------------------------*/

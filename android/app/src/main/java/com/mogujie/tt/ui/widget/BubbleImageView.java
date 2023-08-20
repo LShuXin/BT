@@ -137,13 +137,13 @@ public class BubbleImageView extends ImageView {
     }
 
     public interface ImageLoaddingCallback {
-        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage);
+        void onLoadingComplete(String imageUri, View view, Bitmap loadedImage);
 
-        public void onLoadingStarted(String imageUri, View view);
+        void onLoadingStarted(String imageUri, View view);
 
-        public void onLoadingCanceled(String imageUri, View view);
+        void onLoadingCanceled(String imageUri, View view);
 
-        public void onLoadingFailed(String imageUri, View view);
+        void onLoadingFailed(String imageUri, View view);
     }
 
 

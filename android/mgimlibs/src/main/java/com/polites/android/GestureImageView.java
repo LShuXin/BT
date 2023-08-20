@@ -38,7 +38,7 @@ public class GestureImageView extends ImageView {
 	private float scaleAdjust = 1.0f;
 	private float startingScale = -1.0f;
 
-	private float scale = 1.0f;
+	private final float scale = 1.0f;
 	private float maxScale = 5.0f;
 	private float minScale = 0.75f;
 	private float fitScaleHorizontal = 1.0f;

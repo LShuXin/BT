@@ -47,8 +47,8 @@ public class TopTabButton extends FrameLayout {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.tt_top_tab_button, this);
 
-        tabALLBtn = (Button) findViewById(R.id.all_btn);
-        tabDepartmentBtn = (Button) findViewById(R.id.department_btn);
+        tabALLBtn = findViewById(R.id.all_btn);
+        tabDepartmentBtn = findViewById(R.id.department_btn);
 
         // tabDepartmentBtn.setText(context.getString(R.string.contact_department));
         // tabDepartmentBtn.setBackgroundResource(R.drawable.contact_top_right_nor);

@@ -29,7 +29,7 @@ public class DateUtil {
         SimpleDateFormat formatYear = new SimpleDateFormat("yy/MM/dd");
         SimpleDateFormat formatToday = new SimpleDateFormat("HH:mm");
         /**消息时间戳*/
-        long changeTime = (long) mTimeStamp;
+        long changeTime = mTimeStamp;
         long messageTimeStamp = changeTime * 1000;
         /**当前的时间戳*/
         long currentTimeStamp =System.currentTimeMillis();

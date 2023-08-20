@@ -20,15 +20,17 @@ import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.utils.Logger;
 import com.mogujie.tt.ui.widget.NaviTabButton;
 
+import java.util.Objects;
+
 import de.greenrobot.event.EventBus;
 
 
 public class MainActivity extends FragmentActivity {
 	private Fragment[] mFragments;
 	private NaviTabButton[] mTabButtons;
-	private Logger logger = Logger.getLogger(MainActivity.class);
+	private final Logger logger = Logger.getLogger(MainActivity.class);
     private IMService imService;
-	private IMServiceConnector imServiceConnector = new IMServiceConnector(){
+	private final IMServiceConnector imServiceConnector = new IMServiceConnector(){
         @Override
         public void onIMServiceConnected() {
             imService = imServiceConnector.getIMService();
@@ -92,10 +94,10 @@ public class MainActivity extends FragmentActivity {
 	private void initTab() {
 		mTabButtons = new NaviTabButton[4];
 
-		mTabButtons[0] = (NaviTabButton) findViewById(R.id.tabbutton_chat);
-		mTabButtons[1] = (NaviTabButton) findViewById(R.id.tabbutton_contact);
-		mTabButtons[2] = (NaviTabButton) findViewById(R.id.tabbutton_internal);
-		mTabButtons[3] = (NaviTabButton) findViewById(R.id.tabbutton_my);
+		mTabButtons[0] = findViewById(R.id.tabbutton_chat);
+		mTabButtons[1] = findViewById(R.id.tabbutton_contact);
+		mTabButtons[2] = findViewById(R.id.tabbutton_internal);
+		mTabButtons[3] = findViewById(R.id.tabbutton_my);
 
 		mTabButtons[0].setTitle(getString(R.string.main_chat));
 		mTabButtons[0].setIndex(0);
@@ -205,11 +207,9 @@ public class MainActivity extends FragmentActivity {
     }
 
 	public void onEventMainThread(LoginEvent event){
-        switch (event){
-            case LOGIN_OUT:
-                handleOnLogout();
-                break;
-        }
+		if (Objects.requireNonNull(event) == LoginEvent.LOGIN_OUT) {
+			handleOnLogout();
+		}
     }
 
 	private void handleOnLogout() {

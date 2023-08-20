@@ -238,7 +238,7 @@ public final class IMSwitchService {
       cmdMsgData_ = "";
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -449,7 +449,7 @@ public final class IMSwitchService {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasFromUserId()) {
           
           return false;
@@ -458,11 +458,7 @@ public final class IMSwitchService {
           
           return false;
         }
-        if (!hasCmdMsgData()) {
-          
-          return false;
-        }
-        return true;
+        return hasCmdMsgData();
       }
 
       public Builder mergeFrom(

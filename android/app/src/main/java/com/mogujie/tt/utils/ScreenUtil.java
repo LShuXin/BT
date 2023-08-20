@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
  * 获取屏幕,分辨率相关
  */
 public class ScreenUtil {
-    private Context mCtx;
+    private final Context mCtx;
     private static ScreenUtil mScreenTools;
 
     public static ScreenUtil instance(Context ctx){
@@ -49,7 +49,7 @@ public class ScreenUtil {
      * @return
      */
     public int getScal(){
-        return (int)(getScreenWidth() * 100 / 480);
+        return getScreenWidth() * 100 / 480;
     }
 
     /**

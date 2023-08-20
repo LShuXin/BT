@@ -167,6 +167,6 @@ public class GifView extends ImageView implements Runnable {
     }
 
     public interface OnFrameAvailable {
-        public Bitmap onFrameAvailable(Bitmap bitmap);
+        Bitmap onFrameAvailable(Bitmap bitmap);
     }
 }

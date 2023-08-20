@@ -27,9 +27,9 @@ import de.greenrobot.event.EventBus;
  *   重试的触发点是：1.网络链接的异常 2.请求消息服务器 3链接消息服务器
  */
 public class IMReconnectManager extends IMManager {
-    private Logger logger = Logger.getLogger(IMReconnectManager.class);
+    private final Logger logger = Logger.getLogger(IMReconnectManager.class);
 
-	private static IMReconnectManager inst = new IMReconnectManager();
+	private static final IMReconnectManager inst = new IMReconnectManager();
     public static IMReconnectManager instance() {
        return inst;
     }
@@ -136,13 +136,11 @@ public class IMReconnectManager extends IMManager {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
-                case HANDLER_CHECK_NETWORK:{
-                      if(!NetworkUtil.isNetWorkAvalible(ctx)){
-                          logger.w("reconnect#handleMessage#网络依旧不可用");
-                          EventBus.getDefault().post(ReconnectEvent.DISABLE);
-                      }
-                }break;
+            if (msg.what == HANDLER_CHECK_NETWORK) {
+                if (!NetworkUtil.isNetWorkAvalible(ctx)) {
+                    logger.w("reconnect#handleMessage#网络依旧不可用");
+                    EventBus.getDefault().post(ReconnectEvent.DISABLE);
+                }
             }
         }
     };
@@ -151,12 +149,9 @@ public class IMReconnectManager extends IMManager {
         SocketEvent socketEvent =   IMSocketManager.instance().getSocketStatus();
         LoginEvent loginEvent = IMLoginManager.instance().getLoginStatus();
 
-        if(socketEvent.equals(SocketEvent.CONNECTING_MSG_SERVER)
+        return socketEvent.equals(SocketEvent.CONNECTING_MSG_SERVER)
                 || socketEvent.equals(SocketEvent.REQING_MSG_SERVER_ADDRS)
-                || loginEvent.equals(LoginEvent.LOGINING)){
-            return true;
-        }
-        return false;
+                || loginEvent.equals(LoginEvent.LOGINING);
     }
 
     /**
@@ -234,7 +229,7 @@ public class IMReconnectManager extends IMManager {
 		}
 		AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
 		am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + seconds
-				* 1000, pi);
+				* 1000L, pi);
 	}
 
     /**
@@ -261,7 +256,7 @@ public class IMReconnectManager extends IMManager {
 
     /**--------------------boradcast-广播相关-----------------------------*/
     private final String  ACTION_RECONNECT = "com.mogujie.tt.imlib.action.reconnect";
-    private BroadcastReceiver imReceiver = new BroadcastReceiver(){
+    private final BroadcastReceiver imReceiver = new BroadcastReceiver(){
         @Override
         public void onReceive(Context context, Intent intent) {
                 String action = intent.getAction();

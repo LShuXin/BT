@@ -6,5 +6,5 @@ package com.mogujie.tt.imservice.event;
  */
 public enum ImageMsgEvent {
     HANDLER_IMAGE_UPLOAD_FAILD,
-    HANDLER_IMAGE_UPLOAD_SUCESS;
+    HANDLER_IMAGE_UPLOAD_SUCESS
 }

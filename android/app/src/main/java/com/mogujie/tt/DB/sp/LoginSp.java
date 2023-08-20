@@ -37,7 +37,7 @@ public class LoginSp {
     public void  init(Context ctx){
         this.ctx = ctx;
         sharedPreferences= ctx.getSharedPreferences
-                (fileName,ctx.MODE_PRIVATE);
+                (fileName, Context.MODE_PRIVATE);
     }
 
     public  void setLoginInfo(String userName,String pwd,int loginId){
@@ -62,8 +62,8 @@ public class LoginSp {
     }
 
     public class SpLoginIdentity{
-        private String loginName;
-        private String pwd;
+        private final String loginName;
+        private final String pwd;
         private int loginId;
 
         public SpLoginIdentity(String mUserName,String mPwd,int mLoginId){

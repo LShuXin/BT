@@ -54,16 +54,12 @@ public final class IMOther {
         boolean done = false;
         while (!done) {
           int tag = input.readTag();
-          switch (tag) {
-            case 0:
+          if (tag == 0) {
+            done = true;
+          } else {
+            if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                    extensionRegistry, tag)) {
               done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFieldsCodedOutput,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
             }
           }
         }
@@ -101,7 +97,7 @@ public final class IMOther {
     private void initFields() {
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -251,7 +247,7 @@ public final class IMOther {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         return true;
       }
 

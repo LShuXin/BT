@@ -9,6 +9,7 @@ import com.mogujie.tt.imservice.support.audio.SpeexDecoder;
 import com.mogujie.tt.utils.Logger;
 
 import java.io.File;
+import java.util.Objects;
 
 import de.greenrobot.event.EventBus;
 
@@ -18,7 +19,7 @@ public class AudioPlayerHandler{
     private Thread th = null;
 
     private static AudioPlayerHandler instance = null;
-    private Logger logger = Logger.getLogger(AudioPlayerHandler.class);
+    private final Logger logger = Logger.getLogger(AudioPlayerHandler.class);
 
     public static  AudioPlayerHandler getInstance() {
         if (null == instance) {
@@ -63,7 +64,7 @@ public class AudioPlayerHandler{
      * speexdec 由于线程模型
      * */
     public interface AudioListener{
-        public void onStop();
+        void onStop();
     }
 
     private AudioListener audioListener;
@@ -79,11 +80,9 @@ public class AudioPlayerHandler{
     }
 
     public void onEventMainThread(AudioEvent audioEvent){
-        switch (audioEvent){
-            case AUDIO_STOP_PLAY:{
-                currentPlayPath = null;
-                stopPlayer();
-            }break;
+        if (Objects.requireNonNull(audioEvent) == AudioEvent.AUDIO_STOP_PLAY) {
+            currentPlayPath = null;
+            stopPlayer();
         }
     }
 
@@ -134,7 +133,7 @@ public class AudioPlayerHandler{
                 stopAnimation();
             }
         }
-    };
+    }
 
     public String getCurrentPlayPath() {
         return currentPlayPath;

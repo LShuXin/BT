@@ -27,10 +27,10 @@ import java.util.Map;
  * Created by zhujian on 15/1/14.
  */
 public class ImageLoaderUtil {
-    private static Logger logger = Logger.getLogger(ImageLoaderUtil.class);
+    private static final Logger logger = Logger.getLogger(ImageLoaderUtil.class);
     private static ImageLoaderConfiguration IMImageLoaderConfig;
     private static ImageLoader IMImageLoadInstance;
-    private static Map<Integer,Map<Integer,DisplayImageOptions>> avatarOptionsMaps=new HashMap<Integer,Map<Integer,DisplayImageOptions>>();
+    private static final Map<Integer,Map<Integer,DisplayImageOptions>> avatarOptionsMaps=new HashMap<Integer,Map<Integer,DisplayImageOptions>>();
     public final static int CIRCLE_CORNER = -10;
 
     public static void initImageLoaderConfig(Context context) {

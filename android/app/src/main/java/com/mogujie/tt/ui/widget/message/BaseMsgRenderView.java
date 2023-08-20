@@ -42,10 +42,10 @@ public abstract class BaseMsgRenderView extends RelativeLayout{
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        portrait = (IMBaseImageView) findViewById(R.id.user_portrait);
-        messageFailed = (ImageView) findViewById(R.id.message_state_failed);
-        loadingProgressBar = (ProgressBar) findViewById(R.id.progressBar1);
-        name = (TextView) findViewById(R.id.name);
+        portrait = findViewById(R.id.user_portrait);
+        messageFailed = findViewById(R.id.message_state_failed);
+        loadingProgressBar = findViewById(R.id.progressBar1);
+        name = findViewById(R.id.name);
     }
 
 

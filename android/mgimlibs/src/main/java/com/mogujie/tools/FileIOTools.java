@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 文件缓存管理,
@@ -27,7 +28,7 @@ import java.io.OutputStreamWriter;
  * 下午12:05:32 2011-12-21
  */
 public class FileIOTools {
-	private Context mCtx;
+	private final Context mCtx;
 	private long mTimeDuration;
 
 	private static FileIOTools sFileIOTools;
@@ -105,7 +106,7 @@ public class FileIOTools {
 		StringBuffer sb = new StringBuffer();
 		if(targetFile.exists()){
 			in = new BufferedInputStream(new FileInputStream(targetFile));
-			br = new BufferedReader(new InputStreamReader(in, "utf8"));
+			br = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
 			String line;
 			while ((line = br.readLine()) != null) {
 				sb.append(line);
@@ -132,7 +133,7 @@ public class FileIOTools {
         if(!targetFile.exists()){
             targetFile.createNewFile();
         }
-        osw = new OutputStreamWriter(new FileOutputStream(targetFile),"utf-8");
+        osw = new OutputStreamWriter(new FileOutputStream(targetFile), StandardCharsets.UTF_8);
         osw.write(data);
         osw.flush();
         osw.close();
@@ -149,7 +150,7 @@ public class FileIOTools {
 		BufferedReader br;
 		StringBuffer sb = new StringBuffer();
 		in = mCtx.getResources().getAssets().open(fileName);
-		br = new BufferedReader(new InputStreamReader(in, "utf8"));
+		br = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
 		String line;
 		while ((line = br.readLine()) != null) {
 			sb.append(line + "\n");
@@ -296,7 +297,7 @@ public class FileIOTools {
 			return;
 		}
 		isDeletingFiles = true;
-		mTimeDuration = 1000 * 60 * 60 * 24 * days;
+		mTimeDuration = 1000L * 60 * 60 * 24 * days;
 		new Thread(){
 			@Override
 			public void run(){
@@ -319,7 +320,7 @@ public class FileIOTools {
 			return;
 		}
 		isDeletingFiles = true;
-		mTimeDuration = 1000 * 60 * 60 * 24 * 1;
+		mTimeDuration = 1000 * 60 * 60 * 24;
 		new Thread(){
 			@Override
 			public void run(){
@@ -355,10 +356,7 @@ public class FileIOTools {
 		public boolean accept(File pathname) {
 			long modified = pathname.lastModified();
 			long curTime = System.currentTimeMillis();
-			if(curTime - modified > mTimeDuration){
-				return true;
-			}
-			return false;
+			return curTime - modified > mTimeDuration;
 		}
 	}
 	

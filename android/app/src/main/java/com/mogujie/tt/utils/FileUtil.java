@@ -102,7 +102,7 @@ public class FileUtil
         {
             file = createFileInSDCard(fileName, path);
             output = new FileOutputStream(file, false);
-            byte buffer[] = new byte[4 * 1024];
+            byte[] buffer = new byte[4 * 1024];
             int temp;
             while ((temp = input.read(buffer)) != -1)
             {
@@ -181,34 +181,32 @@ public class FileUtil
             conn.setRequestProperty("Charsert", "UTF-8");
             conn.setRequestProperty("Content-Type", MULTIPART_FROM_DATA + ";boundary=" + BOUNDARY);
             // 首先组拼文本类型的参数
-            StringBuilder sb = new StringBuilder();
-            sb.append(PREFIX);
-            sb.append(BOUNDARY);
-            sb.append(LINEND);
-            sb.append("Content-Disposition: form-data; name=\"userName\"" + LINEND);// \"userName\"
-            sb.append("Content-Type: text/plain; charset=" + CHARSET + LINEND);
-            sb.append("Content-Transfer-Encoding: 8bit" + LINEND);
-            sb.append(LINEND);
-            sb.append(content);
-            sb.append(LINEND);
+            String sb = PREFIX +
+                    BOUNDARY +
+                    LINEND +
+                    "Content-Disposition: form-data; name=\"userName\"" + LINEND +// \"userName\"
+                    "Content-Type: text/plain; charset=" + CHARSET + LINEND +
+                    "Content-Transfer-Encoding: 8bit" + LINEND +
+                    LINEND +
+                    content +
+                    LINEND;
 
             DataOutputStream outStream = new DataOutputStream(conn.getOutputStream());
-            outStream.write(sb.toString().getBytes());
+            outStream.write(sb.getBytes());
             // 发送文件数据
             if (files != null)
             {
                 for (File file : files)
                 {
-                    StringBuilder sb1 = new StringBuilder();
-                    sb1.append(PREFIX);
-                    sb1.append(BOUNDARY);
-                    sb1.append(LINEND);
-                    sb1.append("Content-Disposition: form-data; name=\"" + file.getName()
-                            + "\"; filename=\"" + file.getName() + "\"" + LINEND);
-                    sb1.append("Content-Type: application/octet-stream; charset=" + CHARSET
-                            + LINEND);
-                    sb1.append(LINEND);
-                    outStream.write(sb1.toString().getBytes());
+                    String sb1 = PREFIX +
+                            BOUNDARY +
+                            LINEND +
+                            "Content-Disposition: form-data; name=\"" + file.getName()
+                            + "\"; filename=\"" + file.getName() + "\"" + LINEND +
+                            "Content-Type: application/octet-stream; charset=" + CHARSET
+                            + LINEND +
+                            LINEND;
+                    outStream.write(sb1.getBytes());
                     try
                     {
                         InputStream is = new FileInputStream(file);
@@ -237,7 +235,7 @@ public class FileUtil
             if (res == 200)
             {
                 BufferedReader in = new BufferedReader(new InputStreamReader(
-                        (InputStream) conn.getInputStream()));
+                        conn.getInputStream()));
                 String line = null;
                 StringBuilder result = new StringBuilder();
                 while ((line = in.readLine()) != null)
@@ -310,7 +308,6 @@ public class FileUtil
             }
             file.delete(); // 删除最后的空目录
         }
-        return;
     }
 
     /**
@@ -354,7 +351,7 @@ public class FileUtil
                 dir.mkdir();
             File file = new File(dir, saveName);
             FileOutputStream fos = new FileOutputStream(file);
-            fos.write(crashReport.toString().getBytes());
+            fos.write(crashReport.getBytes());
             fos.close();
             return file;
         } catch (FileNotFoundException e) {
@@ -453,7 +450,7 @@ public class FileUtil
         while ((ch = is.read()) != -1) {
             bytestream.write(ch);
         }
-        byte imgdata[] = bytestream.toByteArray();
+        byte[] imgdata = bytestream.toByteArray();
         bytestream.close();
 
 

@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.imservice.entity.SearchElement;
 import com.mogujie.tt.utils.pinyin.PinYin.PinYinElement;
+
+import java.util.Objects;
 // KEEP INCLUDES END
 /**
  * Entity mapped to table UserInfo.
@@ -28,8 +30,8 @@ public class UserEntity extends PeerEntity{
     private int status;
 
     // KEEP FIELDS - put your custom fields here
-     private PinYinElement pinyinElement = new PinYinElement();
-     private SearchElement searchElement = new SearchElement();
+     private final PinYinElement pinyinElement = new PinYinElement();
+     private final SearchElement searchElement = new SearchElement();
     // KEEP FIELDS END
 
     public UserEntity() {
@@ -206,17 +208,14 @@ public class UserEntity extends PeerEntity{
         if (gender != entity.gender) return false;
         if (peerId != entity.peerId) return false;
         if (status != entity.status) return false;
-        if (avatar != null ? !avatar.equals(entity.avatar) : entity.avatar != null) return false;
-        if (email != null ? !email.equals(entity.email) : entity.email != null) return false;
-        if (mainName != null ? !mainName.equals(entity.mainName) : entity.mainName != null)
+        if (!Objects.equals(avatar, entity.avatar)) return false;
+        if (!Objects.equals(email, entity.email)) return false;
+        if (!Objects.equals(mainName, entity.mainName))
             return false;
-        if (phone != null ? !phone.equals(entity.phone) : entity.phone != null) return false;
-        if (pinyinName != null ? !pinyinName.equals(entity.pinyinName) : entity.pinyinName != null)
+        if (!Objects.equals(phone, entity.phone)) return false;
+        if (!Objects.equals(pinyinName, entity.pinyinName))
             return false;
-        if (realName != null ? !realName.equals(entity.realName) : entity.realName != null)
-            return false;
-
-        return true;
+        return Objects.equals(realName, entity.realName);
     }
 
     @Override

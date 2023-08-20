@@ -31,6 +31,8 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
+import java.util.Objects;
+
 import de.greenrobot.event.EventBus;
 
 /**
@@ -42,8 +44,8 @@ import de.greenrobot.event.EventBus;
  */
 public class IMNotificationManager extends IMManager{
 
-    private Logger logger = Logger.getLogger(IMNotificationManager.class);
-	private static IMNotificationManager inst = new IMNotificationManager();
+    private final Logger logger = Logger.getLogger(IMNotificationManager.class);
+	private static final IMNotificationManager inst = new IMNotificationManager();
 	public static IMNotificationManager instance() {
 			return inst;
 	}
@@ -72,11 +74,9 @@ public class IMNotificationManager extends IMManager{
 
 
     public void onEventMainThread(UnreadEvent event){
-        switch (event.event){
-            case UNREAD_MSG_RECEIVED:
-                UnreadEntity unreadEntity = event.entity;
-                handleMsgRecv(unreadEntity);
-                break;
+        if (Objects.requireNonNull(event.event) == UnreadEvent.Event.UNREAD_MSG_RECEIVED) {
+            UnreadEntity unreadEntity = event.entity;
+            handleMsgRecv(unreadEntity);
         }
     }
 

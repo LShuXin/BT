@@ -55,7 +55,7 @@ import de.greenrobot.event.EventBus;
 public class GroupMemberSelectFragment extends MainFragment
         implements OnTouchingLetterChangedListener {
 
-    private static Logger logger = Logger.getLogger(GroupMemberSelectFragment.class);
+    private static final Logger logger = Logger.getLogger(GroupMemberSelectFragment.class);
 
     private View curView = null;
     private IMService imService;
@@ -135,7 +135,7 @@ public class GroupMemberSelectFragment extends MainFragment
         return alreadyListSet;
     }
 
-    private IMServiceConnector imServiceConnector = new IMServiceConnector(){
+    private final IMServiceConnector imServiceConnector = new IMServiceConnector(){
         @Override
         public void onIMServiceConnected() {
             logger.d("groupselmgr#onIMServiceConnected");
@@ -220,8 +220,8 @@ public class GroupMemberSelectFragment extends MainFragment
 
                 LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View dialog_view = inflater.inflate(R.layout.tt_custom_dialog, null);
-                final EditText editText = (EditText)dialog_view.findViewById(R.id.dialog_edit_content);
-                TextView textText = (TextView)dialog_view.findViewById(R.id.dialog_title);
+                final EditText editText = dialog_view.findViewById(R.id.dialog_edit_content);
+                TextView textText = dialog_view.findViewById(R.id.dialog_title);
                 textText.setText(R.string.create_temp_group_dialog_title);
                 builder.setView(dialog_view);
 
@@ -254,11 +254,7 @@ public class GroupMemberSelectFragment extends MainFragment
 
                     @Override
                     public void afterTextChanged(Editable s) {
-                       if(TextUtils.isEmpty(s.toString().trim())){
-                           alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-                        }else{
-                           alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
-                       }
+                        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(!TextUtils.isEmpty(s.toString().trim()));
                     }
                 });
 
@@ -279,13 +275,13 @@ public class GroupMemberSelectFragment extends MainFragment
             }
         });
 
-        sortSideBar = (SortSideBar) curView.findViewById(R.id.sidrbar);
+        sortSideBar = curView.findViewById(R.id.sidrbar);
         sortSideBar.setOnTouchingLetterChangedListener(this);
 
-        dialog = (TextView) curView.findViewById(R.id.dialog);
+        dialog = curView.findViewById(R.id.dialog);
         sortSideBar.setTextView(dialog);
 
-        contactListView = (ListView) curView.findViewById(R.id.all_contact_list);
+        contactListView = curView.findViewById(R.id.all_contact_list);
         contactListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -301,7 +297,7 @@ public class GroupMemberSelectFragment extends MainFragment
             }
         });
 
-        searchEditText = (SearchEditText) curView.findViewById(R.id.filter_edit);
+        searchEditText = curView.findViewById(R.id.filter_edit);
         searchEditText.addTextChangedListener(new TextWatcher() {
 
             @Override

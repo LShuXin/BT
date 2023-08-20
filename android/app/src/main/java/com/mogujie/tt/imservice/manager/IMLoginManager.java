@@ -24,10 +24,10 @@ import de.greenrobot.event.EventBus;
  * @yingmu
  */
 public class IMLoginManager extends IMManager {
-    private Logger logger = Logger.getLogger(IMLoginManager.class);
+    private final Logger logger = Logger.getLogger(IMLoginManager.class);
 
     /**单例模式*/
-    private static IMLoginManager inst = new IMLoginManager();
+    private static final IMLoginManager inst = new IMLoginManager();
     public static IMLoginManager instance() {
         return inst;
     }
@@ -112,7 +112,7 @@ public class IMLoginManager extends IMManager {
         try {
             imSocketManager.sendRequest(imLogoutReq, sid, cid);
         }catch (Exception e){
-            logger.e("#reqLoginOut#sendRequest error,cause by"+e.toString());
+            logger.e("#reqLoginOut#sendRequest error,cause by"+ e);
         }finally {
             LoginSp.instance().setLoginInfo(loginUserName,null,loginId);
             logger.d("login#send logout finish message");
@@ -340,7 +340,7 @@ public class IMLoginManager extends IMManager {
     public void onLoginStatusNotify(IMBuddy.IMPCLoginStatusNotify statusNotify){
         int userId = statusNotify.getUserId();
         // todo 由于交互不太友好 暂时先去掉
-        if(true || userId !=loginId){
+        if(true){
             logger.i("login#onLoginStatusNotify userId ≠ loginId");
             return;
         }

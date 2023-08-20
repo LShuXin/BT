@@ -28,7 +28,7 @@ public abstract class IMServiceConnector {
 	}
 
 	// todo eric when to release?
-	private ServiceConnection imServiceConnection = new ServiceConnection() {
+	private final ServiceConnection imServiceConnection = new ServiceConnection() {
 
 		@Override
 		public void onServiceDisconnected(ComponentName name) {

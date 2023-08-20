@@ -39,8 +39,8 @@ public class AudioRenderView extends  BaseMsgRenderView {
     /**对外暴露的监听器，点击*/
     private BtnImageListener btnImageListener;
     public interface  BtnImageListener{
-        public void  onClickUnread();
-        public void  onClickReaded();
+        void  onClickUnread();
+        void  onClickReaded();
     }
 
     public void setBtnImageListener(BtnImageListener btnImageListener){
@@ -66,7 +66,7 @@ public class AudioRenderView extends  BaseMsgRenderView {
         super.onFinishInflate();
         messageLayout= findViewById(R.id.message_layout);
         audioAnttView = findViewById(R.id.audio_antt_view);
-        audioDuration = (TextView) findViewById(R.id.audio_duration);
+        audioDuration = findViewById(R.id.audio_duration);
         audioUnreadNotify = findViewById(R.id.audio_unread_notify);
     }
 

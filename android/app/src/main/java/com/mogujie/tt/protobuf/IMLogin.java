@@ -54,16 +54,12 @@ public final class IMLogin {
         boolean done = false;
         while (!done) {
           int tag = input.readTag();
-          switch (tag) {
-            case 0:
+          if (tag == 0) {
+            done = true;
+          } else {
+            if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                    extensionRegistry, tag)) {
               done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFieldsCodedOutput,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
             }
           }
         }
@@ -101,7 +97,7 @@ public final class IMLogin {
     private void initFields() {
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -251,7 +247,7 @@ public final class IMLogin {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         return true;
       }
 
@@ -584,7 +580,7 @@ public final class IMLogin {
       port_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -805,12 +801,8 @@ public final class IMLogin {
         return this;
       }
 
-      public final boolean isInitialized() {
-        if (!hasResultCode()) {
-          
-          return false;
-        }
-        return true;
+      public boolean isInitialized() {
+        return hasResultCode();
       }
 
       public Builder mergeFrom(
@@ -1456,7 +1448,7 @@ public final class IMLogin {
       clientVersion_ = "";
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -1707,7 +1699,7 @@ public final class IMLogin {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserName()) {
           
           return false;
@@ -1720,11 +1712,7 @@ public final class IMLogin {
           
           return false;
         }
-        if (!hasClientType()) {
-          
-          return false;
-        }
-        return true;
+        return hasClientType();
       }
 
       public Builder mergeFrom(
@@ -2391,7 +2379,7 @@ public final class IMLogin {
       userInfo_ = com.mogujie.tt.protobuf.IMBaseDefine.UserInfo.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -2636,7 +2624,7 @@ public final class IMLogin {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasServerTime()) {
           
           return false;
@@ -2646,10 +2634,7 @@ public final class IMLogin {
           return false;
         }
         if (hasUserInfo()) {
-          if (!getUserInfo().isInitialized()) {
-            
-            return false;
-          }
+          return getUserInfo().isInitialized();
         }
         return true;
       }
@@ -2984,16 +2969,12 @@ public final class IMLogin {
         boolean done = false;
         while (!done) {
           int tag = input.readTag();
-          switch (tag) {
-            case 0:
+          if (tag == 0) {
+            done = true;
+          } else {
+            if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                    extensionRegistry, tag)) {
               done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFieldsCodedOutput,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
             }
           }
         }
@@ -3031,7 +3012,7 @@ public final class IMLogin {
     private void initFields() {
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -3181,7 +3162,7 @@ public final class IMLogin {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         return true;
       }
 
@@ -3351,7 +3332,7 @@ public final class IMLogin {
       resultCode_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -3520,12 +3501,8 @@ public final class IMLogin {
         return this;
       }
 
-      public final boolean isInitialized() {
-        if (!hasResultCode()) {
-          
-          return false;
-        }
-        return true;
+      public boolean isInitialized() {
+        return hasResultCode();
       }
 
       public Builder mergeFrom(
@@ -3780,7 +3757,7 @@ public final class IMLogin {
       kickReason_ = com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType.KICK_REASON_DUPLICATE_USER;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -3969,16 +3946,12 @@ public final class IMLogin {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
         }
-        if (!hasKickReason()) {
-          
-          return false;
-        }
-        return true;
+        return hasKickReason();
       }
 
       public Builder mergeFrom(
@@ -4361,7 +4334,7 @@ public final class IMLogin {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -4584,16 +4557,12 @@ public final class IMLogin {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
         }
-        if (!hasDeviceToken()) {
-          
-          return false;
-        }
-        return true;
+        return hasDeviceToken();
       }
 
       public Builder mergeFrom(
@@ -4987,7 +4956,7 @@ public final class IMLogin {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -5172,12 +5141,8 @@ public final class IMLogin {
         return this;
       }
 
-      public final boolean isInitialized() {
-        if (!hasUserId()) {
-          
-          return false;
-        }
-        return true;
+      public boolean isInitialized() {
+        return hasUserId();
       }
 
       public Builder mergeFrom(
@@ -5434,7 +5399,7 @@ public final class IMLogin {
       userId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -5607,12 +5572,8 @@ public final class IMLogin {
         return this;
       }
 
-      public final boolean isInitialized() {
-        if (!hasUserId()) {
-          
-          return false;
-        }
-        return true;
+      public boolean isInitialized() {
+        return hasUserId();
       }
 
       public Builder mergeFrom(
@@ -5860,7 +5821,7 @@ public final class IMLogin {
       resultCode_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -6049,16 +6010,12 @@ public final class IMLogin {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
         }
-        if (!hasResultCode()) {
-          
-          return false;
-        }
-        return true;
+        return hasResultCode();
       }
 
       public Builder mergeFrom(

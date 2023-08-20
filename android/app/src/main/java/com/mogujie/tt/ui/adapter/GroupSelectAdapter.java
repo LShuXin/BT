@@ -33,7 +33,7 @@ import java.util.Set;
 public class GroupSelectAdapter extends BaseAdapter  implements SectionIndexer,
         AdapterView.OnItemClickListener,
         AdapterView.OnItemLongClickListener{
-    private Logger logger = Logger.getLogger(GroupSelectAdapter.class);
+    private final Logger logger = Logger.getLogger(GroupSelectAdapter.class);
 
     private List<UserEntity>  allUserList = new ArrayList<>();
     private List<UserEntity>  backupList = new ArrayList<>();
@@ -41,12 +41,12 @@ public class GroupSelectAdapter extends BaseAdapter  implements SectionIndexer,
     /**已经选中的，不能操作*/
     private Set<Integer> alreadyListSet = new HashSet<>();
     /**在选择面板里面选择的*/
-    private Set<Integer> checkListSet= new HashSet<>();
+    private final Set<Integer> checkListSet= new HashSet<>();
 
     private boolean isSearchMode= false;
     private String searchKey;
-    private Context ctx;
-    private IMService imService;
+    private final Context ctx;
+    private final IMService imService;
 
     public GroupSelectAdapter(Context ctx,IMService service){
         this.ctx = ctx;
@@ -163,11 +163,11 @@ public class GroupSelectAdapter extends BaseAdapter  implements SectionIndexer,
         if (view == null) {
             userHolder = new UserHolder();
             view = LayoutInflater.from(ctx).inflate(R.layout.tt_item_contact, parent,false);
-            userHolder.nameView = (TextView) view.findViewById(R.id.contact_item_title);
-            userHolder.realNameView = (TextView) view.findViewById(R.id.contact_realname_title);
-            userHolder.sectionView = (TextView) view.findViewById(R.id.contact_category_title);
-            userHolder.avatar = (IMBaseImageView)view.findViewById(R.id.contact_portrait);
-            userHolder.checkBox = (CheckBox) view.findViewById(R.id.checkBox);
+            userHolder.nameView = view.findViewById(R.id.contact_item_title);
+            userHolder.realNameView = view.findViewById(R.id.contact_realname_title);
+            userHolder.sectionView = view.findViewById(R.id.contact_category_title);
+            userHolder.avatar = view.findViewById(R.id.contact_portrait);
+            userHolder.checkBox = view.findViewById(R.id.checkBox);
             userHolder.divider = view.findViewById(R.id.contact_divider);
             view.setTag(userHolder);
         } else {
@@ -208,11 +208,7 @@ public class GroupSelectAdapter extends BaseAdapter  implements SectionIndexer,
         boolean checked = checkListSet.contains(userEntity.getPeerId());
         userHolder.checkBox.setChecked(checked);
         boolean disable = alreadyListSet.contains(userEntity.getPeerId());
-        if(disable){
-            userHolder.checkBox.setEnabled(false);
-        }else{
-            userHolder.checkBox.setEnabled(true);
-        }
+        userHolder.checkBox.setEnabled(!disable);
 
         userHolder.avatar.setDefaultImageRes(R.drawable.tt_default_user_portrait_corner);
         userHolder.avatar.setCorner(0);

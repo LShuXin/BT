@@ -28,12 +28,12 @@ public class IMHeartBeatManager  extends  IMManager{
     // 心跳检测4分钟检测一次，并且发送心跳包
     // 服务端自身存在通道检测，5分钟没有数据会主动断开通道
 
-    private static IMHeartBeatManager inst = new IMHeartBeatManager();
+    private static final IMHeartBeatManager inst = new IMHeartBeatManager();
     public static IMHeartBeatManager instance() {
         return inst;
     }
 
-    private Logger logger = Logger.getLogger(IMHeartBeatManager.class);
+    private final Logger logger = Logger.getLogger(IMHeartBeatManager.class);
     private final int HEARTBEAT_INTERVAL = 4 * 60 * 1000;
     private final String ACTION_SENDING_HEARTBEAT = "com.mogujie.tt.imservice.manager.imheartbeatmanager";
     private PendingIntent pendingIntent;
@@ -100,7 +100,7 @@ public class IMHeartBeatManager  extends  IMManager{
 
 
     /**--------------------boradcast-广播相关-----------------------------*/
-    private BroadcastReceiver imReceiver = new BroadcastReceiver(){
+    private final BroadcastReceiver imReceiver = new BroadcastReceiver(){
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();

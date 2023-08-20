@@ -12,7 +12,7 @@ public class SequenceNumberMaker {
 
     private volatile long preMsgId = 0;
 
-    private static SequenceNumberMaker maker = new SequenceNumberMaker();
+    private static final SequenceNumberMaker maker = new SequenceNumberMaker();
 
     private SequenceNumberMaker() {
     }
@@ -51,9 +51,6 @@ public class SequenceNumberMaker {
 
     /**比较 Ugly 的解决办法,但是比较实用*/
     public boolean isFailure(int msgId){
-        if(msgId>=90000000){
-            return true;
-        }
-        return false;
+        return msgId >= 90000000;
     }
 }

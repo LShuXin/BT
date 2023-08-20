@@ -11,7 +11,7 @@ import android.view.View.OnTouchListener;
 
 public class GestureImageViewTouchListener implements OnTouchListener {
 
-	private GestureImageView image;
+	private final GestureImageView image;
 	private OnClickListener onClickListener;
 
 	private final PointF current = new PointF();
@@ -52,19 +52,19 @@ public class GestureImageViewTouchListener implements OnTouchListener {
 
 	private boolean multiTouch = false;
 
-	private int displayWidth;
-	private int displayHeight;
+	private final int displayWidth;
+	private final int displayHeight;
 
-	private int imageWidth;
-	private int imageHeight;
+	private final int imageWidth;
+	private final int imageHeight;
 
-	private FlingListener flingListener;
-	private FlingAnimation flingAnimation;
-	private ZoomAnimation zoomAnimation;
-	private MoveAnimation moveAnimation;
-	private GestureDetector tapDetector;
-	private GestureDetector flingDetector;
-	private GestureImageViewListener imageListener;
+	private final FlingListener flingListener;
+	private final FlingAnimation flingAnimation;
+	private final ZoomAnimation zoomAnimation;
+	private final MoveAnimation moveAnimation;
+	private final GestureDetector tapDetector;
+	private final GestureDetector flingDetector;
+	private final GestureImageViewListener imageListener;
 
 	public GestureImageViewTouchListener(final GestureImageView image, int displayWidth,
 			int displayHeight) {

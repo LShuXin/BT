@@ -49,7 +49,7 @@ public abstract class LoadingLayout extends FrameLayout implements
 
     static final Interpolator ANIMATION_INTERPOLATOR = new LinearInterpolator();
 
-    private View mInnerLayout;
+    private final View mInnerLayout;
 
     protected final ImageView mHeaderImage;
     // protected final ProgressBar mHeaderProgress;
@@ -66,11 +66,11 @@ public abstract class LoadingLayout extends FrameLayout implements
     private CharSequence mRefreshingLabel;
     private CharSequence mReleaseLabel;
     @SuppressWarnings("unused")
-	private CharSequence mLastRefresh;
+	private final CharSequence mLastRefresh;
     @SuppressWarnings("unused")
 	private Date date;
     @SuppressWarnings("unused")
-	private SimpleDateFormat sdf;
+	private final SimpleDateFormat sdf;
 
     public LoadingLayout(Context context, final Mode mode,
             final Orientation scrollDirection, TypedArray attrs) {
@@ -93,13 +93,13 @@ public abstract class LoadingLayout extends FrameLayout implements
         sdf = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 
         mInnerLayout = findViewById(R.id.fl_inner);
-        mHeaderText = (TextView) mInnerLayout
+        mHeaderText = mInnerLayout
                 .findViewById(R.id.pull_to_refresh_text);
         // mHeaderProgress = (ProgressBar)
         // mInnerLayout.findViewById(R.id.pull_to_refresh_progress);
         // mSubHeaderText = (TextView)
         // mInnerLayout.findViewById(R.id.pull_to_refresh_sub_text);
-        mHeaderImage = (ImageView) mInnerLayout
+        mHeaderImage = mInnerLayout
                 .findViewById(R.id.pull_to_refresh_image);
 
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mInnerLayout
@@ -225,13 +225,13 @@ public abstract class LoadingLayout extends FrameLayout implements
     }
 
     public final void setHeight(int height) {
-        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) getLayoutParams();
+        ViewGroup.LayoutParams lp = getLayoutParams();
         lp.height = height;
         requestLayout();
     }
 
     public final void setWidth(int width) {
-        ViewGroup.LayoutParams lp = (ViewGroup.LayoutParams) getLayoutParams();
+        ViewGroup.LayoutParams lp = getLayoutParams();
         lp.width = width;
         requestLayout();
     }

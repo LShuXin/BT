@@ -30,7 +30,7 @@ public class SocketThread extends Thread {
 	private Channel channel = null;
 	private String strHost = null;
 	private int nPort = 0;
-	private static Logger logger = Logger.getLogger(SocketThread.class);
+	private static final Logger logger = Logger.getLogger(SocketThread.class);
 
 	public SocketThread(String strHost, int nPort, SimpleChannelHandler handler) {
 		this.strHost = strHost;

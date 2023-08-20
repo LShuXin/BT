@@ -50,7 +50,7 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
     private IMContactManager contactMgr;
     private int curTabIndex = 0;
 
-    private IMServiceConnector imServiceConnector = new IMServiceConnector() {
+    private final IMServiceConnector imServiceConnector = new IMServiceConnector() {
         @Override
         public void onIMServiceConnected() {
             logger.d("contactUI#onIMServiceConnected");
@@ -101,19 +101,17 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                switch (msg.what) {
-                    case HandlerConstant.HANDLER_CHANGE_CONTACT_TAB:
-                        if (null != msg.obj) {
-                            curTabIndex = (Integer) msg.obj;
-                            if (0 == curTabIndex) {
-                                allContactListView.setVisibility(View.VISIBLE);
-                                departmentContactListView.setVisibility(View.GONE);
-                            } else {
-                                departmentContactListView.setVisibility(View.VISIBLE);
-                                allContactListView.setVisibility(View.GONE);
-                            }
+                if (msg.what == HandlerConstant.HANDLER_CHANGE_CONTACT_TAB) {
+                    if (null != msg.obj) {
+                        curTabIndex = (Integer) msg.obj;
+                        if (0 == curTabIndex) {
+                            allContactListView.setVisibility(View.VISIBLE);
+                            departmentContactListView.setVisibility(View.GONE);
+                        } else {
+                            departmentContactListView.setVisibility(View.VISIBLE);
+                            allContactListView.setVisibility(View.GONE);
                         }
-                        break;
+                    }
                 }
             }
         };
@@ -143,13 +141,13 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
         super.init(curView);
         showProgressBar();
 
-        sortSideBar = (SortSideBar) curView.findViewById(R.id.sidrbar);
-        dialog = (TextView) curView.findViewById(R.id.dialog);
+        sortSideBar = curView.findViewById(R.id.sidrbar);
+        dialog = curView.findViewById(R.id.dialog);
         sortSideBar.setTextView(dialog);
         sortSideBar.setOnTouchingLetterChangedListener(this);
 
-        allContactListView = (ListView) curView.findViewById(R.id.all_contact_list);
-        departmentContactListView = (ListView) curView.findViewById(R.id.department_contact_list);
+        allContactListView = curView.findViewById(R.id.all_contact_list);
+        departmentContactListView = curView.findViewById(R.id.department_contact_list);
 
         //this is critical, disable loading when finger sliding, otherwise you'll find sliding is not very smooth
         allContactListView.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), true, true));

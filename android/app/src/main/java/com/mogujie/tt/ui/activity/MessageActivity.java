@@ -94,6 +94,7 @@ import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -154,7 +155,7 @@ public class MessageActivity extends TTBaseActivity
 
 
     private String takePhotoSavePath = "";
-    private Logger logger = Logger.getLogger(MessageActivity.class);
+    private final Logger logger = Logger.getLogger(MessageActivity.class);
     private IMService imService;
     private UserEntity loginUser;
     private PeerEntity peerEntity;
@@ -201,7 +202,7 @@ public class MessageActivity extends TTBaseActivity
     /**
      * end 全局Toast
      */
-    private IMServiceConnector imServiceConnector = new IMServiceConnector() {
+    private final IMServiceConnector imServiceConnector = new IMServiceConnector() {
         @Override
         public void onIMServiceConnected() {
             logger.d("message_activity#onIMServiceConnected");
@@ -389,19 +390,16 @@ public class MessageActivity extends TTBaseActivity
      * todo  need find good solution
      */
     public void onEvent(PriorityEvent event) {
-        switch (event.event) {
-            case MSG_RECEIVED_MESSAGE: {
-                MessageEntity entity = (MessageEntity) event.object;
-                /**正式当前的会话*/
-                if (currentSessionKey.equals(entity.getSessionKey())) {
-                    Message message = Message.obtain();
-                    message.what = HandlerConstant.MSG_RECEIVED_MESSAGE;
-                    message.obj = entity;
-                    uiHandler.sendMessage(message);
-                    EventBus.getDefault().cancelEventDelivery(event);
-                }
+        if (Objects.requireNonNull(event.event) == PriorityEvent.Event.MSG_RECEIVED_MESSAGE) {
+            MessageEntity entity = (MessageEntity) event.object;
+            /**正式当前的会话*/
+            if (currentSessionKey.equals(entity.getSessionKey())) {
+                Message message = Message.obtain();
+                message.what = HandlerConstant.MSG_RECEIVED_MESSAGE;
+                message.obj = entity;
+                uiHandler.sendMessage(message);
+                EventBus.getDefault().cancelEventDelivery(event);
             }
-            break;
         }
     }
 
@@ -590,8 +588,8 @@ public class MessageActivity extends TTBaseActivity
         topRightBtn.setOnClickListener(this);
 
         // 列表控件(开源PTR)
-        lvPTR = (PullToRefreshListView) this.findViewById(R.id.message_list);
-        textView_new_msg_tip = (TextView) findViewById(R.id.tt_new_msg_tip);
+        lvPTR = this.findViewById(R.id.message_list);
+        textView_new_msg_tip = findViewById(R.id.tt_new_msg_tip);
         lvPTR.getRefreshableView().addHeaderView(LayoutInflater.from(this).inflate(R.layout.tt_messagelist_header,lvPTR.getRefreshableView(), false));
         Drawable loadingDrawable = getResources().getDrawable(R.drawable.pull_to_refresh_indicator);
         final int indicatorWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 29,
@@ -607,28 +605,26 @@ public class MessageActivity extends TTBaseActivity
         lvPTR.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), true, true) {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                switch (scrollState) {
-                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
-                        if (view.getLastVisiblePosition() == (view.getCount() - 1)) {
-                            textView_new_msg_tip.setVisibility(View.GONE);
-                        }
-                        break;
+                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                    if (view.getLastVisiblePosition() == (view.getCount() - 1)) {
+                        textView_new_msg_tip.setVisibility(View.GONE);
+                    }
                 }
             }
         });
         textView_new_msg_tip.setOnClickListener(this);
 
         // 界面底部输入框布局
-        sendBtn = (TextView) this.findViewById(R.id.send_message_btn);
-        recordAudioBtn = (Button) this.findViewById(R.id.record_voice_btn);
-        audioInputImg = (ImageView) this.findViewById(R.id.voice_btn);
-        messageEdt = (CustomEditView) this.findViewById(R.id.message_text);
+        sendBtn = this.findViewById(R.id.send_message_btn);
+        recordAudioBtn = this.findViewById(R.id.record_voice_btn);
+        audioInputImg = this.findViewById(R.id.voice_btn);
+        messageEdt = this.findViewById(R.id.message_text);
         RelativeLayout.LayoutParams messageEdtParam = (LayoutParams) messageEdt.getLayoutParams();
         messageEdtParam.addRule(RelativeLayout.LEFT_OF, R.id.show_emo_btn);
         messageEdtParam.addRule(RelativeLayout.RIGHT_OF, R.id.voice_btn);
-        keyboardInputImg = (ImageView) this.findViewById(R.id.show_keyboard_btn);
-        addPhotoBtn = (ImageView) this.findViewById(R.id.show_add_photo_btn);
-        addEmoBtn = (ImageView) this.findViewById(R.id.show_emo_btn);
+        keyboardInputImg = this.findViewById(R.id.show_keyboard_btn);
+        addPhotoBtn = this.findViewById(R.id.show_add_photo_btn);
+        addEmoBtn = this.findViewById(R.id.show_emo_btn);
         messageEdt.setOnFocusChangeListener(msgEditOnFocusChangeListener);
         messageEdt.setOnClickListener(this);
         messageEdt.addTextChangedListener(this);
@@ -653,15 +649,15 @@ public class MessageActivity extends TTBaseActivity
         takeCameraBtn.setOnClickListener(this);
 
         //EMO_LAYOUT
-        emoLayout = (LinearLayout) findViewById(R.id.emo_layout);
+        emoLayout = findViewById(R.id.emo_layout);
         LayoutParams paramEmoLayout = (LayoutParams) emoLayout.getLayoutParams();
         if (keyboardHeight > 0) {
             paramEmoLayout.height = keyboardHeight;
             emoLayout.setLayoutParams(paramEmoLayout);
         }
-        emoGridView = (EmoGridView) findViewById(R.id.emo_gridview);
-        yayaEmoGridView = (YayaEmoGridView) findViewById(R.id.yaya_emo_gridview);
-        emoRadioGroup = (RadioGroup) findViewById(R.id.emo_tab_group);
+        emoGridView = findViewById(R.id.emo_gridview);
+        yayaEmoGridView = findViewById(R.id.yaya_emo_gridview);
+        emoRadioGroup = findViewById(R.id.emo_tab_group);
         emoGridView.setOnEmoGridViewItemClick(onEmoGridViewItemClick);
         emoGridView.setAdapter();
         yayaEmoGridView.setOnEmoGridViewItemClick(yayaOnEmoGridViewItemClick);
@@ -672,7 +668,7 @@ public class MessageActivity extends TTBaseActivity
         //LOADING
         View view = LayoutInflater.from(MessageActivity.this)
                 .inflate(R.layout.tt_progress_ly, null);
-        progressbar = (MGProgressbar) view.findViewById(R.id.tt_progress);
+        progressbar = view.findViewById(R.id.tt_progress);
         LayoutParams pgParms = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         pgParms.bottomMargin = 50;
@@ -692,8 +688,8 @@ public class MessageActivity extends TTBaseActivity
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         soundVolumeDialog.setContentView(R.layout.tt_sound_volume_dialog);
         soundVolumeDialog.setCanceledOnTouchOutside(true);
-        soundVolumeImg = (ImageView) soundVolumeDialog.findViewById(R.id.sound_volume_img);
-        soundVolumeLayout = (LinearLayout) soundVolumeDialog.findViewById(R.id.sound_volume_bk);
+        soundVolumeImg = soundVolumeDialog.findViewById(R.id.sound_volume_img);
+        soundVolumeLayout = soundVolumeDialog.findViewById(R.id.sound_volume_bk);
     }
 
     /**
@@ -892,8 +888,8 @@ public class MessageActivity extends TTBaseActivity
             break;
             case R.id.take_camera_btn: {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                takePhotoSavePath = CommonUtil.getImageSavePath(String.valueOf(System
-                        .currentTimeMillis())
+                takePhotoSavePath = CommonUtil.getImageSavePath(System
+                        .currentTimeMillis()
                         + ".jpg");
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(takePhotoSavePath)));
                 startActivityForResult(intent, SysConstant.CAMERA_WITH_DATA);
@@ -1156,7 +1152,7 @@ public class MessageActivity extends TTBaseActivity
         MessageActivity.this.finish();
     }
 
-    private RadioGroup.OnCheckedChangeListener emoOnCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
+    private final RadioGroup.OnCheckedChangeListener emoOnCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, int id) {
             switch (id) {
@@ -1176,7 +1172,7 @@ public class MessageActivity extends TTBaseActivity
         }
     };
 
-    private YayaEmoGridView.OnEmoGridViewItemClick yayaOnEmoGridViewItemClick = new YayaEmoGridView.OnEmoGridViewItemClick() {
+    private final YayaEmoGridView.OnEmoGridViewItemClick yayaOnEmoGridViewItemClick = new YayaEmoGridView.OnEmoGridViewItemClick() {
         @Override
         public void onItemClick(int facesPos, int viewIndex) {
             int resId = Emoparser.getInstance(MessageActivity.this).getYayaResIdList()[facesPos];
@@ -1197,7 +1193,7 @@ public class MessageActivity extends TTBaseActivity
         }
     };
 
-    private OnEmoGridViewItemClick onEmoGridViewItemClick = new OnEmoGridViewItemClick() {
+    private final OnEmoGridViewItemClick onEmoGridViewItemClick = new OnEmoGridViewItemClick() {
         @Override
         public void onItemClick(int facesPos, int viewIndex) {
             int deleteId = (++viewIndex) * (SysConstant.pageSize - 1);
@@ -1233,7 +1229,7 @@ public class MessageActivity extends TTBaseActivity
         }
     };
 
-    private OnTouchListener lvPTROnTouchListener = new View.OnTouchListener() {
+    private final OnTouchListener lvPTROnTouchListener = new View.OnTouchListener() {
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {
@@ -1252,7 +1248,7 @@ public class MessageActivity extends TTBaseActivity
         }
     };
 
-    private View.OnFocusChangeListener msgEditOnFocusChangeListener = new android.view.View.OnFocusChangeListener() {
+    private final View.OnFocusChangeListener msgEditOnFocusChangeListener = new android.view.View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
             if (hasFocus) {
@@ -1269,7 +1265,7 @@ public class MessageActivity extends TTBaseActivity
         }
     };
 
-    private ViewTreeObserver.OnGlobalLayoutListener onGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
+    private final ViewTreeObserver.OnGlobalLayoutListener onGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
         @Override
         public void onGlobalLayout() {
             Rect r = new Rect();

@@ -5,9 +5,9 @@ package com.mogujie.tt.imservice.callback;
  * @email : yingmu@mogujie.com.
  */
 public interface IMListener<T> {
-    public abstract void onSuccess(T response);
+    void onSuccess(T response);
 
-    public abstract void onFaild();
+    void onFaild();
 
-    public abstract void onTimeout();
+    void onTimeout();
 }

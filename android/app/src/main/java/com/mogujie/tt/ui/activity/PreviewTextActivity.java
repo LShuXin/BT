@@ -17,7 +17,7 @@ public class PreviewTextActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tt_activity_preview_text);
 
-        txtContent = (TextView) findViewById(R.id.content);
+        txtContent = findViewById(R.id.content);
 
         String displayText = getIntent().getStringExtra(IntentConstant.PREVIEW_TEXT_CONTENT);
         txtContent.setText(displayText);

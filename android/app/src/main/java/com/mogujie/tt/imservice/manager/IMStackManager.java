@@ -42,7 +42,7 @@ public class IMStackManager {
         if(mActivityStack == null || mActivityStack.size() ==0){
             return null;
         }
-        Activity activity = (Activity) mActivityStack.lastElement();
+        Activity activity = mActivityStack.lastElement();
         return activity;
     }
 

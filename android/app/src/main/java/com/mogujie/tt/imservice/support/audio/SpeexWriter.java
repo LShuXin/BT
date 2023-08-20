@@ -9,13 +9,13 @@ import java.util.List;
 
 public class SpeexWriter implements Runnable {
 
-    private Logger log = Logger.getLogger(SpeexWriter.class);
+    private final Logger log = Logger.getLogger(SpeexWriter.class);
     private final Object mutex = new Object();
 
-    private SpeexWriteClient client = new SpeexWriteClient();
+    private final SpeexWriteClient client = new SpeexWriteClient();
     private volatile boolean isRecording;
     private processedData pData;
-    private List<processedData> list;
+    private final List<processedData> list;
 
 
     public static int write_packageSize = 1024;
@@ -87,7 +87,7 @@ public class SpeexWriter implements Runnable {
     class processedData {
         // private long ts;
         private int size;
-        private byte[] processed = new byte[write_packageSize];
+        private final byte[] processed = new byte[write_packageSize];
     }
 
 }

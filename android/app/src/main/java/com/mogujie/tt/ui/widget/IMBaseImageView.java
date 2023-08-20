@@ -106,7 +106,7 @@ public class IMBaseImageView extends ImageView {
     }
 
     private static class ImageLoaddingListener extends SimpleImageLoadingListener {
-        private ImageLoaddingCallback imageLoaddingCallback;
+        private final ImageLoaddingCallback imageLoaddingCallback;
 
         public ImageLoaddingListener(ImageLoaddingCallback callback) {
             this.imageLoaddingCallback=callback;
@@ -119,6 +119,6 @@ public class IMBaseImageView extends ImageView {
     }
 
     public interface ImageLoaddingCallback {
-        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage);
+        void onLoadingComplete(String imageUri, View view, Bitmap loadedImage);
     }
 }

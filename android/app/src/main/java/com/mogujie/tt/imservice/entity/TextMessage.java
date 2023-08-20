@@ -9,6 +9,7 @@ import com.mogujie.tt.imservice.support.SequenceNumberMaker;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author : yingmu on 14-12-31.
@@ -82,13 +83,8 @@ public class TextMessage extends MessageEntity implements Serializable {
 
     @Override
     public byte[] getSendContent() {
-        try {
-            /** 加密*/
-            String sendContent =new String(com.mogujie.tt.Security.getInstance().EncryptMsg(content));
-            return sendContent.getBytes("utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return null;
+        /** 加密*/
+        String sendContent =new String(com.mogujie.tt.Security.getInstance().EncryptMsg(content));
+        return sendContent.getBytes(StandardCharsets.UTF_8);
     }
 }

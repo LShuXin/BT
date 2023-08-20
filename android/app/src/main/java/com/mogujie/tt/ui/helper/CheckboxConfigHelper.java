@@ -11,7 +11,7 @@ import java.util.TreeSet;
 
 // 配置滑动按钮的简单封装
 public class CheckboxConfigHelper {
-    private Logger logger = Logger.getLogger(CheckboxConfigHelper.class);
+    private final Logger logger = Logger.getLogger(CheckboxConfigHelper.class);
 	private ConfigurationSp configMgr;
 	public CheckboxConfigHelper() {
 	}

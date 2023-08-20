@@ -33,7 +33,7 @@ public class SessionDao extends AbstractDao<SessionEntity, Long> {
         public final static Property TalkId = new Property(7, int.class, "talkId", false, "TALK_ID");
         public final static Property Created = new Property(8, int.class, "created", false, "CREATED");
         public final static Property Updated = new Property(9, int.class, "updated", false, "UPDATED");
-    };
+    }
 
 
     public SessionDao(DaoConfig config) {
@@ -89,14 +89,14 @@ public class SessionDao extends AbstractDao<SessionEntity, Long> {
     /** @inheritdoc */
     @Override
     public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+        return cursor.isNull(offset) ? null : cursor.getLong(offset);
     }    
 
     /** @inheritdoc */
     @Override
     public SessionEntity readEntity(Cursor cursor, int offset) {
         SessionEntity entity = new SessionEntity( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
+            cursor.isNull(offset) ? null : cursor.getLong(offset), // id
             cursor.getString(offset + 1), // sessionKey
             cursor.getInt(offset + 2), // peerId
             cursor.getInt(offset + 3), // peerType
@@ -113,7 +113,7 @@ public class SessionDao extends AbstractDao<SessionEntity, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, SessionEntity entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setId(cursor.isNull(offset) ? null : cursor.getLong(offset));
         entity.setSessionKey(cursor.getString(offset + 1));
         entity.setPeerId(cursor.getInt(offset + 2));
         entity.setPeerType(cursor.getInt(offset + 3));

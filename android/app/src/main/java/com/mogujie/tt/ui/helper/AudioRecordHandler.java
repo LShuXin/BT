@@ -14,7 +14,7 @@ import com.mogujie.tt.utils.Logger;
 
 public class AudioRecordHandler implements Runnable {
 
-    private Logger logger = Logger.getLogger(AudioRecordHandler.class);
+    private final Logger logger = Logger.getLogger(AudioRecordHandler.class);
     private volatile boolean isRecording;
     private final Object mutex = new Object();
     private static final int frequency = 8000;
@@ -72,7 +72,7 @@ public class AudioRecordHandler implements Runnable {
                 maxVolumeStart = System.currentTimeMillis();
                 while (this.isRecording) {
                     endTime = System.currentTimeMillis();
-                    recordTime = (float) ((endTime - startTime) / 1000.0f);
+                    recordTime = (endTime - startTime) / 1000.0f;
                     if (recordTime >= SysConstant.MAX_SOUND_RECORD_TIME) {
                         MessageActivity.getUiHandler().sendEmptyMessage(
                                 HandlerConstant.RECORD_AUDIO_TOO_LONG);

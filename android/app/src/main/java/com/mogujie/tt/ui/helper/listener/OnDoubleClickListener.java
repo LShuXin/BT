@@ -32,14 +32,11 @@ public  abstract class OnDoubleClickListener implements View.OnTouchListener {
                     @Override
                     public void handleMessage(Message msg) {
                         super.handleMessage(msg);
-                        switch (msg.what){
-                            case HANDLER_ON_CLICK:{
-                                if(count == 1){
-                                    count = 0;
-                                    onClick(v);
-                                }
-
-                            }break;
+                        if (msg.what == HANDLER_ON_CLICK) {
+                            if (count == 1) {
+                                count = 0;
+                                onClick(v);
+                            }
                         }
                     }
                 };

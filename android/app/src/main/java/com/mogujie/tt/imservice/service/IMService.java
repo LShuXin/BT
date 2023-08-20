@@ -37,6 +37,8 @@ import com.mogujie.tt.utils.Logger;
 import de.greenrobot.event.EventBus;
 import static androidx.core.app.NotificationCompat.PRIORITY_MIN;
 
+import java.util.Objects;
+
 /**
  * IMService 负责所有IMManager的初始化与reset
  * 并且Manager的状态的改变 也会影响到IMService的操作
@@ -44,10 +46,10 @@ import static androidx.core.app.NotificationCompat.PRIORITY_MIN;
  * todo IMManager reflect or just like  ctx.getSystemService()
  */
 public class IMService extends Service {
-    private Logger logger = Logger.getLogger(IMService.class);
+    private final Logger logger = Logger.getLogger(IMService.class);
 
     /**binder*/
-    private IMServiceBinder binder = new IMServiceBinder();
+    private final IMServiceBinder binder = new IMServiceBinder();
     public class IMServiceBinder extends Binder {
         public IMService getService() {
             return IMService.this;
@@ -61,20 +63,20 @@ public class IMService extends Service {
     }
 
     //所有的管理类
-    private IMSocketManager socketMgr = IMSocketManager.instance();
-    private IMLoginManager loginMgr = IMLoginManager.instance();
-    private IMContactManager contactMgr = IMContactManager.instance();
-    private IMGroupManager groupMgr = IMGroupManager.instance();
-    private IMMessageManager messageMgr = IMMessageManager.instance();
-    private IMSessionManager sessionMgr = IMSessionManager.instance();
-    private IMReconnectManager reconnectMgr = IMReconnectManager.instance();
-    private IMUnreadMsgManager unReadMsgMgr = IMUnreadMsgManager.instance();
-    private IMNotificationManager notificationMgr = IMNotificationManager.instance();
-    private IMHeartBeatManager heartBeatManager = IMHeartBeatManager.instance();
+    private final IMSocketManager socketMgr = IMSocketManager.instance();
+    private final IMLoginManager loginMgr = IMLoginManager.instance();
+    private final IMContactManager contactMgr = IMContactManager.instance();
+    private final IMGroupManager groupMgr = IMGroupManager.instance();
+    private final IMMessageManager messageMgr = IMMessageManager.instance();
+    private final IMSessionManager sessionMgr = IMSessionManager.instance();
+    private final IMReconnectManager reconnectMgr = IMReconnectManager.instance();
+    private final IMUnreadMsgManager unReadMsgMgr = IMUnreadMsgManager.instance();
+    private final IMNotificationManager notificationMgr = IMNotificationManager.instance();
+    private final IMHeartBeatManager heartBeatManager = IMHeartBeatManager.instance();
 
     private ConfigurationSp configSp;
-    private LoginSp loginSp = LoginSp.instance();
-    private DBInterface dbInterface = DBInterface.instance();
+    private final LoginSp loginSp = LoginSp.instance();
+    private final DBInterface dbInterface = DBInterface.instance();
 
     @Override
     public void onCreate() {
@@ -104,14 +106,12 @@ public class IMService extends Service {
 
     /**收到消息需要上层的activity判断 {MessageActicity onEvent(PriorityEvent event)}，这个地方是特殊分支*/
     public void onEvent(PriorityEvent event){
-        switch (event.event){
-            case MSG_RECEIVED_MESSAGE:{
-                MessageEntity entity = (MessageEntity) event.object;
-                /**非当前的会话*/
-                logger.d("messageactivity#not this session msg -> id:%s", entity.getFromId());
-                messageMgr.ackReceiveMsg(entity);
-                unReadMsgMgr.add(entity);
-            }break;
+        if (Objects.requireNonNull(event.event) == PriorityEvent.Event.MSG_RECEIVED_MESSAGE) {
+            MessageEntity entity = (MessageEntity) event.object;
+            /**非当前的会话*/
+            logger.d("messageactivity#not this session msg -> id:%s", entity.getFromId());
+            messageMgr.ackReceiveMsg(entity);
+            unReadMsgMgr.add(entity);
         }
     }
 

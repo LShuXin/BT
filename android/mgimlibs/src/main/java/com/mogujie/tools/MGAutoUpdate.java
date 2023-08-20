@@ -30,18 +30,16 @@ import java.io.InputStream;
  * Feb 17, 2013
  */
 public class MGAutoUpdate {  
-	private Context mCtx;
-	private ProgressDialog mProgressDialog;
+	private final Context mCtx;
+	private final ProgressDialog mProgressDialog;
 	private long mCount;
 	private static final int UPDATE = 0x01;
-    private Handler mHandler = new Handler(){
+    private final Handler mHandler = new Handler(){
     	@Override
     	public void handleMessage(Message msg){
-    		switch(msg.what){
-    		case UPDATE:
-    			mProgressDialog.setProgress((int)(mCount / 1000));
-    			break;
-    		}
+            if (msg.what == UPDATE) {
+                mProgressDialog.setProgress((int) (mCount / 1000));
+            }
     	}
     };
     
@@ -153,11 +151,11 @@ public class MGAutoUpdate {
     }
     
     public interface UpdateOnCancleListener {
-    	public void cancel();
+    	void cancel();
     }
 
     public interface OnUpdateFinishListener{
-        public void onFinish();
+        void onFinish();
     }
   
 }  

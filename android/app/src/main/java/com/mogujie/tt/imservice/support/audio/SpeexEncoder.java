@@ -9,16 +9,16 @@ import java.util.List;
 
 public class SpeexEncoder implements Runnable {
 
-    private Logger log = Logger.getLogger(SpeexEncoder.class);
+    private final Logger log = Logger.getLogger(SpeexEncoder.class);
     private final Object mutex = new Object();
-    private Speex speex = new Speex();
+    private final Speex speex = new Speex();
 
     public static int encoder_packagesize = 1024;
     private byte[] processedData = new byte[encoder_packagesize];
 
     List<ReadData> list = null;
     private volatile boolean isRecording;
-    private String fileName;
+    private final String fileName;
 
     public SpeexEncoder(String fileName) {
         super();
@@ -29,7 +29,7 @@ public class SpeexEncoder implements Runnable {
 
     public void run() {
         SpeexWriter fileWriter = new SpeexWriter(fileName);
-        Thread consumerThread = new Thread((Runnable) fileWriter);
+        Thread consumerThread = new Thread(fileWriter);
         fileWriter.setRecording(true);
         consumerThread.start();
 
@@ -92,6 +92,6 @@ public class SpeexEncoder implements Runnable {
 
     class ReadData {
         private int size;
-        private short[] ready = new short[encoder_packagesize];
+        private final short[] ready = new short[encoder_packagesize];
     }
 }

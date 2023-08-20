@@ -29,14 +29,14 @@ public class BitmapCache extends Activity {
 
     public Handler handler = new Handler();
     public final String TAG = getClass().getSimpleName();
-    private static HashMap<String, SoftReference<Bitmap>> imageCache = new HashMap<String, SoftReference<Bitmap>>();
+    private static final HashMap<String, SoftReference<Bitmap>> imageCache = new HashMap<String, SoftReference<Bitmap>>();
     int threadCount = Runtime.getRuntime().availableProcessors();
     ExecutorService executorService = Executors
             .newFixedThreadPool(threadCount + 1);
 
     private static BitmapCache instance = null;
 
-    private Logger logger = Logger.getLogger(BitmapCache.class);
+    private final Logger logger = Logger.getLogger(BitmapCache.class);
 
     public static synchronized BitmapCache getInstance() {
         if (null == instance) {
@@ -176,7 +176,7 @@ public class BitmapCache extends Activity {
     }
 
     public interface ImageCallback {
-        public void imageLoad(ImageView imageView, Bitmap bitmap,
+        void imageLoad(ImageView imageView, Bitmap bitmap,
                 Object... params);
     }
 }

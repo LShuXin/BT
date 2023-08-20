@@ -91,9 +91,9 @@ public class MGDialog extends Dialog implements View.OnClickListener {
     }
 
     public interface OnButtonClickListener {
-        public void onOKButtonClick(MGDialog dialog);
+        void onOKButtonClick(MGDialog dialog);
 
-        public void onCancelButtonClick(MGDialog dialog);
+        void onCancelButtonClick(MGDialog dialog);
     }
 
     public static class DialogBuilder {
@@ -162,7 +162,7 @@ public class MGDialog extends Dialog implements View.OnClickListener {
 
             dialogLayout = mInflater.inflate(R.layout.tt_view_dialog_base, null);
 
-            Button okBtn = (Button) dialogLayout
+            Button okBtn = dialogLayout
                     .findViewById(R.id.imPositiveButton);
             if (!TextUtils.isEmpty(positiveButtonText)) {
                 okBtn.setOnClickListener(dialog);
@@ -171,7 +171,7 @@ public class MGDialog extends Dialog implements View.OnClickListener {
                 okBtn.setVisibility(View.GONE);
             }
 
-            Button cancelBtn = (Button) dialogLayout
+            Button cancelBtn = dialogLayout
                     .findViewById(R.id.imNegativeButton);
             if (!TextUtils.isEmpty(negativeButtonText)) {
                 cancelBtn.setOnClickListener(dialog);
@@ -183,7 +183,7 @@ public class MGDialog extends Dialog implements View.OnClickListener {
                 mlp.leftMargin = 0;
             }
 
-            TextView titleView = (TextView) dialogLayout
+            TextView titleView = dialogLayout
                     .findViewById(R.id.imTitle);
             if (!TextUtils.isEmpty(titleText)) {
                 titleView.setVisibility(View.VISIBLE);
@@ -191,7 +191,7 @@ public class MGDialog extends Dialog implements View.OnClickListener {
             }
 
             if (!TextUtils.isEmpty(subTitleText)) {
-                TextView subTitleView = (TextView) dialogLayout
+                TextView subTitleView = dialogLayout
                         .findViewById(R.id.imSubTitle);
                 subTitleView.setVisibility(View.VISIBLE);
                 subTitleView.setText(subTitleText);

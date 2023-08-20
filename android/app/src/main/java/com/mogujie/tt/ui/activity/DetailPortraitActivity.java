@@ -14,7 +14,7 @@ import com.mogujie.tt.ui.widget.ZoomableImageView;
 
 public class DetailPortraitActivity extends Activity  {
 
-	private Logger logger = Logger.getLogger(DetailPortraitActivity.class);
+	private final Logger logger = Logger.getLogger(DetailPortraitActivity.class);
     public static String imageUri = "";
 	
 	@Override
@@ -35,7 +35,7 @@ public class DetailPortraitActivity extends Activity  {
 		boolean isContactAvatar = intent.getBooleanExtra(IntentConstant.KEY_IS_IMAGE_CONTACT_AVATAR, false);
 		logger.d("displayimage#isContactAvatar:%s", isContactAvatar);
 
-		final ZoomableImageView portraitView = (ZoomableImageView) findViewById(R.id.detail_portrait);
+		final ZoomableImageView portraitView = findViewById(R.id.detail_portrait);
 
 
 		if (portraitView == null) {
@@ -76,7 +76,7 @@ public class DetailPortraitActivity extends Activity  {
 	}
 
     public interface finishActivity{
-        public void finish();
+        void finish();
     }
 
 }

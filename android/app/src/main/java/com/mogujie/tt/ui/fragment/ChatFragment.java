@@ -47,6 +47,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
 import java.util.List;
+import java.util.Objects;
 
 import de.greenrobot.event.EventBus;
 
@@ -80,7 +81,7 @@ public class ChatFragment extends MainFragment
         super.onAttach(activity);
     }
 
-    private IMServiceConnector imServiceConnector = new IMServiceConnector(){
+    private final IMServiceConnector imServiceConnector = new IMServiceConnector(){
 
         @Override
         public void onServiceDisconnected() {
@@ -122,9 +123,9 @@ public class ChatFragment extends MainFragment
         // 多端登陆也在用这个view
         noNetworkView = curView.findViewById(R.id.layout_no_network);
         noChatView = curView.findViewById(R.id.layout_no_chat);
-        reconnectingProgressBar = (ProgressBar) curView.findViewById(R.id.progressbar_reconnect);
-        displayView = (TextView) curView.findViewById(R.id.disconnect_text);
-        notifyImage = (ImageView) curView.findViewById(R.id.imageWifi);
+        reconnectingProgressBar = curView.findViewById(R.id.progressbar_reconnect);
+        displayView = curView.findViewById(R.id.disconnect_text);
+        notifyImage = curView.findViewById(R.id.imageWifi);
 
         super.init(curView);
         initTitleView();// 初始化顶部view
@@ -140,7 +141,7 @@ public class ChatFragment extends MainFragment
         setTopTitleBold(getActivity().getString(R.string.chat_title));
     }
     private void initContactListView() {
-        contactListView = (ListView) curView.findViewById(R.id.ContactListView);
+        contactListView = curView.findViewById(R.id.ContactListView);
         contactListView.setOnItemClickListener(this);
         contactListView.setOnItemLongClickListener(this);
         contactAdapter = new  ChatAdapter(getActivity());
@@ -309,10 +310,8 @@ public class ChatFragment extends MainFragment
     }
 
     public void onEventMainThread(ReconnectEvent reconnectEvent){
-        switch (reconnectEvent){
-            case DISABLE:{
-                handleServerDisconnected();
-            }break;
+        if (Objects.requireNonNull(reconnectEvent) == ReconnectEvent.DISABLE) {
+            handleServerDisconnected();
         }
     }
 

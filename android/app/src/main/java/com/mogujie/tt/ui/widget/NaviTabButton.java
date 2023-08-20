@@ -18,16 +18,16 @@ import com.mogujie.tt.ui.helper.listener.OnDoubleClickListener;
 public class NaviTabButton extends FrameLayout {
 	private int mIndex;
 
-	private ImageView mImage;
-	private TextView mTitle;
-	private TextView mNotify;
+	private final ImageView mImage;
+	private final TextView mTitle;
+	private final TextView mNotify;
 
 	private Drawable mSelectedImg;
 	private Drawable mUnselectedImg;
 
-	private Context mContext;
+	private final Context mContext;
 
-	private Logger logger = Logger.getLogger(NaviTabButton.class);
+	private final Logger logger = Logger.getLogger(NaviTabButton.class);
 
 	public NaviTabButton(Context context) {
 		this(context, null);
@@ -44,11 +44,11 @@ public class NaviTabButton extends FrameLayout {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.tt_navi_tab_button, this, true);
-        RelativeLayout container = (RelativeLayout) findViewById(R.id.tab_btn_container);
+        RelativeLayout container = findViewById(R.id.tab_btn_container);
 
-        mImage = (ImageView) findViewById(R.id.tab_btn_default);
-        mTitle = (TextView) findViewById(R.id.tab_btn_title);
-        mNotify = (TextView) findViewById(R.id.tab_unread_notify);
+        mImage = findViewById(R.id.tab_btn_default);
+        mTitle = findViewById(R.id.tab_btn_title);
+        mNotify = findViewById(R.id.tab_unread_notify);
 
         /**双击的判断是有延迟的,为了其他三个按钮click的点击速度，所以区别对待*/
         if (mIndex == 0) {

@@ -5,7 +5,7 @@ import com.mogujie.tt.imservice.support.SequenceNumberMaker;
 import com.mogujie.tt.utils.Logger;
 
 public class DefaultHeader extends Header {
-    private Logger logger = Logger.getLogger(DefaultHeader.class);
+    private final Logger logger = Logger.getLogger(DefaultHeader.class);
 
     public DefaultHeader(int serviceId, int commandId) {
         setVersion((short) SysConstant.PROTOCOL_VERSION);

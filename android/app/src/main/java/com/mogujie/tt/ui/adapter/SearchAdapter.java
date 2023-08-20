@@ -38,15 +38,15 @@ public class SearchAdapter extends BaseAdapter implements
         AdapterView.OnItemClickListener,
         AdapterView.OnItemLongClickListener{
 
-    private Logger logger = Logger.getLogger(SearchAdapter.class);
+    private final Logger logger = Logger.getLogger(SearchAdapter.class);
 
     private List<UserEntity>  userList = new ArrayList<>();
     private List<DepartmentEntity> deptList = new ArrayList<>();
     private List<GroupEntity> groupList = new ArrayList<>();
 
     private String searchKey;
-    private Context ctx;
-    private IMService imService;
+    private final Context ctx;
+    private final IMService imService;
     public SearchAdapter(Context context,IMService pimService){
         this.ctx = context;
         this.imService = pimService;
@@ -219,10 +219,10 @@ public class SearchAdapter extends BaseAdapter implements
         if (view == null) {
             userHolder = new UserHolder();
             view = LayoutInflater.from(ctx).inflate(R.layout.tt_item_contact, parent,false);
-            userHolder.nameView = (TextView) view.findViewById(R.id.contact_item_title);
-            userHolder.realNameView = (TextView) view.findViewById(R.id.contact_realname_title);
-            userHolder.sectionView = (TextView) view.findViewById(R.id.contact_category_title);
-            userHolder.avatar = (IMBaseImageView)view.findViewById(R.id.contact_portrait);
+            userHolder.nameView = view.findViewById(R.id.contact_item_title);
+            userHolder.realNameView = view.findViewById(R.id.contact_realname_title);
+            userHolder.sectionView = view.findViewById(R.id.contact_category_title);
+            userHolder.avatar = view.findViewById(R.id.contact_portrait);
             userHolder.divider = view.findViewById(R.id.contact_divider);
             view.setTag(userHolder);
         } else {
@@ -267,9 +267,9 @@ public class SearchAdapter extends BaseAdapter implements
         if (view == null) {
             groupHolder = new GroupHolder();
             view = LayoutInflater.from(ctx).inflate(R.layout.tt_item_contact_group, parent,false);
-            groupHolder.nameView = (TextView) view.findViewById(R.id.contact_item_title);
-            groupHolder.sectionView = (TextView) view.findViewById(R.id.contact_category_title);
-            groupHolder.avatar = (IMGroupAvatar)view.findViewById(R.id.contact_portrait);
+            groupHolder.nameView = view.findViewById(R.id.contact_item_title);
+            groupHolder.sectionView = view.findViewById(R.id.contact_category_title);
+            groupHolder.avatar = view.findViewById(R.id.contact_portrait);
             groupHolder.divider = view.findViewById(R.id.contact_divider);
             view.setTag(groupHolder);
         } else {
@@ -324,9 +324,9 @@ public class SearchAdapter extends BaseAdapter implements
         if (view == null) {
             deptHolder = new DeptHolder();
             view = LayoutInflater.from(ctx).inflate(R.layout.tt_item_contact, parent,false);
-            deptHolder.avatar = (IMBaseImageView)view.findViewById(R.id.contact_portrait);
-            deptHolder.nameView = (TextView) view.findViewById(R.id.contact_item_title);
-            deptHolder.sectionView = (TextView) view.findViewById(R.id.contact_category_title);
+            deptHolder.avatar = view.findViewById(R.id.contact_portrait);
+            deptHolder.nameView = view.findViewById(R.id.contact_item_title);
+            deptHolder.sectionView = view.findViewById(R.id.contact_category_title);
             deptHolder.divider = view.findViewById(R.id.contact_divider);
             view.setTag(deptHolder);
         } else {

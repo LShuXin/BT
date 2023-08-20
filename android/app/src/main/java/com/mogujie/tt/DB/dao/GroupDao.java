@@ -35,7 +35,7 @@ public class GroupDao extends AbstractDao<GroupEntity, Long> {
         public final static Property Status = new Property(9, int.class, "status", false, "STATUS");
         public final static Property Created = new Property(10, int.class, "created", false, "CREATED");
         public final static Property Updated = new Property(11, int.class, "updated", false, "UPDATED");
-    };
+    }
 
 
     public GroupDao(DaoConfig config) {
@@ -95,14 +95,14 @@ public class GroupDao extends AbstractDao<GroupEntity, Long> {
     /** @inheritdoc */
     @Override
     public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+        return cursor.isNull(offset) ? null : cursor.getLong(offset);
     }    
 
     /** @inheritdoc */
     @Override
     public GroupEntity readEntity(Cursor cursor, int offset) {
         GroupEntity entity = new GroupEntity( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
+            cursor.isNull(offset) ? null : cursor.getLong(offset), // id
             cursor.getInt(offset + 1), // peerId
             cursor.getInt(offset + 2), // groupType
             cursor.getString(offset + 3), // mainName
@@ -121,7 +121,7 @@ public class GroupDao extends AbstractDao<GroupEntity, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, GroupEntity entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setId(cursor.isNull(offset) ? null : cursor.getLong(offset));
         entity.setPeerId(cursor.getInt(offset + 1));
         entity.setGroupType(cursor.getInt(offset + 2));
         entity.setMainName(cursor.getString(offset + 3));

@@ -31,6 +31,7 @@ import com.mogujie.tt.ui.widget.IMBaseImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.File;
+import java.util.Objects;
 
 import de.greenrobot.event.EventBus;
 
@@ -41,7 +42,7 @@ public class MyFragment extends MainFragment {
     private View clearView;
     private View settingView;
 
-    private IMServiceConnector imServiceConnector = new IMServiceConnector(){
+    private final IMServiceConnector imServiceConnector = new IMServiceConnector(){
         @Override
         public void onServiceDisconnected() {}
 
@@ -98,9 +99,9 @@ public class MyFragment extends MainFragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), android.R.style.Theme_Holo_Light_Dialog));
                 LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View dialog_view = inflater.inflate(R.layout.tt_custom_dialog, null);
-                final EditText editText = (EditText)dialog_view.findViewById(R.id.dialog_edit_content);
+                final EditText editText = dialog_view.findViewById(R.id.dialog_edit_content);
                 editText.setVisibility(View.GONE);
-                TextView textText = (TextView)dialog_view.findViewById(R.id.dialog_title);
+                TextView textText = dialog_view.findViewById(R.id.dialog_title);
                 textText.setText(R.string.clear_cache_tip);
                 builder.setView(dialog_view);
 
@@ -142,9 +143,9 @@ public class MyFragment extends MainFragment {
                 AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), android.R.style.Theme_Holo_Light_Dialog));
                 LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View dialog_view = inflater.inflate(R.layout.tt_custom_dialog, null);
-                final EditText editText = (EditText)dialog_view.findViewById(R.id.dialog_edit_content);
+                final EditText editText = dialog_view.findViewById(R.id.dialog_edit_content);
                 editText.setVisibility(View.GONE);
-                TextView textText = (TextView)dialog_view.findViewById(R.id.dialog_title);
+                TextView textText = dialog_view.findViewById(R.id.dialog_title);
                 textText.setText(R.string.exit_teamtalk_tip);
                 builder.setView(dialog_view);
                 builder.setPositiveButton(getString(R.string.tt_ok), new DialogInterface.OnClickListener() {
@@ -218,9 +219,8 @@ public class MyFragment extends MainFragment {
 	}
 
     public void onEventMainThread(UserInfoEvent event){
-        switch (event){
-            case USER_INFO_OK:
-                init(imServiceConnector.getIMService());
+        if (Objects.requireNonNull(event) == UserInfoEvent.USER_INFO_OK) {
+            init(imServiceConnector.getIMService());
         }
     }
 
@@ -237,9 +237,9 @@ public class MyFragment extends MainFragment {
 		if (loginContact == null) {
 			return;
 		}
-		TextView nickNameView = (TextView) curView.findViewById(R.id.nickName);
-		TextView userNameView = (TextView) curView.findViewById(R.id.userName);
-        IMBaseImageView portraitImageView = (IMBaseImageView) curView.findViewById(R.id.user_portrait);
+		TextView nickNameView = curView.findViewById(R.id.nickName);
+		TextView userNameView = curView.findViewById(R.id.userName);
+        IMBaseImageView portraitImageView = curView.findViewById(R.id.user_portrait);
 
 		nickNameView.setText(loginContact.getMainName());
 		userNameView.setText(loginContact.getRealName());
@@ -251,7 +251,7 @@ public class MyFragment extends MainFragment {
         portraitImageView.setImageResource(R.drawable.tt_default_user_portrait_corner);
         portraitImageView.setImageUrl(loginContact.getAvatar());
 
-        RelativeLayout userContainer = (RelativeLayout) curView.findViewById(R.id.user_container);
+        RelativeLayout userContainer = curView.findViewById(R.id.user_container);
 		userContainer.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {

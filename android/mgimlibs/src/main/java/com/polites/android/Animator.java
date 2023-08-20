@@ -2,7 +2,7 @@ package com.polites.android;
 
 public class Animator extends Thread {
 
-	private GestureImageView view;
+	private final GestureImageView view;
 	private Animation animation;
 	private boolean running = false;
 	private boolean active = false;

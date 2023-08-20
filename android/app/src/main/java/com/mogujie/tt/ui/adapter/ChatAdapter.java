@@ -32,7 +32,7 @@ import java.util.List;
 public class ChatAdapter extends BaseAdapter {
 	private LayoutInflater mInflater = null;
 	private List<RecentInfo> recentSessionList = new ArrayList<>();
-	private Logger logger = Logger.getLogger(ChatAdapter.class);
+	private final Logger logger = Logger.getLogger(ChatAdapter.class);
 
     private static final int CONTACT_TYPE_INVALID = 0;
     private static final int CONTACT_TYPE_USER=1;
@@ -144,12 +144,12 @@ public class ChatAdapter extends BaseAdapter {
         if (null == convertView) {
             convertView = mInflater.inflate(R.layout.tt_item_chat,parent,false);
              holder = new ContactViewHolder();
-            holder.avatar = (IMBaseImageView) convertView.findViewById(R.id.contact_portrait);
-            holder.uname = (TextView) convertView.findViewById(R.id.shop_name);
-            holder.lastContent = (TextView) convertView.findViewById(R.id.message_body);
-            holder.lastTime = (TextView) convertView.findViewById(R.id.message_time);
-            holder.msgCount = (TextView) convertView.findViewById(R.id.message_count_notify);
-            holder.noDisturb = (ImageView)convertView.findViewById(R.id.message_time_no_disturb_view);
+            holder.avatar = convertView.findViewById(R.id.contact_portrait);
+            holder.uname = convertView.findViewById(R.id.shop_name);
+            holder.lastContent = convertView.findViewById(R.id.message_body);
+            holder.lastTime = convertView.findViewById(R.id.message_time);
+            holder.msgCount = convertView.findViewById(R.id.message_count_notify);
+            holder.noDisturb = convertView.findViewById(R.id.message_time_no_disturb_view);
             holder.avatar.setImageResource(R.drawable.tt_default_user_portrait_corner);
             convertView.setTag(holder);
         }else{
@@ -173,12 +173,12 @@ public class ChatAdapter extends BaseAdapter {
         if (null == convertView) {
             convertView = mInflater.inflate(R.layout.tt_item_chat_group, parent,false);
             holder = new GroupViewHolder();
-            holder.avatarLayout = (IMGroupAvatar) convertView.findViewById(R.id.contact_portrait);
-            holder.uname = (TextView) convertView.findViewById(R.id.shop_name);
-            holder.lastContent = (TextView) convertView.findViewById(R.id.message_body);
-            holder.lastTime = (TextView) convertView.findViewById(R.id.message_time);
-            holder.msgCount = (TextView) convertView.findViewById(R.id.message_count_notify);
-            holder.noDisturb = (ImageView)convertView.findViewById(R.id.message_time_no_disturb_view);
+            holder.avatarLayout = convertView.findViewById(R.id.contact_portrait);
+            holder.uname = convertView.findViewById(R.id.shop_name);
+            holder.lastContent = convertView.findViewById(R.id.message_body);
+            holder.lastTime = convertView.findViewById(R.id.message_time);
+            holder.msgCount = convertView.findViewById(R.id.message_count_notify);
+            holder.noDisturb = convertView.findViewById(R.id.message_time_no_disturb_view);
             convertView.setTag(holder);
         }else{
             holder = (GroupViewHolder)convertView.getTag();

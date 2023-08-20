@@ -9,7 +9,7 @@ import java.io.IOException;
  * A client write tags to local file.
  */
 public class SpeexWriteClient {
-    private static Logger log = Logger.getLogger(SpeexWriteClient.class);
+    private static final Logger log = Logger.getLogger(SpeexWriteClient.class);
 
     // private long timeBase = 0;
     // private int sampleRate = 0;

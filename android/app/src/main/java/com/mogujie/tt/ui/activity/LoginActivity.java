@@ -50,8 +50,8 @@ import de.greenrobot.event.EventBus;
  */
 public class LoginActivity extends TTBaseActivity {
 
-    private Logger logger = Logger.getLogger(LoginActivity.class);
-    private Handler uiHandler = new Handler();
+    private final Logger logger = Logger.getLogger(LoginActivity.class);
+    private final Handler uiHandler = new Handler();
     private EditText mNameView;
     private EditText mPasswordView;
     private View loginPage;
@@ -65,7 +65,7 @@ public class LoginActivity extends TTBaseActivity {
     private boolean autoLogin = true;
     private boolean loginSuccess = false;
 
-    private IMServiceConnector imServiceConnector = new IMServiceConnector() {
+    private final IMServiceConnector imServiceConnector = new IMServiceConnector() {
         @Override
         public void onServiceDisconnected() {
         }
@@ -100,7 +100,7 @@ public class LoginActivity extends TTBaseActivity {
                     }
                     mPasswordView.setText(loginIdentity.getPwd());
 
-                    if (autoLogin == false) {
+                    if (!autoLogin) {
                         break;
                     }
 
@@ -162,7 +162,7 @@ public class LoginActivity extends TTBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        intputManager = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
+        intputManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         logger.d("login#onCreate");
 
         SystemConfigSp.instance().init(getApplicationContext());
@@ -174,16 +174,16 @@ public class LoginActivity extends TTBaseActivity {
         EventBus.getDefault().register(this);
 
         setContentView(R.layout.tt_activity_login);
-        mSwitchLoginServer = (TextView)findViewById(R.id.sign_switch_login_server);
+        mSwitchLoginServer = findViewById(R.id.sign_switch_login_server);
         mSwitchLoginServer.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(LoginActivity.this, android.R.style.Theme_Holo_Light_Dialog));
                 LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View dialog_view = inflater.inflate(R.layout.tt_custom_dialog, null);
-                final EditText editText = (EditText)dialog_view.findViewById(R.id.dialog_edit_content);
+                final EditText editText = dialog_view.findViewById(R.id.dialog_edit_content);
                 editText.setText(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.LOGINSERVER));
-                TextView textText = (TextView)dialog_view.findViewById(R.id.dialog_title);
+                TextView textText = dialog_view.findViewById(R.id.dialog_title);
                 textText.setText(R.string.switch_login_server_title);
                 builder.setView(dialog_view);
                 builder.setPositiveButton(getString(R.string.tt_ok), new DialogInterface.OnClickListener() {
@@ -207,8 +207,8 @@ public class LoginActivity extends TTBaseActivity {
             }
         });
 
-        mNameView = (EditText) findViewById(R.id.name);
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mNameView = findViewById(R.id.name);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -275,9 +275,7 @@ public class LoginActivity extends TTBaseActivity {
         if (intent != null) {
             boolean notAutoLogin = intent.getBooleanExtra(IntentConstant.KEY_LOGIN_NOT_AUTO, false);
             logger.d("login#notAutoLogin:%s", notAutoLogin);
-            if (notAutoLogin) {
-                return false;
-            }
+            return !notAutoLogin;
         }
         return true;
     }

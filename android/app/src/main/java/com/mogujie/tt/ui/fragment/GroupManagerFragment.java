@@ -74,8 +74,8 @@ public class GroupManagerFragment extends TTBaseFragment{
             return curView;
         }
         curView = inflater.inflate(R.layout.tt_fragment_group_manage, topContentView);
-        noDisturbCheckbox = (CheckBox) curView.findViewById(R.id.NotificationNoDisturbCheckbox);
-        topSessionCheckBox = (CheckBox) curView.findViewById(R.id.NotificationTopMessageCheckbox);
+        noDisturbCheckbox = curView.findViewById(R.id.NotificationNoDisturbCheckbox);
+        topSessionCheckBox = curView.findViewById(R.id.NotificationTopMessageCheckbox);
         initRes();
         return curView;
     }
@@ -114,7 +114,7 @@ public class GroupManagerFragment extends TTBaseFragment{
     }
 
 
-    private IMServiceConnector imServiceConnector = new IMServiceConnector(){
+    private final IMServiceConnector imServiceConnector = new IMServiceConnector(){
         @Override
         public void onServiceDisconnected() {
         }
@@ -156,7 +156,7 @@ public class GroupManagerFragment extends TTBaseFragment{
             case DBConstant.SESSION_TYPE_GROUP:{
                 GroupEntity groupEntity = (GroupEntity) peerEntity;
                 // 群组名称的展示
-                TextView groupNameView = (TextView) curView.findViewById(R.id.group_manager_title);
+                TextView groupNameView = curView.findViewById(R.id.group_manager_title);
                 groupNameView.setText(groupEntity.getMainName());
             }break;
 
@@ -173,7 +173,7 @@ public class GroupManagerFragment extends TTBaseFragment{
     private void initAdapter(){
         logger.d("groupmgr#initAdapter");
 
-        gridView = (GridView) curView.findViewById(R.id.group_manager_grid);
+        gridView = curView.findViewById(R.id.group_manager_grid);
         gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));// 去掉点击时的黄色背影
         gridView.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), true, true));
 

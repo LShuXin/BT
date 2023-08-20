@@ -12,7 +12,7 @@ import com.mogujie.tt.utils.ScreenUtil;
  * Created by zhujian on 15/1/19.
  */
 public class GroupManagerGridView extends GridView {
-    private Context ctx;
+    private final Context ctx;
     public GroupManagerGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.ctx = context;

@@ -17,7 +17,7 @@ import java.io.IOException;
  * 2. 分发
  */
 public class IMPacketDispatcher {
-	private static Logger logger = Logger.getLogger(IMPacketDispatcher.class);
+	private static final Logger logger = Logger.getLogger(IMPacketDispatcher.class);
 
     /**
      * @param commandId
@@ -77,7 +77,6 @@ public class IMPacketDispatcher {
             case IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_DEPARTMENT_RESPONSE_VALUE:
                 IMBuddy.IMDepartmentRsp departmentRsp = IMBuddy.IMDepartmentRsp.parseFrom(buffer);
                 IMContactManager.instance().onRepDepartment(departmentRsp);
-                return;
 
         }
         } catch (IOException e) {
@@ -150,7 +149,6 @@ public class IMPacketDispatcher {
                     IMGroupManager.instance().receiveGroupChangeMemberNotify(notify);
                 case IMBaseDefine.GroupCmdID.CID_GROUP_SHIELD_GROUP_RESPONSE_VALUE:
                     //todo
-                    return;
             }
         }catch(IOException e){
             logger.e("groupPacketDispatcher# error,cid:%d",commandId);

@@ -76,10 +76,10 @@ public class MessageImageFragment extends Fragment {
 
     private void initRes(View curView) {
         try {
-            view = (GestureImageView) curView.findViewById(R.id.image);
-            newView = (GestureImageView) curView.findViewById(R.id.new_image);
-            parentLayout = (FrameLayout) curView.findViewById(R.id.layout);
-            mProgressbar = (ProgressBar) curView.findViewById(R.id.progress_bar);
+            view = curView.findViewById(R.id.image);
+            newView = curView.findViewById(R.id.new_image);
+            parentLayout = curView.findViewById(R.id.layout);
+            mProgressbar = curView.findViewById(R.id.progress_bar);
             mProgressbar.setVisibility(View.VISIBLE);
             view.setVisibility(View.VISIBLE);
             newView.setVisibility(View.GONE);

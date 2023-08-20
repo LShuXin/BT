@@ -28,9 +28,9 @@ public class SpeexDecoder {
 
     protected String srcFile;
 
-    private List<ProgressListener> listenerList = new ArrayList<ProgressListener>();
+    private final List<ProgressListener> listenerList = new ArrayList<ProgressListener>();
 
-    private File srcPath;
+    private final File srcPath;
     private AudioTrack track;
 
     public SpeexDecoder(File srcPath) throws Exception {
@@ -43,7 +43,7 @@ public class SpeexDecoder {
 
         if (minBufferSize < 0) {
             throw new Exception("Failed to get minimum buffer size: "
-                    + Integer.toString(minBufferSize));
+                    + minBufferSize);
         }
 
         track = new AudioTrack(AudioManager.STREAM_MUSIC, sampleRate,
@@ -253,10 +253,10 @@ public class SpeexDecoder {
          */
         return (data[offset] & 0xff) | ((data[offset + 1] & 0xff) << 8)
                 | ((data[offset + 2] & 0xff) << 16)
-                | ((data[offset + 3] & 0xff) << 24)
-                | ((data[offset + 4] & 0xff) << 32)
-                | ((data[offset + 5] & 0xff) << 40)
-                | ((data[offset + 6] & 0xff) << 48) | (data[offset + 7] << 56);
+                | ((long) (data[offset + 3] & 0xff) << 24)
+                | ((long) (data[offset + 4] & 0xff) << 32)
+                | ((long) (data[offset + 5] & 0xff) << 40)
+                | ((long) (data[offset + 6] & 0xff) << 48) | ((long) data[offset + 7] << 56);
     }
 
     protected static int readShort(final byte[] data, final int offset) {

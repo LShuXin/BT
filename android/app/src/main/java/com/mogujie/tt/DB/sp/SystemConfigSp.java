@@ -30,7 +30,7 @@ public class SystemConfigSp {
     public void init(Context ctx) {
         this.ctx = ctx;
         sharedPreferences = ctx.getSharedPreferences
-                (fileName, ctx.MODE_PRIVATE);
+                (fileName, Context.MODE_PRIVATE);
     }
 
     public String getStrConfig(SysCfgDimension dimension) {

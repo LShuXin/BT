@@ -23,7 +23,7 @@ import com.mogujie.tt.utils.Logger;
  */
 public class ZoomableImageView extends ImageView{
 
-    private static Logger logger = Logger.getLogger(ZoomableImageView.class);
+    private static final Logger logger = Logger.getLogger(ZoomableImageView.class);
     private float maxScale = 3f;
     private float minScale = 1f;
 
@@ -34,8 +34,8 @@ public class ZoomableImageView extends ImageView{
     private State state;
 
     private Matrix matrix;
-    private float[] finalTransformation = new float[9];
-    private PointF last = new PointF();
+    private final float[] finalTransformation = new float[9];
+    private final PointF last = new PointF();
     private float currentScale = 1f;
 
     private int viewWidth;
@@ -412,7 +412,7 @@ public class ZoomableImageView extends ImageView{
         public void setupDialogViews(final Dialog dialog){
             View dialogLyout = LayoutInflater.from(getContext()).inflate(R.layout.tt_dialog_call, null);
 
-            Button callButton = (Button)dialogLyout.findViewById(R.id.call);
+            Button callButton = dialogLyout.findViewById(R.id.call);
             callButton.setText(getContext().getText(R.string.save_image));
             callButton.setOnClickListener(new View.OnClickListener() {
                 @Override

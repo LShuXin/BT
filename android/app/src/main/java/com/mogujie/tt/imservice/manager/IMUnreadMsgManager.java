@@ -19,6 +19,7 @@ import com.mogujie.tt.utils.Logger;
 
 import java.io.StringBufferInputStream;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 import de.greenrobot.event.EventBus;
@@ -30,17 +31,17 @@ import de.greenrobot.event.EventBus;
  * DB 中不保存
  */
 public class IMUnreadMsgManager extends IMManager {
-    private Logger logger = Logger.getLogger(IMUnreadMsgManager.class);
-	private static IMUnreadMsgManager inst = new IMUnreadMsgManager();
+    private final Logger logger = Logger.getLogger(IMUnreadMsgManager.class);
+	private static final IMUnreadMsgManager inst = new IMUnreadMsgManager();
 	public static IMUnreadMsgManager instance() {
 			return inst;
 	}
 
-    private IMSocketManager imSocketManager = IMSocketManager.instance();
-    private IMLoginManager loginManager =IMLoginManager.instance();
+    private final IMSocketManager imSocketManager = IMSocketManager.instance();
+    private final IMLoginManager loginManager =IMLoginManager.instance();
 
     /**key=> sessionKey*/
-    private ConcurrentHashMap<String,UnreadEntity> unreadMsgMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String,UnreadEntity> unreadMsgMap = new ConcurrentHashMap<>();
     private int totalUnreadCount = 0;
 
     private boolean unreadListReady = false;
@@ -71,10 +72,8 @@ public class IMUnreadMsgManager extends IMManager {
      * @param event
      */
     public synchronized void triggerEvent(UnreadEvent event) {
-        switch (event.event){
-            case UNREAD_MSG_LIST_OK:
-                unreadListReady = true;
-                break;
+        if (Objects.requireNonNull(event.event) == UnreadEvent.Event.UNREAD_MSG_LIST_OK) {
+            unreadListReady = true;
         }
 
         EventBus.getDefault().post(event);

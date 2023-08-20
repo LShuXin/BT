@@ -11,7 +11,7 @@ import com.mogujie.tt.utils.Logger;
  */
 public class Header {
 
-    private Logger logger = Logger.getLogger(Header.class);
+    private final Logger logger = Logger.getLogger(Header.class);
 
 
     private int length; // 数据包长度，包括包头

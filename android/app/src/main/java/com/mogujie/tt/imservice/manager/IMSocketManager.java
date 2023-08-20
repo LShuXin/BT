@@ -40,8 +40,8 @@ import de.greenrobot.event.EventBus;
  */
 public class IMSocketManager extends IMManager {
 
-    private Logger logger = Logger.getLogger(IMSocketManager.class);
-    private static IMSocketManager inst = new IMSocketManager();
+    private final Logger logger = Logger.getLogger(IMSocketManager.class);
+    private static final IMSocketManager inst = new IMSocketManager();
 
     public static IMSocketManager instance() {
         return inst;
@@ -51,10 +51,10 @@ public class IMSocketManager extends IMManager {
         logger.d("login#creating IMSocketManager");
     }
 
-    private ListenerQueue listenerQueue = ListenerQueue.instance();
+    private final ListenerQueue listenerQueue = ListenerQueue.instance();
 
     // 请求消息服务器地址
-    private AsyncHttpClient client = new AsyncHttpClient();
+    private final AsyncHttpClient client = new AsyncHttpClient();
 
     /**底层socket*/
     private SocketThread msgServerThread;
@@ -249,10 +249,7 @@ public class IMSocketManager extends IMManager {
 
     /**判断链接是否处于断开状态*/
     public boolean isSocketConnect(){
-        if(msgServerThread == null || msgServerThread.isClose()){
-            return false;
-        }
-        return true;
+        return msgServerThread != null && !msgServerThread.isClose();
     }
 
     public void onMsgServerConnected() {

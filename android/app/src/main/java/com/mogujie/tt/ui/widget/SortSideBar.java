@@ -25,7 +25,7 @@ public class SortSideBar extends View {
             "W", "X", "Y", "Z", "#"
     };
     private int sel = -1;
-    private Paint paint = new Paint();
+    private final Paint paint = new Paint();
 
     private TextView textDialog;
 
@@ -89,34 +89,28 @@ public class SortSideBar extends View {
         final OnTouchingLetterChangedListener listener = onTouchingLetterChangedListener;
         final int c = (int) (y / getHeight() * b.length);// 点击y坐标所占总高度的比例*b数组的长度就等于点击b中的个数.
 
-        switch (action) {
-            case MotionEvent.ACTION_UP:
-                setBackgroundDrawable(new ColorDrawable(0x00000000));
-                sel = -1;//
-                invalidate();
-                if (textDialog != null) {
-                    textDialog.setVisibility(View.INVISIBLE);
-                }
-                break;
-
-            default:
-                // setBackgroundResource(R.drawable.sidebar_background);
-                if (oldChoose != c) {
-                    if (c >= 0 && c < b.length) {
-                        if (listener != null) {
-                            listener.onTouchingLetterChanged(b[c]);
-                        }
-                        if (textDialog != null) {
-                            textDialog.setText(b[c]);
-                            textDialog.setVisibility(View.VISIBLE);
-                        }
-
-                        sel = c;
-                        invalidate();
+        if (action == MotionEvent.ACTION_UP) {
+            setBackgroundDrawable(new ColorDrawable(0x00000000));
+            sel = -1;//
+            invalidate();
+            if (textDialog != null) {
+                textDialog.setVisibility(View.INVISIBLE);
+            }
+        } else {// setBackgroundResource(R.drawable.sidebar_background);
+            if (oldChoose != c) {
+                if (c >= 0 && c < b.length) {
+                    if (listener != null) {
+                        listener.onTouchingLetterChanged(b[c]);
                     }
-                }
+                    if (textDialog != null) {
+                        textDialog.setText(b[c]);
+                        textDialog.setVisibility(View.VISIBLE);
+                    }
 
-                break;
+                    sel = c;
+                    invalidate();
+                }
+            }
         }
         return true;
     }
@@ -127,7 +121,7 @@ public class SortSideBar extends View {
     }
 
     public interface OnTouchingLetterChangedListener {
-        public void onTouchingLetterChanged(String s);
+        void onTouchingLetterChanged(String s);
     }
 
 }

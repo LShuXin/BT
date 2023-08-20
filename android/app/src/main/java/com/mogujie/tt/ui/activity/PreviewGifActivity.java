@@ -30,8 +30,8 @@ public class PreviewGifActivity extends Activity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tt_activity_preview_gif);
-        gifView = (GifView) findViewById(R.id.gif);
-        backView = (ImageView)findViewById(R.id.back_btn);
+        gifView = findViewById(R.id.gif);
+        backView = findViewById(R.id.back_btn);
         backView.setOnClickListener(this);
         String content = getIntent().getStringExtra(IntentConstant.PREVIEW_TEXT_CONTENT);
         if(Emoparser.getInstance(this).isMessageGif(content))

@@ -35,7 +35,7 @@ public class TimeRenderView extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        time_title = (TextView) findViewById(R.id.time_title);
+        time_title = findViewById(R.id.time_title);
     }
 
     /**与数据绑定*/

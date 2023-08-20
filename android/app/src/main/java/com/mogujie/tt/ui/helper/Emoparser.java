@@ -27,13 +27,13 @@ import java.util.regex.Pattern;
  */
 @SuppressLint("UseSparseArrays")
 public class Emoparser {
-    private static Logger logger = Logger.getLogger(Emoparser.class);
+    private static final Logger logger = Logger.getLogger(Emoparser.class);
 
-    private Context context;
-    private String[] emoList;
-    private String[] yayaEmoList;
-    private Pattern mPattern;
-    private Pattern mYayaPattern;
+    private final Context context;
+    private final String[] emoList;
+    private final String[] yayaEmoList;
+    private final Pattern mPattern;
+    private final Pattern mYayaPattern;
     private static HashMap<String, Integer> phraseIdMap;
     private static HashMap<Integer, String> idPhraseMap;
     private static HashMap<String, Integer> yayaPhraseIdMap;

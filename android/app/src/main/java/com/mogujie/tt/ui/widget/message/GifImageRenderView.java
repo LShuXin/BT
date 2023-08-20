@@ -36,7 +36,7 @@ public class GifImageRenderView extends  BaseMsgRenderView {
 
     protected void onFinishInflate() {
         super.onFinishInflate();
-        messageContent = (GifView) findViewById(R.id.message_image);
+        messageContent = findViewById(R.id.message_image);
     }
 
     /**

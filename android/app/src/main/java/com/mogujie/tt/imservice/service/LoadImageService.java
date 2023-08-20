@@ -27,7 +27,7 @@ import de.greenrobot.event.EventBus;
  */
 public class LoadImageService extends IntentService {
 
-    private static Logger logger = Logger.getLogger(LoadImageService.class);
+    private static final Logger logger = Logger.getLogger(LoadImageService.class);
 
     public LoadImageService(){
         super("LoadImageService");
@@ -56,7 +56,7 @@ public class LoadImageService extends IntentService {
             Bitmap bitmap;
             try {
                 File file= new File(messageInfo.getPath());
-                if(file.exists() && FileUtil.getExtensionName(messageInfo.getPath()).toLowerCase().equals(".gif"))
+                if(file.exists() && FileUtil.getExtensionName(messageInfo.getPath()).equalsIgnoreCase(".gif"))
                 {
                     MoGuHttpClient httpClient = new MoGuHttpClient();
                     SystemConfigSp.instance().init(getApplicationContext());

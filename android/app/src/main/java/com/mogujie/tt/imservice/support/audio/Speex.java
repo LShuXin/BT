@@ -12,7 +12,7 @@ class Speex {
      * noticeable with headphones) 8 : 15kbps (artifacts not usually noticeable)
      */
     private static final int DEFAULT_COMPRESSION = 4;
-    private Logger log = Logger.getLogger(Speex.class);
+    private final Logger log = Logger.getLogger(Speex.class);
 
     Speex() {
     }
@@ -44,9 +44,9 @@ class Speex {
 
     public native int getFrameSize();
 
-    public native int decode(byte encoded[], short lin[], int size);
+    public native int decode(byte[] encoded, short[] lin, int size);
 
-    public native int encode(short lin[], int offset, byte encoded[], int size);
+    public native int encode(short[] lin, int offset, byte[] encoded, int size);
 
     public native void close();
 

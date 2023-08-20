@@ -26,14 +26,14 @@ import java.util.List;
  */
 public class SearchFragment extends TTBaseFragment {
 
-	private Logger logger = Logger.getLogger(SearchFragment.class);
+	private final Logger logger = Logger.getLogger(SearchFragment.class);
 	private View curView = null;
 	private ListView listView;
     private View noSearchResultView;
 	private SearchAdapter adapter;
 	IMService imService;
 
-    private IMServiceConnector imServiceConnector = new IMServiceConnector(){
+    private final IMServiceConnector imServiceConnector = new IMServiceConnector(){
         @Override
         public void onIMServiceConnected() {
             logger.d("config#onIMServiceConnected");
@@ -58,7 +58,7 @@ public class SearchFragment extends TTBaseFragment {
 		curView = inflater.inflate(R.layout.tt_fragment_search, topContentView);
         noSearchResultView = curView.findViewById(R.id.layout_no_search_result);
 		initTopBar();
-        listView = (ListView) curView.findViewById(R.id.search);
+        listView = curView.findViewById(R.id.search);
 		return curView;
 	}
 

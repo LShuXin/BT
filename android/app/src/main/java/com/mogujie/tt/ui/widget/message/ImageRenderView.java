@@ -25,7 +25,7 @@ import com.mogujie.tt.utils.Logger;
  *
  */
 public class ImageRenderView extends BaseMsgRenderView {
-    private Logger logger = Logger.getLogger(ImageRenderView.class);
+    private final Logger logger = Logger.getLogger(ImageRenderView.class);
 
     // 上层必须实现的接口
     private ImageLoadListener imageLoadListener;
@@ -54,8 +54,8 @@ public class ImageRenderView extends BaseMsgRenderView {
     protected void onFinishInflate() {
         super.onFinishInflate();
         messageLayout = findViewById(R.id.message_layout);
-        messageImage = (BubbleImageView) findViewById(R.id.message_image);
-        imageProgress = (MGProgressbar) findViewById(R.id.tt_image_progress);
+        messageImage = findViewById(R.id.message_image);
+        imageProgress = findViewById(R.id.tt_image_progress);
         imageProgress.setShowText(false);
     }
 
@@ -316,8 +316,8 @@ public class ImageRenderView extends BaseMsgRenderView {
 
     /**---------------------图片下载相关、点击、以及事件回调start-----------------------------------*/
     public interface  BtnImageListener{
-        public void onMsgSuccess();
-        public void onMsgFailure();
+        void onMsgSuccess();
+        void onMsgFailure();
     }
 
     public void setBtnImageListener(BtnImageListener btnImageListener){
@@ -326,9 +326,9 @@ public class ImageRenderView extends BaseMsgRenderView {
 
 
     public interface ImageLoadListener{
-        public void onLoadComplete(String path);
+        void onLoadComplete(String path);
         // 应该把exception 返回结构放进去
-        public void onLoadFailed();
+        void onLoadFailed();
 
     }
 

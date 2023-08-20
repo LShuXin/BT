@@ -23,7 +23,7 @@ import com.mogujie.tt.utils.Logger;
 public class EmoGridViewAdapter extends BaseAdapter {
     private Context context = null;
     private int[] emoResIds = null;
-    private static Logger logger = Logger.getLogger(EmoGridViewAdapter.class);
+    private static final Logger logger = Logger.getLogger(EmoGridViewAdapter.class);
 
     public EmoGridViewAdapter(Context cxt, int[] ids) {
         this.context = cxt;

@@ -23,8 +23,8 @@ import java.util.List;
  */
 public class ImageBucketAdapter extends BaseAdapter {
 
-    private Activity act;
-    private Logger logger = Logger.getLogger(ImageBucketAdapter.class);
+    private final Activity act;
+    private final Logger logger = Logger.getLogger(ImageBucketAdapter.class);
     public static int selectedPosition = -1;
 
     // 图片集列表
@@ -37,8 +37,8 @@ public class ImageBucketAdapter extends BaseAdapter {
             try {
                 if (null != imageView && null != bitmap) {
                     String url = (String) params[0];
-                    if (null != url && url.equals((String) imageView.getTag())) {
-                        ((ImageView) imageView).setImageBitmap(bitmap);
+                    if (null != url && url.equals(imageView.getTag())) {
+                        imageView.setImageBitmap(bitmap);
                     } else {
                         logger.e("callback, bmp not match");
                     }
@@ -87,10 +87,10 @@ public class ImageBucketAdapter extends BaseAdapter {
             if (null == convertView) {
                 holder = new Holder();
                 convertView = View.inflate(act, R.layout.tt_item_image_pick, null);
-                holder.iv = (ImageView) convertView.findViewById(R.id.image);
-                holder.name = (TextView) convertView.findViewById(R.id.name);
-                holder.count = (TextView) convertView.findViewById(R.id.count);
-                holder.albumArrow = (ImageView) convertView
+                holder.iv = convertView.findViewById(R.id.image);
+                holder.name = convertView.findViewById(R.id.name);
+                holder.count = convertView.findViewById(R.id.count);
+                holder.albumArrow = convertView
                         .findViewById(R.id.im_album_arrow);
                 convertView.setTag(holder);
             } else {

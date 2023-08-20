@@ -31,8 +31,8 @@ import java.util.Set;
  * @YM 改造
  */
 public class GroupManagerAdapter extends BaseAdapter {
-	private Logger logger = Logger.getLogger(GroupManagerAdapter.class);
-	private Context context;
+	private final Logger logger = Logger.getLogger(GroupManagerAdapter.class);
+	private final Context context;
 
     // 用于控制是否是删除状态，也就是那个减号是否出现
 	private boolean removeState = false;
@@ -40,10 +40,10 @@ public class GroupManagerAdapter extends BaseAdapter {
     private boolean showPlusTag = false;
 
 
-	private List<UserEntity> memberList = new ArrayList<>();
-    private IMService imService;
+	private final List<UserEntity> memberList = new ArrayList<>();
+    private final IMService imService;
     private int groupCreatorId = -1;
-    private PeerEntity peerEntity;
+    private final PeerEntity peerEntity;
 
 	public GroupManagerAdapter(Context c,IMService imService,PeerEntity peerEntity) {
         memberList.clear();
@@ -178,9 +178,9 @@ public class GroupManagerAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.tt_group_manage_grid_item, null);
 
             holder = new GroupHolder();
-            holder.imageView =  (IMBaseImageView) convertView.findViewById(R.id.grid_item_image);
-            holder.userTitle = (TextView) convertView.findViewById(R.id.group_manager_user_title);
-            holder.role = (ImageView)convertView.findViewById(R.id.grid_item_image_role);
+            holder.imageView = convertView.findViewById(R.id.grid_item_image);
+            holder.userTitle = convertView.findViewById(R.id.group_manager_user_title);
+            holder.role = convertView.findViewById(R.id.grid_item_image_role);
             holder.deleteImg = convertView.findViewById(R.id.deleteLayout);
             holder.imageView.setDefaultImageRes(R.drawable.tt_default_user_portrait_corner);
             convertView.setTag(holder);

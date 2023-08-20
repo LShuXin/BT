@@ -118,7 +118,7 @@ public class IMUIHelper {
 
     // 对话框回调函数
     public interface dialogCallback{
-        public void callback();
+        void callback();
     }
 
     public static void showCustomDialog(Context context,int visibale,String title, final dialogCallback callback)
@@ -126,9 +126,9 @@ public class IMUIHelper {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(context, android.R.style.Theme_Holo_Light_Dialog));
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialog_view = inflater.inflate(R.layout.tt_custom_dialog, null);
-        final EditText editText = (EditText)dialog_view.findViewById(R.id.dialog_edit_content);
+        final EditText editText = dialog_view.findViewById(R.id.dialog_edit_content);
         editText.setVisibility(visibale);
-        TextView textText = (TextView)dialog_view.findViewById(R.id.dialog_title);
+        TextView textText = dialog_view.findViewById(R.id.dialog_title);
         textText.setText(title);
         builder.setView(dialog_view);
 

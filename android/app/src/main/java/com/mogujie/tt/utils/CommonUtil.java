@@ -28,7 +28,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CommonUtil {
-    private  static Logger logger = Logger.getLogger(CommonUtil.class);
+    private  static final Logger logger = Logger.getLogger(CommonUtil.class);
     /**
      * @Description 判断是否是顶部activity
      * @param context
@@ -51,12 +51,8 @@ public class CommonUtil {
      * @return
      */
     public static boolean checkSDCard() {
-        if (android.os.Environment.getExternalStorageState().equals(
-                android.os.Environment.MEDIA_MOUNTED)) {
-            return true;
-        }
-
-        return false;
+        return Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED);
     }
 
     /**
@@ -326,7 +322,7 @@ public class CommonUtil {
 
     public static String getAudioSavePath(int userId) {
         String path = getSavePath(SysConstant.FILE_SAVE_TYPE_AUDIO) + userId
-                + "_" + String.valueOf(System.currentTimeMillis())
+                + "_" + System.currentTimeMillis()
                 + ".spx";
         File file = new File(path);
         File parent = file.getParentFile();
@@ -405,7 +401,7 @@ public class CommonUtil {
 
     public static boolean gifCheck(String url)
     {
-       boolean isGif = !TextUtils.isEmpty(url) && url.equals(CommonUtil.matchUrl(url)) && url.toLowerCase().substring(url.length() - 4, url.length()).equals(".gif");
+       boolean isGif = !TextUtils.isEmpty(url) && url.equals(CommonUtil.matchUrl(url)) && url.toLowerCase().startsWith(".gif", url.length() - 4);
        return isGif;
     }
 

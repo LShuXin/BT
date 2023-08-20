@@ -39,7 +39,7 @@ wget http://mirrors.sohu.com/nginx/nginx-1.6.0.tar.gz
 apache-log4cxx-0.10.0
 
 ```
-https://archive.apache.org/dist/logging/log4cxx/0.10.0/apache-log4cxx-0.10.0.tar.gz
+  https://archive.apache.org/dist/logging/log4cxx/0.10.0/apache-log4cxx-0.10.0.tar.gz
 ```
 
 MariaDB

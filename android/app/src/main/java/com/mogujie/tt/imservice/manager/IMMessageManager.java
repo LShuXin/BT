@@ -41,15 +41,15 @@ import de.greenrobot.event.EventBus;
  * 消息的处理
  */
 public class IMMessageManager extends IMManager{
-    private Logger logger = Logger.getLogger(IMMessageManager.class);
-	private static IMMessageManager inst = new IMMessageManager();
+    private final Logger logger = Logger.getLogger(IMMessageManager.class);
+	private static final IMMessageManager inst = new IMMessageManager();
 	public static IMMessageManager instance() {
 			return inst;
 	}
 
-    private IMSocketManager imSocketManager = IMSocketManager.instance();
-    private IMSessionManager sessionManager = IMSessionManager.instance();
-    private DBInterface dbInterface = DBInterface.instance();
+    private final IMSocketManager imSocketManager = IMSocketManager.instance();
+    private final IMSessionManager sessionManager = IMSessionManager.instance();
+    private final DBInterface dbInterface = DBInterface.instance();
 
     // 消息发送超时时间爱你设定
     // todo eric, after testing ok, make it a longer value
@@ -58,10 +58,8 @@ public class IMMessageManager extends IMManager{
 
 
     private long getTimeoutTolerance(MessageEntity msg) {
-        switch (msg.getDisplayType()){
-            case DBConstant.SHOW_IMAGE_TYPE:
-                return IMAGE_TIMEOUT_MILLISECONDS;
-            default:break;
+        if (msg.getDisplayType() == DBConstant.SHOW_IMAGE_TYPE) {
+            return IMAGE_TIMEOUT_MILLISECONDS;
         }
         return TIMEOUT_MILLISECONDS;
     }

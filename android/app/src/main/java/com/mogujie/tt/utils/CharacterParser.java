@@ -8,7 +8,7 @@ import com.mogujie.tt.imservice.entity.MsgAnalyzeEngine;
  * todo 使用方，以及使用的场景?
  */
 public class CharacterParser {  
-    private static int[] pyvalue = new int[] {-20319, -20317, -20304, -20295, -20292, -20283, -20265, -20257, -20242, -20230, -20051, -20036, -20032,  
+    private static final int[] pyvalue = new int[] {-20319, -20317, -20304, -20295, -20292, -20283, -20265, -20257, -20242, -20230, -20051, -20036, -20032,
             -20026, -20002, -19990, -19986, -19982, -19976, -19805, -19784, -19775, -19774, -19763, -19756, -19751, -19746, -19741, -19739, -19728,  
             -19725, -19715, -19540, -19531, -19525, -19515, -19500, -19484, -19479, -19467, -19289, -19288, -19281, -19275, -19270, -19263, -19261,  
             -19249, -19243, -19242, -19238, -19235, -19227, -19224, -19218, -19212, -19038, -19023, -19018, -19006, -19003, -18996, -18977, -18961,  
@@ -56,7 +56,7 @@ public class CharacterParser {
             "zhun", "zhuo", "zi", "zong", "zou", "zu", "zuan", "zui", "zun", "zuo"};  
     private StringBuilder buffer;  
     private String resource;  
-    private static CharacterParser characterParser = new CharacterParser();  
+    private static final CharacterParser characterParser = new CharacterParser();
   
     public static CharacterParser getInstance() {  
         return characterParser;  
@@ -113,7 +113,7 @@ public class CharacterParser {
         for (int i = 0; i < chs.length(); i++) {  
             key = chs.substring(i, i + 1);  
             if (key.getBytes().length >= 2) {  
-                value = (String) convertChs(key);  
+                value = convertChs(key);
                 if (value == null) {  
                     value = "unknown";  
                 }  

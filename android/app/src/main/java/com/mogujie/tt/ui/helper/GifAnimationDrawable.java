@@ -20,7 +20,8 @@ public class GifAnimationDrawable extends AnimationDrawable
 {
 	private GifDecoder mGifDecoder;
 	private Bitmap mTmpBitmap;
-	private int height, width;
+	private final int height;
+    private final int width;
     public Handler uiHandler;
 
     public GifAnimationDrawable(InputStream is,HandlerThread handlerThread,Handler workHandler,Handler uiHandler) throws IOException {
@@ -36,7 +37,7 @@ public class GifAnimationDrawable extends AnimationDrawable
 	{
 		super();
 		InputStream bis = is;
-		if(!BufferedInputStream.class.isInstance(bis)) bis = new BufferedInputStream(is, 32768);
+		if(!(bis instanceof BufferedInputStream)) bis = new BufferedInputStream(is, 32768);
 		mGifDecoder = new GifDecoder();
 		mGifDecoder.read(bis);
 		mTmpBitmap = mGifDecoder.getFrame(0);
@@ -57,7 +58,7 @@ public class GifAnimationDrawable extends AnimationDrawable
         }
 	}
 
-	private Runnable loader = new Runnable(){
+	private final Runnable loader = new Runnable(){
 		public void run() 
 		{
 			mGifDecoder.complete();

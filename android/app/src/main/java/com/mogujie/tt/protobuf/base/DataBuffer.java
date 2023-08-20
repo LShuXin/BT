@@ -6,6 +6,7 @@ import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 数据缓冲区对象(ChannelBuffer)
@@ -15,7 +16,7 @@ import java.nio.charset.Charset;
 public class DataBuffer {
 
 	public ChannelBuffer buffer;
-	private static Logger logger = Logger.getLogger(DataBuffer.class);
+	private static final Logger logger = Logger.getLogger(DataBuffer.class);
 
 	public DataBuffer() {
 		buffer = ChannelBuffers.dynamicBuffer();
@@ -114,7 +115,7 @@ public class DataBuffer {
 		
 		byte[] bytes = readBytes(length);
 
-		return new String(bytes, Charset.forName("utf8"));
+		return new String(bytes, StandardCharsets.UTF_8);
 	}
 
 	public String readString(int length) {

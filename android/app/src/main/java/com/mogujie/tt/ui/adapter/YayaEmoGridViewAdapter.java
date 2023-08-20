@@ -22,7 +22,7 @@ import com.mogujie.tt.utils.Logger;
 public class YayaEmoGridViewAdapter extends BaseAdapter {
     private Context context = null;
     private int[] emoResIds = null;
-    private static Logger logger = Logger.getLogger(YayaEmoGridViewAdapter.class);
+    private static final Logger logger = Logger.getLogger(YayaEmoGridViewAdapter.class);
 
     public YayaEmoGridViewAdapter(Context cxt, int[] ids) {
         this.context = cxt;

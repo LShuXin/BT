@@ -26,7 +26,7 @@ public class SettingFragment extends TTBaseFragment{
 	CheckboxConfigHelper checkBoxConfiger = new CheckboxConfigHelper();
 
 
-    private IMServiceConnector imServiceConnector = new IMServiceConnector(){
+    private final IMServiceConnector imServiceConnector = new IMServiceConnector(){
         @Override
         public void onIMServiceConnected() {
             logger.d("config#onIMServiceConnected");
@@ -66,9 +66,9 @@ public class SettingFragment extends TTBaseFragment{
     }
 
     private void initOptions() {
-		notificationNoDisturbCheckBox = (CheckBox) curView.findViewById(R.id.NotificationNoDisturbCheckbox);
-		notificationGotSoundCheckBox = (CheckBox) curView.findViewById(R.id.notifyGotSoundCheckBox);
-		notificationGotVibrationCheckBox = (CheckBox) curView.findViewById(R.id.notifyGotVibrationCheckBox);
+		notificationNoDisturbCheckBox = curView.findViewById(R.id.NotificationNoDisturbCheckbox);
+		notificationGotSoundCheckBox = curView.findViewById(R.id.notifyGotSoundCheckBox);
+		notificationGotVibrationCheckBox = curView.findViewById(R.id.notifyGotVibrationCheckBox);
 //		saveTrafficModeCheckBox = (CheckBox) curView.findViewById(R.id.saveTrafficCheckBox);
 		
 		checkBoxConfiger.initCheckBox(notificationNoDisturbCheckBox, SysConstant.SETTING_GLOBAL, ConfigurationSp.CfgDimension.NOTIFICATION );

@@ -40,9 +40,9 @@ public class PreviewActivity extends Activity
     private ImageView back;
     private ImageView select;
     private final ImageGridAdapter adapter = ImageGridActivity.getAdapter();
-    private Map<Integer, Integer> removePosition = new HashMap<Integer, Integer>();
+    private final Map<Integer, Integer> removePosition = new HashMap<Integer, Integer>();
     private int curImagePosition = -1;
-    private Logger logger = Logger.getLogger(PreviewActivity.class);
+    private final Logger logger = Logger.getLogger(PreviewActivity.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +55,10 @@ public class PreviewActivity extends Activity
     }
 
     private void initView() {
-        viewPager = (CustomViewPager) findViewById(R.id.viewPager);
-        group = (ViewGroup) findViewById(R.id.viewGroup);
-        back = (ImageView) findViewById(R.id.back_btn);
-        select = (ImageView) findViewById(R.id.select_btn);
+        viewPager = findViewById(R.id.viewPager);
+        group = findViewById(R.id.viewGroup);
+        back = findViewById(R.id.back_btn);
+        select = findViewById(R.id.select_btn);
         back.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,8 +66,7 @@ public class PreviewActivity extends Activity
                 Iterator it = removePosition.keySet().iterator();
                 while (it.hasNext()) {
                     int key = (Integer) it.next();
-                    if (adapter.getSelectMap().containsKey(key))
-                        adapter.getSelectMap().remove(key);
+                    adapter.getSelectMap().remove(key);
                 }
                 ImageGridActivity.setAdapterSelectedMap(ImageGridActivity.getAdapter().getSelectMap());
                 removePosition.clear();
@@ -83,9 +82,7 @@ public class PreviewActivity extends Activity
                     if (item.isSelected()) {
                         int selTotal = adapter.getSelectTotalNum();
                         adapter.setSelectTotalNum(++selTotal);
-                        if (removePosition.containsKey(curImagePosition)) {
-                            removePosition.remove(curImagePosition);
-                        }
+                        removePosition.remove(curImagePosition);
                         ImageGridActivity.setSendText(selTotal);
                         select.setImageResource(R.drawable.tt_album_img_selected);
                     } else {
@@ -146,11 +143,7 @@ public class PreviewActivity extends Activity
         // 设置view pager
         viewPager.setAdapter(new PreviewAdapter());
         viewPager.setOnPageChangeListener(this);
-        if (adapter.getSelectMap().size() == 1) {
-            viewPager.setScanScroll(false);
-        } else {
-            viewPager.setScanScroll(true);
-        }
+        viewPager.setScanScroll(adapter.getSelectMap().size() != 1);
         viewPager.setCurrentItem(0);
     }
 

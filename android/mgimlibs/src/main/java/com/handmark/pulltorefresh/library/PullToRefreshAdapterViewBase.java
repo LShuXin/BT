@@ -241,8 +241,6 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 		}
 	}
 
-	;
-
 	@Override
 	protected void onPullToRefresh() {
 		super.onPullToRefresh();

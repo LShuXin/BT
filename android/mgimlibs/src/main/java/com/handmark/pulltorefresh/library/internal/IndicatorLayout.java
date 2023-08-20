@@ -40,8 +40,9 @@ public class IndicatorLayout extends FrameLayout implements AnimationListener {
 
 	static final int DEFAULT_ROTATION_ANIMATION_DURATION = 150;
 
-	private Animation mInAnim, mOutAnim;
-	private ImageView mArrowImageView;
+	private final Animation mInAnim;
+    private final Animation mOutAnim;
+	private final ImageView mArrowImageView;
 
 	private final Animation mRotateAnimation, mResetRotateAnimation;
 

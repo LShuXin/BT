@@ -245,7 +245,7 @@ public final class IMFile {
       fileRole_ = com.mogujie.tt.protobuf.IMBaseDefine.ClientFileRole.CLIENT_REALTIME_SENDER;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -456,7 +456,7 @@ public final class IMFile {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -465,11 +465,7 @@ public final class IMFile {
           
           return false;
         }
-        if (!hasFileRole()) {
-          
-          return false;
-        }
-        return true;
+        return hasFileRole();
       }
 
       public Builder mergeFrom(
@@ -861,7 +857,7 @@ public final class IMFile {
       taskId_ = "";
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -1052,16 +1048,12 @@ public final class IMFile {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasResultCode()) {
           
           return false;
         }
-        if (!hasTaskId()) {
-          
-          return false;
-        }
-        return true;
+        return hasTaskId();
       }
 
       public Builder mergeFrom(
@@ -1455,7 +1447,7 @@ public final class IMFile {
       userId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -1666,7 +1658,7 @@ public final class IMFile {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasState()) {
           
           return false;
@@ -1675,11 +1667,7 @@ public final class IMFile {
           
           return false;
         }
-        if (!hasUserId()) {
-          
-          return false;
-        }
-        return true;
+        return hasUserId();
       }
 
       public Builder mergeFrom(
@@ -2176,7 +2164,7 @@ public final class IMFile {
       dataSize_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -2427,7 +2415,7 @@ public final class IMFile {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasTaskId()) {
           
           return false;
@@ -2444,11 +2432,7 @@ public final class IMFile {
           
           return false;
         }
-        if (!hasDataSize()) {
-          
-          return false;
-        }
-        return true;
+        return hasDataSize();
       }
 
       public Builder mergeFrom(
@@ -3002,7 +2986,7 @@ public final class IMFile {
       data_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -3253,7 +3237,7 @@ public final class IMFile {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasResultCode()) {
           
           return false;
@@ -3270,11 +3254,7 @@ public final class IMFile {
           
           return false;
         }
-        if (!hasData()) {
-          
-          return false;
-        }
-        return true;
+        return hasData();
       }
 
       public Builder mergeFrom(
@@ -3827,7 +3807,7 @@ public final class IMFile {
       transMode_ = com.mogujie.tt.protobuf.IMBaseDefine.FileType.FILE_TYPE_ONLINE;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -4078,7 +4058,7 @@ public final class IMFile {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasFromUserId()) {
           
           return false;
@@ -4095,11 +4075,7 @@ public final class IMFile {
           
           return false;
         }
-        if (!hasTransMode()) {
-          
-          return false;
-        }
-        return true;
+        return hasTransMode();
       }
 
       public Builder mergeFrom(
@@ -4776,7 +4752,7 @@ public final class IMFile {
       transMode_ = com.mogujie.tt.protobuf.IMBaseDefine.FileType.FILE_TYPE_ONLINE;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -5079,7 +5055,7 @@ public final class IMFile {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasResultCode()) {
           
           return false;
@@ -6034,7 +6010,7 @@ public final class IMFile {
       offlineReady_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -6357,7 +6333,7 @@ public final class IMFile {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasFromUserId()) {
           
           return false;
@@ -7064,7 +7040,7 @@ public final class IMFile {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -7249,12 +7225,8 @@ public final class IMFile {
         return this;
       }
 
-      public final boolean isInitialized() {
-        if (!hasUserId()) {
-          
-          return false;
-        }
-        return true;
+      public boolean isInitialized() {
+        return hasUserId();
       }
 
       public Builder mergeFrom(
@@ -7659,7 +7631,7 @@ public final class IMFile {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -7904,7 +7876,7 @@ public final class IMFile {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -8610,7 +8582,7 @@ public final class IMFile {
       fileSize_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -8863,7 +8835,7 @@ public final class IMFile {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasFromUserId()) {
           
           return false;
@@ -8880,11 +8852,7 @@ public final class IMFile {
           
           return false;
         }
-        if (!hasFileSize()) {
-          
-          return false;
-        }
-        return true;
+        return hasFileSize();
       }
 
       public Builder mergeFrom(
@@ -9411,7 +9379,7 @@ public final class IMFile {
       taskId_ = "";
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -9622,7 +9590,7 @@ public final class IMFile {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasFromUserId()) {
           
           return false;
@@ -9631,11 +9599,7 @@ public final class IMFile {
           
           return false;
         }
-        if (!hasTaskId()) {
-          
-          return false;
-        }
-        return true;
+        return hasTaskId();
       }
 
       public Builder mergeFrom(

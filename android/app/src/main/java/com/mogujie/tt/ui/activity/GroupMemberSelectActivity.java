@@ -18,7 +18,7 @@ public class GroupMemberSelectActivity extends FragmentActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (RESULT_OK != resultCode)
-            return;
+        if (RESULT_OK != resultCode) {
+        }
     }
 }

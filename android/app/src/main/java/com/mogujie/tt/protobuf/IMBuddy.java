@@ -205,7 +205,7 @@ public final class IMBuddy {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -410,16 +410,12 @@ public final class IMBuddy {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
         }
-        if (!hasLatestUpdateTime()) {
-          
-          return false;
-        }
-        return true;
+        return hasLatestUpdateTime();
       }
 
       public Builder mergeFrom(
@@ -795,7 +791,7 @@ public final class IMBuddy {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -1010,7 +1006,7 @@ public final class IMBuddy {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -1407,7 +1403,7 @@ public final class IMBuddy {
       userStat_ = com.mogujie.tt.protobuf.IMBaseDefine.UserStat.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -1580,16 +1576,12 @@ public final class IMBuddy {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserStat()) {
           
           return false;
         }
-        if (!getUserStat().isInitialized()) {
-          
-          return false;
-        }
-        return true;
+        return getUserStat().isInitialized();
       }
 
       public Builder mergeFrom(
@@ -1933,7 +1925,7 @@ public final class IMBuddy {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -1978,7 +1970,7 @@ public final class IMBuddy {
             .computeUInt32SizeNoTag(userIdList_.get(i));
         }
         size += dataSize;
-        size += 1 * getUserIdListList().size();
+        size += getUserIdListList().size();
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2147,12 +2139,8 @@ public final class IMBuddy {
         return this;
       }
 
-      public final boolean isInitialized() {
-        if (!hasUserId()) {
-          
-          return false;
-        }
-        return true;
+      public boolean isInitialized() {
+        return hasUserId();
       }
 
       public Builder mergeFrom(
@@ -2562,7 +2550,7 @@ public final class IMBuddy {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -2777,7 +2765,7 @@ public final class IMBuddy {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -3263,7 +3251,7 @@ public final class IMBuddy {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -3488,7 +3476,7 @@ public final class IMBuddy {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -3497,11 +3485,7 @@ public final class IMBuddy {
           
           return false;
         }
-        if (!hasSessionId()) {
-          
-          return false;
-        }
-        return true;
+        return hasSessionId();
       }
 
       public Builder mergeFrom(
@@ -3948,7 +3932,7 @@ public final class IMBuddy {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -4193,7 +4177,7 @@ public final class IMBuddy {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -4206,11 +4190,7 @@ public final class IMBuddy {
           
           return false;
         }
-        if (!hasSessionId()) {
-          
-          return false;
-        }
-        return true;
+        return hasSessionId();
       }
 
       public Builder mergeFrom(
@@ -4622,7 +4602,7 @@ public final class IMBuddy {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -4827,16 +4807,12 @@ public final class IMBuddy {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
         }
-        if (!hasLatestUpdateTime()) {
-          
-          return false;
-        }
-        return true;
+        return hasLatestUpdateTime();
       }
 
       public Builder mergeFrom(
@@ -5242,7 +5218,7 @@ public final class IMBuddy {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -5477,7 +5453,7 @@ public final class IMBuddy {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -5992,7 +5968,7 @@ public final class IMBuddy {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -6037,7 +6013,7 @@ public final class IMBuddy {
             .computeUInt32SizeNoTag(userIdList_.get(i));
         }
         size += dataSize;
-        size += 1 * getUserIdListList().size();
+        size += getUserIdListList().size();
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -6206,12 +6182,8 @@ public final class IMBuddy {
         return this;
       }
 
-      public final boolean isInitialized() {
-        if (!hasUserId()) {
-          
-          return false;
-        }
-        return true;
+      public boolean isInitialized() {
+        return hasUserId();
       }
 
       public Builder mergeFrom(
@@ -6621,7 +6593,7 @@ public final class IMBuddy {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -6836,7 +6808,7 @@ public final class IMBuddy {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -7318,7 +7290,7 @@ public final class IMBuddy {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -7525,16 +7497,12 @@ public final class IMBuddy {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
         }
-        if (!hasAvatarUrl()) {
-          
-          return false;
-        }
-        return true;
+        return hasAvatarUrl();
       }
 
       public Builder mergeFrom(
@@ -7923,7 +7891,7 @@ public final class IMBuddy {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -8128,16 +8096,12 @@ public final class IMBuddy {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
         }
-        if (!hasResultCode()) {
-          
-          return false;
-        }
-        return true;
+        return hasResultCode();
       }
 
       public Builder mergeFrom(
@@ -8463,7 +8427,7 @@ public final class IMBuddy {
       loginStat_ = com.mogujie.tt.protobuf.IMBaseDefine.UserStatType.USER_STATUS_ONLINE;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -8656,16 +8620,12 @@ public final class IMBuddy {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
         }
-        if (!hasLoginStat()) {
-          
-          return false;
-        }
-        return true;
+        return hasLoginStat();
       }
 
       public Builder mergeFrom(
@@ -8985,7 +8945,7 @@ public final class IMBuddy {
       sessionId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -9194,7 +9154,7 @@ public final class IMBuddy {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -9203,11 +9163,7 @@ public final class IMBuddy {
           
           return false;
         }
-        if (!hasSessionId()) {
-          
-          return false;
-        }
-        return true;
+        return hasSessionId();
       }
 
       public Builder mergeFrom(
@@ -9552,7 +9508,7 @@ public final class IMBuddy {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -9757,16 +9713,12 @@ public final class IMBuddy {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
         }
-        if (!hasLatestUpdateTime()) {
-          
-          return false;
-        }
-        return true;
+        return hasLatestUpdateTime();
       }
 
       public Builder mergeFrom(
@@ -10172,7 +10124,7 @@ public final class IMBuddy {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -10407,7 +10359,7 @@ public final class IMBuddy {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;

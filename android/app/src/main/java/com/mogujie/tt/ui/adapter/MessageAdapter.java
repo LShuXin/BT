@@ -60,15 +60,15 @@ import java.util.List;
  * @email : yingmu@mogujie.com.
  */
 public class MessageAdapter extends BaseAdapter {
-    private Logger logger = Logger.getLogger(MessageAdapter.class);
+    private final Logger logger = Logger.getLogger(MessageAdapter.class);
 
-    private ArrayList<Object> msgObjectList = new ArrayList<>();
+    private final ArrayList<Object> msgObjectList = new ArrayList<>();
 
     /**
      * 弹出气泡
      */
     private MessageOperatePopup currentPop;
-    private Context ctx;
+    private final Context ctx;
     /**
      * 依赖整体session状态的
      */
@@ -93,11 +93,7 @@ public class MessageAdapter extends BaseAdapter {
      */
     public void addItem(final MessageEntity msg) {
         if (msg.getDisplayType() == DBConstant.MSG_TYPE_SINGLE_TEXT) {
-            if (isMsgGif(msg)) {
-                msg.setGIfEmo(true);
-            } else {
-                msg.setGIfEmo(false);
-            }
+            msg.setGIfEmo(isMsgGif(msg));
         }
         int nextTime = msg.getCreated();
         if (getCount() > 0) {
@@ -161,8 +157,6 @@ public class MessageAdapter extends BaseAdapter {
         }
     }
 
-    ;
-
     /**
      * 下拉载入历史消息,从最上面开始添加
      */
@@ -177,11 +171,7 @@ public class MessageAdapter extends BaseAdapter {
         int nextTime = 0;
         for (MessageEntity msg : historyList) {
             if (msg.getDisplayType() == DBConstant.MSG_TYPE_SINGLE_TEXT) {
-                if (isMsgGif(msg)) {
-                    msg.setGIfEmo(true);
-                } else {
-                    msg.setGIfEmo(false);
-                }
+                msg.setGIfEmo(isMsgGif(msg));
             }
             nextTime = msg.getCreated();
             boolean needTimeBubble = DateUtil.needDisplayTime(preTime, nextTime);
@@ -758,9 +748,9 @@ public class MessageAdapter extends BaseAdapter {
             implements
             MessageOperatePopup.OnItemClickListener {
 
-        private MessageEntity mMsgInfo;
-        private int mType;
-        private int mPosition;
+        private final MessageEntity mMsgInfo;
+        private final int mType;
+        private final int mPosition;
 
         public OperateItemClickListener(MessageEntity msgInfo, int position) {
             mMsgInfo = msgInfo;
@@ -816,7 +806,7 @@ public class MessageAdapter extends BaseAdapter {
                 }
 
             } catch (Exception e) {
-                logger.e("chat#exception:" + e.toString());
+                logger.e("chat#exception:" + e);
             }
         }
 

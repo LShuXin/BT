@@ -10,7 +10,7 @@ public abstract class MainFragment extends TTBaseFragment {
 	private ProgressBar progressbar;
 
 	public void init(View curView) {
-		progressbar = (ProgressBar) curView.findViewById(R.id.progress_bar);
+		progressbar = curView.findViewById(R.id.progress_bar);
 	}
 
 	public void showProgressBar() {

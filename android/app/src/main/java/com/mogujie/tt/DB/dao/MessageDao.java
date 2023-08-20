@@ -34,7 +34,7 @@ public class MessageDao extends AbstractDao<MessageEntity, Long> {
         public final static Property Status = new Property(8, int.class, "status", false, "STATUS");
         public final static Property Created = new Property(9, int.class, "created", false, "CREATED");
         public final static Property Updated = new Property(10, int.class, "updated", false, "UPDATED");
-    };
+    }
 
 
     public MessageDao(DaoConfig config) {
@@ -99,14 +99,14 @@ public class MessageDao extends AbstractDao<MessageEntity, Long> {
     /** @inheritdoc */
     @Override
     public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+        return cursor.isNull(offset) ? null : cursor.getLong(offset);
     }    
 
     /** @inheritdoc */
     @Override
     public MessageEntity readEntity(Cursor cursor, int offset) {
         MessageEntity entity = new MessageEntity( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
+            cursor.isNull(offset) ? null : cursor.getLong(offset), // id
             cursor.getInt(offset + 1), // msgId
             cursor.getInt(offset + 2), // fromId
             cursor.getInt(offset + 3), // toId
@@ -124,7 +124,7 @@ public class MessageDao extends AbstractDao<MessageEntity, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, MessageEntity entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setId(cursor.isNull(offset) ? null : cursor.getLong(offset));
         entity.setMsgId(cursor.getInt(offset + 1));
         entity.setFromId(cursor.getInt(offset + 2));
         entity.setToId(cursor.getInt(offset + 3));

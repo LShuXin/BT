@@ -56,11 +56,11 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
     private ImageView leftBtn = null;
     private static Context context = null;
     private static ImageGridAdapter adapter = null;
-	private Logger logger = Logger.getLogger(ImageGridActivity.class);
+	private final Logger logger = Logger.getLogger(ImageGridActivity.class);
 
     private IMService imService;
 
-	private IMServiceConnector imServiceConnector = new IMServiceConnector(){
+	private final IMServiceConnector imServiceConnector = new IMServiceConnector(){
         @Override
         public void onIMServiceConnected() {
             imService = imServiceConnector.getIMService();
@@ -75,17 +75,13 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
         }
     };
 
-    private Handler mHandler = new Handler() {
+    private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 0:
-                    Toast.makeText(ImageGridActivity.this,
-                            "最多选择" + SysConstant.MAX_SELECT_IMAGE_COUNT + "张图片",
-                            Toast.LENGTH_LONG).show();
-                    break;
-                default:
-                    break;
+            if (msg.what == 0) {
+                Toast.makeText(ImageGridActivity.this,
+                        "最多选择" + SysConstant.MAX_SELECT_IMAGE_COUNT + "张图片",
+                        Toast.LENGTH_LONG).show();
             }
         }
     };
@@ -142,7 +138,7 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
     }
 
     private void initView() {
-        gridView = (GridView) findViewById(R.id.gridview);
+        gridView = findViewById(R.id.gridview);
         gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
         gridView.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -152,19 +148,19 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
             }
         });
 
-        title = (TextView) findViewById(R.id.base_fragment_title);
+        title = findViewById(R.id.base_fragment_title);
         if (name.length() > 12) {
             name = name.substring(0, 11) + "...";
         }
         title.setText(name);
-        leftBtn = (ImageView) findViewById(R.id.back_btn);
+        leftBtn = findViewById(R.id.back_btn);
         leftBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 ImageGridActivity.this.finish();
             }
         });
-        cancel = (TextView) findViewById(R.id.cancel);
+        cancel = findViewById(R.id.cancel);
         cancel.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,7 +168,7 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
                 ImageGridActivity.this.finish();
             }
         });
-        finish = (TextView) findViewById(R.id.finish);
+        finish = findViewById(R.id.finish);
         finish.setOnClickListener(new OnClickListener() {
 
             public void onClick(View v) {
@@ -206,7 +202,7 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
             }
 
         });
-        preview = (TextView) findViewById(R.id.preview);
+        preview = findViewById(R.id.preview);
         preview.setOnClickListener(new OnClickListener() {
 
             public void onClick(View v) {
@@ -245,18 +241,14 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
         Iterator<Integer> it = adapter.getSelectMap().keySet().iterator();
         if (map != null) {
             while (it.hasNext()) {
-                int key = (Integer) it.next();
-                if (map.containsKey(key)) {
-                    adapter.updateSelectedStatus(key, true);
-                } else {
-                    adapter.updateSelectedStatus(key, false);
-                }
+                int key = it.next();
+                adapter.updateSelectedStatus(key, map.containsKey(key));
             }
             adapter.setSelectMap(map);
             adapter.setSelectTotalNum(map.size());
         } else {
             while (it.hasNext()) {
-                int key = (Integer) it.next();
+                int key = it.next();
                 adapter.updateSelectedStatus(key, false);
             }
             adapter.setSelectMap(null);
@@ -271,10 +263,8 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        switch (motionEvent.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                adapter.unlock();
-                break;
+        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+            adapter.unlock();
         }
         return false;
     }

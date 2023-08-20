@@ -16,7 +16,7 @@ import de.greenrobot.daogenerator.Schema;
  * 【备注】session表中的create与update字段没有特别的区分，主要是之前服务端的习惯。。。
  */
 public class GreenDaoGenerator {
-    private static String entityPath = "com.mogujie.tt.DB.entity";
+    private static final String entityPath = "com.mogujie.tt.DB.entity";
 
     public static void main(String[] args) throws Exception {
         int dbVersion = 12;

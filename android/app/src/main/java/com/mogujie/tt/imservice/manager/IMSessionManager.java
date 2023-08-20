@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -39,19 +40,19 @@ import de.greenrobot.event.EventBus;
  * 最近联系人列表
  */
 public class IMSessionManager extends IMManager {
-    private Logger logger = Logger.getLogger(IMSessionManager.class);
-    private static  IMSessionManager inst = new IMSessionManager();
+    private final Logger logger = Logger.getLogger(IMSessionManager.class);
+    private static final IMSessionManager inst = new IMSessionManager();
     public static IMSessionManager instance() {
        return inst;
     }
 
-    private IMSocketManager imSocketManager = IMSocketManager.instance();
-    private IMLoginManager imLoginManager = IMLoginManager.instance();
-    private DBInterface dbInterface = DBInterface.instance();
-    private IMGroupManager groupManager = IMGroupManager.instance();
+    private final IMSocketManager imSocketManager = IMSocketManager.instance();
+    private final IMLoginManager imLoginManager = IMLoginManager.instance();
+    private final DBInterface dbInterface = DBInterface.instance();
+    private final IMGroupManager groupManager = IMGroupManager.instance();
 
     // key = sessionKey -->  sessionType_peerId
-    private  Map<String, SessionEntity> sessionMap = new ConcurrentHashMap<>();
+    private final Map<String, SessionEntity> sessionMap = new ConcurrentHashMap<>();
     //SessionManager 状态字段
     private boolean sessionListReady = false;
 
@@ -69,10 +70,8 @@ public class IMSessionManager extends IMManager {
      * @param event
      */
     public void triggerEvent(SessionEvent event) {
-        switch (event){
-            case RECENT_SESSION_LIST_SUCCESS:
-                sessionListReady = true;
-            break;
+        if (Objects.requireNonNull(event) == SessionEvent.RECENT_SESSION_LIST_SUCCESS) {
+            sessionListReady = true;
         }
         EventBus.getDefault().post(event);
     }
@@ -182,7 +181,6 @@ public class IMSessionManager extends IMManager {
         int resultCode = removeSessionRsp.getResultCode();
         if(0 != resultCode){
             logger.e("session#removeSession failed");
-            return;
         }
     }
 

@@ -26,6 +26,7 @@ import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.ui.widget.IMBaseImageView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * 1.18 添加currentUser变量
@@ -36,7 +37,7 @@ public class UserInfoFragment extends MainFragment {
     private IMService imService;
     private UserEntity currentUser;
     private int currentUserId;
-    private IMServiceConnector imServiceConnector = new IMServiceConnector(){
+    private final IMServiceConnector imServiceConnector = new IMServiceConnector(){
         @Override
         public void onIMServiceConnected() {
             logger.d("detail#onIMServiceConnected");
@@ -120,21 +121,19 @@ public class UserInfoFragment extends MainFragment {
 	}
 
     public void onEventMainThread(UserInfoEvent event){
-        switch (event){
-            case USER_INFO_UPDATE:
-                UserEntity entity  = imService.getContactManager().findContact(currentUserId);
-                if(entity !=null && currentUser.equals(entity)){
-                    initBaseProfile();
-                    initDetailProfile();
-                }
-                break;
-        }
+		if (Objects.requireNonNull(event) == UserInfoEvent.USER_INFO_UPDATE) {
+			UserEntity entity = imService.getContactManager().findContact(currentUserId);
+			if (currentUser.equals(entity)) {
+				initBaseProfile();
+				initDetailProfile();
+			}
+		}
     }
 
 
 	private void initBaseProfile() {
 		logger.d("detail#initBaseProfile");
-        IMBaseImageView portraitImageView = (IMBaseImageView) curView.findViewById(R.id.user_portrait);
+        IMBaseImageView portraitImageView = curView.findViewById(R.id.user_portrait);
 
 		setTextViewContent(R.id.nickName, currentUser.getMainName());
 		setTextViewContent(R.id.userName, currentUser.getRealName());
@@ -158,7 +157,7 @@ public class UserInfoFragment extends MainFragment {
 		});
 
 		// 设置界面信息
-		Button chatBtn = (Button) curView.findViewById(R.id.chat_btn);
+		Button chatBtn = curView.findViewById(R.id.chat_btn);
 		if (currentUserId == imService.getLoginManager().getLoginId()) {
 			chatBtn.setVisibility(View.GONE);
 		}else{
@@ -227,7 +226,7 @@ public class UserInfoFragment extends MainFragment {
 	}
 
 	private void setTextViewContent(int id, String content) {
-		TextView textView = (TextView) curView.findViewById(id);
+		TextView textView = curView.findViewById(id);
 		if (textView == null) {
 			return;
 		}
@@ -240,7 +239,7 @@ public class UserInfoFragment extends MainFragment {
 			return;
 		}
 
-		TextView sexTextView = (TextView) curView.findViewById(R.id.sex);
+		TextView sexTextView = curView.findViewById(R.id.sex);
 		if (sexTextView == null) {
 			return;
 		}

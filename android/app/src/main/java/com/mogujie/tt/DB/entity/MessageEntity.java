@@ -215,9 +215,7 @@ public class MessageEntity implements java.io.Serializable {
         if (updated != that.updated) return false;
         if (!content.equals(that.content)) return false;
         if (!id.equals(that.id)) return false;
-        if (!sessionKey.equals(that.sessionKey)) return false;
-
-        return true;
+        return sessionKey.equals(that.sessionKey);
     }
 
     @Override
@@ -272,7 +270,7 @@ public class MessageEntity implements java.io.Serializable {
     }
 
     public boolean isSend(int loginId){
-        boolean isSend = (loginId==fromId)?true:false;
+        boolean isSend = loginId == fromId;
         return isSend;
     }
 

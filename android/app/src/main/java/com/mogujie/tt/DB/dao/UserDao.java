@@ -36,7 +36,7 @@ public class UserDao extends AbstractDao<UserEntity, Long> {
         public final static Property Status = new Property(10, int.class, "status", false, "STATUS");
         public final static Property Created = new Property(11, int.class, "created", false, "CREATED");
         public final static Property Updated = new Property(12, int.class, "updated", false, "UPDATED");
-    };
+    }
 
 
     public UserDao(DaoConfig config) {
@@ -101,14 +101,14 @@ public class UserDao extends AbstractDao<UserEntity, Long> {
     /** @inheritdoc */
     @Override
     public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+        return cursor.isNull(offset) ? null : cursor.getLong(offset);
     }    
 
     /** @inheritdoc */
     @Override
     public UserEntity readEntity(Cursor cursor, int offset) {
         UserEntity entity = new UserEntity( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
+            cursor.isNull(offset) ? null : cursor.getLong(offset), // id
             cursor.getInt(offset + 1), // peerId
             cursor.getInt(offset + 2), // gender
             cursor.getString(offset + 3), // mainName
@@ -128,7 +128,7 @@ public class UserDao extends AbstractDao<UserEntity, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, UserEntity entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setId(cursor.isNull(offset) ? null : cursor.getLong(offset));
         entity.setPeerId(cursor.getInt(offset + 1));
         entity.setGender(cursor.getInt(offset + 2));
         entity.setMainName(cursor.getString(offset + 3));

@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class YayaEmoGridView extends LinearLayout {
-    private Context _context;
+    private final Context _context;
     private ViewPager _viewPager;
     private LinearLayout _llDot;
 
@@ -38,7 +38,7 @@ public class YayaEmoGridView extends LinearLayout {
     /** ViewPager页数 */
     private int viewPager_size;
     /** 默认一页20个item */
-    private double pageItemCount = 8d;
+    private final double pageItemCount = 8d;
 
     /** 保存每个页面的GridView视图 */
     private List<GridView> list_Views;
@@ -207,6 +207,6 @@ public class YayaEmoGridView extends LinearLayout {
     }
 
     public interface OnEmoGridViewItemClick {
-        public void onItemClick(int facesPos, int viewIndex);
+        void onItemClick(int facesPos, int viewIndex);
     }
 }

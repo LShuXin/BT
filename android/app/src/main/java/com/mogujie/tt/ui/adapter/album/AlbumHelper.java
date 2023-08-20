@@ -32,7 +32,7 @@ public class AlbumHelper {
     HashMap<String, String> thumbnailList = new HashMap<String, String>();
     List<HashMap<String, String>> albumList = new ArrayList<HashMap<String, String>>();
     HashMap<String, ImageBucket> bucketList = new HashMap<String, ImageBucket>();
-    private Logger logger = Logger.getLogger(AlbumHelper.class);
+    private final Logger logger = Logger.getLogger(AlbumHelper.class);
 
     private static AlbumHelper instance = null;
 
@@ -186,7 +186,7 @@ public class AlbumHelper {
             getThumbnail();
 
             // 构造相册索引
-            String columns[] = new String[] {
+            String[] columns = new String[] {
                     Media._ID, Media.BUCKET_ID,
                     Media.PICASA_ID, Media.DATA, Media.DISPLAY_NAME, Media.TITLE,
                     Media.SIZE, Media.BUCKET_DISPLAY_NAME
@@ -251,7 +251,7 @@ public class AlbumHelper {
             Iterator<Entry<String, ImageBucket>> itr = bucketList.entrySet()
                     .iterator();
             while (itr.hasNext()) {
-                Map.Entry<String, ImageBucket> entry = (Map.Entry<String, ImageBucket>) itr
+                Map.Entry<String, ImageBucket> entry = itr
                         .next();
                 ImageBucket bucket = entry.getValue();
                 for (int i = 0; i < bucket.imageList.size(); ++i) {

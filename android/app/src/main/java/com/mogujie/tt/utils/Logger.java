@@ -11,12 +11,12 @@ public class Logger {
 	/**
 	 * log tag
 	 */
-	private String tagName = "MoGuLogger";// tag name
+	private final String tagName = "MoGuLogger";// tag name
 	private static int logLevel = Log.ERROR;
 	//private static int logLevel = Log.DEBUG;
 
 	private static Logger inst;
-	private Lock lock;
+	private final Lock lock;
 
 	private Logger() {
 		lock = new ReentrantLock();
@@ -60,7 +60,7 @@ public class Logger {
 		long threadId = Thread.currentThread().getId();
 		String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").format(new Date());
 		String message = (functionName == null ? msg : (functionName + " - "
-				+ String.valueOf(threadId) + " - " + msg));
+				+ threadId + " - " + msg));
         String finalRes = currentTime + " - " + message;
 		return finalRes;
 	}
@@ -149,7 +149,7 @@ public class Logger {
 				} else {
 					sb.append(e + "\r\n");
 				}
-				if (sts != null && sts.length > 0) {
+				if (sts != null) {
 					for (StackTraceElement st : sts) {
 						if (st != null) {
 							sb.append("[ " + st.getFileName() + ":"

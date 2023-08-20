@@ -45,7 +45,7 @@ public class WebviewFragment extends MainFragment {
 		});
 		setTopLeftText(getResources().getString(R.string.top_left_back));
 
-        WebView webView = (WebView) curView.findViewById(R.id.webView1);
+        WebView webView = curView.findViewById(R.id.webView1);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(url);
         webView.setVerticalScrollBarEnabled(false);
@@ -96,7 +96,7 @@ public class WebviewFragment extends MainFragment {
         if(url.indexOf("www") == 0){
             url = "http://"+url;
         }else if(url.indexOf("https") == 0){
-            String bUid = url.substring(5, url.length());
+            String bUid = url.substring(5);
             url = "http"+bUid;
         }
     }

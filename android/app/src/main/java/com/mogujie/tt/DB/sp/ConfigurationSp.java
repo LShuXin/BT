@@ -27,10 +27,10 @@ import de.greenrobot.event.EventBus;
  * 多端的状态最好不放在这里。备注: 例如屏蔽的状态
  */
 public class ConfigurationSp {
-    private Context ctx;
-    private int loginId;
-    private String fileName;
-    private SharedPreferences sharedPreferences;
+    private final Context ctx;
+    private final int loginId;
+    private final String fileName;
+    private final SharedPreferences sharedPreferences;
 
     private static ConfigurationSp configurationSp = null;
 
@@ -48,7 +48,7 @@ public class ConfigurationSp {
         this.ctx = ctx;
         this.loginId = loginId;
         this.fileName = "User_" + loginId + ".ini";
-        this.sharedPreferences = ctx.getSharedPreferences(fileName, ctx.MODE_PRIVATE);
+        this.sharedPreferences = ctx.getSharedPreferences(fileName, Context.MODE_PRIVATE);
     }
 
     // 获取全部置顶的session
@@ -63,10 +63,7 @@ public class ConfigurationSp {
 
     public boolean isTopSession(String sessionKey) {
         HashSet<String> list =  getSessionTopList();
-        if (list != null && list.size() > 0 && list.contains(sessionKey)) {
-            return true;
-        }
-        return false;
+        return list != null && list.size() > 0 && list.contains(sessionKey);
     }
 
     /**
@@ -89,9 +86,7 @@ public class ConfigurationSp {
         if (isTop) {
             newList.add(sessionKey);
         } else {
-            if (newList.contains(sessionKey)) {
-                newList.remove(sessionKey);
-            }
+            newList.remove(sessionKey);
         }
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -103,7 +98,7 @@ public class ConfigurationSp {
 
 
     public boolean getCfg(String key, CfgDimension dimension) {
-        boolean defaultOnff = dimension == CfgDimension.NOTIFICATION ? false : true;
+        boolean defaultOnff = dimension != CfgDimension.NOTIFICATION;
         boolean onOff = sharedPreferences.getBoolean(dimension.name() + key, defaultOnff);
         return onOff;
     }

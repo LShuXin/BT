@@ -30,7 +30,7 @@ public class DepartmentDao extends AbstractDao<DepartmentEntity, Long> {
         public final static Property Status = new Property(4, int.class, "status", false, "STATUS");
         public final static Property Created = new Property(5, int.class, "created", false, "CREATED");
         public final static Property Updated = new Property(6, int.class, "updated", false, "UPDATED");
-    };
+    }
 
 
     public DepartmentDao(DaoConfig config) {
@@ -85,14 +85,14 @@ public class DepartmentDao extends AbstractDao<DepartmentEntity, Long> {
     /** @inheritdoc */
     @Override
     public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+        return cursor.isNull(offset) ? null : cursor.getLong(offset);
     }    
 
     /** @inheritdoc */
     @Override
     public DepartmentEntity readEntity(Cursor cursor, int offset) {
         DepartmentEntity entity = new DepartmentEntity( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
+            cursor.isNull(offset) ? null : cursor.getLong(offset), // id
             cursor.getInt(offset + 1), // departId
             cursor.getString(offset + 2), // departName
             cursor.getInt(offset + 3), // priority
@@ -106,7 +106,7 @@ public class DepartmentDao extends AbstractDao<DepartmentEntity, Long> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, DepartmentEntity entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setId(cursor.isNull(offset) ? null : cursor.getLong(offset));
         entity.setDepartId(cursor.getInt(offset + 1));
         entity.setDepartName(cursor.getString(offset + 2));
         entity.setPriority(cursor.getInt(offset + 3));

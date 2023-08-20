@@ -134,7 +134,7 @@ public final class OverscrollHelper {
 							+ ", CurrentScroll: " + currentScrollValue);
 				}
 
-				if (newScrollValue < (0 - fuzzyThreshold)) {
+				if (newScrollValue < (-fuzzyThreshold)) {
 					// Check the mode supports the overscroll direction, and
 					// then move scroll
 					if (mode.showHeaderLoadingLayout()) {

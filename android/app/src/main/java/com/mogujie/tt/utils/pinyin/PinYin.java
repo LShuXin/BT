@@ -20,13 +20,12 @@ public class PinYin {
 		
 		@Override
 		public String toString() {
-			StringBuilder part1 = new StringBuilder("PinYinElement [pinyin=" + pinyin  + ", firstChars=" + tokenFirstChars + "]");
-			StringBuilder part2 = new StringBuilder("tokenPinyinList:");
+            StringBuilder part2 = new StringBuilder("tokenPinyinList:");
 			for (String tokenPinyin : tokenPinyinList) {
 				part2.append(tokenPinyin).append(",");
 			}
 			
-			return part1.append(part2).toString();
+			return "PinYinElement [pinyin=" + pinyin + ", firstChars=" + tokenFirstChars + "]" + part2;
 		}
 
         //@YM getPinYin 调用的入口太多，暂时临时解决

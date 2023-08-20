@@ -14,9 +14,9 @@ import com.mogujie.tt.R;
 
 public class MGProgressbar extends LinearLayout {
 
-    private ProgressBar mProgressBar;
-    private TextView mLoadingText;
-    private Button mRefreshButton;
+    private final ProgressBar mProgressBar;
+    private final TextView mLoadingText;
+    private final Button mRefreshButton;
     private boolean mbTextShow = true;
 
     public interface OnRefreshBtnListener {
@@ -34,9 +34,9 @@ public class MGProgressbar extends LinearLayout {
                 (Context.LAYOUT_INFLATER_SERVICE);
 
         inflater.inflate(R.layout.tt_progress, this, true);
-        mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
-        mLoadingText = (TextView) findViewById(R.id.loading_text);
-        mRefreshButton = (Button) findViewById(R.id.refresh_button);
+        mProgressBar = findViewById(R.id.progress_bar);
+        mLoadingText = findViewById(R.id.loading_text);
+        mRefreshButton = findViewById(R.id.refresh_button);
 
         hideProgress();
     }

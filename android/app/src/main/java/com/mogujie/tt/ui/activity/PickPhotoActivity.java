@@ -37,7 +37,7 @@ public class PickPhotoActivity extends Activity  {
     public static Bitmap bimap = null;
     boolean touchable = true;
     private String currentSessionKey;
-	private Logger logger = Logger.getLogger(PickPhotoActivity.class);
+	private final Logger logger = Logger.getLogger(PickPhotoActivity.class);
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -72,7 +72,7 @@ public class PickPhotoActivity extends Activity  {
      * 初始化view
      */
     private void initView() {
-        listView = (ListView) findViewById(R.id.list);
+        listView = findViewById(R.id.list);
         adapter = new ImageBucketAdapter(this, dataList);
 
         listView.setAdapter(adapter);
@@ -93,7 +93,7 @@ public class PickPhotoActivity extends Activity  {
 //                PickPhotoActivity.this.finish();
             }
         });
-        cancel = (TextView) findViewById(R.id.cancel);
+        cancel = findViewById(R.id.cancel);
         cancel.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -15,8 +15,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ListenerQueue {
 
-    private static ListenerQueue listenerQueue = new ListenerQueue();
-    private Logger logger = Logger.getLogger(ListenerQueue.class);
+    private static final ListenerQueue listenerQueue = new ListenerQueue();
+    private final Logger logger = Logger.getLogger(ListenerQueue.class);
     public static ListenerQueue instance(){
         return listenerQueue;
     }
@@ -26,8 +26,8 @@ public class ListenerQueue {
 
 
     //callback 队列
-    private Map<Integer,Packetlistener> callBackQueue = new ConcurrentHashMap<>();
-    private Handler timerHandler = new Handler();
+    private final Map<Integer,Packetlistener> callBackQueue = new ConcurrentHashMap<>();
+    private final Handler timerHandler = new Handler();
 
 
     public void onStart(){
@@ -43,7 +43,7 @@ public class ListenerQueue {
 
     //以前是TimerTask处理方式
     private void startTimer() {
-        if(!stopFlag && hasTask == false) {
+        if(!stopFlag && !hasTask) {
             hasTask = true;
             timerHandler.postDelayed(new Runnable() {
                 @Override

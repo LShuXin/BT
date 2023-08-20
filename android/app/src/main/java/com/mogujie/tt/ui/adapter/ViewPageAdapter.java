@@ -12,8 +12,8 @@ import com.mogujie.tt.utils.Logger;
 import java.util.List;
 
 public class ViewPageAdapter extends PagerAdapter {
-    private List<GridView> mListViews;
-    private Logger logger = Logger.getLogger(ViewPageAdapter.class);
+    private final List<GridView> mListViews;
+    private final Logger logger = Logger.getLogger(ViewPageAdapter.class);
 
     public ViewPageAdapter(List<GridView> mListViews) {
         this.mListViews = mListViews;// 构造方法，参数是我们的页卡，这样比较方便。

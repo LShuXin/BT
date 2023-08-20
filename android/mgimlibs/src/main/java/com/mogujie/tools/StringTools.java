@@ -11,11 +11,8 @@ import android.text.Spanned;
 public class StringTools{
 	
 	public static boolean isEmpty(String str){
-		if(str != null && str.length() > 0){
-			return false;
-		}
-		return true;
-	}
+        return str == null || str.length() <= 0;
+    }
 
 	public static String makeHtmlStr(String text, String color){
 		return "<font color=\"" + color + "\">" + text + "</font>";

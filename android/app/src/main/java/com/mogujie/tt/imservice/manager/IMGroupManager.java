@@ -25,6 +25,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -32,21 +33,21 @@ import de.greenrobot.event.EventBus;
 
 
 public class IMGroupManager extends IMManager {
-    private Logger logger = Logger.getLogger(IMGroupManager.class);
-    private static IMGroupManager inst = new IMGroupManager();
+    private final Logger logger = Logger.getLogger(IMGroupManager.class);
+    private static final IMGroupManager inst = new IMGroupManager();
     public static IMGroupManager instance() {
         return inst;
     }
 
     // 依赖的服务管理
-    private IMSocketManager imSocketManager = IMSocketManager.instance();
-    private IMLoginManager imLoginManager=IMLoginManager.instance();
-    private DBInterface dbInterface = DBInterface.instance();
+    private final IMSocketManager imSocketManager = IMSocketManager.instance();
+    private final IMLoginManager imLoginManager=IMLoginManager.instance();
+    private final DBInterface dbInterface = DBInterface.instance();
 
 
     // todo Pinyin的处理
     //正式群,临时群都会有的，存在竞争 如果不同时请求的话
-    private Map<Integer,GroupEntity> groupMap = new ConcurrentHashMap<>();
+    private final Map<Integer,GroupEntity> groupMap = new ConcurrentHashMap<>();
     // 群组状态
     private boolean isGroupReady = false;
 
@@ -93,11 +94,8 @@ public class IMGroupManager extends IMManager {
     }
 
     public void onEvent(SessionEvent event){
-        switch (event){
-            case RECENT_SESSION_LIST_UPDATE:
-                // groupMap 本地已经加载完毕之后才触发
-                loadSessionGroupInfo();
-                break;
+        if (Objects.requireNonNull(event) == SessionEvent.RECENT_SESSION_LIST_UPDATE) {// groupMap 本地已经加载完毕之后才触发
+            loadSessionGroupInfo();
         }
     }
 
@@ -147,7 +145,6 @@ public class IMGroupManager extends IMManager {
         // 事件触发的时候需要注意
         if(needReqList.size() >0){
             reqGetGroupDetailInfo(needReqList);
-            return ;
         }
     }
 

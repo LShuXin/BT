@@ -29,7 +29,7 @@ import java.io.IOException;
 // 应该是处理图像的 辅助类 和imageTool 配合使用
 
 public class PhotoHelper {
-    private Context context;
+    private final Context context;
     private String takePhotoSavePath = null;
     private static PhotoHelper instance = null;
 
@@ -168,8 +168,8 @@ public class PhotoHelper {
      */
     public void doTakePhoto(Context context) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        takePhotoSavePath = CommonUtil.getImageSavePath(String.valueOf(System
-                .currentTimeMillis()) + ".jpg");
+        takePhotoSavePath = CommonUtil.getImageSavePath(System
+                .currentTimeMillis() + ".jpg");
         intent.putExtra(MediaStore.EXTRA_OUTPUT,
                 Uri.fromFile(new File(takePhotoSavePath)));
         // intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);

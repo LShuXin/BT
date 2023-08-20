@@ -29,7 +29,7 @@ public class SysInfo{
 	public static String M_SYS = 
 			URLEncoder.encode(Build.VERSION.RELEASE);
 	
-	private static String DEFAULT_STRING = "mgj_2012";
+	private static final String DEFAULT_STRING = "mgj_2012";
 	
 	
 	@SuppressWarnings("deprecation")
@@ -86,10 +86,7 @@ public class SysInfo{
 		if(null == networkinfo){
 			return true;
 		}
-		if(ConnectivityManager.TYPE_WIFI == networkinfo.getType()){
-			return true;
-		}
-		return false;
+		return ConnectivityManager.TYPE_WIFI == networkinfo.getType();
 	}
 
 	public static boolean hasSDCard(){

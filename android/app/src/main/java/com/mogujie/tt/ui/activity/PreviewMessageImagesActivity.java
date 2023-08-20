@@ -66,10 +66,10 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
      */
     private void initRes() {
         try {
-            viewPager = (ViewPager) findViewById(R.id.viewpager);
+            viewPager = findViewById(R.id.viewpager);
             viewPager.setOnPageChangeListener(this);
-            group = (LinearLayout) findViewById(R.id.viewGroup);
-            back = (ImageView) findViewById(R.id.back_btn);
+            group = findViewById(R.id.viewGroup);
+            back = findViewById(R.id.back_btn);
             back.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

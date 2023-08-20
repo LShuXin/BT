@@ -21,8 +21,8 @@ public class DepartmentEntity {
     private int updated;
 
     // KEEP FIELDS - put your custom fields here
-    private PinYin.PinYinElement pinyinElement = new PinYin.PinYinElement();
-    private SearchElement searchElement = new SearchElement();
+    private final PinYin.PinYinElement pinyinElement = new PinYin.PinYinElement();
+    private final SearchElement searchElement = new SearchElement();
     // KEEP FIELDS END
 
     public DepartmentEntity() {

@@ -18,7 +18,7 @@ import java.io.File;
  *
  */
 public class ImageUtil {
-    private static Logger logger = Logger.getLogger(ImageUtil.class);
+    private static final Logger logger = Logger.getLogger(ImageUtil.class);
 
 	public static Bitmap getBigBitmapForDisplay(String imagePath,
 			Context context) {

@@ -352,7 +352,7 @@ public final class IMMessage {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -641,7 +641,7 @@ public final class IMMessage {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasFromUserId()) {
           
           return false;
@@ -662,11 +662,7 @@ public final class IMMessage {
           
           return false;
         }
-        if (!hasMsgData()) {
-          
-          return false;
-        }
-        return true;
+        return hasMsgData();
       }
 
       public Builder mergeFrom(
@@ -1198,7 +1194,7 @@ public final class IMMessage {
       sessionType_ = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_SINGLE;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -1427,7 +1423,7 @@ public final class IMMessage {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -1440,11 +1436,7 @@ public final class IMMessage {
           
           return false;
         }
-        if (!hasSessionType()) {
-          
-          return false;
-        }
-        return true;
+        return hasSessionType();
       }
 
       public Builder mergeFrom(
@@ -1858,7 +1850,7 @@ public final class IMMessage {
       sessionType_ = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_SINGLE;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -2087,7 +2079,7 @@ public final class IMMessage {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -2100,11 +2092,7 @@ public final class IMMessage {
           
           return false;
         }
-        if (!hasSessionType()) {
-          
-          return false;
-        }
-        return true;
+        return hasSessionType();
       }
 
       public Builder mergeFrom(
@@ -2518,7 +2506,7 @@ public final class IMMessage {
       sessionType_ = com.mogujie.tt.protobuf.IMBaseDefine.SessionType.SESSION_TYPE_SINGLE;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -2747,7 +2735,7 @@ public final class IMMessage {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -2760,11 +2748,7 @@ public final class IMMessage {
           
           return false;
         }
-        if (!hasSessionType()) {
-          
-          return false;
-        }
-        return true;
+        return hasSessionType();
       }
 
       public Builder mergeFrom(
@@ -2990,16 +2974,12 @@ public final class IMMessage {
         boolean done = false;
         while (!done) {
           int tag = input.readTag();
-          switch (tag) {
-            case 0:
+          if (tag == 0) {
+            done = true;
+          } else {
+            if (!parseUnknownField(input, unknownFieldsCodedOutput,
+                    extensionRegistry, tag)) {
               done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFieldsCodedOutput,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
             }
           }
         }
@@ -3037,7 +3017,7 @@ public final class IMMessage {
     private void initFields() {
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -3187,7 +3167,7 @@ public final class IMMessage {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         return true;
       }
 
@@ -3357,7 +3337,7 @@ public final class IMMessage {
       serverTime_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -3526,12 +3506,8 @@ public final class IMMessage {
         return this;
       }
 
-      public final boolean isInitialized() {
-        if (!hasServerTime()) {
-          
-          return false;
-        }
-        return true;
+      public boolean isInitialized() {
+        return hasServerTime();
       }
 
       public Builder mergeFrom(
@@ -3779,7 +3755,7 @@ public final class IMMessage {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -3964,12 +3940,8 @@ public final class IMMessage {
         return this;
       }
 
-      public final boolean isInitialized() {
-        if (!hasUserId()) {
-          
-          return false;
-        }
-        return true;
+      public boolean isInitialized() {
+        return hasUserId();
       }
 
       public Builder mergeFrom(
@@ -4343,7 +4315,7 @@ public final class IMMessage {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -4578,7 +4550,7 @@ public final class IMMessage {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -5160,7 +5132,7 @@ public final class IMMessage {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -5425,7 +5397,7 @@ public final class IMMessage {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -5442,11 +5414,7 @@ public final class IMMessage {
           
           return false;
         }
-        if (!hasMsgCnt()) {
-          
-          return false;
-        }
-        return true;
+        return hasMsgCnt();
       }
 
       public Builder mergeFrom(
@@ -6024,7 +5992,7 @@ public final class IMMessage {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -6305,7 +6273,7 @@ public final class IMMessage {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -6902,7 +6870,7 @@ public final class IMMessage {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -7127,7 +7095,7 @@ public final class IMMessage {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -7136,11 +7104,7 @@ public final class IMMessage {
           
           return false;
         }
-        if (!hasSessionId()) {
-          
-          return false;
-        }
-        return true;
+        return hasSessionId();
       }
 
       public Builder mergeFrom(
@@ -7587,7 +7551,7 @@ public final class IMMessage {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -7832,7 +7796,7 @@ public final class IMMessage {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -7845,11 +7809,7 @@ public final class IMMessage {
           
           return false;
         }
-        if (!hasLatestMsgId()) {
-          
-          return false;
-        }
-        return true;
+        return hasLatestMsgId();
       }
 
       public Builder mergeFrom(
@@ -8358,7 +8318,7 @@ public final class IMMessage {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -8425,7 +8385,7 @@ public final class IMMessage {
             .computeUInt32SizeNoTag(msgIdList_.get(i));
         }
         size += dataSize;
-        size += 1 * getMsgIdListList().size();
+        size += getMsgIdListList().size();
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -8612,7 +8572,7 @@ public final class IMMessage {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -8621,11 +8581,7 @@ public final class IMMessage {
           
           return false;
         }
-        if (!hasSessionId()) {
-          
-          return false;
-        }
-        return true;
+        return hasSessionId();
       }
 
       public Builder mergeFrom(
@@ -9169,7 +9125,7 @@ public final class IMMessage {
       attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -9424,7 +9380,7 @@ public final class IMMessage {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;

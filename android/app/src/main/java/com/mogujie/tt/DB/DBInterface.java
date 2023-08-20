@@ -44,7 +44,7 @@ import de.greenrobot.dao.query.QueryBuilder;
  *   QueryBuilder.LOG_VALUES = true;
  */
 public class DBInterface {
-    private Logger logger = Logger.getLogger(DBInterface.class);
+    private final Logger logger = Logger.getLogger(DBInterface.class);
     private static DBInterface dbInterface = null;
     private DaoMaster.DevOpenHelper openHelper;
     private Context context = null;

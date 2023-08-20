@@ -9,7 +9,7 @@ import com.mogujie.tt.utils.Logger;
 
 public class IMApplication extends Application {
 
-	private Logger logger = Logger.getLogger(IMApplication.class);
+	private final Logger logger = Logger.getLogger(IMApplication.class);
 
 	/**
 	 * @param args

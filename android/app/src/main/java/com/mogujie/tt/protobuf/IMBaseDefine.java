@@ -135,7 +135,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<ServiceID>
+    private static final com.google.protobuf.Internal.EnumLiteMap<ServiceID>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<ServiceID>() {
             public ServiceID findValueByNumber(int number) {
@@ -145,7 +145,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private ServiceID(int index, int value) {
+    ServiceID(int index, int value) {
       this.value = value;
     }
 
@@ -330,7 +330,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<LoginCmdID>
+    private static final com.google.protobuf.Internal.EnumLiteMap<LoginCmdID>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<LoginCmdID>() {
             public LoginCmdID findValueByNumber(int number) {
@@ -340,7 +340,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private LoginCmdID(int index, int value) {
+    LoginCmdID(int index, int value) {
       this.value = value;
     }
 
@@ -537,7 +537,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<BuddyListCmdID>
+    private static final com.google.protobuf.Internal.EnumLiteMap<BuddyListCmdID>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<BuddyListCmdID>() {
             public BuddyListCmdID findValueByNumber(int number) {
@@ -547,7 +547,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private BuddyListCmdID(int index, int value) {
+    BuddyListCmdID(int index, int value) {
       this.value = value;
     }
 
@@ -763,7 +763,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<MessageCmdID>
+    private static final com.google.protobuf.Internal.EnumLiteMap<MessageCmdID>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<MessageCmdID>() {
             public MessageCmdID findValueByNumber(int number) {
@@ -773,7 +773,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private MessageCmdID(int index, int value) {
+    MessageCmdID(int index, int value) {
       this.value = value;
     }
 
@@ -904,7 +904,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<GroupCmdID>
+    private static final com.google.protobuf.Internal.EnumLiteMap<GroupCmdID>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<GroupCmdID>() {
             public GroupCmdID findValueByNumber(int number) {
@@ -914,7 +914,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private GroupCmdID(int index, int value) {
+    GroupCmdID(int index, int value) {
       this.value = value;
     }
 
@@ -1082,7 +1082,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<FileCmdID>
+    private static final com.google.protobuf.Internal.EnumLiteMap<FileCmdID>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<FileCmdID>() {
             public FileCmdID findValueByNumber(int number) {
@@ -1092,7 +1092,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private FileCmdID(int index, int value) {
+    FileCmdID(int index, int value) {
       this.value = value;
     }
 
@@ -1129,17 +1129,17 @@ public final class IMBaseDefine {
     public final int getNumber() { return value; }
 
     public static SwitchServiceCmdID valueOf(int value) {
-      switch (value) {
-        case 1537: return CID_SWITCH_P2P_CMD;
-        default: return null;
+      if (value == 1537) {
+        return CID_SWITCH_P2P_CMD;
       }
+      return null;
     }
 
     public static com.google.protobuf.Internal.EnumLiteMap<SwitchServiceCmdID>
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<SwitchServiceCmdID>
+    private static final com.google.protobuf.Internal.EnumLiteMap<SwitchServiceCmdID>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<SwitchServiceCmdID>() {
             public SwitchServiceCmdID findValueByNumber(int number) {
@@ -1149,7 +1149,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private SwitchServiceCmdID(int index, int value) {
+    SwitchServiceCmdID(int index, int value) {
       this.value = value;
     }
 
@@ -1366,7 +1366,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<OtherCmdID>
+    private static final com.google.protobuf.Internal.EnumLiteMap<OtherCmdID>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<OtherCmdID>() {
             public OtherCmdID findValueByNumber(int number) {
@@ -1376,7 +1376,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private OtherCmdID(int index, int value) {
+    OtherCmdID(int index, int value) {
       this.value = value;
     }
 
@@ -1440,7 +1440,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<InternalCmdID>
+    private static final com.google.protobuf.Internal.EnumLiteMap<InternalCmdID>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<InternalCmdID>() {
             public InternalCmdID findValueByNumber(int number) {
@@ -1450,7 +1450,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private InternalCmdID(int index, int value) {
+    InternalCmdID(int index, int value) {
       this.value = value;
     }
 
@@ -1550,7 +1550,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<ResultType>
+    private static final com.google.protobuf.Internal.EnumLiteMap<ResultType>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<ResultType>() {
             public ResultType findValueByNumber(int number) {
@@ -1560,7 +1560,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private ResultType(int index, int value) {
+    ResultType(int index, int value) {
       this.value = value;
     }
 
@@ -1606,7 +1606,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<KickReasonType>
+    private static final com.google.protobuf.Internal.EnumLiteMap<KickReasonType>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<KickReasonType>() {
             public KickReasonType findValueByNumber(int number) {
@@ -1616,7 +1616,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private KickReasonType(int index, int value) {
+    KickReasonType(int index, int value) {
       this.value = value;
     }
 
@@ -1643,17 +1643,17 @@ public final class IMBaseDefine {
     public final int getNumber() { return value; }
 
     public static OnlineListType valueOf(int value) {
-      switch (value) {
-        case 1: return ONLINE_LIST_TYPE_FRIEND_LIST;
-        default: return null;
+      if (value == 1) {
+        return ONLINE_LIST_TYPE_FRIEND_LIST;
       }
+      return null;
     }
 
     public static com.google.protobuf.Internal.EnumLiteMap<OnlineListType>
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<OnlineListType>
+    private static final com.google.protobuf.Internal.EnumLiteMap<OnlineListType>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<OnlineListType>() {
             public OnlineListType findValueByNumber(int number) {
@@ -1663,7 +1663,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private OnlineListType(int index, int value) {
+    OnlineListType(int index, int value) {
       this.value = value;
     }
 
@@ -1718,7 +1718,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<UserStatType>
+    private static final com.google.protobuf.Internal.EnumLiteMap<UserStatType>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<UserStatType>() {
             public UserStatType findValueByNumber(int number) {
@@ -1728,7 +1728,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private UserStatType(int index, int value) {
+    UserStatType(int index, int value) {
       this.value = value;
     }
 
@@ -1790,7 +1790,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<SessionType>
+    private static final com.google.protobuf.Internal.EnumLiteMap<SessionType>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<SessionType>() {
             public SessionType findValueByNumber(int number) {
@@ -1800,7 +1800,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private SessionType(int index, int value) {
+    SessionType(int index, int value) {
       this.value = value;
     }
 
@@ -1864,7 +1864,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<MsgType>
+    private static final com.google.protobuf.Internal.EnumLiteMap<MsgType>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<MsgType>() {
             public MsgType findValueByNumber(int number) {
@@ -1874,7 +1874,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private MsgType(int index, int value) {
+    MsgType(int index, int value) {
       this.value = value;
     }
 
@@ -1938,7 +1938,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<ClientType>
+    private static final com.google.protobuf.Internal.EnumLiteMap<ClientType>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<ClientType>() {
             public ClientType findValueByNumber(int number) {
@@ -1948,7 +1948,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private ClientType(int index, int value) {
+    ClientType(int index, int value) {
       this.value = value;
     }
 
@@ -1994,7 +1994,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<GroupType>
+    private static final com.google.protobuf.Internal.EnumLiteMap<GroupType>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<GroupType>() {
             public GroupType findValueByNumber(int number) {
@@ -2004,7 +2004,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private GroupType(int index, int value) {
+    GroupType(int index, int value) {
       this.value = value;
     }
 
@@ -2050,7 +2050,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<GroupModifyType>
+    private static final com.google.protobuf.Internal.EnumLiteMap<GroupModifyType>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<GroupModifyType>() {
             public GroupModifyType findValueByNumber(int number) {
@@ -2060,7 +2060,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private GroupModifyType(int index, int value) {
+    GroupModifyType(int index, int value) {
       this.value = value;
     }
 
@@ -2106,7 +2106,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<FileType>
+    private static final com.google.protobuf.Internal.EnumLiteMap<FileType>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<FileType>() {
             public FileType findValueByNumber(int number) {
@@ -2116,7 +2116,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private FileType(int index, int value) {
+    FileType(int index, int value) {
       this.value = value;
     }
 
@@ -2180,7 +2180,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<ClientFileState>
+    private static final com.google.protobuf.Internal.EnumLiteMap<ClientFileState>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<ClientFileState>() {
             public ClientFileState findValueByNumber(int number) {
@@ -2190,7 +2190,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private ClientFileState(int index, int value) {
+    ClientFileState(int index, int value) {
       this.value = value;
     }
 
@@ -2254,7 +2254,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<ClientFileRole>
+    private static final com.google.protobuf.Internal.EnumLiteMap<ClientFileRole>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<ClientFileRole>() {
             public ClientFileRole findValueByNumber(int number) {
@@ -2264,7 +2264,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private ClientFileRole(int index, int value) {
+    ClientFileRole(int index, int value) {
       this.value = value;
     }
 
@@ -2409,7 +2409,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<FileServerError>
+    private static final com.google.protobuf.Internal.EnumLiteMap<FileServerError>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<FileServerError>() {
             public FileServerError findValueByNumber(int number) {
@@ -2419,7 +2419,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private FileServerError(int index, int value) {
+    FileServerError(int index, int value) {
       this.value = value;
     }
 
@@ -2465,7 +2465,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<SessionStatusType>
+    private static final com.google.protobuf.Internal.EnumLiteMap<SessionStatusType>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<SessionStatusType>() {
             public SessionStatusType findValueByNumber(int number) {
@@ -2475,7 +2475,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private SessionStatusType(int index, int value) {
+    SessionStatusType(int index, int value) {
       this.value = value;
     }
 
@@ -2521,7 +2521,7 @@ public final class IMBaseDefine {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<DepartmentStatusType>
+    private static final com.google.protobuf.Internal.EnumLiteMap<DepartmentStatusType>
         internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<DepartmentStatusType>() {
             public DepartmentStatusType findValueByNumber(int number) {
@@ -2531,7 +2531,7 @@ public final class IMBaseDefine {
 
     private final int value;
 
-    private DepartmentStatusType(int index, int value) {
+    DepartmentStatusType(int index, int value) {
       this.value = value;
     }
 
@@ -2722,7 +2722,7 @@ public final class IMBaseDefine {
       port_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -2913,16 +2913,12 @@ public final class IMBaseDefine {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasIp()) {
           
           return false;
         }
-        if (!hasPort()) {
-          
-          return false;
-        }
-        return true;
+        return hasPort();
       }
 
       public Builder mergeFrom(
@@ -3756,7 +3752,7 @@ public final class IMBaseDefine {
       status_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -4117,7 +4113,7 @@ public final class IMBaseDefine {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -4154,11 +4150,7 @@ public final class IMBaseDefine {
           
           return false;
         }
-        if (!hasStatus()) {
-          
-          return false;
-        }
-        return true;
+        return hasStatus();
       }
 
       public Builder mergeFrom(
@@ -5231,7 +5223,7 @@ public final class IMBaseDefine {
       latestMsgFromUserId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -5540,7 +5532,7 @@ public final class IMBaseDefine {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasSessionId()) {
           
           return false;
@@ -5569,11 +5561,7 @@ public final class IMBaseDefine {
           
           return false;
         }
-        if (!hasLatestMsgFromUserId()) {
-          
-          return false;
-        }
-        return true;
+        return hasLatestMsgFromUserId();
       }
 
       public Builder mergeFrom(
@@ -6032,7 +6020,7 @@ public final class IMBaseDefine {
       status_ = com.mogujie.tt.protobuf.IMBaseDefine.UserStatType.USER_STATUS_ONLINE;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -6221,16 +6209,12 @@ public final class IMBaseDefine {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
         }
-        if (!hasStatus()) {
-          
-          return false;
-        }
-        return true;
+        return hasStatus();
       }
 
       public Builder mergeFrom(
@@ -6525,7 +6509,7 @@ public final class IMBaseDefine {
       clientType_ = com.mogujie.tt.protobuf.IMBaseDefine.ClientType.CLIENT_TYPE_WINDOWS;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -6734,7 +6718,7 @@ public final class IMBaseDefine {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -6743,11 +6727,7 @@ public final class IMBaseDefine {
           
           return false;
         }
-        if (!hasClientType()) {
-          
-          return false;
-        }
-        return true;
+        return hasClientType();
       }
 
       public Builder mergeFrom(
@@ -7213,7 +7193,7 @@ public final class IMBaseDefine {
       latestMsgFromUserId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -7502,7 +7482,7 @@ public final class IMBaseDefine {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasSessionId()) {
           
           return false;
@@ -7527,11 +7507,7 @@ public final class IMBaseDefine {
           
           return false;
         }
-        if (!hasLatestMsgFromUserId()) {
-          
-          return false;
-        }
-        return true;
+        return hasLatestMsgFromUserId();
       }
 
       public Builder mergeFrom(
@@ -8077,7 +8053,7 @@ public final class IMBaseDefine {
       msgData_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -8326,7 +8302,7 @@ public final class IMBaseDefine {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasMsgId()) {
           
           return false;
@@ -8343,11 +8319,7 @@ public final class IMBaseDefine {
           
           return false;
         }
-        if (!hasMsgData()) {
-          
-          return false;
-        }
-        return true;
+        return hasMsgData();
       }
 
       public Builder mergeFrom(
@@ -8713,7 +8685,7 @@ public final class IMBaseDefine {
       version_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -8902,16 +8874,12 @@ public final class IMBaseDefine {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasGroupId()) {
           
           return false;
         }
-        if (!hasVersion()) {
-          
-          return false;
-        }
-        return true;
+        return hasVersion();
       }
 
       public Builder mergeFrom(
@@ -9458,7 +9426,7 @@ public final class IMBaseDefine {
       groupMemberList_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -9566,7 +9534,7 @@ public final class IMBaseDefine {
             .computeUInt32SizeNoTag(groupMemberList_.get(i));
         }
         size += dataSize;
-        size += 1 * getGroupMemberListList().size();
+        size += getGroupMemberListList().size();
       }
       size += unknownFields.size();
       memoizedSerializedSize = size;
@@ -9780,7 +9748,7 @@ public final class IMBaseDefine {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasGroupId()) {
           
           return false;
@@ -9805,11 +9773,7 @@ public final class IMBaseDefine {
           
           return false;
         }
-        if (!hasShieldStatus()) {
-          
-          return false;
-        }
-        return true;
+        return hasShieldStatus();
       }
 
       public Builder mergeFrom(
@@ -10536,7 +10500,7 @@ public final class IMBaseDefine {
       pushType_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -10787,7 +10751,7 @@ public final class IMBaseDefine {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -10804,11 +10768,7 @@ public final class IMBaseDefine {
           
           return false;
         }
-        if (!hasPushType()) {
-          
-          return false;
-        }
-        return true;
+        return hasPushType();
       }
 
       public Builder mergeFrom(
@@ -11248,7 +11208,7 @@ public final class IMBaseDefine {
       resultCode_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -11439,16 +11399,12 @@ public final class IMBaseDefine {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserToken()) {
           
           return false;
         }
-        if (!hasResultCode()) {
-          
-          return false;
-        }
-        return true;
+        return hasResultCode();
       }
 
       public Builder mergeFrom(
@@ -11786,7 +11742,7 @@ public final class IMBaseDefine {
       shieldStatus_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -11995,7 +11951,7 @@ public final class IMBaseDefine {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasUserId()) {
           
           return false;
@@ -12004,11 +11960,7 @@ public final class IMBaseDefine {
           
           return false;
         }
-        if (!hasShieldStatus()) {
-          
-          return false;
-        }
-        return true;
+        return hasShieldStatus();
       }
 
       public Builder mergeFrom(
@@ -12430,7 +12382,7 @@ public final class IMBaseDefine {
       fileSize_ = 0;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -12663,7 +12615,7 @@ public final class IMBaseDefine {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasFromUserId()) {
           
           return false;
@@ -12676,11 +12628,7 @@ public final class IMBaseDefine {
           
           return false;
         }
-        if (!hasFileSize()) {
-          
-          return false;
-        }
-        return true;
+        return hasFileSize();
       }
 
       public Builder mergeFrom(
@@ -13365,7 +13313,7 @@ public final class IMBaseDefine {
       authIps_ = "";
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -13644,7 +13592,7 @@ public final class IMBaseDefine {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasAppKey()) {
           
           return false;
@@ -13665,11 +13613,7 @@ public final class IMBaseDefine {
           
           return false;
         }
-        if (!hasAuthIps()) {
-          
-          return false;
-        }
-        return true;
+        return hasAuthIps();
       }
 
       public Builder mergeFrom(
@@ -14395,7 +14339,7 @@ public final class IMBaseDefine {
       deptStatus_ = com.mogujie.tt.protobuf.IMBaseDefine.DepartmentStatusType.DEPT_STATUS_OK;
     }
     private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
+    public boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
@@ -14646,7 +14590,7 @@ public final class IMBaseDefine {
         return this;
       }
 
-      public final boolean isInitialized() {
+      public boolean isInitialized() {
         if (!hasDeptId()) {
           
           return false;
@@ -14663,11 +14607,7 @@ public final class IMBaseDefine {
           
           return false;
         }
-        if (!hasDeptStatus()) {
-          
-          return false;
-        }
-        return true;
+        return hasDeptStatus();
       }
 
       public Builder mergeFrom(

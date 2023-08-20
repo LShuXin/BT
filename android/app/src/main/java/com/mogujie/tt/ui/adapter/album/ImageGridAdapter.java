@@ -36,7 +36,7 @@ public class ImageGridAdapter extends BaseAdapter {
     BitmapCache cache = null;
     private Handler mHandler = null;
     private int selectTotal = 0;
-    private Logger logger = Logger.getLogger(ImageGridAdapter.class);
+    private final Logger logger = Logger.getLogger(ImageGridAdapter.class);
     private boolean allowLoad = true;
 
     public void lock() {
@@ -56,8 +56,8 @@ public class ImageGridAdapter extends BaseAdapter {
             try {
                 if (null != imageView && null != bitmap) {
                     String url = (String) params[0];
-                    if (null != url && url.equals((String) imageView.getTag())) {
-                        ((ImageView) imageView).setImageBitmap(bitmap);
+                    if (null != url && url.equals(imageView.getTag())) {
+                        imageView.setImageBitmap(bitmap);
                     } else {
                         logger.e("callback, bmp not match");
                     }
@@ -119,8 +119,8 @@ public class ImageGridAdapter extends BaseAdapter {
                 holder = new Holder();
                 convertView = View.inflate(activity, R.layout.tt_item_image_grid,
                         null);
-                holder.iv = (ImageView) convertView.findViewById(R.id.image);
-                holder.selected = (ImageView) convertView
+                holder.iv = convertView.findViewById(R.id.image);
+                holder.selected = convertView
                         .findViewById(R.id.isselected);
                 convertView.setTag(holder);
             } else {
@@ -200,7 +200,7 @@ public class ImageGridAdapter extends BaseAdapter {
                             selectedMap.remove(position);
                         }
                     } else if (selectTotal >= SysConstant.MAX_SELECT_IMAGE_COUNT) {
-                        if (item.isSelected() == true) {
+                        if (item.isSelected()) {
                             item.setSelected(!item.isSelected());
                             holder.selected
                                     .setImageResource(R.drawable.tt_album_img_select_nor);
@@ -240,8 +240,8 @@ public class ImageGridAdapter extends BaseAdapter {
         private ImageView selected;
     }
 
-    public static interface TextCallback {
-        public void onListen(int count);
+    public interface TextCallback {
+        void onListen(int count);
     }
 
 }

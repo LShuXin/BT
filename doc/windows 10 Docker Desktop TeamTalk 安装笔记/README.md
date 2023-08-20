@@ -1243,7 +1243,9 @@ LOG4CXX_PATH=http://mirror.bit.edu.cn/apache/logging/log4cxx/0.10.0/$LOG4CXX.tar
 改成 
 
 ```cobol
-LOG4CXX_PATH=https://archive.apache.org/dist/logging/log4cxx/0.10.0/$LOG4CXX.tar.gz
+//LOG4CXX_PATH=https://archive.apache.org/dist/logging/log4cxx/0.10.0/$LOG4CXX.tar.gz
+LOG4CXX_PATH=https://archive.apache.org/dist/logging/log4cxx/0.12.1/$LOG4CXX.tar.gz
+// 注意上面一行的版本号也要修改 
 ```
 
 ###  8.3.2 开始安装
@@ -1354,8 +1356,9 @@ sh sync_lib_for_zip.sh
 ### 8.4.4 导入mysql
 
 ```cobol
+cd ..
 mysql -uroot -p12345
-source /TeamTalk/auto_setup/mariadb/conf/ttopen.sql;
+source mariadb/conf/ttopen.sql;
 show tables;
 ```
 
@@ -1376,7 +1379,7 @@ exit
 ```cobol
 cd /home/wwwroot/default
 
-/bin/cp -rf /TeamTalk/php/* /home/wwwroot/default
+cp -rf ~/Downloads/TeamTalk/php/* /home/wwwroot/default
 ```
 
  修改config.php
@@ -1397,13 +1400,9 @@ $config['http_url'] = 'http://127.0.0.1:8400';
  vim application/config/database.php
 
 ```cobol
-
 $db['default']['hostname'] = '127.0.0.1';
-
 $db['default']['username'] = 'root';
-
 $db['default']['password'] = '12345';
-
 $db['default']['database'] = 'teamtalk';
 ```
 
@@ -1424,7 +1423,7 @@ $db['default']['database'] = 'teamtalk';
 ### 8.4.7 运行服务
 
 ```cobol
-cd /TeamTalk/auto_setup/im-server-1.0.0
+cd ~/Downloads/TeamTalk/auto_setup/im-server-1.0.0
 ```
 
 ###     1）修改 restart.sh
@@ -1559,3 +1558,6 @@ win客户端项目是使用 Visual Studio 2013 开发的，项目位置是teamta
 
 ![img](img/20210810191500730.png)
 
+​	 	
+
+> 在上述安装过程中，本人使用的是装有GUI的 CentOS， 服务部署完成后会发现无法进入图形界面，目前为了方便起见直接删除了用户界面，并将命令行登陆设置为了默认的登陆方式

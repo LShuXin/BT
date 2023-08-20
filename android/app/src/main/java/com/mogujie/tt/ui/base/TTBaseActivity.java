@@ -35,12 +35,12 @@ public abstract class TTBaseActivity extends Activity {
 
         topContentView = (ViewGroup) LayoutInflater.from(this).inflate(
                 R.layout.tt_activity_base, null);
-        topBar = (ViewGroup) topContentView.findViewById(R.id.topbar);
-        topTitleTxt = (TextView) topContentView.findViewById(R.id.base_activity_title);
-        topLeftBtn = (ImageView) topContentView.findViewById(R.id.left_btn);
-        topRightBtn = (ImageView) topContentView.findViewById(R.id.right_btn);
-        letTitleTxt = (TextView) topContentView.findViewById(R.id.left_txt);
-        baseRoot = (LinearLayout)topContentView.findViewById(R.id.act_base_root);
+        topBar = topContentView.findViewById(R.id.topbar);
+        topTitleTxt = topContentView.findViewById(R.id.base_activity_title);
+        topLeftBtn = topContentView.findViewById(R.id.left_btn);
+        topRightBtn = topContentView.findViewById(R.id.right_btn);
+        letTitleTxt = topContentView.findViewById(R.id.left_txt);
+        baseRoot = topContentView.findViewById(R.id.act_base_root);
 
         topTitleTxt.setVisibility(View.GONE);
         topRightBtn.setVisibility(View.GONE);

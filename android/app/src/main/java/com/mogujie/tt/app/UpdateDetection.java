@@ -33,9 +33,9 @@ import java.net.URL;
  */
 // not use now
 public class UpdateDetection {
-    private Context mContext;
+    private final Context mContext;
     //提示语
-    private String updateMsg = "有最新的软件包哦，亲快下载吧~";
+    private final String updateMsg = "有最新的软件包哦，亲快下载吧~";
 
     //返回的安装包url
     private String apkVersion;
@@ -61,7 +61,7 @@ public class UpdateDetection {
     private Thread downLoadThread;
     private boolean interceptFlag = false;
 
-    private Handler mHandler = new Handler(){
+    private final Handler mHandler = new Handler(){
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case ON_DOWNLOADING:
@@ -73,7 +73,7 @@ public class UpdateDetection {
                 default:
                     break;
             }
-        };
+        }
     };
 
     public UpdateDetection(Context context) {
@@ -151,7 +151,7 @@ public class UpdateDetection {
 
         final LayoutInflater inflater = LayoutInflater.from(mContext);
         View v = inflater.inflate(R.layout.tt_update_progress, null);
-        mProgress = (ProgressBar)v.findViewById(R.id.progress);
+        mProgress = v.findViewById(R.id.progress);
 
         builder.setView(v);
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -167,7 +167,7 @@ public class UpdateDetection {
         downloadApk();
     }
 
-    private Runnable mdownApkRunnable = new Runnable() {
+    private final Runnable mdownApkRunnable = new Runnable() {
         @Override
         public void run() {
             try {
@@ -187,7 +187,7 @@ public class UpdateDetection {
                     FileOutputStream fos = new FileOutputStream(ApkFile);
 
                     int count = 0;
-                    byte buf[] = new byte[1024];
+                    byte[] buf = new byte[1024];
 
                     do {
                         int numread = is.read(buf);
@@ -231,7 +231,7 @@ public class UpdateDetection {
             return;
         }
         Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setDataAndType(Uri.parse("file://" + apkfile.toString()), "application/vnd.android.package-archive");
+        i.setDataAndType(Uri.parse("file://" + apkfile), "application/vnd.android.package-archive");
         mContext.startActivity(i);
     }
 }

@@ -42,7 +42,7 @@ public class EmojiRenderView extends  BaseMsgRenderView {
 
     protected void onFinishInflate() {
         super.onFinishInflate();
-        messageContent = (GifView) findViewById(R.id.message_content);
+        messageContent = findViewById(R.id.message_content);
     }
 
     /**

@@ -41,12 +41,12 @@ public class ContactAdapter extends BaseAdapter implements
         AdapterView.OnItemClickListener,
         AdapterView.OnItemLongClickListener{
 
-    private Logger logger = Logger.getLogger(ContactAdapter.class);
+    private final Logger logger = Logger.getLogger(ContactAdapter.class);
     public List<GroupEntity> groupList = new ArrayList<>();
     public List<UserEntity> userList = new ArrayList<>();
 
-    private Context ctx;
-    private IMService imService;
+    private final Context ctx;
+    private final IMService imService;
 
     public ContactAdapter(Context context,IMService imService){
         this.ctx = context;
@@ -248,10 +248,10 @@ public class ContactAdapter extends BaseAdapter implements
         if (view == null) {
             userHolder = new UserHolder();
             view = LayoutInflater.from(ctx).inflate(R.layout.tt_item_contact, parent,false);
-            userHolder.nameView = (TextView) view.findViewById(R.id.contact_item_title);
-            userHolder.realNameView = (TextView) view.findViewById(R.id.contact_realname_title);
-            userHolder.sectionView = (TextView) view.findViewById(R.id.contact_category_title);
-            userHolder.avatar = (IMBaseImageView)view.findViewById(R.id.contact_portrait);
+            userHolder.nameView = view.findViewById(R.id.contact_item_title);
+            userHolder.realNameView = view.findViewById(R.id.contact_realname_title);
+            userHolder.sectionView = view.findViewById(R.id.contact_category_title);
+            userHolder.avatar = view.findViewById(R.id.contact_portrait);
             userHolder.divider = view.findViewById(R.id.contact_divider);
             view.setTag(userHolder);
         } else {
@@ -310,9 +310,9 @@ public class ContactAdapter extends BaseAdapter implements
         if (view == null) {
             groupHolder = new GroupHolder();
             view = LayoutInflater.from(ctx).inflate(R.layout.tt_item_contact_group, parent,false);
-            groupHolder.nameView = (TextView) view.findViewById(R.id.contact_item_title);
-            groupHolder.sectionView = (TextView) view.findViewById(R.id.contact_category_title);
-            groupHolder.avatar = (IMGroupAvatar)view.findViewById(R.id.contact_portrait);
+            groupHolder.nameView = view.findViewById(R.id.contact_item_title);
+            groupHolder.sectionView = view.findViewById(R.id.contact_category_title);
+            groupHolder.avatar = view.findViewById(R.id.contact_portrait);
             groupHolder.divider = view.findViewById(R.id.contact_divider);
             view.setTag(groupHolder);
         } else {
