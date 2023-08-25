@@ -5,20 +5,20 @@ option java_package = "com.mogujie.tt.protobuf";
 //option java_outer_classname = "MOGUJIEIMMessage";
 option optimize_for = LITE_RUNTIME;
 
-message IMSyncAuthInfoReq{
+message IMSyncAuthInfoReq {
     uint32 latest_time = 1;
     optional bytes attach_data = 20;
 }
-message IMSyncAuthInfoRsp{
+message IMSyncAuthInfoRsp {
     uint32 latest_time = 1;
     IM.BaseDefine.AuthInfo auth_list = 2;
     optional bytes attach_data = 20;
 }
-message IMGetUserIdListByNickNameReq{
+message IMGetUserIdListByNickNameReq {
     string nick_name_list = 1;
     optional bytes attach_data = 20;
 }
-message IMGetUserIdListByNickNameRsp{
+message IMGetUserIdListByNickNameRsp {
     IM.BaseDefine.UserInfo user_info_list = 1;
     optional bytes attach_data = 20;
 }

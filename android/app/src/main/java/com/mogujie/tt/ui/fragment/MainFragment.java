@@ -7,18 +7,18 @@ import com.mogujie.tt.R;
 import com.mogujie.tt.ui.base.TTBaseFragment;
 
 public abstract class MainFragment extends TTBaseFragment {
-	private ProgressBar progressbar;
+    private ProgressBar progressbar;
 
-	public void init(View curView) {
-		progressbar = curView.findViewById(R.id.progress_bar);
-	}
+    public void init(View curView) {
+        progressbar = curView.findViewById(R.id.progress_bar);
+    }
 
-	public void showProgressBar() {
-		progressbar.setVisibility(View.VISIBLE);
-	}
+    public void showProgressBar() {
+        progressbar.setVisibility(View.VISIBLE);
+    }
 
-	public void hideProgressBar() {
-		progressbar.setVisibility(View.GONE);
-	}
+    public void hideProgressBar() {
+        progressbar.setVisibility(View.GONE);
+    }
 
 }

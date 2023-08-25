@@ -3,15 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/contact_list_item_bk"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/layout_no_search_result"
         android:layout_width="match_parent"
         android:layout_height="49dp"
-        android:orientation="vertical"
         android:gravity="center|center_horizontal"
-        android:visibility="gone" >
+        android:orientation="vertical"
+        android:visibility="gone">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,7 +25,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center"
-        android:divider="@null" >
-    </ListView>
+        android:divider="@null"></ListView>
 
 </LinearLayout>

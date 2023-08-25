@@ -1,4 +1,3 @@
-
 package com.mogujie.tt.ui.adapter;
 
 
@@ -9,6 +8,7 @@ import android.widget.GridView;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.mogujie.tt.utils.Logger;
+
 import java.util.List;
 
 public class ViewPageAdapter extends PagerAdapter {

@@ -1,6 +1,6 @@
 package com.mogujie.tt.ui.activity;
-import android.os.Bundle;
 
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,8 +15,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.mogujie.tt.R;
 import com.mogujie.tt.config.IntentConstant;
 import com.mogujie.tt.imservice.entity.ImageMessage;
-import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.imservice.service.IMService;
+import com.mogujie.tt.imservice.support.IMServiceConnector;
 import com.mogujie.tt.ui.fragment.MessageImageFragment;
 
 import java.util.ArrayList;
@@ -27,21 +27,21 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
     private ImageView back;
     private int curImagePosition = -1;
     private ImageMessage messageInfo;
-    ArrayList<ImageView> tips=new ArrayList<ImageView>();
-    ArrayList<Fragment> fragments=new ArrayList<>();
-    private ArrayList<ImageMessage> imageList= null;
+    ArrayList<ImageView> tips = new ArrayList<ImageView>();
+    ArrayList<Fragment> fragments = new ArrayList<>();
+    private ArrayList<ImageMessage> imageList = null;
     public IMService imService;
 
     IMServiceConnector imServiceConnector = new IMServiceConnector() {
         @Override
         public void onIMServiceConnected() {
             imService = imServiceConnector.getIMService();
-            if(imService!=null)
-            {
+            if (imService != null) {
                 loadFragments();
 //                loadTips();
             }
         }
+
         @Override
         public void onServiceDisconnected() {
         }
@@ -52,12 +52,12 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview_message_images);
-        imageList=ImageMessage.getImageMessageList();
+        imageList = ImageMessage.getImageMessageList();
         try {
             messageInfo = (ImageMessage) getIntent().getSerializableExtra(IntentConstant.CUR_MESSAGE);
             initRes();
             imServiceConnector.connect(this);
-        }catch (Exception e){
+        } catch (Exception e) {
         }
     }
 
@@ -81,15 +81,15 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
             //loadFragments();
             //设置点点
             //loadTips();
-        }catch (Exception e){
+        } catch (Exception e) {
         }
     }
 
     /**
      * 加载页面
      */
-    private void loadFragments(){
-        if (null == viewPager||null==fragments) {
+    private void loadFragments() {
+        if (null == viewPager || null == fragments) {
             return;
         }
         try {
@@ -97,15 +97,15 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
             fragments.clear();
             if (null != imageList && null != messageInfo) {
                 for (int i = 0; i < imageList.size(); i++) {
-                    ImageMessage item =imageList.get(imageList.size()-i-1);
-                    if(null==item){
+                    ImageMessage item = imageList.get(imageList.size() - i - 1);
+                    if (null == item) {
                         continue;
                     }
                     MessageImageFragment fragment = new MessageImageFragment();
                     fragment.setImageInfo(item);
                     fragment.setImService(imService);
                     fragments.add(fragment);
-                    if (item.getMsgId()==messageInfo.getMsgId()&&messageInfo.getId().equals(item.getId())) {
+                    if (item.getMsgId() == messageInfo.getMsgId() && messageInfo.getId().equals(item.getId())) {
                         curImagePosition = i;
                     }
                 }
@@ -114,23 +114,23 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
             if (curImagePosition >= 0) {
                 viewPager.setCurrentItem(curImagePosition);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
         }
     }
 
     /**
      * 加载点点
      */
-    private void loadTips(){
+    private void loadTips() {
         try {
-            if (null==imageList||imageList.size()==0){
+            if (null == imageList || imageList.size() == 0) {
                 return;
             }
             group.removeAllViews();
             tips.clear();
             for (int i = 0; i < imageList.size(); i++) {
-                ImageMessage item =imageList.get(i);
-                if(null==item){
+                ImageMessage item = imageList.get(i);
+                if (null == item) {
                     continue;
                 }
                 ImageView imageView = new ImageView(this);
@@ -146,7 +146,7 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
                 layoutParams.rightMargin = 5;
                 group.addView(imageView, layoutParams);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
         }
     }
 
@@ -158,10 +158,10 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
     @Override
     public void onPageSelected(int position) {
         try {
-            if (null==tips){
+            if (null == tips) {
                 loadTips();
             }
-            if (null!=tips) {
+            if (null != tips) {
                 for (int i = 0; i < tips.size(); i++) {
                     if (i == position) {
                         tips.get(i).setBackgroundResource(R.drawable.tt_default_dot_down);
@@ -170,7 +170,7 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
                     }
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
         }
     }
 
@@ -179,8 +179,9 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
 
     }
 
-    public class FragmentAdapter  extends FragmentPagerAdapter {
+    public class FragmentAdapter extends FragmentPagerAdapter {
         ArrayList<Fragment> list;
+
         public FragmentAdapter(FragmentManager fm, ArrayList<Fragment> list) {
             super(fm);
             this.list = list;

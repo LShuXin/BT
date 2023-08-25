@@ -7,13 +7,12 @@ import android.text.TextUtils;
 
 import com.mogujie.tt.DB.sp.SystemConfigSp;
 import com.mogujie.tt.config.SysConstant;
-import com.mogujie.tt.config.UrlConstant;
 import com.mogujie.tt.imservice.entity.ImageMessage;
 import com.mogujie.tt.imservice.event.MessageEvent;
 import com.mogujie.tt.ui.helper.PhotoHelper;
 import com.mogujie.tt.utils.FileUtil;
-import com.mogujie.tt.utils.MoGuHttpClient;
 import com.mogujie.tt.utils.Logger;
+import com.mogujie.tt.utils.MoGuHttpClient;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,13 +22,12 @@ import de.greenrobot.event.EventBus;
 /**
  * @author : yingmu on 15-1-12.
  * @email : yingmu@mogujie.com.
- *
  */
 public class LoadImageService extends IntentService {
 
     private static final Logger logger = Logger.getLogger(LoadImageService.class);
 
-    public LoadImageService(){
+    public LoadImageService() {
         super("LoadImageService");
     }
 
@@ -51,41 +49,38 @@ public class LoadImageService extends IntentService {
      */
     @Override
     protected void onHandleIntent(Intent intent) {
-        ImageMessage messageInfo = (ImageMessage)intent.getSerializableExtra(SysConstant.UPLOAD_IMAGE_INTENT_PARAMS);
-            String result = null;
-            Bitmap bitmap;
-            try {
-                File file= new File(messageInfo.getPath());
-                if(file.exists() && FileUtil.getExtensionName(messageInfo.getPath()).equalsIgnoreCase(".gif"))
-                {
+        ImageMessage messageInfo = (ImageMessage) intent.getSerializableExtra(SysConstant.UPLOAD_IMAGE_INTENT_PARAMS);
+        String result = null;
+        Bitmap bitmap;
+        try {
+            File file = new File(messageInfo.getPath());
+            if (file.exists() && FileUtil.getExtensionName(messageInfo.getPath()).equalsIgnoreCase(".gif")) {
+                MoGuHttpClient httpClient = new MoGuHttpClient();
+                SystemConfigSp.instance().init(getApplicationContext());
+                result = httpClient.uploadImage3(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.MSFSSERVER), FileUtil.File2byte(messageInfo.getPath()), messageInfo.getPath());
+            } else {
+                bitmap = PhotoHelper.revitionImage(messageInfo.getPath());
+                if (null != bitmap) {
                     MoGuHttpClient httpClient = new MoGuHttpClient();
-                    SystemConfigSp.instance().init(getApplicationContext());
-                    result = httpClient.uploadImage3(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.MSFSSERVER), FileUtil.File2byte(messageInfo.getPath()), messageInfo.getPath());
+                    byte[] bytes = PhotoHelper.getBytes(bitmap);
+                    result = httpClient.uploadImage3(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.MSFSSERVER), bytes, messageInfo.getPath());
                 }
-                else
-                {
-                    bitmap = PhotoHelper.revitionImage(messageInfo.getPath());
-                    if (null != bitmap) {
-                        MoGuHttpClient httpClient = new MoGuHttpClient();
-                        byte[] bytes = PhotoHelper.getBytes(bitmap);
-                        result = httpClient.uploadImage3(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.MSFSSERVER), bytes, messageInfo.getPath());
-                    }
-                }
-
-                if (TextUtils.isEmpty(result)) {
-                    logger.i("upload image faild,cause by result is empty/null");
-                    EventBus.getDefault().post(new MessageEvent(MessageEvent.Event.IMAGE_UPLOAD_FAILD
-                    ,messageInfo));
-                } else {
-                    logger.i("upload image succcess,imageUrl is %s",result);
-                    String imageUrl = result;
-                    messageInfo.setUrl(imageUrl);
-                    EventBus.getDefault().post(new MessageEvent(
-                            MessageEvent.Event.IMAGE_UPLOAD_SUCCESS
-                            ,messageInfo));
-                }
-            } catch (IOException e) {
-                logger.e(e.getMessage());
             }
+
+            if (TextUtils.isEmpty(result)) {
+                logger.i("upload image faild,cause by result is empty/null");
+                EventBus.getDefault().post(new MessageEvent(MessageEvent.Event.IMAGE_UPLOAD_FAILD
+                        , messageInfo));
+            } else {
+                logger.i("upload image succcess,imageUrl is %s", result);
+                String imageUrl = result;
+                messageInfo.setUrl(imageUrl);
+                EventBus.getDefault().post(new MessageEvent(
+                        MessageEvent.Event.IMAGE_UPLOAD_SUCCESS
+                        , messageInfo));
+            }
+        } catch (IOException e) {
+            logger.e(e.getMessage());
+        }
     }
 }

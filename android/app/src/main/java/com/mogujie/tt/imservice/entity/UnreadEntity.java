@@ -5,7 +5,7 @@ import com.mogujie.tt.protobuf.helper.EntityChangeEngine;
 /**
  * @author : yingmu on 15-1-6.
  * @email : yingmu@mogujie.com.
- *
+ * <p>
  * 未读session实体，并未保存在DB中
  */
 public class UnreadEntity {
@@ -86,12 +86,12 @@ public class UnreadEntity {
                 '}';
     }
 
-    public String buildSessionKey(){
-        if(sessionType <=0 || peerId <=0){
+    public String buildSessionKey() {
+        if (sessionType <= 0 || peerId <= 0) {
             throw new IllegalArgumentException(
                     "SessionEntity buildSessionKey error,cause by some params <=0");
         }
-        sessionKey = EntityChangeEngine.getSessionKey(peerId,sessionType);
+        sessionKey = EntityChangeEngine.getSessionKey(peerId, sessionType);
         return sessionKey;
     }
 }

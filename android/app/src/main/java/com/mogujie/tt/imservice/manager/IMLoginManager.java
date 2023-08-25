@@ -8,10 +8,10 @@ import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.DB.sp.LoginSp;
 import com.mogujie.tt.imservice.callback.Packetlistener;
 import com.mogujie.tt.imservice.event.LoginEvent;
-import com.mogujie.tt.protobuf.helper.ProtoBuf2JavaBean;
 import com.mogujie.tt.protobuf.IMBaseDefine;
 import com.mogujie.tt.protobuf.IMBuddy;
 import com.mogujie.tt.protobuf.IMLogin;
+import com.mogujie.tt.protobuf.helper.ProtoBuf2JavaBean;
 import com.mogujie.tt.utils.Logger;
 
 import java.io.IOException;
@@ -21,30 +21,40 @@ import de.greenrobot.event.EventBus;
 /**
  * 很多情况下都是一种权衡
  * 登陆控制
+ *
  * @yingmu
  */
 public class IMLoginManager extends IMManager {
     private final Logger logger = Logger.getLogger(IMLoginManager.class);
 
-    /**单例模式*/
+    /**
+     * 单例模式
+     */
     private static final IMLoginManager inst = new IMLoginManager();
+
     public static IMLoginManager instance() {
         return inst;
     }
+
     public IMLoginManager() {
         logger.d("login#creating IMLoginManager");
     }
+
     IMSocketManager imSocketManager = IMSocketManager.instance();
 
-    /**登陆参数 以便重试*/
+    /**
+     * 登陆参数 以便重试
+     */
     private String loginUserName;
     private String loginPwd;
     private int loginId;
     private UserEntity loginInfo;
 
 
-    /**loginManger 自身的状态 todo 状态太多就采用enum的方式*/
-    private boolean  identityChanged = false;
+    /**
+     * loginManger 自身的状态 todo 状态太多就采用enum的方式
+     */
+    private boolean identityChanged = false;
     private boolean isKickout = false;
     private boolean isPcOnline = false;
     //以前是否登陆过，用户重新登陆的判断
@@ -52,9 +62,11 @@ public class IMLoginManager extends IMManager {
     //本地包含登陆信息了[可以理解为支持离线登陆了]
     private boolean isLocalLogin = false;
 
-    private LoginEvent loginStatus= LoginEvent.NONE;
+    private LoginEvent loginStatus = LoginEvent.NONE;
 
-    /**-------------------------------功能方法--------------------------------------*/
+    /**
+     * -------------------------------功能方法--------------------------------------
+     */
 
     @Override
     public void doOnStart() {
@@ -67,15 +79,16 @@ public class IMLoginManager extends IMManager {
         loginId = -1;
         loginInfo = null;
         identityChanged = false;
-        isKickout=false;
+        isKickout = false;
         isPcOnline = false;
         everLogined = false;
-        loginStatus= LoginEvent.NONE;
+        loginStatus = LoginEvent.NONE;
         isLocalLogin = false;
     }
 
     /**
      * 实现自身的事件驱动
+     *
      * @param event
      */
     public void triggerEvent(LoginEvent event) {
@@ -85,18 +98,17 @@ public class IMLoginManager extends IMManager {
 
     /**
      * if not login, do nothing
-     send logOuting message, so reconnect won't react abnormally
-     but when reconnect start to work again?use isEverLogined
-     close the socket
-     send logOuteOk message
-     mainactivity jumps to login page
-     *
+     * send logOuting message, so reconnect won't react abnormally
+     * but when reconnect start to work again?use isEverLogined
+     * close the socket
+     * send logOuteOk message
+     * mainactivity jumps to login page
      */
     public void logOut() {
         logger.d("login#logOut");
         logger.d("login#stop reconnecting");
         //		everlogined is enough to stop reconnecting
-        everLogined =  false;
+        everLogined = false;
         isLocalLogin = false;
         reqLoginOut();
     }
@@ -104,17 +116,17 @@ public class IMLoginManager extends IMManager {
     /**
      * 退出登陆
      */
-    private void reqLoginOut(){
+    private void reqLoginOut() {
         IMLogin.IMLogoutReq imLogoutReq = IMLogin.IMLogoutReq.newBuilder()
                 .build();
         int sid = IMBaseDefine.ServiceID.SID_LOGIN_VALUE;
         int cid = IMBaseDefine.LoginCmdID.CID_LOGIN_REQ_LOGINOUT_VALUE;
         try {
             imSocketManager.sendRequest(imLogoutReq, sid, cid);
-        }catch (Exception e){
-            logger.e("#reqLoginOut#sendRequest error,cause by"+ e);
-        }finally {
-            LoginSp.instance().setLoginInfo(loginUserName,null,loginId);
+        } catch (Exception e) {
+            logger.e("#reqLoginOut#sendRequest error,cause by" + e);
+        } finally {
+            LoginSp.instance().setLoginInfo(loginUserName, null, loginId);
             logger.d("login#send logout finish message");
             triggerEvent(LoginEvent.LOGIN_OUT);
         }
@@ -122,9 +134,10 @@ public class IMLoginManager extends IMManager {
 
     /**
      * 现在这种模式 req与rsp之间没有必然的耦合关系。是不是太松散了
+     *
      * @param imLogoutRsp
      */
-    public void onRepLoginOut(IMLogin.IMLogoutRsp imLogoutRsp){
+    public void onRepLoginOut(IMLogin.IMLogoutRsp imLogoutRsp) {
         int code = imLogoutRsp.getResultCode();
         logger.d("login#send logout finish message");
     }
@@ -135,13 +148,14 @@ public class IMLoginManager extends IMManager {
      * 2. 请求msg server的地址
      * 3. 建立链接
      * 4. 验证登陆信息
+     *
      * @return
      */
     public void relogin() {
-        if(!TextUtils.isEmpty(loginUserName) && !TextUtils.isEmpty(loginPwd)){
+        if (!TextUtils.isEmpty(loginUserName) && !TextUtils.isEmpty(loginPwd)) {
             logger.d("reconnect#login#relogin");
             imSocketManager.reqMsgServerAddrs();
-        }else{
+        } else {
             logger.d("reconnect#login#userName or loginPwd is null!!");
             everLogined = false;
             triggerEvent(LoginEvent.LOGIN_AUTH_FAILED);
@@ -149,8 +163,8 @@ public class IMLoginManager extends IMManager {
     }
 
     // 自动登陆流程
-    public void login(LoginSp.SpLoginIdentity identity){
-        if(identity == null){
+    public void login(LoginSp.SpLoginIdentity identity) {
+        if (identity == null) {
             triggerEvent(LoginEvent.LOGIN_AUTH_FAILED);
             return;
         }
@@ -160,10 +174,10 @@ public class IMLoginManager extends IMManager {
 
         int mLoginId = identity.getLoginId();
         // 初始化数据库
-        DBInterface.instance().initDbHelp(ctx,mLoginId);
+        DBInterface.instance().initDbHelp(ctx, mLoginId);
         UserEntity loginEntity = DBInterface.instance().getByLoginId(mLoginId);
-        do{
-            if(loginEntity == null){
+        do {
+            if (loginEntity == null) {
                 break;
             }
             loginInfo = loginEntity;
@@ -172,7 +186,7 @@ public class IMLoginManager extends IMManager {
             isLocalLogin = true;
             everLogined = true;
             triggerEvent(LoginEvent.LOCAL_LOGIN_SUCCESS);
-        }while(false);
+        } while (false);
         // 开始请求网络
         imSocketManager.reqMsgServerAddrs();
     }
@@ -183,7 +197,7 @@ public class IMLoginManager extends IMManager {
 
         //test 使用
         LoginSp.SpLoginIdentity identity = LoginSp.instance().getLoginIdentity();
-        if(identity !=null && !TextUtils.isEmpty(identity.getPwd())) {
+        if (identity != null && !TextUtils.isEmpty(identity.getPwd())) {
             if (identity.getPwd().equals(password) && identity.getLoginName().equals(userName)) {
                 login(identity);
                 return;
@@ -198,7 +212,7 @@ public class IMLoginManager extends IMManager {
 
     /**
      * 链接成功之后
-     * */
+     */
     public void reqLoginMsgServer() {
         logger.i("login#reqLoginMsgServer");
         triggerEvent(LoginEvent.LOGINING);
@@ -206,40 +220,41 @@ public class IMLoginManager extends IMManager {
         String desPwd = new String(com.mogujie.tt.Security.getInstance().EncryptPass(loginPwd));
 
         IMLogin.IMLoginReq imLoginReq = IMLogin.IMLoginReq.newBuilder()
-                    .setUserName(loginUserName)
-                    .setPassword(desPwd)
-                    .setOnlineStatus(IMBaseDefine.UserStatType.USER_STATUS_ONLINE)
-                    .setClientType(IMBaseDefine.ClientType.CLIENT_TYPE_ANDROID)
-                    .setClientVersion("1.0.0").build();
+                .setUserName(loginUserName)
+                .setPassword(desPwd)
+                .setOnlineStatus(IMBaseDefine.UserStatType.USER_STATUS_ONLINE)
+                .setClientType(IMBaseDefine.ClientType.CLIENT_TYPE_ANDROID)
+                .setClientVersion("1.0.0").build();
 
-       int sid = IMBaseDefine.ServiceID.SID_LOGIN_VALUE;
-       int cid = IMBaseDefine.LoginCmdID.CID_LOGIN_REQ_USERLOGIN_VALUE;
-       imSocketManager.sendRequest(imLoginReq,sid,cid,new Packetlistener() {
-           @Override
-           public void onSuccess(Object response) {
-               try {
-                   IMLogin.IMLoginRes  imLoginRes = IMLogin.IMLoginRes.parseFrom((CodedInputStream)response);
-                   onRepMsgServerLogin(imLoginRes);
-               } catch (IOException e) {
-                   triggerEvent(LoginEvent.LOGIN_INNER_FAILED);
-                   logger.e("login failed,cause by %s",e.getCause());
-               }
-           }
+        int sid = IMBaseDefine.ServiceID.SID_LOGIN_VALUE;
+        int cid = IMBaseDefine.LoginCmdID.CID_LOGIN_REQ_USERLOGIN_VALUE;
+        imSocketManager.sendRequest(imLoginReq, sid, cid, new Packetlistener() {
+            @Override
+            public void onSuccess(Object response) {
+                try {
+                    IMLogin.IMLoginRes imLoginRes = IMLogin.IMLoginRes.parseFrom((CodedInputStream) response);
+                    onRepMsgServerLogin(imLoginRes);
+                } catch (IOException e) {
+                    triggerEvent(LoginEvent.LOGIN_INNER_FAILED);
+                    logger.e("login failed,cause by %s", e.getCause());
+                }
+            }
 
-           @Override
-           public void onFaild() {
-               triggerEvent(LoginEvent.LOGIN_INNER_FAILED);
-           }
+            @Override
+            public void onFaild() {
+                triggerEvent(LoginEvent.LOGIN_INNER_FAILED);
+            }
 
-           @Override
-           public void onTimeout() {
-               triggerEvent(LoginEvent.LOGIN_INNER_FAILED);
-           }
-       });
+            @Override
+            public void onTimeout() {
+                triggerEvent(LoginEvent.LOGIN_INNER_FAILED);
+            }
+        });
     }
 
     /**
      * 验证登陆信息结果
+     *
      * @param loginRes
      */
     public void onRepMsgServerLogin(IMLogin.IMLoginRes loginRes) {
@@ -251,25 +266,28 @@ public class IMLoginManager extends IMManager {
             return;
         }
 
-        IMBaseDefine.ResultType  code = loginRes.getResultCode();
-        switch (code){
-            case REFUSE_REASON_NONE:{
+        IMBaseDefine.ResultType code = loginRes.getResultCode();
+        switch (code) {
+            case REFUSE_REASON_NONE: {
                 IMBaseDefine.UserStatType userStatType = loginRes.getOnlineStatus();
-                IMBaseDefine.UserInfo userInfo =  loginRes.getUserInfo();
+                IMBaseDefine.UserInfo userInfo = loginRes.getUserInfo();
                 loginId = userInfo.getUserId();
                 loginInfo = ProtoBuf2JavaBean.getUserEntity(userInfo);
                 onLoginOk();
-            }break;
+            }
+            break;
 
-            case REFUSE_REASON_DB_VALIDATE_FAILED:{
+            case REFUSE_REASON_DB_VALIDATE_FAILED: {
                 logger.e("login#login msg server failed, result:%s", code);
                 triggerEvent(LoginEvent.LOGIN_AUTH_FAILED);
-            }break;
+            }
+            break;
 
-            default:{
+            default: {
                 logger.e("login#login msg server inner failed, result:%s", code);
                 triggerEvent(LoginEvent.LOGIN_INNER_FAILED);
-            }break;
+            }
+            break;
         }
     }
 
@@ -279,9 +297,9 @@ public class IMLoginManager extends IMManager {
         isKickout = false;
 
         // 判断登陆的类型
-        if(isLocalLogin){
+        if (isLocalLogin) {
             triggerEvent(LoginEvent.LOCAL_LOGIN_MSG_SERVICE);
-        }else{
+        } else {
             isLocalLogin = true;
             triggerEvent(LoginEvent.LOGIN_OK);
         }
@@ -289,14 +307,13 @@ public class IMLoginManager extends IMManager {
         // 发送token
 //        reqDeviceToken();
         if (identityChanged) {
-            LoginSp.instance().setLoginInfo(loginUserName,loginPwd,loginId);
+            LoginSp.instance().setLoginInfo(loginUserName, loginPwd, loginId);
             identityChanged = false;
         }
     }
 
 
-
-    private void reqDeviceToken(){
+    private void reqDeviceToken() {
 //        String token = PushManager.getInstance().getToken();
 //        IMLogin.IMDeviceTokenReq req = IMLogin.IMDeviceTokenReq.newBuilder()
 //                .setUserId(loginId)
@@ -327,58 +344,62 @@ public class IMLoginManager extends IMManager {
     }
 
 
-    public void onKickout(IMLogin.IMKickUser imKickUser){
+    public void onKickout(IMLogin.IMKickUser imKickUser) {
         logger.i("login#onKickout");
         int kickUserId = imKickUser.getUserId();
         IMBaseDefine.KickReasonType reason = imKickUser.getKickReason();
-        isKickout=true;
+        isKickout = true;
         imSocketManager.onMsgServerDisconn();
     }
 
 
     // 收到PC端登陆的通知，另外登陆成功之后，如果PC端在线，也会立马收到该通知
-    public void onLoginStatusNotify(IMBuddy.IMPCLoginStatusNotify statusNotify){
+    public void onLoginStatusNotify(IMBuddy.IMPCLoginStatusNotify statusNotify) {
         int userId = statusNotify.getUserId();
         // todo 由于交互不太友好 暂时先去掉
-        if(true){
+        if (true) {
             logger.i("login#onLoginStatusNotify userId ≠ loginId");
             return;
         }
 
-        if(isKickout){
+        if (isKickout) {
             logger.i("login#already isKickout");
             return;
         }
 
-        switch (statusNotify.getLoginStat()){
-            case USER_STATUS_ONLINE:{
+        switch (statusNotify.getLoginStat()) {
+            case USER_STATUS_ONLINE: {
                 isPcOnline = true;
                 EventBus.getDefault().postSticky(LoginEvent.PC_ONLINE);
-            }break;
+            }
+            break;
 
-            case USER_STATUS_OFFLINE:{
+            case USER_STATUS_OFFLINE: {
                 isPcOnline = false;
                 EventBus.getDefault().postSticky(LoginEvent.PC_OFFLINE);
-            }break;
+            }
+            break;
         }
     }
 
     // 踢出PC端登陆
-    public void reqKickPCClient(){
+    public void reqKickPCClient() {
         IMLogin.IMKickPCClientReq req = IMLogin.IMKickPCClientReq.newBuilder()
                 .setUserId(loginId)
                 .build();
         int sid = IMBaseDefine.ServiceID.SID_LOGIN_VALUE;
         int cid = IMBaseDefine.LoginCmdID.CID_LOGIN_REQ_KICKPCCLIENT_VALUE;
-        imSocketManager.sendRequest(req,sid,cid,new Packetlistener() {
+        imSocketManager.sendRequest(req, sid, cid, new Packetlistener() {
             @Override
             public void onSuccess(Object response) {
                 triggerEvent(LoginEvent.KICK_PC_SUCCESS);
             }
+
             @Override
             public void onFaild() {
                 triggerEvent(LoginEvent.KICK_PC_FAILED);
             }
+
             @Override
             public void onTimeout() {
                 triggerEvent(LoginEvent.KICK_PC_FAILED);
@@ -386,7 +407,9 @@ public class IMLoginManager extends IMManager {
         });
     }
 
-    /**------------------状态的 set  get------------------------------*/
+    /**
+     * ------------------状态的 set  get------------------------------
+     */
     public int getLoginId() {
         return loginId;
     }

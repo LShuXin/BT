@@ -16,9 +16,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.mogujie.tt.R;
 import com.mogujie.tt.ui.adapter.album.ImageGridAdapter;
 import com.mogujie.tt.ui.adapter.album.ImageItem;
+import com.mogujie.tt.ui.widget.CustomViewPager;
 import com.mogujie.tt.utils.ImageUtil;
 import com.mogujie.tt.utils.Logger;
-import com.mogujie.tt.ui.widget.CustomViewPager;
 
 import java.util.HashMap;
 import java.util.Iterator;

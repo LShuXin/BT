@@ -269,6 +269,9 @@ public class MessageEntity implements java.io.Serializable {
         this.isGIfEmo = isGIfEmo;
     }
 
+    /**
+     * 判断消息是否为自己发出的
+     * */
     public boolean isSend(int loginId){
         boolean isSend = loginId == fromId;
         return isSend;

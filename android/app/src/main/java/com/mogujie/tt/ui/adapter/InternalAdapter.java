@@ -7,20 +7,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.mogujie.tt.DB.sp.SystemConfigSp;
 import com.mogujie.tt.R;
 import com.mogujie.tt.utils.Logger;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Comparator;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -205,8 +206,9 @@ public class InternalAdapter extends BaseAdapter {
         public int compare(Object o1, Object o2) {
             InternalItem s1 = (InternalItem) o1;
             InternalItem s2 = (InternalItem) o2;
-            if (s1.getItemPriority() > s2.getItemPriority())
+            if (s1.getItemPriority() > s2.getItemPriority()) {
                 return 1;
+            }
             return 0;
         }
     }

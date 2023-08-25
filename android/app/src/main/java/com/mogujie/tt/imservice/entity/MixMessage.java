@@ -2,8 +2,8 @@ package com.mogujie.tt.imservice.entity;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.DB.entity.MessageEntity;
+import com.mogujie.tt.config.DBConstant;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,30 +18,31 @@ import java.util.List;
  */
 public class MixMessage extends MessageEntity {
 
-    public List<MessageEntity> msgList ;
+    public List<MessageEntity> msgList;
 
 
     /**
      * 从net端解析需要
+     *
      * @param entityList
      */
-    public MixMessage(List<MessageEntity> entityList){
-        if(entityList ==null || entityList.size()<=1){
+    public MixMessage(List<MessageEntity> entityList) {
+        if (entityList == null || entityList.size() <= 1) {
             throw new RuntimeException("MixMessage# type is error!");
         }
 
         MessageEntity justOne = entityList.get(0);
-        id =  justOne.getId();
-        msgId   = justOne.getMsgId();
-        fromId  = justOne.getFromId();
-        toId    = justOne.getToId();
+        id = justOne.getId();
+        msgId = justOne.getMsgId();
+        fromId = justOne.getFromId();
+        toId = justOne.getToId();
         sessionKey = justOne.getSessionKey();
         msgType = justOne.getMsgType();
-        status  = justOne.getStatus();
+        status = justOne.getStatus();
         created = justOne.getCreated();
         updated = justOne.getUpdated();
         msgList = entityList;
-        displayType= DBConstant.SHOW_MIX_TEXT;
+        displayType = DBConstant.SHOW_MIX_TEXT;
 
         /**分配主键Id
          * 图文混排的之间全部从-1开始
@@ -50,11 +51,11 @@ public class MixMessage extends MessageEntity {
          * dbinterface 结合id sessionKey msgid来替换具体的消息
          * {insertOrUpdateMix}
          * */
-         long index = -1;
-         for(MessageEntity msg:entityList){
-             msg.setId(index);
-             index --;
-         }
+        long index = -1;
+        for (MessageEntity msg : entityList) {
+            msg.setId(index);
+            index--;
+        }
     }
 
     /**
@@ -66,13 +67,13 @@ public class MixMessage extends MessageEntity {
     }
 
     /**
-     *sessionKey是在外边设定的，所以子对象是没有的
+     * sessionKey是在外边设定的，所以子对象是没有的
      * 所以在设定的时候，都需要加上
-     * */
+     */
     @Override
     public void setSessionKey(String sessionKey) {
         super.setSessionKey(sessionKey);
-        for(MessageEntity msg:msgList){
+        for (MessageEntity msg : msgList) {
             msg.setSessionKey(sessionKey);
         }
     }
@@ -80,18 +81,18 @@ public class MixMessage extends MessageEntity {
     @Override
     public void setToId(int toId) {
         super.setToId(toId);
-        for(MessageEntity msg:msgList){
+        for (MessageEntity msg : msgList) {
             msg.setToId(toId);
         }
     }
 
-    public MixMessage(MessageEntity dbEntity){
-        id =  dbEntity.getId();
-        msgId   = dbEntity.getMsgId();
-        fromId  = dbEntity.getFromId();
-        toId    = dbEntity.getToId();
+    public MixMessage(MessageEntity dbEntity) {
+        id = dbEntity.getId();
+        msgId = dbEntity.getMsgId();
+        fromId = dbEntity.getFromId();
+        toId = dbEntity.getToId();
         msgType = dbEntity.getMsgType();
-        status  = dbEntity.getStatus();
+        status = dbEntity.getStatus();
         created = dbEntity.getCreated();
         updated = dbEntity.getUpdated();
         content = dbEntity.getContent();
@@ -100,14 +101,14 @@ public class MixMessage extends MessageEntity {
 
     }
 
-    private String getSerializableContent(List<MessageEntity> entityList){
+    private String getSerializableContent(List<MessageEntity> entityList) {
         Gson gson = new Gson();
         String json = gson.toJson(entityList);
         return json;
     }
 
     public static MixMessage parseFromDB(MessageEntity entity) throws JSONException {
-        if(entity.getDisplayType() != DBConstant.SHOW_MIX_TEXT){
+        if (entity.getDisplayType() != DBConstant.SHOW_MIX_TEXT) {
             throw new RuntimeException("#MixMessage# parseFromDB,not SHOW_MIX_TEXT");
         }
         Gson gson = new GsonBuilder().create();
@@ -119,15 +120,16 @@ public class MixMessage extends MessageEntity {
             JSONObject jsonOb = (JSONObject) jsonArray.opt(i);
             int displayType = jsonOb.getInt("displayType");
             String jsonMessage = jsonOb.toString();
-            switch (displayType){
-                case DBConstant.SHOW_ORIGIN_TEXT_TYPE:{
-                    TextMessage textMessage = gson.fromJson(jsonMessage,TextMessage.class);
+            switch (displayType) {
+                case DBConstant.SHOW_ORIGIN_TEXT_TYPE: {
+                    TextMessage textMessage = gson.fromJson(jsonMessage, TextMessage.class);
                     textMessage.setSessionKey(entity.getSessionKey());
                     msgList.add(textMessage);
-                }break;
+                }
+                break;
 
                 case DBConstant.SHOW_IMAGE_TYPE:
-                    ImageMessage imageMessage = gson.fromJson(jsonMessage,ImageMessage.class);
+                    ImageMessage imageMessage = gson.fromJson(jsonMessage, ImageMessage.class);
                     imageMessage.setSessionKey(entity.getSessionKey());
                     msgList.add(imageMessage);
                     break;

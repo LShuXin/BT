@@ -13,8 +13,8 @@ public class IMStackManager {
     private static IMStackManager mInstance;
 
     /**
-     * @描述 获取栈管理工具
      * @return ActivityManager
+     * @描述 获取栈管理工具
      */
     public static IMStackManager getStackManager() {
         if (mInstance == null) {
@@ -39,7 +39,7 @@ public class IMStackManager {
      */
     public Activity currentActivity() {
         //lastElement()获取最后个子元素，这里是栈顶的Activity
-        if(mActivityStack == null || mActivityStack.size() ==0){
+        if (mActivityStack == null || mActivityStack.size() == 0) {
             return null;
         }
         Activity activity = mActivityStack.lastElement();
@@ -58,6 +58,7 @@ public class IMStackManager {
 
     /**
      * 弹出指定的clsss所在栈顶部的中所有Activity
+     *
      * @clsss : 指定的类
      */
     public void popTopActivitys(Class clsss) {

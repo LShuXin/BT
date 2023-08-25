@@ -6,8 +6,9 @@ package com.mogujie.tt.imservice.entity;
  */
 public class TimeTileMessage {
     private int time;
-    public TimeTileMessage(int mTime){
-        time= mTime;
+
+    public TimeTileMessage(int mTime) {
+        time = mTime;
     }
 
     public int getTime() {

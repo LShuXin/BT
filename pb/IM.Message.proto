@@ -6,9 +6,9 @@ option java_package = "com.mogujie.tt.protobuf";
 option optimize_for = LITE_RUNTIME;
 
 //service id  0x0003
-message IMMsgData{
+message IMMsgData {
     //cmd id:        0x0301
-    uint32 from_user_id = 1;                //消息发送方
+    uint32 from_user_id = 1;                 //消息发送方
     uint32 to_session_id = 2;                //消息接受方
     uint32 msg_id = 3;
     uint32 create_time = 4; 
@@ -17,7 +17,7 @@ message IMMsgData{
     optional bytes attach_data = 20;
 }
 
-message IMMsgDataAck{
+message IMMsgDataAck {
     //cmd id:        0x0302
     uint32 user_id = 1;            //发送此信令的用户id
     uint32 session_id = 2;                
@@ -25,7 +25,7 @@ message IMMsgDataAck{
     IM.BaseDefine.SessionType session_type = 4;
 }
 
-message IMMsgDataReadAck{
+message IMMsgDataReadAck {
     //cmd id:        0x0303
     uint32 user_id = 1;            //发送此信令的用户id
     uint32 session_id = 2;            
@@ -33,7 +33,7 @@ message IMMsgDataReadAck{
     IM.BaseDefine.SessionType session_type = 4;
 }
 
-message IMMsgDataReadNotify{
+message IMMsgDataReadNotify {
     //cmd id:        0x0304
     uint32 user_id = 1;            //发送此信令的用户id
     uint32 session_id = 2;        
@@ -41,22 +41,22 @@ message IMMsgDataReadNotify{
     IM.BaseDefine.SessionType session_type = 4;
 }
 
-message IMClientTimeReq{
+message IMClientTimeReq {
     //cmd id:        0x0305
 }
 
-message IMClientTimeRsp{
+message IMClientTimeRsp {
     //cmd id:        0x0306
     uint32 server_time = 1;
 }
 
-message IMUnreadMsgCntReq{
+message IMUnreadMsgCntReq {
     //cmd id:        0x0307
     uint32 user_id = 1;
     optional bytes attach_data = 20;    
 }
 
-message IMUnreadMsgCntRsp{
+message IMUnreadMsgCntRsp {
     //cmd id:        0x0308
     uint32 user_id = 1;
     uint32 total_cnt = 2;
@@ -64,7 +64,7 @@ message IMUnreadMsgCntRsp{
     optional bytes attach_data = 20;
 }
 
-message IMGetMsgListReq{
+message IMGetMsgListReq {
     //cmd id:        0x0309
     uint32 user_id = 1;
     IM.BaseDefine.SessionType session_type = 2;
@@ -77,7 +77,7 @@ message IMGetMsgListReq{
 //对于群而言，如果消息数目返回的数值小于请求的cnt,则表示群的消息能拉取的到头了，更早的消息没有权限拉取。
 //如果msg_cnt 和 msg_id_begin计算得到的最早消息id与实际返回的最早消息id不一致，说明服务器消息有缺失，需要
 //客户端做一个缺失标记，避免下次再次拉取。
-message IMGetMsgListRsp{
+message IMGetMsgListRsp {
     //cmd id:        0x030a
     uint32 user_id = 1;
     IM.BaseDefine.SessionType session_type = 2;
@@ -87,7 +87,7 @@ message IMGetMsgListRsp{
     optional bytes attach_data = 20;
 }
 
-message IMGetLatestMsgIdReq{
+message IMGetLatestMsgIdReq {
     //cmd id:         0x030b
     uint32 user_id = 1;
     IM.BaseDefine.SessionType session_type = 2;
@@ -95,7 +95,7 @@ message IMGetLatestMsgIdReq{
     optional bytes attach_data = 20;
 }
 
-message IMGetLatestMsgIdRsp{
+message IMGetLatestMsgIdRsp {
     //cmd id:        0x030c
     uint32 user_id = 1;
     IM.BaseDefine.SessionType session_type = 2;
@@ -104,7 +104,7 @@ message IMGetLatestMsgIdRsp{
     optional bytes attach_data = 20;
 }
 
-message IMGetMsgByIdReq{
+message IMGetMsgByIdReq {
     //cmd id:         0x030d
     uint32 user_id = 1;
     IM.BaseDefine.SessionType session_type = 2;
@@ -113,7 +113,7 @@ message IMGetMsgByIdReq{
     optional bytes attach_data = 20;
 }
 
-message IMGetMsgByIdRsp{
+message IMGetMsgByIdRsp {
     //cmd id:        0x030e
     uint32 user_id = 1;
     IM.BaseDefine.SessionType session_type = 2;

@@ -12,18 +12,16 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.DB.entity.MessageEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.R;
-import com.mogujie.tt.config.MessageConstant;
-import com.mogujie.tt.ui.helper.AudioPlayerHandler;
+import com.mogujie.tt.config.DBConstant;
 import com.mogujie.tt.config.IntentConstant;
+import com.mogujie.tt.config.MessageConstant;
 import com.mogujie.tt.imservice.entity.AudioMessage;
 import com.mogujie.tt.imservice.entity.ImageMessage;
 import com.mogujie.tt.imservice.entity.MixMessage;
@@ -32,23 +30,23 @@ import com.mogujie.tt.imservice.service.IMService;
 import com.mogujie.tt.ui.activity.PreviewGifActivity;
 import com.mogujie.tt.ui.activity.PreviewMessageImagesActivity;
 import com.mogujie.tt.ui.activity.PreviewTextActivity;
+import com.mogujie.tt.ui.helper.AudioPlayerHandler;
 import com.mogujie.tt.ui.helper.Emoparser;
+import com.mogujie.tt.ui.helper.listener.OnDoubleClickListener;
 import com.mogujie.tt.ui.widget.GifView;
-import com.mogujie.tt.ui.widget.message.GifImageRenderView;
-import com.mogujie.tt.utils.CommonUtil;
-import com.mogujie.tt.utils.DateUtil;
-import com.mogujie.tt.utils.FileUtil;
-import com.mogujie.tt.utils.Logger;
 import com.mogujie.tt.ui.widget.SpeekerToast;
 import com.mogujie.tt.ui.widget.message.AudioRenderView;
 import com.mogujie.tt.ui.widget.message.EmojiRenderView;
+import com.mogujie.tt.ui.widget.message.GifImageRenderView;
 import com.mogujie.tt.ui.widget.message.ImageRenderView;
 import com.mogujie.tt.ui.widget.message.MessageOperatePopup;
 import com.mogujie.tt.ui.widget.message.RenderType;
 import com.mogujie.tt.ui.widget.message.TextRenderView;
 import com.mogujie.tt.ui.widget.message.TimeRenderView;
-import com.mogujie.tt.ui.helper.listener.OnDoubleClickListener;
-import com.mogujie.tt.utils.ScreenUtil;
+import com.mogujie.tt.utils.CommonUtil;
+import com.mogujie.tt.utils.DateUtil;
+import com.mogujie.tt.utils.FileUtil;
+import com.mogujie.tt.utils.Logger;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -83,7 +81,7 @@ public class MessageAdapter extends BaseAdapter {
      * ----------------------init 的时候需要设定-----------------
      */
 
-    public void setImService(IMService imService,UserEntity loginUser) {
+    public void setImService(IMService imService, UserEntity loginUser) {
         this.imService = imService;
         this.loginUser = loginUser;
     }

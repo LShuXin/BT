@@ -33,7 +33,7 @@ import de.greenrobot.event.EventBus;
 /**
  * @author : yingmu on 14-12-30.
  * @email : yingmu@mogujie.com.
- *
+ * <p>
  * 业务层面:
  * 长连接建立成功之后，就要发送登陆信息，否则15s之内就会断开
  * 所以connMsg 与 login是强耦合的关系
@@ -56,14 +56,20 @@ public class IMSocketManager extends IMManager {
     // 请求消息服务器地址
     private final AsyncHttpClient client = new AsyncHttpClient();
 
-    /**底层socket*/
+    /**
+     * 底层socket
+     */
     private SocketThread msgServerThread;
 
-    /**快速重新连接的时候需要*/
-    private  MsgServerAddrsEntity currentMsgAddress = null;
+    /**
+     * 快速重新连接的时候需要
+     */
+    private MsgServerAddrsEntity currentMsgAddress = null;
 
-    /**自身状态 */
-     private SocketEvent socketStatus = SocketEvent.NONE;
+    /**
+     * 自身状态
+     */
+    private SocketEvent socketStatus = SocketEvent.NONE;
 
     /**
      * 获取Msg地址，等待链接
@@ -84,35 +90,38 @@ public class IMSocketManager extends IMManager {
 
     /**
      * 实现自身的事件驱动
+     *
      * @param event
      */
     public void triggerEvent(SocketEvent event) {
-       setSocketStatus(event);
-       EventBus.getDefault().postSticky(event);
+        setSocketStatus(event);
+        EventBus.getDefault().postSticky(event);
     }
 
-    /**-------------------------------功能方法--------------------------------------*/
+    /**
+     * -------------------------------功能方法--------------------------------------
+     */
 
-    public void sendRequest(GeneratedMessageLite requset,int sid,int cid){
-        sendRequest(requset,sid,cid,null);
+    public void sendRequest(GeneratedMessageLite requset, int sid, int cid) {
+        sendRequest(requset, sid, cid, null);
     }
 
 
     /**
      * todo check exception
-     * */
-    public void sendRequest(GeneratedMessageLite requset,int sid,int cid,Packetlistener packetlistener){
+     */
+    public void sendRequest(GeneratedMessageLite requset, int sid, int cid, Packetlistener packetlistener) {
         int seqNo = 0;
-        try{
+        try {
             //组装包头 header
             com.mogujie.tt.protobuf.base.Header header = new DefaultHeader(sid, cid);
             int bodySize = requset.getSerializedSize();
             header.setLength(SysConstant.PROTOCOL_HEADER_LENGTH + bodySize);
             seqNo = header.getSeqnum();
-            listenerQueue.push(seqNo,packetlistener);
-            boolean sendRes = msgServerThread.sendRequest(requset,header);
-        }catch (Exception e){
-            if(packetlistener !=null){
+            listenerQueue.push(seqNo, packetlistener);
+            boolean sendRes = msgServerThread.sendRequest(requset, header);
+        } catch (Exception e) {
+            if (packetlistener != null) {
                 packetlistener.onFaild();
             }
             listenerQueue.pop(seqNo);
@@ -120,7 +129,7 @@ public class IMSocketManager extends IMManager {
         }
     }
 
-    public void packetDispatch(ChannelBuffer channelBuffer){
+    public void packetDispatch(ChannelBuffer channelBuffer) {
         DataBuffer buffer = new DataBuffer(channelBuffer);
         com.mogujie.tt.protobuf.base.Header header = new com.mogujie.tt.protobuf.base.Header();
         header.decode(buffer);
@@ -132,26 +141,26 @@ public class IMSocketManager extends IMManager {
                 commandId);
         CodedInputStream codedInputStream = CodedInputStream.newInstance(new ChannelBufferInputStream(buffer.getOrignalBuffer()));
 
-       Packetlistener listener = listenerQueue.pop(seqNo);
-       if(listener!=null){
+        Packetlistener listener = listenerQueue.pop(seqNo);
+        if (listener != null) {
             listener.onSuccess(codedInputStream);
             return;
-       }
+        }
 
         // todo eric make it a table
         // 抽象 父类执行
-        switch (serviceId){
+        switch (serviceId) {
             case IMBaseDefine.ServiceID.SID_LOGIN_VALUE:
-                IMPacketDispatcher.loginPacketDispatcher(commandId,codedInputStream);
+                IMPacketDispatcher.loginPacketDispatcher(commandId, codedInputStream);
                 break;
             case IMBaseDefine.ServiceID.SID_BUDDY_LIST_VALUE:
-                IMPacketDispatcher.buddyPacketDispatcher(commandId,codedInputStream);
+                IMPacketDispatcher.buddyPacketDispatcher(commandId, codedInputStream);
                 break;
             case IMBaseDefine.ServiceID.SID_MSG_VALUE:
-                IMPacketDispatcher.msgPacketDispatcher(commandId,codedInputStream);
+                IMPacketDispatcher.msgPacketDispatcher(commandId, codedInputStream);
                 break;
             case IMBaseDefine.ServiceID.SID_GROUP_VALUE:
-                IMPacketDispatcher.groupPacketDispatcher(commandId,codedInputStream);
+                IMPacketDispatcher.groupPacketDispatcher(commandId, codedInputStream);
                 break;
             default:
                 logger.e("packet#unhandled serviceId:%d, commandId:%d", serviceId,
@@ -161,24 +170,23 @@ public class IMSocketManager extends IMManager {
     }
 
 
-
     /**
      * 新版本流程如下
-     1.客户端通过域名获得login_server的地址
-     2.客户端通过login_server获得msg_serv的地址
-     3.客户端带着用户名密码对msg_serv进行登录
-     4.msg_serv转给db_proxy进行认证（do not care on client）
-     5.将认证结果返回给客户端
+     * 1.客户端通过域名获得login_server的地址
+     * 2.客户端通过login_server获得msg_serv的地址
+     * 3.客户端带着用户名密码对msg_serv进行登录
+     * 4.msg_serv转给db_proxy进行认证（do not care on client）
+     * 5.将认证结果返回给客户端
      */
     public void reqMsgServerAddrs() {
         logger.d("socket#reqMsgServerAddrs.");
         client.setUserAgent("Android-TT");
-        client.get(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.LOGINSERVER), new BaseJsonHttpResponseHandler(){
+        client.get(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.LOGINSERVER), new BaseJsonHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, String s, Object o) {
                 logger.d("socket#req msgAddress onSuccess, response:%s", s);
                 MsgServerAddrsEntity msgServer = (MsgServerAddrsEntity) o;
-                if(msgServer == null){
+                if (msgServer == null) {
                     triggerEvent(SocketEvent.REQ_MSG_SERVER_ADDRS_FAILED);
                     return;
                 }
@@ -211,7 +219,7 @@ public class IMSocketManager extends IMManager {
 
         String priorIP = currentMsgAddress.priorIP;
         int port = currentMsgAddress.port;
-        logger.i("login#connectMsgServer -> (%s:%d)",priorIP, port);
+        logger.i("login#connectMsgServer -> (%s:%d)", priorIP, port);
 
         //check again,may be unimportance
         if (msgServerThread != null) {
@@ -219,11 +227,11 @@ public class IMSocketManager extends IMManager {
             msgServerThread = null;
         }
 
-        msgServerThread = new SocketThread(priorIP, port,new MsgServerHandler());
+        msgServerThread = new SocketThread(priorIP, port, new MsgServerHandler());
         msgServerThread.start();
     }
 
-    public void reconnectMsg(){
+    public void reconnectMsg() {
         synchronized (IMSocketManager.class) {
             if (currentMsgAddress != null) {
                 connectMsgServer(currentMsgAddress);
@@ -247,8 +255,10 @@ public class IMSocketManager extends IMManager {
         }
     }
 
-    /**判断链接是否处于断开状态*/
-    public boolean isSocketConnect(){
+    /**
+     * 判断链接是否处于断开状态
+     */
+    public boolean isSocketConnect() {
         return msgServerThread != null && !msgServerThread.isClose();
     }
 
@@ -269,26 +279,31 @@ public class IMSocketManager extends IMManager {
     // only 2 threads(ui thread, network thread) would request sending  packet
     // let the ui thread to close the connection
     // so if the ui thread has a sending task, no synchronization issue
-    public void onMsgServerDisconn(){
+    public void onMsgServerDisconn() {
         logger.w("login#onMsgServerDisconn");
         disconnectMsgServer();
         triggerEvent(SocketEvent.MSG_SERVER_DISCONNECTED);
     }
 
-    /** 之前没有连接成功*/
-    public void onConnectMsgServerFail(){
+    /**
+     * 之前没有连接成功
+     */
+    public void onConnectMsgServerFail() {
         triggerEvent(SocketEvent.CONNECT_MSG_SERVER_FAILED);
     }
 
 
     /**----------------------------请求Msg server地址--实体信息--------------------------------------*/
-    /**请求返回的数据*/
+    /**
+     * 请求返回的数据
+     */
     private class MsgServerAddrsEntity {
         int code;
         String msg;
         String priorIP;
         String backupIP;
         int port;
+
         @Override
         public String toString() {
             return "LoginServerAddrsEntity{" +
@@ -323,27 +338,21 @@ public class IMSocketManager extends IMManager {
         String backupIP = json.getString("backupIP");
         int port = json.getInt("port");
 
-        if(json.has("msfsPrior"))
-        {
+        if (json.has("msfsPrior")) {
             String msfsPrior = json.getString("msfsPrior");
             String msfsBackup = json.getString("msfsBackup");
-            if(!TextUtils.isEmpty(msfsPrior))
-            {
-                SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.MSFSSERVER,msfsPrior);
-            }
-            else
-            {
-                SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.MSFSSERVER,msfsBackup);
+            if (!TextUtils.isEmpty(msfsPrior)) {
+                SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.MSFSSERVER, msfsPrior);
+            } else {
+                SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.MSFSSERVER, msfsBackup);
             }
         }
 
-        if(json.has("discovery"))
-        {
+        if (json.has("discovery")) {
             String discoveryUrl = json.getString("discovery");
-            if(!TextUtils.isEmpty(discoveryUrl))
-            {
+            if (!TextUtils.isEmpty(discoveryUrl)) {
                 SystemConfigSp.instance().init(ctx.getApplicationContext());
-                SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.DISCOVERYURI,discoveryUrl);
+                SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.DISCOVERYURI, discoveryUrl);
             }
         }
 
@@ -355,7 +364,9 @@ public class IMSocketManager extends IMManager {
         return addrsEntity;
     }
 
-    /**------------get/set----------------------------*/
+    /**
+     * ------------get/set----------------------------
+     */
     public SocketEvent getSocketStatus() {
         return socketStatus;
     }

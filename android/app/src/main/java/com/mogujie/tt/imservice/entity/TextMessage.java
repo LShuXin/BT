@@ -1,14 +1,13 @@
 package com.mogujie.tt.imservice.entity;
 
+import com.mogujie.tt.DB.entity.MessageEntity;
 import com.mogujie.tt.DB.entity.PeerEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.config.DBConstant;
-import com.mogujie.tt.DB.entity.MessageEntity;
 import com.mogujie.tt.config.MessageConstant;
 import com.mogujie.tt.imservice.support.SequenceNumberMaker;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -17,41 +16,41 @@ import java.nio.charset.StandardCharsets;
  */
 public class TextMessage extends MessageEntity implements Serializable {
 
-     public TextMessage(){
-         msgId = SequenceNumberMaker.getInstance().makelocalUniqueMsgId();
-     }
+    public TextMessage() {
+        msgId = SequenceNumberMaker.getInstance().makelocalUniqueMsgId();
+    }
 
-     private TextMessage(MessageEntity entity){
-         /**父类的id*/
-         id =  entity.getId();
-         msgId  = entity.getMsgId();
-         fromId = entity.getFromId();
-         toId   = entity.getToId();
-         sessionKey = entity.getSessionKey();
-         content=entity.getContent();
-         msgType=entity.getMsgType();
-         displayType=entity.getDisplayType();
-         status = entity.getStatus();
-         created = entity.getCreated();
-         updated = entity.getUpdated();
-     }
+    private TextMessage(MessageEntity entity) {
+        /**父类的id*/
+        id = entity.getId();
+        msgId = entity.getMsgId();
+        fromId = entity.getFromId();
+        toId = entity.getToId();
+        sessionKey = entity.getSessionKey();
+        content = entity.getContent();
+        msgType = entity.getMsgType();
+        displayType = entity.getDisplayType();
+        status = entity.getStatus();
+        created = entity.getCreated();
+        updated = entity.getUpdated();
+    }
 
-     public static TextMessage parseFromNet(MessageEntity entity){
-         TextMessage textMessage = new TextMessage(entity);
-         textMessage.setStatus(MessageConstant.MSG_SUCCESS);
-         textMessage.setDisplayType(DBConstant.SHOW_ORIGIN_TEXT_TYPE);
-         return textMessage;
-     }
+    public static TextMessage parseFromNet(MessageEntity entity) {
+        TextMessage textMessage = new TextMessage(entity);
+        textMessage.setStatus(MessageConstant.MSG_SUCCESS);
+        textMessage.setDisplayType(DBConstant.SHOW_ORIGIN_TEXT_TYPE);
+        return textMessage;
+    }
 
-    public static TextMessage parseFromDB(MessageEntity entity){
-        if(entity.getDisplayType()!=DBConstant.SHOW_ORIGIN_TEXT_TYPE){
+    public static TextMessage parseFromDB(MessageEntity entity) {
+        if (entity.getDisplayType() != DBConstant.SHOW_ORIGIN_TEXT_TYPE) {
             throw new RuntimeException("#TextMessage# parseFromDB,not SHOW_ORIGIN_TEXT_TYPE");
         }
         TextMessage textMessage = new TextMessage(entity);
         return textMessage;
     }
 
-    public static TextMessage buildForSend(String content,UserEntity fromUser,PeerEntity peerEntity){
+    public static TextMessage buildForSend(String content, UserEntity fromUser, PeerEntity peerEntity) {
         TextMessage textMessage = new TextMessage();
         int nowTime = (int) (System.currentTimeMillis() / 1000);
         textMessage.setFromId(fromUser.getPeerId());
@@ -84,7 +83,7 @@ public class TextMessage extends MessageEntity implements Serializable {
     @Override
     public byte[] getSendContent() {
         /** 加密*/
-        String sendContent =new String(com.mogujie.tt.Security.getInstance().EncryptMsg(content));
+        String sendContent = new String(com.mogujie.tt.Security.getInstance().EncryptMsg(content));
         return sendContent.getBytes(StandardCharsets.UTF_8);
     }
 }

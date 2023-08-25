@@ -1,4 +1,3 @@
-
 package com.mogujie.tt.ui.activity;
 
 import android.app.Activity;

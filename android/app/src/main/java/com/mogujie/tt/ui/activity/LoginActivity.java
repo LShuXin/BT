@@ -39,12 +39,13 @@ import de.greenrobot.event.EventBus;
 
 
 /**
- * @YM 1. 链接成功之后，直接判断是否loginSp是否可以直接登陆
- * true: 1.可以登陆，从DB中获取历史的状态
- * 2.建立长连接，请求最新的数据状态 【网络断开没有这个状态】
- * 3.完成
- * <p/>
- * false:1. 不能直接登陆，跳转到登陆页面
+ * 一、 IMService 连接成功之后，从 loginSp 判断是否直接登陆
+ * 直接登陆
+ * 1. 从DB中获取历史的状态
+ * 2. 建立长连接，请求最新的数据状态 【网络断开没有这个状态】
+ * 3. 完成
+ * 不直接登陆，
+ * 1. 跳转到登陆页面
  * 2. 请求消息服务器地址，链接，验证，触发loginSuccess
  * 3. 保存登陆状态
  */
@@ -58,7 +59,7 @@ public class LoginActivity extends TTBaseActivity {
     private View splashPage;
     private View mLoginStatusView;
     private TextView mSwitchLoginServer;
-    private InputMethodManager intputManager;
+    private InputMethodManager inputManager;
 
 
     private IMService imService;
@@ -162,7 +163,7 @@ public class LoginActivity extends TTBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        intputManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inputManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         logger.d("login#onCreate");
 
         SystemConfigSp.instance().init(getApplicationContext());
@@ -175,11 +176,13 @@ public class LoginActivity extends TTBaseActivity {
 
         setContentView(R.layout.tt_activity_login);
         mSwitchLoginServer = findViewById(R.id.sign_switch_login_server);
-        mSwitchLoginServer.setOnClickListener(new View.OnClickListener(){
+        mSwitchLoginServer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(LoginActivity.this, android.R.style.Theme_Holo_Light_Dialog));
-                LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                AlertDialog.Builder builder = new AlertDialog.Builder(
+                        new ContextThemeWrapper(LoginActivity.this, android.R.style.Theme_Holo_Light_Dialog)
+                );
+                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View dialog_view = inflater.inflate(R.layout.tt_custom_dialog, null);
                 final EditText editText = dialog_view.findViewById(R.id.dialog_edit_content);
                 editText.setText(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.LOGINSERVER));
@@ -190,9 +193,8 @@ public class LoginActivity extends TTBaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        if(!TextUtils.isEmpty(editText.getText().toString().trim()))
-                        {
-                            SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.LOGINSERVER,editText.getText().toString().trim());
+                        if (!TextUtils.isEmpty(editText.getText().toString().trim())) {
+                            SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.LOGINSERVER, editText.getText().toString().trim());
                             dialog.dismiss();
                         }
                     }
@@ -224,7 +226,7 @@ public class LoginActivity extends TTBaseActivity {
         findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intputManager.hideSoftInputFromWindow(mPasswordView.getWindowToken(), 0);
+                inputManager.hideSoftInputFromWindow(mPasswordView.getWindowToken(), 0);
                 attemptLogin();
             }
         });
@@ -247,11 +249,11 @@ public class LoginActivity extends TTBaseActivity {
             public boolean onTouch(View v, MotionEvent event) {
 
                 if (mPasswordView != null) {
-                    intputManager.hideSoftInputFromWindow(mPasswordView.getWindowToken(), 0);
+                    inputManager.hideSoftInputFromWindow(mPasswordView.getWindowToken(), 0);
                 }
 
                 if (mNameView != null) {
-                    intputManager.hideSoftInputFromWindow(mNameView.getWindowToken(), 0);
+                    inputManager.hideSoftInputFromWindow(mNameView.getWindowToken(), 0);
                 }
 
                 return false;

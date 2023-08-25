@@ -15,8 +15,8 @@ import android.widget.LinearLayout;
 import com.mogujie.tt.utils.Logger;
 
 /**
- * @Description 牙牙表情
  * @author fengzi / zhujian
+ * @Description 牙牙表情
  * @date 2015-1-1
  */
 public class YayaEmoGridViewAdapter extends BaseAdapter {

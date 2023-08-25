@@ -1,5 +1,7 @@
 package com.mogujie.tt.imservice.service;
 
+import static androidx.core.app.NotificationCompat.PRIORITY_MIN;
+
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -34,10 +36,9 @@ import com.mogujie.tt.imservice.manager.IMUnreadMsgManager;
 import com.mogujie.tt.utils.ImageLoaderUtil;
 import com.mogujie.tt.utils.Logger;
 
-import de.greenrobot.event.EventBus;
-import static androidx.core.app.NotificationCompat.PRIORITY_MIN;
-
 import java.util.Objects;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * IMService 负责所有IMManager的初始化与reset
@@ -48,8 +49,11 @@ import java.util.Objects;
 public class IMService extends Service {
     private final Logger logger = Logger.getLogger(IMService.class);
 
-    /**binder*/
+    /**
+     * binder
+     */
     private final IMServiceBinder binder = new IMServiceBinder();
+
     public class IMServiceBinder extends Binder {
         public IMService getService() {
             return IMService.this;
@@ -104,8 +108,10 @@ public class IMService extends Service {
         super.onDestroy();
     }
 
-    /**收到消息需要上层的activity判断 {MessageActicity onEvent(PriorityEvent event)}，这个地方是特殊分支*/
-    public void onEvent(PriorityEvent event){
+    /**
+     * 收到消息需要上层的activity判断 {MessageActicity onEvent(PriorityEvent event)}，这个地方是特殊分支
+     */
+    public void onEvent(PriorityEvent event) {
         if (Objects.requireNonNull(event.event) == PriorityEvent.Event.MSG_RECEIVED_MESSAGE) {
             MessageEntity entity = (MessageEntity) event.object;
             /**非当前的会话*/
@@ -116,18 +122,20 @@ public class IMService extends Service {
     }
 
     // EventBus 事件驱动
-    public void onEvent(LoginEvent event){
-        switch (event){
+    public void onEvent(LoginEvent event) {
+        switch (event) {
             case LOGIN_OK:
-                onNormalLoginOk();break;
+                onNormalLoginOk();
+                break;
             case LOCAL_LOGIN_SUCCESS:
                 onLocalLoginOk();
                 break;
-            case  LOCAL_LOGIN_MSG_SERVICE:
+            case LOCAL_LOGIN_MSG_SERVICE:
                 onLocalNetOk();
                 break;
             case LOGIN_OUT:
-                handleLoginout();break;
+                handleLoginout();
+                break;
         }
     }
 
@@ -163,9 +171,9 @@ public class IMService extends Service {
         logger.d("imservice#onLogin Successful");
         //初始化其他manager todo 这个地方注意上下文的清除
         Context ctx = getApplicationContext();
-        int loginId =  loginMgr.getLoginId();
-        configSp = ConfigurationSp.instance(ctx,loginId);
-        dbInterface.initDbHelp(ctx,loginId);
+        int loginId = loginMgr.getLoginId();
+        configSp = ConfigurationSp.instance(ctx, loginId);
+        dbInterface.initDbHelp(ctx, loginId);
 
         contactMgr.onNormalLoginOk();
         sessionMgr.onNormalLoginOk();
@@ -185,11 +193,11 @@ public class IMService extends Service {
      * 自动登陆/离线登陆成功
      * autoLogin -> DB(loginInfo,loginId...) -> loginSucsess
      */
-    private void onLocalLoginOk(){
+    private void onLocalLoginOk() {
         Context ctx = getApplicationContext();
-        int loginId =  loginMgr.getLoginId();
-        configSp = ConfigurationSp.instance(ctx,loginId);
-        dbInterface.initDbHelp(ctx,loginId);
+        int loginId = loginMgr.getLoginId();
+        configSp = ConfigurationSp.instance(ctx, loginId);
+        dbInterface.initDbHelp(ctx, loginId);
 
         contactMgr.onLocalLoginOk();
         groupMgr.onLocalLoginOk();
@@ -200,15 +208,15 @@ public class IMService extends Service {
     }
 
     /**
-     * 1.从本机加载成功之后，请求MessageService建立链接成功(loginMessageSuccess)
+     * 1. 从本机加载成功之后，请求MessageService建立链接成功(loginMessageSuccess)
      * 2. 重练成功之后
      */
-    private void onLocalNetOk(){
+    private void onLocalNetOk() {
         /**为了防止逗比直接把loginId与userName的对应直接改了,重刷一遍*/
         Context ctx = getApplicationContext();
-        int loginId =  loginMgr.getLoginId();
-        configSp = ConfigurationSp.instance(ctx,loginId);
-        dbInterface.initDbHelp(ctx,loginId);
+        int loginId = loginMgr.getLoginId();
+        configSp = ConfigurationSp.instance(ctx, loginId);
+        dbInterface.initDbHelp(ctx, loginId);
 
         contactMgr.onLocalNetOk();
         groupMgr.onLocalNetOk();
@@ -242,6 +250,7 @@ public class IMService extends Service {
         // super.onTaskRemoved(rootIntent);
         this.stopSelf();
     }
+
     /**
      * 启动前台服务
      */
@@ -264,12 +273,13 @@ public class IMService extends Service {
 
     /**
      * 创建通知通道
+     *
      * @param channelId
      * @param channelName
      * @return
      */
     @RequiresApi(Build.VERSION_CODES.O)
-    private String createNotificationChannel(String channelId, String channelName){
+    private String createNotificationChannel(String channelId, String channelName) {
         NotificationChannel chan = new NotificationChannel(channelId,
                 channelName, NotificationManager.IMPORTANCE_NONE);
         chan.setLightColor(Color.BLUE);
@@ -278,7 +288,10 @@ public class IMService extends Service {
         service.createNotificationChannel(chan);
         return channelId;
     }
-    /**-----------------get/set 的实体定义---------------------*/
+
+    /**
+     * -----------------get/set 的实体定义---------------------
+     */
     public IMLoginManager getLoginManager() {
         return loginMgr;
     }

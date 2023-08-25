@@ -2,14 +2,14 @@ package com.mogujie.tt.imservice.entity;
 
 import android.text.TextUtils;
 
+import com.mogujie.tt.DB.entity.MessageEntity;
 import com.mogujie.tt.DB.entity.PeerEntity;
 import com.mogujie.tt.DB.entity.UserEntity;
 import com.mogujie.tt.config.DBConstant;
-import com.mogujie.tt.DB.entity.MessageEntity;
 import com.mogujie.tt.config.MessageConstant;
+import com.mogujie.tt.imservice.support.SequenceNumberMaker;
 import com.mogujie.tt.utils.CommonUtil;
 import com.mogujie.tt.utils.FileUtil;
-import com.mogujie.tt.imservice.support.SequenceNumberMaker;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,37 +19,36 @@ import java.io.Serializable;
 /**
  * @author : yingmu on 14-12-31.
  * @email : yingmu@mogujie.com.
- *
  */
-public class AudioMessage extends MessageEntity implements Serializable{
+public class AudioMessage extends MessageEntity implements Serializable {
 
     private String audioPath = "";
-    private int audiolength =0 ;
+    private int audiolength = 0;
     private int readStatus = MessageConstant.AUDIO_UNREAD;
 
-    public AudioMessage(){
+    public AudioMessage() {
         msgId = SequenceNumberMaker.getInstance().makelocalUniqueMsgId();
     }
 
-    private AudioMessage(MessageEntity entity){
+    private AudioMessage(MessageEntity entity) {
         // 父类主键
-        id =  entity.getId();
-        msgId  = entity.getMsgId();
+        id = entity.getId();
+        msgId = entity.getMsgId();
         fromId = entity.getFromId();
-        toId   = entity.getToId();
-        content=entity.getContent();
-        msgType=entity.getMsgType();
+        toId = entity.getToId();
+        content = entity.getContent();
+        msgType = entity.getMsgType();
         sessionKey = entity.getSessionKey();
-        displayType=entity.getDisplayType();
+        displayType = entity.getDisplayType();
         status = entity.getStatus();
         created = entity.getCreated();
         updated = entity.getUpdated();
     }
 
 
-    public static AudioMessage parseFromDB(MessageEntity entity)  {
-        if(entity.getDisplayType() != DBConstant.SHOW_AUDIO_TYPE){
-           throw new RuntimeException("#AudioMessage# parseFromDB,not SHOW_AUDIO_TYPE");
+    public static AudioMessage parseFromDB(MessageEntity entity) {
+        if (entity.getDisplayType() != DBConstant.SHOW_AUDIO_TYPE) {
+            throw new RuntimeException("#AudioMessage# parseFromDB,not SHOW_AUDIO_TYPE");
         }
         AudioMessage audioMessage = new AudioMessage(entity);
         // 注意坑 啊
@@ -68,7 +67,7 @@ public class AudioMessage extends MessageEntity implements Serializable{
         return audioMessage;
     }
 
-    public static AudioMessage buildForSend(float audioLen,String audioSavePath,UserEntity fromUser,PeerEntity peerEntity){
+    public static AudioMessage buildForSend(float audioLen, String audioSavePath, UserEntity fromUser, PeerEntity peerEntity) {
         int tLen = (int) (audioLen + 0.5);
         tLen = tLen < 1 ? 1 : tLen;
         if (tLen < audioLen) {
@@ -104,9 +103,9 @@ public class AudioMessage extends MessageEntity implements Serializable{
     public String getContent() {
         JSONObject extraContent = new JSONObject();
         try {
-            extraContent.put("audioPath",audioPath);
-            extraContent.put("audiolength",audiolength);
-            extraContent.put("readStatus",readStatus);
+            extraContent.put("audioPath", audioPath);
+            extraContent.put("audiolength", audiolength);
+            extraContent.put("readStatus", readStatus);
             String audioContent = extraContent.toString();
             return audioContent;
         } catch (JSONException e) {
