@@ -40,6 +40,7 @@ function monitor() {
 }
 
 function monitor_business() {
+    # $# 是在Shell脚本中用来获取传递给脚本或函数的参数个数的特殊变量
     if [ $# != 1 ]; then 
         echo "./monitor.sh business port"
         exit

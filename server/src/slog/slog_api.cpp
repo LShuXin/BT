@@ -103,8 +103,12 @@ CSLog::~CSLog()
 void CSLog::Trace(const char *format, ...)
 {
     va_list args;
+    // 这个宏函数初始化 args，使其指向可变参数列表的第一个参数。
     va_start(args, format);
     char szBuffer[MAX_LOG_LENGTH];
+    // 将可变参数列表根据 format 格式化成字符串，并将结果存储在
+    // szBuffer 中。vsnprintf 与 printf 类似，但它可以将结果
+    // 输出到一个指定的字符数组中，避免了字符串缓冲区溢出的风险。
     vsnprintf(szBuffer, sizeof(szBuffer), format, args);
     va_end(args);
     m_log->Trace(szBuffer);

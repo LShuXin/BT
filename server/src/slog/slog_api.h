@@ -13,6 +13,8 @@
 
 #define WATCH_DELAY_TIME     10 * 1000
 
+// 这是一个前向声明（forward declaration）。它告诉编译器 CSLogObject 是一个类，
+// 但不提供其详细定义。这样可以在 CSLog 类中使用 CSLogObject* m_log;，而不需要完全了解 CSLogObject 类的实现细节。
 class CSLogObject;
 
 class CSLog

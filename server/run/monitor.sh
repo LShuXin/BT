@@ -6,17 +6,27 @@
 # monitor.sh must be in the same directory with the server    #
 #############################################################
 function sendSMS() {
-#HTTP_HOST="http://api.transformer.mogujie.org/sms/mandao"
+    # HTTP_HOST="http://api.transformer.mogujie.org/sms/mandao"
     HTTP_HOST="http://api.transformer.mogujie.org/sms/channel1"
     AppKey='82785972c1939448'
     InterFaceKey='mandao'
-#UserId="1,2,3,4,5"
+    # UserId="1,2,3,4,5"
     UserId="1"
-#子烨、蓝狐、罗宁
+    # 子烨、蓝狐、罗宁
     Phone=("18806535140" "18657139120" "18668072662")
     HostName=`hostname`
+
+    # ##*/：在${PWD}之后，使用 ##*/ 对路径进行操作。这是一种称为"参数扩展"的特殊语法。
+    # ${PWD##*/}：这个部分将会从${PWD}中去掉路径中的所有字符，直到最后一个斜杠 /（包括这个斜杠）。
+    # 这就导致只保留了路径中的最后一个目录名部分。
+    # 例如，如果当前工作目录是 /home/user/documents，那么在执行完这段代码后，DirName 将包含字符
+    # 串 "documents"。
     DirName=${PWD##*/}
     Content='[TeamTalk] '$HostName' '$DirName' crash 【蘑菇街】'
+
+    # date: 这是一个命令，用于显示或设置系统的日期和时间。在这里，它用于获取当前日期和时间。
+    # +%s: 这是date命令的一个格式选项。%s用于显示自 Unix 纪元（1970年1月1日00:00:00 UTC）以来的秒数。
+    # 000: 在这里，额外添加了三个零，以将秒数转换为毫秒数。因为1秒 = 1000毫秒，所以将获取的秒数乘以1000就得到了以毫秒为单位的时间戳。
     CreateTime=`date +%s`000
     for i in ${Phone[@]}
     do
@@ -30,12 +40,18 @@ function monitor() {
         echo "no config file"
         return
     fi
+
+    # $$ 代表当前正在执行的脚本或进程的pid
     echo $$ > monitor.pid
     local dot="."
     while true
     do
         if [ -e server.pid ]; then
+            # \033[32m: 这是 ANSI 转义序列的开始，用于设置文本颜色。在这里，\033 是八进制表示的转义字符，
+            # [32m 表示将文本颜色设置为绿色。不同的颜色和样式可以通过不同的数字组合来实现。
+            # \033[0m: 这是 ANSI 转义序列的结束，用于重置文本颜色和样式为默认值。
             echo -e "\033[32m $1 ==> START SUCCESSFUL ... \033[0m"
+
             while true
             do
                 pid=`cat server.pid`  # get pid
