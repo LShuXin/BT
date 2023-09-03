@@ -9,10 +9,10 @@ APR_PATH=https://mirrors.tuna.tsinghua.edu.cn/apache/apr/apr-1.7.0.tar.gz
 APR_UTIL=apr-util-1.6.1
 APR_UTIL_PATH=https://mirrors.tuna.tsinghua.edu.cn/apache/apr/apr-util-1.6.1.tar.gz
 
-LOG4CXX=apache-log4cxx-0.10.0
+LOG4CXX=apache-log4cxx-0.12.1
 #LOG4CXX_PATH=http://mirror.bit.edu.cn/apache/logging/log4cxx/0.10.0/$LOG4CXX.tar.gz
-LOG4CXX_PATH=https://archive.apache.org/dist/logging/log4cxx/0.10.0/$LOG4CXX.tar.gz
-#LOG4CXX_PATH=https://archive.apache.org/dist/logging/log4cxx/0.12.1/$LOG4CXX.tar.gz
+#LOG4CXX_PATH=https://archive.apache.org/dist/logging/log4cxx/0.10.0/$LOG4CXX.tar.gz
+LOG4CXX_PATH=https://archive.apache.org/dist/logging/log4cxx/0.12.1/$LOG4CXX.tar.gz
 CUR_DIR=
 download() {
     if [ -f "$1" ]; then

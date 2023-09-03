@@ -27,7 +27,7 @@ RUN rm -Rf server/im-server-1.0.0.tar.gz && cd server/src && sh build.sh version
 COPY ./docker/develop_server/main.sh /opt/main.sh
 RUN chmod +x /opt/main.sh
 RUN rm -Rf im-server-1.0.0 && tar -zxvf server/im-server-1.0.0.tar.gz
-RUN cd im-server-1.0.0 && ./sync_lib_for_zip.sh
+RUN cd im-server-1.0.0 && chmod +x ./sync_lib_for_zip.sh && ./sync_lib_for_zip.sh
 VOLUME [ "/develop" ]
 ENTRYPOINT [ "/opt/main.sh"]
 CMD ["/bin/bash"]
