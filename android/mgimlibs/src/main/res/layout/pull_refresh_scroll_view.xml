@@ -4,14 +4,13 @@
     android:layout_width="fill_parent"
     android:layout_height="1200dp"
     android:clickable="true"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <com.pullrefresh.scrollview.HeadLoadingView
         android:id="@+id/head_ly"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="-60dp" >
-    </com.pullrefresh.scrollview.HeadLoadingView>
+        android:layout_marginTop="-60dp" />
 
     <!-- <LinearLayout -->
     <!-- android:id="@+id/content_ly" -->
@@ -25,7 +24,6 @@
     <FrameLayout
         android:id="@+id/foot_ly"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent" >
-    </FrameLayout>
+        android:layout_height="fill_parent"></FrameLayout>
 
 </LinearLayout>

@@ -1,4 +1,5 @@
 #!/bin/bash
+# unzip, make, install and copy relative redis files to db_proxy_server directory
 # author: luoning
 # date: 03/24/2015
 
@@ -58,10 +59,11 @@ get_cur_dir() {
         fi
     done
     # Change the current directory to the location of the script
+    # the dirname command is use to extract the directory part of a file path
     CUR_DIR=$(dirname "${REALPATH}")
 }
 
-build_hiredis(){
+build_hiredis() {
     cd hiredis
     unzip $HIREDIS.zip
     cd $HIREDIS

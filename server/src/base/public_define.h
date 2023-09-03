@@ -13,6 +13,7 @@
 #include <set>
 #include "IM.BaseDefine.pb.h"
 #include "ostype.h"
+
 using namespace std;
 
 #define XIAO_T_UID  99999999
@@ -72,9 +73,9 @@ bRet;\
 })
 
 enum {
-    GENDER_UNKNOWN  = 0,
-    GENDER_MAN      = 1,
-    GENDER_WOMAN    = 2,
+    GENDER_UNKNOWN = 0,
+    GENDER_MAN = 1,
+    GENDER_WOMAN = 2,
 };
 
 /*
@@ -115,19 +116,16 @@ bRet;\
 })
 
 
+typedef struct AudioMsgInfo {
+    uint32_t audioId;
+    uint32_t fileSize;
+    uint32_t data_len;
+    uchar_t *data;
+    string path;
 
-
-typedef struct AudioMsgInfo{
-    uint32_t    audioId;
-    uint32_t    fileSize;
-    uint32_t    data_len;
-    uchar_t*    data;
-    string      path;
-    
 } AudioMsgInfo_t;
 
-typedef struct DBUserInfo_t
-{
+typedef struct DBUserInfo_t {
     uint32_t nId;//用户ID
     uint8_t nSex;// 用户性别 1.男;2.女
     uint8_t nStatus; // 用户状态0 正常， 1 离职
@@ -138,10 +136,8 @@ typedef struct DBUserInfo_t
     string strTel;// 手机号码
     string strEmail;// Email
     string strAvatar;// 头像
-    DBUserInfo_t& operator=(const DBUserInfo_t& rhs)
-    {
-        if(this != &rhs)
-        {
+    DBUserInfo_t &operator=(const DBUserInfo_t &rhs) {
+        if (this != &rhs) {
             nId = rhs.nId;
             nSex = rhs.nSex;
             nStatus = rhs.nStatus;
@@ -155,36 +151,33 @@ typedef struct DBUserInfo_t
         }
         return *this;
     }
-    
+
 } DBUserInfo_t;
 
-typedef hash_map<uint32_t, DBUserInfo_t*> DBUserMap_t;
+typedef hash_map<uint32_t, DBUserInfo_t *> DBUserMap_t;
 
-typedef struct DBDeptInfo_t
-{
+typedef struct DBDeptInfo_t {
     uint32_t nId;
     uint32_t nParentId;
     string strName;
-    
-    DBDeptInfo_t& operator=(const DBDeptInfo_t& rhs)
-    {
-        if(this != &rhs)
-        {
+
+    DBDeptInfo_t &operator=(const DBDeptInfo_t &rhs) {
+        if (this != &rhs) {
             nId = rhs.nId;
             nParentId = rhs.nParentId;
             strName = rhs.strName;
         }
         return *this;
     }
-    
+
 } DBDeptInfo_t;
 
-typedef hash_map<uint32_t, DBDeptInfo_t*> DBDeptMap_t;
+typedef hash_map<uint32_t, DBDeptInfo_t *> DBDeptMap_t;
 
 
 typedef struct {
-    uint32_t 	user_id;
-    uint32_t	conn_cnt;
+    uint32_t user_id;
+    uint32_t conn_cnt;
 } user_conn_t;
 
 typedef struct {
@@ -193,13 +186,12 @@ typedef struct {
     uint32_t client_type;
 } user_stat_t;
 
-typedef struct
-{
+typedef struct {
     uint32_t user_id;
     set<uint32_t> allow_user_ids;
     set<uint32_t> allow_group_ids;
-    set<string>  authed_ips;
-    set<string>  authed_interfaces;
+    set<string> authed_ips;
+    set<string> authed_interfaces;
 } auth_struct;
 
 #define MAX_MSG_LEN     4096

@@ -17,12 +17,11 @@ CWorkerThread::CWorkerThread()
 
 CWorkerThread::~CWorkerThread()
 {
-
 }
 
-void* CWorkerThread::StartRoutine(void* arg)
+void *CWorkerThread::StartRoutine(void *arg)
 {
-	CWorkerThread* pThread = (CWorkerThread*)arg;
+	CWorkerThread *pThread = (CWorkerThread *)arg;
 
 	pThread->Execute();
 
@@ -36,15 +35,17 @@ void CWorkerThread::Start()
 
 void CWorkerThread::Execute()
 {
-	while (true) {
+	while (true)
+	{
 		m_thread_notify.Lock();
 
 		// put wait in while cause there can be spurious wake up (due to signal/ENITR)
-		while (m_task_list.empty()) {
+		while (m_task_list.empty())
+		{
 			m_thread_notify.Wait();
 		}
 
-		CTask* pTask = m_task_list.front();
+		CTask *pTask = m_task_list.front();
 		m_task_list.pop_front();
 		m_thread_notify.Unlock();
 
@@ -53,11 +54,11 @@ void CWorkerThread::Execute()
 		delete pTask;
 
 		m_task_cnt++;
-		//log("%d have the execute %d task\n", m_thread_idx, m_task_cnt);
+		// log("%d have the execute %d task\n", m_thread_idx, m_task_cnt);
 	}
 }
 
-void CWorkerThread::PushTask(CTask* pTask)
+void CWorkerThread::PushTask(CTask *pTask)
 {
 	m_thread_notify.Lock();
 	m_task_list.push_back(pTask);
@@ -74,18 +75,19 @@ CThreadPool::CThreadPool()
 
 CThreadPool::~CThreadPool()
 {
-
 }
 
 int CThreadPool::Init(uint32_t worker_size)
 {
-    m_worker_size = worker_size;
-	m_worker_list = new CWorkerThread [m_worker_size];
-	if (!m_worker_list) {
+	m_worker_size = worker_size;
+	m_worker_list = new CWorkerThread[m_worker_size];
+	if (!m_worker_list)
+	{
 		return 1;
 	}
 
-	for (uint32_t i = 0; i < m_worker_size; i++) {
+	for (uint32_t i = 0; i < m_worker_size; i++)
+	{
 		m_worker_list[i].SetThreadIdx(i);
 		m_worker_list[i].Start();
 	}
@@ -95,11 +97,13 @@ int CThreadPool::Init(uint32_t worker_size)
 
 void CThreadPool::Destory()
 {
-    if(m_worker_list)
-        delete [] m_worker_list;
+	if (m_worker_list)
+	{
+		delete[] m_worker_list;
+	}
 }
 
-void CThreadPool::AddTask(CTask* pTask)
+void CThreadPool::AddTask(CTask *pTask)
 {
 	/*
 	 * select a random thread to push task
@@ -109,4 +113,3 @@ void CThreadPool::AddTask(CTask* pTask)
 	uint32_t thread_idx = random() % m_worker_size;
 	m_worker_list[thread_idx].PushTask(pTask);
 }
-

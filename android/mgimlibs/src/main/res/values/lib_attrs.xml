@@ -4,7 +4,7 @@
     <declare-styleable name="MGWebImageViewWithCover">
         <attr name="cover" format="reference" />
     </declare-styleable>
-    
+
     <declare-styleable name="MGWebImageView">
         <attr name="shape">
             <enum name="circle" value="0" />
@@ -12,7 +12,7 @@
         </attr>
         <attr name="cornerSize" format="dimension" />
     </declare-styleable>
-    
+
     <declare-styleable name="HorizontalScattered">
         <attr name="item_left_margin" format="dimension" />
         <attr name="item_top_margin" format="dimension" />
@@ -20,9 +20,9 @@
         <attr name="item_bottom_margin" format="dimension" />
         <attr name="row_count_limited" format="integer" />
     </declare-styleable>
-    
+
     <declare-styleable name="FixedProportionImageView">
-         <!-- 比例，公式: heightBased ? W/H : 	H/W -->
+        <!-- 比例，公式: heightBased ? W/H : 	H/W -->
         <attr name="fixedProportion" format="reference|float" />
         <!-- 默认以控件的宽为基准计算高度，如果设置为true，则以控件的高为基准 -->
         <attr name="heightBased" format="boolean"></attr>

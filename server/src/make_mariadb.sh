@@ -82,14 +82,14 @@ download() {
     return 0
 }
 
-build_mariadb_devel(){
+build_mariadb_devel() {
     CENTOS_VERSION=$(less /etc/redhat-release)
     local VERSION_ID=`grep "VERSION_ID" /etc/os-release | cut -f 2 -d '='`
     local NumOnly=$(cut -f2 <<< "$VERSION_ID")
     if [ NumOnly>7 ]; then
         yum -y install openssl-devel mariadb-devel mariadb-common 
     else
-    # centos:7 需要编译安装
+        # centos:7 需要编译安装
         download $MARIADB_DEVEL.rpm $MARIADB_DEVEL_DOWNLOAD_PATH
         if [ $? -eq 1 ]; then
             return 1

@@ -57,12 +57,17 @@ uint32_t CSimpleBuffer::Write(void* buf, uint32_t len)
 uint32_t CSimpleBuffer::Read(void* buf, uint32_t len)
 {
 	if (len > m_write_offset)
-		len = m_write_offset;
+	{
+        len = m_write_offset;
+	}
 
-	if (buf)
-		memcpy(buf, m_buffer, len);
+	if (buf) {
+        memcpy(buf, m_buffer, len);
+	}
+		
 
 	m_write_offset -= len;
+	// 将从 m_buffer + len 开始，m_write_offset 长度的内存拷贝到m_buffer
 	memmove(m_buffer, m_buffer + len, m_write_offset);
 	return len;
 }
@@ -272,22 +277,31 @@ void CByteStream::_ReadByte(void* buf, uint32_t len)
 	}
 
 	if (m_pSimpBuf)
-		m_pSimpBuf->Read((char*)buf, len);
+	{
+        m_pSimpBuf->Read((char*)buf, len);
+	}
 	else
+	{
 		memcpy(buf, m_pBuf + m_pos, len);
+	}
 
 	m_pos += len;
 }
 
 void CByteStream::_WriteByte(void* buf, uint32_t len)
 {
-	if (m_pBuf && (m_pos + len > m_len))
-		return;
-
+	if (m_pBuf && (m_pos + len > m_len)) {
+        return;
+	}
+		
 	if (m_pSimpBuf)
+	{
 		m_pSimpBuf->Write((char*)buf, len);
+	}
 	else
+	{
 		memcpy(m_pBuf + m_pos, buf, len);
+	}
 
 	m_pos += len;
 }

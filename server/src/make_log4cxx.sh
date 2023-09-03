@@ -86,7 +86,7 @@ get_cur_dir() {
     CUR_DIR=$(dirname "${REALPATH}")
 }
 
-build_apr(){
+build_apr() {
     
     download $APR.tar.gz $APR_PATH
     tar -xf $APR.tar.gz
@@ -98,7 +98,7 @@ build_apr(){
     cd ..
 }
 
-build_apr_util(){    
+build_apr_util() {
     download $APR_UTIL.tar.gz $APR_UTIL_PATH
     tar -xf $APR_UTIL.tar.gz
     cd $APR_UTIL
@@ -107,7 +107,7 @@ build_apr_util(){
     cd ..
 }
 
-build_log4cxx(){
+build_log4cxx() {
     cd log4cxx
     #yum -y update
     local VERSION_ID=`grep "VERSION_ID" /etc/os-release | cut -f 2 -d '='`

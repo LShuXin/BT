@@ -12,6 +12,11 @@ import android.os.Message;
 
 import com.mogujie.im.libs.R;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import cz.msebera.android.httpclient.HttpEntity;
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.client.ClientProtocolException;
@@ -19,143 +24,139 @@ import cz.msebera.android.httpclient.client.HttpClient;
 import cz.msebera.android.httpclient.client.methods.HttpGet;
 import cz.msebera.android.httpclient.impl.client.HttpClientBuilder;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 /**
  * 自动下载更新,~
+ *
  * @author 6a209
  * Feb 17, 2013
  */
-public class MGAutoUpdate {  
-	private final Context mCtx;
-	private final ProgressDialog mProgressDialog;
-	private long mCount;
-	private static final int UPDATE = 0x01;
-    private final Handler mHandler = new Handler(){
-    	@Override
-    	public void handleMessage(Message msg){
+public class MGAutoUpdate {
+    private final Context mCtx;
+    private final ProgressDialog mProgressDialog;
+    private long mCount;
+    private static final int UPDATE = 0x01;
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
             if (msg.what == UPDATE) {
                 mProgressDialog.setProgress((int) (mCount / 1000));
             }
-    	}
+        }
     };
-    
-    private boolean isCancle = false;
-    private UpdateOnCancleListener updateOnCancleListener;
+
+    private boolean isCancel = false;
+    private UpdateOnCancelListener updateOnCancleListener;
     private OnUpdateFinishListener mUpdateFinishListener;
-  
-    public MGAutoUpdate(Context ctx) {  
-    	 mCtx = ctx;
-    	 mProgressDialog = new ProgressDialog(mCtx);
-         mProgressDialog.setTitle(R.string.downloading);
-         mProgressDialog.setMessage(mCtx.getString(R.string.wait_moment));
-         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-         //默认100
-         mProgressDialog.setMax(100);
-         mProgressDialog.show();
-         mProgressDialog.setOnCancelListener(new OnCancelListener() {
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				if(null != updateOnCancleListener){
-					isCancle = true;
-					updateOnCancleListener.cancel();
-				}
-			}
-		});
-    }  
-  
-    public void startDown(final String url) {  
-        new Thread() {  
-            public void run() {  
+
+    public MGAutoUpdate(Context ctx) {
+        mCtx = ctx;
+        mProgressDialog = new ProgressDialog(mCtx);
+        mProgressDialog.setTitle(R.string.downloading);
+        mProgressDialog.setMessage(mCtx.getString(R.string.wait_moment));
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        //默认100
+        mProgressDialog.setMax(100);
+        mProgressDialog.show();
+        mProgressDialog.setOnCancelListener(new OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                if (null != updateOnCancleListener) {
+                    isCancel = true;
+                    updateOnCancleListener.cancel();
+                }
+            }
+        });
+    }
+
+    public void startDown(final String url) {
+        new Thread() {
+            public void run() {
                 HttpClient client = HttpClientBuilder.create().build();
                 // params[0]代表连接的url  
-                HttpGet get = new HttpGet(url);  
-                HttpResponse response;  
-                try {  
-                    response = client.execute(get);  
-                    HttpEntity entity = response.getEntity();  
-                    long length = entity.getContentLength();  
-                    mProgressDialog.setMax((int)(length / 1000));
-                    InputStream is = entity.getContent();  
-                    FileOutputStream fileOutputStream = null;  
-                    if (is != null) {  
-  
-                        File file = new File(Environment  
-                                .getExternalStorageDirectory(), "OA.apk");  
-                        fileOutputStream = new FileOutputStream(file);  
-                          
-                        byte[] buf = new byte[1024];  
-                        int ch = -1;  
-                        mCount = 0;  
-                        while ((ch = is.read(buf)) != -1) {  
+                HttpGet get = new HttpGet(url);
+                HttpResponse response;
+                try {
+                    response = client.execute(get);
+                    HttpEntity entity = response.getEntity();
+                    long length = entity.getContentLength();
+                    mProgressDialog.setMax((int) (length / 1000));
+                    InputStream is = entity.getContent();
+                    FileOutputStream fileOutputStream = null;
+                    if (is != null) {
+
+                        File file = new File(Environment
+                                .getExternalStorageDirectory(), "OA.apk");
+                        fileOutputStream = new FileOutputStream(file);
+
+                        byte[] buf = new byte[1024];
+                        int ch = -1;
+                        mCount = 0;
+                        while ((ch = is.read(buf)) != -1) {
                             // baos.write(buf, 0, ch);  
-                            fileOutputStream.write(buf, 0, ch);  
-                            mCount += ch; 
-                            
-                            if (length > 0) {  
-                              
-                            }  
+                            fileOutputStream.write(buf, 0, ch);
+                            mCount += ch;
+
+                            if (length > 0) {
+
+                            }
                             mHandler.sendEmptyMessage(UPDATE);
-                        }  
+                        }
                     }
-                    
-                    fileOutputStream.flush();  
-                    if (fileOutputStream != null) {  
-                        fileOutputStream.close();  
-                    }  
-                    down();  
-                } catch (ClientProtocolException e) {  
+
+                    fileOutputStream.flush();
+                    if (fileOutputStream != null) {
+                        fileOutputStream.close();
+                    }
+                    down();
+                } catch (ClientProtocolException e) {
                     e.printStackTrace();
-                } catch (IOException e) {  
+                } catch (IOException e) {
                     e.printStackTrace();
-                }  
-            }  
-        }.start();  
-  
-    }  
-  
-    void down() {  
-        mHandler.post(new Runnable() {  
-            public void run() {  
-                update();  
-            }  
-        });  
-    }  
-  
+                }
+            }
+        }.start();
+
+    }
+
+    void down() {
+        mHandler.post(new Runnable() {
+            public void run() {
+                update();
+            }
+        });
+    }
+
     void update() {
-    	if(mProgressDialog.isShowing()){
-        	mProgressDialog.dismiss();
-    	}
-    	
-    	if(isCancle){
-    		return;
-    	}
-        if(null != mUpdateFinishListener){
+        if (mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+
+        if (isCancel) {
+            return;
+        }
+        if (null != mUpdateFinishListener) {
             mUpdateFinishListener.onFinish();
         }
-        Intent intent = new Intent(Intent.ACTION_VIEW);  
-        intent.setDataAndType(Uri.fromFile(new File("/sdcard/OA.apk")),  
-                "application/vnd.android.package-archive");  
-        mCtx.startActivity(intent); 
-    }  
-    
-    public void setUpdateOnCancleListener(UpdateOnCancleListener updateOnCancleListener){
-    	this.updateOnCancleListener = updateOnCancleListener;
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(new File("/sdcard/OA.apk")),
+                "application/vnd.android.package-archive");
+        mCtx.startActivity(intent);
     }
 
-    public void setOnFinishListener(OnUpdateFinishListener listener){
+    public void setUpdateOnCandleListener(UpdateOnCancelListener updateOnCancleListener) {
+        this.updateOnCancleListener = updateOnCancleListener;
+    }
+
+    public void setOnFinishListener(OnUpdateFinishListener listener) {
         mUpdateFinishListener = listener;
     }
-    
-    public interface UpdateOnCancleListener {
-    	void cancel();
+
+    public interface UpdateOnCancelListener {
+        void cancel();
     }
 
-    public interface OnUpdateFinishListener{
+    public interface OnUpdateFinishListener {
         void onFinish();
     }
-  
+
 }  

@@ -7,19 +7,20 @@ build() {
     yum -y install curl-devel
 
     # 第一个是覆盖 >，后面是追加 >>
-	echo "#ifndef __VERSION_H__" > base/version.h
-	echo "#define __VERSION_H__" >> base/version.h
-	echo "#define VERSION \"$1\"" >> base/version.h
-	echo "#endif" >> base/version.h
+	  echo "#ifndef __VERSION_H__" > base/version.h
+	  echo "#define __VERSION_H__" >> base/version.h
+	  echo "#define VERSION \"$1\"" >> base/version.h
+	  echo "#endif" >> base/version.h
 
     if [ ! -d lib ]
     then
         mkdir lib
     fi
 
-	cd base
+
+	  cd base
     cmake .
-	make
+	  make
     if [ $? -eq 0 ]; then
         echo "make base successed";
     else
@@ -30,6 +31,8 @@ build() {
     then
         cp libbase.a ../lib/
     fi
+
+
     cd ../slog
     cmake .
     make
@@ -44,9 +47,10 @@ build() {
     cp libslog.so ../base/slog/lib/
     cp -a lib/liblog4cxx* ../base/slog/lib/
 
+
     cd ../login_server
     cmake .
-	make
+  	make
     if [ $? -eq 0 ]; then
         echo "make login_server successed";
     else
@@ -54,9 +58,10 @@ build() {
         exit;
     fi
 
-	cd ../route_server
+
+	  cd ../route_server
     cmake .
-	make
+  	make
     if [ $? -eq 0 ]; then
         echo "make route_server successed";
     else
@@ -64,15 +69,17 @@ build() {
         exit;
     fi
 
-	cd ../msg_server
+
+	  cd ../msg_server
     cmake .
-	make
+	  make
     if [ $? -eq 0 ]; then
         echo "make msg_server successed";
     else
         echo "make msg_server failed";
         exit;
     fi
+
 
     cd ../http_msg_server
     cmake .
@@ -84,6 +91,7 @@ build() {
         exit;
     fi
 
+
     cd ../file_server
     cmake .
     make
@@ -93,6 +101,7 @@ build() {
         echo "make file_server failed";
         exit;
     fi
+
 
     cd ../push_server
     cmake .
@@ -104,6 +113,7 @@ build() {
         exit;
     fi
 
+
     cd ../tools
     make
     if [ $? -eq 0 ]; then
@@ -112,6 +122,7 @@ build() {
         echo "make tools failed";
         exit;
     fi
+
 
     cd ../db_proxy_server
     cmake .
@@ -123,6 +134,7 @@ build() {
         exit;
     fi
 
+
     cd ../msfs
     cmake .
     make
@@ -133,8 +145,8 @@ build() {
         exit;
     fi
 
-	cd ../
 
+  	cd ../
     mkdir -p ../run/login_server
     mkdir -p ../run/route_server
     mkdir -p ../run/msg_server
@@ -143,31 +155,24 @@ build() {
     mkdir -p ../run/push_server
     mkdir -p ../run/http_msg_server
     mkdir -p ../run/db_proxy_server
-
-	#copy executables to run/ dir
-	cp login_server/login_server ../run/login_server/
-
-	cp route_server/route_server ../run/route_server/
-
-	cp msg_server/msg_server ../run/msg_server/
-
+	  #copy executables to run/ dir
+  	cp login_server/login_server ../run/login_server/
+	  cp route_server/route_server ../run/route_server/
+	  cp msg_server/msg_server ../run/msg_server/
     cp http_msg_server/http_msg_server ../run/http_msg_server/
-
     cp file_server/file_server ../run/file_server/
-
     cp push_server/push_server ../run/push_server/
-
     cp db_proxy_server/db_proxy_server ../run/db_proxy_server/
-
     cp msfs/msfs ../run/msfs/
-
     cp tools/daeml ../run/
 
+
+    # compress zip
     build_version=im-server-$1
     build_name=$build_version.tar.gz
-	if [ -e "$build_name" ]; then
-		rm $build_name
-	fi
+	  if [ -e "$build_name" ]; then
+		    rm $build_name
+	  fi
     mkdir -p ../$build_version
     mkdir -p ../$build_version/login_server
     mkdir -p ../$build_version/route_server
@@ -212,55 +217,63 @@ build() {
     cp ../run/restart.sh ../$build_version/
 
     cd ../
-    tar zcvf    $build_name $build_version
+    tar zcvf $build_name $build_version
 
     rm -rf $build_version
 }
 
 clean() {
-	cd base
-	make clean
-	cd ../login_server
-	make clean
-	cd ../route_server
-	make clean
-	cd ../msg_server
-	make clean
-	cd ../http_msg_server
+    cd base
     make clean
-	cd ../file_server
+
+    cd ../login_server
     make clean
+
+    cd ../route_server
+    make clean
+
+    cd ../msg_server
+    make clean
+
+    cd ../http_msg_server
+    make clean
+
+    cd ../file_server
+    make clean
+
     cd ../push_server
     make clean
-	cd ../db_proxy_server
-	make clean
+
+    cd ../db_proxy_server
+    make clean
+
     cd ../push_server
     make clean
 }
 
 print_help() {
-	echo "Usage: "
-	echo "  $0 clean --- clean all build"
-	echo "  $0 version version_str --- build a version"
+    echo "Usage: "
+    echo "  $0 clean --- clean all build"
+    echo "  $0 version version_str --- build a version"
 }
 
 case $1 in
-	clean)
-		echo "clean all build..."
-		clean
-		;;
-	version)
-		if [ $# != 2 ]; then 
-			echo $#
-			print_help
-			exit
-		fi
+    clean)
+        echo "clean all build..."
+        clean
+        ;;
+    version)
+        if [ $# != 2 ]; then
+            echo $#
+            print_help
+            exit
+        fi
 
-		echo $2
-		echo "build..."
-		build $2
-		;;
-	*)
-		print_help
-		;;
+        echo $2
+        echo "build..."
+        build $2
+        ;;
+    *)
+        print_help
+        ;;
 esac

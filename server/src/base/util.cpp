@@ -56,8 +56,9 @@ uint64_t get_tick_count()
 	LARGE_INTEGER liCounter; 
 	LARGE_INTEGER liCurrent;
 
-	if (!QueryPerformanceFrequency(&liCounter))
+	if (!QueryPerformanceFrequency(&liCounter)) {
 		return GetTickCount();
+    }
 
 	QueryPerformanceCounter(&liCurrent);
 	return (uint64_t)(liCurrent.QuadPart * 1000 / liCounter.QuadPart);
@@ -98,7 +99,7 @@ CStrExplode::CStrExplode(char* str, char seperator)
 	int idx = 0;
 	char* start = pos = str;
 	while (*pos) {
-		if ( pos != start && *pos == seperator) {
+		if (pos != start && *pos == seperator) {
 			uint32_t len = pos - start;
 			m_item_list[idx] = new char [len + 1];
 			strncpy(m_item_list[idx], start, len);
@@ -207,22 +208,29 @@ void writePid()
 
 inline unsigned char toHex(const unsigned char &x)
 {
-    return x > 9 ? x -10 + 'A': x + '0';
+    return x > 9 ? x - 10 + 'A' : x + '0';
 }
 
 inline unsigned char fromHex(const unsigned char &x)
 {
-    return isdigit(x) ? x-'0' : x-'A'+10;
+    return isdigit(x) ? x - '0' : x - 'A' + 10;
 }
 
+
+/**
+ * @brief url 加密，对于原字符串的每一位，如果是数字或者字母，则直接存储，否则将变为3个字符
+ * 
+ * @param sIn 
+ * @return string 
+ */
 string URLEncode(const string &sIn)
 {
     string sOut;
-    for( size_t ix = 0; ix < sIn.size(); ix++ )
+    for (size_t ix = 0; ix < sIn.size(); ix++)
     {
         unsigned char buf[4];
-        memset( buf, 0, 4 );
-        if( isalnum( (unsigned char)sIn[ix] ) )
+        memset(buf, 0, 4);
+        if (isalnum((unsigned char)sIn[ix]))
         {
             buf[0] = sIn[ix];
         }
@@ -233,27 +241,30 @@ string URLEncode(const string &sIn)
         else
         {
             buf[0] = '%';
-            buf[1] = toHex( (unsigned char)sIn[ix] >> 4 );
-            buf[2] = toHex( (unsigned char)sIn[ix] % 16);
+            // 16 的倍数部分
+            buf[1] = toHex((unsigned char)sIn[ix] >> 4);
+            // 16 的余数部分
+            buf[2] = toHex((unsigned char)sIn[ix] % 16);
         }
         sOut += (char *)buf;
     }
     return sOut;
 }
 
+
 string URLDecode(const string &sIn)
 {
     string sOut;
-    for( size_t ix = 0; ix < sIn.size(); ix++ )
+    for (size_t ix = 0; ix < sIn.size(); ix++)
     {
         unsigned char ch = 0;
-        if(sIn[ix]=='%')
+        if (sIn[ix] == '%')
         {
-            ch = (fromHex(sIn[ix+1])<<4);
-            ch |= fromHex(sIn[ix+2]);
+            ch = (fromHex(sIn[ix + 1]) << 4);
+            ch |= fromHex(sIn[ix + 2]);
             ix += 2;
         }
-        else if(sIn[ix] == '+')
+        else if (sIn[ix] == '+')
         {
             ch = ' ';
         }
@@ -267,34 +278,55 @@ string URLDecode(const string &sIn)
 }
 
 
+/**
+ * @brief Get the file size object
+ * 
+ * @param path 
+ * @return int64_t 
+ */
 int64_t get_file_size(const char *path)
 {
     int64_t filesize = -1;
     struct stat statbuff;
-    if(stat(path, &statbuff) < 0){
+    // 将文件信息保存在了 statbuff 中
+    if (stat(path, &statbuff) < 0) {
         return filesize;
-    }else{
+    } else {
         filesize = statbuff.st_size;
     }
     return filesize;
 }
 
-const char*  memfind(const char *src_str,size_t src_len, const char *sub_str, size_t sub_len, bool flag)
+
+/**
+ * @brief 在字符串中查找子串的位置
+ * 
+ * @param src_str 
+ * @param src_len 
+ * @param sub_str 
+ * @param sub_len 
+ * @param flag 为true 时从前往后找，否则从后往前找
+ * @return const char* 子串起始位置指针
+ */
+const char* memfind(const char *src_str, size_t src_len, const char *sub_str, size_t sub_len, bool flag)
 {
-    if(NULL == src_str || NULL == sub_str || src_len <= 0)
+    if (NULL == src_str || NULL == sub_str || src_len <= 0)
     {
         return NULL;
     }
-    if(src_len < sub_len)
+    if (src_len < sub_len)
     {
         return NULL;
     }
+
     const char *p;
-    if (sub_len == 0)
+    if (sub_len == 0) {
         sub_len = strlen(sub_str);
-    if(src_len == sub_len)
+    }
+       
+    if (src_len == sub_len)
     {
-        if(0 == (memcmp(src_str, sub_str, src_len)))
+        if (0 == (memcmp(src_str, sub_str, src_len)))
         {
             return src_str;
         }
@@ -303,23 +335,28 @@ const char*  memfind(const char *src_str,size_t src_len, const char *sub_str, si
             return NULL;
         }
     }
-    if(flag)
+    if (flag)
     {
+        // 这里的界限是不是有问题？
+        // 假如母串长度为4，子串长度为2， 4 - 2 = 2
+        // 是可以在 i = 2 的位置上再比较一次的
+        // 所以应该是 i <= src_len - sub_len ?
         for (int i = 0; i < src_len - sub_len; i++)
         {
             p = src_str + i;
-            if(0 == memcmp(p, sub_str, sub_len))
+            if (0 == memcmp(p, sub_str, sub_len)) {
                 return p;
+            }
         }
     }
     else
     {
-        for ( int i = (src_len - sub_len) ; i >= 0;i--  )
+        for (int i = (src_len - sub_len) ; i >= 0; i--)
         {
             p = src_str + i;
-            if ( 0 == memcmp(  p,sub_str,sub_len ) )
+            if (0 == memcmp(p, sub_str, sub_len)) {
                 return p;
-            
+            }
         }
     }
     return NULL;

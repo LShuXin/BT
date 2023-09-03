@@ -15,7 +15,7 @@ docker容器已经共享到[Docker Hub](https://hub.docker.com/r/lsqtzj/teamtalk
 # 1、运行docker centos:7 版本系统 
 
 ```cobol
-docker run -d -p 80:80 -p 8080:8080 -p 8008:8008 -p 8000:8000 -p 10600:10600 -p 8200:8200 -p 8400:8400 -p8500:8500 -p8600:8600 -p 8700:8700 -tid --name teamtalk --privileged=true centos:7 /sbin/init
+docker run -d -p 80:80 -p 8080:8080 -p 8008:8008 -p 8000:8000 -p 10600:10600 -p 8200:8200 -p 8400:8400 -p 8500:8500 -p 8600:8600 -p 8700:8700 -tid --name teamtalk --privileged=true centos:7 /sbin/init
 ```
 
 这里开放的端口为服务端口后面需要使用。
@@ -103,9 +103,9 @@ default-character-set=utf8mb4
 # The MySQL server
 
 [mysqld]
-bind-address=127.0.0.1
-port        = 3306
-socket      = /tmp/mysql.sock
+bind-address = 127.0.0.1
+port         = 3306
+socket       = /tmp/mysql.sock
 datadir = /usr/local/mysql/var
 collation-server = utf8mb4_general_ci
 character-set-server = utf8mb4
@@ -1211,7 +1211,7 @@ mkdir -p TeamTalk/server/src/base/pb/lib/linux/
 
 cp /usr/local/protobuf/lib/libprotobuf-lite.a TeamTalk/server/src/base/pb/lib/linux/
 
-cp  -r /usr/local/protobuf/include/* TeamTalk/server/src/base/pb/
+cp -r /usr/local/protobuf/include/* TeamTalk/server/src/base/pb/
 
 cd TeamTalk/pb
 
@@ -1281,7 +1281,7 @@ sh make_hiredis.sh
 
 ### 8.4.1 修改代码
 
-###     1）因为mysql不是默认路径，所以修改db_proxy_server/CMakeList
+1）因为mysql不是默认路径，所以修改db_proxy_server/CMakeList
 
 vim db_proxy_server/CMakeLists.txt
 
@@ -1299,7 +1299,7 @@ SET(MYSQL_INCLUDE_DIR /usr/local/mysql/include)
 SET(MYSQL_LIB /usr/local/mysql/lib)
 ```
 
-###     2）因为是测试环境只开了一个 DBServer 所以修改一下msg_server/msg_server.cpp 86行
+2）因为是测试环境只开了一个 DBServer 所以修改一下msg_server/msg_server.cpp 86行
 
 vim msg_server/msg_server.cpp
 
@@ -1426,7 +1426,7 @@ $db['default']['database'] = 'teamtalk';
 cd ~/Downloads/TeamTalk/auto_setup/im-server-1.0.0
 ```
 
-###     1）修改 restart.sh
+1）修改 restart.sh
 
 ```undefined
 vi restart.sh
@@ -1448,7 +1448,7 @@ msfs)
 cp ../im_server/conf/msfs.conf msfs/msfs.conf
 ```
 
-###     2）修改 db_proxy_server/dbproxyserver.conf 配置
+2）修改 db_proxy_server/dbproxyserver.conf 配置
 
 vim  db_proxy_server/dbproxyserver.conf
 
@@ -1473,7 +1473,7 @@ teamtalk_slave_maxconncnt=16
 
 ![img](img/watermark,type_ZmFuZ3poZiiW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xzcXR6ag==,size_16,color_FFFFFF,t_70.png)
 
-###     3）局域网访问
+3）局域网访问
 
 修改 msg_server/msgserver.conf 最后的IpAdd1/IpAdd2 改成主机IP
 
@@ -1483,7 +1483,7 @@ vi msg_server/msgserver.conf
 
 ![img](img/20210812003134630.png)
 
-###     4）启动服务 
+4）启动服务 
 
 ```cobol
 ./restart.sh login_server
@@ -1503,7 +1503,7 @@ vi msg_server/msgserver.conf
 ./restart.sh db_proxy_server
 ```
 
-###     5）查看服务运行情况
+5）查看服务运行情况
 
 ```perl
 ps -ef|grep server && ps -ef|grep msfs
@@ -1517,7 +1517,7 @@ ps -ef|grep server && ps -ef|grep msfs
 cat /TeamTalk/auto_setup/im-server-1.0.0/login_server/log/default.log
 ```
 
-###     6）服务说明
+6）服务说明
 
 | **服务**        | **端口**  | **服务类型** | **说明**                                                     |
 | --------------- | --------- | ------------ | ------------------------------------------------------------ |
