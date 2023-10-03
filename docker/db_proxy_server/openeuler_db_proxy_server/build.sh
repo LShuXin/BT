@@ -1,0 +1,1 @@
+docker build -t 1569663570/openeuler_db_proxy_server:latest -f Dockerfile ../../../

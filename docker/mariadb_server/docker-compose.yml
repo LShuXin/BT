@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  mariadb_server:
+    image: library/mariadb:10.7.1
+    restart: always
+    container_name: mariadb_server
+    hostname: mariadb_server
+    ports:
+      - "3306:3306"
+    volumes:
+      - ../mysql_data:/var/lib/mysql
+      - ../../auto_setup/mariadb/conf:/docker-entrypoint-initdb.d
+    environment:
+      TZ: Europe/Rome #Asia/Shanghai 时区
+      MARIADB_ROOT_PASSWORD: admin123@
+      MARIADB_DATABASE: teamtalk
+      MARIADB_USER: teamtalk
+      MARIADB_PASSWORD: teamtalk123@

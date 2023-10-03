@@ -1,0 +1,1 @@
+docker build -t 1569663570/openeuler_route_server -f Dockerfile ../../../
