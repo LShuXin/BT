@@ -59,7 +59,7 @@ static NSInteger timeoutInterval = 10;
         _success = [success copy];
         _failure = [failure copy];
         [[DDTcpClientManager instance] disconnect];
-        [[DDTcpClientManager instance] connect:ip port:point status:UserStatTypeUserStatusOnline];
+        [[DDTcpClientManager instance] connect:ip port:point status:UserStatType_UserStatusOnline];
         
         NSUInteger nowTimes = _connectTimes;
         double delayInSeconds = timeoutInterval;

@@ -236,7 +236,7 @@
         
         MTGroupChangeMemberAPI* deleteMemberAPI = [[MTGroupChangeMemberAPI alloc] init];
         NSString* myID = [[DDClientState shareInstance]userID];
-        NSArray* array = @[_groupEntity.ID,@[selectUserId],@(GroupModifyTypeGroupModifyTypeDel),myID];
+        NSArray* array = @[_groupEntity.ID,@[selectUserId],@(GroupModifyType_GroupModifyTypeDel),myID];
         [deleteMemberAPI requestWithObject:array Completion:^(id response, NSError *error) {
         
             if (!error)

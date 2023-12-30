@@ -40,8 +40,8 @@
 extern long long spx_mips;
 #define MIPS_INC spx_mips++,
 
-#define QCONST16(x,bits) ((spx_word16_t)(.5+(x)*(((spx_word32_t)1)<<(bits))))
-#define QCONST32(x,bits) ((spx_word32_t)(.5+(x)*(((spx_word32_t)1)<<(bits))))
+#define QCONST16(x,bits) ((spx_word16_t)(.5+ (x)*(((spx_word32_t)1)<<(bits))))
+#define QCONST32(x,bits) ((spx_word32_t)(.5+ (x)*(((spx_word32_t)1)<<(bits))))
 
 
 #define VERIFY_SHORT(x) ((x)<=32767&&(x)>=-32768)
@@ -233,7 +233,7 @@ static inline int SUB32(long long a, long long b)
    return res;
 }
 
-#define ADD64(a,b) (MIPS_INC(a)+(b))
+#define ADD64(a,b) (MIPS_INC(a)+ (b))
 
 /* result fits in 16 bits */
 static inline short MULT16_16_16(int a, int b) 

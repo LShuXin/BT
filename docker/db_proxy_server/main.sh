@@ -1,6 +1,6 @@
 #!/bin/bash
-server_ip(){
-        arp $1 | sed "s/.*(\([0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\)).*/\1/g"
+server_ip() {
+    arp $1 | sed "s/.*(\([0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\)).*/\1/g"
 }
 
 sed -i "s/ListenIP=127.0.0.1/ListenIP=0.0.0.0/g" /teamtalk/db_proxy_server/dbproxyserver.conf
@@ -43,7 +43,7 @@ server=db_proxy_server
 echo -e "\033[32m $server ==> START ... \033[0m"
 ./restart.sh $server log
 cd /teamtalk/$server
-./monitor.sh  $server log
+./monitor.sh $server log
 waitterm() {
         local PID
         # any process to block

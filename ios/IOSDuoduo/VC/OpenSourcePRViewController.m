@@ -8,7 +8,8 @@
 
 #import "OpenSourcePRViewController.h"
 
-@interface OpenSourcePRViewController ()
+
+@interface OpenSourcePRViewController()
 
 @end
 
@@ -17,10 +18,11 @@
     UIWebView* _webView;
     UIActivityIndicatorView* _activityIndicatorView;
 }
-- (void)viewDidLoad {
+
+-(void)viewDidLoad
+{
     [super viewDidLoad];
     _webView = [[UIWebView alloc] initWithFrame:self.view.frame];
-    
     [_webView setClipsToBounds:YES];
     [self.view addSubview:_webView];
     NSURL* url = [NSURL URLWithString:self.urlString];
@@ -32,32 +34,37 @@
     [_activityIndicatorView setHidesWhenStopped:YES];
     [_activityIndicatorView startAnimating];
     [self.view addSubview:_activityIndicatorView];
-    _webView.backgroundColor=[UIColor clearColor];
-    for (UIView *_aView in [_webView subviews])
+    _webView.backgroundColor = [UIColor clearColor];
+    for (UIView* _aView in [_webView subviews])
     {
         if ([_aView isKindOfClass:[UIScrollView class]])
         {
-            [(UIScrollView *)_aView setShowsHorizontalScrollIndicator:NO]; //右侧的滚动条
+            [(UIScrollView*)_aView setShowsHorizontalScrollIndicator:NO]; //右侧的滚动条
         } 
     }
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.tabBarController.tabBar setHidden:YES];
 }
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [self.tabBarController.tabBar setHidden:NO];
 }
-- (void)didReceiveMemoryWarning {
+
+-(void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
+-(void)webViewDidFinishLoad:(UIWebView*)webView
 {
     [_activityIndicatorView stopAnimating];
 }
+
 @end

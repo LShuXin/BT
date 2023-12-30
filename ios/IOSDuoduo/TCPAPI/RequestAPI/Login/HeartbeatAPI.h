@@ -8,6 +8,7 @@
 
 #import "DDSuperAPI.h"
 
+
 @interface HeartbeatAPI : DDSuperAPI<DDAPIScheduleProtocol>
 
 @end

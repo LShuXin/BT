@@ -9,6 +9,7 @@
 #ifndef __slog__slog_api__
 #define __slog__slog_api__
 
+
 #include <stdio.h>
 
 #define WATCH_DELAY_TIME     10 * 1000

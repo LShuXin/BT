@@ -105,7 +105,7 @@
     }
 }
 
-+(NSString *)dbFilePath
++ (NSString *)dbFilePath
 {
     NSString* directorPath = [NSString userExclusiveDirection];
     
@@ -237,13 +237,13 @@
 //                          @"status":[NSNumber numberWithInt:[resultSet intForColumn:@"status"]],
 //                          @"count":[NSNumber numberWithInt:[resultSet intForColumn:@"count"]],
 //                          };
-    DepartInfoBuilder *info = [DepartInfo builder];
-    [info setDeptId:[resultSet intForColumn:@"ID"]];
-    [info setParentDeptId:[resultSet intForColumn:@"parentID"]];
-    [info setPriority:[resultSet intForColumn:@"priority"]];
-    [info setDeptName:[resultSet stringForColumn:@"title"]];
-    [info setDeptStatus:[resultSet intForColumn:@"status"]];
-    DepartInfo *deaprtment = [info build];
+    DepartInfo *deaprtment = [[DepartInfo alloc] init];
+    [deaprtment setDeptId:[resultSet intForColumn:@"ID"]];
+    [deaprtment setParentDeptId:[resultSet intForColumn:@"parentID"]];
+    [deaprtment setPriority:[resultSet intForColumn:@"priority"]];
+    [deaprtment setDeptName:[resultSet stringForColumn:@"title"]];
+    [deaprtment setDeptStatus:[resultSet intForColumn:@"status"]];
+    
     return deaprtment;
 }
 #pragma mark Message

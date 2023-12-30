@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IMBaseDefine.pb.h"
+#import "IMBaseDefine.pbobjc.h"
 
 #define DD_GROUP_SESSIONID_PREFIX                       @"group_"
 #define DD_GROUP_SESSIONID(groupID)                     [NSString stringWithFormat:@"%@%@",DD_GROUP_SESSIONID_PREFIX,groupID]

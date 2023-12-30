@@ -8,7 +8,7 @@
 
 #import "DDFixedGroupAPI.h"
 #import "MTGroupEntity.h"
-#import "IMGroup.pb.h"
+#import "IMGroup.pbobjc.h"
 #import "DataOutputStream+Addition.h"
 @implementation DDFixedGroupAPI
 /**
@@ -28,7 +28,7 @@
  */
 - (int)requestServiceID
 {
-    return ServiceIDSidGroup;
+    return ServiceID_SidGroup;
 }
 
 /**
@@ -38,7 +38,7 @@
  */
 - (int)responseServiceID
 {
-    return ServiceIDSidGroup;
+    return ServiceID_SidGroup;
 }
 
 /**
@@ -48,7 +48,7 @@
  */
 - (int)requestCommendID
 {
-    return GroupCmdIDCidGroupNormalListRequest;
+    return GroupCmdID_CidGroupNormalListRequest;
 }
 
 /**
@@ -58,7 +58,7 @@
  */
 - (int)responseCommendID
 {
-    return GroupCmdIDCidGroupNormalListResponse;
+    return GroupCmdID_CidGroupNormalListResponse;
 }
 
 /**
@@ -70,10 +70,10 @@
 {
     Analysis analysis = (id)^(NSData* data)
     {
-        IMNormalGroupListRsp *allGroupRsp = [IMNormalGroupListRsp parseFromData:data];
+        IMNormalGroupListRsp *allGroupRsp = [IMNormalGroupListRsp parseFromData:data error:nil];
         NSMutableDictionary *groupIdAndVersion = [NSMutableDictionary new];
         NSMutableArray* groupList = [[NSMutableArray alloc] init];
-        for (GroupVersionInfo *groupVersionInfo in allGroupRsp.groupVersionList) {
+        for (GroupVersionInfo *groupVersionInfo in allGroupRsp.groupVersionListArray) {
             NSString* groupId = [[NSNumber numberWithInt:groupVersionInfo.groupId] stringValue];
             NSString* version = [[NSNumber numberWithInt:groupVersionInfo.version] stringValue];
             NSMutableDictionary* groupVersion = [NSMutableDictionary dictionaryWithObjectsAndKeys:groupId,@"groupId",version,@"version",nil];
@@ -94,16 +94,16 @@
 {
     Package package = (id)^(id object,uint16_t seqNo)
     {
-        IMNormalGroupListReqBuilder *req = [IMNormalGroupListReq builder];
+        IMNormalGroupListReq *req = [[IMNormalGroupListReq alloc] init];
 
-        UInt32 reqUserId = [[object objectForKey:@"reqUserId"] intValue];
+        UInt32 reqUserId = [object[@"reqUserId"] intValue];
         [req setUserId:reqUserId];
         DataOutputStream *dataout = [[DataOutputStream alloc] init];
         [dataout writeInt:0];
         [dataout writeTcpProtocolHeader:[self requestServiceID]
                                     cId:[self requestCommendID]
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[req build].data];
+        [dataout directWriteBytes:[req data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

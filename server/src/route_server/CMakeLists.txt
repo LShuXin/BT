@@ -3,7 +3,6 @@ PROJECT(routeserver)
 
 AUX_SOURCE_DIRECTORY(./ SRC_LIST)
 
-#SET(LIBRARY_OUTPUT_PATH ./)
 SET(EXECUTABLE_OUTPUT_PATH  ./)
 if(APPLE)
     SET(PB_LIB_DIR ../base/pb/lib/mac)
@@ -27,8 +26,6 @@ endif()
 INCLUDE_DIRECTORIES(./ ../base ../base/pb/protocol ../base/jsoncpp/ ../base/pb/ ${PB_LIB_DIR})
 LINK_DIRECTORIES(./ ../base ${PB_LIB_DIR} ../base/slog/lib)
 
-#ADD_XXXX必须在TARGET_LINK_LIBRARIES前面，否则会报错
-#ADD_LIBRARY(${PROJECTNAME} SHARED/STATIC ${SRC_LIST})
 ADD_EXECUTABLE(route_server ${SRC_LIST})
 
 if(MSVC)

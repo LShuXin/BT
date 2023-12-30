@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-///////////// CSimpleBuffer ////////////////
+
 CSimpleBuffer::CSimpleBuffer()
 {
 	m_buffer = NULL;
@@ -22,6 +22,7 @@ CSimpleBuffer::~CSimpleBuffer()
 {
 	m_alloc_size = 0;
 	m_write_offset = 0;
+
 	if (m_buffer)
 	{
 		free(m_buffer);
@@ -61,7 +62,8 @@ uint32_t CSimpleBuffer::Read(void* buf, uint32_t len)
         len = m_write_offset;
 	}
 
-	if (buf) {
+	if (buf)
+	{
         memcpy(buf, m_buffer, len);
 	}
 		
@@ -72,7 +74,6 @@ uint32_t CSimpleBuffer::Read(void* buf, uint32_t len)
 	return len;
 }
 
-////// CByteStream //////
 CByteStream::CByteStream(uchar_t* buf, uint32_t len)
 {
 	m_pBuf = buf;
@@ -285,12 +286,14 @@ void CByteStream::_ReadByte(void* buf, uint32_t len)
 		memcpy(buf, m_pBuf + m_pos, len);
 	}
 
+	// ？？
 	m_pos += len;
 }
 
 void CByteStream::_WriteByte(void* buf, uint32_t len)
 {
-	if (m_pBuf && (m_pos + len > m_len)) {
+	if (m_pBuf && (m_pos + len > m_len))
+	{
         return;
 	}
 		

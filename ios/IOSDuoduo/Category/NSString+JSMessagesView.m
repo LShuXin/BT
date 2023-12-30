@@ -28,14 +28,14 @@
 
 #import "NSString+JSMessagesView.h"
 
-@implementation NSString (JSMessagesView)
+@implementation NSString(JSMessagesView)
 
-- (NSString *)trimWhitespace
+-(NSString*)trimWhitespace
 {
     return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
-- (NSUInteger)numberOfLines
+-(NSUInteger)numberOfLines
 {
     return [self componentsSeparatedByString:@"\n"].count + 1;
 }

@@ -20,7 +20,7 @@
 
 CAes *pAes;
 
-// for client connect in
+// 客户端连接请求的回调
 void msg_serv_callback(void* callback_data, uint8_t msg, uint32_t handle, void* pParam)
 {
 	if (msg == NETLIB_MSG_CONNECT)
@@ -37,8 +37,9 @@ void msg_serv_callback(void* callback_data, uint8_t msg, uint32_t handle, void* 
 
 int main(int argc, char* argv[])
 {
-	if ((argc == 2) && (strcmp(argv[1], "-v") == 0)) {
-//		printf("Server Version: MsgServer/%s\n", VERSION);
+	if ((argc == 2) && (strcmp(argv[1], "-v") == 0))
+	{
+ 		// printf("Server Version: MsgServer/%s\n", VERSION);
 		printf("Server Build: %s %s\n", __DATE__, __TIME__);
 		return 0;
 	}
@@ -75,7 +76,8 @@ int main(int argc, char* argv[])
                                                        "FileServerPort", file_server_count);
 
     
-    if (!str_aes_key || strlen(str_aes_key)!=32) {
+    if (!str_aes_key || strlen(str_aes_key) != 32)
+    {
         log("aes key is invalied");
         return -1;
     }
@@ -85,7 +87,9 @@ int main(int argc, char* argv[])
 	// 必须至少配置2个BusinessServer实例, 一个用于用户登录业务，一个用于其他业务
 	// 这样当其他业务量非常繁忙时，也不会影响客服端的登录验证
 	// 建议配置4个实例，这样更新BusinessServer时，不会影响业务
-	if (db_server_count < 1) {
+	// 测试环境只开了一个 DBServer
+	if (db_server_count < 1)
+	{
 		log("DBServerIP need 1 instance at lest ");
 		return 1;
 	}

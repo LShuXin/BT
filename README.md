@@ -1,153 +1,106 @@
-
-
 [toc]
 
-> 项目整理了 TeamTalk 一些相关资源，资源大部分来源于网络，时间原因尚未将所有引用链接与作者列出，后续将明确列出。
+> 作为 C++ 服务器编程入门的学习材料，选择了开源项目 https://github.com/mogutt
 >
-> 根据 doc 目录下的 “windows 10 Docker Desktop TeamTalk 安装笔记” 一文，现已成功部署 server，iOS、Android 客户端经过升级也可以正常运行，但尚未验证是否能与服务端正常通信。
->
-> TeamTalk 官方声明将原有github地址 https://github.com/mogutt 变更为 https://github.com/mogujie/TeamTalk， 但上述两个地址均未能找到相关开源代码。
+> 由于初始开源项目已经无法找到相关代码，本仓储最初版本从 https://gitee.com/CyrusZHou/TeamTalk 拷贝而来。除 https://gitee.com/CyrusZHou/TeamTalk 项目，另一个由张小方维护的项目 https://github.com/balloonwj/TeamTalk 也是代码比较全面的。
 
 
 
-## 一、项目背景
 
-蘑菇街能有今天的快速发展，得益于开源软件群雄崛起的大环境背景，我们一直对开源社区怀有感恩之情，因此也一直希望能为开源社区贡献一份力量。
+## 一、项目介绍
 
-2013年我们蘑菇街从社区导购华丽转身时尚电商平台，为解决千万妹子和时尚卖家的沟通问题，我们开发了自己的即时通讯软件。既然已经有了用户使用的IM，为什么我们自己公司内部沟通还要用第三方的呢？因此就有了TT(TeamTalk)的雏形，现在蘑菇街内部的在线沟通全部通过TT来完成。随着TT功能的逐渐完善，我们决定把TT开源来回馈开源社区，希望国内的中小企业都能用上开源、免费、好用的IM工具！
-
-
-
-## 二、项目介绍
-
-- 名称：TeamTalk
-- 官网：http://tt.mogu.io/
 - 开源协议：[Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
 - 定位：中小型企业用户，member >= 2
 - 特点：开源与产品并重
 - 功能：可靠的消息传递机制；支持文字、图片、语音等富文本信息；文件收发等
-- 具体文档见doc目录下, 安装之前请仔细阅读相关文档。
+- 文档：见 doc 目录
+
+
+
+## 二、分支说明
+
+- master 分支与 https://gitee.com/CyrusZHou/TeamTalk 项目master 分支代码一致；
+
+- main、dev 分支为我本人维护的分支
+
   
 
-## 三、项目框架
+## 三、项目架构
 
-麻雀虽小五脏俱全，本项目涉及到多个平台、多种语言，简单关系如下图：
+![server](./img/server.jpg)
 
-![teamtalk架构图](img/687474703a2f2f73362e6d6f677563646e2e636f6d2f62372f7069632f3134303932312f376e3669685f696579676d7a6a736d697977657a6a776d6d7974616d627168617964655f353134783535312e6a7067.png)
+<center>系统架构图 <a href="https://github.com/9527cpp/moguTTServer">图片来源</a></center>
 
-## 四、服务端
+- login_server (C++): 登录服务器，分配一个负载小的 MsgServer 给客户端使用
+- msg_server (C++):  消息服务器，提供客户端大部分信令处理功能，包括私人聊天、群组聊天等
+- route_server (C++):  路由服务器，为登录在不同 MsgServer 的用户提供消息转发功能
+- file_server (C++): 文件服务器，提供客户端之间得文件传输服务，支持在线以及离线文件传输
+- msfs_server (C++): 图片存储服务器，提供头像，图片传输中的图片存储服务
+- dbproxy_server (C++): 数据库代理服务器，提供 MySQL 以及 Redis 的访问服务，屏蔽其他服务器与 MySQL、Redis 的直接交互
 
-CppServer：TTCppServer工程，包括IM消息服务器、http服务器、文件传输服务器、文件存储服务器、登陆服务器 java DB Proxy：TTJavaServer工程，承载着后台消息存储、redis等接口 PHP server：TTPhpServer工程，teamtalk后台配置页面
-
-### 4.1 服务端 Docker 支持
-
-基于 openeuler/openeuler:20.03 系统的 docker 容器系统，方便快速调试。
-
-![image](img/150361679-a56f862f-ff1f-4c99-bcf3-2d4e4719d143.png)
-
+详细的服务端代码解析课查看 [TeamTalk源码分析(张小方)](./doc/TeamTalk源码分析(张小方)/README.md)
 
 
-### 4.2 直接运行版本
+
+## 四、服务部署
+
+本项目目前整理了四种验证过的部署方案，分别是：虚拟机单机手动部署、Docker 单容器部署（TODO）、Docker 多容器单机部署、K8S 部署（TODO）
+
+
+
+### 4.1 虚拟机单机手动部署
+
+[Macmini+VMWare+CentOS7.9单机手动部署文档](./doc/Macmini+VMWare+CentOS7.9单机手动部署文档/README.md)
+
+
+
+### 4.2 Docker 单容器部署
+
+
+
+### 4.3 Docker 多容器单机部署
+
+> 本项目提供了分别使用 Openeuler、CentOS7.9 为基础镜像的解决方案，运行 docker-compose xxx 命令时如果出现 b'i/o timeout' 问题，重复执行 docker-compose xxx 命令即可
+
+#### （1）直接拉取本项目制作好的镜像进行部署
 
 ```
 cd docker
-docker-compose up -d
+docker-compose up -f docker-compose-centos.yml -d
+# docker-compose up -f docker-compose-openeuler.yml -d
 ```
 
+#### （2） 自定义镜像运行服务
 
-
-### 4.3 编译版本
-
-```
+```Dockerfile
 cd docker
-docker-compose -f "docker-compose-build.yml" up -d --build
-
-# b'i/o timeout' 问题: 重复执行 docker-compose xxx 命令就可以解决。
-```
-
-
-
-### 4.4 命令行转换
-
-```
-下载:
-https://sourceforge.net/projects/dos2unix/
-
-命令行运行:
-for /R %G in (*.c *.cc *.h *.mk *.cpp) do unix2dos "%G" 
-```
-
-
-
-### 4.5 linux换行问题
-
-```
-yum install dos2unix
-find ./ -type f -print0 | xargs -0 dos2unix --
+docker-compose -f "docker-compose-build-centos.yml" up -d --build
+// docker-compose -f "docker-compose-build-openeuler.yml" up -d --build
 ```
 
 
 
 ## 五、客户端
 
-### 5.1 mac
+### 5.1 iOS
 
-TTMacClient工程，mac客户端工程
+工程位于本项目根目录下 ios 文件夹内，采用 OC 编写，已更新到 IOS 11，可使用 Xcode 14.1 打开运行
 
-### 5.2 iOS
+### 5.2 Android
 
-TTIOSClient工程，IOS客户端工程, 已更新到 Xcode 14.1
+工程位于本项目根目录下 android 文件夹内，采用 Java 编写，已更新到 API 29（Java18、gradle8.1.0）可使用 Android Studio 2022.3.1打开运行
 
-### 5.3 Android
+### 5.3 Mac
 
-TTAndroidClient工程，android客户端工程， 已更新到 Android Studio 2022.3.1
+工程位于本项目根目录下 mac 文件夹内，采用 OC 编写，未验证
 
 ### 5.4 Windows
 
-TTWinClient工程，windows客户端工程，更新到 Visual Studio 2019 (v142)  ISO C++17 标准 (/std:c++17)，win-cliient\solution\teamtalk.sln(需要管理员模式打开)。需要安装 vcpkg https://github.com/microsoft/vcpkg#quick-start-windows ，vcpkg install protobuf[core]:x86-windows，
-protobuf    -> 3.18.0
-protobuf 更新后可以替换/pb/protoc.exe 后重新运行make_PB_Files.bat 生成PB协议文件
+工程位于本项目根目录下 win-client 文件夹内，采用 C++17 & WFP 编写，未验证
 
 
 
-## 六、语言
-
-c++、objective-c、java、php
-
-
-
-## 七、系统环境
-
-Linux、Windows，Mac, iOS, Android
-
-
-
-## 八、近期修改
-
-- 消息采用加密存储。
-- 包体采用pb。
-- 聊天数据db 分表存储。
-- 每条消息有唯一id。
-- 多端消息同步。
-- db_proxy用c++改写了。
-- pc端可以播放语音。
-- 消息计数多端同步。
-- 新增push_server用于给iOS推送消息。
-- 各个客户端登陆地址可配置。
-- 修复若干bug。
-- 去掉文件传输功能(后期可能加上)。
-- 发现后台可以动态配置。
-
-
-
-## 九、测试账户
-
-如果只关心调试客户端，可以将默认服务器指向我们提供的测试服务器。
-需要使用我们提供的测试服务器的，请将默认登陆服务器的地址填写为以下:
-http://access.teamtalk.im:8080/msg_server
-由于相关规定，暂时不提供自由注册。需要注册的用户，我们提供TT001-TT100共100个测试账户，密码统一为:test123，其余想开通的，请发邮件申请。
-
-## 十、相关资源
+## 六、文档
 
 - [http接口定义](./doc/http接口定义.md)
 
@@ -165,3 +118,39 @@ http://access.teamtalk.im:8080/msg_server
 - [TeamTalk WinClient编译问题及解决方案](./doc/TeamTalk WinClient编译问题及解决方案/README.md)
 - [mogutt-TTServer](./doc/mogutt-TTServer/README.md)
 - [关于TeamTalk](./doc/开源IM工程“蘑菇街TeamTalk”.md)
+  
+
+
+
+## 七、TODO
+
+- [ ] VMware WorkStation + CentOS7.9 虚拟机单机部署方案
+- [ ] Docker 单容器部署
+- [ ] Docker 多容器单机部署
+- [ ] K8S 部署
+- [x] 升级 Android 到 API 30
+- [ ] 解决 Android 上点击好友列表奔溃问题
+- [x] 升级 IOS 到 IOS 11
+- [x] 升级 IOS PB 到 3.x 版本
+- [ ] 解决 IOS 上的布局适配问题
+- [ ] 开发 Web 版本客户端
+- [ ] 管理后台用 React 重写
+- [ ] Win 客户端验证
+- [ ] Mac 客户端验证
+- [ ] 崩溃日志上传（传到自己的服务器）
+- [ ] 协议文件中的 FileType 重命名为 FileTypeX
+- [ ] 完善单元测试
+- [ ] 完善各客户端文档
+
+
+
+## 八、参考链接
+
+- https://github.com/mogutt
+- https://github.com/mogujie/TeamTalk
+- https://github.com/lsqtzj/TeamTalk
+- https://gitee.com/CyrusZHou/TeamTalk
+- https://blog.csdn.net/lsqtzj/article/details/119456161
+- https://blog.csdn.net/siyacaodeai/article/details/114982897
+- https://blog.csdn.net/analogous_love/category_6901951.html
+- https://blog.csdn.net/analogous_love/category_6503557.html

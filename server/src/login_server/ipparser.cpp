@@ -11,6 +11,7 @@
 ================================================================*/
 #include "ipparser.h"
 
+
 IpParser::IpParser()
 {
 }
@@ -22,12 +23,14 @@ IpParser::~IpParser()
 
 bool IpParser::isTelcome(const char *pIp)
 {
-    if(!pIp)
+    if (!pIp)
     {
         return false;
     }
+
+    // 这里为什么还要进行类型转换？
     CStrExplode strExp((char*)pIp,'.');
-    if(strExp.GetItemCnt() != 4)
+    if (strExp.GetItemCnt() != 4)
     {
         return false;
     }

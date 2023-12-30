@@ -7,7 +7,7 @@
 //
 
 #import "DDOriginEntity.h"
-#import "IMBaseDefine.pb.h"
+#import "IMBaseDefine.pbobjc.h"
 @interface MTUserEntity : DDOriginEntity
 {
     NSInteger _gender;

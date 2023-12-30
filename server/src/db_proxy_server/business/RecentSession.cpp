@@ -24,33 +24,27 @@
 
 using namespace std;
 
-namespace DB_PROXY {
-    /**
-     *  获取最近会话接口
-     *
-     *  @param pPdu      收到的packet包指针
-     *  @param conn_uuid 该包过来的socket 描述符
-     */
+namespace DB_PROXY
+{
     void getRecentSession(CImPdu* pPdu, uint32_t conn_uuid)
     {
-        
         IM::Buddy::IMRecentContactSessionReq msg;
         IM::Buddy::IMRecentContactSessionRsp msgResp;
-        if(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()))
+        if (msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()))
         {
             CImPdu* pPduResp = new CImPdu;
         
             uint32_t nUserId = msg.user_id();
             uint32_t nLastTime = msg.latest_update_time();
             
-            //获取最近联系人列表
+            // 获取最近联系人列表
             list<IM::BaseDefine::ContactSessionInfo> lsContactList;
             CSessionModel::getInstance()->getRecentSession(nUserId, nLastTime, lsContactList);
             msgResp.set_user_id(nUserId);
-            for(auto it=lsContactList.begin(); it!=lsContactList.end(); ++it)
+            for (auto it = lsContactList.begin(); it != lsContactList.end(); ++it)
             {
                 IM::BaseDefine::ContactSessionInfo* pContact = msgResp.add_contact_session_list();
-    //            *pContact = *it;
+                // *pContact = *it;
                 pContact->set_session_id(it->session_id());
                 pContact->set_session_type(it->session_type());
                 pContact->set_session_status(it->session_status());
@@ -75,30 +69,25 @@ namespace DB_PROXY {
             log("parse pb failed");
         }
     }
-    
-    /**
-     *  删除会话接口
-     *
-     *  @param pPdu      收到的packet包指针
-     *  @param conn_uuid 该包过来的socket 描述符
-     */
+
     void deleteRecentSession(CImPdu* pPdu, uint32_t conn_uuid)
     {
         IM::Buddy::IMRemoveSessionReq msg;
         IM::Buddy::IMRemoveSessionRsp msgResp;
         
-        if(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()))
+        if (msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()))
         {
             CImPdu* pPduResp = new CImPdu;
             
             uint32_t nUserId = msg.user_id();
             uint32_t nPeerId = msg.session_id();
             IM::BaseDefine::SessionType nType = msg.session_type();
-            if(IM::BaseDefine::SessionType_IsValid(nType))
+            if (IM::BaseDefine::SessionType_IsValid(nType))
             {
                 bool bRet = false;
                 uint32_t nSessionId = CSessionModel::getInstance()->getSessionId(nUserId, nPeerId, nType, false);
-                if (nSessionId != INVALID_VALUE) {
+                if (nSessionId != INVALID_VALUE)
+                {
                     bRet = CSessionModel::getInstance()->removeSession(nSessionId);
                     // if remove session success, we need to clear the unread msg count
                     if (bRet)

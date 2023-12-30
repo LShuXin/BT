@@ -18,7 +18,8 @@ CSessionModel* CSessionModel::m_pInstance = NULL;
 
 CSessionModel* CSessionModel::getInstance()
 {
-    if (!m_pInstance) {
+    if (!m_pInstance)
+    {
         m_pInstance = new CSessionModel();
     }
     
@@ -28,6 +29,7 @@ CSessionModel* CSessionModel::getInstance()
 void CSessionModel::getRecentSession(uint32_t nUserId, uint32_t lastTime, list<IM::BaseDefine::ContactSessionInfo>& lsContact)
 {
     CDBManager* pDBManager = CDBManager::getInstance();
+    // mysql slave 只读， master 只写
     CDBConn* pDBConn = pDBManager->GetDBConn("teamtalk_slave");
     if (pDBConn)
     {
@@ -39,12 +41,13 @@ void CSessionModel::getRecentSession(uint32_t nUserId, uint32_t lastTime, list<I
             while (pResultSet->Next())
             {
                 IM::BaseDefine::ContactSessionInfo cRelate;
+                // 会话 id 直接用对方对的用户id
                 uint32_t nPeerId = pResultSet->GetInt("peerId");
                 cRelate.set_session_id(nPeerId);
                 cRelate.set_session_status(::IM::BaseDefine::SessionStatusType(pResultSet->GetInt("status")));
                 
                 IM::BaseDefine::SessionType nSessionType = IM::BaseDefine::SessionType(pResultSet->GetInt("type"));
-                if(IM::BaseDefine::SessionType_IsValid(nSessionType))
+                if (IM::BaseDefine::SessionType_IsValid(nSessionType))
                 {
                     cRelate.set_session_type(IM::BaseDefine::SessionType(nSessionType));
                     cRelate.set_updated_time(pResultSet->GetInt("updated"));
@@ -62,7 +65,7 @@ void CSessionModel::getRecentSession(uint32_t nUserId, uint32_t lastTime, list<I
             log("no result set for sql: %s", strSql.c_str());
         }
         pDBManager->RelDBConn(pDBConn);
-        if(!lsContact.empty())
+        if (!lsContact.empty())
         {
             fillSessionMsg(nUserId, lsContact);
         }
@@ -78,11 +81,12 @@ uint32_t CSessionModel::getSessionId(uint32_t nUserId, uint32_t nPeerId, uint32_
     CDBManager* pDBManager = CDBManager::getInstance();
     CDBConn* pDBConn = pDBManager->GetDBConn("teamtalk_slave");
     uint32_t nSessionId = INVALID_VALUE;
-    if(pDBConn)
+    if (pDBConn)
     {
         string strSql;
-        if (isAll) {
-            strSql= "select id from IMRecentSession where userId=" + int2string(nUserId) + " and peerId=" + int2string(nPeerId) + " and type=" + int2string(nType);
+        if (isAll)
+        {
+            strSql = "select id from IMRecentSession where userId=" + int2string(nUserId) + " and peerId=" + int2string(nPeerId) + " and type=" + int2string(nType);
         }
         else
         {
@@ -90,9 +94,10 @@ uint32_t CSessionModel::getSessionId(uint32_t nUserId, uint32_t nPeerId, uint32_
         }
         
         CResultSet* pResultSet = pDBConn->ExecuteQuery(strSql.c_str());
-        if(pResultSet)
+        if (pResultSet)
         {
-            while (pResultSet->Next()) {
+            while (pResultSet->Next())
+            {
                 nSessionId = pResultSet->GetInt("id");
             }
             delete pResultSet;
@@ -110,10 +115,11 @@ bool CSessionModel::updateSession(uint32_t nSessionId, uint32_t nUpdateTime)
 {
     bool bRet = false;
     CDBManager* pDBManager = CDBManager::getInstance();
+    // mysql master 用于写、slave 用于读
     CDBConn* pDBConn = pDBManager->GetDBConn("teamtalk_master");
     if (pDBConn)
     {
-        string strSql = "update IMRecentSession set `updated`="+int2string(nUpdateTime) + " where id="+int2string(nSessionId);
+        string strSql = "update IMRecentSession set `updated`=" + int2string(nUpdateTime) + " where id=" + int2string(nSessionId);
         bRet = pDBConn->ExecuteUpdate(strSql.c_str());
         pDBManager->RelDBConn(pDBConn);
     }
@@ -132,7 +138,8 @@ bool CSessionModel::removeSession(uint32_t nSessionId)
     if (pDBConn)
     {
         uint32_t nNow = (uint32_t) time(NULL);
-        string strSql = "update IMRecentSession set status = 1, updated="+int2string(nNow)+" where id=" + int2string(nSessionId);
+        // IMRecentSession 表 status 等于1表示删除
+        string strSql = "update IMRecentSession set status = 1, updated=" + int2string(nNow) + " where id=" + int2string(nSessionId);
         bRet = pDBConn->ExecuteUpdate(strSql.c_str());
         pDBManager->RelDBConn(pDBConn);
     }
@@ -153,11 +160,11 @@ uint32_t CSessionModel::addSession(uint32_t nUserId, uint32_t nPeerId, uint32_t 
     CDBConn* pDBConn = pDBManager->GetDBConn("teamtalk_master");
     if (pDBConn)
     {
-        if(INVALID_VALUE != nSessionId)
+        if (INVALID_VALUE != nSessionId)
         {
             string strSql = "update IMRecentSession set status=0, updated=" + int2string(nTimeNow) + " where id=" + int2string(nSessionId);
             bool bRet = pDBConn->ExecuteUpdate(strSql.c_str());
-            if(!bRet)
+            if (!bRet)
             {
                 nSessionId = INVALID_VALUE;
             }
@@ -203,13 +210,13 @@ uint32_t CSessionModel::addSession(uint32_t nUserId, uint32_t nPeerId, uint32_t 
 
 void CSessionModel::fillSessionMsg(uint32_t nUserId, list<IM::BaseDefine::ContactSessionInfo>& lsContact)
 {
-    for (auto it=lsContact.begin(); it!=lsContact.end();)
+    for (auto it = lsContact.begin(); it != lsContact.end();)
     {
         uint32_t nMsgId = 0;
         string strMsgData;
         IM::BaseDefine::MsgType nMsgType;
         uint32_t nFromId = 0;
-        if( it->session_type() == IM::BaseDefine::SESSION_TYPE_SINGLE)
+        if (it->session_type() == IM::BaseDefine::SESSION_TYPE_SINGLE)
         {
             nFromId = it->session_id();
             CMessageModel::getInstance()->getLastMsg(it->session_id(), nUserId, nMsgId, strMsgData, nMsgType);
@@ -218,7 +225,7 @@ void CSessionModel::fillSessionMsg(uint32_t nUserId, list<IM::BaseDefine::Contac
         {
             CGroupMessageModel::getInstance()->getLastMsg(it->session_id(), nMsgId, strMsgData, nMsgType, nFromId);
         }
-        if(!IM::BaseDefine::MsgType_IsValid(nMsgType))
+        if (!IM::BaseDefine::MsgType_IsValid(nMsgType))
         {
             it = lsContact.erase(it);
         }

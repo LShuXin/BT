@@ -7,7 +7,7 @@
 //
 
 #import "DDUnreadMessageAPI.h"
-#import "IMMessage.pb.h"
+#import "IMMessage.pbobjc.h"
 #import "MTSessionEntity.h"
 
 @implementation DDUnreadMessageAPI
@@ -70,8 +70,8 @@
 {
     Analysis analysis = (id)^(NSData* data)
     {
-        IMUnreadMsgCntRsp *allGroupRsp = [IMUnreadMsgCntRsp parseFromData:data];
-        NSArray* unreadInfoList = allGroupRsp.unreadinfoList;
+        IMUnreadMsgCntRsp *allGroupRsp = [IMUnreadMsgCntRsp parseFromData:data error:nil];
+        NSArray* unreadInfoList = allGroupRsp.unreadinfoListArray;
         __block NSMutableDictionary* unreadMessageDic = [[NSMutableDictionary alloc] init];
         [unreadInfoList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             UnreadInfo* unreadInfo = (UnreadInfo*)obj;
@@ -95,7 +95,7 @@
 {
     Package package = (id)^(id object,uint16_t seqNo)
     {
-        IMUnreadMsgCntReqBuilder *req = [IMUnreadMsgCntReq builder];
+        IMUnreadMsgCntReq *req = [[IMUnreadMsgCntReq alloc] init];
         
         [req setUserId:[object intValue]];
         DataOutputStream *dataout = [[DataOutputStream alloc] init];
@@ -103,7 +103,7 @@
         [dataout writeTcpProtocolHeader:DDSERVICE_MESSAGE
                                     cId:CMD_MSG_UNREAD_CNT_REQ
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[req build].data];
+        [dataout directWriteBytes:[req data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

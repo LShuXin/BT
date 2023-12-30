@@ -8,7 +8,7 @@
 
 #import "DDCreateGroupAPI.h"
 #import "MTGroupEntity.h"
-#import "IMGroup.pb.h"
+#import "IMGroup.pbobjc.h"
 #import "DataOutputStream+Addition.h"
 
 @implementation DDCreateGroupAPI
@@ -71,7 +71,7 @@
 {
     Analysis analysis = (id)^(NSData* data)
     {
-        IMGroupCreateRsp *rsp = [IMGroupCreateRsp parseFromData:data];
+        IMGroupCreateRsp *rsp = [IMGroupCreateRsp parseFromData:data error: nil];
         uint32_t result = rsp.resultCode;
         MTGroupEntity* group = nil;
         if (result != 0)
@@ -83,12 +83,12 @@
             NSString* creatorId = [NSString stringWithFormat:@"%d",rsp.userId];
             NSString *groupId = [NSString stringWithFormat:@"%d", rsp.groupId];
             NSString *groupName = rsp.groupName;
-            NSInteger userCnt =[rsp.userIdList count];
+            NSInteger userCnt =[rsp.userIdListArray count];
             
             NSMutableArray* groupUserIds = [[NSMutableArray alloc] init];
             
             for (uint32_t i = 0; i < userCnt; i++) {
-                NSInteger userIdFromServer = [rsp.userIdList[i] integerValue];
+                NSInteger userIdFromServer = [[rsp userIdListArray] valueAtIndex:i];
                 NSString* userId = [NSString stringWithFormat:@"%ld", userIdFromServer];
                 [groupUserIds addObject:userId];
             }
@@ -113,11 +113,11 @@
         NSString* groupAvatar = array[1];
         NSArray* groupUserList = array[2];
         
-        IMGroupCreateReqBuilder *req = [IMGroupCreateReq builder];
+        IMGroupCreateReq *req = [[IMGroupCreateReq alloc] init];
         [req setUserId:0];
         [req setGroupName:groupName];
         [req setGroupAvatar:groupAvatar];
-        [req setGroupType:GroupTypeGroupTypeTmp];
+        [req setGroupType:GroupType_GroupTypeTmp];
         NSMutableArray *originalID = [NSMutableArray new];
         for (NSString *localID in groupUserList) {
             int groupId = [localID intValue];
@@ -129,7 +129,7 @@
         [dataout writeTcpProtocolHeader:SERVICE_GROUP
                                     cId:CMD_ID_GROUP_CREATE_TMP_GROUP_REQ
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[req build].data];
+        [dataout directWriteBytes:[req data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

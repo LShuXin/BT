@@ -7,14 +7,17 @@
 //
 
 #import "MsgReadACKAPI.h"
-#import "IMMessage.pb.h"
+#import "IMMessage.pbobjc.h"
+
+
 @implementation MsgReadACKAPI
+
 /**
  *  请求超时时间
  *
  *  @return 超时时间
  */
-- (int)requestTimeOutTimeInterval
+-(int)requestTimeOutTimeInterval
 {
     return 0;
 }
@@ -24,7 +27,7 @@
  *
  *  @return 对应的serviceID
  */
-- (int)requestServiceID
+-(int)requestServiceID
 {
     return DDSERVICE_MESSAGE;
 }
@@ -34,7 +37,7 @@
  *
  *  @return 对应的serviceID
  */
-- (int)responseServiceID
+-(int)responseServiceID
 {
     return 0;
 }
@@ -44,7 +47,7 @@
  *
  *  @return 对应的commendID
  */
-- (int)requestCommendID
+-(int)requestCommendID
 {
     return CID_MSG_READ_ACK;
 }
@@ -54,7 +57,7 @@
  *
  *  @return 对应的commendID
  */
-- (int)responseCommendID
+-(int)responseCommendID
 {
     return 0;
 }
@@ -64,7 +67,7 @@
  *
  *  @return 解析数据的block
  */
-- (Analysis)analysisReturnData
+-(Analysis)analysisReturnData
 {
     Analysis analysis = (id)^(NSData* data)
     {
@@ -78,19 +81,21 @@
  *
  *  @return 打包数据的block
  */
-- (Package)packageRequestObject
+-(Package)packageRequestObject
 {
-    Package package = (id)^(id object,uint16_t seqNo)
+    Package package = (id)^(id object, uint16_t seqNo)
     {
-        IMMsgDataReadAckBuilder *readAck = [IMMsgDataReadAck builder];
+        IMMsgDataReadAck* readAck = [[IMMsgDataReadAck alloc] init];
         [readAck setUserId:0];
         [readAck setSessionId:[TheRuntime changeIDToOriginal:object[0]]];
         [readAck setMsgId:[object[1] integerValue]];
         [readAck setSessionType:[object[2] integerValue]];
-        DDDataOutputStream *dataout = [[DDDataOutputStream alloc] init];
+        DDDataOutputStream* dataout = [[DDDataOutputStream alloc] init];
         [dataout writeInt:0];
-        [dataout writeTcpProtocolHeader:DDSERVICE_MESSAGE cId:CID_MSG_READ_ACK seqNo:seqNo];
-        [dataout directWriteBytes:[readAck build].data];
+        [dataout writeTcpProtocolHeader:DDSERVICE_MESSAGE
+                                    cId:CID_MSG_READ_ACK
+                                  seqNo:seqNo];
+        [dataout directWriteBytes:[readAck data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

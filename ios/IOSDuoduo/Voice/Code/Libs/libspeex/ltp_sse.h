@@ -65,11 +65,11 @@ void pitch_xcorr(const float *_x, const float *_y, float *corr, int len, int nb_
    ALLOC(x, N, __m128);
    ALLOC(y, N+L, __m128);
    for (i=0;i<N;i++)
-      x[i] = _mm_loadu_ps(_x+(i<<2));
+      x[i] = _mm_loadu_ps(_x+ (i<<2));
    for (offset=0;offset<4;offset++)
    {
       for (i=0;i<N+L;i++)
-         y[i] = _mm_loadu_ps(_y+(i<<2)+offset);
+         y[i] = _mm_loadu_ps(_y+ (i<<2)+offset);
       for (i=0;i<L;i++)
       {
          int j;

@@ -26,7 +26,7 @@
  */
 - (int)requestServiceID
 {
-    return ServiceIDSidBuddyList;
+    return ServiceID_SidBuddyList;
 }
 
 /**
@@ -36,7 +36,7 @@
  */
 - (int)responseServiceID
 {
-    return ServiceIDSidBuddyList;
+    return ServiceID_SidBuddyList;
 }
 
 /**

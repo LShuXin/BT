@@ -91,7 +91,7 @@
 #ifdef FIXED_POINT
 #define WORD2INT(x) ((x) < -32767 ? -32768 : ((x) > 32766 ? 32767 : (x)))  
 #else
-#define WORD2INT(x) ((x) < -32767.5f ? -32768 : ((x) > 32766.5f ? 32767 : floor(.5+(x))))  
+#define WORD2INT(x) ((x) < -32767.5f ? -32768 : ((x) > 32766.5f ? 32767 : floor(.5+ (x))))  
 #endif
 
 /* If enabled, the AEC will use a foreground filter and a background filter to be more robust to double-talk

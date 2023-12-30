@@ -11,14 +11,16 @@
 #import "DDTcpClientManager.h"
 #import "LoginAPI.h"
 //#import "LoginEntity.h"
+
+
 static int const timeOutTimeInterval = 10;
 
 typedef void(^CheckSuccess)(id object);
 
 @interface DDMsgServer(PrivateAPI)
 
-- (void)n_receiveLoginMsgServerNotification:(NSNotification*)notification;
-- (void)n_receiveLoginLoginServerNotification:(NSNotification*)notification;
+-(void)n_receiveLoginMsgServerNotification:(NSNotification*)notification;
+-(void)n_receiveLoginLoginServerNotification:(NSNotification*)notification;
 
 @end
 
@@ -30,46 +32,59 @@ typedef void(^CheckSuccess)(id object);
     BOOL _connecting;
     NSUInteger _connectTimes;
 }
-- (id)init
+
+-(id)init
 {
     self = [super init];
     if (self)
     {
         _connecting = NO;
         _connectTimes = 0;
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(n_receiveLoginMsgServerNotification:) name:notificationLoginMsgServerSuccess object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:@selector(n_receiveLoginMsgServerNotification:) name:notificationLoginMsgServerSuccess
+//                                                   object:nil];
     }
     return self;
 }
 
--(void)checkUserID:(NSString*)userID Pwd:(NSString *)password token:(NSString*)token success:(void(^)(id object))success failure:(void(^)(id object))failure
+-(void)checkUserID:(NSString*)userID
+               Pwd:(NSString*)password
+             token:(NSString*)token
+           success:(void(^)(id object))success
+           failure:(void(^)(id object))failure
 {
     
     if (!_connecting)
     {
         
         NSNumber* clientType = @(17);
-        NSString *clientVersion = [NSString stringWithFormat:@"MAC/%@-%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"],[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
-        NSArray* parameter = @[userID,password,clientVersion,clientType];
+        NSString* clientVersion = [NSString stringWithFormat:@"MAC/%@-%@",
+                                   [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"],
+                                   [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+        
+        NSArray* parameter = @[userID, password, clientVersion, clientType];
         
         LoginAPI* api = [[LoginAPI alloc] init];
-        [api requestWithObject:parameter Completion:^(id response, NSError *error) {
+        DDLog(@"登录参数：%@", parameter);
+        [api requestWithObject:parameter Completion:^(id response, NSError* error) {
             if (!error)
             {
                 if (response)
                 {
-                    NSString *resultString =response[@"resultString"];
-                    if (resultString == nil) {
+                    NSString* resultString = response[@"resultString"];
+                    if (resultString == nil)
+                    {
                          success(response);
                     }
-                }else{
+                }
+                else
+                {
                     failure(error);
                 }
-                
             }
             else
             {
-                DDLog(@"error:%@",[error domain]);
+                DDLog(@"error:%@", [error domain]);
                 failure(error);
             }
         }];

@@ -10,13 +10,15 @@
 #import "DDGroupModule.h"
 #import "RuntimeStatus.h"
 #import "GroupEntity.h"
+
+
 @implementation DDReceiveGroupAddMemberAPI
 /**
  *  数据包中的serviceID
  *
  *  @return serviceID
  */
-- (int)responseServiceID
+-(int)responseServiceID
 {
     return SERVICE_GROUP;
 }
@@ -26,7 +28,7 @@
  *
  *  @return commandID
  */
-- (int)responseCommandID
+-(int)responseCommandID
 {
     return CMD_ID_GROUP_CHANGE_GROUP_REQ;
 }
@@ -36,7 +38,7 @@
  *
  *  @return 解析数据包的block
  */
-- (UnrequestAPIAnalysis)unrequestAnalysis
+-(UnrequestAPIAnalysis)unrequestAnalysis
 {
     UnrequestAPIAnalysis analysis = (id)^(NSData* data)
     {
@@ -48,15 +50,17 @@
            // log4CInfo(@"change group member failure");
             return groupEntity;
         }
-        NSString *groupId = [bodyData readUTF];
+        NSString* groupId = [bodyData readUTF];
         uint32_t userCnt = [bodyData readInt];
-        groupEntity =  [[DDGroupModule instance] getGroupByGId:groupId];
+        groupEntity = [[DDGroupModule instance] getGroupByGId:groupId];
 //        if (!groupEntity)
 //        {
 //            [groupModule tcpGetUnkownGroupInfo:groupId];
 //        }
-        if (groupEntity) {
-            for (uint32_t i = 0; i < userCnt; i++) {
+        if (groupEntity)
+        {
+            for (uint32_t i = 0; i < userCnt; i++)
+            {
                 NSString* userId = [bodyData readUTF];
                 if (![groupEntity.groupUserIds containsObject:userId]) {
                     [groupEntity.groupUserIds addObject:userId];

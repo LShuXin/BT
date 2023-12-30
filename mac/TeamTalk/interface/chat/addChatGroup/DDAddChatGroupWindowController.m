@@ -383,7 +383,7 @@
         
         MTGroupChangeMemberAPI    *addMemberToGroupAPI = [[MTGroupChangeMemberAPI alloc] init];
         NSString* myID = [[DDClientState shareInstance]userID];
-        NSArray* object = @[self.groupID,userIdList,@(GroupModifyTypeGroupModifyTypeAdd),myID];
+        NSArray* object = @[self.groupID,userIdList,@(GroupModifyType_GroupModifyTypeAdd),myID];
         __weak DDAddChatGroupWindowController* weakSelf = self;
         [addMemberToGroupAPI requestWithObject:object Completion:^(id response, NSError *error) {
             if (!error && response)

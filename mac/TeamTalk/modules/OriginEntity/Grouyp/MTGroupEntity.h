@@ -7,7 +7,7 @@
 //
 
 #import "DDOriginEntity.h"
-#import "IMBaseDefine.pb.h"
+#import "IMBaseDefine.pbobjc.h"
 
 typedef NS_ENUM(NSUInteger, DDGroupType)
 {

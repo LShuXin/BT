@@ -2,6 +2,7 @@
 .vscode
 .idea
 .gradle
+TT.udb
 /win-cliient/3rdParty/src/http/httpclient/x64/Debug
 /win-cliient/3rdParty/src/libogg/x64/Debug
 /win-cliient/3rdParty/src/libsecurity/win/security.dir/Debug
@@ -39,6 +40,5 @@
 /server/src/cmake-build-debug
 
 *.log
-
 
 /docker/mysql_data

@@ -1,16 +1,16 @@
 #!/bin/bash
 
 build() {
-    yum -y install cmake
+    # yum -y install cmake
     yum -y install libuuid-devel
     yum -y install openssl-devel
     yum -y install curl-devel
 
     # 第一个是覆盖 >，后面是追加 >>
-	  echo "#ifndef __VERSION_H__" > base/version.h
-	  echo "#define __VERSION_H__" >> base/version.h
-	  echo "#define VERSION \"$1\"" >> base/version.h
-	  echo "#endif" >> base/version.h
+	echo "#ifndef __VERSION_H__" > base/version.h
+	echo "#define __VERSION_H__" >> base/version.h
+	echo "#define VERSION \"$1\"" >> base/version.h
+	echo "#endif" >> base/version.h
 
     if [ ! -d lib ]
     then
@@ -20,7 +20,7 @@ build() {
 
 	cd base
     cmake .
-	  make
+	make
     if [ $? -eq 0 ]; then
         echo "make base successed";
     else
@@ -59,7 +59,7 @@ build() {
     fi
 
 
-	  cd ../route_server
+	cd ../route_server
     cmake .
   	make
     if [ $? -eq 0 ]; then
@@ -70,9 +70,9 @@ build() {
     fi
 
 
-	  cd ../msg_server
+	cd ../msg_server
     cmake .
-	  make
+	make
     if [ $? -eq 0 ]; then
         echo "make msg_server successed";
     else
@@ -155,10 +155,10 @@ build() {
     mkdir -p ../run/push_server
     mkdir -p ../run/http_msg_server
     mkdir -p ../run/db_proxy_server
-	  #copy executables to run/ dir
+	#copy executables to run/ dir
   	cp login_server/login_server ../run/login_server/
-	  cp route_server/route_server ../run/route_server/
-	  cp msg_server/msg_server ../run/msg_server/
+	cp route_server/route_server ../run/route_server/
+	cp msg_server/msg_server ../run/msg_server/
     cp http_msg_server/http_msg_server ../run/http_msg_server/
     cp file_server/file_server ../run/file_server/
     cp push_server/push_server ../run/push_server/
@@ -170,9 +170,9 @@ build() {
     # compress zip
     build_version=im-server-$1
     build_name=$build_version.tar.gz
-	  if [ -e "$build_name" ]; then
-		    rm $build_name
-	  fi
+	if [ -e "$build_name" ]; then
+		rm $build_name
+	fi
     mkdir -p ../$build_version
     mkdir -p ../$build_version/login_server
     mkdir -p ../$build_version/route_server

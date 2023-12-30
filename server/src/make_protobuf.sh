@@ -2,15 +2,17 @@
 # author: luoning
 # date: 03/25/2015
 
-PROTOBUF=protobuf-3.18.0
-PROTOBUF_PATH=https://github.com/protocolbuffers/protobuf/archive/refs/tags/v3.18.0.tar.gz
+PROTOBUF_VERSION=3.18.0
+PROTOBUF=protobuf-${PROTOBUF_VERSION}
+PROTOBUF_ZIP=${PROTOBUF}.tar.gz
+PROTOBUF_PATH=https://github.com/protocolbuffers/protobuf/archive/refs/tags/v${PROTOBUF_VERSION}.tar.gz
 CUR_DIR=
 download() {
     if [ -f "$1" ]; then
         echo "$1 existed."
     else
         echo "$1 not existed, begin to download..."
-        wget -c $2 -O $PROTOBUF.tar.gz
+        wget -c $2 -O $PROTOBUF_ZIP
         if [ $? -eq 0 ]; then
             echo "download $1 successed";
         else
@@ -20,6 +22,7 @@ download() {
     fi
     return 0
 }
+
 check_user() {
     if [ $(id -u) != "0" ]; then
         echo "Error: You must be root to run this script, please use root to install im"
@@ -76,19 +79,21 @@ get_cur_dir() {
     CUR_DIR=$(dirname "${REALPATH}")
 }
 
-build_protobuf(){
+build_protobuf() {
+    # 下载安装pb
     cd protobuf
-    download $PROTOBUF.tar.gz $PROTOBUF_PATH
-    tar -xf $PROTOBUF.tar.gz
+    download $PROTOBUF_ZIP $PROTOBUF_PATH
+    tar -xf $PROTOBUF_ZIP
     cd $PROTOBUF
     sh autogen.sh
     ./configure --prefix=/usr/local/protobuf
-    make -j4
-    make install
+    make -j4 && make install
+
+    # 拷贝 .a 和 .h 文件
     cd ..
     mkdir -p ../base/pb/lib/linux/
     cp /usr/local/protobuf/lib/libprotobuf-lite.a ../base/pb/lib/linux/
-    cp  -r /usr/local/protobuf/include/* ../base/pb/
+    cp -r /usr/local/protobuf/include/* ../base/pb/
 }
 
 check_user

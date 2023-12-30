@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 
-@interface NSIndexSet (AQIsSetContiguous)
-- (BOOL) aq_isSetContiguous;
+@interface NSIndexSet(AQIsSetContiguous)
+
+-(BOOL)aq_isSetContiguous;
+
 @end

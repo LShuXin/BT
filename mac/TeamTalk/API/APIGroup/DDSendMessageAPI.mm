@@ -7,7 +7,7 @@
 //
 
 #import "DDSendMessageAPI.h"
-#import "IMMessage.pb.h"
+#import "IMMessage.pbobjc.h"
 #import "security.h"
 #include <iostream>
 
@@ -71,7 +71,7 @@
 {
     Analysis analysis = (id)^(NSData* data)
     {
-        IMMsgDataAck *allMessageRsp = [IMMsgDataAck parseFromData:data];
+        IMMsgDataAck *allMessageRsp = [IMMsgDataAck parseFromData:data error:nil];
         NSUInteger mesageServerID = allMessageRsp.msgId;
         return @(mesageServerID);
     };
@@ -87,18 +87,18 @@
 {
     Package package = (id)^(id object,uint16_t seqNo)
     {
-        IMMsgDataBuilder *req = [IMMsgData builder];
+        IMMsgData *req = [[IMMsgData alloc] init];
         NSArray* array = (NSArray*)object;
         MsgType msgType;
         switch ([array[2] intValue]) {
-            case SessionTypeSessionTypeGroup:
-                msgType = MsgTypeMsgTypeGroupText;
+            case SessionType_SessionTypeGroup:
+                msgType = MsgType_MsgTypeGroupText;
                 break;
-            case SessionTypeSessionTypeSingle:
-                msgType = MsgTypeMsgTypeSingleText;
+            case SessionType_SessionTypeSingle:
+                msgType = MsgType_MsgTypeSingleText;
                 break;
             default:
-                msgType = MsgTypeMsgTypeGroupText;
+                msgType = MsgType_MsgTypeGroupText;
                 NSAssert(NO, @"不知道的会话类型");
                 break;
         }
@@ -138,7 +138,7 @@
         [dataout writeTcpProtocolHeader:DDSERVICE_MESSAGE
                                     cId:CMD_MSG_DATA
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[req build].data];
+        [dataout directWriteBytes:[req data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

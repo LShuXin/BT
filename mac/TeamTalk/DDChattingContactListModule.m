@@ -90,21 +90,21 @@
         StateMaintenanceManager* stateMaintenanceManager = [StateMaintenanceManager instance];
         UserStatType user1OnlineState = [stateMaintenanceManager getUserStateForUserID:uId1];
         UserStatType user2OnlineState = [stateMaintenanceManager getUserStateForUserID:uId2];
-        if((user1OnlineState == UserStatTypeUserStatusOnline) &&
-           (user2OnlineState == UserStatTypeUserStatusLeave || user2OnlineState == UserStatTypeUserStatusOffline))
+        if((user1OnlineState == UserStatType_UserStatusOnline) &&
+           (user2OnlineState == UserStatType_UserStatusLeave || user2OnlineState == UserStatType_UserStatusOffline))
         {
             return NSOrderedAscending;
         }
-        else if(user1OnlineState == UserStatTypeUserStatusLeave && user2OnlineState == UserStatTypeUserStatusOffline)
+        else if(user1OnlineState == UserStatType_UserStatusLeave && user2OnlineState == UserStatType_UserStatusOffline)
         {
             return NSOrderedAscending;
         }
-        else if (user2OnlineState == UserStatTypeUserStatusOnline &&
-                 (user1OnlineState == UserStatTypeUserStatusLeave || user1OnlineState == UserStatTypeUserStatusOffline))
+        else if (user2OnlineState == UserStatType_UserStatusOnline &&
+                 (user1OnlineState == UserStatType_UserStatusLeave || user1OnlineState == UserStatType_UserStatusOffline))
         {
             return NSOrderedDescending;
         }
-        else if(user2OnlineState == UserStatTypeUserStatusLeave && user1OnlineState == UserStatTypeUserStatusOffline)
+        else if(user2OnlineState == UserStatType_UserStatusLeave && user1OnlineState == UserStatType_UserStatusOffline)
         {
             return NSOrderedDescending;
         }
@@ -145,7 +145,7 @@
     __block NSUInteger c =0;
     [array enumerateObjectsUsingBlock:^(MTUserEntity *user, NSUInteger idx, BOOL *stop) {
         UserStatType userState = [[StateMaintenanceManager instance]getUserStateForUserID:user.ID];
-        if(userState!=UserStatTypeUserStatusOffline){
+        if(userState!=UserStatType_UserStatusOffline){
             c++;
         }
     }];

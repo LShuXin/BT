@@ -6,24 +6,19 @@
 platform:ios, "11.0"
 
 target 'TeamTalk' do
+  
 pod 'FMDB', '~> 2.7.5'
-
 pod 'SDWebImage', '3.7.6'
-
 #pod "AFNetworking", "~> 2.3.0"
 pod "AFNetworking", :path => 'ThirdParty/AFNetworking'
-
-
 #pod 'DACircularProgress', '~> 2.3.1'
 pod 'DACircularProgress', :path => 'ThirdParty/DACircularProgress'
-
 pod 'MBProgressHUD', '~> 0.8'
 pod 'PSTCollectionView', '~> 1.2.3'
 pod 'HPGrowingTextView' , '~> 1.1'
-pod 'ProtocolBuffers', '1.9.11'
+pod 'Protobuf', '~> 3.18.0'
 pod 'leveldb-library', '~> 1.18.3'
 pod 'SCLAlertView-Objective-C', '~> 1.2.0'
-
 pod 'MWPhotoBrowser', '~> 1.4.1'
 
 end

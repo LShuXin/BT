@@ -20,6 +20,8 @@ public:
 
 	virtual void OnConnect(net_handle_t handle);
 	virtual void OnClose();
+
+	// 用户发送心跳
 	virtual void OnTimer(uint64_t curr_tick);
 
 	virtual void HandlePdu(CImPdu* pPdu);
@@ -34,6 +36,7 @@ private:
     
 	void _DispatchFriend(uint32_t friend_cnt, uint32_t* friend_id_list);
 
+    // 向所有连接到 route_server 的 msg_server 广播消息
 	void _BroadcastMsg(CImPdu* pPdu, CRouteConn* pFromConn = NULL);
     
 private:

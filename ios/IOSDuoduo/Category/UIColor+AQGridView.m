@@ -36,9 +36,9 @@
 
 #import "UIColor+AQGridView.h"
 
-@implementation UIColor (AQGridView)
+@implementation UIColor(AQGridView)
 
-+ (UIColor *) AQDefaultGridCellSeparatorColor
++ (UIColor*)AQDefaultGridCellSeparatorColor
 {
     return ( [UIColor colorWithWhite: 221.0/255.0 alpha: 1.0] );
 }

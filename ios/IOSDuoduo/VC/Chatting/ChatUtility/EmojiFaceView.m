@@ -45,9 +45,9 @@
                 else
                 {
 //                    [button.titleLabel setFont:[UIFont fontWithName:@"AppleColorEmoji" size:27.0]];
-                    [button setImage:[UIImage imageNamed:[emotions objectAtIndex:i*DD_EMOTIONS_PERROW+y+(page*DD_MAC_EMOTIONS_COUNT_PERPAGE)]] forState:UIControlStateNormal];
-//                    [button setTitle: [emotions objectAtIndex:i*DD_EMOTIONS_PERROW+y+(page*DD_MAC_EMOTIONS_COUNT_PERPAGE)]forState:UIControlStateNormal];
-                    button.tag=i*DD_EMOTIONS_PERROW+y+(page*DD_MAC_EMOTIONS_COUNT_PERPAGE);
+                    [button setImage:[UIImage imageNamed:[emotions objectAtIndex:i*DD_EMOTIONS_PERROW+y+ (page*DD_MAC_EMOTIONS_COUNT_PERPAGE)]] forState:UIControlStateNormal];
+//                    [button setTitle: [emotions objectAtIndex:i*DD_EMOTIONS_PERROW+y+ (page*DD_MAC_EMOTIONS_COUNT_PERPAGE)]forState:UIControlStateNormal];
+                    button.tag=i*DD_EMOTIONS_PERROW+y+ (page*DD_MAC_EMOTIONS_COUNT_PERPAGE);
                     [button addTarget:self action:@selector(selected:) forControlEvents:UIControlEventTouchUpInside];
                     [self addSubview:button];
                 }

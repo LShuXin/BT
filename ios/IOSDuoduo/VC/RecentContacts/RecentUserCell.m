@@ -21,36 +21,39 @@
 #import <QuartzCore/QuartzCore.h>
 #import "PhotosCache.h"
 #import "DDDatabaseUtil.h"
+
+
 @implementation RecentUserCell
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+-(id)initWithCoder:(NSCoder*)aDecoder
 {
     self = [super initWithCoder:aDecoder];
-    if(self){
+    if (self)
+    {
         // 重新设置位置
         _avatarImageView.frame = CGRectMake(10, 10, 50, 50);
-        _nameLabel.frame = CGRectMake(10+50+10, 14, SCREEN_WIDTH-70-10-60, 20);
-        _dateLabel.frame = CGRectMake(FULL_WIDTH-10-60, 14, 60, 15);
-        _lastmessageLabel.frame = CGRectMake(10+50+10, 40, SCREEN_WIDTH-10-10-50, 16);
+        _nameLabel.frame = CGRectMake(10 + 50 + 10, 14, SCREEN_WIDTH - 70 - 10 - 60, 20);
+        _dateLabel.frame = CGRectMake(FULL_WIDTH - 10 - 60, 14, 60, 15);
+        _lastmessageLabel.frame = CGRectMake(10 + 50 + 10, 40, SCREEN_WIDTH - 10 - 10 - 50, 16);
         
         // 设置字体
         [_nameLabel setFont:systemFont(17)];
-       // [_lastmessageLabel setFont:systemFont(8)];
+        // [_lastmessageLabel setFont:systemFont(8)];
         [_dateLabel setFont:systemFont(12)];
-
     }
     return self;
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
+    if (self)
+    {
     }
     return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+-(void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
     if (selected)
@@ -68,7 +71,7 @@
     // Configure the view for the selected state
 }
 
-- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated               // animate between regular and highlighted state
+-(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated               // animate between regular and highlighted state
 {
     if (highlighted && self.selected)
     {
@@ -85,7 +88,7 @@
 }
 
 #pragma mark - public
-- (void)setName:(NSString*)name
+-(void)setName:(NSString*)name
 {
     if (!name)
     {
@@ -97,14 +100,14 @@
     }
 }
 
-- (void)setTimeStamp:(NSUInteger)timeStamp
+-(void)setTimeStamp:(NSUInteger)timeStamp
 {
     NSDate* date = [NSDate dateWithTimeIntervalSince1970:timeStamp];
     NSString* dateString = [date transformToFuzzyDate];
     [_dateLabel setText:dateString];
 }
 
-- (void)setLastMessage:(NSString*)message
+-(void)setLastMessage:(NSString*)message
 {
     if (!message)
     {
@@ -116,9 +119,8 @@
     }
 }
 
-- (void)setAvatar:(NSString*)avatar
+-(void)setAvatar:(NSString*)avatar
 {
-    
     [[_avatarImageView subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [(UIView*)obj removeFromSuperview];
     }];
@@ -130,7 +132,7 @@
     [_avatarImageView sd_setImageWithURL:avatarURL placeholderImage:placeholder];
 }
 
-- (void)setUnreadMessageCount:(NSUInteger)messageCount
+-(void)setUnreadMessageCount:(NSUInteger)messageCount
 {
     if (messageCount == 0)
     {
@@ -140,7 +142,7 @@
     {
         [self.unreadMessageCountLabel setHidden:NO];
         CGPoint center = self.unreadMessageCountLabel.center;
-        NSString* title = [NSString stringWithFormat:@"%li",messageCount];
+        NSString* title = [NSString stringWithFormat:@"%li", messageCount];
         [self.unreadMessageCountLabel setText:title];
         [self.unreadMessageCountLabel setWidth:16];
         [self.unreadMessageCountLabel setCenter:center];
@@ -150,7 +152,7 @@
     {
         [self.unreadMessageCountLabel setHidden:NO];
         CGPoint center = self.unreadMessageCountLabel.center;
-        NSString* title = [NSString stringWithFormat:@"%li",messageCount];
+        NSString* title = [NSString stringWithFormat:@"%li", messageCount];
         [self.unreadMessageCountLabel setText:title];
         [self.unreadMessageCountLabel setWidth:25];
         [self.unreadMessageCountLabel setCenter:center];
@@ -168,91 +170,99 @@
     }
 }
 
-
--(void)setShowSession:(SessionEntity *)session
+-(void)setShowSession:(SessionEntity*)session
 {
     [self setName:session.name];
     [self setUnreadMessageCount:session.unReadMsgCount];
-    if ([session.lastMsg isKindOfClass:[NSString class]]) {
-        if ([session.lastMsg rangeOfString:DD_MESSAGE_IMAGE_PREFIX].location != NSNotFound) {
-            NSArray *array = [session.lastMsg componentsSeparatedByString:DD_MESSAGE_IMAGE_PREFIX];
-            NSString *string = [array lastObject];
-            if ([string rangeOfString:DD_MESSAGE_IMAGE_SUFFIX].location != NSNotFound) {
+    if ([session.lastMsg isKindOfClass:[NSString class]])
+    {
+        if ([session.lastMsg rangeOfString:DD_MESSAGE_IMAGE_PREFIX].location != NSNotFound)
+        {
+            NSArray* array = [session.lastMsg componentsSeparatedByString:DD_MESSAGE_IMAGE_PREFIX];
+            NSString* string = [array lastObject];
+            if ([string rangeOfString:DD_MESSAGE_IMAGE_SUFFIX].location != NSNotFound)
+            {
                 [self setLastMessage:@"[图片]"];
-            }else{
+            }
+            else
+            {
                 [self setLastMessage:string];
             }
-            
-        }else if ([session.lastMsg hasSuffix:@".spx"])
+        }
+        else if ([session.lastMsg hasSuffix:@".spx"])
         {
             [self setLastMessage:@"[语音]"];
         }
-        else{
+        else
+        {
             [self setLastMessage:session.lastMsg];
-            
         }
     }
 
-   
-    if (session.sessionType == SessionTypeSessionTypeSingle) {
-      
-        [[DDUserModule shareInstance] getUserForUserID:session.sessionID Block:^(DDUserEntity *user) {
-          
-            
-            [[_avatarImageView subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    if (session.sessionType == SessionType_SessionTypeSingle)
+    {
+        [[DDUserModule shareInstance] getUserForUserID:session.sessionID Block:^(DDUserEntity* user) {
+            [[_avatarImageView subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop) {
                 [(UIView*)obj removeFromSuperview];
             }];
             [_avatarImageView setImage:nil];
-             [self setAvatar:[user getAvatarUrl]];
+            [self setAvatar:[user getAvatarUrl]];
         }];
-    }else{
+    }
+    else
+    {
         [_avatarImageView setImage:nil];
-        [[_avatarImageView subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [[_avatarImageView subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop) {
             [(UIView*)obj removeFromSuperview];
         }];
        
         if (session.avatar)
         {
-                NSData* data = [[PhotosCache sharedPhotoCache] photoFromDiskCacheForKey:session.avatar];
-                UIImage *image = [[UIImage alloc] initWithData:data];
-                if (image) {
-                     [_avatarImageView setImage:image];
-                }else{
-                    [self loadGroupIcon:session key:session.avatar];
-                }
-        }else{
-                [self loadGroupIcon:session key:session.avatar];
-
+            NSData* data = [[PhotosCache sharedPhotoCache] photoFromDiskCacheForKey:session.avatar];
+            UIImage* image = [[UIImage alloc] initWithData:data];
+            if (image)
+            {
+                [_avatarImageView setImage:image];
             }
-    
+            else
+            {
+                [self loadGroupIcon:session key:session.avatar];
+            }
         }
-    
-   [self setTimeStamp:session.timeInterval];
-    if(session.unReadMsgCount)
+        else
+        {
+            [self loadGroupIcon:session key:session.avatar];
+        }
+    }
+    [self setTimeStamp:session.timeInterval];
+    if (session.unReadMsgCount)
     {
         //实时获取未读消息从接口
     }
 }
 
--(void)loadGroupIcon:(SessionEntity *)session key:(NSString*)key
+-(void)loadGroupIcon:(SessionEntity*)session key:(NSString*)key
 {
     NSString* keyName = [[NSString alloc] init];
-    if (key) {
+    if (key)
+    {
         keyName = key;
-    }else{
+    }
+    else
+    {
         keyName = [[PhotosCache sharedPhotoCache] getKeyName];
-        session.avatar=keyName;
+        session.avatar = keyName;
 //        [[DDDatabaseUtil instance] updateRecentSession:session completion:^(NSError *error) {
 //            
 //        }];
     }
-    [[DDGroupModule instance] getGroupInfogroupID:session.sessionID completion:^(GroupEntity *group) {
+    [[DDGroupModule instance] getGroupInfoByGroupID:session.sessionID completion:^(GroupEntity* group) {
         [self setName:group.name];
         [_avatarImageView setBackgroundColor:RGB(222, 224, 224)];
         NSMutableArray* avatars = [[NSMutableArray alloc] init];
         __block NSUInteger usedImageNumber = 0;
         __block NSUInteger groupUserCnt = [group.groupUserIds count];
-        [group.groupUserIds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [group.groupUserIds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop) {
             
             UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 21, 21)];
             [imageView.layer setCornerRadius:2.0];
@@ -260,7 +270,7 @@
             [imageView setClipsToBounds:YES];
 
             NSString* userID = (NSString*)obj;
-            [[DDUserModule shareInstance] getUserForUserID:userID Block:^(DDUserEntity *user) {
+            [[DDUserModule shareInstance] getUserForUserID:userID Block:^(DDUserEntity* user) {
                 if (user)
                 {
                     usedImageNumber++;
@@ -332,17 +342,16 @@
                     *stop = YES;
                 }
             }];
-            
         }];
     }];
-    
-
 }
--(UIImage *)getImageFromView:(UIView *)orgView{
+
+-(UIImage*)getImageFromView:(UIView*)orgView
+{
     CGSize s = orgView.bounds.size;
     UIGraphicsBeginImageContextWithOptions(s, NO, [UIScreen mainScreen].scale);
     [orgView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage*image = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
 }

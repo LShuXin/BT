@@ -10,24 +10,24 @@
 
 @interface NSDictionary(Safe)
 
-- (id)safeObjectForKey:(id)key;
-- (int)intValueForKey:(id)key;
-- (double)doubleValueForKey:(id)key;
-- (NSString*)stringValueForKey:(id)key;
+-(id)safeObjectForKey:(id)key;
+-(int)intValueForKey:(id)key;
+-(double)doubleValueForKey:(id)key;
+-(NSString*)stringValueForKey:(id)key;
 
 @end
 
 
 @interface NSMutableDictionary(Safe)
 
-- (void)safeSetObject:(id)anObject forKey:(id)aKey;
-- (void)setIntValue:(int)value forKey:(id)aKey;
-- (void)setDoubleValue:(double)value forKey:(id)aKey;
-- (void)setStringValueForKey:(NSString*)string forKey:(id)aKey;
+-(void)safeSetObject:(id)anObject forKey:(id)aKey;
+-(void)setIntValue:(int)value forKey:(id)aKey;
+-(void)setDoubleValue:(double)value forKey:(id)aKey;
+-(void)setStringValueForKey:(NSString*)string forKey:(id)aKey;
 
 @end
 
-@interface NSArray (Exception)
+@interface NSArray(Exception)
 
 - (id)objectForKey:(id)key;
 

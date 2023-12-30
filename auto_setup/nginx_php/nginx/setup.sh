@@ -8,7 +8,7 @@
 NGINX_PATH_7=http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
 NGINX_PATH_6=http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
 
-print_hello(){
+print_hello() {
 	echo "==========================================="
 	echo "$1 nginx for TeamTalk"
 	echo "==========================================="
@@ -57,7 +57,7 @@ clean_yum() {
 }
 
 install_nginx() {
-	#yum -y install yum-fastestmirror
+	# yum -y install yum-fastestmirror
 	clean_yum
 	CENTOS_VERSION=$(less /etc/redhat-release)
 

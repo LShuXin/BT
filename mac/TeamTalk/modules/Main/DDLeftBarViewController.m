@@ -96,16 +96,16 @@ static CGFloat const itemUpGap = 200;
         {
             case DDUserKickout:
             case DDUserKickByMobile:
-                [self p_updateMyOnlieState:UserStatTypeUserStatusOffline];
+                [self p_updateMyOnlieState:UserStatType_UserStatusOffline];
                 break;
             case DDUserOffLine:
-                [self p_updateMyOnlieState:UserStatTypeUserStatusOffline];
+                [self p_updateMyOnlieState:UserStatType_UserStatusOffline];
                 break;
             case DDUserOffLineInitiative:
-                [self p_updateMyOnlieState:UserStatTypeUserStatusOffline];
+                [self p_updateMyOnlieState:UserStatType_UserStatusOffline];
                 break;
             case DDUserOnline:
-                [self p_updateMyOnlieState:UserStatTypeUserStatusOnline];
+                [self p_updateMyOnlieState:UserStatType_UserStatusOnline];
                 break;
             case DDUserLogining:
                 break;
@@ -116,7 +116,7 @@ static CGFloat const itemUpGap = 200;
         if ([DDClientState shareInstance].networkState == DDNetWorkDisconnect)
         {
             //网络断开
-            [self p_updateMyOnlieState:UserStatTypeUserStatusOffline];
+            [self p_updateMyOnlieState:UserStatType_UserStatusOffline];
         }
     }
 }
@@ -191,14 +191,14 @@ static CGFloat const itemUpGap = 200;
     if (state == tag)
         return;
     
-    if (tag==UserStatTypeUserStatusOnline)
+    if (tag==UserStatType_UserStatusOnline)
     {
-        if(UserStatTypeUserStatusOffline == state)
+        if(UserStatType_UserStatusOffline == state)
         {
             [[DDLoginManager instance] reloginSuccess:^{
                 DDLog(@"relogin success");
                 [[DDClientState shareInstance] setUserState:DDUserOffLine];
-                [self p_updateMyOnlieState:UserStatTypeUserStatusOnline];
+                [self p_updateMyOnlieState:UserStatType_UserStatusOnline];
             } failure:^(NSString *error) {
                 DDLog(@"relogin failure:%@",error);
             }];
@@ -215,7 +215,7 @@ static CGFloat const itemUpGap = 200;
 //            }];
             
         }
-        else if(UserStatTypeUserStatusLeave == state)
+        else if(UserStatType_UserStatusLeave == state)
         {
 //            [[DDLogic instance] pushTaskWithBlock:
 //             ^()
@@ -227,9 +227,9 @@ static CGFloat const itemUpGap = 200;
 //            [self p_updateMyOnlieState:USER_STATUS_ONLINE];
         }
     }
-    else if(tag==UserStatTypeUserStatusLeave)
+    else if(tag==UserStatType_UserStatusLeave)
     {
-        if(UserStatTypeUserStatusOffline == state)
+        if(UserStatType_UserStatusOffline == state)
         {
 //            DDClientState* clientState = [DDClientState instance];
 //            clientState.userInitiativeOffline = NO;
@@ -240,7 +240,7 @@ static CGFloat const itemUpGap = 200;
 //                
 //            }];
         }
-        else if(UserStatTypeUserStatusOnline == state)
+        else if(UserStatType_UserStatusOnline == state)
         {
 //            [[DDLogic instance] pushTaskWithBlock:
 //             ^()
@@ -252,11 +252,11 @@ static CGFloat const itemUpGap = 200;
 //            [self p_updateMyOnlieState:USER_STATUS_LEAVE];
         }
     }
-    else if(tag==UserStatTypeUserStatusOffline)
+    else if(tag==UserStatType_UserStatusOffline)
     {
         //断开连接.
         [[DDClientState shareInstance] setUserState:DDUserOffLineInitiative];
-        [self p_updateMyOnlieState:UserStatTypeUserStatusOffline];
+        [self p_updateMyOnlieState:UserStatType_UserStatusOffline];
     }
 }
 
@@ -401,13 +401,13 @@ static CGFloat const itemUpGap = 200;
     NSImage *icon;
     switch (state)
     {
-        case UserStatTypeUserStatusOnline:
+        case UserStatType_UserStatusOnline:
             icon = [NSImage imageNamed:@"state-online"];
             break;
-        case UserStatTypeUserStatusOffline:
+        case UserStatType_UserStatusOffline:
             icon = [NSImage imageNamed:@"state-offline"];
             break;
-        case UserStatTypeUserStatusLeave:
+        case UserStatType_UserStatusLeave:
             icon = [NSImage imageNamed:@"state-leave"];
             break;
     }
@@ -418,7 +418,7 @@ static CGFloat const itemUpGap = 200;
 
 - (void)n_receiveUserLoginSuccessNotification:(NSNotification*)notification
 {
-    [self p_updateMyOnlieState:UserStatTypeUserStatusOnline];
+    [self p_updateMyOnlieState:UserStatType_UserStatusOnline];
     
     MTUserEntity* user = [notification object];
     NSString* avatar = user.avatar;

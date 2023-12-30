@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface BlurView : UIView
+
 @property (nonatomic, strong) UIColor *blurTintColor;
 
 @end

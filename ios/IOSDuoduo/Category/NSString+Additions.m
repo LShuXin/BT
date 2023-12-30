@@ -7,14 +7,14 @@
 //
 
 #import "NSString+Additions.h"
-
 #import <sys/xattr.h>
-
 #import <CommonCrypto/CommonDigest.h>
 
-@implementation NSString (TTString)
 
-+(NSString *)documentPath {
+@implementation NSString(TTString)
+
++ (NSString *)documentPath
+{
     static NSString * path = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -24,7 +24,8 @@
     });
     return path;
 }
-+(BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
+
++ (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
 {
     if (URL==nil) {
         return NO;
@@ -60,50 +61,62 @@
     }
     return YES;
 }
-+(NSString *)cachePath {
-    static NSString * path = nil;
+
++ (NSString *)cachePath
+{
+    static NSString *path = nil;
     if (!path) {
         path = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)
-                 objectAtIndex:0] copy];
+                objectAtIndex:0] copy];
     }
     return path;
 }
 
-+(NSString *)formatCurDate {
++ (NSString *)formatCurDate
+{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *result = [dateFormatter stringFromDate:[NSDate date]];
     
     return result;
 }
-+(NSString *)formatCurDay {
+
++ (NSString *)formatCurDay
+{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *result = [dateFormatter stringFromDate:[NSDate date]];
     
     return result;
 }
-+(NSString *)formatCurDayForVersion {
+
++ (NSString *)formatCurDayForVersion
+{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy.MM.dd"];
     NSString *result = [dateFormatter stringFromDate:[NSDate date]];
     
     return result;
 }
-+(NSString *)getAppVer {
+
++ (NSString *)getAppVer
+{
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 }
-- (NSURL *) toURL {
+
+-(NSURL *)toURL
+{
     return [NSURL URLWithString:[self stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 }
 
-- (BOOL) isEmpty {
+-(BOOL)isEmpty
+{
     return nil == self
     || 0 == [[self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length];
 }
 
-
-- (NSString *) MD5 {
+-(NSString *)MD5
+{
     // Create pointer to the string as UTF8
 	const char* ptr = [self UTF8String];
 	unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
@@ -113,27 +126,30 @@
     
 	// Convert MD5 value in the buffer to NSString of hex values
 	NSMutableString* output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-	for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
-		[output appendFormat:@"%02x",md5Buffer[i]];
+	for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+    {
+		[output appendFormat:@"%02x", md5Buffer[i]];
 	}
     
 	return output;
 }
--(NSString *)trim{
-    return  [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
+-(NSString *)trim
+{
+    return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
-
--(BOOL) isOlderVersionThan:(NSString*)otherVersion
+-(BOOL)isOlderVersionThan:(NSString*)otherVersion
 {
 	return ([self compare:otherVersion options:NSNumericSearch] == NSOrderedAscending);
 }
 
--(BOOL) isNewerVersionThan:(NSString*)otherVersion
+-(BOOL)isNewerVersionThan:(NSString*)otherVersion
 {
 	return ([self compare:otherVersion options:NSNumericSearch] == NSOrderedDescending);
 }
-- (NSString*)removeAllSpace
+
+-(NSString*)removeAllSpace
 {
     NSString* result = [self stringByReplacingOccurrencesOfString:@" " withString:@""];
     result = [result stringByReplacingOccurrencesOfString:@"    " withString:@""];

@@ -7,14 +7,16 @@
 //
 
 #import "HeartbeatAPI.h"
-#import "IMOther.pb.h"
+#import "IMOther.pbobjc.h"
+
+
 @implementation HeartbeatAPI
 /**
  *  请求超时时间
  *
  *  @return 超时时间
  */
-- (int)requestTimeOutTimeInterval
+-(int)requestTimeOutTimeInterval
 {
     return 0;
 }
@@ -24,7 +26,7 @@
  *
  *  @return 对应的serviceID
  */
-- (int)requestServiceID
+-(int)requestServiceID
 {
     return DDHEARTBEAT_SID;
 }
@@ -34,7 +36,7 @@
  *
  *  @return 对应的serviceID
  */
-- (int)responseServiceID
+-(int)responseServiceID
 {
     return DDHEARTBEAT_SID;
 }
@@ -44,7 +46,7 @@
  *
  *  @return 对应的commendID
  */
-- (int)requestCommendID
+-(int)requestCommendID
 {
     return REQ_CID;
 }
@@ -54,7 +56,7 @@
  *
  *  @return 对应的commendID
  */
-- (int)responseCommendID
+-(int)responseCommendID
 {
     return RES_CID;
 }
@@ -64,14 +66,11 @@
  *
  *  @return 解析数据的block
  */
-- (Analysis)analysisReturnData
+-(Analysis)analysisReturnData
 {
     Analysis analysis = (id)^(NSData* data)
     {
         
-        
-        
-    
     };
     return analysis;
 }
@@ -81,17 +80,17 @@
  *
  *  @return 打包数据的block
  */
-- (Package)packageRequestObject
+-(Package)packageRequestObject
 {
-    Package package = (id)^(id object,UInt32 seqNo)
+    Package package = (id)^(id object, UInt32 seqNo)
     {
-        IMHeartBeatBuilder *builder = [IMHeartBeat builder];
-        
-        DDDataOutputStream *dataout = [[DDDataOutputStream alloc] init];
-
+        IMHeartBeat* heartBeat = [[IMHeartBeat alloc] init];
+        DDDataOutputStream* dataout = [[DDDataOutputStream alloc] init];
         [dataout writeInt:0];
-        [dataout writeTcpProtocolHeader:DDHEARTBEAT_SID cId:REQ_CID seqNo:seqNo];
-        [dataout directWriteBytes:[builder build].data];
+        [dataout writeTcpProtocolHeader:DDHEARTBEAT_SID
+                                    cId:REQ_CID
+                                  seqNo:seqNo];
+        [dataout directWriteBytes:[heartBeat data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

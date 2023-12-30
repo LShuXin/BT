@@ -13,8 +13,12 @@
 #include "ipparser.h"
 
 IpParser* pIpParser = NULL;
+// 图片服务器地址
 string strMsfsUrl;
-string strDiscovery;//发现获取地址
+// 发现获取地址
+string strDiscovery;
+
+// 客户端连接请求回调
 void client_callback(void* callback_data, uint8_t msg, uint32_t handle, void* pParam)
 {
 	if (msg == NETLIB_MSG_CONNECT)
@@ -58,7 +62,8 @@ void http_callback(void* callback_data, uint8_t msg, uint32_t handle, void* pPar
 
 int main(int argc, char* argv[])
 {
-	if ((argc == 2) && (strcmp(argv[1], "-v") == 0)) {
+	if ((argc == 2) && (strcmp(argv[1], "-v") == 0))
+	{
 		printf("Server Version: LoginServer/%s\n", VERSION);
 		printf("Server Build: %s %s\n", __DATE__, __TIME__);
 		return 0;
@@ -76,7 +81,8 @@ int main(int argc, char* argv[])
     char* str_discovery = config_file.GetConfigName("discovery");
 
 	if (!msg_server_listen_ip || !str_msg_server_port || !http_listen_ip
-        || !str_http_port || !str_msfs_url || !str_discovery) {
+        || !str_http_port || !str_msfs_url || !str_discovery)
+	{
 		log("config item missing, exit... ");
 		return -1;
 	}
@@ -85,27 +91,36 @@ int main(int argc, char* argv[])
     uint16_t http_port = atoi(str_http_port);
     strMsfsUrl = str_msfs_url;
     strDiscovery = str_discovery;
-    
-    
+
     pIpParser = new IpParser();
     
 	int ret = netlib_init();
 
 	if (ret == NETLIB_ERROR)
-		return ret;
+    {
+        return ret;
+    }
 
+    // 监听 msg_server 发起的长连接
 	CStrExplode msg_server_listen_ip_list(msg_server_listen_ip, ';');
-	for (uint32_t i = 0; i < msg_server_listen_ip_list.GetItemCnt(); i++) {
+	for (uint32_t i = 0; i < msg_server_listen_ip_list.GetItemCnt(); i++)
+	{
 		ret = netlib_listen(msg_server_listen_ip_list.GetItem(i), msg_server_port, msg_serv_callback, NULL);
 		if (ret == NETLIB_ERROR)
-			return ret;
+        {
+            return ret;
+        }
 	}
-    
+
+	// 监听客户端发起的 http 连接
     CStrExplode http_listen_ip_list(http_listen_ip, ';');
-    for (uint32_t i = 0; i < http_listen_ip_list.GetItemCnt(); i++) {
+    for (uint32_t i = 0; i < http_listen_ip_list.GetItemCnt(); i++)
+    {
         ret = netlib_listen(http_listen_ip_list.GetItem(i), http_port, http_callback, NULL);
         if (ret == NETLIB_ERROR)
+        {
             return ret;
+        }
     }
     
 	printf("server start listen on:\nFor MsgServer: %s:%d\nFor http:%s:%d\n",

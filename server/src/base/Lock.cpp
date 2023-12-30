@@ -17,7 +17,7 @@ CLock::CLock()
 #ifdef _WIN32
     InitializeCriticalSection(&m_critical_section);
 #else
-    pthread_mutex_init(&m_lock,NULL);
+    pthread_mutex_init(&m_lock, NULL);
 #endif
 }
 
@@ -95,9 +95,10 @@ bool CRWLock::try_wlock()
 CAutoRWLock::CAutoRWLock(CRWLock* pLock, bool bRLock)
 {
     m_pLock = pLock;
-    if(NULL != m_pLock)
+    if (NULL != m_pLock)
     {
-        if (bRLock) {
+        if (bRLock)
+        {
             m_pLock->rlock();
         }
         else
@@ -109,7 +110,7 @@ CAutoRWLock::CAutoRWLock(CRWLock* pLock, bool bRLock)
 
 CAutoRWLock::~CAutoRWLock()
 {
-    if(NULL != m_pLock)
+    if (NULL != m_pLock)
     {
         m_pLock->unlock();
     }
@@ -119,12 +120,16 @@ CAutoRWLock::~CAutoRWLock()
 CAutoLock::CAutoLock(CLock* pLock)
 {
     m_pLock = pLock;
-    if(NULL != m_pLock)
+    if (NULL != m_pLock)
+    {
         m_pLock->lock();
+    }
 }
 
 CAutoLock::~CAutoLock()
 {
-    if(NULL != m_pLock)
+    if (NULL != m_pLock)
+    {
         m_pLock->unlock();
+    }
 }

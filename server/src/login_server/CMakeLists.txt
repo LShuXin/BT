@@ -1,9 +1,8 @@
 cmake_minimum_required(VERSION 2.6)
-PROJECT(loginserver)
+PROJECT(login_server)
 
 AUX_SOURCE_DIRECTORY(./ SRC_LIST)
 
-#SET(LIBRARY_OUTPUT_PATH ./)
 SET(EXECUTABLE_OUTPUT_PATH  ./)
 if(APPLE)
     SET(PB_LIB_DIR ../base/pb/lib/mac)

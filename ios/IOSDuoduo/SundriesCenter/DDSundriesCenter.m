@@ -8,8 +8,10 @@
 
 #import "DDSundriesCenter.h"
 
+
 @implementation DDSundriesCenter
-+ (instancetype)instance
+
++(instancetype)instance
 {
     static DDSundriesCenter* g_ddSundriesCenter;
     static dispatch_once_t onceToken;
@@ -19,7 +21,7 @@
     return g_ddSundriesCenter;
 }
 
-- (id)init
+-(id)init
 {
     self = [super init];
     if (self)
@@ -30,21 +32,21 @@
     return self;
 }
 
-- (void)pushTaskToSerialQueue:(Task)task
+-(void)pushTaskToSerialQueue:(Task)task
 {
     dispatch_async(self.serialQueue, ^{
         task();
     });
 }
 
-- (void)pushTaskToParallelQueue:(Task)task
+-(void)pushTaskToParallelQueue:(Task)task
 {
     dispatch_async(self.parallelQueue, ^{
         task();
     });
 }
 
-- (void)pushTaskToSynchronizationSerialQUeue:(Task)task
+-(void)pushTaskToSynchronizationSerialQUeue:(Task)task
 {
     dispatch_sync(self.serialQueue, ^{
         task();

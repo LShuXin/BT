@@ -48,9 +48,11 @@ bool CCondition::waitTime(uint64_t nWaitTime)
 }
 void CCondition::notify()
 {
+    // 唤醒一个被条件变量阻塞的线程
     pthread_cond_signal(&m_cond);
 }
 void CCondition::notifyAll()
 {
+    // 唤醒所有被条件变量阻塞的线程
     pthread_cond_broadcast(&m_cond);
 }

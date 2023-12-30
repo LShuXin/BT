@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^SearchCompletion)(NSArray* result,NSError* error);
+typedef void(^SearchCompletion)(NSArray* result, NSError* error);
 
 @interface DDSearch : NSObject
 + (instancetype)instance;
 - (void)searchContent:(NSString*)content completion:(SearchCompletion)completion;
-- (void)searchContent:(NSString *)content inRange:(NSArray*)ranges completion:(SearchCompletion)completion;
+- (void)searchContent:(NSString*)content inRange:(NSArray*)ranges completion:(SearchCompletion)completion;
 - (void)searchDepartment:(NSString*)content completion:(SearchCompletion)completion;
 @end

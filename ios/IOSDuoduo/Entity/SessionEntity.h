@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IMBaseDefine.pb.h"
-@class DDUserEntity,GroupEntity;
+#import "IMBaseDefine.pbobjc.h"
+
+
+@class DDUserEntity, GroupEntity;
 //typedef enum
 //{
 //    SESSIONTYPE_SINGLE = 1,          //单个用户会话
@@ -17,17 +19,20 @@
 //}SessionType;
 
 @interface SessionEntity : NSObject
-@property (nonatomic,retain)NSString* sessionID;
-@property (nonatomic,assign)SessionType sessionType;
-@property (nonatomic,readonly)NSString* name;
-@property(assign)NSInteger unReadMsgCount;
-@property (assign)NSUInteger timeInterval;
-@property(nonatomic,strong,readonly)NSString* orginId;
-@property(assign)BOOL isShield;
-@property(strong)NSString *lastMsg;
-@property(assign)NSInteger lastMsgID;
-@property(strong)NSString *avatar;
+
+@property(nonatomic, retain) NSString* sessionID;
+@property(nonatomic, assign) SessionType sessionType;
+@property(nonatomic, readonly) NSString* name;
+@property(assign) NSInteger unReadMsgCount;
+@property(assign) NSUInteger timeInterval;
+@property(nonatomic, strong, readonly) NSString* orginId;
+@property(assign) BOOL isShield;
+@property(strong) NSString *lastMsg;
+@property(assign) NSInteger lastMsgID;
+@property(strong) NSString *avatar;
+
 -(NSArray*)sessionUsers;
+
 /**
  *  创建一个session，只需赋值sessionID和Type即可
  *
@@ -36,14 +41,15 @@
  *
  *  @return 
  */
-- (id)initWithSessionID:(NSString*)sessionID type:(SessionType)type;
-- (id)initWithSessionID:(NSString*)sessionID SessionName:(NSString *)name type:(SessionType)type;
-- (id)initWithSessionIDByUser:(DDUserEntity*)user;
-- (id)initWithSessionIDByGroup:(GroupEntity*)group;
-- (void)updateUpdateTime:(NSUInteger)date;
--(NSString *)getSessionGroupID;
--(void)setSessionName:(NSString *)theName;
+-(id)initWithSessionID:(NSString*)sessionID type:(SessionType)type;
+-(id)initWithSessionID:(NSString*)sessionID SessionName:(NSString*)name type:(SessionType)type;
+-(id)initWithSessionIDByUser:(DDUserEntity*)user;
+-(id)initWithSessionIDByGroup:(GroupEntity*)group;
+-(void)updateUpdateTime:(NSUInteger)date;
+-(NSString*)getSessionGroupID;
+-(void)setSessionName:(NSString*)theName;
 -(BOOL)isGroup;
--(id)dicToGroup:(NSDictionary *)dic;
--(void)setSessionUser:(NSArray *)array;
+-(id)dicToGroup:(NSDictionary*)dic;
+-(void)setSessionUser:(NSArray*)array;
+
 @end

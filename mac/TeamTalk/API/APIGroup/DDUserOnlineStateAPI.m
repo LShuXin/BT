@@ -7,8 +7,8 @@
 //
 
 #import "DDUserOnlineStateAPI.h"
-#import "IMBuddy.pb.h"
-#import "IMBaseDefine.pb.h"
+#import "IMBuddy.pbobjc.h"
+#import "IMBaseDefine.pbobjc.h"
 
 @implementation DDUserOnlineStateAPI
 /**
@@ -70,7 +70,7 @@
 {
     Analysis analysis = (id)^(NSData* data)
     {
-        IMUsersStatRsp *rsp = [IMUsersStatRsp parseFromData:data];
+        IMUsersStatRsp *rsp = [IMUsersStatRsp parseFromData:data error: nil];
         return rsp;
     };
     return analysis;
@@ -87,19 +87,19 @@
     {
 //        UserStatBuilder *userBuilder = [UserStat builder];
 //        [userBuilder setUserId:656];
-//        [userBuilder setStatus:UserStatTypeUserStatusOnline];
+//        [userBuilder setStatus:UserStatType_UserStatusOnline];
         
-        IMUsersStatReqBuilder *reqBuilder = [IMUsersStatReq builder];
-        [reqBuilder setUserId:0];
+        IMUsersStatReq *req = [[IMUsersStatReq alloc] init];
+        [req setUserId:0];
         NSArray* userList = [[NSArray alloc]initWithObjects:@(656), nil];
-        [reqBuilder setUserIdListArray:userList];
+        [req setUserIdListArray:userList];
         
         DataOutputStream *dataout = [[DataOutputStream alloc] init];
         [dataout writeInt:0];
         [dataout writeTcpProtocolHeader:MODULE_ID_SESSION
                                     cId:CMD_FRI_LIST_STATE_REQ
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[reqBuilder build].data];
+        [dataout directWriteBytes:[req data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

@@ -7,8 +7,8 @@
 //
 
 #import "DDReceiveMsgDataReadNotifyAPI.h"
-#import "IMBaseDefine.pb.h"
-#import "IMMessage.pb.h"
+#import "IMBaseDefine.pbobjc.h"
+#import "IMMessage.pbobjc.h"
 
 @implementation DDReceiveMsgDataReadNotifyAPI
 
@@ -19,7 +19,7 @@
  */
 - (int)responseServiceID
 {
-    return ServiceIDSidMsg;
+    return ServiceID_SidMsg;
 }
 
 /**
@@ -29,7 +29,7 @@
  */
 - (int)responseCommandID
 {
-    return MessageCmdIDCidMsgReadNotify;
+    return MessageCmdID_CidMsgReadNotify;
 }
 
 /**
@@ -41,7 +41,7 @@
 {
     UnrequestAPIAnalysis analysis = (id)^(NSData* data)
     {
-        IMMsgDataReadNotify *msgRsp = [IMMsgDataReadNotify parseFromData:data];
+        IMMsgDataReadNotify *msgRsp = [IMMsgDataReadNotify parseFromData:data error:nil];
         NSString *userId = [NSString stringWithFormat:@"%i",msgRsp.userId];
         NSString *sessionId = [NSString stringWithFormat:@"%i",msgRsp.sessionId];
         

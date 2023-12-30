@@ -9,9 +9,9 @@
 #import "UIButton+JSMessagesView.h"
 #import "JSMessageInputView.h"
 
-@implementation UIButton (JSMessagesView)
+@implementation UIButton(JSMessagesView)
 
-+ (UIButton *)defaultSendButton
++ (UIButton*)defaultSendButton
 {
     UIButton *sendButton;
     

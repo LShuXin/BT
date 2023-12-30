@@ -6,7 +6,6 @@ AUX_SOURCE_DIRECTORY(./socket SRC_LIST2)
 AUX_SOURCE_DIRECTORY(../base/pb/protocol SRC_LIST3)
 
 
-#SET(LIBRARY_OUTPUT_PATH ./)
 SET(EXECUTABLE_OUTPUT_PATH  ./)
 if(APPLE)
     SET(PB_LIB_DIR ../base/pb/lib/mac)
@@ -30,8 +29,6 @@ endif()
 INCLUDE_DIRECTORIES(./ ../base/pb/protocol ../base/pb ../base/slog)
 LINK_DIRECTORIES(./ ${PB_LIB_DIR} ../base/slog/lib)
 
-#ADD_XXXX必须在TARGET_LINK_LIBRARIES前面，否则会报错
-#ADD_LIBRARY(${PROJECTNAME} SHARED/STATIC ${SRC_LIST})
 ADD_EXECUTABLE(push_server ${SRC_LIST1} ${SRC_LIST2} ${SRC_LIST3})
 if(MSVC)
     message("PROJECT: ${CMAKE_GENERATOR}")

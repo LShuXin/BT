@@ -26,7 +26,8 @@ CUserInfo* GetUserInfo(uint32_t user_id)
 {
     CUserInfo* pUser = NULL;
     UserInfoMap_t::iterator it = g_user_map.find(user_id);
-    if (it != g_user_map.end()) {
+    if (it != g_user_map.end())
+    {
         pUser = it->second;
     }
     
@@ -129,16 +130,16 @@ void CRouteConn::HandlePdu(CImPdu* pPdu)
             // do not take any action, heart beat only update m_last_recv_tick
             break;
         case CID_OTHER_ONLINE_USER_INFO:
-            _HandleOnlineUserInfo( pPdu );
+            _HandleOnlineUserInfo(pPdu);
             break;
         case CID_OTHER_USER_STATUS_UPDATE:
-            _HandleUserStatusUpdate( pPdu );
+            _HandleUserStatusUpdate(pPdu);
             break;
         case CID_OTHER_ROLE_SET:
-            _HandleRoleSet( pPdu );
+            _HandleRoleSet(pPdu);
             break;
         case CID_BUDDY_LIST_USERS_STATUS_REQUEST:
-            _HandleUsersStatusRequest( pPdu );
+            _HandleUsersStatusRequest(pPdu);
             break;
         case CID_MSG_DATA:
         case CID_SWITCH_P2P_CMD:
@@ -165,7 +166,8 @@ void CRouteConn::_HandleOnlineUserInfo(CImPdu* pPdu)
 
 	log("HandleOnlineUserInfo, user_cnt=%u ", user_count);
 
-	for (uint32_t i = 0; i < user_count; i++) {
+	for (uint32_t i = 0; i < user_count; i++)
+	{
         IM::BaseDefine::ServerUserStat server_user_stat = msg.user_stat_list(i);
 		_UpdateUserStatus(server_user_stat.user_id(), server_user_stat.status(), server_user_stat.client_type());
 	}
@@ -288,7 +290,8 @@ void CRouteConn::_HandleUsersStatusRequest(CImPdu* pPdu)
         uint32_t user_id = msg.user_id_list(i);
         user_stat->set_user_id(user_id);
         CUserInfo* pUser = GetUserInfo(user_id);
-        if (pUser) {
+        if (pUser)
+        {
             user_stat->set_status((::IM::BaseDefine::UserStatType) pUser->GetStatus()) ;
         }
 		else
@@ -362,9 +365,11 @@ void CRouteConn::_UpdateUserStatus(uint32_t user_id, uint32_t status, uint32_t c
 void CRouteConn::_BroadcastMsg(CImPdu* pPdu, CRouteConn* pFromConn)
 {
 	ConnMap_t::iterator it;
-	for (it = g_route_conn_map.begin(); it != g_route_conn_map.end(); it++) {
+	for (it = g_route_conn_map.begin(); it != g_route_conn_map.end(); it++)
+	{
 		CRouteConn* pRouteConn = (CRouteConn*)it->second;
-		if (pRouteConn != pFromConn) {
+		if (pRouteConn != pFromConn)
+		{
 			pRouteConn->SendPdu(pPdu);
 		}
 	}

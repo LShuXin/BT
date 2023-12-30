@@ -98,10 +98,10 @@
             KickReasonType reason = [object intValue];
             switch (reason)
             {
-                case KickReasonTypeKickReasonDuplicateUser:
+                case KickReasonType_KickReasonDuplicateUser:
                     self.userState = DDUserKickout;
                     break;
-                case KickReasonTypeKickReasonMobileKick:
+                case KickReasonType_KickReasonMobileKick:
                     self.userState = DDUserKickByMobile;
                     break;
                 default:

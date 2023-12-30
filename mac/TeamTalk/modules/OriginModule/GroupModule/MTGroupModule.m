@@ -94,7 +94,7 @@ typedef void(^HandleGroupMemberChange)();
     DDGroupInfoAPI *api = [[DDGroupInfoAPI alloc] init];
     [api requestWithObject:param Completion:^(id response, NSError *error) {
         if (!error) {
-            NSMutableArray* groupInfos = [response objectForKey:@"groupList"];
+            NSMutableArray* groupInfos = response[@"groupList"];
             [self addMaintainOriginEntities:groupInfos];
             [[MTDatabaseUtil instance] insertGroups:groupInfos];
             completion(groupInfos,error);
@@ -195,7 +195,7 @@ typedef void(^HandleGroupMemberChange)();
                     else
                     {
                         //删除会话
-                        NSString* sessionID = [MTSessionEntity getSessionIDForOriginID:groupID sessionType:SessionTypeSessionTypeGroup];
+                        NSString* sessionID = [MTSessionEntity getSessionIDForOriginID:groupID sessionType:SessionType_SessionTypeGroup];
                         MTSessionEntity* session = [[MTSessionModule shareInstance] getSessionBySessionID:sessionID];
                         [[MTSessionModule shareInstance] removeSessions:@[session]];
                         [[NSNotificationCenter defaultCenter] postNotificationName:DD_RECENT_CONTACTS_VIEW_RELOAD_NOTIFICATION object:nil];
@@ -253,7 +253,7 @@ typedef void(^HandleGroupMemberChange)();
     [param setObject:reqUserId forKey:@"reqUserId"];
     [api requestWithObject:param Completion:^(id response, NSError *error) {
         if (!error) {
-            NSMutableArray* groupInfos = [response objectForKey:@"groupVersionList"];
+            NSMutableArray* groupInfos = response[@"groupVersionList"];
             NSInteger groupInfosCnt = [groupInfos count];
             NSMutableArray* needUpdateGroupList = [[NSMutableArray alloc] init];
             for (NSInteger i = 0; i<groupInfosCnt; i++) {
@@ -295,7 +295,7 @@ typedef void(^HandleGroupMemberChange)();
     DDGroupInfoAPI *api = [[DDGroupInfoAPI alloc] init];
     [api requestWithObject:param Completion:^(id response, NSError *error) {
         if (!error) {
-            NSMutableArray* groupInfos = [response objectForKey:@"groupList"];
+            NSMutableArray* groupInfos = response[@"groupList"];
             [self addMaintainOriginEntities:groupInfos];
             [[MTDatabaseUtil instance] insertGroups:groupInfos];
             completion(YES);

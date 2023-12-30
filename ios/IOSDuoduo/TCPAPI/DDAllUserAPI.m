@@ -8,14 +8,17 @@
 
 #import "DDAllUserAPI.h"
 #import "DDUserEntity.h"
-#import "IMBuddy.pb.h"
+#import "IMBuddy.pbobjc.h"
+
+
 @implementation DDAllUserAPI
+
 /**
  *  请求超时时间
  *
  *  @return 超时时间
  */
-- (int)requestTimeOutTimeInterval
+-(int)requestTimeOutTimeInterval
 {
     return TimeOutTimeInterval;
 }
@@ -25,7 +28,7 @@
  *
  *  @return 对应的serviceID
  */
-- (int)requestServiceID
+-(int)requestServiceID
 {
     return MODULE_ID_SESSION;
 }
@@ -35,7 +38,7 @@
  *
  *  @return 对应的serviceID
  */
-- (int)responseServiceID
+-(int)responseServiceID
 {
     return MODULE_ID_SESSION;
 }
@@ -45,7 +48,7 @@
  *
  *  @return 对应的commendID
  */
-- (int)requestCommendID
+-(int)requestCommendID
 {
     return CMD_FRI_ALL_USER_REQ;
 }
@@ -55,7 +58,7 @@
  * 
  *  @return 对应的commendID
  */
-- (int)responseCommendID
+-(int)responseCommendID
 {
     return CMD_FRI_ALL_USER_RES;
 }
@@ -65,18 +68,19 @@
  *
  *  @return 解析数据的block
  */
-- (Analysis)analysisReturnData
+-(Analysis)analysisReturnData
 {
     
     Analysis analysis = (id)^(NSData* data)
     {
-        IMAllUserRsp *allUserRsp = [IMAllUserRsp parseFromData:data];
+        IMAllUserRsp* allUserRsp = [IMAllUserRsp parseFromData:data error:nil];
         uint32_t alllastupdatetime = allUserRsp.latestUpdateTime;
-        NSMutableDictionary *userAndVersion = [NSMutableDictionary new];
+        NSMutableDictionary* userAndVersion = [NSMutableDictionary new];
         [userAndVersion setObject:@(alllastupdatetime) forKey:@"alllastupdatetime"];
-        NSMutableArray *userList = [[NSMutableArray alloc] init];
-        for (UserInfo *userInfo in allUserRsp.userList) {
-            DDUserEntity *user = [[DDUserEntity alloc] initWithPB:userInfo];
+        NSMutableArray* userList = [[NSMutableArray alloc] init];
+        for (UserInfo* userInfo in allUserRsp.userListArray)
+        {
+            DDUserEntity* user = [[DDUserEntity alloc] initWithPB:userInfo];
             [userList addObject:user];
         }
 
@@ -106,19 +110,19 @@
  */
 - (Package)packageRequestObject
 {
-    Package package = (id)^(id object,uint32_t seqNo)
+    Package package = (id)^(id object, uint32_t seqNo)
     {
-        IMAllUserReqBuilder *reqBuilder = [IMAllUserReq builder];
+        IMAllUserReq* reqBuilder = [[IMAllUserReq alloc] init];
         NSInteger version = [object[0] integerValue];
         [reqBuilder setUserId:0];
         [reqBuilder setLatestUpdateTime:version];
 
-        DDDataOutputStream *dataout = [[DDDataOutputStream alloc] init];
+        DDDataOutputStream* dataout = [[DDDataOutputStream alloc] init];
         [dataout writeInt:0];
         [dataout writeTcpProtocolHeader:MODULE_ID_SESSION
                                     cId:CMD_FRI_ALL_USER_REQ
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[reqBuilder build].data];
+        [dataout directWriteBytes:[reqBuilder data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

@@ -43,21 +43,20 @@
     return self;
 }
 
-
-- (void)dealloc
+-(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)setUseStateWithoutObserver:(DDUserState)userState
+-(void)setUseStateWithoutObserver:(DDUserState)userState
 {
     _userState = userState;
 }
 
 #pragma mark - privateAPI
-- (void)n_receiveReachabilityChangedNotification:(NSNotification*)notification
+-(void)n_receiveReachabilityChangedNotification:(NSNotification*)notification
 {
-    DDReachability * reach = [notification object];
+    DDReachability* reach = [notification object];
     NetworkStatus netWorkStatus = [reach currentReachabilityStatus];
     switch (netWorkStatus)
     {

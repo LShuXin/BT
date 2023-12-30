@@ -7,7 +7,7 @@
 //
 
 #import "DDReceiveKickAPI.h"
-#import "IMLogin.pb.h"
+#import "IMLogin.pbobjc.h"
 @implementation DDReceiveKickAPI
 /**
  *  数据包中的serviceID
@@ -16,7 +16,7 @@
  */
 - (int)responseServiceID
 {
-    return ServiceIDSidLogin;
+    return ServiceID_SidLogin;
 }
 
 /**
@@ -26,7 +26,7 @@
  */
 - (int)responseCommandID
 {
-    return LoginCmdIDCidLoginKickUser;
+    return LoginCmdID_CidLoginKickUser;
 }
 
 /**
@@ -38,7 +38,7 @@
 {
     UnrequestAPIAnalysis analysis = (id)^(NSData* data)
     {
-        IMKickUser* kickUserNotify = [IMKickUser parseFromData:data];
+        IMKickUser* kickUserNotify = [IMKickUser parseFromData:data error:nil];
         NSString* userID = [NSString stringWithFormat:@"%i",kickUserNotify.userId];
         if ([userID isEqualToString:[DDClientState shareInstance].userID])
         {

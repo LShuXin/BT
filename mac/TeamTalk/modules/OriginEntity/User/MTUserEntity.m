@@ -41,7 +41,7 @@
 - (instancetype)initWithUserInfo:(UserInfo*)userInfo
 {
     NSString* ID = [NSString stringWithFormat:@"%d",userInfo.userId];
-    self = [self initWithID:ID name:userInfo.userNickName avatar:userInfo.avatarUrl gender:userInfo.userGender department:userInfo.departmentId email:userInfo.email realName:userInfo.userRealName userDomain:userInfo.userDomain tel:userInfo.userTel status:userInfo.status];
+    self = [self initWithID:ID name:userInfo.userNickName avatar:userInfo.avatarURL gender:userInfo.userGender department:userInfo.departmentId email:userInfo.email realName:userInfo.userRealName userDomain:userInfo.userDomain tel:userInfo.userTel status:userInfo.status];
     return self;
 }
 

@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDictionary (JSON)
+@interface NSDictionary(JSON)
 
-- (NSString*)jsonString;
+-(NSString*)jsonString;
 + (NSDictionary*)initWithJsonString:(NSString*)json;
 
 @end

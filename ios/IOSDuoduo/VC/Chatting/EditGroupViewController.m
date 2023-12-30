@@ -136,7 +136,7 @@
             [self.editArray removeObjectsInArray:self.users];
            [self addUsersToGroup:self.editArray];
         }else{
-            [TheRuntime showAlertView:@" " Description:@"你没有选择要添加的联系人"];
+            [TheRuntime showAlertView:@" " description:@"你没有选择要添加的联系人"];
         }
         
     }
@@ -369,8 +369,8 @@
                     [self.editControll refreshUsers:self.editArray];
                     self.editControll.group=response;
                     self.editControll.session.sessionID=response.objID;
-                    self.editControll.session.sessionType=SessionTypeSessionTypeGroup;
-                    SessionEntity *session = [[SessionEntity alloc] initWithSessionID:response.objID type:SessionTypeSessionTypeGroup];
+                    self.editControll.session.sessionType=SessionType_SessionTypeGroup;
+                    SessionEntity *session = [[SessionEntity alloc] initWithSessionID:response.objID type:SessionType_SessionTypeGroup];
                     session.lastMsg=@" ";
                     [[DDDatabaseUtil instance] updateRecentSession:session completion:^(NSError *error) {
                         

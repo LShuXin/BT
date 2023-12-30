@@ -111,7 +111,7 @@ typedef NS_ENUM(NSUInteger, PanelStatus)
     float _inputViewY;
     int _type;
 }
-+(instancetype )shareInstance
++ (instancetype )shareInstance
 {
     static dispatch_once_t onceToken;
     static ChattingMainViewController *_sharedManager = nil;
@@ -253,10 +253,10 @@ typedef NS_ENUM(NSUInteger, PanelStatus)
     DDMessageEntity* message = [DDMessageEntity makeMessage:filePath Module:self.module MsgType:msgContentType];
     BOOL isGroup = [self.module.sessionEntity isGroup];
     if (isGroup) {
-        message.msgType=MsgTypeMsgTypeGroupAudio;
+        message.msgType=MsgType_MsgTypeGroupAudio;
     }else
     {
-        message.msgType = MsgTypeMsgTypeSingleAudio;
+        message.msgType = MsgType_MsgTypeSingleAudio;
     }
     [message.info setObject:@(length) forKey:VOICE_LENGTH];
     [message.info setObject:@(1) forKey:DDVOICE_PLAYED];

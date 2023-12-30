@@ -3,16 +3,20 @@
 # date: 03/24/2015
 
 
-APR=apr-1.7.0
-APR_PATH=https://mirrors.tuna.tsinghua.edu.cn/apache/apr/apr-1.7.0.tar.gz
+APR_VERSION=1.7.0
+APR=apr-${APR_VERSION}
+APR_ZIP=${APR}.tar.gz
+APR_PATH=https://mirrors.tuna.tsinghua.edu.cn/apache/apr/${APR_ZIP}
 
-APR_UTIL=apr-util-1.6.1
-APR_UTIL_PATH=https://mirrors.tuna.tsinghua.edu.cn/apache/apr/apr-util-1.6.1.tar.gz
+APR_UTIL_VERSION=1.6.1
+APR_UTIL=apr-util-${APR_UTIL_VERSION}
+APR_UTIL_ZIP=${APR_UTIL}.tar.gz
+APR_UTIL_PATH=https://mirrors.tuna.tsinghua.edu.cn/apache/apr/${APR_UTIL_ZIP}
 
-LOG4CXX=apache-log4cxx-0.12.1
-#LOG4CXX_PATH=http://mirror.bit.edu.cn/apache/logging/log4cxx/0.10.0/$LOG4CXX.tar.gz
-#LOG4CXX_PATH=https://archive.apache.org/dist/logging/log4cxx/0.10.0/$LOG4CXX.tar.gz
-LOG4CXX_PATH=https://archive.apache.org/dist/logging/log4cxx/0.12.1/$LOG4CXX.tar.gz
+LOG4CXX_VERSION=0.12.1
+LOG4CXX=apache-log4cxx-${LOG4CXX_VERSION}
+LOG4CXX_ZIP=${LOG4CXX}.tar.gz
+LOG4CXX_PATH=https://archive.apache.org/dist/logging/log4cxx/${LOG4CXX_VERSION}/${LOG4CXX_ZIP}
 CUR_DIR=
 download() {
     if [ -f "$1" ]; then
@@ -88,8 +92,8 @@ get_cur_dir() {
 
 build_apr() {
     
-    download $APR.tar.gz $APR_PATH
-    tar -xf $APR.tar.gz
+    download $APR_ZIP $APR_PATH
+    tar -xf $APR_ZIP
     cd $APR
     # rm: cannot remove 'libtoolT': No such file or directory
     sed -i "s/RM='\$RM'/RM='\$RM -f'/g" configure
@@ -99,8 +103,8 @@ build_apr() {
 }
 
 build_apr_util() {
-    download $APR_UTIL.tar.gz $APR_UTIL_PATH
-    tar -xf $APR_UTIL.tar.gz
+    download $APR_UTIL_ZIP $APR_UTIL_PATH
+    tar -xf $APR_UTIL_ZIP
     cd $APR_UTIL
     ./configure --prefix=/usr/local/apr --with-apr=/usr/local/apr/bin/apr-1-config
     make -j4 && make install
@@ -109,25 +113,32 @@ build_apr_util() {
 
 build_log4cxx() {
     cd log4cxx
-    #yum -y update
+    # yum -y update
+    # cut -f 2 -d '='：一旦找到包含 "VERSION_ID" 的行，cut 命令被用来根据等号(=)分隔符提取出等号后面的部分，也就是版本号。
+    # -f 2 选项指定了要提取的字段编号，这里是第二个字段，即等号后面的部分。
     local VERSION_ID=`grep "VERSION_ID" /etc/os-release | cut -f 2 -d '='`
+    # <<< "$VERSION_ID"：这是 Bash 的 "here string" 语法，它将 $VERSION_ID 的内容作为输入传递给下一个命令。
+    # cut -f2：与第一行相同，这个命令提取 $VERSION_ID 中的第二个字段，也就是版本号。
     local NumOnly=$(cut -f2 <<< "$VERSION_ID")
     if [ NumOnly>7 ]; then
         yum -y install apr-devel
         yum -y install apr-util-devel
     else
-    # centos:7 需要编译安装
+        # centos:7 需要编译安装
         yum -y uninstall apr-devel
         yum -y uninstall apr-util-devel
         build_apr    
         build_apr_util
     fi
 
-    download $LOG4CXX.tar.gz $LOG4CXX_PATH
-    tar -xf $LOG4CXX.tar.gz
+    download $LOG4CXX_ZIP $LOG4CXX_PATH
+    tar -xf $LOG4CXX_ZIP
     cd $LOG4CXX
-    #./configure --prefix=$CUR_DIR/log4cxx --with-apr=/usr --with-apr-util=/usr
-    cmake  -DCMAKE_INSTALL_PREFIX:PATH=$CUR_DIR/log4cxx .
+    # ./configure --prefix=$CUR_DIR/log4cxx --with-apr=/usr --with-apr-util=/usr
+
+    # 将 CMake 项目的安装目录设置为当前工作目录下的 log4cxx 子目录
+    # :PATH 是CMake中的一种类型提示，它告诉CMake将变量解释为一个路径（文件夹）
+    cmake -DCMAKE_INSTALL_PREFIX:PATH=$CUR_DIR/log4cxx .
     /bin/cp -rf ../inputstreamreader.cpp ./src/main/cpp/
     /bin/cp -rf ../socketoutputstream.cpp ./src/main/cpp/
     /bin/cp -rf ../console.cpp ./src/examples/cpp/

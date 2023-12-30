@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIButton (JSMessagesView)
+@interface UIButton(JSMessagesView)
 
-+ (UIButton *)defaultSendButton;
++ (UIButton*)defaultSendButton;
 
 @end

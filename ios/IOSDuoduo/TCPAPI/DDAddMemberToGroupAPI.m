@@ -10,14 +10,18 @@
 #import "DDGroupModule.h"
 #import "GroupEntity.h"
 #import "RuntimeStatus.h"
-#import "IMGroup.pb.h"
+#import "IMGroup.pbobjc.h"
+#import "GPBProtocolBuffers.h"
+
+
 @implementation DDAddMemberToGroupAPI
+
 /**
  *  请求超时时间
  *
  *  @return 超时时间
  */
-- (int)requestTimeOutTimeInterval
+-(int)requestTimeOutTimeInterval
 {
     return TimeOutTimeInterval;
 }
@@ -27,7 +31,7 @@
  *
  *  @return 对应的serviceID
  */
-- (int)requestServiceID
+-(int)requestServiceID
 {
     return SERVICE_GROUP;
 }
@@ -37,7 +41,7 @@
  *
  *  @return 对应的serviceID
  */
-- (int)responseServiceID
+-(int)responseServiceID
 {
     return SERVICE_GROUP;
 }
@@ -47,7 +51,7 @@
  *
  *  @return 对应的commendID
  */
-- (int)requestCommendID
+-(int)requestCommendID
 {
     return CMD_ID_GROUP_CHANGE_GROUP_REQ;
 }
@@ -57,7 +61,7 @@
  *
  *  @return 对应的commendID
  */
-- (int)responseCommendID
+-(int)responseCommendID
 {
     return CMD_ID_GROUP_CHANGE_GROUP_RES;
 }
@@ -67,29 +71,29 @@
  *
  *  @return 解析数据的block
  */
-- (Analysis)analysisReturnData
+-(Analysis)analysisReturnData
 {
     Analysis analysis = (id)^(NSData* data)
     {
         
-        IMGroupChangeMemberRsp *rsp = [IMGroupChangeMemberRsp parseFromData:data];
+        IMGroupChangeMemberRsp* rsp = [IMGroupChangeMemberRsp parseFromData:data error:nil];
 
-        uint32_t result =rsp.resultCode;
-    NSMutableArray *array = [NSMutableArray new];
+        uint32_t result = rsp.resultCode;
+        NSMutableArray* array = [NSMutableArray new];
         if (result != 0)
         {
             return array;
         }
     
+        NSUInteger userCnt = [rsp.curUserIdListArray count];
 
-        NSUInteger userCnt = [rsp.curUserIdList count];
-
-        for (NSUInteger i = 0; i < userCnt; i++) {
-                NSString* userId = [TheRuntime changeOriginalToLocalID:[rsp.curUserIdList[i] integerValue] SessionType:SessionTypeSessionTypeSingle];
-                [array addObject:userId];
-            }
+        for (NSUInteger i = 0; i < userCnt; i++)
+        {
+            NSString* userId = [TheRuntime changeOriginalToLocalID:[[rsp curUserIdListArray] valueAtIndex:i]
+                                                       sessionType:SessionType_SessionTypeSingle];
+            [array addObject:userId];
+        }
         return array;
-        
     };
     return analysis;
 }
@@ -99,26 +103,36 @@
  *
  *  @return 打包数据的block
  */
-- (Package)packageRequestObject
+-(Package)packageRequestObject
 {
-    Package package = (id)^(id object,uint16_t seqNo)
+    Package package = (id)^(id object, uint16_t seqNo)
     {
         NSArray* array = (NSArray*)object;
         NSString* groupId = array[0];
         NSArray* userList = array[1];
         NSMutableArray *users = [NSMutableArray new];
-        for (NSString *user in userList) {
+        for (NSString* user in userList)
+        {
             [users addObject:@([TheRuntime changeIDToOriginal:user])];
         }
-        IMGroupChangeMemberReqBuilder *memberChange = [IMGroupChangeMemberReq builder];
+        IMGroupChangeMemberReq* memberChange = [[IMGroupChangeMemberReq alloc] init];
         [memberChange setUserId:0];
-        [memberChange setChangeType:GroupModifyTypeGroupModifyTypeAdd];
+        [memberChange setChangeType:GroupModifyType_GroupModifyTypeAdd];
         [memberChange setGroupId:[TheRuntime changeIDToOriginal:groupId]];
-        [memberChange setMemberIdListArray:users];
-        DDDataOutputStream *dataout = [[DDDataOutputStream alloc] init];
+        
+        
+        GPBUInt32Array *tempUsers = [[GPBUInt32Array alloc] init];
+        for (NSNumber *number in users) {
+            [tempUsers addValue:number.unsignedIntValue];
+        }
+        [memberChange setMemberIdListArray:tempUsers];
+        DDDataOutputStream* dataout = [[DDDataOutputStream alloc] init];
         [dataout writeInt:0];
-        [dataout writeTcpProtocolHeader:SERVICE_GROUP cId:CMD_ID_GROUP_CHANGE_GROUP_REQ seqNo:seqNo];
-        [dataout directWriteBytes:[memberChange build].data];
+        [dataout writeTcpProtocolHeader:SERVICE_GROUP
+                                    cId:CMD_ID_GROUP_CHANGE_GROUP_REQ
+                                  seqNo:seqNo];
+        
+        [dataout directWriteBytes:[memberChange data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

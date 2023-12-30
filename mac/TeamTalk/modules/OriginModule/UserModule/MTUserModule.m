@@ -70,10 +70,10 @@
     DDAllUserAPI *api = [[DDAllUserAPI alloc] init];
     [api requestWithObject:@[@(latestUpdateTime)] Completion:^(id response, NSError *error) {
         if (!error) {
-            NSInteger responseLastUpdateTime = [[response objectForKey:@"latestUpdateTime"] integerValue];
+            NSInteger responseLastUpdateTime = [response[@"latestUpdateTime"] integerValue];
             
             if(latestUpdateTime==0|| latestUpdateTime!=responseLastUpdateTime){
-                NSMutableArray *userArray = [response objectForKey:@"userlist"];
+                NSMutableArray *userArray = response[@"userlist"];
                 [self addMaintainOriginEntities:userArray];
                 [[MTDatabaseUtil instance] insertUsers:userArray];
                 [[MTSysConfigModule shareInstance] addSysConfigEntitiesToDBAndMaintainWithsysConfigName:MT_SYS_CONFIG_USER_LASTUPTIME sysConfigValue:responseLastUpdateTime];

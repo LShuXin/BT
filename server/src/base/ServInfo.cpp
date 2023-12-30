@@ -15,25 +15,29 @@ serv_info_t *read_server_config(CConfigFileReader *config_file, const char *serv
     server_count = 0;
 
     // get server_count first;
-    while (true) {
+    while (true)
+    {
         sprintf(server_ip_key, "%s%d", server_ip_format, server_count + 1);
         sprintf(server_port_key, "%s%d", server_port_format, server_count + 1);
         char *server_ip_value = config_file->GetConfigName(server_ip_key);
         char *server_port_value = config_file->GetConfigName(server_port_key);
-        if (!server_ip_value || !server_port_value) {
+        if (!server_ip_value || !server_port_value)
+        {
             break;
         }
 
         server_count++;
     }
 
-    if (server_count == 0) {
+    if (server_count == 0)
+    {
         return NULL;
     }
 
     serv_info_t *server_list = new serv_info_t[server_count];
 
-    for (uint32_t i = 0; i < server_count; i++) {
+    for (uint32_t i = 0; i < server_count; i++)
+    {
         sprintf(server_ip_key, "%s%d", server_ip_format, i + 1);
         sprintf(server_port_key, "%s%d", server_port_format, i + 1);
         char *server_ip_value = config_file->GetConfigName(server_ip_key);

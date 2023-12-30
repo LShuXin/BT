@@ -12,7 +12,7 @@ PHP_DB_CONF_PATH=$PHP_WEB_SETUP_PATH/$PHP_WEB/application/config
 PHP_NGINX_CONF=im.com.conf
 PHP_NGINX_CONF_PATH=/etc/nginx/conf.d
 
-print_hello(){
+print_hello() {
 	echo "==========================================="
 	echo "$1 im web for TeamTalk"
 	echo "==========================================="
@@ -28,7 +28,7 @@ check_user() {
 check_os() {
 	OS_VERSION=$(less /etc/redhat-release)
 	OS_BIT=$(getconf LONG_BIT)
-	#echo "$OS_VERSION, $OS_BIT bit..." 
+	echo "$OS_VERSION, $OS_BIT bit..." 
 	if [[ $OS_VERSION =~ "CentOS" ]]; then
 		if [ $OS_BIT == 64 ]; then
 			return 0
@@ -42,7 +42,7 @@ check_os() {
 	fi
 }
 
-build_web(){
+build_web() {
 	if [ -d $PHP_WEB ]; then
 		echo "$PHP_WEB has existed."
 	else
@@ -51,7 +51,7 @@ build_web(){
 			echo "unzip $PHP_WEB successed."
 		else
 			echo "Error: unzip $PHP_WEB failed."
-		return 1
+		    return 1
 		fi
 	fi
 

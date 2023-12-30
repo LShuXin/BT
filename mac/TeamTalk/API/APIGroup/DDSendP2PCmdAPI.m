@@ -7,8 +7,8 @@
 //
 
 #import "DDSendP2PCmdAPI.h"
-#import "IMBaseDefine.pb.h"
-#import "IMSwitchService.pb.h"
+#import "IMBaseDefine.pbobjc.h"
+#import "IMSwitchService.pbobjc.h"
 
 @implementation DDSendP2PCmdAPI
 
@@ -38,7 +38,7 @@
  */
 - (int)requestServiceID
 {
-    return ServiceIDSidSwitchService;
+    return ServiceID_SidSwitchService;
 }
 
 /**
@@ -58,7 +58,7 @@
  */
 - (int)requestCommendID
 {
-    return SwitchServiceCmdIDCidSwitchP2PCmd;
+    return SwitchServiceCmdID_CidSwitchP2PCmd;
 }
 
 /**
@@ -90,7 +90,7 @@
 {
     Package package = (id)^(id object,uint16_t seqNo)
     {   
-        IMP2PCmdMsgBuilder *req = [IMP2PCmdMsg builder];
+        IMP2PCmdMsg *req = [[IMP2PCmdMsg alloc] init];
         NSArray* array = (NSArray*)object;
         NSString* fromId = array[0];
         NSString* toId = array[1];
@@ -107,7 +107,7 @@
         
         [dataout writeInt:0];
         [dataout writeTcpProtocolHeader:[self requestServiceID] cId:[self requestCommendID] seqNo:seqNo];
-        [dataout directWriteBytes:[req build].data];
+        [dataout directWriteBytes:[req data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

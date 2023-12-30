@@ -7,7 +7,7 @@
 //
 
 #import "DDReceiveStateChangedAPI.h"
-#import "IMBuddy.pb.h"
+#import "IMBuddy.pbobjc.h"
 @implementation DDReceiveStateChangedAPI
 /**
  *  数据包中的serviceID
@@ -16,7 +16,7 @@
  */
 - (int)responseServiceID
 {
-    return ServiceIDSidBuddyList;
+    return ServiceID_SidBuddyList;
 }
 
 /**
@@ -26,7 +26,7 @@
  */
 - (int)responseCommandID
 {
-    return BuddyListCmdIDCidBuddyListStatusNotify;
+    return BuddyListCmdID_CidBuddyListStatusNotify;
 }
 
 /**
@@ -39,7 +39,7 @@
    UnrequestAPIAnalysis analysis = (id)^(NSData* data)
     {
         
-        IMUserStatNotify *userstatNotify = [IMUserStatNotify parseFromData:data];
+        IMUserStatNotify *userstatNotify = [IMUserStatNotify parseFromData:data error:nil];
         return  userstatNotify.userStat;
     };
     return analysis;

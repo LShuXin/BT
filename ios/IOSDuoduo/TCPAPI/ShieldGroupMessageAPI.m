@@ -7,14 +7,17 @@
 //
 
 #import "ShieldGroupMessageAPI.h"
-#import "IMGroup.pb.h"
+#import "IMGroup.pbobjc.h"
+
+
 @implementation ShieldGroupMessageAPI
+
 /**
  *  请求超时时间
  *
  *  @return 超时时间
  */
-- (int)requestTimeOutTimeInterval
+-(int)requestTimeOutTimeInterval
 {
     return TimeOutTimeInterval;
 }
@@ -24,7 +27,7 @@
  *
  *  @return 对应的serviceID
  */
-- (int)requestServiceID
+-(int)requestServiceID
 {
     return SERVICE_GROUP;
 }
@@ -34,7 +37,7 @@
  *
  *  @return 对应的serviceID
  */
-- (int)responseServiceID
+-(int)responseServiceID
 {
     return SERVICE_GROUP;
 }
@@ -44,7 +47,7 @@
  *
  *  @return 对应的commendID
  */
-- (int)requestCommendID
+-(int)requestCommendID
 {
     return CID_GROUP_SHIELD_GROUP_REQUEST;
 }
@@ -54,7 +57,7 @@
  *
  *  @return 对应的commendID
  */
-- (int)responseCommendID
+-(int)responseCommendID
 {
     return CID_GROUP_SHIELD_GROUP_RESPONSE;
 }
@@ -64,11 +67,11 @@
  *
  *  @return 解析数据的block
  */
-- (Analysis)analysisReturnData
+-(Analysis)analysisReturnData
 {
     Analysis analysis = (id)^(NSData* data)
     {
-        IMGroupShieldRsp *groupShieldRsp = [IMGroupShieldRsp parseFromData:data];
+        IMGroupShieldRsp* groupShieldRsp = [IMGroupShieldRsp parseFromData:data error:nil];
         return groupShieldRsp.resultCode;
     };
     return analysis;
@@ -79,24 +82,24 @@
  *
  *  @return 打包数据的block
  */
-- (Package)packageRequestObject
+-(Package)packageRequestObject
 {
-    Package package = (id)^(id object,uint16_t seqNo)
+    Package package = (id)^(id object, uint16_t seqNo)
     {
         NSArray* array = (NSArray*)object;
-        UInt32 groupID =[TheRuntime changeIDToOriginal:array[0]];
+        UInt32 groupID = [TheRuntime changeIDToOriginal:array[0]];
         uint32_t isShield = [array[1] intValue];
-        IMGroupShieldReqBuilder *groupShield = [IMGroupShieldReq builder];
+        IMGroupShieldReq* groupShield = [[IMGroupShieldReq alloc] init];
         [groupShield setUserId:0];
         [groupShield setGroupId:groupID];
         [groupShield setShieldStatus:isShield];
         
-        DDDataOutputStream *dataout = [[DDDataOutputStream alloc] init];
+        DDDataOutputStream* dataout = [[DDDataOutputStream alloc] init];
         [dataout writeInt:0];
         [dataout writeTcpProtocolHeader:SERVICE_GROUP
                                     cId:CID_GROUP_SHIELD_GROUP_REQUEST
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[groupShield build].data];
+        [dataout directWriteBytes:[groupShield data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

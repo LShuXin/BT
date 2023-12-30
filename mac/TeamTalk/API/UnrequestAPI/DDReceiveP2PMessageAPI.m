@@ -7,8 +7,8 @@
 //
 
 #import "DDReceiveP2PMessageAPI.h"
-#import "IMBaseDefine.pb.h"
-#import "IMSwitchService.pb.h"
+#import "IMBaseDefine.pbobjc.h"
+#import "IMSwitchService.pbobjc.h"
 
 @implementation DDReceiveP2PMessageAPI
 /**
@@ -18,7 +18,7 @@
  */
 - (int)responseServiceID
 {
-    return ServiceIDSidSwitchService;
+    return ServiceID_SidSwitchService;
 }
 
 /**
@@ -28,7 +28,7 @@
  */
 - (int)responseCommandID
 {
-    return SwitchServiceCmdIDCidSwitchP2PCmd;
+    return SwitchServiceCmdID_CidSwitchP2PCmd;
 }
 
 /**
@@ -40,7 +40,7 @@
 {
     UnrequestAPIAnalysis analysis = (id)^(NSData* data)
     {
-        IMP2PCmdMsg *msgRsp = [IMP2PCmdMsg parseFromData:data];
+        IMP2PCmdMsg *msgRsp = [IMP2PCmdMsg parseFromData:data error:nil];
 
         NSString *fromUserId = [NSString stringWithFormat:@"%i",msgRsp.fromUserId];
         NSString *toId = [NSString stringWithFormat:@"%i",msgRsp.toUserId];

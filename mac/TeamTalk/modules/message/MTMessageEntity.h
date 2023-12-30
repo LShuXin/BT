@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IMMessage.pb.h"
+#import "IMMessage.pbobjc.h"
 
 typedef NS_ENUM(NSUInteger, MTMessageType)
 {

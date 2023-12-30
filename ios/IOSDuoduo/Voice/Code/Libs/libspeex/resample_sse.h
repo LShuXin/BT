@@ -62,7 +62,7 @@ static inline float interpolate_product_single(const float *a, const float *b, u
   for(i=0;i<len;i+=2)
   {
     sum = _mm_add_ps(sum, _mm_mul_ps(_mm_load1_ps(a+i), _mm_loadu_ps(b+i*oversample)));
-    sum = _mm_add_ps(sum, _mm_mul_ps(_mm_load1_ps(a+i+1), _mm_loadu_ps(b+(i+1)*oversample)));
+    sum = _mm_add_ps(sum, _mm_mul_ps(_mm_load1_ps(a+i+1), _mm_loadu_ps(b+ (i+1)*oversample)));
   }
    sum = _mm_mul_ps(f, sum);
    sum = _mm_add_ps(sum, _mm_movehl_ps(sum, sum));
@@ -113,7 +113,7 @@ static inline double interpolate_product_double(const float *a, const float *b, 
     sum1 = _mm_add_pd(sum1, _mm_cvtps_pd(t));
     sum2 = _mm_add_pd(sum2, _mm_cvtps_pd(_mm_movehl_ps(t, t)));
 
-    t = _mm_mul_ps(_mm_load1_ps(a+i+1), _mm_loadu_ps(b+(i+1)*oversample));
+    t = _mm_mul_ps(_mm_load1_ps(a+i+1), _mm_loadu_ps(b+ (i+1)*oversample));
     sum1 = _mm_add_pd(sum1, _mm_cvtps_pd(t));
     sum2 = _mm_add_pd(sum2, _mm_cvtps_pd(_mm_movehl_ps(t, t)));
   }

@@ -51,7 +51,7 @@ typedef void(^Failure)(id object);
     {
         NSString *clientVersion = [NSString stringWithFormat:@"MAC/%@-%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"],[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
 
-        NSArray* parameter = @[userID,token,clientVersion,[NSNumber numberWithInteger:UserStatTypeUserStatusOnline]];
+        NSArray* parameter = @[userID,token,clientVersion,[NSNumber numberWithInteger:UserStatType_UserStatusOnline]];
         
         DDLoginAPI* api = [[DDLoginAPI alloc] init];
         [api requestWithObject:parameter Completion:^(id response, NSError *error) {

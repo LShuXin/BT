@@ -356,7 +356,7 @@ void oggpackB_adv(oggpack_buffer *b,int bits){
 }
 
 void oggpack_adv1(oggpack_buffer *b){
-  if(++(b->endbit)>7){
+  if(++ (b->endbit)>7){
     b->endbit=0;
     b->ptr++;
     b->endbyte++;
@@ -497,7 +497,7 @@ long oggpackB_read1(oggpack_buffer *b){
 }
 
 long oggpack_bytes(oggpack_buffer *b){
-  return(b->endbyte+(b->endbit+7)/8);
+  return(b->endbyte+ (b->endbit+7)/8);
 }
 
 long oggpack_bits(oggpack_buffer *b){

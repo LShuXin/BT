@@ -19,9 +19,15 @@ class CFileModel
 public:
     virtual ~CFileModel();
     static CFileModel* getInstance();
-    
+
+    // 获取用户（id 为 userId）的离线文件信息
+    // 所谓的离线文件，是指
     void getOfflineFile(uint32_t userId, list<IM::BaseDefine::OfflineFileInfo>& lsOffline);
+
+    // 添加离线消息信息
     void addOfflineFile(uint32_t fromId, uint32_t toId, string& taskId, string& fileName, uint32_t fileSize);
+
+    // 删除离线消息
     void delOfflineFile(uint32_t fromId, uint32_t toId, string& taskId);
     
 private:

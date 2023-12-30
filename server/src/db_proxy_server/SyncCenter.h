@@ -26,30 +26,57 @@ class CSyncCenter
 {
 public:
     static CSyncCenter* getInstance();
-    uint32_t getLastUpdateGroup() { return m_nLastUpdateGroup; } 
+
+    // 获取上一次更新群组的时间
+    uint32_t getLastUpdateGroup() { return m_nLastUpdateGroup; }
+
+    // 通过部门 id 获取部门名称
     string getDeptName(uint32_t nDeptId);
+
+    // 开始同步群组
     void startSync();
+
+    // 停止同步群组
     void stopSync();
+
+    // 初始化函数，从缓存中获取上次同步群组的时间
     void init();
 private:
-    void updateLastUpdateGroup(uint32_t nUpdated);
-    
     CSyncCenter();
     ~CSyncCenter();
+
+    /**
+     *  更新上次同步群组信息时间
+     *  @param nUpdated 时间
+     */
+    void updateLastUpdateGroup(uint32_t nUpdated);
+
+    // 同步群组聊天信息，主要工作内容是：
+    // 1. 找出在上次群组同步之后，又有新聊天消息的群组，然后更新这些群组中用户的会话
+    // 2. 修改 redis 中最近一次同步群组会话的时间
     static void* doSyncGroupChat(void* arg);
     
 private:
     static CSyncCenter* m_pInstance;
-    uint32_t    m_nLastUpdateGroup;
     
-    CCondition* m_pCondGroupChat;
-    CLock*      m_pLockGroupChat;
-    static bool        m_bSyncGroupChatRuning;
-    bool m_bSyncGroupChatWaitting;
+    // 上次更新群组的时间
+    uint32_t            m_nLastUpdateGroup;
+
+    // 群组条件变量
+    CCondition*         m_pCondGroupChat;
+
+    // 群组锁
+    CLock*              m_pLockGroupChat;
+
+    // 是否正在进行群组同步
+    static bool         m_bSyncGroupChatRuning;
+
+    // 是否正在等待群组同步
+    bool                m_bSyncGroupChatWaitting;
 #ifdef _WIN32
-    DWORD		m_nGroupChatThreadId;
+    DWORD		        m_nGroupChatThreadId;
 #else
-    pthread_t	m_nGroupChatThreadId;
+    pthread_t	        m_nGroupChatThreadId;
 #endif
 
 };

@@ -7,7 +7,7 @@
 //
 
 #import "DDHistoryMessageAPI.h"
-#import "IMMessage.pb.h"
+#import "IMMessage.pbobjc.h"
 #import "MTMessageEntity.h"
 @implementation DDHistoryMessageAPI
 /**
@@ -69,8 +69,8 @@
 {
     Analysis analysis = (id)^(NSData* data)
     {
-        IMGetMsgListRsp *allMessageRsp = [IMGetMsgListRsp parseFromData:data];
-        NSArray* messages = allMessageRsp.msgList;
+        IMGetMsgListRsp *allMessageRsp = [IMGetMsgListRsp parseFromData:data error:nil];
+        NSArray* messages = allMessageRsp.msgListArray;
         NSString* sessionID = [NSString stringWithFormat:@"%i",allMessageRsp.sessionId];
         NSMutableArray* newMessages = [[NSMutableArray alloc] init];
         for (NSInteger index = 0; index < [messages count]; index ++)
@@ -93,7 +93,7 @@
 {
     Package package = (id)^(id object,uint16_t seqNo)
     {
-        IMGetMsgListReqBuilder *req = [IMGetMsgListReq builder];
+        IMGetMsgListReq *req = [[IMGetMsgListReq alloc] init];
         
         [req setUserId:[object[0] intValue]];
         [req setSessionType:[object[1] intValue]];
@@ -105,7 +105,7 @@
         [dataout writeTcpProtocolHeader:DDSERVICE_MESSAGE
                                     cId:CID_MSG_LIST_REQUEST
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[req build].data];
+        [dataout directWriteBytes:[req data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

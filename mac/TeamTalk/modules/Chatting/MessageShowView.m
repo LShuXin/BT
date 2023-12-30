@@ -79,17 +79,17 @@ static void* kNameButtonUserID = @"NameButtonUserIDKey";
 
 - (void)awakeFromNib
 {
-    [self.documentView setFlipped:YES];
-    _documentBeginAddGap = YES;
-    _loading = NO;
-    [self setDelegate:self];
-    bubbleLeftGap = avatarLeftGap + avatarWidth + 5;
-    [self needShowNewMsgBtn:NO];
-    [[self contentView] setPostsBoundsChangedNotifications: YES];
-    [[NSNotificationCenter defaultCenter] addObserver: self
-               selector: @selector(boundsDidChangeNotification:)
-                   name: NSViewBoundsDidChangeNotification
-                 object: [self contentView]];
+//    [self.documentView setFlipped:YES];
+//    _documentBeginAddGap = YES;
+//    _loading = NO;
+//    [self setDelegate:self];
+//    bubbleLeftGap = avatarLeftGap + avatarWidth + 5;
+//    [self needShowNewMsgBtn:NO];
+//    [[self contentView] setPostsBoundsChangedNotifications: YES];
+//    [[NSNotificationCenter defaultCenter] addObserver: self
+//               selector: @selector(boundsDidChangeNotification:)
+//                   name: NSViewBoundsDidChangeNotification
+//                 object: [self contentView]];
 }
 
 -(void)dealloc

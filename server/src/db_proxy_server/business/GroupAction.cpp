@@ -19,12 +19,7 @@
 
 namespace DB_PROXY {
     
-    /**
-     *  创建群组
-     *
-     *  @param pPdu      收到的packet包指针
-     *  @param conn_uuid 该包过来的socket 描述符
-     */
+
     void createGroup(CImPdu* pPdu, uint32_t conn_uuid)
     {
         IM::Group::IMGroupCreateReq msg;

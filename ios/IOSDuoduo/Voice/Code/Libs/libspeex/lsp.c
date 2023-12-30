@@ -559,7 +559,7 @@ void lsp_to_lpc(spx_lsp_t *freq,spx_coef_t *ak,int lpcrdr, char *stack)
     for(j=0;j<=lpcrdr;j++){
        int i2=0;
 	for(i=0;i<m;i++,i2+=2){
-	    n1 = pw+(i*4);
+	    n1 = pw+ (i*4);
 	    n2 = n1 + 1;
 	    n3 = n2 + 1;
 	    n4 = n3 + 1;

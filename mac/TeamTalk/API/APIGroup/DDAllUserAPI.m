@@ -8,7 +8,7 @@
 
 #import "DDAllUserAPI.h"
 #import "MTUserEntity.h"
-#import "IMBuddy.pb.h"
+#import "IMBuddy.pbobjc.h"
 
 @implementation DDAllUserAPI
 /**
@@ -71,12 +71,12 @@
     
     Analysis analysis = (id)^(NSData* data)
     {
-        IMAllUserRsp *allUserRsp = [IMAllUserRsp parseFromData:data];
+        IMAllUserRsp *allUserRsp = [IMAllUserRsp parseFromData:data error: nil];
         uint32_t latestUpdateTime = allUserRsp.latestUpdateTime;
         NSMutableDictionary *userAndVersion = [NSMutableDictionary new];
         [userAndVersion setObject:@(latestUpdateTime) forKey:@"latestUpdateTime"];
         NSMutableArray *userList = [[NSMutableArray alloc] init];
-        for (UserInfo *userInfo in allUserRsp.userList) {
+        for (UserInfo *userInfo in allUserRsp.userListArray) {
             MTUserEntity *user = [[MTUserEntity alloc] initWithUserInfo:userInfo];
             [userList addObject:user];
         }
@@ -96,7 +96,7 @@
 {
     Package package = (id)^(id object,uint32_t seqNo)
     {
-        IMAllUserReqBuilder *reqBuilder = [IMAllUserReq builder];
+        IMAllUserReq *reqBuilder = [[IMAllUserReq alloc] init];
         NSInteger latestUpdateTime = [object[0] integerValue];
         [reqBuilder setUserId:0];
         [reqBuilder setLatestUpdateTime:(UInt32)latestUpdateTime];
@@ -106,7 +106,7 @@
         [dataout writeTcpProtocolHeader:MODULE_ID_SESSION
                                     cId:CMD_FRI_ALL_USER_REQ
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[reqBuilder build].data];
+        [dataout directWriteBytes:[reqBuilder data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

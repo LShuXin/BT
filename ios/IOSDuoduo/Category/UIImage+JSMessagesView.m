@@ -29,10 +29,10 @@
 #import "UIImage+JSMessagesView.h"
 #import "JSMessageInputView.h"
 
-@implementation UIImage (JSMessagesView)
+@implementation UIImage(JSMessagesView)
 
 #pragma mark - Avatar styles
-- (UIImage *)circleImageWithSize:(CGFloat)size
+-(UIImage*)circleImageWithSize:(CGFloat)size
 {
     return [self imageAsCircle:YES
                    withDiamter:size

@@ -45,13 +45,13 @@
     UserStatType userOnlineState = [stateMaintenanceManager getUserStateForUserID:userID];
     switch (userOnlineState)
     {
-        case UserStatTypeUserStatusOnline:
+        case UserStatType_UserStatusOnline:
             icon = [NSImage imageNamed:@"state-online"];
             break;
-        case UserStatTypeUserStatusOffline:
+        case UserStatType_UserStatusOffline:
             icon = [NSImage imageNamed:@"state-offline"];
             break;
-        case UserStatTypeUserStatusLeave:
+        case UserStatType_UserStatusLeave:
             icon = [NSImage imageNamed:@"state-leave"];
             break;
     }

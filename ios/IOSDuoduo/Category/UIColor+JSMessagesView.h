@@ -28,9 +28,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIColor (JSMessagesView)
+@interface UIColor(JSMessagesView)
 
-+ (UIColor *)messagesBackgroundColor;
-+ (UIColor *)messagesTimestampColor;
++ (UIColor*)messagesBackgroundColor;
++ (UIColor*)messagesTimestampColor;
 
 @end

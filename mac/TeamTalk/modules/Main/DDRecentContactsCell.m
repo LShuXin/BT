@@ -55,13 +55,13 @@ NSNumber* DegreesToNumber(CGFloat degrees) {
 - (void)configeCellWithObject:(MTSessionEntity*)object
 {
     //头像和在线状态
-    if (object.sessionType==SessionTypeSessionTypeGroup)
+    if (object.sessionType==SessionType_SessionTypeGroup)
     {
         [nameTextField setTextColor:[NSColor blackColor]];
     }
     else
     {
-        if ([[StateMaintenanceManager instance] getUserStateForUserID:object.sessionID] == UserStatTypeUserStatusOnline)
+        if ([[StateMaintenanceManager instance] getUserStateForUserID:object.sessionID] == UserStatType_UserStatusOnline)
         {
             [nameTextField setTextColor:[NSColor blackColor]];
         }

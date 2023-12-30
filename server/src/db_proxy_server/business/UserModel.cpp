@@ -27,7 +27,7 @@ CUserModel::~CUserModel()
 
 CUserModel* CUserModel::getInstance()
 {
-    if(m_pInstance == NULL)
+    if (m_pInstance == NULL)
     {
         m_pInstance = new CUserModel();
     }
@@ -41,7 +41,7 @@ void CUserModel::getChangedId(uint32_t& nLastTime, list<uint32_t> &lsIds)
     if (pDBConn)
     {
         string strSql ;
-        if(nLastTime == 0)
+        if (nLastTime == 0)
         {
             strSql = "select id, updated from IMUser where status != 3";
         }
@@ -50,12 +50,13 @@ void CUserModel::getChangedId(uint32_t& nLastTime, list<uint32_t> &lsIds)
             strSql = "select id, updated from IMUser where updated>=" + int2string(nLastTime);
         }
         CResultSet* pResultSet = pDBConn->ExecuteQuery(strSql.c_str());
-        if(pResultSet)
+        if (pResultSet)
         {
-            while (pResultSet->Next()) {
+            while (pResultSet->Next())
+            {
                 uint32_t nId = pResultSet->GetInt("id");
                 uint32_t nUpdated = pResultSet->GetInt("updated");
-                if(nLastTime < nUpdated)
+                if (nLastTime < nUpdated)
                 {
                     nLastTime = nUpdated;
                 }
@@ -77,19 +78,21 @@ void CUserModel::getChangedId(uint32_t& nLastTime, list<uint32_t> &lsIds)
 
 void CUserModel::getUsers(list<uint32_t> lsIds, list<IM::BaseDefine::UserInfo> &lsUsers)
 {
-    if (lsIds.empty()) {
+    if (lsIds.empty())
+    {
         log("list is empty");
         return;
     }
     CDBManager* pDBManager = CDBManager::getInstance();
     CDBConn* pDBConn = pDBManager->GetDBConn("teamtalk_slave");
+
     if (pDBConn)
     {
         string strClause;
         bool bFirst = true;
-        for (auto it = lsIds.begin(); it!=lsIds.end(); ++it)
+        for (auto it = lsIds.begin(); it != lsIds.end(); ++it)
         {
-            if(bFirst)
+            if (bFirst)
             {
                 bFirst = false;
                 strClause += int2string(*it);
@@ -99,9 +102,9 @@ void CUserModel::getUsers(list<uint32_t> lsIds, list<IM::BaseDefine::UserInfo> &
                 strClause += ("," + int2string(*it));
             }
         }
-        string  strSql = "select * from IMUser where id in (" + strClause + ")";
+        string strSql = "select * from IMUser where id in (" + strClause + ")";
         CResultSet* pResultSet = pDBConn->ExecuteQuery(strSql.c_str());
-        if(pResultSet)
+        if (pResultSet)
         {
             while (pResultSet->Next())
             {
@@ -139,9 +142,9 @@ bool CUserModel::getUser(uint32_t nUserId, DBUserInfo_t &cUser)
     CDBConn* pDBConn = pDBManager->GetDBConn("teamtalk_slave");
     if (pDBConn)
     {
-        string strSql = "select * from IMUser where id="+int2string(nUserId);
+        string strSql = "select * from IMUser where id=" + int2string(nUserId);
         CResultSet* pResultSet = pDBConn->ExecuteQuery(strSql.c_str());
-        if(pResultSet)
+        if (pResultSet)
         {
             while (pResultSet->Next())
             {
@@ -176,13 +179,14 @@ bool CUserModel::updateUser(DBUserInfo_t &cUser)
 {
     bool bRet = false;
     CDBManager* pDBManager = CDBManager::getInstance();
+    // mysql master 数据库用于写，mysql slave 数据库用于读
     CDBConn* pDBConn = pDBManager->GetDBConn("teamtalk_master");
     if (pDBConn)
     {
         uint32_t nNow = (uint32_t)time(NULL);
-        string strSql = "update IMUser set `sex`=" + int2string(cUser.nSex)+ ", `nick`='" + cUser.strNick +"', `domain`='"+ cUser.strDomain + "', `name`='" + cUser.strName + "', `phone`='" + cUser.strTel + "', `email`='" + cUser.strEmail+ "', `avatar`='" + cUser.strAvatar + "', `departId`='" + int2string(cUser.nDeptId) + "', `status`=" + int2string(cUser.nStatus) + ", `updated`="+int2string(nNow) + " where id="+int2string(cUser.nId);
+        string strSql = "update IMUser set `sex`=" + int2string(cUser.nSex) + ", `nick`='" + cUser.strNick + "', `domain`='" + cUser.strDomain + "', `name`='" + cUser.strName + "', `phone`='" + cUser.strTel + "', `email`='" + cUser.strEmail + "', `avatar`='" + cUser.strAvatar + "', `departId`='" + int2string(cUser.nDeptId) + "', `status`=" + int2string(cUser.nStatus) + ", `updated`="+int2string(nNow) + " where id="+int2string(cUser.nId);
         bRet = pDBConn->ExecuteUpdate(strSql.c_str());
-        if(!bRet)
+        if (!bRet)
         {
             log("update failed:%s", strSql.c_str());
         }
@@ -241,14 +245,14 @@ bool CUserModel::insertUser(DBUserInfo_t &cUser)
 
 void CUserModel::clearUserCounter(uint32_t nUserId, uint32_t nPeerId, IM::BaseDefine::SessionType nSessionType)
 {
-    if(IM::BaseDefine::SessionType_IsValid(nSessionType))
+    if (IM::BaseDefine::SessionType_IsValid(nSessionType))
     {
         CacheManager* pCacheManager = CacheManager::getInstance();
         CacheConn* pCacheConn = pCacheManager->GetCacheConn("unread");
         if (pCacheConn)
         {
             // Clear P2P msg Counter
-            if(nSessionType == IM::BaseDefine::SESSION_TYPE_SINGLE)
+            if (nSessionType == IM::BaseDefine::SESSION_TYPE_SINGLE)
             {
                 int nRet = pCacheConn->hdel("unread_" + int2string(nUserId), int2string(nPeerId));
                 if(!nRet)
@@ -257,7 +261,7 @@ void CUserModel::clearUserCounter(uint32_t nUserId, uint32_t nPeerId, IM::BaseDe
                 }
             }
             // Clear Group msg Counter
-            else if(nSessionType == IM::BaseDefine::SESSION_TYPE_GROUP)
+            else if (nSessionType == IM::BaseDefine::SESSION_TYPE_GROUP)
             {
                 string strGroupKey = int2string(nPeerId) + GROUP_TOTAL_MSG_COUNTER_REDIS_KEY_SUFFIX;
                 map<string, string> mapGroupCount;
@@ -266,7 +270,8 @@ void CUserModel::clearUserCounter(uint32_t nUserId, uint32_t nPeerId, IM::BaseDe
                 {
                     string strUserKey = int2string(nUserId) + "_" + int2string(nPeerId) + GROUP_USER_MSG_COUNTER_REDIS_KEY_SUFFIX;
                     string strReply = pCacheConn->hmset(strUserKey, mapGroupCount);
-                    if(strReply.empty()) {
+                    if (strReply.empty())
+                    {
                         log("hmset %s failed !", strUserKey.c_str());
                     }
                 }

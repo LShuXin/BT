@@ -324,7 +324,7 @@ int   update_target
    for (i=0;i<N;i++)
    {
       ot2[i]=tmp+2*i*nsf;
-      nt2[i]=tmp+(2*i+1)*nsf;
+      nt2[i]=tmp+ (2*i+1)*nsf;
    }
    ot=ot2;
    nt=nt2;
@@ -339,7 +339,7 @@ int   update_target
    for (i=0;i<N;i++)
    {
       nind[i]=itmp+2*i*nb_subvect;
-      oind[i]=itmp+(2*i+1)*nb_subvect;
+      oind[i]=itmp+ (2*i+1)*nb_subvect;
    }
    
    SPEEX_COPY(t, target, nsf);

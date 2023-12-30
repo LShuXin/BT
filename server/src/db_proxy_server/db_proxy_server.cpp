@@ -51,31 +51,37 @@ int main(int argc, char* argv[])
 	srand(time(NULL));
 
 	CacheManager* pCacheManager = CacheManager::getInstance();
-	if (!pCacheManager) {
+	if (!pCacheManager)
+	{
 		log("CacheManager init failed");
 		return -1;
 	}
 
 	CDBManager* pDBManager = CDBManager::getInstance();
-	if (!pDBManager) {
+	if (!pDBManager)
+	{
 		log("DBManager init failed");
 		return -1;
 	}
 
 	// 主线程初始化单例，不然在工作线程可能会出现多次初始化
-	if (!CAudioModel::getInstance()) {
+	if (!CAudioModel::getInstance())
+	{
 		return -1;
 	}
     
-    if (!CGroupMessageModel::getInstance()) {
+    if (!CGroupMessageModel::getInstance())
+    {
         return -1;
     }
     
-    if (!CGroupModel::getInstance()) {
+    if (!CGroupModel::getInstance())
+    {
         return -1;
     }
     
-    if (!CMessageModel::getInstance()) {
+    if (!CMessageModel::getInstance())
+    {
         return -1;
     }
 
@@ -83,19 +89,20 @@ int main(int argc, char* argv[])
 		return -1;
 	}
     
-    if(!CRelationModel::getInstance())
+    if (!CRelationModel::getInstance())
     {
         return -1;
     }
     
-    if (!CUserModel::getInstance()) {
+    if (!CUserModel::getInstance())
+    {
         return -1;
     }
     
-    if (!CFileModel::getInstance()) {
+    if (!CFileModel::getInstance())
+    {
         return -1;
     }
-
 
 	CConfigFileReader config_file("dbproxyserver.conf");
 
@@ -105,12 +112,13 @@ int main(int argc, char* argv[])
     char* str_file_site = config_file.GetConfigName("MsfsSite");
     char* str_aes_key = config_file.GetConfigName("aesKey");
 
-	if (!listen_ip || !str_listen_port || !str_thread_num || !str_file_site || !str_aes_key) {
+	if (!listen_ip || !str_listen_port || !str_thread_num || !str_file_site || !str_aes_key)
+	{
 		log("missing ListenIP/ListenPort/ThreadNum/MsfsSite/aesKey, exit...");
 		return -1;
 	}
     
-    if(strlen(str_aes_key) != 32)
+    if (strlen(str_aes_key) != 32)
     {
         log("aes key is invalied");
         return -2;
@@ -120,9 +128,10 @@ int main(int argc, char* argv[])
     string strAudio = "[语音]";
     char* pAudioEnc;
     uint32_t nOutLen;
-    if(cAes.Encrypt(strAudio.c_str(), strAudio.length(), &pAudioEnc, nOutLen) == 0)
+    if (cAes.Encrypt(strAudio.c_str(), strAudio.length(), &pAudioEnc, nOutLen) == 0)
     {
         strAudioEnc.clear();
+        // 提前计算出来，保存为全局变量，后面直接用
         strAudioEnc.append(pAudioEnc, nOutLen);
         cAes.Free(pAudioEnc);
     }
@@ -136,22 +145,25 @@ int main(int argc, char* argv[])
 	int ret = netlib_init();
 
 	if (ret == NETLIB_ERROR)
-		return ret;
-    
-    /// yunfan add 2014.9.28
+    {
+        return ret;
+    }
+
     // for 603 push
     curl_global_init(CURL_GLOBAL_ALL);
-    /// yunfan add end
 
 	init_proxy_conn(thread_num);
     CSyncCenter::getInstance()->init();
     CSyncCenter::getInstance()->startSync();
 
 	CStrExplode listen_ip_list(listen_ip, ';');
-	for (uint32_t i = 0; i < listen_ip_list.GetItemCnt(); i++) {
+	for (uint32_t i = 0; i < listen_ip_list.GetItemCnt(); i++)
+	{
 		ret = netlib_listen(listen_ip_list.GetItem(i), listen_port, proxy_serv_callback, NULL);
 		if (ret == NETLIB_ERROR)
-			return ret;
+        {
+            return ret;
+        }
 	}
 
 	printf("server start listen on: %s:%d\n", listen_ip,  listen_port);

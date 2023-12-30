@@ -13,16 +13,19 @@
 #import "DDMessageModule.h"
 #import "RuntimeStatus.h"
 #import "SessionEntity.h"
-#import "IMMessage.pb.h"
-#import "IMBaseDefine.pb.h"
+#import "IMMessage.pbobjc.h"
+#import "IMBaseDefine.pbobjc.h"
 #import "GroupEntity.h"
+
+
 @implementation GetUnreadMessagesAPI
+
 /**
  *  请求超时时间
  *
  *  @return 超时时间
  */
-- (int)requestTimeOutTimeInterval
+-(int)requestTimeOutTimeInterval
 {
     return 20;
 }
@@ -32,7 +35,7 @@
  *
  *  @return 对应的serviceID
  */
-- (int)requestServiceID
+-(int)requestServiceID
 {
     return DDSERVICE_MESSAGE;
 }
@@ -42,7 +45,7 @@
  *
  *  @return 对应的serviceID
  */
-- (int)responseServiceID
+-(int)responseServiceID
 {
     return DDSERVICE_MESSAGE;
 }
@@ -52,7 +55,7 @@
  *
  *  @return 对应的commendID
  */
-- (int)requestCommendID
+-(int)requestCommendID
 {
     return CID_MSG_UNREAD_CNT_REQUEST;
 }
@@ -62,7 +65,7 @@
  *
  *  @return 对应的commendID
  */
-- (int)responseCommendID
+-(int)responseCommendID
 {
     return CID_MSG_UNREAD_CNT_RESPONSE;
 }
@@ -72,33 +75,37 @@
  *
  *  @return 解析数据的block
  */
-- (Analysis)analysisReturnData
+-(Analysis)analysisReturnData
 {
     Analysis analysis = (id)^(NSData* data)
     {
-        IMUnreadMsgCntRsp *unreadrsp = [IMUnreadMsgCntRsp parseFromData:data];
+        IMUnreadMsgCntRsp* unreadrsp = [IMUnreadMsgCntRsp parseFromData:data error:nil];
        
-        NSMutableDictionary *dic = [NSMutableDictionary new];
+        NSMutableDictionary* dic = [NSMutableDictionary new];
         NSInteger m_total_cnt = unreadrsp.totalCnt;
         [dic setObject:@(m_total_cnt) forKey:@"m_total_cnt"];
-         NSMutableArray *array = [NSMutableArray new];
-        for (UnreadInfo *unreadInfo in unreadrsp.unreadinfoList) {
-            NSString *userID = @"";
+        NSMutableArray* array = [NSMutableArray new];
+        
+        for (UnreadInfo* unreadInfo in unreadrsp.unreadinfoListArray)
+        {
+            NSString* userID = @"";
             NSInteger sessionType = unreadInfo.sessionType;
-            if (sessionType == SessionTypeSessionTypeSingle) {
+            if (sessionType == SessionType_SessionTypeSingle)
+            {
                 userID = [DDUserEntity pbUserIdToLocalID:unreadInfo.sessionId];
-            }else{
+            }
+            else
+            {
                 userID = [GroupEntity pbGroupIdToLocalID:unreadInfo.sessionId];
             }
             NSInteger unread_cnt = unreadInfo.unreadCnt;
             NSInteger latest_msg_id = unreadInfo.latestMsgId;
-            NSString *latest_msg_content = unreadInfo.latestMsgData;
-            SessionEntity *session = [[SessionEntity alloc] initWithSessionID:userID type:sessionType];
-            session.unReadMsgCount=unread_cnt;
-            session.lastMsg=latest_msg_content;
-            session.lastMsgID=latest_msg_id;
+            NSString* latest_msg_content = [[NSString alloc] initWithData:unreadInfo.latestMsgData encoding:NSUTF8StringEncoding];
+            SessionEntity* session = [[SessionEntity alloc] initWithSessionID:userID type:sessionType];
+            session.unReadMsgCount = unread_cnt;
+            session.lastMsg = latest_msg_content;
+            session.lastMsgID = latest_msg_id;
             [array addObject:session];
-
         }
        
         [dic setObject:array forKey:@"sessions"];
@@ -112,18 +119,18 @@
  *
  *  @return 打包数据的block
  */
-- (Package)packageRequestObject
+-(Package)packageRequestObject
 {
-    Package package = (id)^(id object,uint32_t seqNo)
+    Package package = (id)^(id object, uint32_t seqNo)
     {
-        IMUnreadMsgCntReqBuilder *unreadreq = [IMUnreadMsgCntReq builder];
+        IMUnreadMsgCntReq* unreadreq = [[IMUnreadMsgCntReq alloc] init];
         [unreadreq setUserId:0];
-        DDDataOutputStream *dataout = [[DDDataOutputStream alloc] init];
+        DDDataOutputStream* dataout = [[DDDataOutputStream alloc] init];
         [dataout writeInt:0];
         [dataout writeTcpProtocolHeader:DDSERVICE_MESSAGE
                                     cId:CID_MSG_UNREAD_CNT_REQUEST
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[unreadreq build].data];
+        [dataout directWriteBytes:[unreadreq data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

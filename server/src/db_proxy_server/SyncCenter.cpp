@@ -21,49 +21,44 @@
 #include "business/GroupModel.h"
 #include "business/SessionModel.h"
 
+// 初始单例的锁，避免多个线程同时初始化单例
 static CLock* g_pLock = new CLock();
-static CRWLock *g_pRWDeptLock = new CRWLock();
+// static CRWLock *g_pRWDeptLock = new CRWLock();
 
 CSyncCenter* CSyncCenter::m_pInstance = NULL;
 bool CSyncCenter::m_bSyncGroupChatRuning = false;
-/**
- *  单例
- *
- *  @return 返回CSyncCenter的单例指针
- */
+
 CSyncCenter* CSyncCenter::getInstance()
 {
+    // 加锁，避免多个线程同时初始化单例
     CAutoLock autoLock(g_pLock);
-    if(m_pInstance == NULL)
+    if (m_pInstance == NULL)
     {
         m_pInstance = new CSyncCenter();
     }
     return m_pInstance;
 }
 
-/**
- *  构造函数
- */
 CSyncCenter::CSyncCenter()
-:m_nGroupChatThreadId(0),
-m_nLastUpdateGroup(time(NULL)),
-m_bSyncGroupChatWaitting(true),
-m_pLockGroupChat(new CLock())
-//m_pLock(new CLock())
+    :m_nGroupChatThreadId(0),
+    m_nLastUpdateGroup(time(NULL)),
+    m_bSyncGroupChatWaitting(true),
+    m_pLockGroupChat(new CLock())
+    //m_pLock(new CLock())
 {
     m_pCondGroupChat = new CCondition(m_pLockGroupChat);
 }
 
-/**
- *  析构函数
- */
 CSyncCenter::~CSyncCenter()
 {
-    if(m_pLockGroupChat != NULL)
+    // 删除锁
+    if (m_pLockGroupChat != NULL)
     {
         delete m_pLockGroupChat;
     }
-    if(m_pCondGroupChat != NULL)
+
+    // 删除条件变量
+    if (m_pCondGroupChat != NULL)
     {
         delete m_pCondGroupChat;
     }
@@ -87,31 +82,36 @@ void CSyncCenter::startSync()
 void CSyncCenter::stopSync()
 {
     m_bSyncGroupChatWaitting = false;
+
+    // 唤醒一个被条件变量阻塞的线程
+    // 实际上也只开辟了一个工作线程用于同步群组
     m_pCondGroupChat->notify();
-    while (m_bSyncGroupChatRuning ) {
+
+    // 已经发出了停止同步的信号
+    // 如果同步还没有停止，则应该让主线程同步
+    while (m_bSyncGroupChatRuning)
+    {
         usleep(500);
     }
 }
 
-/*
- * 初始化函数，从cache里面加载上次同步的时间信息等
- */
 void CSyncCenter::init()
 {
-    // Load total update time
     CacheManager* pCacheManager = CacheManager::getInstance();
-    // increase message count
     CacheConn* pCacheConn = pCacheManager->GetCacheConn("unread");
     if (pCacheConn)
     {
         string strLastUpdateGroup = pCacheConn->get("last_update_group");
         pCacheManager->RelCacheConn(pCacheConn);
-        if(strLastUpdateGroup.empty())
+        // BUGFIX: strLastUpdateGroup.empty() -> !strLastUpdateGroup.empty()
+        if (!strLastUpdateGroup.empty())
         {
             m_nLastUpdateGroup = string2int(strLastUpdateGroup);
         }
         else
         {
+            // 如果缓存中没有上次同步的时间，则直接将上次同步的时间设置为当前时间
+            // 因为调用完 init 之后会立即开始同步
             updateLastUpdateGroup(time(NULL));
         }
     }
@@ -121,16 +121,14 @@ void CSyncCenter::init()
     }
 }
 
-/**
- *  更新上次同步群组信息时间
- *
- *  @param nUpdated 时间
- */
 void CSyncCenter::updateLastUpdateGroup(uint32_t nUpdated)
 {
     CacheManager* pCacheManager = CacheManager::getInstance();
     CacheConn* pCacheConn = pCacheManager->GetCacheConn("unread");
-    if (pCacheConn) {
+    if (pCacheConn)
+    {
+        // 上次更新群组消息的时间
+        // 此对象保存一份、redis 中也保存了一份，这是为什么？
         m_nLastUpdateGroup = nUpdated;
         string strUpdated = int2string(nUpdated);
         pCacheConn->set("last_update_group", strUpdated);
@@ -142,31 +140,28 @@ void CSyncCenter::updateLastUpdateGroup(uint32_t nUpdated)
     }
 }
 
-/**
- *  同步群组聊天信息
- *
- *  @param arg NULL
- *
- *  @return NULL
- */
 void* CSyncCenter::doSyncGroupChat(void* arg)
 {
+    // 标记群组聊天同步线程正在运行
     m_bSyncGroupChatRuning = true;
     CDBManager* pDBManager = CDBManager::getInstance();
+    // 暂存自从上次同步群组消息之后，又有新聊天的群组的群 id 和对应最近一次聊天的时间
     map<uint32_t, uint32_t> mapChangedGroup;
-    do{
+    do {
         mapChangedGroup.clear();
+        // mysql slave 数据库只用于读，master 数据库只用于写
         CDBConn* pDBConn = pDBManager->GetDBConn("teamtalk_slave");
-        if(pDBConn)
+        if (pDBConn)
         {
-            string strSql = "select id, lastChated from IMGroup where status=0 and lastChated >=" + int2string(m_pInstance->getLastUpdateGroup());
+            string strSql = "select id,lastChated from IMGroup where status=0 and lastChated >=" + int2string(m_pInstance->getLastUpdateGroup());
             CResultSet* pResult = pDBConn->ExecuteQuery(strSql.c_str());
-            if(pResult)
+            if (pResult)
             {
-                while (pResult->Next()) {
+                while (pResult->Next())
+                {
                     uint32_t nGroupId = pResult->GetInt("id");
                     uint32_t nLastChat = pResult->GetInt("lastChated");
-                    if(nLastChat != 0)
+                    if (nLastChat != 0)
                     {
                         mapChangedGroup[nGroupId] = nLastChat;
                     }
@@ -179,19 +174,22 @@ void* CSyncCenter::doSyncGroupChat(void* arg)
         {
             log("no db connection for teamtalk_slave");
         }
+
+        // 更新最近一次同步群组消息的时间（写入redis）
         m_pInstance->updateLastUpdateGroup(time(NULL));
-        for (auto it=mapChangedGroup.begin(); it!=mapChangedGroup.end(); ++it)
+        // 更新会话或者创建会话
+        for (auto it = mapChangedGroup.begin(); it != mapChangedGroup.end(); ++it)
         {
-            uint32_t nGroupId =it->first;
+            uint32_t nGroupId = it->first;
             list<uint32_t> lsUsers;
             uint32_t nUpdate = it->second;
             CGroupModel::getInstance()->getGroupUser(nGroupId, lsUsers);
-            for (auto it1=lsUsers.begin(); it1!=lsUsers.end(); ++it1)
+            for (auto it1 = lsUsers.begin(); it1 != lsUsers.end(); ++it1)
             {
                 uint32_t nUserId = *it1;
                 uint32_t nSessionId = INVALID_VALUE;
                 nSessionId = CSessionModel::getInstance()->getSessionId(nUserId, nGroupId, IM::BaseDefine::SESSION_TYPE_GROUP, true);
-                if(nSessionId != INVALID_VALUE)
+                if (nSessionId != INVALID_VALUE)
                 {
                     CSessionModel::getInstance()->updateSession(nSessionId, nUpdate);
                 }
@@ -202,7 +200,7 @@ void* CSyncCenter::doSyncGroupChat(void* arg)
             }
         }
 //    } while (!m_pInstance->m_pCondSync->waitTime(5*1000));
-    } while (m_pInstance->m_bSyncGroupChatWaitting && !(m_pInstance->m_pCondGroupChat->waitTime(5*1000)));
+    } while (m_pInstance->m_bSyncGroupChatWaitting && !(m_pInstance->m_pCondGroupChat->waitTime(5 * 1000)));
 //    } while(m_pInstance->m_bSyncGroupChatWaitting);
     m_bSyncGroupChatRuning = false;
     return NULL;

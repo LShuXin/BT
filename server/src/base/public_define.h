@@ -14,25 +14,31 @@
 #include "IM.BaseDefine.pb.h"
 #include "ostype.h"
 
+
 using namespace std;
+
 
 #define XIAO_T_UID  99999999
 
-enum {
+enum
+{
     USER_CNT_INC = 1,
     USER_CNT_DEC = 2,
 };
 
-enum {
+enum
+{
     IM_GROUP_SETTING_PUSH = 1,
 };
 
-enum {
+enum
+{
     IM_PUSH_TYPE_NORMAL = 1,
     IM_PUSH_TYPE_SILENT = 2,
 };
 
-enum {
+enum
+{
     IM_PC_LOGIN_STATUS_ON = 1,
     IM_PC_LOGIN_STATUS_OFF = 0,
 };
@@ -72,21 +78,24 @@ bRet = true;\
 bRet;\
 })
 
-enum {
+enum
+{
     GENDER_UNKNOWN = 0,
     GENDER_MAN = 1,
     GENDER_WOMAN = 2,
 };
 
 /*
-enum {
+enum
+{
     SESSION_TYPE_SINGLE     = 0x01,
     SESSION_TYPE_GROUP      = 0x02,
 };
 */
 
 /*
-enum {
+enum
+{
     MSG_TYPE_SINGLE_TEXT    = 0x01,
     MSG_TYPE_SINGLE_AUDIO   = 0x02,
     MSG_TYPE_GROUP_TEXT     = 0x11,
@@ -116,7 +125,8 @@ bRet;\
 })
 
 
-typedef struct AudioMsgInfo {
+typedef struct AudioMsgInfo
+{
     uint32_t audioId;
     uint32_t fileSize;
     uint32_t data_len;
@@ -125,19 +135,42 @@ typedef struct AudioMsgInfo {
 
 } AudioMsgInfo_t;
 
-typedef struct DBUserInfo_t {
-    uint32_t nId;//用户ID
-    uint8_t nSex;// 用户性别 1.男;2.女
-    uint8_t nStatus; // 用户状态0 正常， 1 离职
-    uint32_t nDeptId;// 所属部门
-    string strNick;// 花名
-    string strDomain;// 花名拼音
-    string strName;// 真名
-    string strTel;// 手机号码
-    string strEmail;// Email
-    string strAvatar;// 头像
-    DBUserInfo_t &operator=(const DBUserInfo_t &rhs) {
-        if (this != &rhs) {
+typedef struct DBUserInfo_t
+{
+    //用户ID
+    uint32_t nId;
+
+    // 用户性别 1.男;2.女
+    uint8_t nSex;
+
+    // 用户状态0 正常，1 离职
+    uint8_t nStatus;
+
+    // 所属部门
+    uint32_t nDeptId;
+
+    // 花名
+    string strNick;
+
+    // 花名拼音
+    string strDomain;
+
+    // 真名
+    string strName;
+
+    // 手机号码
+    string strTel;
+
+    // Email
+    string strEmail;
+
+    // 头像
+    string strAvatar;
+
+    DBUserInfo_t &operator=(const DBUserInfo_t &rhs)
+    {
+        if (this != &rhs)
+        {
             nId = rhs.nId;
             nSex = rhs.nSex;
             nStatus = rhs.nStatus;
@@ -156,13 +189,16 @@ typedef struct DBUserInfo_t {
 
 typedef hash_map<uint32_t, DBUserInfo_t *> DBUserMap_t;
 
-typedef struct DBDeptInfo_t {
+typedef struct DBDeptInfo_t
+{
     uint32_t nId;
     uint32_t nParentId;
     string strName;
 
-    DBDeptInfo_t &operator=(const DBDeptInfo_t &rhs) {
-        if (this != &rhs) {
+    DBDeptInfo_t &operator=(const DBDeptInfo_t &rhs)
+    {
+        if (this != &rhs)
+        {
             nId = rhs.nId;
             nParentId = rhs.nParentId;
             strName = rhs.strName;
@@ -175,18 +211,21 @@ typedef struct DBDeptInfo_t {
 typedef hash_map<uint32_t, DBDeptInfo_t *> DBDeptMap_t;
 
 
-typedef struct {
+typedef struct
+{
     uint32_t user_id;
     uint32_t conn_cnt;
 } user_conn_t;
 
-typedef struct {
+typedef struct
+{
     uint32_t user_id;
     uint32_t status;
     uint32_t client_type;
 } user_stat_t;
 
-typedef struct {
+typedef struct
+{
     uint32_t user_id;
     set<uint32_t> allow_user_ids;
     set<uint32_t> allow_group_ids;
@@ -195,5 +234,6 @@ typedef struct {
 } auth_struct;
 
 #define MAX_MSG_LEN     4096
+
 
 #endif

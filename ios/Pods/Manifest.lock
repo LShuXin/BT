@@ -32,7 +32,7 @@ PODS:
     - MBProgressHUD (~> 0.8)
     - PSTCollectionView (~> 1.2)
     - SDWebImage (~> 3.7)
-  - ProtocolBuffers (1.9.11)
+  - Protobuf (3.18.3)
   - PSTCollectionView (1.2.3)
   - SCLAlertView-Objective-C (1.2.0)
   - SDWebImage (3.7.6):
@@ -47,7 +47,7 @@ DEPENDENCIES:
   - leveldb-library (~> 1.18.3)
   - MBProgressHUD (~> 0.8)
   - MWPhotoBrowser (~> 1.4.1)
-  - ProtocolBuffers (= 1.9.11)
+  - Protobuf (~> 3.18.0)
   - PSTCollectionView (~> 1.2.3)
   - SCLAlertView-Objective-C (~> 1.2.0)
   - SDWebImage (= 3.7.6)
@@ -59,7 +59,7 @@ SPEC REPOS:
     - leveldb-library
     - MBProgressHUD
     - MWPhotoBrowser
-    - ProtocolBuffers
+    - Protobuf
     - PSTCollectionView
     - SCLAlertView-Objective-C
     - SDWebImage
@@ -78,11 +78,11 @@ SPEC CHECKSUMS:
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MWPhotoBrowser: 2531e682860d62b8a7ba8659de02eb9040e431e5
-  ProtocolBuffers: d509225eb2ea43d9582a59e94348fcf86e2abd65
+  Protobuf: 9c40b90885968e63530983e38af7fef3c85741a5
   PSTCollectionView: 6749df92885353521f55279a7ce2b293762e2be4
   SCLAlertView-Objective-C: 84f12f66d779dadad7f293e5e8b7697ba4254ee0
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
 
-PODFILE CHECKSUM: 2d7aca8a7fcbe1beecacd0a8e7d93a76437c59d9
+PODFILE CHECKSUM: fcf64e07e525d39fb017649b6f93ab4ef1855000
 
 COCOAPODS: 1.11.3

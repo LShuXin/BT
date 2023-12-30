@@ -9,12 +9,15 @@
 #import "NSString+DDPath.h"
 #import "DDUserModule.h"
 #import "RuntimeStatus.h"
-@implementation NSString (DDPath)
+
+
+@implementation NSString(DDPath)
+
 + (NSString*)userExclusiveDirection
 {
     NSString* myName = TheRuntime.user.objID;
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     
     NSString* directorPath = [documentsDirectory stringByAppendingPathComponent:myName];
@@ -25,4 +28,5 @@
     }
     return directorPath;
 }
+
 @end

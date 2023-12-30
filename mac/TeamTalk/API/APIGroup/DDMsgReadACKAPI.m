@@ -7,7 +7,7 @@
 //
 
 #import "DDMsgReadACKAPI.h"
-#import "IMMessage.pb.h"
+#import "IMMessage.pbobjc.h"
 
 @implementation DDMsgReadACKAPI
 /**
@@ -80,7 +80,7 @@
 {
     Package package = (id)^(id object,uint32_t seqNo)
     {
-        IMMsgDataReadAckBuilder *req = [IMMsgDataReadAck builder];
+        IMMsgDataReadAck *req = [[IMMsgDataReadAck alloc] init];
         
         [req setUserId:0];
         [req setSessionId:(UInt32)[object[0] integerValue]];
@@ -92,7 +92,7 @@
         [dataout writeTcpProtocolHeader:DDSERVICE_MESSAGE
                                     cId:CMD_MSG_READ_ACK
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[req build].data];
+        [dataout directWriteBytes:[req data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

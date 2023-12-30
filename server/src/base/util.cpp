@@ -1,6 +1,9 @@
 #include "util.h"
 #include <sstream>
+
+
 using namespace std;
+
 
 CSLog g_imlog = CSLog(LOG_MODULE_IM);
 
@@ -46,7 +49,9 @@ void CRefObject::ReleaseRef()
 	{
 		m_refCount--;
 		if (m_refCount == 0)
-			delete this;
+        {
+            delete this;
+        }
 	}
 }
 
@@ -86,8 +91,10 @@ CStrExplode::CStrExplode(char* str, char seperator)
 {
 	m_item_cnt = 1;
 	char* pos = str;
-	while (*pos) {
-		if (*pos == seperator) {
+	while (*pos)
+	{
+		if (*pos == seperator)
+		{
 			m_item_cnt++;
 		}
 
@@ -98,12 +105,14 @@ CStrExplode::CStrExplode(char* str, char seperator)
 
 	int idx = 0;
 	char* start = pos = str;
-	while (*pos) {
-		if (pos != start && *pos == seperator) {
+	while (*pos)
+	{
+		if (pos != start && *pos == seperator)
+		{
 			uint32_t len = pos - start;
 			m_item_list[idx] = new char [len + 1];
 			strncpy(m_item_list[idx], start, len);
-			m_item_list[idx][len]  = '\0';
+			m_item_list[idx][len] = '\0';
 			idx++;
 
 			start = pos + 1;
@@ -113,33 +122,36 @@ CStrExplode::CStrExplode(char* str, char seperator)
 	}
 
 	uint32_t len = pos - start;
-    if(len != 0)
+    if (len != 0)
     {
         m_item_list[idx] = new char [len + 1];
         strncpy(m_item_list[idx], start, len);
-        m_item_list[idx][len]  = '\0';
+        m_item_list[idx][len] = '\0';
     }
 }
 
 CStrExplode::~CStrExplode()
 {
-	for (uint32_t i = 0; i < m_item_cnt; i++) {
+	for (uint32_t i = 0; i < m_item_cnt; i++)
+	{
 		delete [] m_item_list[i];
 	}
 
 	delete [] m_item_list;
 }
 
+// 字符替换而不是字符串替换
 char* replaceStr(char* pSrc, char oldChar, char newChar)
 {
-    if(NULL == pSrc)
+    if (NULL == pSrc)
     {
         return NULL;
     }
     
     char *pHead = pSrc;
-    while (*pHead != '\0') {
-        if(*pHead == oldChar)
+    while (*pHead != '\0')
+    {
+        if (*pHead == oldChar)
         {
             *pHead = newChar;
         }
@@ -160,11 +172,13 @@ uint32_t string2int(const string& value)
     return (uint32_t)atoi(value.c_str());
 }
 
-// 由于被替换的内容可能包含?号，所以需要更新开始搜寻的位置信息来避免替换刚刚插入的?号
+// 用于在含有 n 个 ？的字符串中逐个将 ？替换为 ' + new_value + '
+// 在防止 Sql 注入那里用到
 void replace_mark(string& str, string& new_value, uint32_t& begin_pos)
 {
     string::size_type pos = str.find('?', begin_pos);
-    if (pos == string::npos) {
+    if (pos == string::npos)
+    {
         return;
     }
     
@@ -181,7 +195,8 @@ void replace_mark(string& str, uint32_t new_value, uint32_t& begin_pos)
     
     string str_value = ss.str();
     string::size_type pos = str.find('?', begin_pos);
-    if (pos == string::npos) {
+    if (pos == string::npos)
+    {
         return;
     }
     
@@ -277,37 +292,22 @@ string URLDecode(const string &sIn)
     return sOut;
 }
 
-
-/**
- * @brief Get the file size object
- * 
- * @param path 
- * @return int64_t 
- */
 int64_t get_file_size(const char *path)
 {
     int64_t filesize = -1;
     struct stat statbuff;
     // 将文件信息保存在了 statbuff 中
-    if (stat(path, &statbuff) < 0) {
+    if (stat(path, &statbuff) < 0)
+    {
         return filesize;
-    } else {
+    }
+    else
+    {
         filesize = statbuff.st_size;
     }
     return filesize;
 }
 
-
-/**
- * @brief 在字符串中查找子串的位置
- * 
- * @param src_str 
- * @param src_len 
- * @param sub_str 
- * @param sub_len 
- * @param flag 为true 时从前往后找，否则从后往前找
- * @return const char* 子串起始位置指针
- */
 const char* memfind(const char *src_str, size_t src_len, const char *sub_str, size_t sub_len, bool flag)
 {
     if (NULL == src_str || NULL == sub_str || src_len <= 0)
@@ -320,7 +320,8 @@ const char* memfind(const char *src_str, size_t src_len, const char *sub_str, si
     }
 
     const char *p;
-    if (sub_len == 0) {
+    if (sub_len == 0)
+    {
         sub_len = strlen(sub_str);
     }
        
@@ -344,7 +345,8 @@ const char* memfind(const char *src_str, size_t src_len, const char *sub_str, si
         for (int i = 0; i < src_len - sub_len; i++)
         {
             p = src_str + i;
-            if (0 == memcmp(p, sub_str, sub_len)) {
+            if (0 == memcmp(p, sub_str, sub_len))
+            {
                 return p;
             }
         }
@@ -354,7 +356,8 @@ const char* memfind(const char *src_str, size_t src_len, const char *sub_str, si
         for (int i = (src_len - sub_len) ; i >= 0; i--)
         {
             p = src_str + i;
-            if (0 == memcmp(p, sub_str, sub_len)) {
+            if (0 == memcmp(p, sub_str, sub_len))
+            {
                 return p;
             }
         }

@@ -27,7 +27,7 @@ HTTP_MSG_SERVER_CONF=httpmsgserver.conf
 PUSH_SERVER_CONF=pushserver.conf
 DB_PROXY_SERVER_CONF=dbproxyserver.conf
 
-print_hello(){
+print_hello() {
 	echo "==========================================="
 	echo "$1 im server for TeamTalk"
 	echo "==========================================="
@@ -43,7 +43,7 @@ check_user() {
 check_os() {
 	OS_VERSION=$(less /etc/redhat-release)
 	OS_BIT=$(getconf LONG_BIT)
-	#echo "$OS_VERSION, $OS_BIT bit..." 
+	echo "$OS_VERSION, $OS_BIT bit..." 
 	if [[ $OS_VERSION =~ "CentOS" ]]; then
 		if [ $OS_BIT == 64 ]; then
 			return 0
@@ -68,8 +68,7 @@ clean_yum() {
 }
 
 build_im_server() {
-
-	#yum -y install yum-fastestmirror
+	# yum -y install yum-fastestmirror
 	clean_yum
 	yum -y install libuuid-devel
 	yum -y install apr-util-devel

@@ -312,7 +312,7 @@ class ShardedLRUCache : public Cache {
   }
   virtual uint64_t NewId() {
     MutexLock l(&id_mutex_);
-    return ++(last_id_);
+    return ++ (last_id_);
   }
 };
 

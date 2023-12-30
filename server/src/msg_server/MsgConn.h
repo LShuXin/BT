@@ -8,13 +8,15 @@
 #ifndef MSGCONN_H_
 #define MSGCONN_H_
 
+
 #include "imconn.h"
 
 
 #define KICK_FROM_ROUTE_SERVER 		1
 #define MAX_ONLINE_FRIEND_CNT		100	//通知好友状态通知的最多个数
 
-typedef struct {
+typedef struct
+{
 	uint32_t msg_id;
 	uint32_t from_id;
 	uint64_t timestamp;
@@ -41,13 +43,16 @@ public:
     bool IsKickOff() { return m_bKickOff; }
     void SetOnlineStatus(uint32_t status) { m_online_status = status; }
     uint32_t GetOnlineStatus() { return m_online_status; }
-    
+
+    // 向 login_server、route_server 发送用户状态更新通知
     void SendUserStatusUpdate(uint32_t user_status);
 
 	virtual void Close(bool kick_user = false);
 
 	virtual void OnConnect(net_handle_t handle);
 	virtual void OnClose();
+
+	// 超时检测
 	virtual inline void OnTimer(uint64_t curr_tick);
 
 	virtual void HandlePdu(CImPdu* pPdu);
@@ -78,9 +83,9 @@ private:
     void _HandleClientDepartmentRequest(CImPdu* pPdu);
     void _SendFriendStatusNotify(uint32_t status);
 private:
-    string          m_login_name;        //登录名拼音
+    string          m_login_name;       // 登录名拼音
     uint32_t        m_user_id;
-    bool			m_bOpen;	// only DB validate passed will be set to true;
+    bool			m_bOpen;	        // only DB validate passed will be set to true;
     bool            m_bKickOff;
     uint64_t		m_login_time;
     
@@ -94,11 +99,12 @@ private:
     
     uint32_t		m_msg_cnt_per_sec;
     
-    uint32_t        m_client_type;        //客户端登录方式
+    uint32_t        m_client_type;       // 客户端登录方式
     
-    uint32_t        m_online_status;      //在线状态 1-online, 2-off-line, 3-leave
+    uint32_t        m_online_status;     // 在线状态 1-online, 2-off-line, 3-leave
 };
 
 void init_msg_conn();
+
 
 #endif /* MSGCONN_H_ */

@@ -18,7 +18,8 @@ CHttpConn* FindHttpConnByHandle(uint32_t conn_handle)
 {
     CHttpConn* pConn = NULL;
     HttpConnMap_t::iterator it = g_http_conn_map.find(conn_handle);
-    if (it != g_http_conn_map.end()) {
+    if (it != g_http_conn_map.end())
+    {
         pConn = it->second;
     }
 
@@ -74,7 +75,6 @@ void init_http_conn()
 	netlib_register_timer(http_conn_timer_callback, NULL, 1000);
 }
 
-//////////////////////////
 CHttpConn::CHttpConn()
 {
 	m_busy = false;

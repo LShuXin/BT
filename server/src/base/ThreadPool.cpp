@@ -9,7 +9,7 @@
 #include "util.h"
 #include "ThreadPool.h"
 
-///////////
+
 CWorkerThread::CWorkerThread()
 {
 	m_task_cnt = 0;
@@ -66,7 +66,6 @@ void CWorkerThread::PushTask(CTask *pTask)
 	m_thread_notify.Unlock();
 }
 
-//////////////
 CThreadPool::CThreadPool()
 {
 	m_worker_size = 0;

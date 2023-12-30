@@ -14,19 +14,29 @@
 #include "IM.Server.pb.h"
 #include "ThreadPool.h"
 #include "SyncCenter.h"
-static ConnMap_t g_proxy_conn_map;
-static UserMap_t g_uuid_conn_map;
-static CHandlerMap* s_handler_map;
 
+
+// 每一个建立的 socket 连接都保存在这里，以 handle 为key
+static ConnMap_t g_proxy_conn_map;
+// 由于 socket 复用，g_proxy_conn_map 无法唯一标识每个进入的消息，故增加此 map，以 uuid 为 key，以消息为 value
+static UserMap_t g_uuid_conn_map;
+// 全局的，各种消息类型的处理函数
+static CHandlerMap* s_handler_map;
+// g_uuid_conn_map 中上一个 uuid
 uint32_t CProxyConn::s_uuid_alloctor = 0;
+// 保护主线程响应消息队列的锁
 CLock CProxyConn::s_list_lock;
+// 主线程用于响应消息的响应消息队列
 list<ResponsePdu_t*> CProxyConn::s_response_pdu_list;
+// 用于处理消息任务的线程池
 static CThreadPool g_thread_pool;
 
+// 按时调用此方法，此方法在内部调用所有连接（以handle为标识）的 OnTimer 方法，用于实现心跳
 void proxy_timer_callback(void* callback_data, uint8_t msg, uint32_t handle, void* pParam)
 {
 	uint64_t cur_time = get_tick_count();
-	for (ConnMap_t::iterator it = g_proxy_conn_map.begin(); it != g_proxy_conn_map.end(); ) {
+	for (ConnMap_t::iterator it = g_proxy_conn_map.begin(); it != g_proxy_conn_map.end(); )
+	{
 		ConnMap_t::iterator it_old = it;
 		it++;
 
@@ -35,7 +45,7 @@ void proxy_timer_callback(void* callback_data, uint8_t msg, uint32_t handle, voi
 	}
 }
 
-//
+// 主线程的循环需要调用此方法，用于向客户端发回响应
 void proxy_loop_callback(void* callback_data, uint8_t msg, uint32_t handle, void* pParam)
 {
 	CProxyConn::SendResponsePduList();
@@ -43,9 +53,8 @@ void proxy_loop_callback(void* callback_data, uint8_t msg, uint32_t handle, void
 
 /*
  * 用于优雅的关闭连接：
- * 服务器收到SIGTERM信号后，发送CImPduStopReceivePacket数据包给每个连接，
- * 通知消息服务器不要往自己发送数据包请求，
- * 然后注册4s后调用的回调函数，回调时再退出进程
+ * 服务器收到 SIGTERM 信号后，发送 CImPduStopReceivePacket 数据包给每个代理连接，通知消息服务器不要往自己发送数据包请求，
+ * 然后注册4s后调用本函数（退出代理连接进程）
  */
 void exit_callback(void* callback_data, uint8_t msg, uint32_t handle, void* pParam)
 {
@@ -53,9 +62,11 @@ void exit_callback(void* callback_data, uint8_t msg, uint32_t handle, void* pPar
 	exit(0);
 }
 
+// 处理 SIGTERM 信号，发送 CImPduStopReceivePacket 数据包给每个代理连接，通知消息服务器不要往自己发送数据包请求，然后在4秒后关掉进程
 static void sig_handler(int sig_no)
 {
-	if (sig_no == SIGTERM) {
+	if (sig_no == SIGTERM)
+	{
 		log("receive SIGTERM, prepare for exit");
         CImPdu cPdu;
         IM::Server::IMStopReceivePacket msg;
@@ -63,15 +74,15 @@ static void sig_handler(int sig_no)
         cPdu.SetPBMsg(&msg);
         cPdu.SetServiceId(IM::BaseDefine::SID_OTHER);
         cPdu.SetCommandId(IM::BaseDefine::CID_OTHER_STOP_RECV_PACKET);
-        for (ConnMap_t::iterator it = g_proxy_conn_map.begin(); it != g_proxy_conn_map.end(); it++) {
+        for (ConnMap_t::iterator it = g_proxy_conn_map.begin(); it != g_proxy_conn_map.end(); it++)
+        {
             CProxyConn* pConn = (CProxyConn*)it->second;
             pConn->SendPdu(&cPdu);
         }
-        // Add By ZhangYuanhao
-        // Before stop we need to stop the sync thread,otherwise maybe will not sync the internal data any more
+
+        // 停掉代理连接进程之前，先停止同步服务
         CSyncCenter::getInstance()->stopSync();
-        
-        // callback after 4 second to exit process;
+
 		netlib_register_timer(exit_callback, NULL, 4000);
 	}
 }
@@ -92,18 +103,19 @@ CProxyConn* get_proxy_conn_by_uuid(uint32_t uuid)
 {
 	CProxyConn* pConn = NULL;
 	UserMap_t::iterator it = g_uuid_conn_map.find(uuid);
-	if (it != g_uuid_conn_map.end()) {
+	if (it != g_uuid_conn_map.end())
+	{
 		pConn = (CProxyConn *)it->second;
 	}
 
 	return pConn;
 }
 
-//////////////////////////
 CProxyConn::CProxyConn()
 {
 	m_uuid = ++CProxyConn::s_uuid_alloctor;
-	if (m_uuid == 0) {
+	if (m_uuid == 0)
+	{
 		m_uuid = ++CProxyConn::s_uuid_alloctor;
 	}
 
@@ -117,7 +129,8 @@ CProxyConn::~CProxyConn()
 
 void CProxyConn::Close()
 {
-	if (m_handle != NETLIB_INVALID_HANDLE) {
+	if (m_handle != NETLIB_INVALID_HANDLE)
+	{
 		netlib_close(m_handle);
 		g_proxy_conn_map.erase(m_handle);
 
@@ -180,8 +193,9 @@ void CProxyConn::OnClose()
 
 void CProxyConn::OnTimer(uint64_t curr_tick)
 {
-	if (curr_tick > m_last_send_tick + SERVER_HEARTBEAT_INTERVAL) {
-        
+    // 这种实现即使是检测到超时了，也还是会向客户端发送一次心跳，然后再关闭连接
+	if (curr_tick > m_last_send_tick + SERVER_HEARTBEAT_INTERVAL)
+	{
         CImPdu cPdu;
         IM::Other::IMHeartBeat msg;
         cPdu.SetPBMsg(&msg);
@@ -190,7 +204,8 @@ void CProxyConn::OnTimer(uint64_t curr_tick)
 		SendPdu(&cPdu);
 	}
 
-	if (curr_tick > m_last_recv_tick + SERVER_TIMEOUT) {
+	if (curr_tick > m_last_recv_tick + SERVER_TIMEOUT)
+	{
 		log("proxy connection timeout %s:%d", m_peer_ip.c_str(), m_peer_port);
 		Close();
 	}
@@ -201,26 +216,24 @@ void CProxyConn::HandlePduBuf(uchar_t* pdu_buf, uint32_t pdu_len)
     CImPdu* pPdu = NULL;
     pPdu = CImPdu::ReadPdu(pdu_buf, pdu_len);
     
-    if (pPdu->GetCommandId() == IM::BaseDefine::CID_OTHER_HEARTBEAT) {
+    if (pPdu->GetCommandId() == IM::BaseDefine::CID_OTHER_HEARTBEAT)
+    {
         return;
     }
     
     pdu_handler_t handler = s_handler_map->GetHandler(pPdu->GetCommandId());
     
-    if (handler) {
+    if (handler)
+    {
         CTask* pTask = new CProxyTask(m_uuid, handler, pPdu);
         g_thread_pool.AddTask(pTask);
-    } else {
+    }
+    else
+    {
         log("no handler for packet type: %d", pPdu->GetCommandId());
     }
 }
 
-/*
- * static method
- * add response pPdu to send list for another thread to send
- * if pPdu == NULL, it means you want to close connection with conn_uuid
- * e.g. parse packet failed
- */
 void CProxyConn::AddResponsePdu(uint32_t conn_uuid, CImPdu* pPdu)
 {
 	ResponsePdu_t* pResp = new ResponsePdu_t;
@@ -243,6 +256,7 @@ void CProxyConn::SendResponsePduList()
 		CProxyConn* pConn = get_proxy_conn_by_uuid(pResp->conn_uuid);
 		if (pConn) {
 			if (pResp->pPdu) {
+			    log("send puc to peer: %d", pResp->conn_uuid);
 				pConn->SendPdu(pResp->pPdu);
 			} else {
 				log("close connection uuid=%d by parse pdu error\b", pResp->conn_uuid);

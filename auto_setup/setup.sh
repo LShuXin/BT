@@ -42,7 +42,9 @@ check_user() {
 check_os() {
 	OS_VERSION=$(less /etc/redhat-release)
 	OS_BIT=$(getconf LONG_BIT)
-	#echo "$OS_VERSION, $OS_BIT bit..." 
+	echo "$OS_VERSION, $OS_BIT bit..." 
+
+	# =~ is used for pattern matching with regular expressions.
 	if [[ $OS_VERSION =~ "CentOS" ]]; then
 		if [ $OS_BIT == 64 ]; then
 			return 0
@@ -250,7 +252,6 @@ check_php() {
 
 build_nginx() {
 	cd $NGINX_PHP
-
 	cd $NGINX
 	chmod +x setup.sh
 	setup_begin $NGINX
@@ -265,7 +266,6 @@ build_nginx() {
 
 build_php() {
 	cd $NGINX_PHP
-
 	cd $PHP
 	chmod +x setup.sh
 	setup_begin $PHP

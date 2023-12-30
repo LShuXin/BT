@@ -9,18 +9,21 @@
 #import <Foundation/Foundation.h>
 #import "DDUserEntity.h"
 
+
 typedef void(^DDLoadRecentUsersCompletion)();
 
 
 @interface DDUserModule : NSObject
 
-@property (nonatomic,strong)NSString* currentUserID;
-@property (nonatomic,strong)NSMutableDictionary* recentUsers;
-+ (instancetype)shareInstance;
-- (void)addMaintanceUser:(DDUserEntity*)user;
-- (void )getUserForUserID:(NSString*)userID Block:(void(^)(DDUserEntity *user))block;
-- (void)addRecentUser:(DDUserEntity*)user;
-- (void)loadAllRecentUsers:(DDLoadRecentUsersCompletion)completion;
+@property(nonatomic, strong) NSString* currentUserID;
+@property(nonatomic, strong) NSMutableDictionary* recentUsers;
+
++(instancetype)shareInstance;
+-(void)addMaintanceUser:(DDUserEntity*)user;
+-(void)getUserForUserID:(NSString*)userID Block:(void(^)(DDUserEntity* user))block;
+-(void)addRecentUser:(DDUserEntity*)user;
+-(void)loadAllRecentUsers:(DDLoadRecentUsersCompletion)completion;
 -(void)clearRecentUser;
--(NSArray *)getAllMaintanceUser;
+-(NSArray*)getAllMaintanceUser;
+
 @end

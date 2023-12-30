@@ -7,10 +7,10 @@
 //
 
 #import "MTGroupChangeMemberAPI.h"
-#import "IMBaseDefine.pb.h"
-#import "IMGroup.pb.h"
+#import "IMBaseDefine.pbobjc.h"
+#import "IMGroup.pbobjc.h"
 #import "MTGroupModule.h"
-#import "IMBaseDefine.pb.h"
+#import "IMBaseDefine.pbobjc.h"
 
 @implementation MTGroupChangeMemberAPI
 
@@ -19,19 +19,19 @@
 }
 
 -(int)requestServiceID{
-    return ServiceIDSidGroup;
+    return ServiceID_SidGroup;
 }
 
 -(int)responseServiceID{
-    return ServiceIDSidGroup;
+    return ServiceID_SidGroup;
 }
 
 -(int) requestCommendID{
-    return GroupCmdIDCidGroupChangeMemberRequest;
+    return GroupCmdID_CidGroupChangeMemberRequest;
 }
 
 -(int)responseCommendID{
-    return GroupCmdIDCidGroupChangeMemberResponse;
+    return GroupCmdID_CidGroupChangeMemberResponse;
 }
 
 -(Analysis) analysisReturnData{
@@ -45,7 +45,7 @@
          repeated uint32 chg_user_id_list = 6;			//变动的成员id,add: 表示添加成功的id,   del: 表示删除的id
          optional bytes attach_data = 20;
          */
-        IMGroupChangeMemberRsp *rsp = [IMGroupChangeMemberRsp parseFromData:data];
+        IMGroupChangeMemberRsp *rsp = [IMGroupChangeMemberRsp parseFromData:data error: nil];
         
          uint32_t result = rsp.resultCode;
         if (result != 0)
@@ -55,10 +55,10 @@
         
         NSString *groupId = [NSString stringWithFormat:@"%d", rsp.groupId];
         
-        NSInteger userCnt =[rsp.curUserIdList count];
+        NSInteger userCnt =[rsp.curUserIdListArray count];
          NSMutableArray *newUserIds = [NSMutableArray new];
         for (uint32_t i = 0; i < userCnt; i++) {
-            NSInteger userIdFromServer = [rsp.curUserIdList[i] integerValue];
+            NSInteger userIdFromServer = [[rsp curUserIdListArray] valueAtIndex:i];
             NSString* userId = [NSString stringWithFormat:@"%ld", userIdFromServer];
             [newUserIds addObject:userId];
         }
@@ -79,7 +79,7 @@
         GroupModifyType type = [array[2] intValue]; //add 1,del 2.
         NSString *userId = array[3];
          DataOutputStream *dataout = [[DataOutputStream alloc] init];
-        IMGroupChangeMemberReqBuilder *req = [IMGroupChangeMemberReq builder];
+        IMGroupChangeMemberReq *req = [[IMGroupChangeMemberReq alloc] init];
         [req setUserId:[userId intValue]];
         [req setGroupId:[groupId intValue]];
         [req setChangeType:type];
@@ -95,7 +95,7 @@
         [dataout writeTcpProtocolHeader:[self requestServiceID]
                                     cId:[self requestCommendID]
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[req build].data];
+        [dataout directWriteBytes:[req data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
         

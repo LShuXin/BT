@@ -106,7 +106,7 @@ struct kiss_fft_state{
     do { \
 	    CHECK_OVERFLOW_OP((a).r,+,(b).r)\
 	    CHECK_OVERFLOW_OP((a).i,+,(b).i)\
-	    (res).r=(a).r+(b).r;  (res).i=(a).i+(b).i; \
+	    (res).r=(a).r+ (b).r;  (res).i=(a).i+ (b).i; \
     }while(0)
 #define  C_SUB( res, a,b)\
     do { \

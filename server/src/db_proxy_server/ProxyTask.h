@@ -26,8 +26,11 @@ public:
     
 	virtual void run();
 private:
+    // 消息唯一id（本服务内部使用）
 	uint32_t 		m_conn_uuid;
+    // 本消息类型对应的处理器函数
 	pdu_handler_t	m_pdu_handler;
+	// 本消息的数据
 	CImPdu* 		m_pPdu;
 };
 #endif

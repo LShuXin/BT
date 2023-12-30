@@ -19,6 +19,9 @@
 class CLoginStrategy
 {
 public:
+    /**
+     * 纯虚函数，必须重写；登录成功后获得用户信息
+     * */
     virtual bool doLogin(const std::string& strName, const std::string& strPass, IM::BaseDefine::UserInfo& user) = 0;
 };
 

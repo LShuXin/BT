@@ -8,8 +8,8 @@
 
 #import "DDLoginAPI.h"
 #import "MTUserEntity.h"
-#import "IMLogin.pb.h"
-#import "IMBaseDefine.pb.h"
+#import "IMLogin.pbobjc.h"
+#import "IMBaseDefine.pbobjc.h"
 #import "security.h"
 #include <iostream>
 @implementation DDLoginAPI
@@ -73,7 +73,7 @@
     Analysis analysis = (id)^(NSData* data)
     {
         
-        IMLoginRes *res = [IMLoginRes parseFromData:data];
+        IMLoginRes *res = [IMLoginRes parseFromData:data error:nil];
         NSInteger serverTime = res.serverTime;
         NSInteger loginResult = res.resultCode;
         NSDictionary* result = nil;
@@ -112,7 +112,7 @@
         [dataout writeTcpProtocolHeader:DDSERVICE_LOGIN
                                     cId:CMD_LOGIN_REQ_USERLOGIN
                                   seqNo:seqNo];
-        IMLoginReqBuilder *login = [IMLoginReq builder];
+        IMLoginReq *login = [[IMLoginReq alloc] init];
         [login setUserName:name];
         
         std::string *strMsg =new std::string([password UTF8String]);
@@ -130,10 +130,10 @@
 
         
         [login setPassword:password];
-        [login setClientType:ClientTypeClientTypeMac];
+        [login setClientType:ClientType_ClientTypeMac];
         [login setClientVersion:clientVersion];
-        [login setOnlineStatus:UserStatTypeUserStatusOnline];
-        [dataout directWriteBytes:[login build].data];
+        [login setOnlineStatus:UserStatType_UserStatusOnline];
+        [dataout directWriteBytes:[login data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

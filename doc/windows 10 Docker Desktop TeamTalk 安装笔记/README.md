@@ -12,7 +12,7 @@ docker容器已经共享到[Docker Hub](https://hub.docker.com/r/lsqtzj/teamtalk
 
 [https://gitee.com/CyrusZHou/TeamTalk](https://gitee.com/CyrusZHou/TeamTalk)
 
-# 1、运行docker centos:7 版本系统 
+# 1、运行docker centos:7 版本系统
 
 ```cobol
 docker run -d -p 80:80 -p 8080:8080 -p 8008:8008 -p 8000:8000 -p 10600:10600 -p 8200:8200 -p 8400:8400 -p 8500:8500 -p 8600:8600 -p 8700:8700 -tid --name teamtalk --privileged=true centos:7 /sbin/init
@@ -656,7 +656,7 @@ cd ..
 ln -s /usr/local/nginx/sbin/nginx /usr/bin/nginx
 ```
 
-## 4.4配置nginx
+## 4.4 配置nginx
 
 ```cobol
 rm -f /usr/local/nginx/conf/nginx.conf
@@ -759,17 +759,13 @@ http {
 
 ```cobol
 mkdir -p /home/wwwroot/default
-
 chmod +w /home/wwwroot/default
-
 mkdir -p /home/wwwlogs
-
 chmod 777 /home/wwwlogs
-
 chown -R www:www /home/wwwroot/default
 ```
 
-## 4.6创建nginx启动脚本
+## 4.6 创建nginx启动脚本
 
 ```cobol
 vim /etc/init.d/nginx
@@ -1130,11 +1126,7 @@ gcc version 11.2.1 20220127 (Red Hat 11.2.1-9) (GCC)
 /opt/rh/devtoolset-11/root/usr/bin/g++
 
 
-vim /etc/profile
-在文件后面添加下面两行内容：
 
-PATH=$PATH::/opt/rh/devtoolset-11/root/usr/bin
-export PATH
 
 重新加载文件
 source /etc/profile
@@ -1342,23 +1334,16 @@ sh build.sh version 1.0.0
 ### 8.4.3 部署服务
 
 ```cobol
-cd ../../auto_setup
+cd 
 
-cp ../server/im-server-1.0.0.tar.gz im-server-1.0.0.tar.gz
 
-tar -zxvf im-server-1.0.0.tar.gz
-
-cd im-server-1.0.0
-
-sh sync_lib_for_zip.sh
 ```
 
 ### 8.4.4 导入mysql
 
 ```cobol
-cd ..
 mysql -uroot -p12345
-source mariadb/conf/ttopen.sql;
+source /home/TT/auto_setup/mariadb/conf/ttopen.sql;
 show tables;
 ```
 
@@ -1378,7 +1363,6 @@ exit
 
 ```cobol
 cd /home/wwwroot/default
-
 cp -rf ~/Downloads/TeamTalk/php/* /home/wwwroot/default
 ```
 
@@ -1445,7 +1429,7 @@ msfs)
 复制配置文件
 
 ```cobol
-cp ../im_server/conf/msfs.conf msfs/msfs.conf
+cp /home/TT/auto_setup/im_server/conf/msfs.conf /home/TT/auto_setup/im-server-1.0.0/msfs/msfs.conf
 ```
 
 2）修改 db_proxy_server/dbproxyserver.conf 配置

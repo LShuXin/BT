@@ -14,7 +14,8 @@
 
 #include "ImPduBase.h"
 
-namespace DB_PROXY {
+namespace DB_PROXY
+{
 
 void doLogin(CImPdu* pPdu, uint32_t conn_uuid);
 

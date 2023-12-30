@@ -8,7 +8,7 @@
 
 #import "DDGroupInfoAPI.h"
 #import "MTGroupEntity.h"
-#import "IMGroup.pb.h"
+#import "IMGroup.pbobjc.h"
 @implementation DDGroupInfoAPI
 /**
  *  请求超时时间
@@ -69,12 +69,12 @@
 {
     Analysis analysis = (id)^(NSData* data)
     {
-        IMGroupInfoListRsp* groupInfoRsp = [IMGroupInfoListRsp parseFromData:data];
+        IMGroupInfoListRsp* groupInfoRsp = [IMGroupInfoListRsp parseFromData:data error:nil];
         uint32_t userId = groupInfoRsp.userId;
         NSMutableDictionary *groupInfoAndReqUserId = [NSMutableDictionary new];
         [groupInfoAndReqUserId setObject:@(userId) forKey:@"reqUserId"];
         NSMutableArray *groupList = [[NSMutableArray alloc] init];
-        for (GroupInfo *groupInfo in groupInfoRsp.groupInfoList) {
+        for (GroupInfo *groupInfo in groupInfoRsp.groupInfoListArray) {
             MTGroupEntity *groupEntity = [[MTGroupEntity alloc] initWithGroupInfo:(GroupInfo *)groupInfo];
             [groupList addObject:groupEntity];
         }
@@ -94,18 +94,18 @@
 {
     Package package = (id)^(id object,uint32_t seqNo)
     {
-        IMGroupInfoListReqBuilder *reqBuilder = [IMGroupInfoListReq builder];
-        UInt32 reqUserId = [[object objectForKey:@"reqUserId"] intValue];
+        IMGroupInfoListReq *reqBuilder = [[IMGroupInfoListReq alloc] init];
+        UInt32 reqUserId = [object[@"reqUserId"] intValue];
         [reqBuilder setUserId:reqUserId];
-        NSMutableArray* groupVersionList = [object objectForKey:@"groupVersionList"];
+        NSMutableArray* groupVersionList = object[@"groupVersionList"];
         NSMutableArray* groupVersionListArray = [[NSMutableArray alloc] init];
         for (NSDictionary* groupVersionInfo in groupVersionList) {
-            GroupVersionInfoBuilder* groupInfoReqBuilder = [GroupVersionInfo builder];
+            GroupVersionInfo* groupInfoReqBuilder = [[GroupVersionInfo alloc] init];
             UInt32 groupId = [[groupVersionInfo objectForKey:@"groupId"] intValue];
             UInt32 version = [[groupVersionInfo objectForKey:@"version"] intValue];
             [groupInfoReqBuilder setGroupId:groupId];
             [groupInfoReqBuilder setVersion:version];
-            [groupVersionListArray addObject:groupInfoReqBuilder.build];
+            [groupVersionListArray addObject:groupInfoReqBuilder];
         }
         [reqBuilder setGroupVersionListArray:groupVersionListArray];
         DataOutputStream *dataout = [[DataOutputStream alloc] init];
@@ -113,7 +113,7 @@
         [dataout writeTcpProtocolHeader:SERVICE_GROUP
                                     cId:CMD_ID_GROUP_USER_LIST_REQ
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[reqBuilder build].data];
+        [dataout directWriteBytes:[reqBuilder data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

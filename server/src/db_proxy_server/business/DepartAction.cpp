@@ -13,13 +13,14 @@
 #include "IM.Buddy.pb.h"
 #include "../ProxyConn.h"
 
-namespace DB_PROXY{
+namespace DB_PROXY
+{
     void getChgedDepart(CImPdu* pPdu, uint32_t conn_uuid)
     {
         IM::Buddy::IMDepartmentReq msg;
         IM::Buddy::IMDepartmentRsp msgResp;
-        if (msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength())) {
-            
+        if (msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()))
+        {
             CImPdu* pPduRes = new CImPdu;
             
             uint32_t nUserId = msg.user_id();
@@ -31,7 +32,7 @@ namespace DB_PROXY{
             
             msgResp.set_user_id(nUserId);
             msgResp.set_latest_update_time(nLastUpdate);
-            for(auto it=lsDeparts.begin(); it!=lsDeparts.end(); ++it)
+            for (auto it = lsDeparts.begin(); it != lsDeparts.end(); ++it)
             {
                 IM::BaseDefine::DepartInfo* pDeptInfo = msgResp.add_dept_list();
                 pDeptInfo->set_dept_id(it->dept_id());
@@ -47,7 +48,6 @@ namespace DB_PROXY{
             pPduRes->SetServiceId(IM::BaseDefine::SID_BUDDY_LIST);
             pPduRes->SetCommandId(IM::BaseDefine::CID_BUDDY_LIST_DEPARTMENT_RESPONSE);
             CProxyConn::AddResponsePdu(conn_uuid, pPduRes);
-            
         }
         else
         {

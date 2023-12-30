@@ -36,17 +36,23 @@ CMessageModel::~CMessageModel()
 
 CMessageModel* CMessageModel::getInstance()
 {
-	if (!m_pInstance) {
+	if (!m_pInstance)
+	{
 		m_pInstance = new CMessageModel();
 	}
 
 	return m_pInstance;
 }
 
-void CMessageModel::getMessage(uint32_t nUserId, uint32_t nPeerId, uint32_t nMsgId,
-                               uint32_t nMsgCnt, list<IM::BaseDefine::MsgInfo>& lsMsg)
+void CMessageModel::getMessage(
+        uint32_t nUserId,
+        uint32_t nPeerId,
+        uint32_t nMsgId,
+        uint32_t nMsgCnt,
+        list<IM::BaseDefine::MsgInfo>& lsMsg)
 {
     uint32_t nRelateId = CRelationModel::getInstance()->getRelationId(nUserId, nPeerId, false);
+
 	if (nRelateId != INVALID_VALUE)
     {
         CDBManager* pDBManager = CDBManager::getInstance();
@@ -55,7 +61,8 @@ void CMessageModel::getMessage(uint32_t nUserId, uint32_t nPeerId, uint32_t nMsg
         {
             string strTableName = "IMMessage_" + int2string(nRelateId % 8);
             string strSql;
-            if (nMsgId == 0) {
+            if (nMsgId == 0)
+            {
                 strSql = "select * from " + strTableName + " force index (idx_relateId_status_created) where relateId= " + int2string(nRelateId) + " and status = 0 order by created desc, id desc limit " + int2string(nMsgCnt);
             }
             else
@@ -72,7 +79,7 @@ void CMessageModel::getMessage(uint32_t nUserId, uint32_t nPeerId, uint32_t nMsg
                     cMsg.set_from_session_id(pResultSet->GetInt("fromId"));
                     cMsg.set_create_time(pResultSet->GetInt("created"));
                     IM::BaseDefine::MsgType nMsgType = IM::BaseDefine::MsgType(pResultSet->GetInt("type"));
-                    if(IM::BaseDefine::MsgType_IsValid(nMsgType))
+                    if (IM::BaseDefine::MsgType_IsValid(nMsgType))
                     {
                         cMsg.set_msg_type(nMsgType);
                         cMsg.set_msg_data(pResultSet->GetString("content"));
@@ -106,17 +113,18 @@ void CMessageModel::getMessage(uint32_t nUserId, uint32_t nPeerId, uint32_t nMsg
     }
 }
 
-/*
- * IMMessage 分表
- * AddFriendShip()
- * if nFromId or nToId is ShopEmployee
- * GetShopId
- * Insert into IMMessage_ShopId%8
- */
-bool CMessageModel::sendMessage(uint32_t nRelateId, uint32_t nFromId, uint32_t nToId, IM::BaseDefine::MsgType nMsgType, uint32_t nCreateTime, uint32_t nMsgId, string& strMsgContent)
+bool CMessageModel::sendMessage(
+        uint32_t nRelateId,
+        uint32_t nFromId,
+        uint32_t nToId,
+        IM::BaseDefine::MsgType nMsgType,
+        uint32_t nCreateTime,
+        uint32_t nMsgId,
+        string& strMsgContent)
 {
     bool bRet =false;
-    if (nFromId == 0 || nToId == 0) {
+    if (nFromId == 0 || nToId == 0)
+    {
         log("invalied userId.%u->%u", nFromId, nToId);
         return bRet;
     }
@@ -127,7 +135,7 @@ bool CMessageModel::sendMessage(uint32_t nRelateId, uint32_t nFromId, uint32_t n
     {
         string strTableName = "IMMessage_" + int2string(nRelateId % 8);
         string strSql = "insert into " + strTableName + " (`relateId`, `fromId`, `toId`, `msgId`, `content`, `status`, `type`, `created`, `updated`) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        // 必须在释放连接前delete CPrepareStatement对象，否则有可能多个线程操作mysql对象，会crash
+        // 必须在释放连接前 delete CPrepareStatement 对象，否则有可能多个线程操作 mysql 对象，会 crash
         CPrepareStatement* pStmt = new CPrepareStatement();
         if (pStmt->Init(pDBConn->GetMysql(), strSql))
         {
@@ -149,7 +157,7 @@ bool CMessageModel::sendMessage(uint32_t nRelateId, uint32_t nFromId, uint32_t n
         pDBManager->RelDBConn(pDBConn);
         if (bRet)
         {
-            uint32_t nNow = (uint32_t) time(NULL);
+            // uint32_t nNow = (uint32_t) time(NULL);
             incMsgCount(nFromId, nToId);
         }
         else
@@ -164,9 +172,18 @@ bool CMessageModel::sendMessage(uint32_t nRelateId, uint32_t nFromId, uint32_t n
 	return bRet;
 }
 
-bool CMessageModel::sendAudioMessage(uint32_t nRelateId, uint32_t nFromId, uint32_t nToId, IM::BaseDefine::MsgType nMsgType, uint32_t nCreateTime, uint32_t nMsgId, const char* pMsgContent, uint32_t nMsgLen)
+bool CMessageModel::sendAudioMessage(
+        uint32_t nRelateId,
+        uint32_t nFromId,
+        uint32_t nToId,
+        IM::BaseDefine::MsgType nMsgType,
+        uint32_t nCreateTime,
+        uint32_t nMsgId,
+        const char* pMsgContent,
+        uint32_t nMsgLen)
 {
-	if (nMsgLen <= 4) {
+	if (nMsgLen <= 4)
+	{
 		return false;
 	}
 
@@ -174,10 +191,13 @@ bool CMessageModel::sendAudioMessage(uint32_t nRelateId, uint32_t nFromId, uint3
 	int nAudioId = pAudioModel->saveAudioInfo(nFromId, nToId, nCreateTime, pMsgContent, nMsgLen);
 
 	bool bRet = true;
-	if (nAudioId != -1) {
+	if (nAudioId != -1)
+	{
 		string strMsg = int2string(nAudioId);
 		bRet = sendMessage(nRelateId, nFromId, nToId, nMsgType, nCreateTime, nMsgId, strMsg);
-	} else {
+	}
+	else
+    {
 		bRet = false;
 	}
 
@@ -189,28 +209,36 @@ void CMessageModel::incMsgCount(uint32_t nFromId, uint32_t nToId)
 	CacheManager* pCacheManager = CacheManager::getInstance();
 	// increase message count
 	CacheConn* pCacheConn = pCacheManager->GetCacheConn("unread");
-	if (pCacheConn) {
+	if (pCacheConn)
+	{
 		pCacheConn->hincrBy("unread_" + int2string(nToId), int2string(nFromId), 1);
 		pCacheManager->RelCacheConn(pCacheConn);
-	} else {
+	}
+	else
+    {
 		log("no cache connection to increase unread count: %d->%d", nFromId, nToId);
 	}
 }
 
-void CMessageModel::getUnreadMsgCount(uint32_t nUserId, uint32_t &nTotalCnt, list<IM::BaseDefine::UnreadInfo>& lsUnreadCount)
+void CMessageModel::getUnreadMsgCount(
+        uint32_t nUserId,
+        uint32_t &nTotalCnt,
+        list<IM::BaseDefine::UnreadInfo>& lsUnreadCount)
 {
     CacheManager* pCacheManager = CacheManager::getInstance();
     CacheConn* pCacheConn = pCacheManager->GetCacheConn("unread");
     if (pCacheConn)
     {
         map<string, string> mapUnread;
+        // nUserId 看到的未读数
         string strKey = "unread_" + int2string(nUserId);
         bool bRet = pCacheConn->hgetAll(strKey, mapUnread);
         pCacheManager->RelCacheConn(pCacheConn);
-        if(bRet)
+        if (bRet)
         {
             IM::BaseDefine::UnreadInfo cUnreadInfo;
-            for (auto it = mapUnread.begin(); it != mapUnread.end(); it++) {
+            for (auto it = mapUnread.begin(); it != mapUnread.end(); it++)
+            {
                 cUnreadInfo.set_session_id(atoi(it->first.c_str()));
                 cUnreadInfo.set_unread_cnt(atoi(it->second.c_str()));
                 cUnreadInfo.set_session_type(IM::BaseDefine::SESSION_TYPE_SINGLE);
@@ -218,7 +246,7 @@ void CMessageModel::getUnreadMsgCount(uint32_t nUserId, uint32_t &nTotalCnt, lis
                 string strMsgData;
                 IM::BaseDefine::MsgType nMsgType;
                 getLastMsg(cUnreadInfo.session_id(), nUserId, nMsgId, strMsgData, nMsgType);
-                if(IM::BaseDefine::MsgType_IsValid(nMsgType))
+                if (IM::BaseDefine::MsgType_IsValid(nMsgType))
                 {
                     cUnreadInfo.set_latest_msg_id(nMsgId);
                     cUnreadInfo.set_latest_msg_data(strMsgData);
@@ -249,7 +277,7 @@ uint32_t CMessageModel::getMsgId(uint32_t nRelateId)
     uint32_t nMsgId = 0;
     CacheManager* pCacheManager = CacheManager::getInstance();
     CacheConn* pCacheConn = pCacheManager->GetCacheConn("unread");
-    if(pCacheConn)
+    if (pCacheConn)
     {
         string strKey = "msg_id_" + int2string(nRelateId);
         nMsgId = pCacheConn->incrBy(strKey, 1);
@@ -258,17 +286,13 @@ uint32_t CMessageModel::getMsgId(uint32_t nRelateId)
     return nMsgId;
 }
 
-/**
- *  <#Description#>
- *
- *  @param nFromId    <#nFromId description#>
- *  @param nToId      <#nToId description#>
- *  @param nMsgId     <#nMsgId description#>
- *  @param strMsgData <#strMsgData description#>
- *  @param nMsgType   <#nMsgType description#>
- *  @param nStatus    0获取未被删除的，1获取所有的，默认获取未被删除的
- */
-void CMessageModel::getLastMsg(uint32_t nFromId, uint32_t nToId, uint32_t& nMsgId, string& strMsgData, IM::BaseDefine::MsgType& nMsgType, uint32_t nStatus)
+void CMessageModel::getLastMsg(
+        uint32_t nFromId,
+        uint32_t nToId,
+        uint32_t& nMsgId,
+        string& strMsgData,
+        IM::BaseDefine::MsgType& nMsgType,
+        uint32_t nStatus)
 {
     uint32_t nRelateId = CRelationModel::getInstance()->getRelationId(nFromId, nToId, false);
     
@@ -331,7 +355,8 @@ void CMessageModel::getUnReadCntAll(uint32_t nUserId, uint32_t &nTotalCnt)
         
         if(bRet)
         {
-            for (auto it = mapUnread.begin(); it != mapUnread.end(); it++) {
+            for (auto it = mapUnread.begin(); it != mapUnread.end(); it++)
+            {
                 nTotalCnt += atoi(it->second.c_str());
             }
         }
@@ -348,14 +373,14 @@ void CMessageModel::getUnReadCntAll(uint32_t nUserId, uint32_t &nTotalCnt)
 
 void CMessageModel::getMsgByMsgId(uint32_t nUserId, uint32_t nPeerId, const list<uint32_t> &lsMsgId, list<IM::BaseDefine::MsgInfo> &lsMsg)
 {
-    if(lsMsgId.empty())
-
+    if (lsMsgId.empty())
     {
         return ;
     }
+
     uint32_t nRelateId = CRelationModel::getInstance()->getRelationId(nUserId, nPeerId, false);
 
-    if(nRelateId == INVALID_VALUE)
+    if (nRelateId == INVALID_VALUE)
     {
         log("invalid relation id between %u and %u", nUserId, nPeerId);
         return;
@@ -368,9 +393,10 @@ void CMessageModel::getMsgByMsgId(uint32_t nUserId, uint32_t nPeerId, const list
         string strTableName = "IMMessage_" + int2string(nRelateId % 8);
         string strClause ;
         bool bFirst = true;
-        for(auto it= lsMsgId.begin(); it!=lsMsgId.end();++it)
+        for (auto it = lsMsgId.begin(); it != lsMsgId.end(); ++it)
         {
-            if (bFirst) {
+            if (bFirst)
+            {
                 bFirst = false;
                 strClause = int2string(*it);
             }
@@ -391,7 +417,7 @@ void CMessageModel::getMsgByMsgId(uint32_t nUserId, uint32_t nPeerId, const list
                 msg.set_from_session_id(pResultSet->GetInt("fromId"));
                 msg.set_create_time(pResultSet->GetInt("created"));
                 IM::BaseDefine::MsgType nMsgType = IM::BaseDefine::MsgType(pResultSet->GetInt("type"));
-                if(IM::BaseDefine::MsgType_IsValid(nMsgType))
+                if (IM::BaseDefine::MsgType_IsValid(nMsgType))
                 {
                     msg.set_msg_type(nMsgType);
                     msg.set_msg_data(pResultSet->GetString("content"));
@@ -409,7 +435,7 @@ void CMessageModel::getMsgByMsgId(uint32_t nUserId, uint32_t nPeerId, const list
             log("no result set for sql:%s", strSql.c_str());
         }
         pDBManager->RelDBConn(pDBConn);
-        if(!lsMsg.empty())
+        if (!lsMsg.empty())
         {
             CAudioModel::getInstance()->readAudios(lsMsg);
         }
@@ -426,12 +452,12 @@ bool CMessageModel::resetMsgId(uint32_t nRelateId)
     uint32_t nMsgId = 0;
     CacheManager* pCacheManager = CacheManager::getInstance();
     CacheConn* pCacheConn = pCacheManager->GetCacheConn("unread");
-    if(pCacheConn)
+    if (pCacheConn)
     {
         string strKey = "msg_id_" + int2string(nRelateId);
         string strValue = "0";
         string strReply = pCacheConn->set(strKey, strValue);
-        if(strReply == strValue)
+        if (strReply == strValue)
         {
             bRet = true;
         }

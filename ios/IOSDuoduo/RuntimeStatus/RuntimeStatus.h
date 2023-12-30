@@ -10,6 +10,8 @@
 #import "DDUserEntity.h"
 #import "std.h"
 #define TheRuntime [RuntimeStatus instance]
+
+
 @interface RuntimeStatus : NSObject
 
 @property(strong)DDUserEntity *user;
@@ -23,7 +25,9 @@
 @property(copy)NSString *dao;
 @property(copy)NSString *pushToken;
 @property(copy)NSString *discoverUrl;
+
 + (instancetype)instance;
+
 -(void)insertToFixedTop:(NSString *)idString;
 -(void)removeFromFixedTop:(NSString *)idString;
 -(BOOL)isInFixedTop:(NSString *)idString;
@@ -31,9 +35,10 @@
 -(BOOL)isInShielding:(NSString *)idString;
 -(void)removeIDFromShielding:(NSString *)idString;
 -(void)addToShielding:(NSString *)string;
--(void)showAlertView:(NSString *)title Description:(NSString *)string;
+-(void)showAlertView:(NSString *)title description:(NSString *)string;
 -(void)updateData;
 -(NSUInteger)changeIDToOriginal:(NSString *)sessionID;
--(NSString *)changeOriginalToLocalID:(NSUInteger)orignalID SessionType:(SessionType)sessionType;
+-(NSString *)changeOriginalToLocalID:(NSUInteger)orignalID sessionType:(SessionType)sessionType;
 #define LOCAL_MSG_BEGIN_ID 1000000
+
 @end

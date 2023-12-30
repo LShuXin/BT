@@ -26,6 +26,16 @@ public:
 	virtual ~CRelationModel();
 
 	static CRelationModel* getInstance();
+
+    /**
+     *  获取会话关系ID
+     *  对于群组，必须把nUserBId设置为群ID
+     *
+     *  @param nUserAId  <#nUserAId description#>
+     *  @param nUserBId  <#nUserBId description#>
+     *  @param bAdd      <#bAdd description#>
+     *  @param nStatus 0 获取未被删除会话，1获取所有。
+     */
     uint32_t getRelationId(uint32_t nUserAId, uint32_t nUserBId, bool bAdd);
     bool updateRelation(uint32_t nRelationId, uint32_t nUpdateTime);
     bool removeRelation(uint32_t nRelationId);

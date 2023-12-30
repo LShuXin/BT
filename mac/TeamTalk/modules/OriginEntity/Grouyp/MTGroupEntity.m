@@ -37,8 +37,8 @@
     NSString* groupName = groupInfo.groupName;
     NSString* groupAvatar = groupInfo.groupAvatar;
     NSMutableArray* groupUserIds  = [[NSMutableArray alloc] init];
-    for (int i = 0; i<[groupInfo.groupMemberList count]; i++) {
-        [groupUserIds addObject:[NSString stringWithFormat:@"%@",groupInfo.groupMemberList[i]] ];
+    for (int i = 0; i<[groupInfo.groupMemberListArray count]; i++) {
+        [groupUserIds addObject:[NSString stringWithFormat:@"%@", [groupInfo.groupMemberListArray valueAtIndex: i]] ];
     }
     NSUInteger groupVersion = groupInfo.version;
     BOOL shieldStatus = groupInfo.shieldStatus != 0;

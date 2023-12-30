@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+
 /**
  *  自身状态的维护
  */
 @interface DDClientStateMaintenanceManager : NSObject
 
-+ (instancetype)shareInstance;
++(instancetype)shareInstance;
 
 @end

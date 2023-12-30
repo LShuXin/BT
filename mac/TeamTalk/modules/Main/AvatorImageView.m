@@ -27,10 +27,10 @@
 
     switch (session.sessionType)
     {
-        case SessionTypeSessionTypeSingle:
+        case SessionType_SessionTypeSingle:
             [self loadUserAvator:session];
             break;
-        case SessionTypeSessionTypeGroup:
+        case SessionType_SessionTypeGroup:
             [self loadGroupAvator:session];
             break;
         default:

@@ -9,11 +9,19 @@
 #import "DDUserEntity.h"
 #import "NSDictionary+Safe.h"
 #import "PublicProfileViewControll.h"
-#define USER_PRE @"user_"
 #import "DDDatabaseUtil.h"
-#import "IMBuddy.pb.h"
+#import "IMBuddy.pbobjc.h"
+
+#define USER_PRE @"user_"
+
 @implementation DDUserEntity
-- (id)initWithUserID:(NSString*)userID name:(NSString*)name nick:(NSString*)nick avatar:(NSString*)avatar userRole:(NSInteger)userRole userUpdated:(NSUInteger)updated
+
+-(id)initWithUserID:(NSString*)userID
+               name:(NSString*)name
+               nick:(NSString*)nick
+             avatar:(NSString*)avatar
+           userRole:(NSInteger)userRole
+        userUpdated:(NSUInteger)updated
 {
     self = [super init];
     if (self)
@@ -27,6 +35,7 @@
     }
     return self;
 }
+
 //- (NSString*)avatar
 //{
 //    if (![_avatar hasSuffix:@"_100x100"])
@@ -36,9 +45,9 @@
 //    return _avatar;
 //}
 
-+(NSMutableDictionary *)userToDic:(DDUserEntity *)user
++(NSMutableDictionary*)userToDic:(DDUserEntity*)user
 {
-    NSMutableDictionary *dic = [NSMutableDictionary new];
+    NSMutableDictionary* dic = [NSMutableDictionary new];
     [dic safeSetObject:user.objID forKey:@"userId"];
     [dic safeSetObject:user.name forKey:@"name"];
     [dic safeSetObject:user.nick forKey:@"nick"];
@@ -49,12 +58,13 @@
     [dic safeSetObject:user.position forKey:@"position"];
     [dic safeSetObject:user.telphone forKey:@"telphone"];
     [dic safeSetObject:user.department forKey:@"departName"];
-    [dic safeSetObject:[NSNumber numberWithInt:user.sex ]forKey:@"sex"];
+    [dic safeSetObject:[NSNumber numberWithInt:user.sex] forKey:@"sex"];
     [dic safeSetObject:[NSNumber numberWithInt:user.lastUpdateTime] forKey:@"lastUpdateTime"];
     return dic;
 }
-- (void) encodeWithCoder:(NSCoder *)encoder {
 
+- (void)encodeWithCoder:(NSCoder*)encoder
+{
     [encoder encodeObject:self.objID forKey:@"userId"];
     [encoder encodeObject:self.name forKey:@"name"];
     [encoder encodeObject:self.nick forKey:@"nick"];
@@ -64,16 +74,17 @@
     [encoder encodeObject:self.department forKey:@"department"];
     [encoder encodeObject:self.position forKey:@"position"];
     [encoder encodeObject:self.telphone forKey:@"telphone"];
-    [encoder encodeObject:[NSNumber numberWithInt:self.sex ]forKey:@"sex"];
+    [encoder encodeObject:[NSNumber numberWithInt:self.sex] forKey:@"sex"];
     [encoder encodeObject:[NSNumber numberWithInt:self.lastUpdateTime] forKey:@"lastUpdateTime"];
 }
-- (id)initWithCoder:(NSCoder *)aDecoder
+
+- (id)initWithCoder:(NSCoder*)aDecoder
 {
-    if((self = [super init])) {
+    if ((self = [super init]))
+    {
         self.objID = [aDecoder decodeObjectForKey:@"userId"];
         self.name = [aDecoder decodeObjectForKey:@"name"];
         self.nick = [aDecoder decodeObjectForKey:@"nickName"];
-
         self.avatar = [aDecoder decodeObjectForKey:@"avatar"];
         self.department = [aDecoder decodeObjectForKey:@"department"];
         self.departId = [[aDecoder decodeObjectForKey:@"departId"] integerValue];
@@ -83,7 +94,6 @@
 
     }
     return self;
-    
 }
 
 
@@ -104,16 +114,16 @@
 //@"updateTime":@(updateTime),
 //@"token":token,
 //@"userType":@(userType)
-+(id)dicToUserEntity:(NSDictionary *)dic
++(id)dicToUserEntity:(NSDictionary*)dic
 {
-    DDUserEntity *user = [DDUserEntity new];
+    DDUserEntity* user = [DDUserEntity new];
     user.objID = [dic safeObjectForKey:@"userId"];
     user.name = [dic safeObjectForKey:@"name"];
-    user.nick = [dic safeObjectForKey:@"nickName"]?[dic safeObjectForKey:@"nickName"]:user.name;
+    user.nick = [dic safeObjectForKey:@"nickName"] ? [dic safeObjectForKey:@"nickName"] : user.name;
 
     user.avatar = [dic safeObjectForKey:@"avatar"];
     user.department = [dic safeObjectForKey:@"department"];
-    user.departId =[[dic safeObjectForKey:@"departId"] integerValue];
+    user.departId = [[dic safeObjectForKey:@"departId"] integerValue];
     user.email = [dic safeObjectForKey:@"email"];
     user.position = [dic safeObjectForKey:@"position"];
     user.telphone = [dic safeObjectForKey:@"telphone"];
@@ -121,45 +131,55 @@
     user.lastUpdateTime = [[dic safeObjectForKey:@"lastUpdateTime"] integerValue];
     user.pyname = [dic safeObjectForKey:@"pyname"];
     return user;
-
 }
+
 -(void)sendEmail
 {
-    NSString *stringURL =[NSString stringWithFormat:@"mailto:%@",self.email];
-    NSURL *url = [NSURL URLWithString:stringURL];
+    NSString* stringURL = [NSString stringWithFormat:@"mailto:%@", self.email];
+    NSURL* url = [NSURL URLWithString:stringURL];
     [[UIApplication sharedApplication] openURL:url];
 }
+
 -(void)callPhoneNum
 {
-    NSString *string = [NSString stringWithFormat:@"tel:%@",self.telphone];
+    NSString* string = [NSString stringWithFormat:@"tel:%@", self.telphone];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:string]];
 }
-- (BOOL)isEqual:(id)other
+
+-(BOOL)isEqual:(id)other
 {
-    if (other == self) {
+    if (other == self)
+    {
         return YES;
-    }else if([self class] != [other class])
+    }
+    else if ([self class] != [other class])
     {
         return NO;
-    }else {
-        DDUserEntity *otherUser = (DDUserEntity *)other;
-        if (![otherUser.objID isEqualToString:self.objID]) {
+    }
+    else
+    {
+        DDUserEntity* otherUser = (DDUserEntity*)other;
+        if (![otherUser.objID isEqualToString:self.objID])
+        {
             return NO;
         }
-        if (![otherUser.name isEqualToString:self.name]) {
+        if (![otherUser.name isEqualToString:self.name])
+        {
             return NO;
         }
-        if (![otherUser.nick isEqualToString:self.nick]) {
+        if (![otherUser.nick isEqualToString:self.nick])
+        {
             return NO;
         }
-        if (![otherUser.pyname isEqualToString:self.pyname]) {
+        if (![otherUser.pyname isEqualToString:self.pyname])
+        {
             return NO;
         }
     }
     return YES;
 }
 
-- (NSUInteger)hash
+-(NSUInteger)hash
 {
     NSUInteger objIDHash = [self.objID hash];
     NSUInteger nameHash = [self.name hash];
@@ -168,29 +188,33 @@
     
     return objIDHash^nameHash^nickHash^pynameHash;
 }
-+(NSString *)pbUserIdToLocalID:(NSUInteger)userID
+
++(NSString*)pbUserIdToLocalID:(NSUInteger)userID
 {
-    return [NSString stringWithFormat:@"%@%ld",USER_PRE,userID];
+    return [NSString stringWithFormat:@"%@%ld", USER_PRE, userID];
 }
-+(UInt32)localIDTopb:(NSString *)userid
+
++(UInt32)localIDTopb:(NSString*)userid
 {
-    if (![userid hasPrefix:USER_PRE]) {
+    if (![userid hasPrefix:USER_PRE])
+    {
         return 0;
     }
     return [[userid substringFromIndex:[USER_PRE length]] integerValue];
 }
 
--(id)initWithPB:(UserInfo *)pbUser
+-(id)initWithPB:(UserInfo*)pbUser
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         self.objID = [[self class] pbUserIdToLocalID:pbUser.userId];
-        self.name  = pbUser.userRealName;
-        self.nick  = pbUser.userNickName;
-        self.avatar= pbUser.avatarUrl;
+        self.name = pbUser.userRealName;
+        self.nick = pbUser.userNickName;
+        self.avatar = pbUser.avatarURL;
         self.departId = pbUser.departmentId;
         self.telphone = pbUser.userTel;
-        self.sex =   pbUser.userGender;
+        self.sex = pbUser.userGender;
         self.email = pbUser.email;
         self.pyname = pbUser.userDomain;
         self.userStatus = pbUser.status;
@@ -198,12 +222,14 @@
     return self;
 }
 
--(NSString *)getAvatarUrl
+-(NSString*)getAvatarUrl
 {
-    return [NSString stringWithFormat:@"%@_100x100.jpg",self.avatar];
+    return [NSString stringWithFormat:@"%@_100x100.jpg", self.avatar];
 }
+
 -(NSString *)getAvatarPreImageUrl
 {
-    return [NSString stringWithFormat:@"%@_640×999.jpg",self.avatar];
+    return [NSString stringWithFormat:@"%@_640×999.jpg", self.avatar];
 }
+
 @end

@@ -30,13 +30,15 @@ void CDepartModel::getChgedDeptId(uint32_t& nLastTime, list<uint32_t>& lsChanged
     {
         string strSql = "select id, updated from IMDepart where updated > " + int2string(nLastTime);
         CResultSet* pResultSet = pDBConn->ExecuteQuery(strSql.c_str());
-        if(pResultSet)
+        if (pResultSet)
         {
-            while (pResultSet->Next()) {
+            while (pResultSet->Next())
+            {
                 uint32_t id = pResultSet->GetInt("id");
                 uint32_t nUpdated = pResultSet->GetInt("updated");
-                if(nLastTime < nUpdated)
+                if (nLastTime < nUpdated)
                 {
+                    // 保存最后一次更新的时间
                     nLastTime = nUpdated;
                 }
                 lsChangedIds.push_back(id);
@@ -53,7 +55,7 @@ void CDepartModel::getChgedDeptId(uint32_t& nLastTime, list<uint32_t>& lsChanged
 
 void CDepartModel::getDepts(list<uint32_t>& lsDeptIds, list<IM::BaseDefine::DepartInfo>& lsDepts)
 {
-    if(lsDeptIds.empty())
+    if (lsDeptIds.empty())
     {
         log("list is empty");
         return;
@@ -64,8 +66,9 @@ void CDepartModel::getDepts(list<uint32_t>& lsDeptIds, list<IM::BaseDefine::Depa
     {
         string strClause;
         bool bFirst = true;
-        for (auto it=lsDeptIds.begin(); it!=lsDeptIds.end(); ++it) {
-            if(bFirst)
+        for (auto it = lsDeptIds.begin(); it != lsDeptIds.end(); ++it)
+        {
+            if (bFirst)
             {
                 bFirst = false;
                 strClause += int2string(*it);
@@ -77,16 +80,17 @@ void CDepartModel::getDepts(list<uint32_t>& lsDeptIds, list<IM::BaseDefine::Depa
         }
         string strSql = "select * from IMDepart where id in ( " + strClause + " )";
         CResultSet* pResultSet = pDBConn->ExecuteQuery(strSql.c_str());
-        if(pResultSet)
+        if (pResultSet)
         {
-            while (pResultSet->Next()) {
+            while (pResultSet->Next())
+            {
                 IM::BaseDefine::DepartInfo cDept;
                 uint32_t nId = pResultSet->GetInt("id");
                 uint32_t nParentId = pResultSet->GetInt("parentId");
                 string strDeptName = pResultSet->GetString("departName");
                 uint32_t nStatus = pResultSet->GetInt("status");
                 uint32_t nPriority = pResultSet->GetInt("priority");
-                if(IM::BaseDefine::DepartmentStatusType_IsValid(nStatus))
+                if (IM::BaseDefine::DepartmentStatusType_IsValid(nStatus))
                 {
                     cDept.set_dept_id(nId);
                     cDept.set_parent_dept_id(nParentId);
@@ -114,15 +118,16 @@ void CDepartModel::getDept(uint32_t nDeptId, IM::BaseDefine::DepartInfo& cDept)
     {
         string strSql = "select * from IMDepart where id = " + int2string(nDeptId);
         CResultSet* pResultSet = pDBConn->ExecuteQuery(strSql.c_str());
-        if(pResultSet)
+        if (pResultSet)
         {
-            while (pResultSet->Next()) {
+            while (pResultSet->Next())
+            {
                 uint32_t nId = pResultSet->GetInt("id");
                 uint32_t nParentId = pResultSet->GetInt("parentId");
                 string strDeptName = pResultSet->GetString("departName");
                 uint32_t nStatus = pResultSet->GetInt("status");
                 uint32_t nPriority = pResultSet->GetInt("priority");
-                if(IM::BaseDefine::DepartmentStatusType_IsValid(nStatus))
+                if (IM::BaseDefine::DepartmentStatusType_IsValid(nStatus))
                 {
                     cDept.set_dept_id(nId);
                     cDept.set_parent_dept_id(nParentId);

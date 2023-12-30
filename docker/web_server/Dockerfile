@@ -1,4 +1,4 @@
-FROM lsqtzj/openeuler_nginx  AS base
+FROM lsqtzj/openeuler_nginx AS base
 EXPOSE 80
 RUN rm -Rf /www/wwwroot/default/*
 COPY ./php /www/wwwroot/default

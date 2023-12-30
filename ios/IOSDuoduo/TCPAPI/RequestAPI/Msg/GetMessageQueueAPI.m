@@ -9,7 +9,7 @@
 #import "GetMessageQueueAPI.h"
 #import "DDMessageEntity.h"
 #import "Encapsulator.h"
-#import "IMMessage.pb.h"
+#import "IMMessage.pbobjc.h"
 @implementation GetMessageQueueAPI
 /**
  *  请求超时时间
@@ -71,12 +71,12 @@
    
     Analysis analysis = (id)^(NSData* data)
     {
-        IMGetMsgListRsp *rsp =[IMGetMsgListRsp parseFromData:data];
+        IMGetMsgListRsp *rsp =[IMGetMsgListRsp parseFromData:data error:nil];
         SessionType sessionType = rsp.sessionType;
-        NSString *sessionID = [TheRuntime changeOriginalToLocalID:rsp.sessionId SessionType:sessionType];
+        NSString *sessionID = [TheRuntime changeOriginalToLocalID:rsp.sessionId sessionType:sessionType];
         NSUInteger begin = rsp.msgIdBegin;
          NSMutableArray *msgArray = [NSMutableArray new];
-        for (MsgInfo *msgInfo in rsp.msgList) {
+        for (MsgInfo *msgInfo in rsp.msgListArray) {
             DDMessageEntity *msg = [DDMessageEntity makeMessageFromPB:msgInfo SessionType:sessionType];
             msg.sessionId=sessionID;
             msg.state=DDmessageSendSuccess;
@@ -99,7 +99,7 @@
     Package package = (id)^(id object,uint16_t seqNo)
     {
         NSArray* array = (NSArray*)object;
-        IMGetMsgListReqBuilder *getMsgListReq = [IMGetMsgListReq builder];
+        IMGetMsgListReq *getMsgListReq = [[IMGetMsgListReq alloc] init];
         [getMsgListReq setMsgIdBegin:[array[0] integerValue]];
         [getMsgListReq setUserId:0];
         [getMsgListReq setMsgCnt:[array[1] integerValue]];
@@ -108,7 +108,7 @@
         DDDataOutputStream *dataout = [[DDDataOutputStream alloc] init];
         [dataout writeInt:0];
         [dataout writeTcpProtocolHeader:DDSERVICE_MESSAGE cId:CID_MSG_LIST_REQUEST seqNo:seqNo];
-        [dataout directWriteBytes:[getMsgListReq build].data];
+        [dataout directWriteBytes:[getMsgListReq data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

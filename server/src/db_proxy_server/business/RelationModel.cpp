@@ -31,26 +31,19 @@ CRelationModel::~CRelationModel()
 
 CRelationModel* CRelationModel::getInstance()
 {
-	if (!m_pInstance) {
+	if (!m_pInstance)
+	{
 		m_pInstance = new CRelationModel();
 	}
 
 	return m_pInstance;
 }
 
-/**
- *  获取会话关系ID
- *  对于群组，必须把nUserBId设置为群ID
- *
- *  @param nUserAId  <#nUserAId description#>
- *  @param nUserBId  <#nUserBId description#>
- *  @param bAdd      <#bAdd description#>
- *  @param nStatus 0 获取未被删除会话，1获取所有。
- */
 uint32_t CRelationModel::getRelationId(uint32_t nUserAId, uint32_t nUserBId, bool bAdd)
 {
     uint32_t nRelationId = INVALID_VALUE;
-    if (nUserAId == 0 || nUserBId == 0) {
+    if (nUserAId == 0 || nUserBId == 0)
+    {
         log("invalied user id:%u->%u", nUserAId, nUserBId);
         return nRelationId;
     }
@@ -58,9 +51,11 @@ uint32_t CRelationModel::getRelationId(uint32_t nUserAId, uint32_t nUserBId, boo
     CDBConn* pDBConn = pDBManager->GetDBConn("teamtalk_slave");
     if (pDBConn)
     {
+        // 选择大一点的用户id
         uint32_t nBigId = nUserAId > nUserBId ? nUserAId : nUserBId;
+        // 选择小一点的用户id
         uint32_t nSmallId = nUserAId > nUserBId ? nUserBId : nUserAId;
-        string strSql = "select id from IMRelationShip where smallId=" + int2string(nSmallId) + " and bigId="+ int2string(nBigId) + " and status = 0";
+        string strSql = "select id from IMRelationShip where smallId=" + int2string(nSmallId) + " and bigId=" + int2string(nBigId) + " and status = 0";
         
         CResultSet* pResultSet = pDBConn->ExecuteQuery(strSql.c_str());
         if (pResultSet)
@@ -98,7 +93,7 @@ uint32_t CRelationModel::addRelation(uint32_t nSmallId, uint32_t nBigId)
         uint32_t nTimeNow = (uint32_t)time(NULL);
         string strSql = "select id from IMRelationShip where smallId=" + int2string(nSmallId) + " and bigId="+ int2string(nBigId);
         CResultSet* pResultSet = pDBConn->ExecuteQuery(strSql.c_str());
-        if(pResultSet && pResultSet->Next())
+        if (pResultSet && pResultSet->Next())
         {
             nRelationId = pResultSet->GetInt("id");
             strSql = "update IMRelationShip set status=0, updated=" + int2string(nTimeNow) + " where id=" + int2string(nRelationId);
@@ -134,10 +129,10 @@ uint32_t CRelationModel::addRelation(uint32_t nSmallId, uint32_t nBigId)
                     log("insert message failed. %s", strSql.c_str());
                 }
             }
-            if(nRelationId != INVALID_VALUE)
+            if (nRelationId != INVALID_VALUE)
             {
                 // 初始化msgId
-                if(!CMessageModel::getInstance()->resetMsgId(nRelationId))
+                if (!CMessageModel::getInstance()->resetMsgId(nRelationId))
                 {
                     log("reset msgId failed. smallId=%u, bigId=%u.", nSmallId, nBigId);
                 }
@@ -160,7 +155,7 @@ bool CRelationModel::updateRelation(uint32_t nRelationId, uint32_t nUpdateTime)
     CDBConn* pDBConn = pDBManager->GetDBConn("teamtalk_master");
     if (pDBConn)
     {
-        string strSql = "update IMRelationShip set `updated`="+int2string(nUpdateTime) + " where id="+int2string(nRelationId);
+        string strSql = "update IMRelationShip set `updated`=" + int2string(nUpdateTime) + " where id=" + int2string(nRelationId);
         bRet = pDBConn->ExecuteUpdate(strSql.c_str());
         pDBManager->RelDBConn(pDBConn);
     }
@@ -179,7 +174,7 @@ bool CRelationModel::removeRelation(uint32_t nRelationId)
     if (pDBConn)
     {
         uint32_t nNow = (uint32_t) time(NULL);
-        string strSql = "update IMRelationShip set status = 1, updated="+int2string(nNow)+" where id=" + int2string(nRelationId);
+        string strSql = "update IMRelationShip set status = 1, updated=" + int2string(nNow) + " where id=" + int2string(nRelationId);
         bRet = pDBConn->ExecuteUpdate(strSql.c_str());
         pDBManager->RelDBConn(pDBConn);
     }

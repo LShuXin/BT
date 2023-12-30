@@ -41,7 +41,7 @@
 	if(self = [super init]) {
 		self.placeholderImage = anImage;
 		self.delegate = aDelegate;
-        onlineState = UserStatTypeUserStatusOffline ;
+        onlineState = UserStatType_UserStatusOffline ;
         imageIndex=0;
 	}
 	
@@ -57,7 +57,7 @@
 	}
 	
 	if(!aURL) {
-        if(UserStatTypeUserStatusOffline==onlineState && self.placeholderImage){
+        if(UserStatType_UserStatusOffline==onlineState && self.placeholderImage){
             //先不用灰色处理
           //  self.image = GrayImageFromNSImageWithAlpha(self.placeholderImage);
             self.image = self.placeholderImage;
@@ -75,7 +75,7 @@
 	NSImage* anImage = [[EGOImageLoader sharedImageLoader] imageForURL:aURL shouldLoadWithObserver:self];
 	
 	if(anImage) {
-        if(UserStatTypeUserStatusOffline==onlineState){
+        if(UserStatType_UserStatusOffline==onlineState){
            // self.image = GrayImageFromNSImageWithAlpha(anImage);
             self.image = anImage;
         }else{
@@ -87,7 +87,7 @@
 			[self.delegate imageViewLoadedImage:self];
 		}
 	} else {
-        if(UserStatTypeUserStatusOffline==onlineState){
+        if(UserStatType_UserStatusOffline==onlineState){
             //self.image = GrayImageFromNSImageWithAlpha(self.placeholderImage);
              self.image = self.placeholderImage;
         }else{
@@ -115,7 +115,7 @@
 
 	NSImage* anImage = [[notification userInfo] objectForKey:@"image"];
    // NSString *imageURL =[[notification userInfo] objectForKey:@"imageURL"];
-    if(UserStatTypeUserStatusOffline==onlineState){
+    if(UserStatType_UserStatusOffline==onlineState){
        // self.image = GrayImageFromNSImageWithAlpha(anImage);
           self.image = anImage;
     }else{

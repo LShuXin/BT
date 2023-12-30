@@ -56,7 +56,7 @@
   
     self.title=@"聊天详情";
     self.willDeleteItems = [NSMutableArray new];
-    if (self.session.sessionType != SessionTypeSessionTypeSingle) {
+    if (self.session.sessionType != SessionType_SessionTypeSingle) {
         [self.collectionView.layer setBorderWidth:0.5];
         [self.collectionView.layer setBorderColor:RGB(199, 199, 196).CGColor];
     }
@@ -85,7 +85,7 @@
     [self loadGroupUsers];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self addHiddenDelete];
-    if (self.session.sessionType == SessionTypeSessionTypeSingle) {
+    if (self.session.sessionType == SessionType_SessionTypeSingle) {
         self.collectionView.frame=CGRectMake(0, 0, FULL_WIDTH, FULL_HEIGHT);
     }
     self.collectionView.contentInset=UIEdgeInsetsMake(0, 0, -55, 0);
@@ -164,7 +164,7 @@
     [deleteMemberAPI requestWithObject:@[self.session.sessionID, user.objID] Completion:^(GroupEntity *response, NSError *error) {
         [self.hud hide:YES afterDelay:1];
         if (error) {
-            [TheRuntime showAlertView:@" " Description:error.domain?error.domain:@"未知错误"];
+            [TheRuntime showAlertView:@" " description:error.domain?error.domain:@"未知错误"];
             return ;
         }
         if (response)
@@ -214,13 +214,13 @@
     {
         [self.items removeObjectsInRange:NSMakeRange(0, [self.items count]-2)];
     }
-    if (self.session.sessionType == SessionTypeSessionTypeGroup) {
+    if (self.session.sessionType == SessionType_SessionTypeGroup) {
         self.group = [[DDGroupModule instance] getGroupByGId:self.session.sessionID];
         self.groupName = self.group.name;
         if (!self.group)
         {
             SessionEntity* session = self.session;
-            [[DDGroupModule instance] getGroupInfogroupID:session.sessionID completion:^(GroupEntity *group) {
+            [[DDGroupModule instance] getGroupInfoByGroupID:session.sessionID completion:^(GroupEntity *group) {
                 
                 self.group =group;
                 self.groupName = self.group.name;
@@ -301,7 +301,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.session.sessionType == SessionTypeSessionTypeGroup)
+    if (self.session.sessionType == SessionType_SessionTypeGroup)
     {
         return 2;
     }else{
@@ -320,7 +320,7 @@
         [cell addSubview:line];
     }
    
-    if (self.session.sessionType == SessionTypeSessionTypeGroup)
+    if (self.session.sessionType == SessionType_SessionTypeGroup)
     {
         if (indexPath.row == 0) {
             [cell.textLabel setText:@"群聊名称"];

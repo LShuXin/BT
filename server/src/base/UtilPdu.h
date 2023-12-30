@@ -56,8 +56,9 @@ public:
 	uint32_t GetServiceId() { return m_service_id; }
 	uint32_t GetCommandId() { return m_command_id; }
 	uint32_t GetErrorCode() { return m_error_code; }
-	char *GetErrorMsg() {
-		// 从string转为c风格的字符串需要显式的类型转换
+	char *GetErrorMsg()
+	{
+		// 从 string 转为 c 风格的字符串需要显式的类型转换
 		return (char *)m_error_msg.c_str();
 	}
 

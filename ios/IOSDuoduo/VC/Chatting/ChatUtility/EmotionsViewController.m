@@ -115,8 +115,8 @@
             }else{
                 //表情
                 [button.titleLabel setFont:[UIFont fontWithName:@"AppleColorEmoji" size:27.0]];
-                [button setTitle: [emotions objectAtIndex:i*4+y+(page*8)]forState:UIControlStateNormal];
-                button.tag=i*4+y+(page*8);
+                [button setTitle: [emotions objectAtIndex:i*4+y+ (page*8)]forState:UIControlStateNormal];
+                button.tag=i*4+y+ (page*8);
                 NSString *emotionStr = [[EmotionsModule shareInstance].emotionUnicodeDic objectForKey:emotions[i*4 + y + page*8]];
                 UIImage* emotionImage = [UIImage imageNamed:emotionStr];
                 [button setImage:emotionImage forState:UIControlStateNormal];

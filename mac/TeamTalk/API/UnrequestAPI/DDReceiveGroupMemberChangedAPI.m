@@ -7,10 +7,10 @@
 //
 
 #import "DDReceiveGroupMemberChangedAPI.h"
-#import "IMBaseDefine.pb.h"
-#import "IMGroup.pb.h"
+#import "IMBaseDefine.pbobjc.h"
+#import "IMGroup.pbobjc.h"
 #import "MTGroupModule.h"
-#import "IMBaseDefine.pb.h"
+#import "IMBaseDefine.pbobjc.h"
 
 @implementation DDReceiveGroupMemberChangedAPI
 /**
@@ -20,7 +20,7 @@
  */
 - (int)responseServiceID
 {
-    return ServiceIDSidGroup;
+    return ServiceID_SidGroup;
 }
 
 /**
@@ -30,7 +30,7 @@
  */
 - (int)responseCommandID
 {
-    return GroupCmdIDCidGroupChangeMemberNotify;
+    return GroupCmdID_CidGroupChangeMemberNotify;
 }
 
 /**
@@ -42,11 +42,11 @@
 {
     UnrequestAPIAnalysis analysis = (id)^(NSData* data)
     {
-        IMGroupChangeMemberNotify *rsp = [IMGroupChangeMemberNotify parseFromData:data];
+        IMGroupChangeMemberNotify *rsp = [IMGroupChangeMemberNotify parseFromData:data error: nil];
         
         NSString *groupId = [NSString stringWithFormat:@"%d", rsp.groupId];
         
-        PBArray* currentUserIDs = rsp.curUserIdList;
+        NSArray* currentUserIDs = rsp.curUserIdListArray;
         NSMutableArray* userIDs = [[NSMutableArray alloc] init];
         for (NSInteger index = 0; index < [currentUserIDs count]; index ++)
         {

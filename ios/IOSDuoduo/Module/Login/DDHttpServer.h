@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface DDHttpServer : NSObject
 
 /**
@@ -18,9 +19,12 @@
  *  @param success  登录成功回调的block
  *  @param failure  登录失败回调的block
  */
-- (void)loginWithUserName:(NSString*)userName
-                 password:(NSString*)password
-                  success:(void(^)(id respone))success
-                  failure:(void(^)(id error))failure;
--(void)getMsgIp:(void(^)(NSDictionary *dic))block failure:(void(^)(NSString* error))failure;
+-(void)loginWithUserName:(NSString*)userName
+                password:(NSString*)password
+                 success:(void(^)(id respone))success
+                 failure:(void(^)(id error))failure;
+
+-(void)getMsgIp:(void(^)(NSDictionary* dic))block
+        failure:(void(^)(NSString* error))failure;
+
 @end

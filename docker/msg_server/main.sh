@@ -4,8 +4,8 @@ server_ip(){
         arp $1 | sed "s/.*(\([0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\)).*/\1/g"
 }
 
-sed -i "s/IpAddr1=.*/IpAddr1= $IPAdd1/g" /teamtalk/msg_server/msgserver.conf
-sed -i "s/IpAddr2=.*/IpAddr2= $IPAdd2/g" /teamtalk/msg_server/msgserver.conf
+sed -i "s/IpAddr1=.*/IpAddr1= $IP_ADDR1/g" /teamtalk/msg_server/msgserver.conf
+sed -i "s/IpAddr2=.*/IpAddr2= $IP_ADDR2/g" /teamtalk/msg_server/msgserver.conf
 sed -i "s/DBServerIP1=.*/DBServerIP1=$( server_ip "${DB_PROXY_SERVER}" )/g" /teamtalk/msg_server/msgserver.conf
 sed -i "s/LoginServerIP1=.*/LoginServerIP1=$( server_ip "${LOGIN_SERVER}" )/g" /teamtalk/msg_server/msgserver.conf
 sed -i "s/RouteServerIP1=.*/RouteServerIP1=$( server_ip "${ROUTE_SERVER}" )/g" /teamtalk/msg_server/msgserver.conf

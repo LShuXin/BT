@@ -1,6 +1,7 @@
 package com.mogujie.tt.imservice.manager;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.protobuf.CodedInputStream;
 import com.mogujie.tt.DB.DBInterface;

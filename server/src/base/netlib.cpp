@@ -2,9 +2,11 @@
 #include "BaseSocket.h"
 #include "EventDispatch.h"
 
+
 int netlib_init()
 {
 	int ret = NETLIB_OK;
+
 #ifdef _WIN32
 	WSADATA wsaData;
 	WORD wReqest = MAKEWORD(1, 1);
@@ -20,6 +22,7 @@ int netlib_init()
 int netlib_destroy()
 {
 	int ret = NETLIB_OK;
+
 #ifdef _WIN32
 	if (WSACleanup() != 0)
 	{
@@ -38,11 +41,16 @@ int netlib_listen(
 {
 	CBaseSocket* pSocket = new CBaseSocket();
 	if (!pSocket)
-		return NETLIB_ERROR;
+    {
+        return NETLIB_ERROR;
+    }
 
-	int ret =  pSocket->Listen(server_ip, port, callback, callback_data);
+	int ret = pSocket->Listen(server_ip, port, callback, callback_data);
 	if (ret == NETLIB_ERROR)
-		delete pSocket;
+    {
+        delete pSocket;
+    }
+
 	return ret;
 }
 
@@ -54,11 +62,16 @@ net_handle_t netlib_connect(
 {
 	CBaseSocket* pSocket = new CBaseSocket();
 	if (!pSocket)
-		return NETLIB_INVALID_HANDLE;
+    {
+        return NETLIB_INVALID_HANDLE;
+    }
 
 	net_handle_t handle = pSocket->Connect(server_ip, port, callback, callback_data);
 	if (handle == NETLIB_INVALID_HANDLE)
-		delete pSocket;
+    {
+        delete pSocket;
+    }
+
 	return handle;
 }
 
@@ -78,7 +91,9 @@ int netlib_recv(net_handle_t handle, void* buf, int len)
 {
 	CBaseSocket* pSocket = FindBaseSocket(handle);
 	if (!pSocket)
-		return NETLIB_ERROR;
+    {
+        return NETLIB_ERROR;
+    }
 
 	int ret = pSocket->Recv(buf, len);
 	pSocket->ReleaseRef();
@@ -89,7 +104,9 @@ int netlib_close(net_handle_t handle)
 {
 	CBaseSocket* pSocket = FindBaseSocket(handle);
 	if (!pSocket)
-		return NETLIB_ERROR;
+    {
+        return NETLIB_ERROR;
+    }
 
 	int ret = pSocket->Close();
 	pSocket->ReleaseRef();
@@ -100,10 +117,14 @@ int netlib_option(net_handle_t handle, int opt, void* optval)
 {
 	CBaseSocket* pSocket = FindBaseSocket(handle);
 	if (!pSocket)
-		return NETLIB_ERROR;
+    {
+        return NETLIB_ERROR;
+    }
 
 	if ((opt >= NETLIB_OPT_GET_REMOTE_IP) && !optval)
-		return NETLIB_ERROR;
+    {
+        return NETLIB_ERROR;
+    }
 
 	switch (opt)
 	{

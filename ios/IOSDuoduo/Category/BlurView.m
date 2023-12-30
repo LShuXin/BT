@@ -7,21 +7,28 @@
 //
 
 #import "BlurView.h"
+
+
 @interface BlurView()
 @property (nonatomic, strong) UIToolbar *toolbar;
 @end
+
 @implementation BlurView
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+-(instancetype)initWithCoder:(NSCoder*)aDecoder
+{
     self = [super initWithCoder:aDecoder];
-    if (self) {
+    if (self)
+    {
         [self setup];
     }
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
+-(instancetype)initWithFrame:(CGRect)frame
+{
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
         [self setup];
     }
     return self;
@@ -30,17 +37,20 @@
 - (instancetype)init
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         [self setup];
     }
     return self;
 }
 
-- (void)setup {
+- (void)setup
+{
     // If we don't clip to bounds the toolbar draws a thin shadow on top
     [self setClipsToBounds:YES];
     
-    if (![self toolbar]) {
+    if (![self toolbar])
+    {
         [self setToolbar:[[UIToolbar alloc] initWithFrame:[self bounds]]];
         [self.toolbar setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self insertSubview:[self toolbar] atIndex:0];
@@ -56,7 +66,8 @@
     }
 }
 
-- (void) setBlurTintColor:(UIColor *)blurTintColor {
+-(void)setBlurTintColor:(UIColor*)blurTintColor
+{
     [self.toolbar setBarTintColor:blurTintColor];
 }
 

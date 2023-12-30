@@ -36,10 +36,10 @@
     NSString* realSessionID = nil;
     switch (self.sessionType)
     {
-        case SessionTypeSessionTypeSingle:
+        case SessionType_SessionTypeSingle:
             realSessionID = [self.sessionID copy];
             break;
-        case SessionTypeSessionTypeGroup:
+        case SessionType_SessionTypeGroup:
             realSessionID = [self.sessionID substringFromIndex:[DD_GROUP_SESSIONID_PREFIX length]];
             break;
     }
@@ -52,7 +52,7 @@
     {
         switch (_sessionType)
         {
-            case SessionTypeSessionTypeSingle:
+            case SessionType_SessionTypeSingle:
             {
 
                 MTUserEntity *user = (MTUserEntity *)[[MTUserModule shareInstance] getOriginEntityWithOriginID:_originID];
@@ -67,7 +67,7 @@
 
             }
                 break;
-            case SessionTypeSessionTypeGroup:
+            case SessionType_SessionTypeGroup:
             {
                 MTGroupEntity *group = (MTGroupEntity *)[[MTGroupModule shareInsatnce] getOriginEntityWithOriginID:_originID];
                 if (group)
@@ -87,7 +87,7 @@
     {
         switch (_sessionType)
         {
-            case SessionTypeSessionTypeSingle:
+            case SessionType_SessionTypeSingle:
             {
                 MTUserEntity *user = (MTUserEntity *)[[MTUserModule shareInstance] getOriginEntityWithOriginID:_originID];
                 if (![user.avatar hasSuffix:@"_100x100.jpg"])
@@ -100,7 +100,7 @@
                 }
             }
                 break;
-            case SessionTypeSessionTypeGroup:
+            case SessionType_SessionTypeGroup:
             {
                 /*
                  MTGroupEntity *group = (MTGroupEntity *)[[MTGroupModule shareInsatnce]getOriginEntityWithOriginID:_originID];
@@ -150,12 +150,12 @@
         self.sessionType = type;
         switch (type)
         {
-            case SessionTypeSessionTypeSingle:
+            case SessionType_SessionTypeSingle:
             {
                 self.sessionID = originID;
             }
                 break;
-            case SessionTypeSessionTypeGroup:
+            case SessionType_SessionTypeGroup:
             {
                 NSString* sessionID = DD_GROUP_SESSIONID(originID);
                 self.sessionID = sessionID;
@@ -178,12 +178,12 @@
 {
     switch (sessionType)
     {
-        case SessionTypeSessionTypeSingle:
+        case SessionType_SessionTypeSingle:
         {
             return originID;
         }
             break;
-        case SessionTypeSessionTypeGroup:
+        case SessionType_SessionTypeGroup:
         {
             NSString* sessionID = DD_GROUP_SESSIONID(originID);
             return sessionID;
@@ -210,11 +210,11 @@
 {
     if ([sessionID hasPrefix:DD_GROUP_SESSIONID_PREFIX])
     {
-        return SessionTypeSessionTypeGroup;
+        return SessionType_SessionTypeGroup;
     }
     else
     {
-        return SessionTypeSessionTypeSingle;
+        return SessionType_SessionTypeSingle;
     }
 }
 
@@ -222,7 +222,7 @@
 {
     switch (self.sessionType)
     {
-        case SessionTypeSessionTypeSingle:
+        case SessionType_SessionTypeSingle:
         {
             NSString* originID = self.originID;
 #warning 判断用户是否被屏蔽，并且返回
@@ -230,7 +230,7 @@
             return NO;
         }
             break;
-        case SessionTypeSessionTypeGroup:
+        case SessionType_SessionTypeGroup:
         {
             NSString* originID = self.originID;
 #warning 判断群是否被屏蔽，并且返回

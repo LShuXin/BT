@@ -9,14 +9,17 @@
 #import "DDCreateGroupAPI.h"
 #import "DDTcpProtocolHeader.h"
 #import "GroupEntity.h"
-#import "IMGroup.pb.h"
+#import "IMGroup.pbobjc.h"
+
+
 @implementation DDCreateGroupAPI
+
 /**
  *  请求超时时间
  *
  *  @return 超时时间
  */
-- (int)requestTimeOutTimeInterval
+-(int)requestTimeOutTimeInterval
 {
     return TimeOutTimeInterval;
 }
@@ -26,7 +29,7 @@
  *
  *  @return 对应的serviceID
  */
-- (int)requestServiceID
+-(int)requestServiceID
 {
     return SERVICE_GROUP;
 }
@@ -36,7 +39,7 @@
  *
  *  @return 对应的serviceID
  */
-- (int)responseServiceID
+-(int)responseServiceID
 {
     return SERVICE_GROUP;
 }
@@ -46,7 +49,7 @@
  *
  *  @return 对应的commendID
  */
-- (int)requestCommendID
+-(int)requestCommendID
 {
     return CMD_ID_GROUP_CREATE_TMP_GROUP_REQ;
 }
@@ -56,7 +59,7 @@
  *
  *  @return 对应的commendID
  */
-- (int)responseCommendID
+-(int)responseCommendID
 {
     return CMD_ID_GROUP_CREATE_TMP_GROUP_RES;
 }
@@ -66,11 +69,11 @@
  *
  *  @return 解析数据的block
  */
-- (Analysis)analysisReturnData
+-(Analysis)analysisReturnData
 {
     Analysis analysis = (id)^(NSData* data)
     {
-        IMGroupCreateRsp *rsp = [IMGroupCreateRsp parseFromData:data];
+        IMGroupCreateRsp* rsp = [IMGroupCreateRsp parseFromData:data error:nil];
         uint32_t result = rsp.resultCode;
         GroupEntity* group = nil;
         if (result != 0)
@@ -79,16 +82,17 @@
         }
         else
         {
-            NSString *groupId = [GroupEntity pbGroupIdToLocalID:rsp.groupId];
-            NSString *groupName = rsp.groupName;
-            uint32_t userCnt =[rsp.userIdList count];
+            NSString* groupId = [GroupEntity pbGroupIdToLocalID:rsp.groupId];
+            NSString* groupName = rsp.groupName;
+            uint32_t userCnt = [rsp.userIdListArray count];
             group = [[GroupEntity alloc] init];
             group.objID = groupId;
             group.name = groupName;
             group.groupUserIds = [[NSMutableArray alloc] init];
             
-            for (uint32_t i = 0; i < userCnt; i++) {
-                NSString* userId = [DDUserEntity pbUserIdToLocalID:[rsp.userIdList[i] integerValue]];
+            for (uint32_t i = 0; i < userCnt; i++)
+            {
+                NSString *userId = [DDUserEntity pbUserIdToLocalID:[[rsp userIdListArray] valueAtIndex:i]];
                 [group.groupUserIds addObject:userId];
                 [group addFixOrderGroupUserIDS:userId];
             }
@@ -104,31 +108,32 @@
  *
  *  @return 打包数据的block
  */
-- (Package)packageRequestObject
+-(Package)packageRequestObject
 {
-    Package package = (id)^(id object,uint16_t seqNo)
+    Package package = (id)^(id object, uint16_t seqNo)
     {
         NSArray* array = (NSArray*)object;
         NSString* groupName = array[0];
         NSString* groupAvatar = array[1];
         NSArray* groupUserList = array[2];
         
-        IMGroupCreateReqBuilder *req = [IMGroupCreateReq builder];
+        IMGroupCreateReq* req = [[IMGroupCreateReq alloc] init];
         [req setUserId:0];
         [req setGroupName:groupName];
         [req setGroupAvatar:groupAvatar];
-        [req setGroupType:GroupTypeGroupTypeTmp];
-        NSMutableArray *originalID = [NSMutableArray new];
-        for (NSString *localID in groupUserList) {
-            [originalID addObject:@([TheRuntime changeIDToOriginal:localID])];
+        [req setGroupType:GroupType_GroupTypeTmp];
+        GPBUInt32Array* originalID = [[GPBUInt32Array alloc] init];
+        for (NSString* localID in groupUserList)
+        {
+            [originalID addValue:[TheRuntime changeIDToOriginal:localID]];
         }
         [req setMemberIdListArray:originalID];
-        DDDataOutputStream *dataout = [[DDDataOutputStream alloc] init];
+        DDDataOutputStream* dataout = [[DDDataOutputStream alloc] init];
         [dataout writeInt:0];
         [dataout writeTcpProtocolHeader:SERVICE_GROUP
                                     cId:CMD_ID_GROUP_CREATE_TMP_GROUP_REQ
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[req build].data];
+        [dataout directWriteBytes:[req data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

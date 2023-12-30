@@ -14,36 +14,41 @@
 #import "GroupAvatarImage.h"
 #import "DDNotificationHelp.h"
 #import "NSDictionary+Safe.h"
+
+
 @implementation DDGroupModule
-- (instancetype)init
+
+-(instancetype)init
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         self.allGroups = [NSMutableDictionary new];
-        [[DDDatabaseUtil instance] loadGroupsCompletion:^(NSArray *contacts, NSError *error) {
-            [contacts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                GroupEntity *group = (GroupEntity *)obj;
-                if(group.objID)
+        [[DDDatabaseUtil instance] loadGroupsCompletion:^(NSArray* contacts, NSError* error) {
+            [contacts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop) {
+                GroupEntity* group = (GroupEntity*)obj;
+                if (group.objID)
                 {
                     [self addGroup:group];
                     GetGroupInfoAPI* request = [[GetGroupInfoAPI alloc] init];
-                    [request requestWithObject:@[@([TheRuntime changeIDToOriginal:group.objID]),@(group.objectVersion)] Completion:^(id response, NSError *error) {
+                    [request requestWithObject:@[@([TheRuntime changeIDToOriginal:group.objID]), @(group.objectVersion)]
+                                    Completion:^(id response, NSError* error) {
+                        
                         if (!error)
                         {
-                            if ([response count]) {
+                            if ([response count])
+                            {
                                 GroupEntity* group = (GroupEntity*)response[0];
                                 if (group)
                                 {
                                     [self addGroup:group];
-                                    [[DDDatabaseUtil instance] updateRecentGroup:group completion:^(NSError *error) {
+                                    [[DDDatabaseUtil instance] updateRecentGroup:group completion:^(NSError* error) {
                                         DDLog(@"insert group to database error.");
                                     }];
                                 }
                             }
-                            
                         }
                     }];
-
                 }
             }];
         }];
@@ -52,20 +57,21 @@
     return self;
 }
 
-+ (instancetype)instance
++(instancetype)instance
 {
     static DDGroupModule* group;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         group = [[DDGroupModule alloc] init];
-        
     });
     return group;
 }
+
 -(void)getGroupFromDB
 {
     
 }
+
 -(void)addGroup:(GroupEntity*)newGroup
 {
     if (!newGroup)
@@ -76,44 +82,48 @@
     [_allGroups setObject:group forKey:group.objID];
     newGroup = nil;
 }
+
 -(NSArray*)getAllGroups
 {
     return [_allGroups allValues];
 }
+
 -(GroupEntity*)getGroupByGId:(NSString*)gId
 {
-    
-    GroupEntity *entity= [_allGroups safeObjectForKey:gId];
-  
+    GroupEntity* entity= [_allGroups safeObjectForKey:gId];
     return entity;
 }
 
-- (void)getGroupInfogroupID:(NSString*)groupID completion:(GetGroupInfoCompletion)completion
+-(void)getGroupInfoByGroupID:(NSString*)groupID completion:(GetGroupInfoCompletion)completion
 {
-    GroupEntity *group = [self getGroupByGId:groupID];
-    if (group) {
+    GroupEntity* group = [self getGroupByGId:groupID];
+    if (group)
+    {
         completion(group);
-    }else{
+    }
+    else
+    {
         GetGroupInfoAPI* request = [[GetGroupInfoAPI alloc] init];
-        [request requestWithObject:@[@([TheRuntime changeIDToOriginal:groupID]),@(group.objectVersion)] Completion:^(id response, NSError *error) {
+        [request requestWithObject:@[@([TheRuntime changeIDToOriginal:groupID]), @(group.objectVersion)]
+                        Completion:^(id response, NSError* error) {
+            
             if (!error)
             {
-                if ([response count]) {
+                if ([response count])
+                {
                     GroupEntity* group = (GroupEntity*)response[0];
                     if (group)
                     {
                         [self addGroup:group];
-                        [[DDDatabaseUtil instance] updateRecentGroup:group completion:^(NSError *error) {
+                        [[DDDatabaseUtil instance] updateRecentGroup:group completion:^(NSError* error) {
                             DDLog(@"insert group to database error.");
                         }];
                     }
                     completion(group);
                 }
-                
             }
         }];
     }
-    
 }
 
 -(BOOL)isContainGroup:(NSString*)gId
@@ -121,14 +131,12 @@
     return ([_allGroups valueForKey:gId] != nil);
 }
 
-- (void)registerAPI
+-(void)registerAPI
 {
-    
     DDReceiveGroupAddMemberAPI* addmemberAPI = [[DDReceiveGroupAddMemberAPI alloc] init];
-    [addmemberAPI registerAPIInAPIScheduleReceiveData:^(id object, NSError *error) {
+    [addmemberAPI registerAPIInAPIScheduleReceiveData:^(id object, NSError* error) {
         if (!error)
         {
-            
             GroupEntity* groupEntity = (GroupEntity*)object;
             if (!groupEntity)
             {
@@ -137,12 +145,10 @@
             if ([self getGroupByGId:groupEntity.objID])
             {
                 //自己本身就在组中
-                
             }
             else
             {
                 //自己被添加进组中
-                
                 groupEntity.lastUpdateTime = [[NSDate date] timeIntervalSince1970];
                 [[DDGroupModule instance] addGroup:groupEntity];
 //                [self addGroup:groupEntity];

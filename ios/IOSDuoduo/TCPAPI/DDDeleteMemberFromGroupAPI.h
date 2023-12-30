@@ -7,8 +7,10 @@
 //
 
 #import "DDSuperAPI.h"
+
+
 /**
- *  移除讨论组中的某个用户,index1:groupId,index2:userlist
+ *  移除讨论组中的某个用户, index1: groupId, index2: userlist
  */
 @interface DDDeleteMemberFromGroupAPI : DDSuperAPI
 

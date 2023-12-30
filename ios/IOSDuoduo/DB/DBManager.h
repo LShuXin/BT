@@ -10,18 +10,23 @@
 #import "DBHelper.h"
 #import "DDUserEntity.h"
 #import "std.h"
-enum{
+
+
+enum
+{
     User_DB,
     MessageDB,
     SessionDB,
     GroupDB
-    
 } TeamTalkDBType;
+
+
 @interface DBManager : NSObject
+
 AS_SINGLETON(DBManager)
--(void)updateUser:(DDUserEntity *)user;
--(void)insertUsers:(NSArray *)array;
--(NSMutableArray *)getAllUser;
+-(void)updateUser:(DDUserEntity*)user;
+-(void)insertUsers:(NSArray*)array;
+-(NSMutableArray*)getAllUser;
 -(void)setUsersVersion:(NSUInteger)version;
 -(NSInteger)getUsersVersion;
 @end

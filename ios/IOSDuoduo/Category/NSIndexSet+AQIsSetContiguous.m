@@ -8,9 +8,9 @@
 
 #import "NSIndexSet+AQIsSetContiguous.h"
 
-@implementation NSIndexSet (AQIsSetContiguous)
+@implementation NSIndexSet(AQIsSetContiguous)
 
-- (BOOL) aq_isSetContiguous
+-(BOOL)aq_isSetContiguous
 {
     return ( (([self lastIndex] - [self firstIndex]) + 1) == [self count] );
 }

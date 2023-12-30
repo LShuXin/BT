@@ -203,14 +203,14 @@
     if ([entity isKindOfClass:[MTUserEntity class]])
     {
         MTUserEntity* user = (MTUserEntity*)entity;
-        MTSessionEntity* session = [[MTSessionEntity alloc] initWithOriginID:user.ID type:SessionTypeSessionTypeSingle];
+        MTSessionEntity* session = [[MTSessionEntity alloc] initWithOriginID:user.ID type:SessionType_SessionTypeSingle];
         [self addSessions:@[session] saveToDB:save];
         return session;
     }
     else if ([entity isKindOfClass:[MTGroupEntity class]])
     {
         MTGroupEntity* group = (MTGroupEntity*)entity;
-        MTSessionEntity* session = [[MTSessionEntity alloc] initWithOriginID:group.ID type:SessionTypeSessionTypeGroup];
+        MTSessionEntity* session = [[MTSessionEntity alloc] initWithOriginID:group.ID type:SessionType_SessionTypeGroup];
         [self addSessions:@[session] saveToDB:save];
         return session;
     }
@@ -416,7 +416,7 @@
                 {
                     DDLog(@"asdas");
                 }
-                if (sessionEntity.sessionType == SessionTypeSessionTypeGroup)
+                if (sessionEntity.sessionType == SessionType_SessionTypeGroup)
                 {
                     [tempGroups addObject:sessionEntity.originID];
                 }

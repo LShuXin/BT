@@ -8,19 +8,21 @@
 
 #import "WifiViewController.h"
 
-@interface WifiViewController ()
+
+@interface WifiViewController()
 
 @end
 
 @implementation WifiViewController
-
 {
     UIWebView* _webView;
     UIActivityIndicatorView* _activityIndicatorView;
 }
-- (void)viewDidLoad {
+
+-(void)viewDidLoad
+{
     [super viewDidLoad];
-    self.title=@"街利贷";
+    self.title = @"街利贷";
     _webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:_webView];
     NSURL* url = [NSURL URLWithString:@"https://f.mogujie.com/p2p/home/investment"];
@@ -30,12 +32,13 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
+-(void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
+-(void)webViewDidFinishLoad:(UIWebView*)webView
 {
     [_activityIndicatorView stopAnimating];
 }

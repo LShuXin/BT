@@ -109,7 +109,7 @@ NSRTFPboardType, NSStringPboardType, nil]
 
 - (BOOL)resignFirstResponder
 {
-    if (sessonEntity.sessionType == SessionTypeSessionTypeSingle)
+    if (sessonEntity.sessionType == SessionType_SessionTypeSingle)
     {
 
         DDSendP2PCmdAPI* sendP2PCmdAPI = [[DDSendP2PCmdAPI alloc] init];

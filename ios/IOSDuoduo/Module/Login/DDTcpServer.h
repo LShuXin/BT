@@ -7,10 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+
+
 typedef void(^ClientSuccess)();
+
 @interface DDTcpServer : NSObject
 {
     
 }
-- (void)loginTcpServerIP:(NSString*)ip port:(NSInteger)point Success:(void(^)())success failure:(void(^)())failure;
+
+-(void)loginTcpServerIP:(NSString*)ip
+                   port:(NSInteger)point
+                Success:(void(^)())success
+                failure:(void(^)())failure;
+
 @end

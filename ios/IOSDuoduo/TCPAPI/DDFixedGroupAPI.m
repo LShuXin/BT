@@ -8,14 +8,17 @@
 
 #import "DDFixedGroupAPI.h"
 #import "GroupEntity.h"
-#import "IMGroup.pb.h"
+#import "IMGroup.pbobjc.h"
+
+
 @implementation DDFixedGroupAPI
+
 /**
  *  请求超时时间
  *
  *  @return 超时时间
  */
-- (int)requestTimeOutTimeInterval
+-(int)requestTimeOutTimeInterval
 {
     return TimeOutTimeInterval;
 }
@@ -25,7 +28,7 @@
  *
  *  @return 对应的serviceID
  */
-- (int)requestServiceID
+-(int)requestServiceID
 {
     return SERVICE_GROUP;
 }
@@ -35,7 +38,7 @@
  *
  *  @return 对应的serviceID
  */
-- (int)responseServiceID
+-(int)responseServiceID
 {
     return SERVICE_GROUP;
 }
@@ -45,7 +48,7 @@
  *
  *  @return 对应的commendID
  */
-- (int)requestCommendID
+-(int)requestCommendID
 {
     return CMD_ID_GROUP_LIST_REQ;
 }
@@ -55,7 +58,7 @@
  *
  *  @return 对应的commendID
  */
-- (int)responseCommendID
+-(int)responseCommendID
 {
     return CMD_ID_GROUP_LIST_RES;
 }
@@ -65,15 +68,16 @@
  *
  *  @return 解析数据的block
  */
-- (Analysis)analysisReturnData
+-(Analysis)analysisReturnData
 {
     Analysis analysis = (id)^(NSData* object)
     {
      
-        IMNormalGroupListRsp *imNormalRsp = [IMNormalGroupListRsp parseFromData:object];
-        NSMutableArray *array = [NSMutableArray new];
-        for (GroupVersionInfo *info in imNormalRsp.groupVersionList) {
-            NSDictionary *dic = @{@"groupid":@(info.groupId),@"version":@(info.version)};
+        IMNormalGroupListRsp* imNormalRsp = [IMNormalGroupListRsp parseFromData:object error:nil];
+        NSMutableArray* array = [NSMutableArray new];
+        for (GroupVersionInfo* info in imNormalRsp.groupVersionListArray)
+        {
+            NSDictionary* dic = @{@"groupid":@(info.groupId), @"version":@(info.version)};
             [array addObject:dic];
         }
         return  array;
@@ -117,18 +121,18 @@
  *
  *  @return 打包数据的block
  */
-- (Package)packageRequestObject
+-(Package)packageRequestObject
 {
-    Package package = (id)^(id object,uint32_t seqNo)
+    Package package = (id)^(id object, uint32_t seqNo)
     {
-        DDDataOutputStream *dataout = [[DDDataOutputStream alloc] init];
-        IMNormalGroupListReqBuilder *imnormal = [IMNormalGroupListReq builder];
+        DDDataOutputStream* dataout = [[DDDataOutputStream alloc] init];
+        IMNormalGroupListReq* imnormal = [[IMNormalGroupListReq alloc] init];
         [imnormal setUserId:0];
         [dataout writeInt:0];
         [dataout writeTcpProtocolHeader:SERVICE_GROUP
                                     cId:CMD_ID_GROUP_LIST_REQ
                                   seqNo:seqNo];
-        [dataout directWriteBytes:imnormal.build.data];
+        [dataout directWriteBytes:[imnormal data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

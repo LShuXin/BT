@@ -15,82 +15,61 @@
 
 using namespace std;
 
-//AudioModel
 CAudioModel* CAudioModel::m_pInstance = NULL;
 
-/**
- *  构造函数
- */
 CAudioModel::CAudioModel()
 {
 
 }
 
-/**
- *  析构函数
- */
 CAudioModel::~CAudioModel()
 {
 
 }
 
-/**
- *  单例
- *
- *  @return 单例的指针
- */
 CAudioModel* CAudioModel::getInstance()
 {
-	if (!m_pInstance) {
+	if (!m_pInstance)
+	{
 		m_pInstance = new CAudioModel();
 	}
 
 	return m_pInstance;
 }
 
-/**
- *  这只语音存储的url地址
- *
- *  @param strFileSite 上传的url
- */
 void CAudioModel::setUrl(string& strFileSite)
 {
     m_strFileSite = strFileSite;
-    if(m_strFileSite[m_strFileSite.length()] != '/')
+    if (m_strFileSite[m_strFileSite.length()] != '/')
     {
         m_strFileSite += "/";
     }
 }
 
-/**
- *  读取语音消息
- *
- *  @param nAudioId 语音的Id
- *  @param cMsg     语音消息，引用
- *
- *  @return bool 成功返回true，失败返回false
- */
 bool CAudioModel::readAudios(list<IM::BaseDefine::MsgInfo>& lsMsg)
 {
-    if(lsMsg.empty())
+    if (lsMsg.empty())
     {
         return true;
     }
     bool bRet = false;
     CDBManager* pDBManger = CDBManager::getInstance();
+    // mysql slave 只用于读
     CDBConn* pDBConn = pDBManger->GetDBConn("teamtalk_slave");
     if (pDBConn)
     {
-        for (auto it=lsMsg.begin(); it!=lsMsg.end(); )
+        for (auto it = lsMsg.begin(); it != lsMsg.end();)
         {
             IM::BaseDefine::MsgType nType = it->msg_type();
-            if((IM::BaseDefine::MSG_TYPE_GROUP_AUDIO ==  nType) || (IM::BaseDefine::MSG_TYPE_SINGLE_AUDIO == nType))
+            // 群聊语音/单聊语音
+            if ((IM::BaseDefine::MSG_TYPE_GROUP_AUDIO == nType) || (IM::BaseDefine::MSG_TYPE_SINGLE_AUDIO == nType))
             {
                 string strSql = "select * from IMAudio where id=" + it->msg_data();
                 CResultSet* pResultSet = pDBConn->ExecuteQuery(strSql.c_str());
                 if (pResultSet)
                 {
-                    while (pResultSet->Next()) {
+                    while (pResultSet->Next())
+                    {
                         uint32_t nCostTime = pResultSet->GetInt("duration");
                         uint32_t nSize = pResultSet->GetInt("size");
                         string strPath = pResultSet->GetString("path");
@@ -120,26 +99,19 @@ bool CAudioModel::readAudios(list<IM::BaseDefine::MsgInfo>& lsMsg)
     return bRet;
 }
 
-/**
- *  存储语音消息
- *
- *  @param nFromId     发送者Id
- *  @param nToId       接收者Id
- *  @param nCreateTime 发送时间
- *  @param pAudioData  指向语音消息的指针
- *  @param nAudioLen   语音消息的长度
- *
- *  @return 成功返回语音id，失败返回-1
- */
 int CAudioModel::saveAudioInfo(uint32_t nFromId, uint32_t nToId, uint32_t nCreateTime, const char* pAudioData, uint32_t nAudioLen)
 {
 	// parse audio data
+	// 语音长度
 	uint32_t nCostTime = CByteStream::ReadUint32((uchar_t*)pAudioData);
+	// 除去长度数据的音频数据
 	uchar_t* pRealData = (uchar_t*)pAudioData + 4;
+	// 除去长度数据的音频数据的长度
 	uint32_t nRealLen = nAudioLen - 4;
     int nAudioId = -1;
     
 	CHttpClient httpClient;
+	// 上传音频数据，返回音频数据地址
 	string strPath = httpClient.UploadByteFile(m_strFileSite, pRealData, nRealLen);
 	if (!strPath.empty())
     {
@@ -178,19 +150,11 @@ int CAudioModel::saveAudioInfo(uint32_t nFromId, uint32_t nToId, uint32_t nCreat
 	return nAudioId;
 }
 
-/**
- *  读取语音的具体内容
- *
- *  @param nCostTime 语音时长
- *  @param nSize     语音大小
- *  @param strPath   语音存储的url
- *  @param cMsg      msg结构体
- *
- *  @return 成功返回true，失败返回false
- */
+
 bool CAudioModel::readAudioContent(uint32_t nCostTime, uint32_t nSize, const string& strPath, IM::BaseDefine::MsgInfo& cMsg)
 {
-	if (strPath.empty() || nCostTime == 0 || nSize == 0) {
+	if (strPath.empty() || nCostTime == 0 || nSize == 0)
+	{
 		return false;
 	}
 
@@ -204,7 +168,7 @@ bool CAudioModel::readAudioContent(uint32_t nCostTime, uint32_t nSize, const str
 
 	// 获取音频数据，写入上面分配的内存
     CHttpClient httpClient;
-    if(!httpClient.DownloadByteFile(strPath, &cAudioMsg))
+    if (!httpClient.DownloadByteFile(strPath, &cAudioMsg))
     {
         delete [] pData;
         return false;

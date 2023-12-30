@@ -71,7 +71,7 @@
     NSString* toUserID = [NSString stringWithFormat:@"%i",[msgRsp toSessionId]];
 
      NSString *originID=nil;
-    if (msgType==MsgTypeMsgTypeSingleText ||msgType == MsgTypeMsgTypeSingleAudio) {
+    if (msgType==MsgType_MsgTypeSingleText ||msgType == MsgType_MsgTypeSingleAudio) {
         if([fromID isEqualToString:[[DDClientState shareInstance] userID] ]){       //自己发的.
             originID = toUserID;
         }else{
@@ -86,26 +86,26 @@
     MTMessageType messageType = MessageTypeNormal;
     id messageContent = nil;
     switch (msgType) {
-        case MsgTypeMsgTypeGroupAudio:
-            sessionID = [MTSessionEntity getSessionIDForOriginID:originID sessionType:SessionTypeSessionTypeGroup];
+        case MsgType_MsgTypeGroupAudio:
+            sessionID = [MTSessionEntity getSessionIDForOriginID:originID sessionType:SessionType_SessionTypeGroup];
             messageType = MessageTypeVoice;
             messageContent = [self p_getMessageContentFromMsgData:msgData forMessageServerID:messageServerID sessionID:sessionID];
             break;
             
-        case MsgTypeMsgTypeGroupText:
-            sessionID = [MTSessionEntity getSessionIDForOriginID:originID sessionType:SessionTypeSessionTypeGroup];
+        case MsgType_MsgTypeGroupText:
+            sessionID = [MTSessionEntity getSessionIDForOriginID:originID sessionType:SessionType_SessionTypeGroup];
             messageType = MessageTypeNormal;
             messageContent = [[NSString alloc] initWithData:msgData encoding:NSUTF8StringEncoding];
             break;
             
-        case MsgTypeMsgTypeSingleAudio:
-            sessionID = [MTSessionEntity getSessionIDForOriginID:originID sessionType:SessionTypeSessionTypeSingle];
+        case MsgType_MsgTypeSingleAudio:
+            sessionID = [MTSessionEntity getSessionIDForOriginID:originID sessionType:SessionType_SessionTypeSingle];
             messageType = MessageTypeVoice;
             messageContent = [self p_getMessageContentFromMsgData:msgData forMessageServerID:messageServerID sessionID:sessionID];
             break;
             
-        case MsgTypeMsgTypeSingleText:
-            sessionID = [MTSessionEntity getSessionIDForOriginID:originID sessionType:SessionTypeSessionTypeSingle];
+        case MsgType_MsgTypeSingleText:
+            sessionID = [MTSessionEntity getSessionIDForOriginID:originID sessionType:SessionType_SessionTypeSingle];
             messageType = MessageTypeNormal;
             messageContent = [[NSString alloc] initWithData:msgData encoding:NSUTF8StringEncoding];
             break;
@@ -114,7 +114,7 @@
             break;
     }
     
-    if(msgType == MsgTypeMsgTypeSingleAudio||MsgTypeMsgTypeGroupAudio==msgType){
+    if(msgType == MsgType_MsgTypeSingleAudio||MsgType_MsgTypeGroupAudio==msgType){
         _messageContent=messageContent;
     }else{
         std::string *strMsg =new std::string([messageContent UTF8String]);
@@ -147,9 +147,9 @@
     NSString* targetID;
     NSString* messageContent;
     switch (msgtype) {
-        case MsgTypeMsgTypeSingleText:
+        case MsgType_MsgTypeSingleText:
             messageType = MessageTypeNormal;
-            newSessionID = [MTSessionEntity getSessionIDForOriginID:sessionID sessionType:SessionTypeSessionTypeSingle];
+            newSessionID = [MTSessionEntity getSessionIDForOriginID:sessionID sessionType:SessionType_SessionTypeSingle];
             if ([sessionID isEqualToString:senderID])
             {
                 targetID = [DDClientState shareInstance].userID;
@@ -160,9 +160,9 @@
             }
             messageContent = [[NSString alloc] initWithData:msgInfo.msgData encoding:NSUTF8StringEncoding];
             break;
-        case MsgTypeMsgTypeSingleAudio:
+        case MsgType_MsgTypeSingleAudio:
             messageType = MessageTypeVoice;
-            newSessionID = [MTSessionEntity getSessionIDForOriginID:sessionID sessionType:SessionTypeSessionTypeSingle];
+            newSessionID = [MTSessionEntity getSessionIDForOriginID:sessionID sessionType:SessionType_SessionTypeSingle];
             if ([sessionID isEqualToString:senderID])
             {
                 targetID = [DDClientState shareInstance].userID;
@@ -174,15 +174,15 @@
             messageContent = [self p_getMessageContentFromMsgData:msgInfo.msgData forMessageServerID:msgServerID sessionID:sessionID];
 
             break;
-        case MsgTypeMsgTypeGroupText:
+        case MsgType_MsgTypeGroupText:
             messageType = MessageTypeNormal;
-            newSessionID = [MTSessionEntity getSessionIDForOriginID:sessionID sessionType:SessionTypeSessionTypeGroup];
+            newSessionID = [MTSessionEntity getSessionIDForOriginID:sessionID sessionType:SessionType_SessionTypeGroup];
             targetID = [sessionID copy];
             messageContent = [[NSString alloc] initWithData:msgInfo.msgData encoding:NSUTF8StringEncoding];
             break;
-        case MsgTypeMsgTypeGroupAudio:
+        case MsgType_MsgTypeGroupAudio:
             messageType = MessageTypeVoice;
-            newSessionID = [MTSessionEntity getSessionIDForOriginID:sessionID sessionType:SessionTypeSessionTypeGroup];
+            newSessionID = [MTSessionEntity getSessionIDForOriginID:sessionID sessionType:SessionType_SessionTypeGroup];
             targetID = [sessionID copy];
             messageContent = [self p_getMessageContentFromMsgData:msgInfo.msgData forMessageServerID:msgServerID sessionID:sessionID];
 
@@ -192,7 +192,7 @@
     }
     NSUInteger messageTime = msgInfo.createTime;
 
-    if(msgtype == MsgTypeMsgTypeSingleAudio||MsgTypeMsgTypeGroupAudio==msgtype){
+    if(msgtype == MsgType_MsgTypeSingleAudio||MsgType_MsgTypeGroupAudio==msgtype){
         _messageContent=messageContent;
     }else{
         std::string *strMsg =new std::string([messageContent UTF8String]);

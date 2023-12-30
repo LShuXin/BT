@@ -14,12 +14,24 @@
 
 #include "ImPduBase.h"
 
-namespace DB_PROXY {
-
+namespace DB_PROXY
+{
+    /**
+     *  获取指定时间以后发生变动的会话
+     *
+     *  @param pPdu      收到的packet包指针
+     *  @param conn_uuid 该包过来的 socket 描述符
+     */
     void getRecentSession(CImPdu* pPdu, uint32_t conn_uuid);
-    
-    void deleteRecentSession(CImPdu* pPdu, uint32_t conn_uuid);
 
+
+    /**
+     *  删除会话接口
+     *
+     *  @param pPdu      收到的packet包指针
+     *  @param conn_uuid 该包过来的socket 描述符
+     */
+    void deleteRecentSession(CImPdu* pPdu, uint32_t conn_uuid);
 };
 
 

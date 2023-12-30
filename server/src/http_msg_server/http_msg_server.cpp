@@ -35,7 +35,8 @@ void http_callback(void* callback_data, uint8_t msg, uint32_t handle, void* pPar
 
 int main(int argc, char* argv[])
 {
-	if ((argc == 2) && (strcmp(argv[1], "-v") == 0)) {
+	if ((argc == 2) && (strcmp(argv[1], "-v") == 0))
+	{
 		printf("Server Version: HttpMsgServer/%s\n", VERSION);
 		printf("Server Build: %s %s\n", __DATE__, __TIME__);
 		return 0;
@@ -61,21 +62,25 @@ int main(int argc, char* argv[])
 	uint32_t concurrent_db_conn_cnt = DEFAULT_CONCURRENT_DB_CONN_CNT;
 	uint32_t db_server_count2 = db_server_count * DEFAULT_CONCURRENT_DB_CONN_CNT;
 	char* concurrent_db_conn = config_file.GetConfigName("ConcurrentDBConnCnt");
-	if (concurrent_db_conn) {
-		concurrent_db_conn_cnt  = atoi(concurrent_db_conn);
+	if (concurrent_db_conn)
+	{
+		concurrent_db_conn_cnt = atoi(concurrent_db_conn);
 		db_server_count2 = db_server_count * concurrent_db_conn_cnt;
 	}
 
 	serv_info_t* db_server_list2 = NULL;
-	if (db_server_count2 > 0) {
+	if (db_server_count2 > 0)
+	{
 		db_server_list2 = new serv_info_t [ db_server_count2];
-		for (uint32_t i = 0; i < db_server_count2; i++) {
+		for (uint32_t i = 0; i < db_server_count2; i++)
+		{
 			db_server_list2[i].server_ip = db_server_list[i / concurrent_db_conn_cnt].server_ip.c_str();
 			db_server_list2[i].server_port = db_server_list[i / concurrent_db_conn_cnt].server_port;
 		}
 	}
 
-	if (!listen_ip || !str_listen_port) {
+	if (!listen_ip || !str_listen_port)
+	{
 		log("config file miss, exit... ");
 		return -1;
 	}
@@ -85,24 +90,32 @@ int main(int argc, char* argv[])
 	int ret = netlib_init();
     
 	if (ret == NETLIB_ERROR)
-		return ret;
+    {
+        return ret;
+    }
+
     
 	CStrExplode listen_ip_list(listen_ip, ';');
-	for (uint32_t i = 0; i < listen_ip_list.GetItemCnt(); i++) {
+	for (uint32_t i = 0; i < listen_ip_list.GetItemCnt(); i++)
+	{
 		ret = netlib_listen(listen_ip_list.GetItem(i), listen_port, http_callback, NULL);
 		if (ret == NETLIB_ERROR)
-			return ret;
+        {
+            return ret;
+        }
 	}
 
 	printf("server start listen on: %s:%d\n", listen_ip, listen_port);
     
 	init_http_conn();
     
-	if (db_server_count > 0) {
+	if (db_server_count > 0)
+	{
 		HTTP::init_db_serv_conn(db_server_list2, db_server_count2, concurrent_db_conn_cnt);
 	}
 
-	if (route_server_count > 0) {
+	if (route_server_count > 0)
+	{
 		HTTP::init_route_serv_conn(route_server_list, route_server_count);
 	}
 

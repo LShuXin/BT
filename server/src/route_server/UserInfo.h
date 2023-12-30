@@ -21,7 +21,8 @@ class CUserInfo
 public:
     CUserInfo();
     ~CUserInfo();
-    
+
+    // 用户 pc 端是否在线
     uint32_t GetStatus();
     
     void AddRouteConn(CRouteConn* pConn) { m_RouteConnSet.insert(pConn); }

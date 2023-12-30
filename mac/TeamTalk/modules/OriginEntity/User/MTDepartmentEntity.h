@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IMBuddy.pb.h"
+#import "IMBuddy.pbobjc.h"
 @interface MTDepartmentEntity : NSObject
 @property (nonatomic,assign)NSInteger ID;
 @property (nonatomic,retain)NSString* name;

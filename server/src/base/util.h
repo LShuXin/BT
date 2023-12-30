@@ -27,7 +27,8 @@
 #include <sys/time.h>
 #endif
 
-#define NOTUSED_ARG(v) ((void)v)		// used this to remove warning C4100, unreferenced parameter
+// used this to remove warning C4100, unreferenced parameter
+#define NOTUSED_ARG(v) ((void)v)
 
 /// yunfan modify end 
 class CRefObject
@@ -40,7 +41,7 @@ public:
 	void AddRef();
 	void ReleaseRef();
 private:
-	int				m_refCount;
+	int		m_refCount;
 	CLock*	m_lock;
 };
 
@@ -49,8 +50,8 @@ private:
 
 extern CSLog g_imlog;
 
-// Add By ZhangYuanhao 2015-01-14 For log show the file name not the full path + filename
-#define __FILENAME__ (strrchr(__FILE__, '/') ? (strrchr(__FILE__, '/') + 1):__FILE__)
+// For log show the file name not the full path + filename
+#define __FILENAME__ (strrchr(__FILE__, '/') ? (strrchr(__FILE__, '/') + 1) : __FILE__)
 #if defined(_WIN32) || defined(_WIN64)
 #define log(fmt, ...)  g_imlog.Info("<%s>\t<%d>\t<%s>,"fmt, __FILENAME__, __LINE__, __FUNCTION__, ##__VA_ARGS__)
 #else
@@ -88,8 +89,25 @@ string URLEncode(const string &sIn);
 string URLDecode(const string &sIn);
 
 
+/**
+ * @brief 获取文件大小
+ *
+ * @param path
+ * @return int64_t
+ */
 int64_t get_file_size(const char *path);
-const char*  memfind(const char *src_str, size_t src_len, const char *sub_str, size_t sub_len, bool flag = true);
+
+/**
+ * @brief 在字符串中查找子串的位置
+ *
+ * @param src_str
+ * @param src_len
+ * @param sub_str
+ * @param sub_len
+ * @param flag 为true 时从前往后找，否则从后往前找
+ * @return const char* 子串起始位置指针
+ */
+const char* memfind(const char *src_str, size_t src_len, const char *sub_str, size_t sub_len, bool flag = true);
 
 
 #endif

@@ -14,14 +14,13 @@
 #include "../ProxyConn.h"
 
 
-namespace DB_PROXY {
-
-    
+namespace DB_PROXY
+{
     void hasOfflineFile(CImPdu* pPdu, uint32_t conn_uuid)
     {
         IM::File::IMFileHasOfflineReq msg;
         IM::File::IMFileHasOfflineRsp msgResp;
-        if(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()))
+        if (msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()))
         {
             CImPdu* pPduRes = new CImPdu;
             
@@ -30,10 +29,10 @@ namespace DB_PROXY {
             list<IM::BaseDefine::OfflineFileInfo> lsOffline;
             pModel->getOfflineFile(nUserId, lsOffline);
             msgResp.set_user_id(nUserId);
-            for (list<IM::BaseDefine::OfflineFileInfo>::iterator it=lsOffline.begin();
-                 it != lsOffline.end(); ++it) {
+            for (list<IM::BaseDefine::OfflineFileInfo>::iterator it = lsOffline.begin(); it != lsOffline.end(); ++it)
+            {
                 IM::BaseDefine::OfflineFileInfo* pInfo = msgResp.add_offline_file_list();
-    //            *pInfo = *it;
+                // *pInfo = *it;
                 pInfo->set_from_user_id(it->from_user_id());
                 pInfo->set_task_id(it->task_id());
                 pInfo->set_file_name(it->file_name());
@@ -58,7 +57,7 @@ namespace DB_PROXY {
     void addOfflineFile(CImPdu* pPdu, uint32_t conn_uuid)
     {
         IM::File::IMFileAddOfflineReq msg;
-        if(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()))
+        if (msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()))
         {
             uint32_t nUserId = msg.from_user_id();
             uint32_t nToId = msg.to_user_id();
@@ -73,8 +72,9 @@ namespace DB_PROXY {
     
     void delOfflineFile(CImPdu* pPdu, uint32_t conn_uuid)
     {
+        // 这里语义。。
         IM::File::IMFileAddOfflineReq msg;
-        if(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()))
+        if (msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()))
         {
             uint32_t nUserId = msg.from_user_id();
             uint32_t nToId = msg.to_user_id();

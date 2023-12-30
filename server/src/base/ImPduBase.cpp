@@ -8,6 +8,8 @@
 #include "util.h"
 #include "ImPduBase.h"
 #include "IM.BaseDefine.pb.h"
+
+
 using namespace IM::BaseDefine;
 
 CImPdu::CImPdu()
@@ -94,7 +96,8 @@ void CImPdu::SetReversed(uint32_t reversed)
 int CImPdu::ReadPduHeader(uchar_t* buf, uint32_t len)
 {
 	int ret = -1;
-	if (len >= IM_PDU_HEADER_LEN && buf) {
+	if (len >= IM_PDU_HEADER_LEN && buf)
+	{
 		CByteStream is(buf, len);
 
 		is >> m_pdu_header.length;
@@ -115,15 +118,17 @@ CImPdu* CImPdu::ReadPdu(uchar_t *buf, uint32_t len)
 {
 	uint32_t pdu_len = 0;
 	if (!IsPduAvailable(buf, len, pdu_len))
-		return NULL;
+    {
+        return NULL;
+    }
 
 	uint16_t service_id = CByteStream::ReadUint16(buf + 8);
 	uint16_t command_id = CByteStream::ReadUint16(buf + 10);
 	CImPdu* pPdu = NULL;
 
     pPdu = new CImPdu();
-    //pPdu->_SetIncomingLen(pdu_len);
-    //pPdu->_SetIncomingBuf(buf);
+    // pPdu->_SetIncomingLen(pdu_len);
+    // pPdu->_SetIncomingBuf(buf);
     pPdu->Write(buf, pdu_len);
     pPdu->ReadPduHeader(buf, IM_PDU_HEADER_LEN);
     
@@ -133,7 +138,9 @@ CImPdu* CImPdu::ReadPdu(uchar_t *buf, uint32_t len)
 bool CImPdu::IsPduAvailable(uchar_t* buf, uint32_t len, uint32_t& pdu_len)
 {
 	if (len < IM_PDU_HEADER_LEN)
-		return false;
+    {
+        return false;
+    }
 
 	pdu_len = CByteStream::ReadUint32(buf);
 	if (pdu_len > len)
@@ -142,7 +149,7 @@ bool CImPdu::IsPduAvailable(uchar_t* buf, uint32_t len, uint32_t& pdu_len)
 		return false;
 	}
     
-    if(0 == pdu_len)
+    if (0 == pdu_len)
     {
         throw CPduException(1, "pdu_len is 0");
     }

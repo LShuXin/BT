@@ -13,271 +13,187 @@ public final class IMLogin {
       com.google.protobuf.MessageLiteOrBuilder {
   }
   /**
-   * Protobuf type {@code IM.Login.IMMsgServReq}
-   *
    * <pre>
-   *cmd id:		0x0101
+   *cmd id:        0x0101
    * </pre>
+   *
+   * Protobuf type {@code IM.Login.IMMsgServReq}
    */
-  public static final class IMMsgServReq extends
-      com.google.protobuf.GeneratedMessageLite implements
+  public  static final class IMMsgServReq extends
+      com.google.protobuf.GeneratedMessageLite<
+          IMMsgServReq, IMMsgServReq.Builder> implements
       // @@protoc_insertion_point(message_implements:IM.Login.IMMsgServReq)
       IMMsgServReqOrBuilder {
-    // Use IMMsgServReq.newBuilder() to construct.
-    private IMMsgServReq(com.google.protobuf.GeneratedMessageLite.Builder builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
+    private IMMsgServReq() {
     }
-    private IMMsgServReq(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
-
-    private static final IMMsgServReq defaultInstance;
-    public static IMMsgServReq getDefaultInstance() {
-      return defaultInstance;
+    public static com.mogujie.tt.protobuf.IMLogin.IMMsgServReq parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
-
-    public IMMsgServReq getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.ByteString unknownFields;
-    private IMMsgServReq(
-        com.google.protobuf.CodedInputStream input,
+    public static com.mogujie.tt.protobuf.IMLogin.IMMsgServReq parseFrom(
+        java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      com.google.protobuf.ByteString.Output unknownFieldsOutput =
-          com.google.protobuf.ByteString.newOutput();
-      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
-          com.google.protobuf.CodedOutputStream.newInstance(
-              unknownFieldsOutput);
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          if (tag == 0) {
-            done = true;
-          } else {
-            if (!parseUnknownField(input, unknownFieldsCodedOutput,
-                    extensionRegistry, tag)) {
-              done = true;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        try {
-          unknownFieldsCodedOutput.flush();
-        } catch (java.io.IOException e) {
-        // Should not happen
-        } finally {
-          unknownFields = unknownFieldsOutput.toByteString();
-        }
-        makeExtensionsImmutable();
-      }
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static com.google.protobuf.Parser<IMMsgServReq> PARSER =
-        new com.google.protobuf.AbstractParser<IMMsgServReq>() {
-      public IMMsgServReq parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new IMMsgServReq(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<IMMsgServReq> getParserForType() {
-      return PARSER;
-    }
-
-    private void initFields() {
-    }
-    private byte memoizedIsInitialized = -1;
-    public boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      output.writeRawBytes(unknownFields);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      size += unknownFields.size();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServReq parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServReq parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServReq parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServReq parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServReq parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServReq parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServReq parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServReq parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServReq parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServReq parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMMsgServReq prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMMsgServReq prototype) {
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
+    }
 
     /**
-     * Protobuf type {@code IM.Login.IMMsgServReq}
-     *
      * <pre>
-     *cmd id:		0x0101
+     *cmd id:        0x0101
      * </pre>
+     *
+     * Protobuf type {@code IM.Login.IMMsgServReq}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          com.mogujie.tt.protobuf.IMLogin.IMMsgServReq, Builder>
-        implements
+          com.mogujie.tt.protobuf.IMLogin.IMMsgServReq, Builder> implements
         // @@protoc_insertion_point(builder_implements:IM.Login.IMMsgServReq)
         com.mogujie.tt.protobuf.IMLogin.IMMsgServReqOrBuilder {
       // Construct using com.mogujie.tt.protobuf.IMLogin.IMMsgServReq.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private void maybeForceBuilderInitialization() {
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMMsgServReq getDefaultInstanceForType() {
-        return com.mogujie.tt.protobuf.IMLogin.IMMsgServReq.getDefaultInstance();
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMMsgServReq build() {
-        com.mogujie.tt.protobuf.IMLogin.IMMsgServReq result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMMsgServReq buildPartial() {
-        com.mogujie.tt.protobuf.IMLogin.IMMsgServReq result = new com.mogujie.tt.protobuf.IMLogin.IMMsgServReq(this);
-        return result;
-      }
-
-      public Builder mergeFrom(com.mogujie.tt.protobuf.IMLogin.IMMsgServReq other) {
-        if (other == com.mogujie.tt.protobuf.IMLogin.IMMsgServReq.getDefaultInstance()) return this;
-        setUnknownFields(
-            getUnknownFields().concat(other.unknownFields));
-        return this;
-      }
-
-      public boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.mogujie.tt.protobuf.IMLogin.IMMsgServReq parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.mogujie.tt.protobuf.IMLogin.IMMsgServReq) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
 
       // @@protoc_insertion_point(builder_scope:IM.Login.IMMsgServReq)
     }
-
-    static {
-      defaultInstance = new IMMsgServReq(true);
-      defaultInstance.initFields();
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.IMLogin.IMMsgServReq();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = null;java.lang.String info =
+                "\u0000\u0000";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<com.mogujie.tt.protobuf.IMLogin.IMMsgServReq> parser = PARSER;
+          if (parser == null) {
+            synchronized (com.mogujie.tt.protobuf.IMLogin.IMMsgServReq.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<com.mogujie.tt.protobuf.IMLogin.IMMsgServReq>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
     }
 
+
     // @@protoc_insertion_point(class_scope:IM.Login.IMMsgServReq)
+    private static final com.mogujie.tt.protobuf.IMLogin.IMMsgServReq DEFAULT_INSTANCE;
+    static {
+      IMMsgServReq defaultInstance = new IMMsgServReq();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        IMMsgServReq.class, defaultInstance);
+    }
+
+    public static com.mogujie.tt.protobuf.IMLogin.IMMsgServReq getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<IMMsgServReq> PARSER;
+
+    public static com.google.protobuf.Parser<IMMsgServReq> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
   }
 
   public interface IMMsgServRspOrBuilder extends
@@ -285,789 +201,676 @@ public final class IMLogin {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>required .IM.BaseDefine.ResultType result_code = 1;</code>
-     *
      * <pre>
-     *cmd id:		0x0102
+     *cmd id:        0x0102
      * </pre>
+     *
+     * <code>.IM.BaseDefine.ResultType result_code = 1;</code>
+     * @return The enum numeric value on the wire for resultCode.
      */
-    boolean hasResultCode();
+    int getResultCodeValue();
     /**
-     * <code>required .IM.BaseDefine.ResultType result_code = 1;</code>
-     *
      * <pre>
-     *cmd id:		0x0102
+     *cmd id:        0x0102
      * </pre>
+     *
+     * <code>.IM.BaseDefine.ResultType result_code = 1;</code>
+     * @return The resultCode.
      */
     com.mogujie.tt.protobuf.IMBaseDefine.ResultType getResultCode();
 
     /**
      * <code>optional string prior_ip = 2;</code>
+     * @return Whether the priorIp field is set.
      */
     boolean hasPriorIp();
     /**
      * <code>optional string prior_ip = 2;</code>
+     * @return The priorIp.
      */
     java.lang.String getPriorIp();
     /**
      * <code>optional string prior_ip = 2;</code>
+     * @return The bytes for priorIp.
      */
     com.google.protobuf.ByteString
         getPriorIpBytes();
 
     /**
      * <code>optional string backip_ip = 3;</code>
+     * @return Whether the backipIp field is set.
      */
     boolean hasBackipIp();
     /**
      * <code>optional string backip_ip = 3;</code>
+     * @return The backipIp.
      */
     java.lang.String getBackipIp();
     /**
      * <code>optional string backip_ip = 3;</code>
+     * @return The bytes for backipIp.
      */
     com.google.protobuf.ByteString
         getBackipIpBytes();
 
     /**
      * <code>optional uint32 port = 4;</code>
+     * @return Whether the port field is set.
      */
     boolean hasPort();
     /**
      * <code>optional uint32 port = 4;</code>
+     * @return The port.
      */
     int getPort();
   }
   /**
    * Protobuf type {@code IM.Login.IMMsgServRsp}
    */
-  public static final class IMMsgServRsp extends
-      com.google.protobuf.GeneratedMessageLite implements
+  public  static final class IMMsgServRsp extends
+      com.google.protobuf.GeneratedMessageLite<
+          IMMsgServRsp, IMMsgServRsp.Builder> implements
       // @@protoc_insertion_point(message_implements:IM.Login.IMMsgServRsp)
       IMMsgServRspOrBuilder {
-    // Use IMMsgServRsp.newBuilder() to construct.
-    private IMMsgServRsp(com.google.protobuf.GeneratedMessageLite.Builder builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
+    private IMMsgServRsp() {
+      priorIp_ = "";
+      backipIp_ = "";
     }
-    private IMMsgServRsp(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
-
-    private static final IMMsgServRsp defaultInstance;
-    public static IMMsgServRsp getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public IMMsgServRsp getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.ByteString unknownFields;
-    private IMMsgServRsp(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.ByteString.Output unknownFieldsOutput =
-          com.google.protobuf.ByteString.newOutput();
-      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
-          com.google.protobuf.CodedOutputStream.newInstance(
-              unknownFieldsOutput);
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFieldsCodedOutput,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              int rawValue = input.readEnum();
-              com.mogujie.tt.protobuf.IMBaseDefine.ResultType value = com.mogujie.tt.protobuf.IMBaseDefine.ResultType.valueOf(rawValue);
-              if (value == null) {
-                unknownFieldsCodedOutput.writeRawVarint32(tag);
-                unknownFieldsCodedOutput.writeRawVarint32(rawValue);
-              } else {
-                bitField0_ |= 0x00000001;
-                resultCode_ = value;
-              }
-              break;
-            }
-            case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
-              priorIp_ = bs;
-              break;
-            }
-            case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000004;
-              backipIp_ = bs;
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              port_ = input.readUInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        try {
-          unknownFieldsCodedOutput.flush();
-        } catch (java.io.IOException e) {
-        // Should not happen
-        } finally {
-          unknownFields = unknownFieldsOutput.toByteString();
-        }
-        makeExtensionsImmutable();
-      }
-    }
-    public static com.google.protobuf.Parser<IMMsgServRsp> PARSER =
-        new com.google.protobuf.AbstractParser<IMMsgServRsp>() {
-      public IMMsgServRsp parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new IMMsgServRsp(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<IMMsgServRsp> getParserForType() {
-      return PARSER;
-    }
-
     private int bitField0_;
     public static final int RESULT_CODE_FIELD_NUMBER = 1;
-    private com.mogujie.tt.protobuf.IMBaseDefine.ResultType resultCode_;
+    private int resultCode_;
     /**
-     * <code>required .IM.BaseDefine.ResultType result_code = 1;</code>
-     *
      * <pre>
-     *cmd id:		0x0102
+     *cmd id:        0x0102
      * </pre>
+     *
+     * <code>.IM.BaseDefine.ResultType result_code = 1;</code>
+     * @return The enum numeric value on the wire for resultCode.
      */
-    public boolean hasResultCode() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+    @java.lang.Override
+    public int getResultCodeValue() {
+      return resultCode_;
     }
     /**
-     * <code>required .IM.BaseDefine.ResultType result_code = 1;</code>
-     *
      * <pre>
-     *cmd id:		0x0102
+     *cmd id:        0x0102
      * </pre>
+     *
+     * <code>.IM.BaseDefine.ResultType result_code = 1;</code>
+     * @return The resultCode.
      */
+    @java.lang.Override
     public com.mogujie.tt.protobuf.IMBaseDefine.ResultType getResultCode() {
-      return resultCode_;
+      com.mogujie.tt.protobuf.IMBaseDefine.ResultType result = com.mogujie.tt.protobuf.IMBaseDefine.ResultType.forNumber(resultCode_);
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.ResultType.UNRECOGNIZED : result;
+    }
+    /**
+     * <pre>
+     *cmd id:        0x0102
+     * </pre>
+     *
+     * <code>.IM.BaseDefine.ResultType result_code = 1;</code>
+     * @param value The enum numeric value on the wire for resultCode to set.
+     */
+    private void setResultCodeValue(int value) {
+        resultCode_ = value;
+    }
+    /**
+     * <pre>
+     *cmd id:        0x0102
+     * </pre>
+     *
+     * <code>.IM.BaseDefine.ResultType result_code = 1;</code>
+     * @param value The resultCode to set.
+     */
+    private void setResultCode(com.mogujie.tt.protobuf.IMBaseDefine.ResultType value) {
+      resultCode_ = value.getNumber();
+      
+    }
+    /**
+     * <pre>
+     *cmd id:        0x0102
+     * </pre>
+     *
+     * <code>.IM.BaseDefine.ResultType result_code = 1;</code>
+     */
+    private void clearResultCode() {
+      
+      resultCode_ = 0;
     }
 
     public static final int PRIOR_IP_FIELD_NUMBER = 2;
-    private java.lang.Object priorIp_;
+    private java.lang.String priorIp_;
     /**
      * <code>optional string prior_ip = 2;</code>
+     * @return Whether the priorIp field is set.
      */
+    @java.lang.Override
     public boolean hasPriorIp() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000001) != 0);
     }
     /**
      * <code>optional string prior_ip = 2;</code>
+     * @return The priorIp.
      */
+    @java.lang.Override
     public java.lang.String getPriorIp() {
-      java.lang.Object ref = priorIp_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          priorIp_ = s;
-        }
-        return s;
-      }
+      return priorIp_;
     }
     /**
      * <code>optional string prior_ip = 2;</code>
+     * @return The bytes for priorIp.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getPriorIpBytes() {
-      java.lang.Object ref = priorIp_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        priorIp_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(priorIp_);
+    }
+    /**
+     * <code>optional string prior_ip = 2;</code>
+     * @param value The priorIp to set.
+     */
+    private void setPriorIp(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  bitField0_ |= 0x00000001;
+      priorIp_ = value;
+    }
+    /**
+     * <code>optional string prior_ip = 2;</code>
+     */
+    private void clearPriorIp() {
+      bitField0_ = (bitField0_ & ~0x00000001);
+      priorIp_ = getDefaultInstance().getPriorIp();
+    }
+    /**
+     * <code>optional string prior_ip = 2;</code>
+     * @param value The bytes for priorIp to set.
+     */
+    private void setPriorIpBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      priorIp_ = value.toStringUtf8();
+      bitField0_ |= 0x00000001;
     }
 
     public static final int BACKIP_IP_FIELD_NUMBER = 3;
-    private java.lang.Object backipIp_;
+    private java.lang.String backipIp_;
     /**
      * <code>optional string backip_ip = 3;</code>
+     * @return Whether the backipIp field is set.
      */
+    @java.lang.Override
     public boolean hasBackipIp() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000002) != 0);
     }
     /**
      * <code>optional string backip_ip = 3;</code>
+     * @return The backipIp.
      */
+    @java.lang.Override
     public java.lang.String getBackipIp() {
-      java.lang.Object ref = backipIp_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          backipIp_ = s;
-        }
-        return s;
-      }
+      return backipIp_;
     }
     /**
      * <code>optional string backip_ip = 3;</code>
+     * @return The bytes for backipIp.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getBackipIpBytes() {
-      java.lang.Object ref = backipIp_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        backipIp_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(backipIp_);
+    }
+    /**
+     * <code>optional string backip_ip = 3;</code>
+     * @param value The backipIp to set.
+     */
+    private void setBackipIp(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  bitField0_ |= 0x00000002;
+      backipIp_ = value;
+    }
+    /**
+     * <code>optional string backip_ip = 3;</code>
+     */
+    private void clearBackipIp() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      backipIp_ = getDefaultInstance().getBackipIp();
+    }
+    /**
+     * <code>optional string backip_ip = 3;</code>
+     * @param value The bytes for backipIp to set.
+     */
+    private void setBackipIpBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      backipIp_ = value.toStringUtf8();
+      bitField0_ |= 0x00000002;
     }
 
     public static final int PORT_FIELD_NUMBER = 4;
     private int port_;
     /**
      * <code>optional uint32 port = 4;</code>
+     * @return Whether the port field is set.
      */
+    @java.lang.Override
     public boolean hasPort() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000004) != 0);
+    }
+    /**
+     * <code>optional uint32 port = 4;</code>
+     * @return The port.
+     */
+    @java.lang.Override
+    public int getPort() {
+      return port_;
+    }
+    /**
+     * <code>optional uint32 port = 4;</code>
+     * @param value The port to set.
+     */
+    private void setPort(int value) {
+      bitField0_ |= 0x00000004;
+      port_ = value;
     }
     /**
      * <code>optional uint32 port = 4;</code>
      */
-    public int getPort() {
-      return port_;
-    }
-
-    private void initFields() {
-      resultCode_ = com.mogujie.tt.protobuf.IMBaseDefine.ResultType.REFUSE_REASON_NONE;
-      priorIp_ = "";
-      backipIp_ = "";
+    private void clearPort() {
+      bitField0_ = (bitField0_ & ~0x00000004);
       port_ = 0;
-    }
-    private byte memoizedIsInitialized = -1;
-    public boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasResultCode()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeEnum(1, resultCode_.getNumber());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getPriorIpBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getBackipIpBytes());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeUInt32(4, port_);
-      }
-      output.writeRawBytes(unknownFields);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, resultCode_.getNumber());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getPriorIpBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getBackipIpBytes());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(4, port_);
-      }
-      size += unknownFields.size();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
     }
 
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp prototype) {
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
+    }
 
     /**
      * Protobuf type {@code IM.Login.IMMsgServRsp}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp, Builder>
-        implements
+          com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp, Builder> implements
         // @@protoc_insertion_point(builder_implements:IM.Login.IMMsgServRsp)
         com.mogujie.tt.protobuf.IMLogin.IMMsgServRspOrBuilder {
       // Construct using com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private void maybeForceBuilderInitialization() {
-      }
-      private static Builder create() {
-        return new Builder();
-      }
 
-      public Builder clear() {
-        super.clear();
-        resultCode_ = com.mogujie.tt.protobuf.IMBaseDefine.ResultType.REFUSE_REASON_NONE;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        priorIp_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
-        backipIp_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
-        port_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp getDefaultInstanceForType() {
-        return com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp.getDefaultInstance();
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp build() {
-        com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp buildPartial() {
-        com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp result = new com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.resultCode_ = resultCode_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.priorIp_ = priorIp_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.backipIp_ = backipIp_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.port_ = port_;
-        result.bitField0_ = to_bitField0_;
-        return result;
-      }
-
-      public Builder mergeFrom(com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp other) {
-        if (other == com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp.getDefaultInstance()) return this;
-        if (other.hasResultCode()) {
-          setResultCode(other.getResultCode());
-        }
-        if (other.hasPriorIp()) {
-          bitField0_ |= 0x00000002;
-          priorIp_ = other.priorIp_;
-          
-        }
-        if (other.hasBackipIp()) {
-          bitField0_ |= 0x00000004;
-          backipIp_ = other.backipIp_;
-          
-        }
-        if (other.hasPort()) {
-          setPort(other.getPort());
-        }
-        setUnknownFields(
-            getUnknownFields().concat(other.unknownFields));
-        return this;
-      }
-
-      public boolean isInitialized() {
-        return hasResultCode();
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private com.mogujie.tt.protobuf.IMBaseDefine.ResultType resultCode_ = com.mogujie.tt.protobuf.IMBaseDefine.ResultType.REFUSE_REASON_NONE;
       /**
-       * <code>required .IM.BaseDefine.ResultType result_code = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0102
+       *cmd id:        0x0102
        * </pre>
+       *
+       * <code>.IM.BaseDefine.ResultType result_code = 1;</code>
+       * @return The enum numeric value on the wire for resultCode.
        */
-      public boolean hasResultCode() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
+      @java.lang.Override
+      public int getResultCodeValue() {
+        return instance.getResultCodeValue();
       }
       /**
-       * <code>required .IM.BaseDefine.ResultType result_code = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0102
+       *cmd id:        0x0102
        * </pre>
+       *
+       * <code>.IM.BaseDefine.ResultType result_code = 1;</code>
+       * @param value The resultCode to set.
+       * @return This builder for chaining.
        */
+      public Builder setResultCodeValue(int value) {
+        copyOnWrite();
+        instance.setResultCodeValue(value);
+        return this;
+      }
+      /**
+       * <pre>
+       *cmd id:        0x0102
+       * </pre>
+       *
+       * <code>.IM.BaseDefine.ResultType result_code = 1;</code>
+       * @return The resultCode.
+       */
+      @java.lang.Override
       public com.mogujie.tt.protobuf.IMBaseDefine.ResultType getResultCode() {
-        return resultCode_;
+        return instance.getResultCode();
       }
       /**
-       * <code>required .IM.BaseDefine.ResultType result_code = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0102
+       *cmd id:        0x0102
        * </pre>
+       *
+       * <code>.IM.BaseDefine.ResultType result_code = 1;</code>
+       * @param value The enum numeric value on the wire for resultCode to set.
+       * @return This builder for chaining.
        */
       public Builder setResultCode(com.mogujie.tt.protobuf.IMBaseDefine.ResultType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000001;
-        resultCode_ = value;
-        
+        copyOnWrite();
+        instance.setResultCode(value);
         return this;
       }
       /**
-       * <code>required .IM.BaseDefine.ResultType result_code = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0102
+       *cmd id:        0x0102
        * </pre>
+       *
+       * <code>.IM.BaseDefine.ResultType result_code = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearResultCode() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        resultCode_ = com.mogujie.tt.protobuf.IMBaseDefine.ResultType.REFUSE_REASON_NONE;
-        
+        copyOnWrite();
+        instance.clearResultCode();
         return this;
       }
 
-      private java.lang.Object priorIp_ = "";
       /**
        * <code>optional string prior_ip = 2;</code>
+       * @return Whether the priorIp field is set.
        */
+      @java.lang.Override
       public boolean hasPriorIp() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return instance.hasPriorIp();
       }
       /**
        * <code>optional string prior_ip = 2;</code>
+       * @return The priorIp.
        */
+      @java.lang.Override
       public java.lang.String getPriorIp() {
-        java.lang.Object ref = priorIp_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            priorIp_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getPriorIp();
       }
       /**
        * <code>optional string prior_ip = 2;</code>
+       * @return The bytes for priorIp.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getPriorIpBytes() {
-        java.lang.Object ref = priorIp_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          priorIp_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getPriorIpBytes();
       }
       /**
        * <code>optional string prior_ip = 2;</code>
+       * @param value The priorIp to set.
+       * @return This builder for chaining.
        */
       public Builder setPriorIp(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        priorIp_ = value;
-        
+        copyOnWrite();
+        instance.setPriorIp(value);
         return this;
       }
       /**
        * <code>optional string prior_ip = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearPriorIp() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        priorIp_ = getDefaultInstance().getPriorIp();
-        
+        copyOnWrite();
+        instance.clearPriorIp();
         return this;
       }
       /**
        * <code>optional string prior_ip = 2;</code>
+       * @param value The bytes for priorIp to set.
+       * @return This builder for chaining.
        */
       public Builder setPriorIpBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        priorIp_ = value;
-        
+        copyOnWrite();
+        instance.setPriorIpBytes(value);
         return this;
       }
 
-      private java.lang.Object backipIp_ = "";
       /**
        * <code>optional string backip_ip = 3;</code>
+       * @return Whether the backipIp field is set.
        */
+      @java.lang.Override
       public boolean hasBackipIp() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return instance.hasBackipIp();
       }
       /**
        * <code>optional string backip_ip = 3;</code>
+       * @return The backipIp.
        */
+      @java.lang.Override
       public java.lang.String getBackipIp() {
-        java.lang.Object ref = backipIp_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            backipIp_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getBackipIp();
       }
       /**
        * <code>optional string backip_ip = 3;</code>
+       * @return The bytes for backipIp.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getBackipIpBytes() {
-        java.lang.Object ref = backipIp_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          backipIp_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getBackipIpBytes();
       }
       /**
        * <code>optional string backip_ip = 3;</code>
+       * @param value The backipIp to set.
+       * @return This builder for chaining.
        */
       public Builder setBackipIp(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        backipIp_ = value;
-        
+        copyOnWrite();
+        instance.setBackipIp(value);
         return this;
       }
       /**
        * <code>optional string backip_ip = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearBackipIp() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        backipIp_ = getDefaultInstance().getBackipIp();
-        
+        copyOnWrite();
+        instance.clearBackipIp();
         return this;
       }
       /**
        * <code>optional string backip_ip = 3;</code>
+       * @param value The bytes for backipIp to set.
+       * @return This builder for chaining.
        */
       public Builder setBackipIpBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        backipIp_ = value;
-        
+        copyOnWrite();
+        instance.setBackipIpBytes(value);
         return this;
       }
 
-      private int port_ ;
       /**
        * <code>optional uint32 port = 4;</code>
+       * @return Whether the port field is set.
        */
+      @java.lang.Override
       public boolean hasPort() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return instance.hasPort();
       }
       /**
        * <code>optional uint32 port = 4;</code>
+       * @return The port.
        */
+      @java.lang.Override
       public int getPort() {
-        return port_;
+        return instance.getPort();
       }
       /**
        * <code>optional uint32 port = 4;</code>
+       * @param value The port to set.
+       * @return This builder for chaining.
        */
       public Builder setPort(int value) {
-        bitField0_ |= 0x00000008;
-        port_ = value;
-        
+        copyOnWrite();
+        instance.setPort(value);
         return this;
       }
       /**
        * <code>optional uint32 port = 4;</code>
+       * @return This builder for chaining.
        */
       public Builder clearPort() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        port_ = 0;
-        
+        copyOnWrite();
+        instance.clearPort();
         return this;
       }
 
       // @@protoc_insertion_point(builder_scope:IM.Login.IMMsgServRsp)
     }
-
-    static {
-      defaultInstance = new IMMsgServRsp(true);
-      defaultInstance.initFields();
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "bitField0_",
+              "resultCode_",
+              "priorIp_",
+              "backipIp_",
+              "port_",
+            };
+            java.lang.String info =
+                "\u0000\u0004\u0000\u0001\u0001\u0004\u0004\u0000\u0000\u0000\u0001\f\u0002\u1208" +
+                "\u0000\u0003\u1208\u0001\u0004\u100b\u0002";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp> parser = PARSER;
+          if (parser == null) {
+            synchronized (com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
     }
 
+
     // @@protoc_insertion_point(class_scope:IM.Login.IMMsgServRsp)
+    private static final com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp DEFAULT_INSTANCE;
+    static {
+      IMMsgServRsp defaultInstance = new IMMsgServRsp();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        IMMsgServRsp.class, defaultInstance);
+    }
+
+    public static com.mogujie.tt.protobuf.IMLogin.IMMsgServRsp getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<IMMsgServRsp> PARSER;
+
+    public static com.google.protobuf.Parser<IMMsgServRsp> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
   }
 
   public interface IMLoginReqOrBuilder extends
@@ -1075,73 +878,72 @@ public final class IMLogin {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>required string user_name = 1;</code>
-     *
      * <pre>
-     *cmd id:		0x0103
+     *cmd id:        0x0103
      * </pre>
-     */
-    boolean hasUserName();
-    /**
-     * <code>required string user_name = 1;</code>
      *
-     * <pre>
-     *cmd id:		0x0103
-     * </pre>
+     * <code>string user_name = 1;</code>
+     * @return The userName.
      */
     java.lang.String getUserName();
     /**
-     * <code>required string user_name = 1;</code>
-     *
      * <pre>
-     *cmd id:		0x0103
+     *cmd id:        0x0103
      * </pre>
+     *
+     * <code>string user_name = 1;</code>
+     * @return The bytes for userName.
      */
     com.google.protobuf.ByteString
         getUserNameBytes();
 
     /**
-     * <code>required string password = 2;</code>
-     */
-    boolean hasPassword();
-    /**
-     * <code>required string password = 2;</code>
+     * <code>string password = 2;</code>
+     * @return The password.
      */
     java.lang.String getPassword();
     /**
-     * <code>required string password = 2;</code>
+     * <code>string password = 2;</code>
+     * @return The bytes for password.
      */
     com.google.protobuf.ByteString
         getPasswordBytes();
 
     /**
-     * <code>required .IM.BaseDefine.UserStatType online_status = 3;</code>
+     * <code>.IM.BaseDefine.UserStatType online_status = 3;</code>
+     * @return The enum numeric value on the wire for onlineStatus.
      */
-    boolean hasOnlineStatus();
+    int getOnlineStatusValue();
     /**
-     * <code>required .IM.BaseDefine.UserStatType online_status = 3;</code>
+     * <code>.IM.BaseDefine.UserStatType online_status = 3;</code>
+     * @return The onlineStatus.
      */
     com.mogujie.tt.protobuf.IMBaseDefine.UserStatType getOnlineStatus();
 
     /**
-     * <code>required .IM.BaseDefine.ClientType client_type = 4;</code>
+     * <code>.IM.BaseDefine.ClientType client_type = 4;</code>
+     * @return The enum numeric value on the wire for clientType.
      */
-    boolean hasClientType();
+    int getClientTypeValue();
     /**
-     * <code>required .IM.BaseDefine.ClientType client_type = 4;</code>
+     * <code>.IM.BaseDefine.ClientType client_type = 4;</code>
+     * @return The clientType.
      */
     com.mogujie.tt.protobuf.IMBaseDefine.ClientType getClientType();
 
     /**
      * <code>optional string client_version = 5;</code>
+     * @return Whether the clientVersion field is set.
      */
     boolean hasClientVersion();
     /**
      * <code>optional string client_version = 5;</code>
+     * @return The clientVersion.
      */
     java.lang.String getClientVersion();
     /**
      * <code>optional string client_version = 5;</code>
+     * @return The bytes for clientVersion.
      */
     com.google.protobuf.ByteString
         getClientVersionBytes();
@@ -1149,922 +951,710 @@ public final class IMLogin {
   /**
    * Protobuf type {@code IM.Login.IMLoginReq}
    */
-  public static final class IMLoginReq extends
-      com.google.protobuf.GeneratedMessageLite implements
+  public  static final class IMLoginReq extends
+      com.google.protobuf.GeneratedMessageLite<
+          IMLoginReq, IMLoginReq.Builder> implements
       // @@protoc_insertion_point(message_implements:IM.Login.IMLoginReq)
       IMLoginReqOrBuilder {
-    // Use IMLoginReq.newBuilder() to construct.
-    private IMLoginReq(com.google.protobuf.GeneratedMessageLite.Builder builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
+    private IMLoginReq() {
+      userName_ = "";
+      password_ = "";
+      clientVersion_ = "";
     }
-    private IMLoginReq(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
-
-    private static final IMLoginReq defaultInstance;
-    public static IMLoginReq getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public IMLoginReq getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.ByteString unknownFields;
-    private IMLoginReq(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.ByteString.Output unknownFieldsOutput =
-          com.google.protobuf.ByteString.newOutput();
-      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
-          com.google.protobuf.CodedOutputStream.newInstance(
-              unknownFieldsOutput);
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFieldsCodedOutput,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000001;
-              userName_ = bs;
-              break;
-            }
-            case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
-              password_ = bs;
-              break;
-            }
-            case 24: {
-              int rawValue = input.readEnum();
-              com.mogujie.tt.protobuf.IMBaseDefine.UserStatType value = com.mogujie.tt.protobuf.IMBaseDefine.UserStatType.valueOf(rawValue);
-              if (value == null) {
-                unknownFieldsCodedOutput.writeRawVarint32(tag);
-                unknownFieldsCodedOutput.writeRawVarint32(rawValue);
-              } else {
-                bitField0_ |= 0x00000004;
-                onlineStatus_ = value;
-              }
-              break;
-            }
-            case 32: {
-              int rawValue = input.readEnum();
-              com.mogujie.tt.protobuf.IMBaseDefine.ClientType value = com.mogujie.tt.protobuf.IMBaseDefine.ClientType.valueOf(rawValue);
-              if (value == null) {
-                unknownFieldsCodedOutput.writeRawVarint32(tag);
-                unknownFieldsCodedOutput.writeRawVarint32(rawValue);
-              } else {
-                bitField0_ |= 0x00000008;
-                clientType_ = value;
-              }
-              break;
-            }
-            case 42: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000010;
-              clientVersion_ = bs;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        try {
-          unknownFieldsCodedOutput.flush();
-        } catch (java.io.IOException e) {
-        // Should not happen
-        } finally {
-          unknownFields = unknownFieldsOutput.toByteString();
-        }
-        makeExtensionsImmutable();
-      }
-    }
-    public static com.google.protobuf.Parser<IMLoginReq> PARSER =
-        new com.google.protobuf.AbstractParser<IMLoginReq>() {
-      public IMLoginReq parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new IMLoginReq(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<IMLoginReq> getParserForType() {
-      return PARSER;
-    }
-
     private int bitField0_;
     public static final int USER_NAME_FIELD_NUMBER = 1;
-    private java.lang.Object userName_;
+    private java.lang.String userName_;
     /**
-     * <code>required string user_name = 1;</code>
-     *
      * <pre>
-     *cmd id:		0x0103
+     *cmd id:        0x0103
      * </pre>
-     */
-    public boolean hasUserName() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required string user_name = 1;</code>
      *
-     * <pre>
-     *cmd id:		0x0103
-     * </pre>
+     * <code>string user_name = 1;</code>
+     * @return The userName.
      */
+    @java.lang.Override
     public java.lang.String getUserName() {
-      java.lang.Object ref = userName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          userName_ = s;
-        }
-        return s;
-      }
+      return userName_;
     }
     /**
-     * <code>required string user_name = 1;</code>
-     *
      * <pre>
-     *cmd id:		0x0103
+     *cmd id:        0x0103
      * </pre>
+     *
+     * <code>string user_name = 1;</code>
+     * @return The bytes for userName.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getUserNameBytes() {
-      java.lang.Object ref = userName_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        userName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(userName_);
+    }
+    /**
+     * <pre>
+     *cmd id:        0x0103
+     * </pre>
+     *
+     * <code>string user_name = 1;</code>
+     * @param value The userName to set.
+     */
+    private void setUserName(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      userName_ = value;
+    }
+    /**
+     * <pre>
+     *cmd id:        0x0103
+     * </pre>
+     *
+     * <code>string user_name = 1;</code>
+     */
+    private void clearUserName() {
+      
+      userName_ = getDefaultInstance().getUserName();
+    }
+    /**
+     * <pre>
+     *cmd id:        0x0103
+     * </pre>
+     *
+     * <code>string user_name = 1;</code>
+     * @param value The bytes for userName to set.
+     */
+    private void setUserNameBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      userName_ = value.toStringUtf8();
+      
     }
 
     public static final int PASSWORD_FIELD_NUMBER = 2;
-    private java.lang.Object password_;
+    private java.lang.String password_;
     /**
-     * <code>required string password = 2;</code>
+     * <code>string password = 2;</code>
+     * @return The password.
      */
-    public boolean hasPassword() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required string password = 2;</code>
-     */
+    @java.lang.Override
     public java.lang.String getPassword() {
-      java.lang.Object ref = password_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          password_ = s;
-        }
-        return s;
-      }
+      return password_;
     }
     /**
-     * <code>required string password = 2;</code>
+     * <code>string password = 2;</code>
+     * @return The bytes for password.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getPasswordBytes() {
-      java.lang.Object ref = password_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        password_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(password_);
+    }
+    /**
+     * <code>string password = 2;</code>
+     * @param value The password to set.
+     */
+    private void setPassword(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      password_ = value;
+    }
+    /**
+     * <code>string password = 2;</code>
+     */
+    private void clearPassword() {
+      
+      password_ = getDefaultInstance().getPassword();
+    }
+    /**
+     * <code>string password = 2;</code>
+     * @param value The bytes for password to set.
+     */
+    private void setPasswordBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      password_ = value.toStringUtf8();
+      
     }
 
     public static final int ONLINE_STATUS_FIELD_NUMBER = 3;
-    private com.mogujie.tt.protobuf.IMBaseDefine.UserStatType onlineStatus_;
+    private int onlineStatus_;
     /**
-     * <code>required .IM.BaseDefine.UserStatType online_status = 3;</code>
+     * <code>.IM.BaseDefine.UserStatType online_status = 3;</code>
+     * @return The enum numeric value on the wire for onlineStatus.
      */
-    public boolean hasOnlineStatus() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+    @java.lang.Override
+    public int getOnlineStatusValue() {
+      return onlineStatus_;
     }
     /**
-     * <code>required .IM.BaseDefine.UserStatType online_status = 3;</code>
+     * <code>.IM.BaseDefine.UserStatType online_status = 3;</code>
+     * @return The onlineStatus.
      */
+    @java.lang.Override
     public com.mogujie.tt.protobuf.IMBaseDefine.UserStatType getOnlineStatus() {
-      return onlineStatus_;
+      com.mogujie.tt.protobuf.IMBaseDefine.UserStatType result = com.mogujie.tt.protobuf.IMBaseDefine.UserStatType.forNumber(onlineStatus_);
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.UserStatType.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.IM.BaseDefine.UserStatType online_status = 3;</code>
+     * @param value The enum numeric value on the wire for onlineStatus to set.
+     */
+    private void setOnlineStatusValue(int value) {
+        onlineStatus_ = value;
+    }
+    /**
+     * <code>.IM.BaseDefine.UserStatType online_status = 3;</code>
+     * @param value The onlineStatus to set.
+     */
+    private void setOnlineStatus(com.mogujie.tt.protobuf.IMBaseDefine.UserStatType value) {
+      onlineStatus_ = value.getNumber();
+      
+    }
+    /**
+     * <code>.IM.BaseDefine.UserStatType online_status = 3;</code>
+     */
+    private void clearOnlineStatus() {
+      
+      onlineStatus_ = 0;
     }
 
     public static final int CLIENT_TYPE_FIELD_NUMBER = 4;
-    private com.mogujie.tt.protobuf.IMBaseDefine.ClientType clientType_;
+    private int clientType_;
     /**
-     * <code>required .IM.BaseDefine.ClientType client_type = 4;</code>
+     * <code>.IM.BaseDefine.ClientType client_type = 4;</code>
+     * @return The enum numeric value on the wire for clientType.
      */
-    public boolean hasClientType() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+    @java.lang.Override
+    public int getClientTypeValue() {
+      return clientType_;
     }
     /**
-     * <code>required .IM.BaseDefine.ClientType client_type = 4;</code>
+     * <code>.IM.BaseDefine.ClientType client_type = 4;</code>
+     * @return The clientType.
      */
+    @java.lang.Override
     public com.mogujie.tt.protobuf.IMBaseDefine.ClientType getClientType() {
-      return clientType_;
+      com.mogujie.tt.protobuf.IMBaseDefine.ClientType result = com.mogujie.tt.protobuf.IMBaseDefine.ClientType.forNumber(clientType_);
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.ClientType.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.IM.BaseDefine.ClientType client_type = 4;</code>
+     * @param value The enum numeric value on the wire for clientType to set.
+     */
+    private void setClientTypeValue(int value) {
+        clientType_ = value;
+    }
+    /**
+     * <code>.IM.BaseDefine.ClientType client_type = 4;</code>
+     * @param value The clientType to set.
+     */
+    private void setClientType(com.mogujie.tt.protobuf.IMBaseDefine.ClientType value) {
+      clientType_ = value.getNumber();
+      
+    }
+    /**
+     * <code>.IM.BaseDefine.ClientType client_type = 4;</code>
+     */
+    private void clearClientType() {
+      
+      clientType_ = 0;
     }
 
     public static final int CLIENT_VERSION_FIELD_NUMBER = 5;
-    private java.lang.Object clientVersion_;
+    private java.lang.String clientVersion_;
     /**
      * <code>optional string client_version = 5;</code>
+     * @return Whether the clientVersion field is set.
      */
+    @java.lang.Override
     public boolean hasClientVersion() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000001) != 0);
     }
     /**
      * <code>optional string client_version = 5;</code>
+     * @return The clientVersion.
      */
+    @java.lang.Override
     public java.lang.String getClientVersion() {
-      java.lang.Object ref = clientVersion_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          clientVersion_ = s;
-        }
-        return s;
-      }
+      return clientVersion_;
     }
     /**
      * <code>optional string client_version = 5;</code>
+     * @return The bytes for clientVersion.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getClientVersionBytes() {
-      java.lang.Object ref = clientVersion_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        clientVersion_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(clientVersion_);
     }
-
-    private void initFields() {
-      userName_ = "";
-      password_ = "";
-      onlineStatus_ = com.mogujie.tt.protobuf.IMBaseDefine.UserStatType.USER_STATUS_ONLINE;
-      clientType_ = com.mogujie.tt.protobuf.IMBaseDefine.ClientType.CLIENT_TYPE_WINDOWS;
-      clientVersion_ = "";
+    /**
+     * <code>optional string client_version = 5;</code>
+     * @param value The clientVersion to set.
+     */
+    private void setClientVersion(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  bitField0_ |= 0x00000001;
+      clientVersion_ = value;
     }
-    private byte memoizedIsInitialized = -1;
-    public boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasUserName()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasPassword()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasOnlineStatus()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasClientType()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
+    /**
+     * <code>optional string client_version = 5;</code>
+     */
+    private void clearClientVersion() {
+      bitField0_ = (bitField0_ & ~0x00000001);
+      clientVersion_ = getDefaultInstance().getClientVersion();
     }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getUserNameBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getPasswordBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeEnum(3, onlineStatus_.getNumber());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeEnum(4, clientType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBytes(5, getClientVersionBytes());
-      }
-      output.writeRawBytes(unknownFields);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getUserNameBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getPasswordBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(3, onlineStatus_.getNumber());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(4, clientType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getClientVersionBytes());
-      }
-      size += unknownFields.size();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
+    /**
+     * <code>optional string client_version = 5;</code>
+     * @param value The bytes for clientVersion to set.
+     */
+    private void setClientVersionBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      clientVersion_ = value.toStringUtf8();
+      bitField0_ |= 0x00000001;
     }
 
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginReq parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.IMLogin.IMLoginReq parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMLogin.IMLoginReq parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginReq parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginReq parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginReq parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginReq parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginReq parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginReq parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginReq parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginReq parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginReq parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMLoginReq prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMLoginReq prototype) {
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
+    }
 
     /**
      * Protobuf type {@code IM.Login.IMLoginReq}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          com.mogujie.tt.protobuf.IMLogin.IMLoginReq, Builder>
-        implements
+          com.mogujie.tt.protobuf.IMLogin.IMLoginReq, Builder> implements
         // @@protoc_insertion_point(builder_implements:IM.Login.IMLoginReq)
         com.mogujie.tt.protobuf.IMLogin.IMLoginReqOrBuilder {
       // Construct using com.mogujie.tt.protobuf.IMLogin.IMLoginReq.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private void maybeForceBuilderInitialization() {
-      }
-      private static Builder create() {
-        return new Builder();
-      }
 
-      public Builder clear() {
-        super.clear();
-        userName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
-        password_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
-        onlineStatus_ = com.mogujie.tt.protobuf.IMBaseDefine.UserStatType.USER_STATUS_ONLINE;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        clientType_ = com.mogujie.tt.protobuf.IMBaseDefine.ClientType.CLIENT_TYPE_WINDOWS;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        clientVersion_ = "";
-        bitField0_ = (bitField0_ & ~0x00000010);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMLoginReq getDefaultInstanceForType() {
-        return com.mogujie.tt.protobuf.IMLogin.IMLoginReq.getDefaultInstance();
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMLoginReq build() {
-        com.mogujie.tt.protobuf.IMLogin.IMLoginReq result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMLoginReq buildPartial() {
-        com.mogujie.tt.protobuf.IMLogin.IMLoginReq result = new com.mogujie.tt.protobuf.IMLogin.IMLoginReq(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.userName_ = userName_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.password_ = password_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.onlineStatus_ = onlineStatus_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.clientType_ = clientType_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.clientVersion_ = clientVersion_;
-        result.bitField0_ = to_bitField0_;
-        return result;
-      }
-
-      public Builder mergeFrom(com.mogujie.tt.protobuf.IMLogin.IMLoginReq other) {
-        if (other == com.mogujie.tt.protobuf.IMLogin.IMLoginReq.getDefaultInstance()) return this;
-        if (other.hasUserName()) {
-          bitField0_ |= 0x00000001;
-          userName_ = other.userName_;
-          
-        }
-        if (other.hasPassword()) {
-          bitField0_ |= 0x00000002;
-          password_ = other.password_;
-          
-        }
-        if (other.hasOnlineStatus()) {
-          setOnlineStatus(other.getOnlineStatus());
-        }
-        if (other.hasClientType()) {
-          setClientType(other.getClientType());
-        }
-        if (other.hasClientVersion()) {
-          bitField0_ |= 0x00000010;
-          clientVersion_ = other.clientVersion_;
-          
-        }
-        setUnknownFields(
-            getUnknownFields().concat(other.unknownFields));
-        return this;
-      }
-
-      public boolean isInitialized() {
-        if (!hasUserName()) {
-          
-          return false;
-        }
-        if (!hasPassword()) {
-          
-          return false;
-        }
-        if (!hasOnlineStatus()) {
-          
-          return false;
-        }
-        return hasClientType();
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.mogujie.tt.protobuf.IMLogin.IMLoginReq parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.mogujie.tt.protobuf.IMLogin.IMLoginReq) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private java.lang.Object userName_ = "";
       /**
-       * <code>required string user_name = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0103
+       *cmd id:        0x0103
        * </pre>
-       */
-      public boolean hasUserName() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required string user_name = 1;</code>
        *
-       * <pre>
-       *cmd id:		0x0103
-       * </pre>
+       * <code>string user_name = 1;</code>
+       * @return The userName.
        */
+      @java.lang.Override
       public java.lang.String getUserName() {
-        java.lang.Object ref = userName_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            userName_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getUserName();
       }
       /**
-       * <code>required string user_name = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0103
+       *cmd id:        0x0103
        * </pre>
+       *
+       * <code>string user_name = 1;</code>
+       * @return The bytes for userName.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getUserNameBytes() {
-        java.lang.Object ref = userName_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          userName_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getUserNameBytes();
       }
       /**
-       * <code>required string user_name = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0103
+       *cmd id:        0x0103
        * </pre>
+       *
+       * <code>string user_name = 1;</code>
+       * @param value The userName to set.
+       * @return This builder for chaining.
        */
       public Builder setUserName(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        userName_ = value;
-        
+        copyOnWrite();
+        instance.setUserName(value);
         return this;
       }
       /**
-       * <code>required string user_name = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0103
+       *cmd id:        0x0103
        * </pre>
+       *
+       * <code>string user_name = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearUserName() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        userName_ = getDefaultInstance().getUserName();
-        
+        copyOnWrite();
+        instance.clearUserName();
         return this;
       }
       /**
-       * <code>required string user_name = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0103
+       *cmd id:        0x0103
        * </pre>
+       *
+       * <code>string user_name = 1;</code>
+       * @param value The bytes for userName to set.
+       * @return This builder for chaining.
        */
       public Builder setUserNameBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        userName_ = value;
-        
+        copyOnWrite();
+        instance.setUserNameBytes(value);
         return this;
       }
 
-      private java.lang.Object password_ = "";
       /**
-       * <code>required string password = 2;</code>
+       * <code>string password = 2;</code>
+       * @return The password.
        */
-      public boolean hasPassword() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required string password = 2;</code>
-       */
+      @java.lang.Override
       public java.lang.String getPassword() {
-        java.lang.Object ref = password_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            password_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getPassword();
       }
       /**
-       * <code>required string password = 2;</code>
+       * <code>string password = 2;</code>
+       * @return The bytes for password.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getPasswordBytes() {
-        java.lang.Object ref = password_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          password_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getPasswordBytes();
       }
       /**
-       * <code>required string password = 2;</code>
+       * <code>string password = 2;</code>
+       * @param value The password to set.
+       * @return This builder for chaining.
        */
       public Builder setPassword(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        password_ = value;
-        
+        copyOnWrite();
+        instance.setPassword(value);
         return this;
       }
       /**
-       * <code>required string password = 2;</code>
+       * <code>string password = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearPassword() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        password_ = getDefaultInstance().getPassword();
-        
+        copyOnWrite();
+        instance.clearPassword();
         return this;
       }
       /**
-       * <code>required string password = 2;</code>
+       * <code>string password = 2;</code>
+       * @param value The bytes for password to set.
+       * @return This builder for chaining.
        */
       public Builder setPasswordBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        password_ = value;
-        
+        copyOnWrite();
+        instance.setPasswordBytes(value);
         return this;
       }
 
-      private com.mogujie.tt.protobuf.IMBaseDefine.UserStatType onlineStatus_ = com.mogujie.tt.protobuf.IMBaseDefine.UserStatType.USER_STATUS_ONLINE;
       /**
-       * <code>required .IM.BaseDefine.UserStatType online_status = 3;</code>
+       * <code>.IM.BaseDefine.UserStatType online_status = 3;</code>
+       * @return The enum numeric value on the wire for onlineStatus.
        */
-      public boolean hasOnlineStatus() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+      @java.lang.Override
+      public int getOnlineStatusValue() {
+        return instance.getOnlineStatusValue();
       }
       /**
-       * <code>required .IM.BaseDefine.UserStatType online_status = 3;</code>
+       * <code>.IM.BaseDefine.UserStatType online_status = 3;</code>
+       * @param value The onlineStatus to set.
+       * @return This builder for chaining.
        */
+      public Builder setOnlineStatusValue(int value) {
+        copyOnWrite();
+        instance.setOnlineStatusValue(value);
+        return this;
+      }
+      /**
+       * <code>.IM.BaseDefine.UserStatType online_status = 3;</code>
+       * @return The onlineStatus.
+       */
+      @java.lang.Override
       public com.mogujie.tt.protobuf.IMBaseDefine.UserStatType getOnlineStatus() {
-        return onlineStatus_;
+        return instance.getOnlineStatus();
       }
       /**
-       * <code>required .IM.BaseDefine.UserStatType online_status = 3;</code>
+       * <code>.IM.BaseDefine.UserStatType online_status = 3;</code>
+       * @param value The enum numeric value on the wire for onlineStatus to set.
+       * @return This builder for chaining.
        */
       public Builder setOnlineStatus(com.mogujie.tt.protobuf.IMBaseDefine.UserStatType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000004;
-        onlineStatus_ = value;
-        
+        copyOnWrite();
+        instance.setOnlineStatus(value);
         return this;
       }
       /**
-       * <code>required .IM.BaseDefine.UserStatType online_status = 3;</code>
+       * <code>.IM.BaseDefine.UserStatType online_status = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearOnlineStatus() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        onlineStatus_ = com.mogujie.tt.protobuf.IMBaseDefine.UserStatType.USER_STATUS_ONLINE;
-        
+        copyOnWrite();
+        instance.clearOnlineStatus();
         return this;
       }
 
-      private com.mogujie.tt.protobuf.IMBaseDefine.ClientType clientType_ = com.mogujie.tt.protobuf.IMBaseDefine.ClientType.CLIENT_TYPE_WINDOWS;
       /**
-       * <code>required .IM.BaseDefine.ClientType client_type = 4;</code>
+       * <code>.IM.BaseDefine.ClientType client_type = 4;</code>
+       * @return The enum numeric value on the wire for clientType.
        */
-      public boolean hasClientType() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+      @java.lang.Override
+      public int getClientTypeValue() {
+        return instance.getClientTypeValue();
       }
       /**
-       * <code>required .IM.BaseDefine.ClientType client_type = 4;</code>
+       * <code>.IM.BaseDefine.ClientType client_type = 4;</code>
+       * @param value The clientType to set.
+       * @return This builder for chaining.
        */
+      public Builder setClientTypeValue(int value) {
+        copyOnWrite();
+        instance.setClientTypeValue(value);
+        return this;
+      }
+      /**
+       * <code>.IM.BaseDefine.ClientType client_type = 4;</code>
+       * @return The clientType.
+       */
+      @java.lang.Override
       public com.mogujie.tt.protobuf.IMBaseDefine.ClientType getClientType() {
-        return clientType_;
+        return instance.getClientType();
       }
       /**
-       * <code>required .IM.BaseDefine.ClientType client_type = 4;</code>
+       * <code>.IM.BaseDefine.ClientType client_type = 4;</code>
+       * @param value The enum numeric value on the wire for clientType to set.
+       * @return This builder for chaining.
        */
       public Builder setClientType(com.mogujie.tt.protobuf.IMBaseDefine.ClientType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000008;
-        clientType_ = value;
-        
+        copyOnWrite();
+        instance.setClientType(value);
         return this;
       }
       /**
-       * <code>required .IM.BaseDefine.ClientType client_type = 4;</code>
+       * <code>.IM.BaseDefine.ClientType client_type = 4;</code>
+       * @return This builder for chaining.
        */
       public Builder clearClientType() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        clientType_ = com.mogujie.tt.protobuf.IMBaseDefine.ClientType.CLIENT_TYPE_WINDOWS;
-        
+        copyOnWrite();
+        instance.clearClientType();
         return this;
       }
 
-      private java.lang.Object clientVersion_ = "";
       /**
        * <code>optional string client_version = 5;</code>
+       * @return Whether the clientVersion field is set.
        */
+      @java.lang.Override
       public boolean hasClientVersion() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return instance.hasClientVersion();
       }
       /**
        * <code>optional string client_version = 5;</code>
+       * @return The clientVersion.
        */
+      @java.lang.Override
       public java.lang.String getClientVersion() {
-        java.lang.Object ref = clientVersion_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            clientVersion_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getClientVersion();
       }
       /**
        * <code>optional string client_version = 5;</code>
+       * @return The bytes for clientVersion.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getClientVersionBytes() {
-        java.lang.Object ref = clientVersion_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          clientVersion_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getClientVersionBytes();
       }
       /**
        * <code>optional string client_version = 5;</code>
+       * @param value The clientVersion to set.
+       * @return This builder for chaining.
        */
       public Builder setClientVersion(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
-        clientVersion_ = value;
-        
+        copyOnWrite();
+        instance.setClientVersion(value);
         return this;
       }
       /**
        * <code>optional string client_version = 5;</code>
+       * @return This builder for chaining.
        */
       public Builder clearClientVersion() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        clientVersion_ = getDefaultInstance().getClientVersion();
-        
+        copyOnWrite();
+        instance.clearClientVersion();
         return this;
       }
       /**
        * <code>optional string client_version = 5;</code>
+       * @param value The bytes for clientVersion to set.
+       * @return This builder for chaining.
        */
       public Builder setClientVersionBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
-        clientVersion_ = value;
-        
+        copyOnWrite();
+        instance.setClientVersionBytes(value);
         return this;
       }
 
       // @@protoc_insertion_point(builder_scope:IM.Login.IMLoginReq)
     }
-
-    static {
-      defaultInstance = new IMLoginReq(true);
-      defaultInstance.initFields();
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.IMLogin.IMLoginReq();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "bitField0_",
+              "userName_",
+              "password_",
+              "onlineStatus_",
+              "clientType_",
+              "clientVersion_",
+            };
+            java.lang.String info =
+                "\u0000\u0005\u0000\u0001\u0001\u0005\u0005\u0000\u0000\u0000\u0001\u0208\u0002\u0208" +
+                "\u0003\f\u0004\f\u0005\u1208\u0000";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<com.mogujie.tt.protobuf.IMLogin.IMLoginReq> parser = PARSER;
+          if (parser == null) {
+            synchronized (com.mogujie.tt.protobuf.IMLogin.IMLoginReq.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<com.mogujie.tt.protobuf.IMLogin.IMLoginReq>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
     }
 
+
     // @@protoc_insertion_point(class_scope:IM.Login.IMLoginReq)
+    private static final com.mogujie.tt.protobuf.IMLogin.IMLoginReq DEFAULT_INSTANCE;
+    static {
+      IMLoginReq defaultInstance = new IMLoginReq();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        IMLoginReq.class, defaultInstance);
+    }
+
+    public static com.mogujie.tt.protobuf.IMLogin.IMLoginReq getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<IMLoginReq> PARSER;
+
+    public static com.google.protobuf.Parser<IMLoginReq> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
   }
 
   public interface IMLoginResOrBuilder extends
@@ -2072,288 +1662,265 @@ public final class IMLogin {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>required uint32 server_time = 1;</code>
-     *
      * <pre>
-     *cmd id:		0x0104
+     *cmd id:        0x0104
      * </pre>
-     */
-    boolean hasServerTime();
-    /**
-     * <code>required uint32 server_time = 1;</code>
      *
-     * <pre>
-     *cmd id:		0x0104
-     * </pre>
+     * <code>uint32 server_time = 1;</code>
+     * @return The serverTime.
      */
     int getServerTime();
 
     /**
-     * <code>required .IM.BaseDefine.ResultType result_code = 2;</code>
+     * <code>.IM.BaseDefine.ResultType result_code = 2;</code>
+     * @return The enum numeric value on the wire for resultCode.
      */
-    boolean hasResultCode();
+    int getResultCodeValue();
     /**
-     * <code>required .IM.BaseDefine.ResultType result_code = 2;</code>
+     * <code>.IM.BaseDefine.ResultType result_code = 2;</code>
+     * @return The resultCode.
      */
     com.mogujie.tt.protobuf.IMBaseDefine.ResultType getResultCode();
 
     /**
      * <code>optional string result_string = 3;</code>
+     * @return Whether the resultString field is set.
      */
     boolean hasResultString();
     /**
      * <code>optional string result_string = 3;</code>
+     * @return The resultString.
      */
     java.lang.String getResultString();
     /**
      * <code>optional string result_string = 3;</code>
+     * @return The bytes for resultString.
      */
     com.google.protobuf.ByteString
         getResultStringBytes();
 
     /**
      * <code>optional .IM.BaseDefine.UserStatType online_status = 4;</code>
+     * @return Whether the onlineStatus field is set.
      */
     boolean hasOnlineStatus();
     /**
      * <code>optional .IM.BaseDefine.UserStatType online_status = 4;</code>
+     * @return The enum numeric value on the wire for onlineStatus.
+     */
+    int getOnlineStatusValue();
+    /**
+     * <code>optional .IM.BaseDefine.UserStatType online_status = 4;</code>
+     * @return The onlineStatus.
      */
     com.mogujie.tt.protobuf.IMBaseDefine.UserStatType getOnlineStatus();
 
     /**
      * <code>optional .IM.BaseDefine.UserInfo user_info = 5;</code>
+     * @return Whether the userInfo field is set.
      */
     boolean hasUserInfo();
     /**
      * <code>optional .IM.BaseDefine.UserInfo user_info = 5;</code>
+     * @return The userInfo.
      */
     com.mogujie.tt.protobuf.IMBaseDefine.UserInfo getUserInfo();
   }
   /**
    * Protobuf type {@code IM.Login.IMLoginRes}
    */
-  public static final class IMLoginRes extends
-      com.google.protobuf.GeneratedMessageLite implements
+  public  static final class IMLoginRes extends
+      com.google.protobuf.GeneratedMessageLite<
+          IMLoginRes, IMLoginRes.Builder> implements
       // @@protoc_insertion_point(message_implements:IM.Login.IMLoginRes)
       IMLoginResOrBuilder {
-    // Use IMLoginRes.newBuilder() to construct.
-    private IMLoginRes(com.google.protobuf.GeneratedMessageLite.Builder builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
+    private IMLoginRes() {
+      resultString_ = "";
     }
-    private IMLoginRes(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
-
-    private static final IMLoginRes defaultInstance;
-    public static IMLoginRes getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public IMLoginRes getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.ByteString unknownFields;
-    private IMLoginRes(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.ByteString.Output unknownFieldsOutput =
-          com.google.protobuf.ByteString.newOutput();
-      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
-          com.google.protobuf.CodedOutputStream.newInstance(
-              unknownFieldsOutput);
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFieldsCodedOutput,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              serverTime_ = input.readUInt32();
-              break;
-            }
-            case 16: {
-              int rawValue = input.readEnum();
-              com.mogujie.tt.protobuf.IMBaseDefine.ResultType value = com.mogujie.tt.protobuf.IMBaseDefine.ResultType.valueOf(rawValue);
-              if (value == null) {
-                unknownFieldsCodedOutput.writeRawVarint32(tag);
-                unknownFieldsCodedOutput.writeRawVarint32(rawValue);
-              } else {
-                bitField0_ |= 0x00000002;
-                resultCode_ = value;
-              }
-              break;
-            }
-            case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000004;
-              resultString_ = bs;
-              break;
-            }
-            case 32: {
-              int rawValue = input.readEnum();
-              com.mogujie.tt.protobuf.IMBaseDefine.UserStatType value = com.mogujie.tt.protobuf.IMBaseDefine.UserStatType.valueOf(rawValue);
-              if (value == null) {
-                unknownFieldsCodedOutput.writeRawVarint32(tag);
-                unknownFieldsCodedOutput.writeRawVarint32(rawValue);
-              } else {
-                bitField0_ |= 0x00000008;
-                onlineStatus_ = value;
-              }
-              break;
-            }
-            case 42: {
-              com.mogujie.tt.protobuf.IMBaseDefine.UserInfo.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000010) == 0x00000010)) {
-                subBuilder = userInfo_.toBuilder();
-              }
-              userInfo_ = input.readMessage(com.mogujie.tt.protobuf.IMBaseDefine.UserInfo.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(userInfo_);
-                userInfo_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000010;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        try {
-          unknownFieldsCodedOutput.flush();
-        } catch (java.io.IOException e) {
-        // Should not happen
-        } finally {
-          unknownFields = unknownFieldsOutput.toByteString();
-        }
-        makeExtensionsImmutable();
-      }
-    }
-    public static com.google.protobuf.Parser<IMLoginRes> PARSER =
-        new com.google.protobuf.AbstractParser<IMLoginRes>() {
-      public IMLoginRes parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new IMLoginRes(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<IMLoginRes> getParserForType() {
-      return PARSER;
-    }
-
     private int bitField0_;
     public static final int SERVER_TIME_FIELD_NUMBER = 1;
     private int serverTime_;
     /**
-     * <code>required uint32 server_time = 1;</code>
-     *
      * <pre>
-     *cmd id:		0x0104
+     *cmd id:        0x0104
      * </pre>
-     */
-    public boolean hasServerTime() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required uint32 server_time = 1;</code>
      *
-     * <pre>
-     *cmd id:		0x0104
-     * </pre>
+     * <code>uint32 server_time = 1;</code>
+     * @return The serverTime.
      */
+    @java.lang.Override
     public int getServerTime() {
       return serverTime_;
     }
-
-    public static final int RESULT_CODE_FIELD_NUMBER = 2;
-    private com.mogujie.tt.protobuf.IMBaseDefine.ResultType resultCode_;
     /**
-     * <code>required .IM.BaseDefine.ResultType result_code = 2;</code>
+     * <pre>
+     *cmd id:        0x0104
+     * </pre>
+     *
+     * <code>uint32 server_time = 1;</code>
+     * @param value The serverTime to set.
      */
-    public boolean hasResultCode() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+    private void setServerTime(int value) {
+      
+      serverTime_ = value;
     }
     /**
-     * <code>required .IM.BaseDefine.ResultType result_code = 2;</code>
+     * <pre>
+     *cmd id:        0x0104
+     * </pre>
+     *
+     * <code>uint32 server_time = 1;</code>
      */
-    public com.mogujie.tt.protobuf.IMBaseDefine.ResultType getResultCode() {
+    private void clearServerTime() {
+      
+      serverTime_ = 0;
+    }
+
+    public static final int RESULT_CODE_FIELD_NUMBER = 2;
+    private int resultCode_;
+    /**
+     * <code>.IM.BaseDefine.ResultType result_code = 2;</code>
+     * @return The enum numeric value on the wire for resultCode.
+     */
+    @java.lang.Override
+    public int getResultCodeValue() {
       return resultCode_;
+    }
+    /**
+     * <code>.IM.BaseDefine.ResultType result_code = 2;</code>
+     * @return The resultCode.
+     */
+    @java.lang.Override
+    public com.mogujie.tt.protobuf.IMBaseDefine.ResultType getResultCode() {
+      com.mogujie.tt.protobuf.IMBaseDefine.ResultType result = com.mogujie.tt.protobuf.IMBaseDefine.ResultType.forNumber(resultCode_);
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.ResultType.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.IM.BaseDefine.ResultType result_code = 2;</code>
+     * @param value The enum numeric value on the wire for resultCode to set.
+     */
+    private void setResultCodeValue(int value) {
+        resultCode_ = value;
+    }
+    /**
+     * <code>.IM.BaseDefine.ResultType result_code = 2;</code>
+     * @param value The resultCode to set.
+     */
+    private void setResultCode(com.mogujie.tt.protobuf.IMBaseDefine.ResultType value) {
+      resultCode_ = value.getNumber();
+      
+    }
+    /**
+     * <code>.IM.BaseDefine.ResultType result_code = 2;</code>
+     */
+    private void clearResultCode() {
+      
+      resultCode_ = 0;
     }
 
     public static final int RESULT_STRING_FIELD_NUMBER = 3;
-    private java.lang.Object resultString_;
+    private java.lang.String resultString_;
     /**
      * <code>optional string result_string = 3;</code>
+     * @return Whether the resultString field is set.
      */
+    @java.lang.Override
     public boolean hasResultString() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000001) != 0);
     }
     /**
      * <code>optional string result_string = 3;</code>
+     * @return The resultString.
      */
+    @java.lang.Override
     public java.lang.String getResultString() {
-      java.lang.Object ref = resultString_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          resultString_ = s;
-        }
-        return s;
-      }
+      return resultString_;
     }
     /**
      * <code>optional string result_string = 3;</code>
+     * @return The bytes for resultString.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getResultStringBytes() {
-      java.lang.Object ref = resultString_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        resultString_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(resultString_);
+    }
+    /**
+     * <code>optional string result_string = 3;</code>
+     * @param value The resultString to set.
+     */
+    private void setResultString(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  bitField0_ |= 0x00000001;
+      resultString_ = value;
+    }
+    /**
+     * <code>optional string result_string = 3;</code>
+     */
+    private void clearResultString() {
+      bitField0_ = (bitField0_ & ~0x00000001);
+      resultString_ = getDefaultInstance().getResultString();
+    }
+    /**
+     * <code>optional string result_string = 3;</code>
+     * @param value The bytes for resultString to set.
+     */
+    private void setResultStringBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      resultString_ = value.toStringUtf8();
+      bitField0_ |= 0x00000001;
     }
 
     public static final int ONLINE_STATUS_FIELD_NUMBER = 4;
-    private com.mogujie.tt.protobuf.IMBaseDefine.UserStatType onlineStatus_;
+    private int onlineStatus_;
     /**
      * <code>optional .IM.BaseDefine.UserStatType online_status = 4;</code>
+     * @return Whether the onlineStatus field is set.
      */
+    @java.lang.Override
     public boolean hasOnlineStatus() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000002) != 0);
+    }
+    /**
+     * <code>optional .IM.BaseDefine.UserStatType online_status = 4;</code>
+     * @return The enum numeric value on the wire for onlineStatus.
+     */
+    @java.lang.Override
+    public int getOnlineStatusValue() {
+      return onlineStatus_;
+    }
+    /**
+     * <code>optional .IM.BaseDefine.UserStatType online_status = 4;</code>
+     * @return The onlineStatus.
+     */
+    @java.lang.Override
+    public com.mogujie.tt.protobuf.IMBaseDefine.UserStatType getOnlineStatus() {
+      com.mogujie.tt.protobuf.IMBaseDefine.UserStatType result = com.mogujie.tt.protobuf.IMBaseDefine.UserStatType.forNumber(onlineStatus_);
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.UserStatType.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>optional .IM.BaseDefine.UserStatType online_status = 4;</code>
+     * @param value The enum numeric value on the wire for onlineStatus to set.
+     */
+    private void setOnlineStatusValue(int value) {
+      bitField0_ |= 0x00000002;  onlineStatus_ = value;
+    }
+    /**
+     * <code>optional .IM.BaseDefine.UserStatType online_status = 4;</code>
+     * @param value The onlineStatus to set.
+     */
+    private void setOnlineStatus(com.mogujie.tt.protobuf.IMBaseDefine.UserStatType value) {
+      onlineStatus_ = value.getNumber();
+      bitField0_ |= 0x00000002;
     }
     /**
      * <code>optional .IM.BaseDefine.UserStatType online_status = 4;</code>
      */
-    public com.mogujie.tt.protobuf.IMBaseDefine.UserStatType getOnlineStatus() {
-      return onlineStatus_;
+    private void clearOnlineStatus() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      onlineStatus_ = 0;
     }
 
     public static final int USER_INFO_FIELD_NUMBER = 5;
@@ -2361,566 +1928,464 @@ public final class IMLogin {
     /**
      * <code>optional .IM.BaseDefine.UserInfo user_info = 5;</code>
      */
+    @java.lang.Override
     public boolean hasUserInfo() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000004) != 0);
     }
     /**
      * <code>optional .IM.BaseDefine.UserInfo user_info = 5;</code>
      */
-    public com.mogujie.tt.protobuf.IMBaseDefine.UserInfo getUserInfo() {
-      return userInfo_;
-    }
-
-    private void initFields() {
-      serverTime_ = 0;
-      resultCode_ = com.mogujie.tt.protobuf.IMBaseDefine.ResultType.REFUSE_REASON_NONE;
-      resultString_ = "";
-      onlineStatus_ = com.mogujie.tt.protobuf.IMBaseDefine.UserStatType.USER_STATUS_ONLINE;
-      userInfo_ = com.mogujie.tt.protobuf.IMBaseDefine.UserInfo.getDefaultInstance();
-    }
-    private byte memoizedIsInitialized = -1;
-    public boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasServerTime()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasResultCode()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (hasUserInfo()) {
-        if (!getUserInfo().isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, serverTime_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeEnum(2, resultCode_.getNumber());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getResultStringBytes());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeEnum(4, onlineStatus_.getNumber());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeMessage(5, userInfo_);
-      }
-      output.writeRawBytes(unknownFields);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, serverTime_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(2, resultCode_.getNumber());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getResultStringBytes());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(4, onlineStatus_.getNumber());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, userInfo_);
-      }
-      size += unknownFields.size();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
+    public com.mogujie.tt.protobuf.IMBaseDefine.UserInfo getUserInfo() {
+      return userInfo_ == null ? com.mogujie.tt.protobuf.IMBaseDefine.UserInfo.getDefaultInstance() : userInfo_;
+    }
+    /**
+     * <code>optional .IM.BaseDefine.UserInfo user_info = 5;</code>
+     */
+    private void setUserInfo(com.mogujie.tt.protobuf.IMBaseDefine.UserInfo value) {
+      value.getClass();
+  userInfo_ = value;
+      bitField0_ |= 0x00000004;
+      }
+    /**
+     * <code>optional .IM.BaseDefine.UserInfo user_info = 5;</code>
+     */
+    @java.lang.SuppressWarnings({"ReferenceEquality"})
+    private void mergeUserInfo(com.mogujie.tt.protobuf.IMBaseDefine.UserInfo value) {
+      value.getClass();
+  if (userInfo_ != null &&
+          userInfo_ != com.mogujie.tt.protobuf.IMBaseDefine.UserInfo.getDefaultInstance()) {
+        userInfo_ =
+          com.mogujie.tt.protobuf.IMBaseDefine.UserInfo.newBuilder(userInfo_).mergeFrom(value).buildPartial();
+      } else {
+        userInfo_ = value;
+      }
+      bitField0_ |= 0x00000004;
+    }
+    /**
+     * <code>optional .IM.BaseDefine.UserInfo user_info = 5;</code>
+     */
+    private void clearUserInfo() {  userInfo_ = null;
+      bitField0_ = (bitField0_ & ~0x00000004);
     }
 
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginRes parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.IMLogin.IMLoginRes parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMLogin.IMLoginRes parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginRes parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginRes parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginRes parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginRes parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginRes parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginRes parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginRes parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginRes parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLoginRes parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMLoginRes prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMLoginRes prototype) {
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
+    }
 
     /**
      * Protobuf type {@code IM.Login.IMLoginRes}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          com.mogujie.tt.protobuf.IMLogin.IMLoginRes, Builder>
-        implements
+          com.mogujie.tt.protobuf.IMLogin.IMLoginRes, Builder> implements
         // @@protoc_insertion_point(builder_implements:IM.Login.IMLoginRes)
         com.mogujie.tt.protobuf.IMLogin.IMLoginResOrBuilder {
       // Construct using com.mogujie.tt.protobuf.IMLogin.IMLoginRes.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private void maybeForceBuilderInitialization() {
-      }
-      private static Builder create() {
-        return new Builder();
-      }
 
-      public Builder clear() {
-        super.clear();
-        serverTime_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        resultCode_ = com.mogujie.tt.protobuf.IMBaseDefine.ResultType.REFUSE_REASON_NONE;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        resultString_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
-        onlineStatus_ = com.mogujie.tt.protobuf.IMBaseDefine.UserStatType.USER_STATUS_ONLINE;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        userInfo_ = com.mogujie.tt.protobuf.IMBaseDefine.UserInfo.getDefaultInstance();
-        bitField0_ = (bitField0_ & ~0x00000010);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMLoginRes getDefaultInstanceForType() {
-        return com.mogujie.tt.protobuf.IMLogin.IMLoginRes.getDefaultInstance();
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMLoginRes build() {
-        com.mogujie.tt.protobuf.IMLogin.IMLoginRes result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMLoginRes buildPartial() {
-        com.mogujie.tt.protobuf.IMLogin.IMLoginRes result = new com.mogujie.tt.protobuf.IMLogin.IMLoginRes(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.serverTime_ = serverTime_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.resultCode_ = resultCode_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.resultString_ = resultString_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.onlineStatus_ = onlineStatus_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.userInfo_ = userInfo_;
-        result.bitField0_ = to_bitField0_;
-        return result;
-      }
-
-      public Builder mergeFrom(com.mogujie.tt.protobuf.IMLogin.IMLoginRes other) {
-        if (other == com.mogujie.tt.protobuf.IMLogin.IMLoginRes.getDefaultInstance()) return this;
-        if (other.hasServerTime()) {
-          setServerTime(other.getServerTime());
-        }
-        if (other.hasResultCode()) {
-          setResultCode(other.getResultCode());
-        }
-        if (other.hasResultString()) {
-          bitField0_ |= 0x00000004;
-          resultString_ = other.resultString_;
-          
-        }
-        if (other.hasOnlineStatus()) {
-          setOnlineStatus(other.getOnlineStatus());
-        }
-        if (other.hasUserInfo()) {
-          mergeUserInfo(other.getUserInfo());
-        }
-        setUnknownFields(
-            getUnknownFields().concat(other.unknownFields));
-        return this;
-      }
-
-      public boolean isInitialized() {
-        if (!hasServerTime()) {
-          
-          return false;
-        }
-        if (!hasResultCode()) {
-          
-          return false;
-        }
-        if (hasUserInfo()) {
-          return getUserInfo().isInitialized();
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.mogujie.tt.protobuf.IMLogin.IMLoginRes parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.mogujie.tt.protobuf.IMLogin.IMLoginRes) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int serverTime_ ;
       /**
-       * <code>required uint32 server_time = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0104
+       *cmd id:        0x0104
        * </pre>
-       */
-      public boolean hasServerTime() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required uint32 server_time = 1;</code>
        *
-       * <pre>
-       *cmd id:		0x0104
-       * </pre>
+       * <code>uint32 server_time = 1;</code>
+       * @return The serverTime.
        */
+      @java.lang.Override
       public int getServerTime() {
-        return serverTime_;
+        return instance.getServerTime();
       }
       /**
-       * <code>required uint32 server_time = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0104
+       *cmd id:        0x0104
        * </pre>
+       *
+       * <code>uint32 server_time = 1;</code>
+       * @param value The serverTime to set.
+       * @return This builder for chaining.
        */
       public Builder setServerTime(int value) {
-        bitField0_ |= 0x00000001;
-        serverTime_ = value;
-        
+        copyOnWrite();
+        instance.setServerTime(value);
         return this;
       }
       /**
-       * <code>required uint32 server_time = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0104
+       *cmd id:        0x0104
        * </pre>
+       *
+       * <code>uint32 server_time = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearServerTime() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        serverTime_ = 0;
-        
+        copyOnWrite();
+        instance.clearServerTime();
         return this;
       }
 
-      private com.mogujie.tt.protobuf.IMBaseDefine.ResultType resultCode_ = com.mogujie.tt.protobuf.IMBaseDefine.ResultType.REFUSE_REASON_NONE;
       /**
-       * <code>required .IM.BaseDefine.ResultType result_code = 2;</code>
+       * <code>.IM.BaseDefine.ResultType result_code = 2;</code>
+       * @return The enum numeric value on the wire for resultCode.
        */
-      public boolean hasResultCode() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+      @java.lang.Override
+      public int getResultCodeValue() {
+        return instance.getResultCodeValue();
       }
       /**
-       * <code>required .IM.BaseDefine.ResultType result_code = 2;</code>
+       * <code>.IM.BaseDefine.ResultType result_code = 2;</code>
+       * @param value The resultCode to set.
+       * @return This builder for chaining.
        */
+      public Builder setResultCodeValue(int value) {
+        copyOnWrite();
+        instance.setResultCodeValue(value);
+        return this;
+      }
+      /**
+       * <code>.IM.BaseDefine.ResultType result_code = 2;</code>
+       * @return The resultCode.
+       */
+      @java.lang.Override
       public com.mogujie.tt.protobuf.IMBaseDefine.ResultType getResultCode() {
-        return resultCode_;
+        return instance.getResultCode();
       }
       /**
-       * <code>required .IM.BaseDefine.ResultType result_code = 2;</code>
+       * <code>.IM.BaseDefine.ResultType result_code = 2;</code>
+       * @param value The enum numeric value on the wire for resultCode to set.
+       * @return This builder for chaining.
        */
       public Builder setResultCode(com.mogujie.tt.protobuf.IMBaseDefine.ResultType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000002;
-        resultCode_ = value;
-        
+        copyOnWrite();
+        instance.setResultCode(value);
         return this;
       }
       /**
-       * <code>required .IM.BaseDefine.ResultType result_code = 2;</code>
+       * <code>.IM.BaseDefine.ResultType result_code = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearResultCode() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        resultCode_ = com.mogujie.tt.protobuf.IMBaseDefine.ResultType.REFUSE_REASON_NONE;
-        
+        copyOnWrite();
+        instance.clearResultCode();
         return this;
       }
 
-      private java.lang.Object resultString_ = "";
       /**
        * <code>optional string result_string = 3;</code>
+       * @return Whether the resultString field is set.
        */
+      @java.lang.Override
       public boolean hasResultString() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return instance.hasResultString();
       }
       /**
        * <code>optional string result_string = 3;</code>
+       * @return The resultString.
        */
+      @java.lang.Override
       public java.lang.String getResultString() {
-        java.lang.Object ref = resultString_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            resultString_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getResultString();
       }
       /**
        * <code>optional string result_string = 3;</code>
+       * @return The bytes for resultString.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getResultStringBytes() {
-        java.lang.Object ref = resultString_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          resultString_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getResultStringBytes();
       }
       /**
        * <code>optional string result_string = 3;</code>
+       * @param value The resultString to set.
+       * @return This builder for chaining.
        */
       public Builder setResultString(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        resultString_ = value;
-        
+        copyOnWrite();
+        instance.setResultString(value);
         return this;
       }
       /**
        * <code>optional string result_string = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearResultString() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        resultString_ = getDefaultInstance().getResultString();
-        
+        copyOnWrite();
+        instance.clearResultString();
         return this;
       }
       /**
        * <code>optional string result_string = 3;</code>
+       * @param value The bytes for resultString to set.
+       * @return This builder for chaining.
        */
       public Builder setResultStringBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        resultString_ = value;
-        
+        copyOnWrite();
+        instance.setResultStringBytes(value);
         return this;
       }
 
-      private com.mogujie.tt.protobuf.IMBaseDefine.UserStatType onlineStatus_ = com.mogujie.tt.protobuf.IMBaseDefine.UserStatType.USER_STATUS_ONLINE;
       /**
        * <code>optional .IM.BaseDefine.UserStatType online_status = 4;</code>
+       * @return Whether the onlineStatus field is set.
        */
+      @java.lang.Override
       public boolean hasOnlineStatus() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return instance.hasOnlineStatus();
       }
       /**
        * <code>optional .IM.BaseDefine.UserStatType online_status = 4;</code>
+       * @return The enum numeric value on the wire for onlineStatus.
        */
-      public com.mogujie.tt.protobuf.IMBaseDefine.UserStatType getOnlineStatus() {
-        return onlineStatus_;
+      @java.lang.Override
+      public int getOnlineStatusValue() {
+        return instance.getOnlineStatusValue();
       }
       /**
        * <code>optional .IM.BaseDefine.UserStatType online_status = 4;</code>
+       * @param value The onlineStatus to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOnlineStatusValue(int value) {
+        copyOnWrite();
+        instance.setOnlineStatusValue(value);
+        return this;
+      }
+      /**
+       * <code>optional .IM.BaseDefine.UserStatType online_status = 4;</code>
+       * @return The onlineStatus.
+       */
+      @java.lang.Override
+      public com.mogujie.tt.protobuf.IMBaseDefine.UserStatType getOnlineStatus() {
+        return instance.getOnlineStatus();
+      }
+      /**
+       * <code>optional .IM.BaseDefine.UserStatType online_status = 4;</code>
+       * @param value The enum numeric value on the wire for onlineStatus to set.
+       * @return This builder for chaining.
        */
       public Builder setOnlineStatus(com.mogujie.tt.protobuf.IMBaseDefine.UserStatType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000008;
-        onlineStatus_ = value;
-        
+        copyOnWrite();
+        instance.setOnlineStatus(value);
         return this;
       }
       /**
        * <code>optional .IM.BaseDefine.UserStatType online_status = 4;</code>
+       * @return This builder for chaining.
        */
       public Builder clearOnlineStatus() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        onlineStatus_ = com.mogujie.tt.protobuf.IMBaseDefine.UserStatType.USER_STATUS_ONLINE;
-        
+        copyOnWrite();
+        instance.clearOnlineStatus();
         return this;
       }
 
-      private com.mogujie.tt.protobuf.IMBaseDefine.UserInfo userInfo_ = com.mogujie.tt.protobuf.IMBaseDefine.UserInfo.getDefaultInstance();
       /**
        * <code>optional .IM.BaseDefine.UserInfo user_info = 5;</code>
        */
+      @java.lang.Override
       public boolean hasUserInfo() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return instance.hasUserInfo();
       }
       /**
        * <code>optional .IM.BaseDefine.UserInfo user_info = 5;</code>
        */
+      @java.lang.Override
       public com.mogujie.tt.protobuf.IMBaseDefine.UserInfo getUserInfo() {
-        return userInfo_;
+        return instance.getUserInfo();
       }
       /**
        * <code>optional .IM.BaseDefine.UserInfo user_info = 5;</code>
        */
       public Builder setUserInfo(com.mogujie.tt.protobuf.IMBaseDefine.UserInfo value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        userInfo_ = value;
-
-        bitField0_ |= 0x00000010;
+        copyOnWrite();
+        instance.setUserInfo(value);
         return this;
-      }
+        }
       /**
        * <code>optional .IM.BaseDefine.UserInfo user_info = 5;</code>
        */
       public Builder setUserInfo(
           com.mogujie.tt.protobuf.IMBaseDefine.UserInfo.Builder builderForValue) {
-        userInfo_ = builderForValue.build();
-
-        bitField0_ |= 0x00000010;
+        copyOnWrite();
+        instance.setUserInfo(builderForValue.build());
         return this;
       }
       /**
        * <code>optional .IM.BaseDefine.UserInfo user_info = 5;</code>
        */
       public Builder mergeUserInfo(com.mogujie.tt.protobuf.IMBaseDefine.UserInfo value) {
-        if (((bitField0_ & 0x00000010) == 0x00000010) &&
-            userInfo_ != com.mogujie.tt.protobuf.IMBaseDefine.UserInfo.getDefaultInstance()) {
-          userInfo_ =
-            com.mogujie.tt.protobuf.IMBaseDefine.UserInfo.newBuilder(userInfo_).mergeFrom(value).buildPartial();
-        } else {
-          userInfo_ = value;
-        }
-
-        bitField0_ |= 0x00000010;
+        copyOnWrite();
+        instance.mergeUserInfo(value);
         return this;
       }
       /**
        * <code>optional .IM.BaseDefine.UserInfo user_info = 5;</code>
        */
-      public Builder clearUserInfo() {
-        userInfo_ = com.mogujie.tt.protobuf.IMBaseDefine.UserInfo.getDefaultInstance();
-
-        bitField0_ = (bitField0_ & ~0x00000010);
+      public Builder clearUserInfo() {  copyOnWrite();
+        instance.clearUserInfo();
         return this;
       }
 
       // @@protoc_insertion_point(builder_scope:IM.Login.IMLoginRes)
     }
-
-    static {
-      defaultInstance = new IMLoginRes(true);
-      defaultInstance.initFields();
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.IMLogin.IMLoginRes();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "bitField0_",
+              "serverTime_",
+              "resultCode_",
+              "resultString_",
+              "onlineStatus_",
+              "userInfo_",
+            };
+            java.lang.String info =
+                "\u0000\u0005\u0000\u0001\u0001\u0005\u0005\u0000\u0000\u0000\u0001\u000b\u0002\f" +
+                "\u0003\u1208\u0000\u0004\u100c\u0001\u0005\u1009\u0002";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<com.mogujie.tt.protobuf.IMLogin.IMLoginRes> parser = PARSER;
+          if (parser == null) {
+            synchronized (com.mogujie.tt.protobuf.IMLogin.IMLoginRes.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<com.mogujie.tt.protobuf.IMLogin.IMLoginRes>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
     }
 
+
     // @@protoc_insertion_point(class_scope:IM.Login.IMLoginRes)
+    private static final com.mogujie.tt.protobuf.IMLogin.IMLoginRes DEFAULT_INSTANCE;
+    static {
+      IMLoginRes defaultInstance = new IMLoginRes();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        IMLoginRes.class, defaultInstance);
+    }
+
+    public static com.mogujie.tt.protobuf.IMLogin.IMLoginRes getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<IMLoginRes> PARSER;
+
+    public static com.google.protobuf.Parser<IMLoginRes> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
   }
 
   public interface IMLogoutReqOrBuilder extends
@@ -2928,271 +2393,187 @@ public final class IMLogin {
       com.google.protobuf.MessageLiteOrBuilder {
   }
   /**
-   * Protobuf type {@code IM.Login.IMLogoutReq}
-   *
    * <pre>
-   *cmd id:		0x0105
+   *cmd id:        0x0105
    * </pre>
+   *
+   * Protobuf type {@code IM.Login.IMLogoutReq}
    */
-  public static final class IMLogoutReq extends
-      com.google.protobuf.GeneratedMessageLite implements
+  public  static final class IMLogoutReq extends
+      com.google.protobuf.GeneratedMessageLite<
+          IMLogoutReq, IMLogoutReq.Builder> implements
       // @@protoc_insertion_point(message_implements:IM.Login.IMLogoutReq)
       IMLogoutReqOrBuilder {
-    // Use IMLogoutReq.newBuilder() to construct.
-    private IMLogoutReq(com.google.protobuf.GeneratedMessageLite.Builder builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
+    private IMLogoutReq() {
     }
-    private IMLogoutReq(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
-
-    private static final IMLogoutReq defaultInstance;
-    public static IMLogoutReq getDefaultInstance() {
-      return defaultInstance;
+    public static com.mogujie.tt.protobuf.IMLogin.IMLogoutReq parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
-
-    public IMLogoutReq getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.ByteString unknownFields;
-    private IMLogoutReq(
-        com.google.protobuf.CodedInputStream input,
+    public static com.mogujie.tt.protobuf.IMLogin.IMLogoutReq parseFrom(
+        java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      com.google.protobuf.ByteString.Output unknownFieldsOutput =
-          com.google.protobuf.ByteString.newOutput();
-      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
-          com.google.protobuf.CodedOutputStream.newInstance(
-              unknownFieldsOutput);
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          if (tag == 0) {
-            done = true;
-          } else {
-            if (!parseUnknownField(input, unknownFieldsCodedOutput,
-                    extensionRegistry, tag)) {
-              done = true;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        try {
-          unknownFieldsCodedOutput.flush();
-        } catch (java.io.IOException e) {
-        // Should not happen
-        } finally {
-          unknownFields = unknownFieldsOutput.toByteString();
-        }
-        makeExtensionsImmutable();
-      }
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
-    public static com.google.protobuf.Parser<IMLogoutReq> PARSER =
-        new com.google.protobuf.AbstractParser<IMLogoutReq>() {
-      public IMLogoutReq parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new IMLogoutReq(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<IMLogoutReq> getParserForType() {
-      return PARSER;
-    }
-
-    private void initFields() {
-    }
-    private byte memoizedIsInitialized = -1;
-    public boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      output.writeRawBytes(unknownFields);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      size += unknownFields.size();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutReq parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutReq parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutReq parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutReq parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutReq parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutReq parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutReq parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutReq parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutReq parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutReq parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMLogoutReq prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMLogoutReq prototype) {
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
+    }
 
     /**
-     * Protobuf type {@code IM.Login.IMLogoutReq}
-     *
      * <pre>
-     *cmd id:		0x0105
+     *cmd id:        0x0105
      * </pre>
+     *
+     * Protobuf type {@code IM.Login.IMLogoutReq}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          com.mogujie.tt.protobuf.IMLogin.IMLogoutReq, Builder>
-        implements
+          com.mogujie.tt.protobuf.IMLogin.IMLogoutReq, Builder> implements
         // @@protoc_insertion_point(builder_implements:IM.Login.IMLogoutReq)
         com.mogujie.tt.protobuf.IMLogin.IMLogoutReqOrBuilder {
       // Construct using com.mogujie.tt.protobuf.IMLogin.IMLogoutReq.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private void maybeForceBuilderInitialization() {
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMLogoutReq getDefaultInstanceForType() {
-        return com.mogujie.tt.protobuf.IMLogin.IMLogoutReq.getDefaultInstance();
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMLogoutReq build() {
-        com.mogujie.tt.protobuf.IMLogin.IMLogoutReq result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMLogoutReq buildPartial() {
-        com.mogujie.tt.protobuf.IMLogin.IMLogoutReq result = new com.mogujie.tt.protobuf.IMLogin.IMLogoutReq(this);
-        return result;
-      }
-
-      public Builder mergeFrom(com.mogujie.tt.protobuf.IMLogin.IMLogoutReq other) {
-        if (other == com.mogujie.tt.protobuf.IMLogin.IMLogoutReq.getDefaultInstance()) return this;
-        setUnknownFields(
-            getUnknownFields().concat(other.unknownFields));
-        return this;
-      }
-
-      public boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.mogujie.tt.protobuf.IMLogin.IMLogoutReq parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.mogujie.tt.protobuf.IMLogin.IMLogoutReq) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
 
       // @@protoc_insertion_point(builder_scope:IM.Login.IMLogoutReq)
     }
-
-    static {
-      defaultInstance = new IMLogoutReq(true);
-      defaultInstance.initFields();
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.IMLogin.IMLogoutReq();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = null;java.lang.String info =
+                "\u0000\u0000";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<com.mogujie.tt.protobuf.IMLogin.IMLogoutReq> parser = PARSER;
+          if (parser == null) {
+            synchronized (com.mogujie.tt.protobuf.IMLogin.IMLogoutReq.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<com.mogujie.tt.protobuf.IMLogin.IMLogoutReq>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
     }
 
+
     // @@protoc_insertion_point(class_scope:IM.Login.IMLogoutReq)
+    private static final com.mogujie.tt.protobuf.IMLogin.IMLogoutReq DEFAULT_INSTANCE;
+    static {
+      IMLogoutReq defaultInstance = new IMLogoutReq();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        IMLogoutReq.class, defaultInstance);
+    }
+
+    public static com.mogujie.tt.protobuf.IMLogin.IMLogoutReq getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<IMLogoutReq> PARSER;
+
+    public static com.google.protobuf.Parser<IMLogoutReq> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
   }
 
   public interface IMLogoutRspOrBuilder extends
@@ -3200,387 +2581,270 @@ public final class IMLogin {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>required uint32 result_code = 1;</code>
-     *
      * <pre>
-     *cmd id:		0x0106
+     *cmd id:        0x0106
      * </pre>
-     */
-    boolean hasResultCode();
-    /**
-     * <code>required uint32 result_code = 1;</code>
      *
-     * <pre>
-     *cmd id:		0x0106
-     * </pre>
+     * <code>uint32 result_code = 1;</code>
+     * @return The resultCode.
      */
     int getResultCode();
   }
   /**
    * Protobuf type {@code IM.Login.IMLogoutRsp}
    */
-  public static final class IMLogoutRsp extends
-      com.google.protobuf.GeneratedMessageLite implements
+  public  static final class IMLogoutRsp extends
+      com.google.protobuf.GeneratedMessageLite<
+          IMLogoutRsp, IMLogoutRsp.Builder> implements
       // @@protoc_insertion_point(message_implements:IM.Login.IMLogoutRsp)
       IMLogoutRspOrBuilder {
-    // Use IMLogoutRsp.newBuilder() to construct.
-    private IMLogoutRsp(com.google.protobuf.GeneratedMessageLite.Builder builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
+    private IMLogoutRsp() {
     }
-    private IMLogoutRsp(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
-
-    private static final IMLogoutRsp defaultInstance;
-    public static IMLogoutRsp getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public IMLogoutRsp getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.ByteString unknownFields;
-    private IMLogoutRsp(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.ByteString.Output unknownFieldsOutput =
-          com.google.protobuf.ByteString.newOutput();
-      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
-          com.google.protobuf.CodedOutputStream.newInstance(
-              unknownFieldsOutput);
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFieldsCodedOutput,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              resultCode_ = input.readUInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        try {
-          unknownFieldsCodedOutput.flush();
-        } catch (java.io.IOException e) {
-        // Should not happen
-        } finally {
-          unknownFields = unknownFieldsOutput.toByteString();
-        }
-        makeExtensionsImmutable();
-      }
-    }
-    public static com.google.protobuf.Parser<IMLogoutRsp> PARSER =
-        new com.google.protobuf.AbstractParser<IMLogoutRsp>() {
-      public IMLogoutRsp parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new IMLogoutRsp(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<IMLogoutRsp> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
     public static final int RESULT_CODE_FIELD_NUMBER = 1;
     private int resultCode_;
     /**
-     * <code>required uint32 result_code = 1;</code>
-     *
      * <pre>
-     *cmd id:		0x0106
+     *cmd id:        0x0106
      * </pre>
-     */
-    public boolean hasResultCode() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required uint32 result_code = 1;</code>
      *
-     * <pre>
-     *cmd id:		0x0106
-     * </pre>
+     * <code>uint32 result_code = 1;</code>
+     * @return The resultCode.
      */
+    @java.lang.Override
     public int getResultCode() {
       return resultCode_;
     }
-
-    private void initFields() {
+    /**
+     * <pre>
+     *cmd id:        0x0106
+     * </pre>
+     *
+     * <code>uint32 result_code = 1;</code>
+     * @param value The resultCode to set.
+     */
+    private void setResultCode(int value) {
+      
+      resultCode_ = value;
+    }
+    /**
+     * <pre>
+     *cmd id:        0x0106
+     * </pre>
+     *
+     * <code>uint32 result_code = 1;</code>
+     */
+    private void clearResultCode() {
+      
       resultCode_ = 0;
-    }
-    private byte memoizedIsInitialized = -1;
-    public boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasResultCode()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, resultCode_);
-      }
-      output.writeRawBytes(unknownFields);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, resultCode_);
-      }
-      size += unknownFields.size();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
     }
 
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp prototype) {
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
+    }
 
     /**
      * Protobuf type {@code IM.Login.IMLogoutRsp}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp, Builder>
-        implements
+          com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp, Builder> implements
         // @@protoc_insertion_point(builder_implements:IM.Login.IMLogoutRsp)
         com.mogujie.tt.protobuf.IMLogin.IMLogoutRspOrBuilder {
       // Construct using com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private void maybeForceBuilderInitialization() {
-      }
-      private static Builder create() {
-        return new Builder();
-      }
 
-      public Builder clear() {
-        super.clear();
-        resultCode_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp getDefaultInstanceForType() {
-        return com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp.getDefaultInstance();
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp build() {
-        com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp buildPartial() {
-        com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp result = new com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.resultCode_ = resultCode_;
-        result.bitField0_ = to_bitField0_;
-        return result;
-      }
-
-      public Builder mergeFrom(com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp other) {
-        if (other == com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp.getDefaultInstance()) return this;
-        if (other.hasResultCode()) {
-          setResultCode(other.getResultCode());
-        }
-        setUnknownFields(
-            getUnknownFields().concat(other.unknownFields));
-        return this;
-      }
-
-      public boolean isInitialized() {
-        return hasResultCode();
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int resultCode_ ;
       /**
-       * <code>required uint32 result_code = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0106
+       *cmd id:        0x0106
        * </pre>
-       */
-      public boolean hasResultCode() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required uint32 result_code = 1;</code>
        *
-       * <pre>
-       *cmd id:		0x0106
-       * </pre>
+       * <code>uint32 result_code = 1;</code>
+       * @return The resultCode.
        */
+      @java.lang.Override
       public int getResultCode() {
-        return resultCode_;
+        return instance.getResultCode();
       }
       /**
-       * <code>required uint32 result_code = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0106
+       *cmd id:        0x0106
        * </pre>
+       *
+       * <code>uint32 result_code = 1;</code>
+       * @param value The resultCode to set.
+       * @return This builder for chaining.
        */
       public Builder setResultCode(int value) {
-        bitField0_ |= 0x00000001;
-        resultCode_ = value;
-        
+        copyOnWrite();
+        instance.setResultCode(value);
         return this;
       }
       /**
-       * <code>required uint32 result_code = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0106
+       *cmd id:        0x0106
        * </pre>
+       *
+       * <code>uint32 result_code = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearResultCode() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        resultCode_ = 0;
-        
+        copyOnWrite();
+        instance.clearResultCode();
         return this;
       }
 
       // @@protoc_insertion_point(builder_scope:IM.Login.IMLogoutRsp)
     }
-
-    static {
-      defaultInstance = new IMLogoutRsp(true);
-      defaultInstance.initFields();
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "resultCode_",
+            };
+            java.lang.String info =
+                "\u0000\u0001\u0000\u0000\u0001\u0001\u0001\u0000\u0000\u0000\u0001\u000b";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp> parser = PARSER;
+          if (parser == null) {
+            synchronized (com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
     }
 
+
     // @@protoc_insertion_point(class_scope:IM.Login.IMLogoutRsp)
+    private static final com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp DEFAULT_INSTANCE;
+    static {
+      IMLogoutRsp defaultInstance = new IMLogoutRsp();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        IMLogoutRsp.class, defaultInstance);
+    }
+
+    public static com.mogujie.tt.protobuf.IMLogin.IMLogoutRsp getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<IMLogoutRsp> PARSER;
+
+    public static com.google.protobuf.Parser<IMLogoutRsp> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
   }
 
   public interface IMKickUserOrBuilder extends
@@ -3588,483 +2852,371 @@ public final class IMLogin {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>required uint32 user_id = 1;</code>
-     *
      * <pre>
-     *cmd id:		0x0107
+     *cmd id:        0x0107
      * </pre>
-     */
-    boolean hasUserId();
-    /**
-     * <code>required uint32 user_id = 1;</code>
      *
-     * <pre>
-     *cmd id:		0x0107
-     * </pre>
+     * <code>uint32 user_id = 1;</code>
+     * @return The userId.
      */
     int getUserId();
 
     /**
-     * <code>required .IM.BaseDefine.KickReasonType kick_reason = 2;</code>
+     * <code>.IM.BaseDefine.KickReasonType kick_reason = 2;</code>
+     * @return The enum numeric value on the wire for kickReason.
      */
-    boolean hasKickReason();
+    int getKickReasonValue();
     /**
-     * <code>required .IM.BaseDefine.KickReasonType kick_reason = 2;</code>
+     * <code>.IM.BaseDefine.KickReasonType kick_reason = 2;</code>
+     * @return The kickReason.
      */
     com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType getKickReason();
   }
   /**
    * Protobuf type {@code IM.Login.IMKickUser}
    */
-  public static final class IMKickUser extends
-      com.google.protobuf.GeneratedMessageLite implements
+  public  static final class IMKickUser extends
+      com.google.protobuf.GeneratedMessageLite<
+          IMKickUser, IMKickUser.Builder> implements
       // @@protoc_insertion_point(message_implements:IM.Login.IMKickUser)
       IMKickUserOrBuilder {
-    // Use IMKickUser.newBuilder() to construct.
-    private IMKickUser(com.google.protobuf.GeneratedMessageLite.Builder builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
+    private IMKickUser() {
     }
-    private IMKickUser(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
-
-    private static final IMKickUser defaultInstance;
-    public static IMKickUser getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public IMKickUser getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.ByteString unknownFields;
-    private IMKickUser(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.ByteString.Output unknownFieldsOutput =
-          com.google.protobuf.ByteString.newOutput();
-      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
-          com.google.protobuf.CodedOutputStream.newInstance(
-              unknownFieldsOutput);
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFieldsCodedOutput,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              userId_ = input.readUInt32();
-              break;
-            }
-            case 16: {
-              int rawValue = input.readEnum();
-              com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType value = com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType.valueOf(rawValue);
-              if (value == null) {
-                unknownFieldsCodedOutput.writeRawVarint32(tag);
-                unknownFieldsCodedOutput.writeRawVarint32(rawValue);
-              } else {
-                bitField0_ |= 0x00000002;
-                kickReason_ = value;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        try {
-          unknownFieldsCodedOutput.flush();
-        } catch (java.io.IOException e) {
-        // Should not happen
-        } finally {
-          unknownFields = unknownFieldsOutput.toByteString();
-        }
-        makeExtensionsImmutable();
-      }
-    }
-    public static com.google.protobuf.Parser<IMKickUser> PARSER =
-        new com.google.protobuf.AbstractParser<IMKickUser>() {
-      public IMKickUser parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new IMKickUser(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<IMKickUser> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
     public static final int USER_ID_FIELD_NUMBER = 1;
     private int userId_;
     /**
-     * <code>required uint32 user_id = 1;</code>
-     *
      * <pre>
-     *cmd id:		0x0107
+     *cmd id:        0x0107
      * </pre>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required uint32 user_id = 1;</code>
      *
-     * <pre>
-     *cmd id:		0x0107
-     * </pre>
+     * <code>uint32 user_id = 1;</code>
+     * @return The userId.
      */
+    @java.lang.Override
     public int getUserId() {
       return userId_;
     }
+    /**
+     * <pre>
+     *cmd id:        0x0107
+     * </pre>
+     *
+     * <code>uint32 user_id = 1;</code>
+     * @param value The userId to set.
+     */
+    private void setUserId(int value) {
+      
+      userId_ = value;
+    }
+    /**
+     * <pre>
+     *cmd id:        0x0107
+     * </pre>
+     *
+     * <code>uint32 user_id = 1;</code>
+     */
+    private void clearUserId() {
+      
+      userId_ = 0;
+    }
 
     public static final int KICK_REASON_FIELD_NUMBER = 2;
-    private com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType kickReason_;
+    private int kickReason_;
     /**
-     * <code>required .IM.BaseDefine.KickReasonType kick_reason = 2;</code>
+     * <code>.IM.BaseDefine.KickReasonType kick_reason = 2;</code>
+     * @return The enum numeric value on the wire for kickReason.
      */
-    public boolean hasKickReason() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required .IM.BaseDefine.KickReasonType kick_reason = 2;</code>
-     */
-    public com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType getKickReason() {
+    @java.lang.Override
+    public int getKickReasonValue() {
       return kickReason_;
     }
-
-    private void initFields() {
-      userId_ = 0;
-      kickReason_ = com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType.KICK_REASON_DUPLICATE_USER;
-    }
-    private byte memoizedIsInitialized = -1;
-    public boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasUserId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasKickReason()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, userId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeEnum(2, kickReason_.getNumber());
-      }
-      output.writeRawBytes(unknownFields);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, userId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(2, kickReason_.getNumber());
-      }
-      size += unknownFields.size();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
+    /**
+     * <code>.IM.BaseDefine.KickReasonType kick_reason = 2;</code>
+     * @return The kickReason.
+     */
     @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
+    public com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType getKickReason() {
+      com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType result = com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType.forNumber(kickReason_);
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>.IM.BaseDefine.KickReasonType kick_reason = 2;</code>
+     * @param value The enum numeric value on the wire for kickReason to set.
+     */
+    private void setKickReasonValue(int value) {
+        kickReason_ = value;
+    }
+    /**
+     * <code>.IM.BaseDefine.KickReasonType kick_reason = 2;</code>
+     * @param value The kickReason to set.
+     */
+    private void setKickReason(com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType value) {
+      kickReason_ = value.getNumber();
+      
+    }
+    /**
+     * <code>.IM.BaseDefine.KickReasonType kick_reason = 2;</code>
+     */
+    private void clearKickReason() {
+      
+      kickReason_ = 0;
     }
 
     public static com.mogujie.tt.protobuf.IMLogin.IMKickUser parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.IMLogin.IMKickUser parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMLogin.IMKickUser parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickUser parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickUser parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickUser parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickUser parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickUser parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickUser parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickUser parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickUser parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickUser parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMKickUser prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMKickUser prototype) {
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
+    }
 
     /**
      * Protobuf type {@code IM.Login.IMKickUser}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          com.mogujie.tt.protobuf.IMLogin.IMKickUser, Builder>
-        implements
+          com.mogujie.tt.protobuf.IMLogin.IMKickUser, Builder> implements
         // @@protoc_insertion_point(builder_implements:IM.Login.IMKickUser)
         com.mogujie.tt.protobuf.IMLogin.IMKickUserOrBuilder {
       // Construct using com.mogujie.tt.protobuf.IMLogin.IMKickUser.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private void maybeForceBuilderInitialization() {
-      }
-      private static Builder create() {
-        return new Builder();
-      }
 
-      public Builder clear() {
-        super.clear();
-        userId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        kickReason_ = com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType.KICK_REASON_DUPLICATE_USER;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMKickUser getDefaultInstanceForType() {
-        return com.mogujie.tt.protobuf.IMLogin.IMKickUser.getDefaultInstance();
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMKickUser build() {
-        com.mogujie.tt.protobuf.IMLogin.IMKickUser result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMKickUser buildPartial() {
-        com.mogujie.tt.protobuf.IMLogin.IMKickUser result = new com.mogujie.tt.protobuf.IMLogin.IMKickUser(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.userId_ = userId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.kickReason_ = kickReason_;
-        result.bitField0_ = to_bitField0_;
-        return result;
-      }
-
-      public Builder mergeFrom(com.mogujie.tt.protobuf.IMLogin.IMKickUser other) {
-        if (other == com.mogujie.tt.protobuf.IMLogin.IMKickUser.getDefaultInstance()) return this;
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
-        }
-        if (other.hasKickReason()) {
-          setKickReason(other.getKickReason());
-        }
-        setUnknownFields(
-            getUnknownFields().concat(other.unknownFields));
-        return this;
-      }
-
-      public boolean isInitialized() {
-        if (!hasUserId()) {
-          
-          return false;
-        }
-        return hasKickReason();
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.mogujie.tt.protobuf.IMLogin.IMKickUser parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.mogujie.tt.protobuf.IMLogin.IMKickUser) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int userId_ ;
       /**
-       * <code>required uint32 user_id = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0107
+       *cmd id:        0x0107
        * </pre>
-       */
-      public boolean hasUserId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required uint32 user_id = 1;</code>
        *
-       * <pre>
-       *cmd id:		0x0107
-       * </pre>
+       * <code>uint32 user_id = 1;</code>
+       * @return The userId.
        */
+      @java.lang.Override
       public int getUserId() {
-        return userId_;
+        return instance.getUserId();
       }
       /**
-       * <code>required uint32 user_id = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0107
+       *cmd id:        0x0107
        * </pre>
+       *
+       * <code>uint32 user_id = 1;</code>
+       * @param value The userId to set.
+       * @return This builder for chaining.
        */
       public Builder setUserId(int value) {
-        bitField0_ |= 0x00000001;
-        userId_ = value;
-        
+        copyOnWrite();
+        instance.setUserId(value);
         return this;
       }
       /**
-       * <code>required uint32 user_id = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0107
+       *cmd id:        0x0107
        * </pre>
+       *
+       * <code>uint32 user_id = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearUserId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
-        
+        copyOnWrite();
+        instance.clearUserId();
         return this;
       }
 
-      private com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType kickReason_ = com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType.KICK_REASON_DUPLICATE_USER;
       /**
-       * <code>required .IM.BaseDefine.KickReasonType kick_reason = 2;</code>
+       * <code>.IM.BaseDefine.KickReasonType kick_reason = 2;</code>
+       * @return The enum numeric value on the wire for kickReason.
        */
-      public boolean hasKickReason() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+      @java.lang.Override
+      public int getKickReasonValue() {
+        return instance.getKickReasonValue();
       }
       /**
-       * <code>required .IM.BaseDefine.KickReasonType kick_reason = 2;</code>
+       * <code>.IM.BaseDefine.KickReasonType kick_reason = 2;</code>
+       * @param value The kickReason to set.
+       * @return This builder for chaining.
        */
-      public com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType getKickReason() {
-        return kickReason_;
-      }
-      /**
-       * <code>required .IM.BaseDefine.KickReasonType kick_reason = 2;</code>
-       */
-      public Builder setKickReason(com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000002;
-        kickReason_ = value;
-        
+      public Builder setKickReasonValue(int value) {
+        copyOnWrite();
+        instance.setKickReasonValue(value);
         return this;
       }
       /**
-       * <code>required .IM.BaseDefine.KickReasonType kick_reason = 2;</code>
+       * <code>.IM.BaseDefine.KickReasonType kick_reason = 2;</code>
+       * @return The kickReason.
+       */
+      @java.lang.Override
+      public com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType getKickReason() {
+        return instance.getKickReason();
+      }
+      /**
+       * <code>.IM.BaseDefine.KickReasonType kick_reason = 2;</code>
+       * @param value The enum numeric value on the wire for kickReason to set.
+       * @return This builder for chaining.
+       */
+      public Builder setKickReason(com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType value) {
+        copyOnWrite();
+        instance.setKickReason(value);
+        return this;
+      }
+      /**
+       * <code>.IM.BaseDefine.KickReasonType kick_reason = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearKickReason() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        kickReason_ = com.mogujie.tt.protobuf.IMBaseDefine.KickReasonType.KICK_REASON_DUPLICATE_USER;
-        
+        copyOnWrite();
+        instance.clearKickReason();
         return this;
       }
 
       // @@protoc_insertion_point(builder_scope:IM.Login.IMKickUser)
     }
-
-    static {
-      defaultInstance = new IMKickUser(true);
-      defaultInstance.initFields();
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.IMLogin.IMKickUser();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "userId_",
+              "kickReason_",
+            };
+            java.lang.String info =
+                "\u0000\u0002\u0000\u0000\u0001\u0002\u0002\u0000\u0000\u0000\u0001\u000b\u0002\f" +
+                "";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<com.mogujie.tt.protobuf.IMLogin.IMKickUser> parser = PARSER;
+          if (parser == null) {
+            synchronized (com.mogujie.tt.protobuf.IMLogin.IMKickUser.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<com.mogujie.tt.protobuf.IMLogin.IMKickUser>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
     }
 
+
     // @@protoc_insertion_point(class_scope:IM.Login.IMKickUser)
+    private static final com.mogujie.tt.protobuf.IMLogin.IMKickUser DEFAULT_INSTANCE;
+    static {
+      IMKickUser defaultInstance = new IMKickUser();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        IMKickUser.class, defaultInstance);
+    }
+
+    public static com.mogujie.tt.protobuf.IMLogin.IMKickUser getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<IMKickUser> PARSER;
+
+    public static com.google.protobuf.Parser<IMKickUser> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
   }
 
   public interface IMDeviceTokenReqOrBuilder extends
@@ -4072,721 +3224,588 @@ public final class IMLogin {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>required uint32 user_id = 1;</code>
-     *
      * <pre>
-     *cmd id:		0x0108
+     *cmd id:        0x0108
      * </pre>
-     */
-    boolean hasUserId();
-    /**
-     * <code>required uint32 user_id = 1;</code>
      *
-     * <pre>
-     *cmd id:		0x0108
-     * </pre>
+     * <code>uint32 user_id = 1;</code>
+     * @return The userId.
      */
     int getUserId();
 
     /**
-     * <code>required string device_token = 2;</code>
-     */
-    boolean hasDeviceToken();
-    /**
-     * <code>required string device_token = 2;</code>
+     * <code>string device_token = 2;</code>
+     * @return The deviceToken.
      */
     java.lang.String getDeviceToken();
     /**
-     * <code>required string device_token = 2;</code>
+     * <code>string device_token = 2;</code>
+     * @return The bytes for deviceToken.
      */
     com.google.protobuf.ByteString
         getDeviceTokenBytes();
 
     /**
      * <code>optional .IM.BaseDefine.ClientType client_type = 3;</code>
+     * @return Whether the clientType field is set.
      */
     boolean hasClientType();
     /**
      * <code>optional .IM.BaseDefine.ClientType client_type = 3;</code>
+     * @return The enum numeric value on the wire for clientType.
+     */
+    int getClientTypeValue();
+    /**
+     * <code>optional .IM.BaseDefine.ClientType client_type = 3;</code>
+     * @return The clientType.
      */
     com.mogujie.tt.protobuf.IMBaseDefine.ClientType getClientType();
 
     /**
      * <code>optional bytes attach_data = 20;</code>
+     * @return Whether the attachData field is set.
      */
     boolean hasAttachData();
     /**
      * <code>optional bytes attach_data = 20;</code>
+     * @return The attachData.
      */
     com.google.protobuf.ByteString getAttachData();
   }
   /**
    * Protobuf type {@code IM.Login.IMDeviceTokenReq}
    */
-  public static final class IMDeviceTokenReq extends
-      com.google.protobuf.GeneratedMessageLite implements
+  public  static final class IMDeviceTokenReq extends
+      com.google.protobuf.GeneratedMessageLite<
+          IMDeviceTokenReq, IMDeviceTokenReq.Builder> implements
       // @@protoc_insertion_point(message_implements:IM.Login.IMDeviceTokenReq)
       IMDeviceTokenReqOrBuilder {
-    // Use IMDeviceTokenReq.newBuilder() to construct.
-    private IMDeviceTokenReq(com.google.protobuf.GeneratedMessageLite.Builder builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
+    private IMDeviceTokenReq() {
+      deviceToken_ = "";
+      attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
-    private IMDeviceTokenReq(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
-
-    private static final IMDeviceTokenReq defaultInstance;
-    public static IMDeviceTokenReq getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public IMDeviceTokenReq getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.ByteString unknownFields;
-    private IMDeviceTokenReq(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.ByteString.Output unknownFieldsOutput =
-          com.google.protobuf.ByteString.newOutput();
-      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
-          com.google.protobuf.CodedOutputStream.newInstance(
-              unknownFieldsOutput);
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFieldsCodedOutput,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              userId_ = input.readUInt32();
-              break;
-            }
-            case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
-              deviceToken_ = bs;
-              break;
-            }
-            case 24: {
-              int rawValue = input.readEnum();
-              com.mogujie.tt.protobuf.IMBaseDefine.ClientType value = com.mogujie.tt.protobuf.IMBaseDefine.ClientType.valueOf(rawValue);
-              if (value == null) {
-                unknownFieldsCodedOutput.writeRawVarint32(tag);
-                unknownFieldsCodedOutput.writeRawVarint32(rawValue);
-              } else {
-                bitField0_ |= 0x00000004;
-                clientType_ = value;
-              }
-              break;
-            }
-            case 162: {
-              bitField0_ |= 0x00000008;
-              attachData_ = input.readBytes();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        try {
-          unknownFieldsCodedOutput.flush();
-        } catch (java.io.IOException e) {
-        // Should not happen
-        } finally {
-          unknownFields = unknownFieldsOutput.toByteString();
-        }
-        makeExtensionsImmutable();
-      }
-    }
-    public static com.google.protobuf.Parser<IMDeviceTokenReq> PARSER =
-        new com.google.protobuf.AbstractParser<IMDeviceTokenReq>() {
-      public IMDeviceTokenReq parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new IMDeviceTokenReq(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<IMDeviceTokenReq> getParserForType() {
-      return PARSER;
-    }
-
     private int bitField0_;
     public static final int USER_ID_FIELD_NUMBER = 1;
     private int userId_;
     /**
-     * <code>required uint32 user_id = 1;</code>
-     *
      * <pre>
-     *cmd id:		0x0108
+     *cmd id:        0x0108
      * </pre>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required uint32 user_id = 1;</code>
      *
-     * <pre>
-     *cmd id:		0x0108
-     * </pre>
+     * <code>uint32 user_id = 1;</code>
+     * @return The userId.
      */
+    @java.lang.Override
     public int getUserId() {
       return userId_;
     }
+    /**
+     * <pre>
+     *cmd id:        0x0108
+     * </pre>
+     *
+     * <code>uint32 user_id = 1;</code>
+     * @param value The userId to set.
+     */
+    private void setUserId(int value) {
+      
+      userId_ = value;
+    }
+    /**
+     * <pre>
+     *cmd id:        0x0108
+     * </pre>
+     *
+     * <code>uint32 user_id = 1;</code>
+     */
+    private void clearUserId() {
+      
+      userId_ = 0;
+    }
 
     public static final int DEVICE_TOKEN_FIELD_NUMBER = 2;
-    private java.lang.Object deviceToken_;
+    private java.lang.String deviceToken_;
     /**
-     * <code>required string device_token = 2;</code>
+     * <code>string device_token = 2;</code>
+     * @return The deviceToken.
      */
-    public boolean hasDeviceToken() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required string device_token = 2;</code>
-     */
+    @java.lang.Override
     public java.lang.String getDeviceToken() {
-      java.lang.Object ref = deviceToken_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          deviceToken_ = s;
-        }
-        return s;
-      }
+      return deviceToken_;
     }
     /**
-     * <code>required string device_token = 2;</code>
+     * <code>string device_token = 2;</code>
+     * @return The bytes for deviceToken.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getDeviceTokenBytes() {
-      java.lang.Object ref = deviceToken_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        deviceToken_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+      return com.google.protobuf.ByteString.copyFromUtf8(deviceToken_);
+    }
+    /**
+     * <code>string device_token = 2;</code>
+     * @param value The deviceToken to set.
+     */
+    private void setDeviceToken(
+        java.lang.String value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  
+      deviceToken_ = value;
+    }
+    /**
+     * <code>string device_token = 2;</code>
+     */
+    private void clearDeviceToken() {
+      
+      deviceToken_ = getDefaultInstance().getDeviceToken();
+    }
+    /**
+     * <code>string device_token = 2;</code>
+     * @param value The bytes for deviceToken to set.
+     */
+    private void setDeviceTokenBytes(
+        com.google.protobuf.ByteString value) {
+      checkByteStringIsUtf8(value);
+      deviceToken_ = value.toStringUtf8();
+      
     }
 
     public static final int CLIENT_TYPE_FIELD_NUMBER = 3;
-    private com.mogujie.tt.protobuf.IMBaseDefine.ClientType clientType_;
+    private int clientType_;
     /**
      * <code>optional .IM.BaseDefine.ClientType client_type = 3;</code>
+     * @return Whether the clientType field is set.
      */
+    @java.lang.Override
     public boolean hasClientType() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <code>optional .IM.BaseDefine.ClientType client_type = 3;</code>
+     * @return The enum numeric value on the wire for clientType.
+     */
+    @java.lang.Override
+    public int getClientTypeValue() {
+      return clientType_;
+    }
+    /**
+     * <code>optional .IM.BaseDefine.ClientType client_type = 3;</code>
+     * @return The clientType.
+     */
+    @java.lang.Override
+    public com.mogujie.tt.protobuf.IMBaseDefine.ClientType getClientType() {
+      com.mogujie.tt.protobuf.IMBaseDefine.ClientType result = com.mogujie.tt.protobuf.IMBaseDefine.ClientType.forNumber(clientType_);
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.ClientType.UNRECOGNIZED : result;
+    }
+    /**
+     * <code>optional .IM.BaseDefine.ClientType client_type = 3;</code>
+     * @param value The enum numeric value on the wire for clientType to set.
+     */
+    private void setClientTypeValue(int value) {
+      bitField0_ |= 0x00000001;  clientType_ = value;
+    }
+    /**
+     * <code>optional .IM.BaseDefine.ClientType client_type = 3;</code>
+     * @param value The clientType to set.
+     */
+    private void setClientType(com.mogujie.tt.protobuf.IMBaseDefine.ClientType value) {
+      clientType_ = value.getNumber();
+      bitField0_ |= 0x00000001;
     }
     /**
      * <code>optional .IM.BaseDefine.ClientType client_type = 3;</code>
      */
-    public com.mogujie.tt.protobuf.IMBaseDefine.ClientType getClientType() {
-      return clientType_;
+    private void clearClientType() {
+      bitField0_ = (bitField0_ & ~0x00000001);
+      clientType_ = 0;
     }
 
     public static final int ATTACH_DATA_FIELD_NUMBER = 20;
     private com.google.protobuf.ByteString attachData_;
     /**
      * <code>optional bytes attach_data = 20;</code>
+     * @return Whether the attachData field is set.
      */
+    @java.lang.Override
     public boolean hasAttachData() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000002) != 0);
+    }
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     * @return The attachData.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString getAttachData() {
+      return attachData_;
+    }
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     * @param value The attachData to set.
+     */
+    private void setAttachData(com.google.protobuf.ByteString value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  bitField0_ |= 0x00000002;
+      attachData_ = value;
     }
     /**
      * <code>optional bytes attach_data = 20;</code>
      */
-    public com.google.protobuf.ByteString getAttachData() {
-      return attachData_;
-    }
-
-    private void initFields() {
-      userId_ = 0;
-      deviceToken_ = "";
-      clientType_ = com.mogujie.tt.protobuf.IMBaseDefine.ClientType.CLIENT_TYPE_WINDOWS;
-      attachData_ = com.google.protobuf.ByteString.EMPTY;
-    }
-    private byte memoizedIsInitialized = -1;
-    public boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasUserId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasDeviceToken()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, userId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getDeviceTokenBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeEnum(3, clientType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(20, attachData_);
-      }
-      output.writeRawBytes(unknownFields);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, userId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getDeviceTokenBytes());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(3, clientType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(20, attachData_);
-      }
-      size += unknownFields.size();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
+    private void clearAttachData() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      attachData_ = getDefaultInstance().getAttachData();
     }
 
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq prototype) {
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
+    }
 
     /**
      * Protobuf type {@code IM.Login.IMDeviceTokenReq}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq, Builder>
-        implements
+          com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq, Builder> implements
         // @@protoc_insertion_point(builder_implements:IM.Login.IMDeviceTokenReq)
         com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReqOrBuilder {
       // Construct using com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private void maybeForceBuilderInitialization() {
-      }
-      private static Builder create() {
-        return new Builder();
-      }
 
-      public Builder clear() {
-        super.clear();
-        userId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        deviceToken_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
-        clientType_ = com.mogujie.tt.protobuf.IMBaseDefine.ClientType.CLIENT_TYPE_WINDOWS;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        attachData_ = com.google.protobuf.ByteString.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq getDefaultInstanceForType() {
-        return com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq.getDefaultInstance();
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq build() {
-        com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq buildPartial() {
-        com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq result = new com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.userId_ = userId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.deviceToken_ = deviceToken_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.clientType_ = clientType_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.attachData_ = attachData_;
-        result.bitField0_ = to_bitField0_;
-        return result;
-      }
-
-      public Builder mergeFrom(com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq other) {
-        if (other == com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq.getDefaultInstance()) return this;
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
-        }
-        if (other.hasDeviceToken()) {
-          bitField0_ |= 0x00000002;
-          deviceToken_ = other.deviceToken_;
-          
-        }
-        if (other.hasClientType()) {
-          setClientType(other.getClientType());
-        }
-        if (other.hasAttachData()) {
-          setAttachData(other.getAttachData());
-        }
-        setUnknownFields(
-            getUnknownFields().concat(other.unknownFields));
-        return this;
-      }
-
-      public boolean isInitialized() {
-        if (!hasUserId()) {
-          
-          return false;
-        }
-        return hasDeviceToken();
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int userId_ ;
       /**
-       * <code>required uint32 user_id = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0108
+       *cmd id:        0x0108
        * </pre>
-       */
-      public boolean hasUserId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required uint32 user_id = 1;</code>
        *
-       * <pre>
-       *cmd id:		0x0108
-       * </pre>
+       * <code>uint32 user_id = 1;</code>
+       * @return The userId.
        */
+      @java.lang.Override
       public int getUserId() {
-        return userId_;
+        return instance.getUserId();
       }
       /**
-       * <code>required uint32 user_id = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0108
+       *cmd id:        0x0108
        * </pre>
+       *
+       * <code>uint32 user_id = 1;</code>
+       * @param value The userId to set.
+       * @return This builder for chaining.
        */
       public Builder setUserId(int value) {
-        bitField0_ |= 0x00000001;
-        userId_ = value;
-        
+        copyOnWrite();
+        instance.setUserId(value);
         return this;
       }
       /**
-       * <code>required uint32 user_id = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x0108
+       *cmd id:        0x0108
        * </pre>
+       *
+       * <code>uint32 user_id = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearUserId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
-        
+        copyOnWrite();
+        instance.clearUserId();
         return this;
       }
 
-      private java.lang.Object deviceToken_ = "";
       /**
-       * <code>required string device_token = 2;</code>
+       * <code>string device_token = 2;</code>
+       * @return The deviceToken.
        */
-      public boolean hasDeviceToken() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required string device_token = 2;</code>
-       */
+      @java.lang.Override
       public java.lang.String getDeviceToken() {
-        java.lang.Object ref = deviceToken_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            deviceToken_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+        return instance.getDeviceToken();
       }
       /**
-       * <code>required string device_token = 2;</code>
+       * <code>string device_token = 2;</code>
+       * @return The bytes for deviceToken.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString
           getDeviceTokenBytes() {
-        java.lang.Object ref = deviceToken_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          deviceToken_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+        return instance.getDeviceTokenBytes();
       }
       /**
-       * <code>required string device_token = 2;</code>
+       * <code>string device_token = 2;</code>
+       * @param value The deviceToken to set.
+       * @return This builder for chaining.
        */
       public Builder setDeviceToken(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        deviceToken_ = value;
-        
+        copyOnWrite();
+        instance.setDeviceToken(value);
         return this;
       }
       /**
-       * <code>required string device_token = 2;</code>
+       * <code>string device_token = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearDeviceToken() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        deviceToken_ = getDefaultInstance().getDeviceToken();
-        
+        copyOnWrite();
+        instance.clearDeviceToken();
         return this;
       }
       /**
-       * <code>required string device_token = 2;</code>
+       * <code>string device_token = 2;</code>
+       * @param value The bytes for deviceToken to set.
+       * @return This builder for chaining.
        */
       public Builder setDeviceTokenBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        deviceToken_ = value;
-        
+        copyOnWrite();
+        instance.setDeviceTokenBytes(value);
         return this;
       }
 
-      private com.mogujie.tt.protobuf.IMBaseDefine.ClientType clientType_ = com.mogujie.tt.protobuf.IMBaseDefine.ClientType.CLIENT_TYPE_WINDOWS;
       /**
        * <code>optional .IM.BaseDefine.ClientType client_type = 3;</code>
+       * @return Whether the clientType field is set.
        */
+      @java.lang.Override
       public boolean hasClientType() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return instance.hasClientType();
       }
       /**
        * <code>optional .IM.BaseDefine.ClientType client_type = 3;</code>
+       * @return The enum numeric value on the wire for clientType.
        */
-      public com.mogujie.tt.protobuf.IMBaseDefine.ClientType getClientType() {
-        return clientType_;
+      @java.lang.Override
+      public int getClientTypeValue() {
+        return instance.getClientTypeValue();
       }
       /**
        * <code>optional .IM.BaseDefine.ClientType client_type = 3;</code>
+       * @param value The clientType to set.
+       * @return This builder for chaining.
+       */
+      public Builder setClientTypeValue(int value) {
+        copyOnWrite();
+        instance.setClientTypeValue(value);
+        return this;
+      }
+      /**
+       * <code>optional .IM.BaseDefine.ClientType client_type = 3;</code>
+       * @return The clientType.
+       */
+      @java.lang.Override
+      public com.mogujie.tt.protobuf.IMBaseDefine.ClientType getClientType() {
+        return instance.getClientType();
+      }
+      /**
+       * <code>optional .IM.BaseDefine.ClientType client_type = 3;</code>
+       * @param value The enum numeric value on the wire for clientType to set.
+       * @return This builder for chaining.
        */
       public Builder setClientType(com.mogujie.tt.protobuf.IMBaseDefine.ClientType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000004;
-        clientType_ = value;
-        
+        copyOnWrite();
+        instance.setClientType(value);
         return this;
       }
       /**
        * <code>optional .IM.BaseDefine.ClientType client_type = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearClientType() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        clientType_ = com.mogujie.tt.protobuf.IMBaseDefine.ClientType.CLIENT_TYPE_WINDOWS;
-        
+        copyOnWrite();
+        instance.clearClientType();
         return this;
       }
 
-      private com.google.protobuf.ByteString attachData_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>optional bytes attach_data = 20;</code>
+       * @return Whether the attachData field is set.
        */
+      @java.lang.Override
       public boolean hasAttachData() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return instance.hasAttachData();
       }
       /**
        * <code>optional bytes attach_data = 20;</code>
+       * @return The attachData.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString getAttachData() {
-        return attachData_;
+        return instance.getAttachData();
       }
       /**
        * <code>optional bytes attach_data = 20;</code>
+       * @param value The attachData to set.
+       * @return This builder for chaining.
        */
       public Builder setAttachData(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
-        attachData_ = value;
-        
+        copyOnWrite();
+        instance.setAttachData(value);
         return this;
       }
       /**
        * <code>optional bytes attach_data = 20;</code>
+       * @return This builder for chaining.
        */
       public Builder clearAttachData() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        attachData_ = getDefaultInstance().getAttachData();
-        
+        copyOnWrite();
+        instance.clearAttachData();
         return this;
       }
 
       // @@protoc_insertion_point(builder_scope:IM.Login.IMDeviceTokenReq)
     }
-
-    static {
-      defaultInstance = new IMDeviceTokenReq(true);
-      defaultInstance.initFields();
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "bitField0_",
+              "userId_",
+              "deviceToken_",
+              "clientType_",
+              "attachData_",
+            };
+            java.lang.String info =
+                "\u0000\u0004\u0000\u0001\u0001\u0014\u0004\u0000\u0000\u0000\u0001\u000b\u0002\u0208" +
+                "\u0003\u100c\u0000\u0014\u100a\u0001";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq> parser = PARSER;
+          if (parser == null) {
+            synchronized (com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
     }
 
+
     // @@protoc_insertion_point(class_scope:IM.Login.IMDeviceTokenReq)
+    private static final com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq DEFAULT_INSTANCE;
+    static {
+      IMDeviceTokenReq defaultInstance = new IMDeviceTokenReq();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        IMDeviceTokenReq.class, defaultInstance);
+    }
+
+    public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenReq getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<IMDeviceTokenReq> PARSER;
+
+    public static com.google.protobuf.Parser<IMDeviceTokenReq> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
   }
 
   public interface IMDeviceTokenRspOrBuilder extends
@@ -4794,468 +3813,357 @@ public final class IMLogin {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>required uint32 user_id = 1;</code>
-     *
      * <pre>
-     *cmd id: 		0x0109
+     *cmd id:         0x0109
      * </pre>
-     */
-    boolean hasUserId();
-    /**
-     * <code>required uint32 user_id = 1;</code>
      *
-     * <pre>
-     *cmd id: 		0x0109
-     * </pre>
+     * <code>uint32 user_id = 1;</code>
+     * @return The userId.
      */
     int getUserId();
 
     /**
      * <code>optional bytes attach_data = 20;</code>
+     * @return Whether the attachData field is set.
      */
     boolean hasAttachData();
     /**
      * <code>optional bytes attach_data = 20;</code>
+     * @return The attachData.
      */
     com.google.protobuf.ByteString getAttachData();
   }
   /**
    * Protobuf type {@code IM.Login.IMDeviceTokenRsp}
    */
-  public static final class IMDeviceTokenRsp extends
-      com.google.protobuf.GeneratedMessageLite implements
+  public  static final class IMDeviceTokenRsp extends
+      com.google.protobuf.GeneratedMessageLite<
+          IMDeviceTokenRsp, IMDeviceTokenRsp.Builder> implements
       // @@protoc_insertion_point(message_implements:IM.Login.IMDeviceTokenRsp)
       IMDeviceTokenRspOrBuilder {
-    // Use IMDeviceTokenRsp.newBuilder() to construct.
-    private IMDeviceTokenRsp(com.google.protobuf.GeneratedMessageLite.Builder builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
+    private IMDeviceTokenRsp() {
+      attachData_ = com.google.protobuf.ByteString.EMPTY;
     }
-    private IMDeviceTokenRsp(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
-
-    private static final IMDeviceTokenRsp defaultInstance;
-    public static IMDeviceTokenRsp getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public IMDeviceTokenRsp getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.ByteString unknownFields;
-    private IMDeviceTokenRsp(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.ByteString.Output unknownFieldsOutput =
-          com.google.protobuf.ByteString.newOutput();
-      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
-          com.google.protobuf.CodedOutputStream.newInstance(
-              unknownFieldsOutput);
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFieldsCodedOutput,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              userId_ = input.readUInt32();
-              break;
-            }
-            case 162: {
-              bitField0_ |= 0x00000002;
-              attachData_ = input.readBytes();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        try {
-          unknownFieldsCodedOutput.flush();
-        } catch (java.io.IOException e) {
-        // Should not happen
-        } finally {
-          unknownFields = unknownFieldsOutput.toByteString();
-        }
-        makeExtensionsImmutable();
-      }
-    }
-    public static com.google.protobuf.Parser<IMDeviceTokenRsp> PARSER =
-        new com.google.protobuf.AbstractParser<IMDeviceTokenRsp>() {
-      public IMDeviceTokenRsp parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new IMDeviceTokenRsp(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<IMDeviceTokenRsp> getParserForType() {
-      return PARSER;
-    }
-
     private int bitField0_;
     public static final int USER_ID_FIELD_NUMBER = 1;
     private int userId_;
     /**
-     * <code>required uint32 user_id = 1;</code>
-     *
      * <pre>
-     *cmd id: 		0x0109
+     *cmd id:         0x0109
      * </pre>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required uint32 user_id = 1;</code>
      *
-     * <pre>
-     *cmd id: 		0x0109
-     * </pre>
+     * <code>uint32 user_id = 1;</code>
+     * @return The userId.
      */
+    @java.lang.Override
     public int getUserId() {
       return userId_;
+    }
+    /**
+     * <pre>
+     *cmd id:         0x0109
+     * </pre>
+     *
+     * <code>uint32 user_id = 1;</code>
+     * @param value The userId to set.
+     */
+    private void setUserId(int value) {
+      
+      userId_ = value;
+    }
+    /**
+     * <pre>
+     *cmd id:         0x0109
+     * </pre>
+     *
+     * <code>uint32 user_id = 1;</code>
+     */
+    private void clearUserId() {
+      
+      userId_ = 0;
     }
 
     public static final int ATTACH_DATA_FIELD_NUMBER = 20;
     private com.google.protobuf.ByteString attachData_;
     /**
      * <code>optional bytes attach_data = 20;</code>
+     * @return Whether the attachData field is set.
      */
+    @java.lang.Override
     public boolean hasAttachData() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     * @return The attachData.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString getAttachData() {
+      return attachData_;
+    }
+    /**
+     * <code>optional bytes attach_data = 20;</code>
+     * @param value The attachData to set.
+     */
+    private void setAttachData(com.google.protobuf.ByteString value) {
+      java.lang.Class<?> valueClass = value.getClass();
+  bitField0_ |= 0x00000001;
+      attachData_ = value;
     }
     /**
      * <code>optional bytes attach_data = 20;</code>
      */
-    public com.google.protobuf.ByteString getAttachData() {
-      return attachData_;
-    }
-
-    private void initFields() {
-      userId_ = 0;
-      attachData_ = com.google.protobuf.ByteString.EMPTY;
-    }
-    private byte memoizedIsInitialized = -1;
-    public boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasUserId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, userId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(20, attachData_);
-      }
-      output.writeRawBytes(unknownFields);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, userId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(20, attachData_);
-      }
-      size += unknownFields.size();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
+    private void clearAttachData() {
+      bitField0_ = (bitField0_ & ~0x00000001);
+      attachData_ = getDefaultInstance().getAttachData();
     }
 
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp prototype) {
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
+    }
 
     /**
      * Protobuf type {@code IM.Login.IMDeviceTokenRsp}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp, Builder>
-        implements
+          com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp, Builder> implements
         // @@protoc_insertion_point(builder_implements:IM.Login.IMDeviceTokenRsp)
         com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRspOrBuilder {
       // Construct using com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private void maybeForceBuilderInitialization() {
-      }
-      private static Builder create() {
-        return new Builder();
-      }
 
-      public Builder clear() {
-        super.clear();
-        userId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        attachData_ = com.google.protobuf.ByteString.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp getDefaultInstanceForType() {
-        return com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp.getDefaultInstance();
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp build() {
-        com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp buildPartial() {
-        com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp result = new com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.userId_ = userId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.attachData_ = attachData_;
-        result.bitField0_ = to_bitField0_;
-        return result;
-      }
-
-      public Builder mergeFrom(com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp other) {
-        if (other == com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp.getDefaultInstance()) return this;
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
-        }
-        if (other.hasAttachData()) {
-          setAttachData(other.getAttachData());
-        }
-        setUnknownFields(
-            getUnknownFields().concat(other.unknownFields));
-        return this;
-      }
-
-      public boolean isInitialized() {
-        return hasUserId();
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int userId_ ;
       /**
-       * <code>required uint32 user_id = 1;</code>
-       *
        * <pre>
-       *cmd id: 		0x0109
+       *cmd id:         0x0109
        * </pre>
-       */
-      public boolean hasUserId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required uint32 user_id = 1;</code>
        *
-       * <pre>
-       *cmd id: 		0x0109
-       * </pre>
+       * <code>uint32 user_id = 1;</code>
+       * @return The userId.
        */
+      @java.lang.Override
       public int getUserId() {
-        return userId_;
+        return instance.getUserId();
       }
       /**
-       * <code>required uint32 user_id = 1;</code>
-       *
        * <pre>
-       *cmd id: 		0x0109
+       *cmd id:         0x0109
        * </pre>
+       *
+       * <code>uint32 user_id = 1;</code>
+       * @param value The userId to set.
+       * @return This builder for chaining.
        */
       public Builder setUserId(int value) {
-        bitField0_ |= 0x00000001;
-        userId_ = value;
-        
+        copyOnWrite();
+        instance.setUserId(value);
         return this;
       }
       /**
-       * <code>required uint32 user_id = 1;</code>
-       *
        * <pre>
-       *cmd id: 		0x0109
+       *cmd id:         0x0109
        * </pre>
+       *
+       * <code>uint32 user_id = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearUserId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
-        
+        copyOnWrite();
+        instance.clearUserId();
         return this;
       }
 
-      private com.google.protobuf.ByteString attachData_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>optional bytes attach_data = 20;</code>
+       * @return Whether the attachData field is set.
        */
+      @java.lang.Override
       public boolean hasAttachData() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return instance.hasAttachData();
       }
       /**
        * <code>optional bytes attach_data = 20;</code>
+       * @return The attachData.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString getAttachData() {
-        return attachData_;
+        return instance.getAttachData();
       }
       /**
        * <code>optional bytes attach_data = 20;</code>
+       * @param value The attachData to set.
+       * @return This builder for chaining.
        */
       public Builder setAttachData(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        attachData_ = value;
-        
+        copyOnWrite();
+        instance.setAttachData(value);
         return this;
       }
       /**
        * <code>optional bytes attach_data = 20;</code>
+       * @return This builder for chaining.
        */
       public Builder clearAttachData() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        attachData_ = getDefaultInstance().getAttachData();
-        
+        copyOnWrite();
+        instance.clearAttachData();
         return this;
       }
 
       // @@protoc_insertion_point(builder_scope:IM.Login.IMDeviceTokenRsp)
     }
-
-    static {
-      defaultInstance = new IMDeviceTokenRsp(true);
-      defaultInstance.initFields();
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "bitField0_",
+              "userId_",
+              "attachData_",
+            };
+            java.lang.String info =
+                "\u0000\u0002\u0000\u0001\u0001\u0014\u0002\u0000\u0000\u0000\u0001\u000b\u0014\u100a" +
+                "\u0000";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp> parser = PARSER;
+          if (parser == null) {
+            synchronized (com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
     }
 
+
     // @@protoc_insertion_point(class_scope:IM.Login.IMDeviceTokenRsp)
+    private static final com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp DEFAULT_INSTANCE;
+    static {
+      IMDeviceTokenRsp defaultInstance = new IMDeviceTokenRsp();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        IMDeviceTokenRsp.class, defaultInstance);
+    }
+
+    public static com.mogujie.tt.protobuf.IMLogin.IMDeviceTokenRsp getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<IMDeviceTokenRsp> PARSER;
+
+    public static com.google.protobuf.Parser<IMDeviceTokenRsp> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
   }
 
   public interface IMKickPCClientReqOrBuilder extends
@@ -5263,395 +4171,278 @@ public final class IMLogin {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>required uint32 user_id = 1;</code>
-     *
      * <pre>
-     *cmd id:		0x010a
+     *cmd id:        0x010a
      * </pre>
-     */
-    boolean hasUserId();
-    /**
-     * <code>required uint32 user_id = 1;</code>
      *
-     * <pre>
-     *cmd id:		0x010a
-     * </pre>
+     * <code>uint32 user_id = 1;</code>
+     * @return The userId.
      */
     int getUserId();
   }
   /**
-   * Protobuf type {@code IM.Login.IMKickPCClientReq}
-   *
    * <pre>
    *只给移动端请求
    * </pre>
+   *
+   * Protobuf type {@code IM.Login.IMKickPCClientReq}
    */
-  public static final class IMKickPCClientReq extends
-      com.google.protobuf.GeneratedMessageLite implements
+  public  static final class IMKickPCClientReq extends
+      com.google.protobuf.GeneratedMessageLite<
+          IMKickPCClientReq, IMKickPCClientReq.Builder> implements
       // @@protoc_insertion_point(message_implements:IM.Login.IMKickPCClientReq)
       IMKickPCClientReqOrBuilder {
-    // Use IMKickPCClientReq.newBuilder() to construct.
-    private IMKickPCClientReq(com.google.protobuf.GeneratedMessageLite.Builder builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
+    private IMKickPCClientReq() {
     }
-    private IMKickPCClientReq(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
-
-    private static final IMKickPCClientReq defaultInstance;
-    public static IMKickPCClientReq getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public IMKickPCClientReq getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.ByteString unknownFields;
-    private IMKickPCClientReq(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.ByteString.Output unknownFieldsOutput =
-          com.google.protobuf.ByteString.newOutput();
-      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
-          com.google.protobuf.CodedOutputStream.newInstance(
-              unknownFieldsOutput);
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFieldsCodedOutput,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              userId_ = input.readUInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        try {
-          unknownFieldsCodedOutput.flush();
-        } catch (java.io.IOException e) {
-        // Should not happen
-        } finally {
-          unknownFields = unknownFieldsOutput.toByteString();
-        }
-        makeExtensionsImmutable();
-      }
-    }
-    public static com.google.protobuf.Parser<IMKickPCClientReq> PARSER =
-        new com.google.protobuf.AbstractParser<IMKickPCClientReq>() {
-      public IMKickPCClientReq parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new IMKickPCClientReq(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<IMKickPCClientReq> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
     public static final int USER_ID_FIELD_NUMBER = 1;
     private int userId_;
     /**
-     * <code>required uint32 user_id = 1;</code>
-     *
      * <pre>
-     *cmd id:		0x010a
+     *cmd id:        0x010a
      * </pre>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required uint32 user_id = 1;</code>
      *
-     * <pre>
-     *cmd id:		0x010a
-     * </pre>
+     * <code>uint32 user_id = 1;</code>
+     * @return The userId.
      */
+    @java.lang.Override
     public int getUserId() {
       return userId_;
     }
-
-    private void initFields() {
+    /**
+     * <pre>
+     *cmd id:        0x010a
+     * </pre>
+     *
+     * <code>uint32 user_id = 1;</code>
+     * @param value The userId to set.
+     */
+    private void setUserId(int value) {
+      
+      userId_ = value;
+    }
+    /**
+     * <pre>
+     *cmd id:        0x010a
+     * </pre>
+     *
+     * <code>uint32 user_id = 1;</code>
+     */
+    private void clearUserId() {
+      
       userId_ = 0;
-    }
-    private byte memoizedIsInitialized = -1;
-    public boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasUserId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, userId_);
-      }
-      output.writeRawBytes(unknownFields);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, userId_);
-      }
-      size += unknownFields.size();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
     }
 
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq prototype) {
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
+    }
 
     /**
-     * Protobuf type {@code IM.Login.IMKickPCClientReq}
-     *
      * <pre>
      *只给移动端请求
      * </pre>
+     *
+     * Protobuf type {@code IM.Login.IMKickPCClientReq}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq, Builder>
-        implements
+          com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq, Builder> implements
         // @@protoc_insertion_point(builder_implements:IM.Login.IMKickPCClientReq)
         com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReqOrBuilder {
       // Construct using com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private void maybeForceBuilderInitialization() {
-      }
-      private static Builder create() {
-        return new Builder();
-      }
 
-      public Builder clear() {
-        super.clear();
-        userId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq getDefaultInstanceForType() {
-        return com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq.getDefaultInstance();
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq build() {
-        com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq buildPartial() {
-        com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq result = new com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.userId_ = userId_;
-        result.bitField0_ = to_bitField0_;
-        return result;
-      }
-
-      public Builder mergeFrom(com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq other) {
-        if (other == com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq.getDefaultInstance()) return this;
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
-        }
-        setUnknownFields(
-            getUnknownFields().concat(other.unknownFields));
-        return this;
-      }
-
-      public boolean isInitialized() {
-        return hasUserId();
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int userId_ ;
       /**
-       * <code>required uint32 user_id = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x010a
+       *cmd id:        0x010a
        * </pre>
-       */
-      public boolean hasUserId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required uint32 user_id = 1;</code>
        *
-       * <pre>
-       *cmd id:		0x010a
-       * </pre>
+       * <code>uint32 user_id = 1;</code>
+       * @return The userId.
        */
+      @java.lang.Override
       public int getUserId() {
-        return userId_;
+        return instance.getUserId();
       }
       /**
-       * <code>required uint32 user_id = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x010a
+       *cmd id:        0x010a
        * </pre>
+       *
+       * <code>uint32 user_id = 1;</code>
+       * @param value The userId to set.
+       * @return This builder for chaining.
        */
       public Builder setUserId(int value) {
-        bitField0_ |= 0x00000001;
-        userId_ = value;
-        
+        copyOnWrite();
+        instance.setUserId(value);
         return this;
       }
       /**
-       * <code>required uint32 user_id = 1;</code>
-       *
        * <pre>
-       *cmd id:		0x010a
+       *cmd id:        0x010a
        * </pre>
+       *
+       * <code>uint32 user_id = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearUserId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
-        
+        copyOnWrite();
+        instance.clearUserId();
         return this;
       }
 
       // @@protoc_insertion_point(builder_scope:IM.Login.IMKickPCClientReq)
     }
-
-    static {
-      defaultInstance = new IMKickPCClientReq(true);
-      defaultInstance.initFields();
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "userId_",
+            };
+            java.lang.String info =
+                "\u0000\u0001\u0000\u0000\u0001\u0001\u0001\u0000\u0000\u0000\u0001\u000b";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq> parser = PARSER;
+          if (parser == null) {
+            synchronized (com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
     }
 
+
     // @@protoc_insertion_point(class_scope:IM.Login.IMKickPCClientReq)
+    private static final com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq DEFAULT_INSTANCE;
+    static {
+      IMKickPCClientReq defaultInstance = new IMKickPCClientReq();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        IMKickPCClientReq.class, defaultInstance);
+    }
+
+    public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientReq getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<IMKickPCClientReq> PARSER;
+
+    public static com.google.protobuf.Parser<IMKickPCClientReq> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
   }
 
   public interface IMKickPCClientRspOrBuilder extends
@@ -5659,473 +4450,332 @@ public final class IMLogin {
       com.google.protobuf.MessageLiteOrBuilder {
 
     /**
-     * <code>required uint32 user_id = 1;</code>
-     *
      * <pre>
-     *cmd id: 		0x010b
+     *cmd id:         0x010b
      * </pre>
-     */
-    boolean hasUserId();
-    /**
-     * <code>required uint32 user_id = 1;</code>
      *
-     * <pre>
-     *cmd id: 		0x010b
-     * </pre>
+     * <code>uint32 user_id = 1;</code>
+     * @return The userId.
      */
     int getUserId();
 
     /**
-     * <code>required uint32 result_code = 2;</code>
-     */
-    boolean hasResultCode();
-    /**
-     * <code>required uint32 result_code = 2;</code>
+     * <code>uint32 result_code = 2;</code>
+     * @return The resultCode.
      */
     int getResultCode();
   }
   /**
    * Protobuf type {@code IM.Login.IMKickPCClientRsp}
    */
-  public static final class IMKickPCClientRsp extends
-      com.google.protobuf.GeneratedMessageLite implements
+  public  static final class IMKickPCClientRsp extends
+      com.google.protobuf.GeneratedMessageLite<
+          IMKickPCClientRsp, IMKickPCClientRsp.Builder> implements
       // @@protoc_insertion_point(message_implements:IM.Login.IMKickPCClientRsp)
       IMKickPCClientRspOrBuilder {
-    // Use IMKickPCClientRsp.newBuilder() to construct.
-    private IMKickPCClientRsp(com.google.protobuf.GeneratedMessageLite.Builder builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
+    private IMKickPCClientRsp() {
     }
-    private IMKickPCClientRsp(boolean noInit) { this.unknownFields = com.google.protobuf.ByteString.EMPTY;}
-
-    private static final IMKickPCClientRsp defaultInstance;
-    public static IMKickPCClientRsp getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public IMKickPCClientRsp getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.ByteString unknownFields;
-    private IMKickPCClientRsp(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.ByteString.Output unknownFieldsOutput =
-          com.google.protobuf.ByteString.newOutput();
-      com.google.protobuf.CodedOutputStream unknownFieldsCodedOutput =
-          com.google.protobuf.CodedOutputStream.newInstance(
-              unknownFieldsOutput);
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFieldsCodedOutput,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              userId_ = input.readUInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              resultCode_ = input.readUInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        try {
-          unknownFieldsCodedOutput.flush();
-        } catch (java.io.IOException e) {
-        // Should not happen
-        } finally {
-          unknownFields = unknownFieldsOutput.toByteString();
-        }
-        makeExtensionsImmutable();
-      }
-    }
-    public static com.google.protobuf.Parser<IMKickPCClientRsp> PARSER =
-        new com.google.protobuf.AbstractParser<IMKickPCClientRsp>() {
-      public IMKickPCClientRsp parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new IMKickPCClientRsp(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<IMKickPCClientRsp> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
     public static final int USER_ID_FIELD_NUMBER = 1;
     private int userId_;
     /**
-     * <code>required uint32 user_id = 1;</code>
-     *
      * <pre>
-     *cmd id: 		0x010b
+     *cmd id:         0x010b
      * </pre>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required uint32 user_id = 1;</code>
      *
-     * <pre>
-     *cmd id: 		0x010b
-     * </pre>
+     * <code>uint32 user_id = 1;</code>
+     * @return The userId.
      */
+    @java.lang.Override
     public int getUserId() {
       return userId_;
+    }
+    /**
+     * <pre>
+     *cmd id:         0x010b
+     * </pre>
+     *
+     * <code>uint32 user_id = 1;</code>
+     * @param value The userId to set.
+     */
+    private void setUserId(int value) {
+      
+      userId_ = value;
+    }
+    /**
+     * <pre>
+     *cmd id:         0x010b
+     * </pre>
+     *
+     * <code>uint32 user_id = 1;</code>
+     */
+    private void clearUserId() {
+      
+      userId_ = 0;
     }
 
     public static final int RESULT_CODE_FIELD_NUMBER = 2;
     private int resultCode_;
     /**
-     * <code>required uint32 result_code = 2;</code>
+     * <code>uint32 result_code = 2;</code>
+     * @return The resultCode.
      */
-    public boolean hasResultCode() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required uint32 result_code = 2;</code>
-     */
+    @java.lang.Override
     public int getResultCode() {
       return resultCode_;
     }
-
-    private void initFields() {
-      userId_ = 0;
+    /**
+     * <code>uint32 result_code = 2;</code>
+     * @param value The resultCode to set.
+     */
+    private void setResultCode(int value) {
+      
+      resultCode_ = value;
+    }
+    /**
+     * <code>uint32 result_code = 2;</code>
+     */
+    private void clearResultCode() {
+      
       resultCode_ = 0;
-    }
-    private byte memoizedIsInitialized = -1;
-    public boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasUserId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasResultCode()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, userId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeUInt32(2, resultCode_);
-      }
-      output.writeRawBytes(unknownFields);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, userId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, resultCode_);
-      }
-      size += unknownFields.size();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
     }
 
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
+    }
+    public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
+    }
+    public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, data, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input);
     }
     public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageLite.parseFrom(
+          DEFAULT_INSTANCE, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return (Builder) DEFAULT_INSTANCE.createBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp prototype) {
+      return (Builder) DEFAULT_INSTANCE.createBuilder(prototype);
+    }
 
     /**
      * Protobuf type {@code IM.Login.IMKickPCClientRsp}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageLite.Builder<
-          com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp, Builder>
-        implements
+          com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp, Builder> implements
         // @@protoc_insertion_point(builder_implements:IM.Login.IMKickPCClientRsp)
         com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRspOrBuilder {
       // Construct using com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp.newBuilder()
       private Builder() {
-        maybeForceBuilderInitialization();
+        super(DEFAULT_INSTANCE);
       }
 
-      private void maybeForceBuilderInitialization() {
-      }
-      private static Builder create() {
-        return new Builder();
-      }
 
-      public Builder clear() {
-        super.clear();
-        userId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        resultCode_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp getDefaultInstanceForType() {
-        return com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp.getDefaultInstance();
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp build() {
-        com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp buildPartial() {
-        com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp result = new com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.userId_ = userId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.resultCode_ = resultCode_;
-        result.bitField0_ = to_bitField0_;
-        return result;
-      }
-
-      public Builder mergeFrom(com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp other) {
-        if (other == com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp.getDefaultInstance()) return this;
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
-        }
-        if (other.hasResultCode()) {
-          setResultCode(other.getResultCode());
-        }
-        setUnknownFields(
-            getUnknownFields().concat(other.unknownFields));
-        return this;
-      }
-
-      public boolean isInitialized() {
-        if (!hasUserId()) {
-          
-          return false;
-        }
-        return hasResultCode();
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int userId_ ;
       /**
-       * <code>required uint32 user_id = 1;</code>
-       *
        * <pre>
-       *cmd id: 		0x010b
+       *cmd id:         0x010b
        * </pre>
-       */
-      public boolean hasUserId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required uint32 user_id = 1;</code>
        *
-       * <pre>
-       *cmd id: 		0x010b
-       * </pre>
+       * <code>uint32 user_id = 1;</code>
+       * @return The userId.
        */
+      @java.lang.Override
       public int getUserId() {
-        return userId_;
+        return instance.getUserId();
       }
       /**
-       * <code>required uint32 user_id = 1;</code>
-       *
        * <pre>
-       *cmd id: 		0x010b
+       *cmd id:         0x010b
        * </pre>
+       *
+       * <code>uint32 user_id = 1;</code>
+       * @param value The userId to set.
+       * @return This builder for chaining.
        */
       public Builder setUserId(int value) {
-        bitField0_ |= 0x00000001;
-        userId_ = value;
-        
+        copyOnWrite();
+        instance.setUserId(value);
         return this;
       }
       /**
-       * <code>required uint32 user_id = 1;</code>
-       *
        * <pre>
-       *cmd id: 		0x010b
+       *cmd id:         0x010b
        * </pre>
+       *
+       * <code>uint32 user_id = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearUserId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
-        
+        copyOnWrite();
+        instance.clearUserId();
         return this;
       }
 
-      private int resultCode_ ;
       /**
-       * <code>required uint32 result_code = 2;</code>
+       * <code>uint32 result_code = 2;</code>
+       * @return The resultCode.
        */
-      public boolean hasResultCode() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required uint32 result_code = 2;</code>
-       */
+      @java.lang.Override
       public int getResultCode() {
-        return resultCode_;
+        return instance.getResultCode();
       }
       /**
-       * <code>required uint32 result_code = 2;</code>
+       * <code>uint32 result_code = 2;</code>
+       * @param value The resultCode to set.
+       * @return This builder for chaining.
        */
       public Builder setResultCode(int value) {
-        bitField0_ |= 0x00000002;
-        resultCode_ = value;
-        
+        copyOnWrite();
+        instance.setResultCode(value);
         return this;
       }
       /**
-       * <code>required uint32 result_code = 2;</code>
+       * <code>uint32 result_code = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearResultCode() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        resultCode_ = 0;
-        
+        copyOnWrite();
+        instance.clearResultCode();
         return this;
       }
 
       // @@protoc_insertion_point(builder_scope:IM.Login.IMKickPCClientRsp)
     }
-
-    static {
-      defaultInstance = new IMKickPCClientRsp(true);
-      defaultInstance.initFields();
+    @java.lang.Override
+    @java.lang.SuppressWarnings({"unchecked", "fallthrough"})
+    protected final java.lang.Object dynamicMethod(
+        com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,
+        java.lang.Object arg0, java.lang.Object arg1) {
+      switch (method) {
+        case NEW_MUTABLE_INSTANCE: {
+          return new com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp();
+        }
+        case NEW_BUILDER: {
+          return new Builder();
+        }
+        case BUILD_MESSAGE_INFO: {
+            java.lang.Object[] objects = new java.lang.Object[] {
+              "userId_",
+              "resultCode_",
+            };
+            java.lang.String info =
+                "\u0000\u0002\u0000\u0000\u0001\u0002\u0002\u0000\u0000\u0000\u0001\u000b\u0002\u000b" +
+                "";
+            return newMessageInfo(DEFAULT_INSTANCE, info, objects);
+        }
+        // fall through
+        case GET_DEFAULT_INSTANCE: {
+          return DEFAULT_INSTANCE;
+        }
+        case GET_PARSER: {
+          com.google.protobuf.Parser<com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp> parser = PARSER;
+          if (parser == null) {
+            synchronized (com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp.class) {
+              parser = PARSER;
+              if (parser == null) {
+                parser =
+                    new DefaultInstanceBasedParser<com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp>(
+                        DEFAULT_INSTANCE);
+                PARSER = parser;
+              }
+            }
+          }
+          return parser;
+      }
+      case GET_MEMOIZED_IS_INITIALIZED: {
+        return (byte) 1;
+      }
+      case SET_MEMOIZED_IS_INITIALIZED: {
+        return null;
+      }
+      }
+      throw new UnsupportedOperationException();
     }
 
+
     // @@protoc_insertion_point(class_scope:IM.Login.IMKickPCClientRsp)
+    private static final com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp DEFAULT_INSTANCE;
+    static {
+      IMKickPCClientRsp defaultInstance = new IMKickPCClientRsp();
+      // New instances are implicitly immutable so no need to make
+      // immutable.
+      DEFAULT_INSTANCE = defaultInstance;
+      com.google.protobuf.GeneratedMessageLite.registerDefaultInstance(
+        IMKickPCClientRsp.class, defaultInstance);
+    }
+
+    public static com.mogujie.tt.protobuf.IMLogin.IMKickPCClientRsp getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static volatile com.google.protobuf.Parser<IMKickPCClientRsp> PARSER;
+
+    public static com.google.protobuf.Parser<IMKickPCClientRsp> parser() {
+      return DEFAULT_INSTANCE.getParserForType();
+    }
   }
 
 

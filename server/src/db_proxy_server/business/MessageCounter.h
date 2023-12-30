@@ -13,8 +13,8 @@
 #define MESSAGECOUNTER_H_
 
 #include "ImPduBase.h"
-namespace DB_PROXY {
-
+namespace DB_PROXY
+{
     void getUnreadMsgCounter(CImPdu* pPdu, uint32_t conn_uuid);
     void clearUnreadMsgCounter(CImPdu* pPdu, uint32_t conn_uuid);
     

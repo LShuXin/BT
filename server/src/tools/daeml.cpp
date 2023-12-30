@@ -7,12 +7,12 @@
 #include <signal.h>
 #include <errno.h>
 
+
 /**
  * @brief 关闭从 fg 到最大文件描述符数之间的所有文件描述符
  * 
  * @param fd 
  */
-
 void closeall(int fd)
 {
     int fdlimit = sysconf(_SC_OPEN_MAX);
@@ -30,7 +30,7 @@ void closeall(int fd)
  * returns -1 on failure, but you can't do much except exit in that case
  * since we may already have forked. This is based on the BSD version,
  * so the caller is responsible for things like the umask, etc.
- * 这段代码看起来是一个用于创建守护进程的函数，它可能被调用来确保进程在后台运行，摆脱终端控制，
+ * 这段代码是一个用于创建守护进程的函数，它被调用来确保进程在后台运行，摆脱终端控制，
  * 并准备好运行时的环境。下面是这个函数的作用以及可能的设计思路解释
  * 
  * 函数作用：
@@ -39,18 +39,17 @@ void closeall(int fd)
  * 了一系列设置，包括创建新会话、改变工作目录和重定向标准输入/输出/错误流。
  *
  * 设计思路：
- * 创建新会话： 守护进程的第一步是调用 setsid() 函数来创建一个新的会话。这将使进程摆脱终端会话的控制，
+ * 1.创建新会话 守护进程的第一步是调用 setsid() 函数来创建一个新的会话。这将使进程摆脱终端会话的控制，
  * 确保即使终端关闭，进程也能继续运行。
- * 改变工作目录： 默认情况下，进程的当前工作目录是启动它的终端所在的目录。通过调用 chdir("/")，函数将
+ * 2.改变工作目录 默认情况下，进程的当前工作目录是启动它的终端所在的目录。通过调用 chdir("/")，函数将
  * 当前工作目录更改为根目录，以避免与特定目录关联，确保进程不受到工作目录变化的影响。
- * 关闭文件描述符和重定向： 这部分首先尝试关闭所有已打开的文件描述符（可能是通过自定义的 closeall 函数实现的）。
+ * 3.关闭文件描述符和重定向 这部分首先尝试关闭所有已打开的文件描述符（通过自定义的 closeall 函数实现）。
  * 接下来，它尝试打开 /dev/null 设备文件，并通过 dup2 函数将其文件描述符复制到标准输入、标准输出和标准错误的
  * 文件描述符。这样做的效果是，所有从标准输入读取的数据都会被丢弃，所有写入标准输出和标准错误的数据都会被丢弃。
  *
  * 总结：
  * 这个函数的设计思路是确保守护进程在后台运行，不受终端控制，不与特定的工作目录或文件路径相关联，并且所有的输入
- * 和输出都被重定向到 /dev/null，从而保证进程在静默的环境中执行。不过，需要注意的是，这里提到了一些自定义的函
- * 数（例如 closeall），它们的具体实现不在代码中给出，因此这些函数的细节和影响不能被完全确定。
+ * 和输出都被重定向到 /dev/null，从而保证进程在静默的环境中执行。
  */
 int daemon(int nochdir, int noclose, int asroot)
 {
@@ -63,7 +62,7 @@ int daemon(int nochdir, int noclose, int asroot)
         case -1:
             return -1;                /* 表示创建子进程失败 */
         default:
-            _exit(0);                  /* exit the original process */
+            _exit(0);                 /* exit the original process */
     }
     
 
@@ -76,16 +75,18 @@ int daemon(int nochdir, int noclose, int asroot)
     }              
         
 
-    /* asroot: 这可能是一个布尔变量，用于标识进程是否应该以超级用户（root）身份运行。在这个上下文中，如果
-    asroot 为真，进程将尝试将自己的用户ID设置为1，即超级用户ID，以提升到超级用户权限。
+    /* asroot: 这是一个布尔变量，用于标识进程是否以超级用户（root）身份运行。在这个上下文中，如果
+    asroot 不为真，进程将尝试将自己的用户ID设置为1，即超级用户ID，以提升到超级用户权限。
 
-    setuid(1): 这是一个系统调用，用于改变进程的有效用户ID。在这里，如果 asroot 为假（或者说，不希望以超级用户身份运行），
+    setuid(1): 这是一个系统调用，用于改变进程的有效用户ID。在这里，如果 asroot 为假（或者说，当前没有以超级用户身份运行），
     并且进程成功地将有效用户ID更改为1（超级用户ID），则表示进程以root权限成功运行。如果 setuid(1) 调用失败，它会返回负值，
-    表示出现了错误。因此，if (!asroot && (setuid(1) < 0)) 这部分检查了是否在不希望以root权限运行的情况下，进程能够成功
-    地将用户ID更改为1，如果失败，则返回-1表示出错。*/
+    表示出现了错误。因此，if (!asroot && (setuid(1) < 0)) 这部分检查了当前没有 root 权限运行的情况下，进程是否能够成功
+    地将用户ID更改为1，如果失败，则返回 -1 表示出错。*/
     if (!asroot && (setuid(1) < 0)) {  /* shoudn't fail */
         return -1;
-    }             
+    }
+
+    printf("Require root privilege to launch successfully.\n"); 
         
     
     /* dyke out this switch if you want to acquire a control tty in */
@@ -125,7 +126,6 @@ int daemon(int nochdir, int noclose, int asroot)
          * 这些函数调用用于复制文件描述符。在这里，它们将 /dev/null 的文件描述符复制到标准输入、标准输出
          * 和标准错误的文件描述符。这实际上将这三个标准流重定向到 /dev/null，这意味着所有从标准输入读取的
          * 数据都会被丢弃，所有写入标准输出和标准错误的数据都会被丢弃。
-         * 
          */
         dup2(fd, STDIN_FILENO);
         dup2(fd, STDOUT_FILENO);
@@ -155,7 +155,7 @@ void PrintUsage(char* name)
 /**
  * @brief  程序开始处，使用 printf 打印了一些关于这个程序的简短介绍。
  * 命令行参数检查： 接着，程序检查是否提供了足够的命令行参数。如果没有提供足够的参数，它会打印错误消息并调用
- * PrintUsage 函数（这个函数在代码中没有提供）来显示程序的正确用法，然后通过 exit(0) 终止程序。
+ * PrintUsage 函数来显示程序的正确用法，然后通过 exit(0) 终止程序。
  * 加载守护进程： 如果提供了足够的命令行参数，程序会尝试将指定的程序加载为守护进程。它使用 daemon(1, 0, 1)
  * 函数来实现这一点。daemon 函数的第一个参数表示关闭文件描述符，第二个参数表示是否在后台运行，第三个参数表示
  * 是否创建新的会话。如果创建守护进程成功（返回值大于等于0），程序会继续执行以下代码。
@@ -175,7 +175,6 @@ int main(int argc, char* argv[])
            TEXT("\n")
            TEXT("Daemon loader\n")
            TEXT("- Launch specified program as daemon.\n")
-           //TEXT("- Require root privilege to launch successfully.\n\n\n")
            );
     
     if (argc < 2)
@@ -191,7 +190,7 @@ int main(int argc, char* argv[])
     {
         signal(SIGCHLD, SIG_IGN);
         
-        //execl(argv[1], argv[1], NULL);
+        // execl(argv[1], argv[1], NULL);
         execv(argv[1], argv + 1);
         printf("! Excute daemon programm %s failed. \n", argv[1]);
         

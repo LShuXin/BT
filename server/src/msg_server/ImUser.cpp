@@ -16,7 +16,6 @@ using namespace ::IM::BaseDefine;
 
 CImUser::CImUser(string user_name)
 {
-    //log("ImUser, userId=%u\n", user_id);
     m_login_name = user_name;
     m_bValidate = false;
     m_user_id = 0;

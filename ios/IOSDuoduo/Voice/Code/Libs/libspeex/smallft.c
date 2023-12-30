@@ -135,7 +135,7 @@ static void dradf2(int ido,int l1,float *cc,float *ch,float *wa1){
   t2=t0;
   for(k=0;k<l1;k++){
     t3=t2;
-    t4=(t1<<1)+(ido<<1);
+    t4=(t1<<1)+ (ido<<1);
     t5=t1;
     t6=t1+t1;
     for(i=2;i<ido;i+=2){
@@ -177,7 +177,7 @@ static void dradf4(int ido,int l1,float *cc,float *ch,float *wa1,
   
   t1=t0;
   t4=t1<<1;
-  t2=t1+(t1<<1);
+  t2=t1+ (t1<<1);
   t3=0;
 
   for(k=0;k<l1;k++){
@@ -247,7 +247,7 @@ static void dradf4(int ido,int l1,float *cc,float *ch,float *wa1,
 
  L105:
   
-  t2=(t1=t0+ido-1)+(t0<<1);
+  t2=(t1=t0+ido-1)+ (t0<<1);
   t3=ido<<2;
   t4=ido;
   t5=ido<<1;
@@ -655,7 +655,7 @@ static void dradb2(int ido,int l1,float *cc,float *ch,float *wa1){
   t2=0;
   for(k=0;k<l1;k++){
     t3=t1;
-    t5=(t4=t2)+(ido<<1);
+    t5=(t4=t2)+ (ido<<1);
     t6=t0+t1;
     for(i=2;i<ido;i+=2){
       t3+=2;
@@ -696,11 +696,11 @@ static void dradb3(int ido,int l1,float *cc,float *ch,float *wa1,
   t1=0;
   t2=t0<<1;
   t3=ido<<1;
-  t4=ido+(ido<<1);
+  t4=ido+ (ido<<1);
   t5=0;
   for(k=0;k<l1;k++){
     tr2=cc[t3-1]+cc[t3-1];
-    cr2=cc[t5]+(taur*tr2);
+    cr2=cc[t5]+ (taur*tr2);
     ch[t1]=cc[t5]+tr2;
     ci3=taui*(cc[t3]+cc[t3]);
     ch[t1+t0]=cr2-ci3;
@@ -715,7 +715,7 @@ static void dradb3(int ido,int l1,float *cc,float *ch,float *wa1,
   t1=0;
   t3=ido<<1;
   for(k=0;k<l1;k++){
-    t7=t1+(t1<<1);
+    t7=t1+ (t1<<1);
     t6=(t5=t7+t3);
     t8=t1;
     t10=(t9=t1+t0)+t0;
@@ -728,10 +728,10 @@ static void dradb3(int ido,int l1,float *cc,float *ch,float *wa1,
       t9+=2;
       t10+=2;
       tr2=cc[t5-1]+cc[t6-1];
-      cr2=cc[t7-1]+(taur*tr2);
+      cr2=cc[t7-1]+ (taur*tr2);
       ch[t8-1]=cc[t7-1]+tr2;
       ti2=cc[t5]-cc[t6];
-      ci2=cc[t7]+(taur*ti2);
+      ci2=cc[t7]+ (taur*ti2);
       ch[t8]=cc[t7]+ti2;
       cr3=taui*(cc[t5-1]-cc[t6-1]);
       ci3=taui*(cc[t5]+cc[t6]);
@@ -821,7 +821,7 @@ static void dradb4(int ido,int l1,float *cc,float *ch,float *wa1,
   t1=ido;
   t2=ido<<2;
   t3=ido-1;
-  t4=ido+(ido<<1);
+  t4=ido+ (ido<<1);
   for(k=0;k<l1;k++){
     t5=t3;
     ti1=cc[t1]+cc[t4];

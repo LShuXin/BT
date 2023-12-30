@@ -21,7 +21,9 @@ public:
     static CSessionModel* getInstance();
     ~CSessionModel() {}
 
+    // 获取指定时间以后有变动的会话
     void getRecentSession(uint32_t userId, uint32_t lastTime, list<IM::BaseDefine::ContactSessionInfo>& lsContact);
+    // 通过自己的 id、对方的 id 获取会话 id
     uint32_t getSessionId(uint32_t nUserId, uint32_t nPeerId, uint32_t nType, bool isAll);
     bool updateSession(uint32_t nSessionId, uint32_t nUpdateTime);
     bool removeSession(uint32_t nSessionId);

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (DDPath)
+@interface NSString(DDPath)
+
 + (NSString*)userExclusiveDirection;
+
 @end

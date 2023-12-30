@@ -161,10 +161,10 @@ static EmotionViewController *emotionViewController = nil;
 
 -(void)setStateImage{
     UserStatType stateType = [[StateMaintenanceManager instance]getUserStateForUserID:self.module.session.sessionID];
-    if(stateType== UserStatTypeUserStatusOffline || stateType == UserStatTypeUserStatusLeave) {
+    if(stateType== UserStatType_UserStatusOffline || stateType == UserStatType_UserStatusLeave) {
         NSImage* image = [NSImage imageNamed:@"state-offline"];
         [self.chattingHeadViewController.state setImage:image];
-    }else if(stateType == UserStatTypeUserStatusOnline){
+    }else if(stateType == UserStatType_UserStatusOnline){
         NSImage* image = [NSImage imageNamed:@"state-online"];
         [self.chattingHeadViewController.state setImage:image];
     }
@@ -275,7 +275,7 @@ static EmotionViewController *emotionViewController = nil;
 
 - (void)updateUI
 {
-    if (self.module.session.sessionType == SessionTypeSessionTypeGroup)
+    if (self.module.session.sessionType == SessionType_SessionTypeGroup)
     {
         MTGroupEntity* group = (MTGroupEntity*)[[MTGroupModule shareInsatnce] getOriginEntityWithOriginID:self.module.session.originID];
         
@@ -311,7 +311,7 @@ static EmotionViewController *emotionViewController = nil;
 
         [_chatSplitView setFrame:CGRectMake(0, 0, _bottomMainView.frame.size.width - self.bottomRightView.bounds.size.width, _bottomMainView.frame.size.height)];
     }
-    else if(SessionTypeSessionTypeSingle == [self.module.session sessionType])
+    else if(SessionType_SessionTypeSingle == [self.module.session sessionType])
     {
         [[self bottomRightView] setHidden:YES];
 
@@ -331,7 +331,7 @@ static EmotionViewController *emotionViewController = nil;
 
     switch (self.module.session.sessionType)
     {
-        case SessionTypeSessionTypeSingle:
+        case SessionType_SessionTypeSingle:
         {
 //            [self.chattingHeadViewController.iconImage setType:UserAvator];
             [self.chattingHeadViewController.iconImage setSession:self.module.session];
@@ -339,7 +339,7 @@ static EmotionViewController *emotionViewController = nil;
             [self setStateImage];
         }
             break;
-        case SessionTypeSessionTypeGroup:
+        case SessionType_SessionTypeGroup:
         {
 //            [self.chattingHeadViewController.iconImage setType:GroupAvator];
             [self.chattingHeadViewController.iconImage setSession:self.module.session];
@@ -348,7 +348,7 @@ static EmotionViewController *emotionViewController = nil;
             break;
     }
     
-    if (self.module.session.sessionType != SessionTypeSessionTypeSingle)
+    if (self.module.session.sessionType != SessionType_SessionTypeSingle)
     {
         [self.shakeButton setHidden:YES];
 
@@ -398,7 +398,7 @@ static EmotionViewController *emotionViewController = nil;
 
 - (BOOL)textView:(NSTextView *)textView shouldChangeTextInRanges:(NSArray *)affectedRanges replacementStrings:(NSArray *)replacementStrings
 {
-    if(self.module.session.sessionType==SessionTypeSessionTypeSingle) {
+    if(self.module.session.sessionType==SessionType_SessionTypeSingle) {
         //控制发送限制
         NSUInteger nowTime = [[NSDate date] timeIntervalSince1970];
         

@@ -61,7 +61,7 @@ kiss_fftr_cfg kiss_fftr_alloc(int nfft,int inverse_fft,void * mem,size_t * lenme
 
 #ifdef FIXED_POINT
     for (i=0;i<nfft;++i) {
-       spx_word32_t phase = i+(nfft>>1);
+       spx_word32_t phase = i+ (nfft>>1);
        if (!inverse_fft)
           phase = -phase;
        kf_cexp2(st->super_twiddles+i, DIV32(SHL32(phase,16),nfft));

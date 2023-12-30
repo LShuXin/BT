@@ -144,7 +144,7 @@ CGFloat const dd_bubbleUpDown = 10;                //气泡到上下边缘的距
         default:
             break;
     }
-    if (self.session.sessionType == SessionTypeSessionTypeSingle) {
+    if (self.session.sessionType == SessionType_SessionTypeSingle) {
          [self.bubbleImageView setFrame:CGRectMake(bubbleX,dd_avatarEdge*2, bubbleWidth, bubbleheight)];
         [self.userName setHidden:YES];
     }else{

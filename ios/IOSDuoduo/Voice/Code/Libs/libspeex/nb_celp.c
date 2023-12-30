@@ -712,7 +712,7 @@ int nb_encode(void *state, void *vin, SpeexBits *bits)
             real_exc[i] = sw[i] = st->winBuf[i];
       } else {
          for (i=0;i<st->subframeSize;i++)
-            real_exc[i] = sw[i] = in[i+((sub-1)*st->subframeSize)];
+            real_exc[i] = sw[i] = in[i+ ((sub-1)*st->subframeSize)];
       }
       fir_mem16(real_exc, interp_qlpc, real_exc, st->subframeSize, st->lpcSize, st->mem_exc2, stack);
       

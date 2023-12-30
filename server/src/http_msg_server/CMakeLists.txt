@@ -25,8 +25,6 @@ endif ()
 INCLUDE_DIRECTORIES(./ ../base ../base/jsoncpp ../base/pb/protocol ../base/pb/)
 LINK_DIRECTORIES(./ ../base ${PB_LIB_DIR} ../base/slog/lib)
 
-#ADD_XXXX必须在TARGET_LINK_LIBRARIES前面，否则会报错
-#ADD_LIBRARY(${PROJECTNAME} SHARED/STATIC ${SRC_LIST})
 ADD_EXECUTABLE(http_msg_server ${SRC_LIST})
 
 

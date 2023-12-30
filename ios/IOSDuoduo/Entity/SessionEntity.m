@@ -14,10 +14,13 @@
 #import "DDMessageModule.h"
 #import "DDUserEntity.h"
 #import "GroupEntity.h"
+
+
 @implementation SessionEntity
-@synthesize  name;
+@synthesize name;
 @synthesize timeInterval;
-- (void)setSessionID:(NSString *)sessionID
+
+- (void)setSessionID:(NSString*)sessionID
 {
     _sessionID = [sessionID copy];
     name = nil;
@@ -37,7 +40,7 @@
     {
         switch (self.sessionType)
         {
-            case SessionTypeSessionTypeSingle:
+            case SessionType_SessionTypeSingle:
             {
                 [[DDUserModule shareInstance] getUserForUserID:_sessionID Block:^(DDUserEntity *user) {
                     if ([user.nick length] > 0)
@@ -52,11 +55,11 @@
                 }];
         }
                 break;
-            case SessionTypeSessionTypeGroup:
+            case SessionType_SessionTypeGroup:
             {
                 GroupEntity* group = [[DDGroupModule instance] getGroupByGId:_sessionID];
                 if (!group) {
-                    [[DDGroupModule instance] getGroupInfogroupID:_sessionID completion:^(GroupEntity *group) {
+                    [[DDGroupModule instance] getGroupInfoByGroupID:_sessionID completion:^(GroupEntity *group) {
                              name=group.name;
                     }];
                 }else{
@@ -70,17 +73,19 @@
     }
     return name;
 }
--(void)setSessionName:(NSString *)theName
+
+-(void)setSessionName:(NSString*)theName
 {
     name = theName;
 }
-- (NSUInteger)timeInterval
+
+-(NSUInteger)timeInterval
 {
     if (timeInterval == 0)
     {
         switch (_sessionType)
         {
-            case SessionTypeSessionTypeSingle:
+            case SessionType_SessionTypeSingle:
             {
                  [[DDUserModule shareInstance] getUserForUserID:_sessionID Block:^(DDUserEntity *user) {
                       timeInterval = user.lastUpdateTime;
@@ -96,105 +101,113 @@
 
 #pragma mark -
 #pragma mark Public API
-- (id)initWithSessionID:(NSString*)sessionID SessionName:(NSString *)name type:(SessionType)type
+-(id)initWithSessionID:(NSString*)sessionID SessionName:(NSString*)name type:(SessionType)type
 {
-    SessionEntity *session = [self initWithSessionID:sessionID type:type];
+    SessionEntity* session = [self initWithSessionID:sessionID type:type];
     [session setSessionName:name];
     return session;
 }
-- (id)initWithSessionID:(NSString*)sessionID type:(SessionType)type
+
+-(id)initWithSessionID:(NSString*)sessionID type:(SessionType)type
 {
     self = [super init];
     if (self)
     {
         self.sessionID = sessionID;
         self.sessionType = type;
-        self.unReadMsgCount=0;
-        self.lastMsg=@"";
-        self.lastMsgID=0;
-        self.timeInterval= [[NSDate date] timeIntervalSince1970];
+        self.unReadMsgCount =  0;
+        self.lastMsg = @"";
+        self.lastMsgID = 0;
+        self.timeInterval = [[NSDate date] timeIntervalSince1970];
         
     }
     return self;
 }
 
-- (void)updateUpdateTime:(NSUInteger)date
+-(void)updateUpdateTime:(NSUInteger)date
 {
-     timeInterval = date;
+    timeInterval = date;
     self.timeInterval = timeInterval;
     [[DDDatabaseUtil instance] updateRecentSession:self completion:^(NSError *error) {
                     
     }];
-        
   }
+
 -(NSArray*)sessionUsers
 {
-    if(SessionTypeSessionTypeGroup == self.sessionType)
+    if (SessionType_SessionTypeGroup == self.sessionType)
     {
         GroupEntity* group = [[DDGroupModule instance] getGroupByGId:_sessionID];
         return group.groupUserIds;
     }
     
-    return  nil;
+    return nil;
 }
--(NSString *)getSessionGroupID
+
+-(NSString*)getSessionGroupID
 {
     return _sessionID;
 }
+
 -(BOOL)isGroup
 {
-    if(SessionTypeSessionTypeGroup == self.sessionType)
+    if (SessionType_SessionTypeGroup == self.sessionType)
     {
         return YES;
     }
     return NO;
 }
 
-- (id)initWithSessionIDByUser:(DDUserEntity*)user
+-(id)initWithSessionIDByUser:(DDUserEntity*)user
 {
-    SessionEntity *session = [self initWithSessionID:user.objID type:SessionTypeSessionTypeSingle];
+    SessionEntity *session = [self initWithSessionID:user.objID type:SessionType_SessionTypeSingle];
     [session setSessionName:user.name];
     return session;
 }
-- (id)initWithSessionIDByGroup:(GroupEntity*)group
+
+-(id)initWithSessionIDByGroup:(GroupEntity*)group
 {
-    SessionType sessionType =SessionTypeSessionTypeGroup;
-    SessionEntity *session = [self initWithSessionID:group.objID type:sessionType];
+    SessionType sessionType = SessionType_SessionTypeGroup;
+    SessionEntity* session = [self initWithSessionID:group.objID type:sessionType];
     [session setSessionName:group.name];
     
     return session;
 }
-+(id)initWithDicToGroup:(NSDictionary *)dic
+
++(id)initWithDicToGroup:(NSDictionary*)dic
 {
-    SessionEntity *session =[SessionEntity new];
+    SessionEntity* session = [SessionEntity new];
     return session;
 }
-- (BOOL)isEqual:(id)other
+
+-(BOOL)isEqual:(id)other
 {
-   
-    if (other == self) {
+    if (other == self)
+    {
         return YES;
-    }  else if([self class] != [other class])
+    }
+    else if ([self class] != [other class])
     {
         return NO;
-    }else {
-         SessionEntity *otherSession = (SessionEntity *)other;
-        if (![self.sessionID isEqualToString:otherSession.sessionID]) {
+    }
+    else
+    {
+        SessionEntity* otherSession = (SessionEntity*)other;
+        if (![self.sessionID isEqualToString:otherSession.sessionID])
+        {
             return NO;
         }
-        if (self.sessionType != otherSession.sessionType) {
+        if (self.sessionType != otherSession.sessionType)
+        {
             return NO;
         }
-       
-        
     }
     return YES;
 }
 
-- (NSUInteger)hash
+-(NSUInteger)hash
 {
     NSUInteger sessionIDhash = [self.sessionID hash];
-    
     return sessionIDhash^self.sessionType;
 }
 @end

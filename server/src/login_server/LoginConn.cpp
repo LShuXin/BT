@@ -4,22 +4,31 @@
  *  Created on: 2013-6-21
  *      Author: ziteng@mogujie.com
  */
-
 #include "LoginConn.h"
 #include "IM.Server.pb.h"
 #include "IM.Other.pb.h"
 #include "IM.Login.pb.h"
 #include "public_define.h"
+
+
 using namespace IM::BaseDefine;
+
+// static 变量本文件中才能访问
 static ConnMap_t g_client_conn_map;
 static ConnMap_t g_msg_serv_conn_map;
-static uint32_t g_total_online_user_cnt = 0;	// 并发在线总人数
+
+// 并发在线总人数
+static uint32_t g_total_online_user_cnt = 0;
+
+// 全局变量，保存注册到本 login_server 上的 msg_server 信息
 map<uint32_t, msg_serv_info_t*> g_msg_serv_info;
 
+// 用于心跳维护
 void login_conn_timer_callback(void* callback_data, uint8_t msg, uint32_t handle, void* pParam)
 {
 	uint64_t cur_time = get_tick_count();
-	for (ConnMap_t::iterator it = g_client_conn_map.begin(); it != g_client_conn_map.end(); ) {
+	for (ConnMap_t::iterator it = g_client_conn_map.begin(); it != g_client_conn_map.end();)
+	{
 		ConnMap_t::iterator it_old = it;
 		it++;
 
@@ -27,7 +36,8 @@ void login_conn_timer_callback(void* callback_data, uint8_t msg, uint32_t handle
 		pConn->OnTimer(cur_time);
 	}
 
-	for (ConnMap_t::iterator it = g_msg_serv_conn_map.begin(); it != g_msg_serv_conn_map.end(); ) {
+	for (ConnMap_t::iterator it = g_msg_serv_conn_map.begin(); it != g_msg_serv_conn_map.end();)
+	{
 		ConnMap_t::iterator it_old = it;
 		it++;
 
@@ -38,6 +48,7 @@ void login_conn_timer_callback(void* callback_data, uint8_t msg, uint32_t handle
 
 void init_login_conn()
 {
+    // 用于实现心跳
 	netlib_register_timer(login_conn_timer_callback, NULL, 1000);
 }
 
@@ -52,21 +63,26 @@ CLoginConn::~CLoginConn()
 
 void CLoginConn::Close()
 {
-	if (m_handle != NETLIB_INVALID_HANDLE) {
+	if (m_handle != NETLIB_INVALID_HANDLE)
+	{
 		netlib_close(m_handle);
-		if (m_conn_type == LOGIN_CONN_TYPE_CLIENT) {
+		if (m_conn_type == LOGIN_CONN_TYPE_CLIENT)
+		{
 			g_client_conn_map.erase(m_handle);
-		} else {
+		}
+		else
+        {
 			g_msg_serv_conn_map.erase(m_handle);
 
-			// remove all user count from this message server
+			// 从并发在线人数中减去正要关闭的 msg_server 上连接的用户数 + 在服务注册表中删除该 msg_server
 			map<uint32_t, msg_serv_info_t*>::iterator it = g_msg_serv_info.find(m_handle);
-			if (it != g_msg_serv_info.end()) {
+			if (it != g_msg_serv_info.end())
+			{
 				msg_serv_info_t* pMsgServInfo = it->second;
-
 				g_total_online_user_cnt -= pMsgServInfo->cur_conn_cnt;
 				log("onclose from MsgServer: %s:%u ", pMsgServInfo->hostname.c_str(), pMsgServInfo->port);
 				delete pMsgServInfo;
+				// 在服务注册表中删除该服务
 				g_msg_serv_info.erase(it);
 			}
 		}
@@ -77,11 +93,13 @@ void CLoginConn::Close()
 
 void CLoginConn::OnConnect2(net_handle_t handle, int conn_type)
 {
+    // socket handle
 	m_handle = handle;
 	m_conn_type = conn_type;
 
 	ConnMap_t* conn_map = &g_msg_serv_conn_map;
-	if (conn_type == LOGIN_CONN_TYPE_CLIENT) {
+	if (conn_type == LOGIN_CONN_TYPE_CLIENT)
+	{
 		conn_map = &g_client_conn_map;
 	}
 
@@ -98,12 +116,17 @@ void CLoginConn::OnClose()
 
 void CLoginConn::OnTimer(uint64_t curr_tick)
 {
-	if (m_conn_type == LOGIN_CONN_TYPE_CLIENT) {
-		if (curr_tick > m_last_recv_tick + CLIENT_TIMEOUT) {
+	if (m_conn_type == LOGIN_CONN_TYPE_CLIENT)
+	{
+		if (curr_tick > m_last_recv_tick + CLIENT_TIMEOUT)
+		{
 			Close();
 		}
-	} else {
-		if (curr_tick > m_last_send_tick + SERVER_HEARTBEAT_INTERVAL) {
+	}
+	else
+    {
+		if (curr_tick > m_last_send_tick + SERVER_HEARTBEAT_INTERVAL)
+		{
             IM::Other::IMHeartBeat msg;
             CImPdu pdu;
             pdu.SetPBMsg(&msg);
@@ -112,7 +135,8 @@ void CLoginConn::OnTimer(uint64_t curr_tick)
 			SendPdu(&pdu);
 		}
 
-		if (curr_tick > m_last_recv_tick + SERVER_TIMEOUT) {
+		if (curr_tick > m_last_recv_tick + SERVER_TIMEOUT)
+		{
 			log("connection to MsgServer timeout ");
 			Close();
 		}
@@ -156,31 +180,41 @@ void CLoginConn::_HandleMsgServInfo(CImPdu* pPdu)
 
 	g_total_online_user_cnt += pMsgServInfo->cur_conn_cnt;
 
-	log("MsgServInfo, ip_addr1=%s, ip_addr2=%s, port=%d, max_conn_cnt=%d, cur_conn_cnt=%d, "\
-		"hostname: %s. ",
-		pMsgServInfo->ip_addr1.c_str(), pMsgServInfo->ip_addr2.c_str(), pMsgServInfo->port,pMsgServInfo->max_conn_cnt,
-		pMsgServInfo->cur_conn_cnt, pMsgServInfo->hostname.c_str());
+	log("MsgServInfo, ip_addr1=%s, ip_addr2=%s, port=%d, max_conn_cnt=%d, cur_conn_cnt=%d, hostname: %s. ",
+		pMsgServInfo->ip_addr1.c_str(),
+		pMsgServInfo->ip_addr2.c_str(),
+		pMsgServInfo->port,
+		pMsgServInfo->max_conn_cnt,
+		pMsgServInfo->cur_conn_cnt,
+		pMsgServInfo->hostname.c_str());
 }
 
 void CLoginConn::_HandleUserCntUpdate(CImPdu* pPdu)
 {
 	map<uint32_t, msg_serv_info_t*>::iterator it = g_msg_serv_info.find(m_handle);
-	if (it != g_msg_serv_info.end()) {
+	if (it != g_msg_serv_info.end())
+	{
 		msg_serv_info_t* pMsgServInfo = it->second;
         IM::Server::IMUserCntUpdate msg;
         msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength());
 
 		uint32_t action = msg.user_action();
-		if (action == USER_CNT_INC) {
+		if (action == USER_CNT_INC)
+		{
 			pMsgServInfo->cur_conn_cnt++;
 			g_total_online_user_cnt++;
-		} else {
+		}
+		else
+        {
 			pMsgServInfo->cur_conn_cnt--;
 			g_total_online_user_cnt--;
 		}
 
-		log("%s:%d, cur_cnt=%u, total_cnt=%u ", pMsgServInfo->hostname.c_str(),
-            pMsgServInfo->port, pMsgServInfo->cur_conn_cnt, g_total_online_user_cnt);
+        log("%s:%d, cur_cnt=%u, total_cnt=%u ",
+            pMsgServInfo->hostname.c_str(),
+            pMsgServInfo->port,
+            pMsgServInfo->cur_conn_cnt,
+            g_total_online_user_cnt);
 	}
 }
 
@@ -192,7 +226,8 @@ void CLoginConn::_HandleMsgServRequest(CImPdu* pPdu)
 	log("HandleMsgServReq. ");
 
 	// no MessageServer available
-	if (g_msg_serv_info.size() == 0) {
+	if (g_msg_serv_info.size() == 0)
+	{
         IM::Login::IMMsgServRsp msg;
         msg.set_result_code(::IM::BaseDefine::REFUSE_REASON_NO_MSG_SERVER);
         CImPdu pdu;
@@ -208,19 +243,20 @@ void CLoginConn::_HandleMsgServRequest(CImPdu* pPdu)
 	// return a message server with minimum concurrent connection count
 	msg_serv_info_t* pMsgServInfo;
 	uint32_t min_user_cnt = (uint32_t)-1;
-	map<uint32_t, msg_serv_info_t*>::iterator it_min_conn = g_msg_serv_info.end(),it;
+	map<uint32_t, msg_serv_info_t*>::iterator it_min_conn = g_msg_serv_info.end(), it;
 
-	for (it = g_msg_serv_info.begin() ; it != g_msg_serv_info.end(); it++) {
+	for (it = g_msg_serv_info.begin() ; it != g_msg_serv_info.end(); it++)
+	{
 		pMsgServInfo = it->second;
-		if ( (pMsgServInfo->cur_conn_cnt < pMsgServInfo->max_conn_cnt) &&
-			 (pMsgServInfo->cur_conn_cnt < min_user_cnt))
+		if ((pMsgServInfo->cur_conn_cnt < pMsgServInfo->max_conn_cnt) && (pMsgServInfo->cur_conn_cnt < min_user_cnt))
         {
 			it_min_conn = it;
 			min_user_cnt = pMsgServInfo->cur_conn_cnt;
 		}
 	}
 
-	if (it_min_conn == g_msg_serv_info.end()) {
+	if (it_min_conn == g_msg_serv_info.end())
+	{
 		log("All TCP MsgServer are full ");
         IM::Login::IMMsgServRsp msg;
         msg.set_result_code(::IM::BaseDefine::REFUSE_REASON_MSG_SERVER_FULL);

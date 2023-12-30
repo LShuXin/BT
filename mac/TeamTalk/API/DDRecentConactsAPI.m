@@ -8,7 +8,7 @@
 
 #import "DDRecentConactsAPI.h"
 #import "MTUserEntity.h"
-#import "IMBuddy.pb.h"
+#import "IMBuddy.pbobjc.h"
 #import "MTGroupEntity.h"
 #import "MTSessionEntity.h"
 @implementation DDRecentConactsAPI
@@ -44,10 +44,10 @@
 {
     Analysis analysis = (id)^(NSData* data)
     {
-        IMRecentContactSessionRsp *rsp =[IMRecentContactSessionRsp parseFromData:data];
+        IMRecentContactSessionRsp *rsp =[IMRecentContactSessionRsp parseFromData:data error:nil];
         NSMutableArray *array = [NSMutableArray new];
         
-        for (ContactSessionInfo *sessionInfo in rsp.contactSessionList) {
+        for (ContactSessionInfo *sessionInfo in rsp.contactSessionListArray) {
             NSString *originID =[NSString stringWithFormat:@"%d",sessionInfo.sessionId];
             SessionType sessionType =sessionInfo.sessionType;
             NSInteger updated_time = sessionInfo.updatedTime;
@@ -66,7 +66,7 @@
 {
     Package package = (id)^(id object,uint16_t seqNo)
     {
-        IMRecentContactSessionReqBuilder *req = [IMRecentContactSessionReq builder];
+        IMRecentContactSessionReq *req = [[IMRecentContactSessionReq alloc] init];
         [req setUserId:0];
         [req setLatestUpdateTime:(UInt32)[object[0] integerValue]];
         DataOutputStream *dataout = [[DataOutputStream alloc] init];
@@ -74,7 +74,7 @@
         [dataout writeTcpProtocolHeader:MODULE_ID_SESSION
                                     cId:RECENT_SESSION_REQ
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[req build].data];
+        [dataout directWriteBytes:[req data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface OpenSourcePRViewController : UIViewController<UIWebViewDelegate>
-@property(copy)NSString *urlString;
+
+@property(copy) NSString* urlString;
+
 @end

@@ -8,18 +8,21 @@
 
 #import "LoginAPI.h"
 #import "DDUserEntity.h"
-#import "IMLogin.pb.h"
-#import "IMBaseDefine.pb.h"
+#import "IMLogin.pbobjc.h"
+#import "IMBaseDefine.pbobjc.h"
 #import "DDUserEntity.h"
 #import "NSString+Additions.h"
 #import "security.h"
+
+
 @implementation LoginAPI
+
 /**
  *  请求超时时间
  *
  *  @return 超时时间
  */
-- (int)requestTimeOutTimeInterval
+-(int)requestTimeOutTimeInterval
 {
     return 15;
 }
@@ -29,7 +32,7 @@
  *
  *  @return 对应的serviceID
  */
-- (int)requestServiceID
+-(int)requestServiceID
 {
     return DDSERVICE_LOGIN;
 }
@@ -39,7 +42,7 @@
  *
  *  @return 对应的serviceID
  */
-- (int)responseServiceID
+-(int)responseServiceID
 {
     return DDSERVICE_LOGIN;
 }
@@ -49,7 +52,7 @@
  *
  *  @return 对应的commendID
  */
-- (int)requestCommendID
+-(int)requestCommendID
 {
     return DDCMD_LOGIN_REQ_USERLOGIN;
 }
@@ -59,7 +62,7 @@
  *
  *  @return 对应的commendID
  */
-- (int)responseCommendID
+-(int)responseCommendID
 {
     return DDCMD_LOGIN_RES_USERLOGIN;
 }
@@ -69,28 +72,30 @@
  *
  *  @return 解析数据的block
  */
-- (Analysis)analysisReturnData
+-(Analysis)analysisReturnData
 {
     Analysis analysis = (id)^(NSData* data)
     {
-        IMLoginRes *res = [IMLoginRes parseFromData:data];
+        IMLoginRes* res = [IMLoginRes parseFromData:data error:nil];
         NSInteger serverTime = res.serverTime;
         NSInteger loginResult = res.resultCode;
-        NSString *resultString=nil;
+        NSString* resultString = nil;
         resultString = res.resultString;
         NSDictionary* result = nil;
-        if (loginResult !=0) {
-            return result;
-        }else
+        if (loginResult != 0)
         {
-            DDUserEntity *user = [[DDUserEntity alloc] initWithPB:res.userInfo];
-            result = @{@"serverTime":@(serverTime),
-                                     @"result":resultString,
-                                     @"user":user,
-                                     };
             return result;
         }
-        
+        else
+        {
+            DDUserEntity* user = [[DDUserEntity alloc] initWithPB:res.userInfo];
+            result = @{
+                @"serverTime": @(serverTime),
+                @"result": resultString,
+                @"user": user,
+            };
+            return result;
+        }
     };
     return analysis;
 }
@@ -100,26 +105,28 @@
  *
  *  @return 打包数据的block
  */
-- (Package)packageRequestObject
+-(Package)packageRequestObject
 {
-    Package package = (id)^(id object,uint32_t seqNo)
+    Package package = (id)^(id object, uint32_t seqNo)
     {
 
-        NSString *clientVersion = [NSString stringWithFormat:@"MAC/%@-%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"],[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
-        NSString * strMsg = object[1];
-        DDDataOutputStream *dataout = [[DDDataOutputStream alloc] init];
+        NSString* clientVersion = [NSString stringWithFormat:@"MAC/%@-%@",
+                                   [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"],
+                                   [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+        NSString* strMsg = object[1];
+        DDDataOutputStream* dataout = [[DDDataOutputStream alloc] init];
         [dataout writeInt:0];
         [dataout writeTcpProtocolHeader:DDSERVICE_LOGIN
                                     cId:DDCMD_LOGIN_REQ_USERLOGIN
                                   seqNo:seqNo];
 
-        IMLoginReqBuilder *login = [IMLoginReq builder];
+        IMLoginReq* login = [[IMLoginReq alloc] init];
         [login setUserName:object[0]];
         [login setPassword:[strMsg MD5]];
-        [login setClientType:ClientTypeClientTypeIos];
+        [login setClientType:ClientType_ClientTypeIos];
         [login setClientVersion:clientVersion];
-        [login setOnlineStatus:UserStatTypeUserStatusOnline];
-        [dataout directWriteBytes:[login build].data];
+        [login setOnlineStatus:UserStatType_UserStatusOnline];
+        [dataout directWriteBytes:[login data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

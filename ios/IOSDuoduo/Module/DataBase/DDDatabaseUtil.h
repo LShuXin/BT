@@ -8,28 +8,31 @@
 
 #import <Foundation/Foundation.h>
 #import "FMDB.h"
+
+
 @class DDepartment;
 @class DDMessageEntity;
 @class GroupEntity;
 @class SessionEntity;
 @class MessageEntity,DDUserEntity;
 
+
 @interface DDDatabaseUtil : NSObject
-@property(strong)NSString *recentsession;
-//在数据库上的操作
-@property (nonatomic,readonly)dispatch_queue_t databaseMessageQueue;
 
+@property(strong) NSString* recentsession;
+// 在数据库上的操作
+@property(nonatomic, readonly) dispatch_queue_t databaseMessageQueue;
 
-+ (instancetype)instance;
++(instancetype)instance;
 
-- (void)openCurrentUserDB;
+-(void)openCurrentUserDB;
 
 @end
 
-typedef void(^LoadMessageInSessionCompletion)(NSArray* messages,NSError* error);
+typedef void(^LoadMessageInSessionCompletion)(NSArray *messages, NSError* error);
 typedef void(^MessageCountCompletion)(NSInteger count);
 typedef void(^DeleteSessionCompletion)(BOOL success);
-typedef void(^DDDBGetLastestMessageCompletion)(DDMessageEntity* message,NSError* error);
+typedef void(^DDDBGetLastestMessageCompletion)(DDMessageEntity* message, NSError* error);
 typedef void(^DDUpdateMessageCompletion)(BOOL result);
 typedef void(^DDGetLastestCommodityMessageCompletion)(DDMessageEntity* message);
 
@@ -43,9 +46,14 @@ typedef void(^DDGetLastestCommodityMessageCompletion)(DDMessageEntity* message);
  *  @param page       页数
  *  @param completion 完成获取
  */
-- (void)loadMessageForSessionID:(NSString*)sessionID pageCount:(int)pagecount index:(NSInteger)index completion:(LoadMessageInSessionCompletion)completion;
+-(void)loadMessageForSessionID:(NSString*)sessionID
+                      pageCount:(int)pagecount
+                          index:(NSInteger)index
+                     completion:(LoadMessageInSessionCompletion)completion;
 
-- (void)loadMessageForSessionID:(NSString*)sessionID afterMessage:(DDMessageEntity*)message completion:(LoadMessageInSessionCompletion)completion;
+-(void)loadMessageForSessionID:(NSString*)sessionID
+                  afterMessage:(DDMessageEntity*)message
+                    completion:(LoadMessageInSessionCompletion)completion;
 
 /**
  *  获取对应的Session的最新的自己发送的商品气泡
@@ -53,7 +61,8 @@ typedef void(^DDGetLastestCommodityMessageCompletion)(DDMessageEntity* message);
  *  @param sessionID  会话ID
  *  @param completion 完成获取
  */
-- (void)getLasetCommodityTypeImageForSession:(NSString*)sessionID completion:(DDGetLastestCommodityMessageCompletion)completion;
+-(void)getLasetCommodityTypeImageForSession:(NSString*)sessionID
+                                 completion:(DDGetLastestCommodityMessageCompletion)completion;
 
 /**
  *  在|databaseMessageQueue|执行查询操作，获取DB中
@@ -61,7 +70,8 @@ typedef void(^DDGetLastestCommodityMessageCompletion)(DDMessageEntity* message);
  *  @param sessionID  sessionID
  *  @param completion 完成获取最新的消息
  */
-- (void)getLastestMessageForSessionID:(NSString*)sessionID completion:(DDDBGetLastestMessageCompletion)completion;
+-(void)getLastestMessageForSessionID:(NSString*)sessionID
+                           completion:(DDDBGetLastestMessageCompletion)completion;
 
 /**
  *  在|databaseMessageQueue|执行查询操作，分页获取聊天记录
@@ -69,7 +79,8 @@ typedef void(^DDGetLastestCommodityMessageCompletion)(DDMessageEntity* message);
  *  @param sessionID  会话ID
  *  @param completion 完成block
  */
-- (void)getMessagesCountForSessionID:(NSString*)sessionID completion:(MessageCountCompletion)completion;
+-(void)getMessagesCountForSessionID:(NSString*)sessionID
+                          completion:(MessageCountCompletion)completion;
 
 /**
  *  批量插入message，需要用户必须在线，避免插入离线时阅读的消息
@@ -78,7 +89,7 @@ typedef void(^DDGetLastestCommodityMessageCompletion)(DDMessageEntity* message);
  *  @param success 插入成功
  *  @param failure 插入失败
  */
-- (void)insertMessages:(NSArray*)messages
+-(void)insertMessages:(NSArray*)messages
                success:(void(^)())success
                failure:(void(^)(NSString* errorDescripe))failure;
 
@@ -88,7 +99,8 @@ typedef void(^DDGetLastestCommodityMessageCompletion)(DDMessageEntity* message);
  *  @param sessionID  会话
  *  @param completion 完成删除
  */
-- (void)deleteMesagesForSession:(NSString*)sessionID completion:(DeleteSessionCompletion)completion;
+-(void)deleteMesagesForSession:(NSString*)sessionID
+                    completion:(DeleteSessionCompletion)completion;
 
 /**
  *  更新数据库中的某条消息
@@ -96,17 +108,17 @@ typedef void(^DDGetLastestCommodityMessageCompletion)(DDMessageEntity* message);
  *  @param message    更新后的消息
  *  @param completion 完成更新
  */
-- (void)updateMessageForMessage:(DDMessageEntity*)message completion:(DDUpdateMessageCompletion)completion;
+-(void)updateMessageForMessage:(DDMessageEntity*)message
+                    completion:(DDUpdateMessageCompletion)completion;
 @end
 
-//-----------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------
 
-typedef void(^LoadRecentContactsComplection)(NSArray* contacts,NSError* error);
-typedef void(^LoadAllContactsComplection)(NSArray* contacts,NSError* error);
-typedef void(^LoadAllSessionsComplection)(NSArray* session,NSError* error);
+typedef void(^LoadRecentContactsComplection)(NSArray* contacts, NSError* error);
+typedef void(^LoadAllContactsComplection)(NSArray* contacts, NSError* error);
+typedef void(^LoadAllSessionsComplection)(NSArray* session, NSError* error);
 typedef void(^UpdateRecentContactsComplection)(NSError* error);
 typedef void(^InsertsRecentContactsCOmplection)(NSError* error);
+
 
 @interface DDDatabaseUtil(Users)
 
@@ -115,14 +127,14 @@ typedef void(^InsertsRecentContactsCOmplection)(NSError* error);
  *
  *  @param completion 完成加载
  */
-- (void)loadContactsCompletion:(LoadRecentContactsComplection)completion;
+-(void)loadContactsCompletion:(LoadRecentContactsComplection)completion;
 
 /**
  *  更新本地数据库的最近联系人信息
  *
  *  @param completion 完成更新本地数据库
  */
-- (void)updateContacts:(NSArray*)users inDBCompletion:(UpdateRecentContactsComplection)completion;
+-(void)updateContacts:(NSArray*)users inDBCompletion:(UpdateRecentContactsComplection)completion;
 
 /**
  *  更新本地数据库某个用户的信息
@@ -138,29 +150,30 @@ typedef void(^InsertsRecentContactsCOmplection)(NSError* error);
  *  @param users      最近联系人数组
  *  @param completion 完成插入
  */
-- (void)insertUsers:(NSArray*)users completion:(InsertsRecentContactsCOmplection)completion;
+-(void)insertUsers:(NSArray*)users completion:(InsertsRecentContactsCOmplection)completion;
 /**
  *  插入组织架构信息
  *
  *  @param departments 组织架构数组
  *  @param completion  完成插入
  */
-- (void)insertDepartments:(NSArray*)departments completion:(InsertsRecentContactsCOmplection)completion;
+-(void)insertDepartments:(NSArray*)departments completion:(InsertsRecentContactsCOmplection)completion;
 
-- (void)getDepartmentFromID:(NSString*)departmentID completion:(void(^)(DDepartment *department))completion;
-- (void)insertAllUser:(NSArray*)users completion:(InsertsRecentContactsCOmplection)completion;
+-(void)getDepartmentFromID:(NSString*)departmentID completion:(void(^)(DDepartment* department))completion;
+-(void)insertAllUser:(NSArray*)users completion:(InsertsRecentContactsCOmplection)completion;
 
-- (void)getAllUsers:(LoadAllContactsComplection )completion;
+-(void)getAllUsers:(LoadAllContactsComplection)completion;
 
-- (void)getUserFromID:(NSString*)userID completion:(void(^)(DDUserEntity *user))completion;
+-(void)getUserFromID:(NSString*)userID completion:(void(^)(DDUserEntity* user))completion;
 
-- (void)updateRecentGroup:(GroupEntity *)group completion:(InsertsRecentContactsCOmplection)completion;
-- (void)updateRecentSession:(SessionEntity *)session completion:(InsertsRecentContactsCOmplection)completion;
-- (void)loadGroupsCompletion:(LoadRecentContactsComplection)completion;
-- (void)loadSessionsCompletion:(LoadAllSessionsComplection)completion;
--(void)removeSession:(NSString *)sessionID;
-- (void)deleteMesages:(DDMessageEntity * )message completion:(DeleteSessionCompletion)completion;
-- (void)loadGroupByIDCompletion:(NSString *)groupID Block:(LoadRecentContactsComplection)completion;
-- (void)getAllDeprt:(LoadAllContactsComplection )completion;
--(void)getDepartmentTitleById:(NSInteger )departmentid Block:(void(^)(NSString *title))block;
+-(void)updateRecentGroup:(GroupEntity*)group completion:(InsertsRecentContactsCOmplection)completion;
+-(void)updateRecentSession:(SessionEntity*)session completion:(InsertsRecentContactsCOmplection)completion;
+-(void)loadGroupsCompletion:(LoadRecentContactsComplection)completion;
+-(void)loadSessionsCompletion:(LoadAllSessionsComplection)completion;
+-(void)removeSession:(NSString*)sessionID;
+-(void)deleteMesages:(DDMessageEntity*)message completion:(DeleteSessionCompletion)completion;
+-(void)loadGroupByIDCompletion:(NSString*)groupID Block:(LoadRecentContactsComplection)completion;
+-(void)getAllDeprt:(LoadAllContactsComplection)completion;
+-(void)getDepartmentTitleById:(NSInteger)departmentid Block:(void(^)(NSString* title))block;
+
 @end

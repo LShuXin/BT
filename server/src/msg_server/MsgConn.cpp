@@ -22,22 +22,26 @@
 #include "IM.SwitchService.pb.h"
 #include "public_define.h"
 #include "ImPduBase.h"
+
+
 using namespace IM::BaseDefine;
 
-#define TIMEOUT_WATI_LOGIN_RESPONSE		15000	// 15 seconds
+
+#define TIMEOUT_WAIT_LOGIN_RESPONSE		15000	// 15 seconds
 #define TIMEOUT_WAITING_MSG_DATA_ACK	15000	// 15 seconds
 #define LOG_MSG_STAT_INTERVAL			300000	// log message miss status in every 5 minutes;
-#define MAX_MSG_CNT_PER_SECOND			20	// user can not send more than 20 msg in one second
+#define MAX_MSG_CNT_PER_SECOND			20	    // user can not send more than 20 msg in one second
+
 static ConnMap_t g_msg_conn_map;
 static UserMap_t g_msg_conn_user_map;
 
-static uint64_t	g_last_stat_tick;	// 上次显示丢包率信息的时间
+static uint64_t	g_last_stat_tick;	        // 上次显示丢包率信息的时间
 static uint32_t g_up_msg_total_cnt = 0;		// 上行消息包总数
 static uint32_t g_up_msg_miss_cnt = 0;		// 上行消息包丢数
 static uint32_t g_down_msg_total_cnt = 0;	// 下行消息包总数
 static uint32_t g_down_msg_miss_cnt = 0;	// 下行消息丢包数
 
-static bool g_log_msg_toggle = true;	// 是否把收到的MsgData写入Log的开关，通过kill -SIGUSR2 pid 打开/关闭
+static bool g_log_msg_toggle = true;	    // 是否把收到的MsgData写入Log的开关，通过kill -SIGUSR2 pid 打开/关闭
 
 static CFileHandler* s_file_handler = NULL;
 static CGroupChat* s_group_chat = NULL;
@@ -48,7 +52,8 @@ void msg_conn_timer_callback(void* callback_data, uint8_t msg, uint32_t handle, 
 	CMsgConn* pConn = NULL;
 	uint64_t cur_time = get_tick_count();
 
-	for (ConnMap_t::iterator it = g_msg_conn_map.begin(); it != g_msg_conn_map.end(); ) {
+	for (ConnMap_t::iterator it = g_msg_conn_map.begin(); it != g_msg_conn_map.end();)
+	{
 		it_old = it;
 		it++;
 
@@ -56,16 +61,22 @@ void msg_conn_timer_callback(void* callback_data, uint8_t msg, uint32_t handle, 
 		pConn->OnTimer(cur_time);
 	}
 
-	if (cur_time > g_last_stat_tick + LOG_MSG_STAT_INTERVAL) {
+	// 用于打印一些状态日志
+	if (cur_time > g_last_stat_tick + LOG_MSG_STAT_INTERVAL)
+	{
 		g_last_stat_tick = cur_time;
 		log("up_msg_cnt=%u, up_msg_miss_cnt=%u, down_msg_cnt=%u, down_msg_miss_cnt=%u ",
-			g_up_msg_total_cnt, g_up_msg_miss_cnt, g_down_msg_total_cnt, g_down_msg_miss_cnt);
+			g_up_msg_total_cnt,
+			g_up_msg_miss_cnt,
+			g_down_msg_total_cnt,
+			g_down_msg_miss_cnt);
 	}
 }
 
 static void signal_handler_usr1(int sig_no)
 {
-	if (sig_no == SIGUSR1) {
+	if (sig_no == SIGUSR1)
+	{
 		log("receive SIGUSR1 ");
 		g_up_msg_total_cnt = 0;
 		g_up_msg_miss_cnt = 0;
@@ -76,7 +87,8 @@ static void signal_handler_usr1(int sig_no)
 
 static void signal_handler_usr2(int sig_no)
 {
-	if (sig_no == SIGUSR2) {
+	if (sig_no == SIGUSR2)
+	{
 		log("receive SIGUSR2 ");
 		g_log_msg_toggle = !g_log_msg_toggle;
 	}
@@ -84,7 +96,8 @@ static void signal_handler_usr2(int sig_no)
 
 static void signal_handler_hup(int sig_no)
 {
-	if (sig_no == SIGHUP) {
+	if (sig_no == SIGHUP)
+	{
 		log("receive SIGHUP exit... ");
 		exit(0);
 	}
@@ -101,7 +114,6 @@ void init_msg_conn()
 	s_group_chat = CGroupChat::GetInstance();
 }
 
-////////////////////////////
 CMsgConn::CMsgConn()
 {
     m_user_id = 0;
@@ -120,17 +132,20 @@ CMsgConn::~CMsgConn()
 
 void CMsgConn::SendUserStatusUpdate(uint32_t user_status)
 {
-    if (!m_bOpen) {
+    if (!m_bOpen)
+    {
 		return;
 	}
     
     CImUser* pImUser = CImUserManager::GetInstance()->GetImUserById(GetUserId());
-    if (!pImUser) {
+    if (!pImUser)
+    {
         return;
     }
     
-    // 只有上下线通知才通知LoginServer
-    if (user_status == ::IM::BaseDefine::USER_STATUS_ONLINE) {
+    // 只有上下线通知才通知 LoginServer
+    if (user_status == ::IM::BaseDefine::USER_STATUS_ONLINE)
+    {
         IM::Server::IMUserCntUpdate msg;
         msg.set_user_action(USER_CNT_INC);
         msg.set_user_id(pImUser->GetUserId());
@@ -150,7 +165,9 @@ void CMsgConn::SendUserStatusUpdate(uint32_t user_status)
         pdu2.SetCommandId(CID_OTHER_USER_STATUS_UPDATE);
         
         send_to_all_route_server(&pdu2);
-    } else if (user_status == ::IM::BaseDefine::USER_STATUS_OFFLINE) {
+    }
+    else if (user_status == ::IM::BaseDefine::USER_STATUS_OFFLINE)
+    {
         IM::Server::IMUserCntUpdate msg;
         msg.set_user_action(USER_CNT_DEC);
         msg.set_user_id(pImUser->GetUserId());
@@ -175,26 +192,31 @@ void CMsgConn::SendUserStatusUpdate(uint32_t user_status)
 void CMsgConn::Close(bool kick_user)
 {
     log("Close client, handle=%d, user_id=%u ", m_handle, GetUserId());
-    if (m_handle != NETLIB_INVALID_HANDLE) {
+    if (m_handle != NETLIB_INVALID_HANDLE)
+    {
         netlib_close(m_handle);
         g_msg_conn_map.erase(m_handle);
     }
     
     CImUser *pImUser = CImUserManager::GetInstance()->GetImUserById(GetUserId());
-    if (pImUser) {
+    if (pImUser)
+    {
         pImUser->DelMsgConn(GetHandle());
         pImUser->DelUnValidateMsgConn(this);
         
         SendUserStatusUpdate(::IM::BaseDefine::USER_STATUS_OFFLINE);
-        if (pImUser->IsMsgConnEmpty()) {
+        if (pImUser->IsMsgConnEmpty())
+        {
             CImUserManager::GetInstance()->RemoveImUser(pImUser);
         }
     }
     
     pImUser = CImUserManager::GetInstance()->GetImUserByLoginName(GetLoginName());
-    if (pImUser) {
+    if (pImUser)
+    {
         pImUser->DelUnValidateMsgConn(this);
-        if (pImUser->IsMsgConnEmpty()) {
+        if (pImUser->IsMsgConnEmpty())
+        {
             CImUserManager::GetInstance()->RemoveImUser(pImUser);
         }
     }
@@ -228,7 +250,8 @@ void CMsgConn::OnTimer(uint64_t curr_tick)
 
     if (CHECK_CLIENT_TYPE_MOBILE(GetClientType()))
     {
-        if (curr_tick > m_last_recv_tick + MOBILE_CLIENT_TIMEOUT) {
+        if (curr_tick > m_last_recv_tick + MOBILE_CLIENT_TIMEOUT)
+        {
             log("mobile client timeout, handle=%d, uid=%u ", m_handle, GetUserId());
             Close();
             return;
@@ -236,7 +259,8 @@ void CMsgConn::OnTimer(uint64_t curr_tick)
     }
     else
     {
-        if (curr_tick > m_last_recv_tick + CLIENT_TIMEOUT) {
+        if (curr_tick > m_last_recv_tick + CLIENT_TIMEOUT)
+        {
             log("client timeout, handle=%d, uid=%u ", m_handle, GetUserId());
             Close();
             return;
@@ -244,8 +268,10 @@ void CMsgConn::OnTimer(uint64_t curr_tick)
     }
     
 
-	if (!IsOpen()) {
-		if (curr_tick > m_login_time + TIMEOUT_WATI_LOGIN_RESPONSE) {
+	if (!IsOpen())
+	{
+		if (curr_tick > m_login_time + TIMEOUT_WAIT_LOGIN_RESPONSE)
+		{
 			log("login timeout, handle=%d, uid=%u ", m_handle, GetUserId());
 			Close();
 			return;
@@ -253,15 +279,19 @@ void CMsgConn::OnTimer(uint64_t curr_tick)
 	}
 
 	list<msg_ack_t>::iterator it_old;
-	for (list<msg_ack_t>::iterator it = m_send_msg_list.begin(); it != m_send_msg_list.end(); ) {
+	for (list<msg_ack_t>::iterator it = m_send_msg_list.begin(); it != m_send_msg_list.end();)
+	{
 		msg_ack_t msg = *it;
 		it_old = it;
 		it++;
-		if (curr_tick >= msg.timestamp + TIMEOUT_WAITING_MSG_DATA_ACK) {
+		if (curr_tick >= msg.timestamp + TIMEOUT_WAITING_MSG_DATA_ACK)
+		{
 			log("!!!a msg missed, msg_id=%u, %u->%u ", msg.msg_id, msg.from_id, GetUserId());
 			g_down_msg_miss_cnt++;
 			m_send_msg_list.erase(it_old);
-		} else {
+		}
+		else
+        {
 			break;
 		}
 	}
@@ -270,13 +300,14 @@ void CMsgConn::OnTimer(uint64_t curr_tick)
 void CMsgConn::HandlePdu(CImPdu* pPdu)
 {
 	// request authorization check
-	if (pPdu->GetCommandId() != CID_LOGIN_REQ_USERLOGIN && !IsOpen() && IsKickOff()) {
+	if (pPdu->GetCommandId() != CID_LOGIN_REQ_USERLOGIN && !IsOpen() && IsKickOff())
+	{
         log("HandlePdu, wrong msg. ");
         throw CPduException(pPdu->GetServiceId(), pPdu->GetCommandId(), ERROR_CODE_WRONG_SERVICE_ID, "HandlePdu error, user not login. ");
-		return;
     }
     
-	switch (pPdu->GetCommandId()) {
+	switch (pPdu->GetCommandId())
+	{
         case CID_OTHER_HEARTBEAT:
             _HandleHeartBeat(pPdu);
             break;
@@ -308,7 +339,7 @@ void CMsgConn::HandlePdu(CImPdu* pPdu)
             _HandleClientGetMsgByMsgIdRequest(pPdu);
             break;
         case CID_MSG_UNREAD_CNT_REQUEST:
-            _HandleClientUnreadMsgCntRequest(pPdu );
+            _HandleClientUnreadMsgCntRequest(pPdu);
             break;
         case CID_MSG_READ_ACK:
             _HandleClientMsgReadAck(pPdu);
@@ -316,25 +347,26 @@ void CMsgConn::HandlePdu(CImPdu* pPdu)
         case CID_MSG_GET_LATEST_MSG_ID_REQ:
             _HandleClientGetLatestMsgIDReq(pPdu);
             break;
+        // for p2p
         case CID_SWITCH_P2P_CMD:
-            _HandleClientP2PCmdMsg(pPdu );
+            _HandleClientP2PCmdMsg(pPdu);
             break;
+        // for buddy process
         case CID_BUDDY_LIST_RECENT_CONTACT_SESSION_REQUEST:
             _HandleClientRecentContactSessionRequest(pPdu);
             break;
         case CID_BUDDY_LIST_USER_INFO_REQUEST:
-            _HandleClientUserInfoRequest( pPdu );
+            _HandleClientUserInfoRequest(pPdu);
             break;
         case CID_BUDDY_LIST_REMOVE_SESSION_REQ:
-            _HandleClientRemoveSessionRequest( pPdu );
+            _HandleClientRemoveSessionRequest(pPdu);
             break;
         case CID_BUDDY_LIST_ALL_USER_REQUEST:
-            _HandleClientAllUserRequest(pPdu );
+            _HandleClientAllUserRequest(pPdu);
             break;
         case CID_BUDDY_LIST_CHANGE_AVATAR_REQUEST:
             _HandleChangeAvatarRequest(pPdu);
             break;
-            
         case CID_BUDDY_LIST_USERS_STATUS_REQUEST:
             _HandleClientUsersStatusRequest(pPdu);
             break;
@@ -357,7 +389,7 @@ void CMsgConn::HandlePdu(CImPdu* pPdu)
         case CID_GROUP_SHIELD_GROUP_REQUEST:
             s_group_chat->HandleClientGroupShieldGroupRequest(pPdu, this);
             break;
-            
+        // for file process
         case CID_FILE_REQUEST:
             s_file_handler->HandleClientFileRequest(this, pPdu);
             break;
@@ -386,7 +418,8 @@ void CMsgConn::_HandleHeartBeat(CImPdu *pPdu)
 void CMsgConn::_HandleLoginRequest(CImPdu* pPdu)
 {
     // refuse second validate request
-    if (m_login_name.length() != 0) {
+    if (m_login_name.length() != 0)
+    {
         log("duplicate LoginRequest in the same conn ");
         return;
     }
@@ -395,20 +428,24 @@ void CMsgConn::_HandleLoginRequest(CImPdu* pPdu)
     uint32_t result = 0;
     string result_string = "";
     CDBServConn* pDbConn = get_db_serv_conn_for_login();
-    if (!pDbConn) {
+    if (!pDbConn)
+    {
         result = IM::BaseDefine::REFUSE_REASON_NO_DB_SERVER;
         result_string = "DB SERVER 服务端异常";
     }
-    else if (!is_login_server_available()) {
+    else if (!is_login_server_available())
+    {
         result = IM::BaseDefine::REFUSE_REASON_NO_LOGIN_SERVER;
         result_string = "LOGIN SERVER 服务端异常";
     }
-    else if (!is_route_server_available()) {
+    else if (!is_route_server_available())
+    {
         result = IM::BaseDefine::REFUSE_REASON_NO_ROUTE_SERVER;
         result_string = "ROUTE SERVER 服务端异常";
     }
     
-    if (result) {
+    if (result)
+    {
         IM::Login::IMLoginRes msg;
         msg.set_server_time(time(NULL));
         msg.set_result_code((IM::BaseDefine::ResultType)result);
@@ -425,22 +462,27 @@ void CMsgConn::_HandleLoginRequest(CImPdu* pPdu)
     
     IM::Login::IMLoginReq msg;
     CHECK_PB_PARSE_MSG(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()));
-    //假如是汉字，则转成拼音
+    // 假如是汉字，则转成拼音
     m_login_name = msg.user_name();
     string password = msg.password();
     uint32_t online_status = msg.online_status();
-    if (online_status < IM::BaseDefine::USER_STATUS_ONLINE || online_status > IM::BaseDefine::USER_STATUS_LEAVE) {
-        log("HandleLoginReq, online status wrong: %u ", online_status);
+    if (online_status < IM::BaseDefine::USER_STATUS_ONLINE || online_status > IM::BaseDefine::USER_STATUS_LEAVE)
+    {
+        log("HandleLoginReq, online status wrong: %u", online_status);
         online_status = IM::BaseDefine::USER_STATUS_ONLINE;
     }
     m_client_version = msg.client_version();
     m_client_type = msg.client_type();
     m_online_status = online_status;
-    log("HandleLoginReq, user_name=%s, status=%u, client_type=%u, client=%s, ",
-        m_login_name.c_str(), online_status, m_client_type, m_client_version.c_str());
+    log("HandleLoginReq, user_name=%s, status=%u, client_type=%u, client=%s",
+        m_login_name.c_str(),
+        online_status,
+        m_client_type,
+        m_client_version.c_str());
     
     CImUser* pImUser = CImUserManager::GetInstance()->GetImUserByLoginName(GetLoginName());
-    if (!pImUser) {
+    if (!pImUser)
+    {
         pImUser = new CImUser(GetLoginName());
         CImUserManager::GetInstance()->AddImUserByLoginName(GetLoginName(), pImUser);
     }
@@ -463,9 +505,10 @@ void CMsgConn::_HandleLoginRequest(CImPdu* pPdu)
 
 void CMsgConn::_HandleLoginOutRequest(CImPdu *pPdu)
 {
-    log("HandleLoginOutRequest, user_id=%d, client_type=%u. ", GetUserId(), GetClientType());
+    log("HandleLoginOutRequest, user_id=%d, client_type=%u", GetUserId(), GetClientType());
     CDBServConn* pDBConn = get_db_serv_conn();
-	if (pDBConn) {
+	if (pDBConn)
+	{
         IM::Login::IMDeviceTokenReq msg;
         msg.set_user_id(GetUserId());
         msg.set_device_token("");
@@ -495,10 +538,10 @@ void CMsgConn::_HandleKickPCClient(CImPdu *pPdu)
     uint32_t user_id = GetUserId();
     if (!CHECK_CLIENT_TYPE_MOBILE(GetClientType()))
     {
-        log("HandleKickPCClient, user_id = %u, cmd must come from mobile client. ", user_id);
+        log("HandleKickPCClient, user_id = %u, cmd must come from mobile client", user_id);
         return;
     }
-    log("HandleKickPCClient, user_id = %u. ", user_id);
+    log("HandleKickPCClient, user_id = %u", user_id);
     
     CImUser* pImUser = CImUserManager::GetInstance()->GetImUserById(user_id);
     if (pImUser)
@@ -507,7 +550,8 @@ void CMsgConn::_HandleKickPCClient(CImPdu *pPdu)
     }
     
     CRouteServConn* pRouteConn = get_route_serv_conn();
-    if (pRouteConn) {
+    if (pRouteConn)
+    {
         IM::Server::IMServerKickUser msg2;
         msg2.set_user_id(user_id);
         msg2.set_client_type(::IM::BaseDefine::CLIENT_TYPE_MAC);
@@ -533,13 +577,14 @@ void CMsgConn::_HandleKickPCClient(CImPdu *pPdu)
 void CMsgConn::_HandleClientRecentContactSessionRequest(CImPdu *pPdu)
 {
     CDBServConn* pConn = get_db_serv_conn_for_login();
-    if (!pConn) {
+    if (!pConn)
+    {
         return;
     }
     
     IM::Buddy::IMRecentContactSessionReq msg;
     CHECK_PB_PARSE_MSG(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()));
-    log("HandleClientRecentContactSessionRequest, user_id=%u, latest_update_time=%u. ", GetUserId(), msg.latest_update_time());
+    log("HandleClientRecentContactSessionRequest, user_id=%u, latest_update_time=%u", GetUserId(), msg.latest_update_time());
 
     msg.set_user_id(GetUserId());
     // 请求最近联系会话列表
@@ -553,13 +598,15 @@ void CMsgConn::_HandleClientMsgData(CImPdu* pPdu)
 {
     IM::Message::IMMsgData msg;
     CHECK_PB_PARSE_MSG(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()));
-	if (msg.msg_data().length() == 0) {
+	if (msg.msg_data().length() == 0)
+	{
 		log("discard an empty message, uid=%u ", GetUserId());
 		return;
 	}
 
-	if (m_msg_cnt_per_sec >= MAX_MSG_CNT_PER_SECOND) {
-		log("!!!too much msg cnt in one second, uid=%u ", GetUserId());
+	if (m_msg_cnt_per_sec >= MAX_MSG_CNT_PER_SECOND)
+	{
+		log("!!!too much msg cnt in one second, uid=%u", GetUserId());
 		return;
 	}
     
@@ -576,8 +623,9 @@ void CMsgConn::_HandleClientMsgData(CImPdu* pPdu)
 	uint8_t msg_type = msg.msg_type();
     string msg_data = msg.msg_data();
 
-	if (g_log_msg_toggle) {
-		log("HandleClientMsgData, %d->%d, msg_type=%u, msg_id=%u. ", GetUserId(), to_session_id, msg_type, msg_id);
+	if (g_log_msg_toggle)
+	{
+		log("HandleClientMsgData, %d->%d, msg_type=%u, msg_id=%u", GetUserId(), to_session_id, msg_type, msg_id);
 	}
 
 	uint32_t cur_time = time(NULL);
@@ -588,7 +636,8 @@ void CMsgConn::_HandleClientMsgData(CImPdu* pPdu)
     pPdu->SetPBMsg(&msg);
 	// send to DB storage server
 	CDBServConn* pDbConn = get_db_serv_conn();
-	if (pDbConn) {
+	if (pDbConn)
+	{
 		pDbConn->SendPdu(pPdu);
 	}
 }
@@ -627,10 +676,16 @@ void CMsgConn::_HandleClientGetMsgListRequest(CImPdu *pPdu)
     uint32_t msg_id_begin = msg.msg_id_begin();
     uint32_t msg_cnt = msg.msg_cnt();
     uint32_t session_type = msg.session_type();
-    log("HandleClientGetMsgListRequest, req_id=%u, session_type=%u, session_id=%u, msg_id_begin=%u, msg_cnt=%u. ",
-        GetUserId(), session_type, session_id, msg_id_begin, msg_cnt);
+    log("HandleClientGetMsgListRequest, req_id=%u, session_type=%u, session_id=%u, msg_id_begin=%u, msg_cnt=%u",
+        GetUserId(),
+        session_type,
+        session_id,
+        msg_id_begin,
+        msg_cnt);
+
     CDBServConn* pDBConn = get_db_serv_conn_for_login();
-    if (pDBConn) {
+    if (pDBConn)
+    {
         CDbAttachData attach(ATTACH_TYPE_HANDLE, m_handle, 0);
         msg.set_user_id(GetUserId());
         msg.set_attach_data(attach.GetBuffer(), attach.GetLength());
@@ -646,10 +701,13 @@ void CMsgConn::_HandleClientGetMsgByMsgIdRequest(CImPdu *pPdu)
     uint32_t session_id = msg.session_id();
     uint32_t session_type = msg.session_type();
     uint32_t msg_cnt = msg.msg_id_list_size();
-    log("_HandleClientGetMsgByMsgIdRequest, req_id=%u, session_type=%u, session_id=%u, msg_cnt=%u.",
-        GetUserId(), session_type, session_id, msg_cnt);
+    log("_HandleClientGetMsgByMsgIdRequest, req_id=%u, session_type=%u, session_id=%u, msg_cnt=%u",
+        GetUserId(),
+        session_type,
+        session_id, msg_cnt);
     CDBServConn* pDBConn = get_db_serv_conn_for_login();
-    if (pDBConn) {
+    if (pDBConn)
+    {
         CDbAttachData attach(ATTACH_TYPE_HANDLE, m_handle, 0);
         msg.set_user_id(GetUserId());
         msg.set_attach_data(attach.GetBuffer(), attach.GetLength());
@@ -660,12 +718,13 @@ void CMsgConn::_HandleClientGetMsgByMsgIdRequest(CImPdu *pPdu)
 
 void CMsgConn::_HandleClientUnreadMsgCntRequest(CImPdu* pPdu)
 {
-	log("HandleClientUnreadMsgCntReq, from_id=%u ", GetUserId());
+	log("HandleClientUnreadMsgCntReq, from_id=%u", GetUserId());
     IM::Message::IMUnreadMsgCntReq msg;
     CHECK_PB_PARSE_MSG(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()));
     
 	CDBServConn* pDBConn = get_db_serv_conn_for_login();
-	if (pDBConn) {
+	if (pDBConn)
+	{
 		CDbAttachData attach(ATTACH_TYPE_HANDLE, m_handle, 0);
         msg.set_user_id(GetUserId());
         msg.set_attach_data(attach.GetBuffer(), attach.GetLength());
@@ -681,10 +740,11 @@ void CMsgConn::_HandleClientMsgReadAck(CImPdu* pPdu)
     uint32_t session_type = msg.session_type();
     uint32_t session_id = msg.session_id();
     uint32_t msg_id = msg.msg_id();
-    log("HandleClientMsgReadAck, user_id=%u, session_id=%u, msg_id=%u, session_type=%u. ", GetUserId(),session_id, msg_id, session_type);
+    log("HandleClientMsgReadAck, user_id=%u, session_id=%u, msg_id=%u, session_type=%u", GetUserId(),session_id, msg_id, session_type);
     
 	CDBServConn* pDBConn = get_db_serv_conn();
-	if (pDBConn) {
+	if (pDBConn)
+	{
         msg.set_user_id(GetUserId());
         pPdu->SetPBMsg(&msg);
 		pDBConn->SendPdu(pPdu);
@@ -704,7 +764,8 @@ void CMsgConn::_HandleClientMsgReadAck(CImPdu* pPdu)
         pUser->BroadcastPdu(&pdu, this);
     }
     CRouteServConn* pRouteConn = get_route_serv_conn();
-    if (pRouteConn) {
+    if (pRouteConn)
+    {
         pRouteConn->SendPdu(&pdu);
     }
     
@@ -720,10 +781,11 @@ void CMsgConn::_HandleClientGetLatestMsgIDReq(CImPdu *pPdu)
     CHECK_PB_PARSE_MSG(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()));
     uint32_t session_type = msg.session_type();
     uint32_t session_id = msg.session_id();
-    log("HandleClientGetMsgListRequest, user_id=%u, session_id=%u, session_type=%u. ", GetUserId(),session_id, session_type);
+    log("_HandleClientGetLatestMsgIDReq, user_id=%u, session_id=%u, session_type=%u", GetUserId(),session_id, session_type);
     
     CDBServConn* pDBConn = get_db_serv_conn();
-    if (pDBConn) {
+    if (pDBConn)
+    {
         CDbAttachData attach(ATTACH_TYPE_HANDLE, m_handle, 0);
         msg.set_user_id(GetUserId());
         msg.set_attach_data(attach.GetBuffer(), attach.GetLength());
@@ -741,21 +803,24 @@ void CMsgConn::_HandleClientP2PCmdMsg(CImPdu* pPdu)
 	uint32_t from_user_id = msg.from_user_id();
 	uint32_t to_user_id = msg.to_user_id();
 
-	log("HandleClientP2PCmdMsg, %u->%u, cmd_msg: %s ", from_user_id, to_user_id, cmd_msg.c_str());
+	log("HandleClientP2PCmdMsg, %u->%u, cmd_msg: %s", from_user_id, to_user_id, cmd_msg.c_str());
 
     CImUser* pFromImUser = CImUserManager::GetInstance()->GetImUserById(GetUserId());
 	CImUser* pToImUser = CImUserManager::GetInstance()->GetImUserById(to_user_id);
     
-	if (pFromImUser) {
+	if (pFromImUser)
+	{
 		pFromImUser->BroadcastPdu(pPdu, this);
 	}
     
-	if (pToImUser) {
+	if (pToImUser)
+	{
 		pToImUser->BroadcastPdu(pPdu, NULL);
 	}
     
 	CRouteServConn* pRouteConn = get_route_serv_conn();
-	if (pRouteConn) {
+	if (pRouteConn)
+	{
 		pRouteConn->SendPdu(pPdu);
 	}
 }
@@ -765,9 +830,10 @@ void CMsgConn::_HandleClientUserInfoRequest(CImPdu* pPdu)
     IM::Buddy::IMUsersInfoReq msg;
     CHECK_PB_PARSE_MSG(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()));
     uint32_t user_cnt = msg.user_id_list_size();
-	log("HandleClientUserInfoReq, req_id=%u, user_cnt=%u ", GetUserId(), user_cnt);
+	log("HandleClientUserInfoReq, req_id=%u, user_cnt=%u", GetUserId(), user_cnt);
 	CDBServConn* pDBConn = get_db_serv_conn_for_login();
-	if (pDBConn) {
+	if (pDBConn)
+	{
 		CDbAttachData attach(ATTACH_TYPE_HANDLE, m_handle, 0);
         msg.set_user_id(GetUserId());
         msg.set_attach_data(attach.GetBuffer(), attach.GetLength());
@@ -782,10 +848,11 @@ void CMsgConn::_HandleClientRemoveSessionRequest(CImPdu* pPdu)
     CHECK_PB_PARSE_MSG(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()));
     uint32_t session_type = msg.session_type();
     uint32_t session_id = msg.session_id();
-    log("HandleClientRemoveSessionReq, user_id=%u, session_id=%u, type=%u ", GetUserId(), session_id, session_type);
+    log("HandleClientRemoveSessionReq, user_id=%u, session_id=%u, type=%u", GetUserId(), session_id, session_type);
     
     CDBServConn* pConn = get_db_serv_conn();
-    if (pConn) {
+    if (pConn)
+    {
         CDbAttachData attach(ATTACH_TYPE_HANDLE, m_handle, 0);
         msg.set_user_id(GetUserId());
         msg.set_attach_data(attach.GetBuffer(), attach.GetLength());
@@ -804,11 +871,13 @@ void CMsgConn::_HandleClientRemoveSessionRequest(CImPdu* pPdu)
         pdu.SetServiceId(SID_BUDDY_LIST);
         pdu.SetCommandId(CID_BUDDY_LIST_REMOVE_SESSION_NOTIFY);
         CImUser* pImUser = CImUserManager::GetInstance()->GetImUserById(GetUserId());
-        if (pImUser) {
+        if (pImUser)
+        {
             pImUser->BroadcastPdu(&pdu, this);
         }
         CRouteServConn* pRouteConn = get_route_serv_conn();
-        if (pRouteConn) {
+        if (pRouteConn)
+        {
             pRouteConn->SendPdu(&pdu);
         }
     }
@@ -819,10 +888,11 @@ void CMsgConn::_HandleClientAllUserRequest(CImPdu* pPdu)
     IM::Buddy::IMAllUserReq msg;
     CHECK_PB_PARSE_MSG(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()));
     uint32_t latest_update_time = msg.latest_update_time();
-    log("HandleClientAllUserReq, user_id=%u, latest_update_time=%u. ", GetUserId(), latest_update_time);
+    log("HandleClientAllUserReq, user_id=%u, latest_update_time=%u", GetUserId(), latest_update_time);
     
     CDBServConn* pConn = get_db_serv_conn();
-    if (pConn) {
+    if (pConn)
+    {
         CDbAttachData attach(ATTACH_TYPE_HANDLE, m_handle, 0);
         msg.set_user_id(GetUserId());
         msg.set_attach_data(attach.GetBuffer(), attach.GetLength());
@@ -837,7 +907,8 @@ void CMsgConn::_HandleChangeAvatarRequest(CImPdu* pPdu)
     CHECK_PB_PARSE_MSG(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()));
     log("HandleChangeAvatarRequest, user_id=%u ", GetUserId());
     CDBServConn* pDBConn = get_db_serv_conn();
-    if (pDBConn) {
+    if (pDBConn)
+    {
         msg.set_user_id(GetUserId());
         pPdu->SetPBMsg(&msg);
         pDBConn->SendPdu(pPdu);
@@ -849,10 +920,10 @@ void CMsgConn::_HandleClientUsersStatusRequest(CImPdu* pPdu)
     IM::Buddy::IMUsersStatReq msg;
     CHECK_PB_PARSE_MSG(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()));
 	uint32_t user_count = msg.user_id_list_size();
-	log("HandleClientUsersStatusReq, user_id=%u, query_count=%u.", GetUserId(), user_count);
+	log("HandleClientUsersStatusReq, user_id=%u, query_count=%u", GetUserId(), user_count);
     
     CRouteServConn* pRouteConn = get_route_serv_conn();
-    if(pRouteConn)
+    if (pRouteConn)
     {
         msg.set_user_id(GetUserId());
         CPduAttachData attach(ATTACH_TYPE_HANDLE, m_handle,0, NULL);
@@ -866,9 +937,10 @@ void CMsgConn::_HandleClientDepartmentRequest(CImPdu *pPdu)
 {
     IM::Buddy::IMDepartmentReq msg;
     CHECK_PB_PARSE_MSG(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()));
-    log("HandleClientDepartmentRequest, user_id=%u, latest_update_time=%u.", GetUserId(), msg.latest_update_time());
+    log("HandleClientDepartmentRequest, user_id=%u, latest_update_time=%u", GetUserId(), msg.latest_update_time());
     CDBServConn* pDBConn = get_db_serv_conn();
-    if (pDBConn) {
+    if (pDBConn)
+    {
         CDbAttachData attach(ATTACH_TYPE_HANDLE, m_handle, 0);
         msg.set_user_id(GetUserId());
         msg.set_attach_data(attach.GetBuffer(), attach.GetLength());
@@ -881,13 +953,13 @@ void CMsgConn::_HandleClientDeviceToken(CImPdu *pPdu)
 {
     if (!CHECK_CLIENT_TYPE_MOBILE(GetClientType()))
     {
-        log("HandleClientDeviceToken, user_id=%u, not mobile client.", GetUserId());
+        log("HandleClientDeviceToken, user_id=%u, not mobile client", GetUserId());
         return;
     }
     IM::Login::IMDeviceTokenReq msg;
     CHECK_PB_PARSE_MSG(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()));
     string device_token = msg.device_token();
-    log("HandleClientDeviceToken, user_id=%u, device_token=%s ", GetUserId(), device_token.c_str());
+    log("HandleClientDeviceToken, user_id=%u, device_token=%s", GetUserId(), device_token.c_str());
     
     IM::Login::IMDeviceTokenRsp msg2;
     msg.set_user_id(GetUserId());
@@ -900,7 +972,8 @@ void CMsgConn::_HandleClientDeviceToken(CImPdu *pPdu)
     SendPdu(&pdu);
     
     CDBServConn* pDBConn = get_db_serv_conn();
-	if (pDBConn) {
+	if (pDBConn)
+	{
         msg.set_user_id(GetUserId());
         pPdu->SetPBMsg(&msg);
 		pDBConn->SendPdu(pPdu);
@@ -922,9 +995,11 @@ void CMsgConn::AddToSendList(uint32_t msg_id, uint32_t from_id)
 void CMsgConn::DelFromSendList(uint32_t msg_id, uint32_t from_id)
 {
 	//log("DelSendMsg, seq_no=%u, from_id=%u ", seq_no, from_id);
-	for (list<msg_ack_t>::iterator it = m_send_msg_list.begin(); it != m_send_msg_list.end(); it++) {
+	for (list<msg_ack_t>::iterator it = m_send_msg_list.begin(); it != m_send_msg_list.end(); it++)
+	{
 		msg_ack_t msg = *it;
-		if ( (msg.msg_id == msg_id) && (msg.from_id == from_id) ) {
+		if ( (msg.msg_id == msg_id) && (msg.from_id == from_id) )
+		{
 			m_send_msg_list.erase(it);
 			break;
 		}

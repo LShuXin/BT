@@ -88,7 +88,7 @@ get_cur_dir() {
 }
 
 
-build_g++(){
+build_g++() {
 	check_user
 	yum -y install gcc-c++
 	download $GCC.tar.gz $GCC_DOWNLOAD_PATH
@@ -102,7 +102,7 @@ build_g++(){
 	make install
 }
 
-build_termcap(){
+build_termcap() {
 	# building termcap
 	cd $CUR_DIR
 	download $TERMCAP.tar.gz $TERMCAP_DOWNLOAD_PATH
@@ -111,21 +111,22 @@ build_termcap(){
 	./configure --prefix=/usr
     make
 	if [ $? -eq 0 ]; then
-  	echo "make termcap successed";
+  	    echo "make termcap successed";
 	else
-  	echo "make termcap failed";
-  	exit;
+  	    echo "make termcap failed";
+  	    exit;
 	fi
+
     make install
 	if [ $? -eq 0 ]; then
-  	echo "install termcap successed";
+  	    echo "install termcap successed";
 	else
-  	echo "install termcap failed";
-  	exit;
+  	    echo "install termcap failed";
+  	    exit;
 	fi
 }
 
-build_gdb(){
+build_gdb() {
 	# building gdb
     yum -y install texinfo
 	cd $CUR_DIR
@@ -135,17 +136,17 @@ build_gdb(){
 	./configure --prefix=/usr
     make
 	if [ $? -eq 0 ]; then
-  	echo "make gdb successed";
+  	    echo "make gdb successed";
 	else
-  	echo "make gdb failed";
+  	    echo "make gdb failed";
   	exit;
 	fi
     make install
 	if [ $? -eq 0 ]; then
-  	echo "install gdb successed";
+  	    echo "install gdb successed";
 	else
-  	echo "install gdb failed";
-  	exit;
+  	    echo "install gdb failed";
+  	    exit;
 	fi
 }
 

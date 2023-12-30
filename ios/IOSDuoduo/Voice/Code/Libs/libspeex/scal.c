@@ -190,12 +190,12 @@ EXPORT void speex_decorrelate(SpeexDecorrState *st, const spx_int16_t *in, spx_i
          if (ringID>=order)
             ringID=0;
       }
-      order = order+(irand(&st->seed)%3)-1;
+      order = order+ (irand(&st->seed)%3)-1;
       if (order < 5)
          order = 5;
       if (order > 10)
          order = 10;
-      /*order = 5+(irand(&st->seed)%6);*/
+      /*order = 5+ (irand(&st->seed)%6);*/
       max_alpha = pow(.96+.04*(amount-1),order);
       if (max_alpha > .98/(1.+beta2))
          max_alpha = .98/(1.+beta2);

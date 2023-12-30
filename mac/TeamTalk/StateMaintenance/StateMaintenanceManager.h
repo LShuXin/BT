@@ -7,7 +7,7 @@
 //
 
 #import "DDRootModule.h"
-#import "IMBaseDefine.pb.h"
+#import "IMBaseDefine.pbobjc.h"
 
 @class DDUserStateEntity;
 #define DD_USER_ONLINE_STATE_KEYPATH        @"userStateEntity"

@@ -12,7 +12,7 @@ REDIS_CONF=redis.conf
 REDIS_SERVER_PATH=/usr/local/bin
 REDIS_SERVER=redis-server
 
-print_hello(){
+print_hello() {
 	echo "==========================================="
 	echo "$1 redis for TeamTalk"
 	echo "==========================================="
@@ -28,7 +28,7 @@ check_user() {
 check_os() {
 	OS_VERSION=$(less /etc/redhat-release)
 	OS_BIT=$(getconf LONG_BIT)
-	#echo "$OS_VERSION, $OS_BIT bit..." 
+	echo "$OS_VERSION, $OS_BIT bit..." 
 	if [[ $OS_VERSION =~ "CentOS" ]]; then
 		if [ $OS_BIT == 64 ]; then
 			return 0

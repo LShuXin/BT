@@ -7,7 +7,7 @@
 //
 
 #import "DDRemoveSessionAPI.h"
-#import "IMBuddy.pb.h"
+#import "IMBuddy.pbobjc.h"
 
 @implementation DDRemoveSessionAPI
 
@@ -70,7 +70,7 @@
 {
     Analysis analysis = (id)^(NSData* data)
     {
-        IMRemoveSessionRsp *rsp = [IMRemoveSessionRsp parseFromData:data];
+        IMRemoveSessionRsp *rsp = [IMRemoveSessionRsp parseFromData:data error:nil];
         NSMutableDictionary *dic = [NSMutableDictionary new];
         UInt32 sessionId = rsp.sessionId;
         SessionType sessionType = rsp.sessionType;
@@ -97,7 +97,7 @@
         NSArray* array = (NSArray*)object;
         UInt32 sessionId= (UInt32)[array[0] intValue];
         SessionType sessionType = [array[1] intValue];
-        IMRemoveSessionReqBuilder *removeSession = [IMRemoveSessionReq builder];
+        IMRemoveSessionReq *removeSession = [[IMRemoveSessionReq alloc] init];
         [removeSession setUserId:0];
         [removeSession setSessionId:sessionId];
         [removeSession setSessionType:sessionType];
@@ -106,7 +106,7 @@
         [dataout writeTcpProtocolHeader:MODULE_ID_SESSION
                                     cId:REMOVE_SESSION_REQ
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[removeSession build].data];
+        [dataout directWriteBytes:[removeSession data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

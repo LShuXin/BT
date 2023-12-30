@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FinderViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,NSURLConnectionDelegate>
-@property(nonatomic,weak)IBOutlet UITableView* tableView;
+
+@interface FinderViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, NSURLConnectionDelegate>
+
+@property(nonatomic, weak) IBOutlet UITableView* tableView;
+
 @end

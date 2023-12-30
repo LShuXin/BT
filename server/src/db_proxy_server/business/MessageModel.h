@@ -21,23 +21,85 @@
 #include "IM.BaseDefine.pb.h"
 using namespace std;
 
-class CMessageModel {
+class CMessageModel
+{
 public:
 	virtual ~CMessageModel();
 	static CMessageModel* getInstance();
 
-    bool sendMessage(uint32_t nRelateId, uint32_t nFromId, uint32_t nToId, IM::BaseDefine::MsgType nMsgType, uint32_t nCreateTime,
-                     uint32_t nMsgId, string& strMsgContent);
-    bool sendAudioMessage(uint32_t nRelateId, uint32_t nFromId, uint32_t nToId, IM::BaseDefine::MsgType nMsgType, uint32_t nCreateTime,
-                          uint32_t nMsgId, const char* pMsgContent, uint32_t nMsgLen);
-    void getMessage(uint32_t nUserId, uint32_t nPeerId, uint32_t nMsgId, uint32_t nMsgCnt,
-                    list<IM::BaseDefine::MsgInfo>& lsMsg);
+    /*
+     * IMMessage 分表
+     * AddFriendShip()
+     * if nFromId or nToId is ShopEmployee
+     * GetShopId
+     * Insert into IMMessage_ShopId%8
+     */
+    bool sendMessage(
+            uint32_t nRelateId,
+            uint32_t nFromId,
+            uint32_t nToId,
+            IM::BaseDefine::MsgType nMsgType,
+            uint32_t nCreateTime,
+            uint32_t nMsgId,
+            string& strMsgContent);
+
+    bool sendAudioMessage(
+            uint32_t nRelateId,
+            uint32_t nFromId,
+            uint32_t nToId,
+            IM::BaseDefine::MsgType nMsgType,
+            uint32_t nCreateTime,
+            uint32_t nMsgId,
+            const char* pMsgContent,
+            uint32_t nMsgLen);
+
+    void getMessage(
+            uint32_t nUserId,
+            uint32_t nPeerId,
+            uint32_t nMsgId,
+            uint32_t nMsgCnt,
+            list<IM::BaseDefine::MsgInfo>& lsMsg);
+
     bool clearMessageCount(uint32_t nUserId, uint32_t nPeerId);
+
     uint32_t getMsgId(uint32_t nRelateId);
-    void getUnreadMsgCount(uint32_t nUserId, uint32_t &nTotalCnt, list<IM::BaseDefine::UnreadInfo>& lsUnreadCount);
-    void getLastMsg(uint32_t nFromId, uint32_t nToId, uint32_t& nMsgId, string& strMsgData, IM::BaseDefine::MsgType & nMsgType, uint32_t nStatus = 0);
+
+    /**
+     * 获取未读消息数
+     *
+     * @param nTotalCnt 未读总数
+     * @param lsUnreadCount 分别未读数
+     * */
+    void getUnreadMsgCount(
+            uint32_t nUserId,
+            uint32_t &nTotalCnt,
+            list<IM::BaseDefine::UnreadInfo>& lsUnreadCount);
+
+    /**
+     *  @param nFromId
+     *  @param nToId
+     *  @param nMsgId
+     *  @param strMsgData
+     *  @param nMsgType
+     *  @param nStatus    0获取未被删除的，1获取所有的，默认获取未被删除的
+     */
+    void getLastMsg(
+            uint32_t nFromId,
+            uint32_t nToId,
+            uint32_t& nMsgId,
+            string& strMsgData,
+            IM::BaseDefine::MsgType & nMsgType,
+            uint32_t nStatus = 0);
+
+    // 获取用户 nUserId 未读消息总数
     void getUnReadCntAll(uint32_t nUserId, uint32_t &nTotalCnt);
-    void getMsgByMsgId(uint32_t nUserId, uint32_t nPeerId, const list<uint32_t>& lsMsgId, list<IM::BaseDefine::MsgInfo>& lsMsg);
+
+    void getMsgByMsgId(
+            uint32_t nUserId,
+            uint32_t nPeerId,
+            const list<uint32_t>& lsMsgId,
+            list<IM::BaseDefine::MsgInfo>& lsMsg);
+
     bool resetMsgId(uint32_t nRelateId);
 private:
 	CMessageModel();

@@ -914,7 +914,7 @@ EXPORT int speex_preprocess_run(SpeexPreprocessState *st, spx_int16_t *x)
          /*st->reverb_estimate[i] = st->reverb_decay*st->reverb_estimate[i] + st->reverb_decay*st->reverb_level*st->gain[i]*st->gain[i]*st->ps[i];*/
          
          /* Take into account speech probability of presence (loudness domain MMSE estimator) */
-         /* gain2 = [p*sqrt(gain)+(1-p)*sqrt(gain _floor) ]^2 */
+         /* gain2 = [p*sqrt(gain)+ (1-p)*sqrt(gain _floor) ]^2 */
          tmp = MULT16_16_P15(p,spx_sqrt(SHL32(EXTEND32(st->gain[i]),15))) + MULT16_16_P15(SUB16(Q15_ONE,p),spx_sqrt(SHL32(EXTEND32(st->gain_floor[i]),15)));
          st->gain2[i]=SQR16_Q15(tmp);
 

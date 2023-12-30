@@ -26,6 +26,16 @@
 		18A38FF7187AAD1A00F3F19D /* DDCommonModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A38FF6187AAD1A00F3F19D /* DDCommonModule.m */; };
 		18C769FA188E444B0066AA8C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C769F9188E444B0066AA8C /* SystemConfiguration.framework */; };
 		18C769FD188E44720066AA8C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C769FC188E44720066AA8C /* Reachability.m */; };
+		18F6BA012B404208006FB2AF /* ImInternal.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F6B9F02B404201006FB2AF /* ImInternal.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18F6BA022B404208006FB2AF /* ImBuddy.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F6B9F12B404202006FB2AF /* ImBuddy.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18F6BA032B404208006FB2AF /* ImBaseDefine.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F6B9F22B404202006FB2AF /* ImBaseDefine.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18F6BA042B404208006FB2AF /* ImFile.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F6B9F42B404203006FB2AF /* ImFile.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18F6BA052B404208006FB2AF /* ImServer.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F6B9F62B404204006FB2AF /* ImServer.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18F6BA062B404208006FB2AF /* ImOther.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F6B9F72B404204006FB2AF /* ImOther.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18F6BA072B404208006FB2AF /* ImGroup.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F6B9F82B404204006FB2AF /* ImGroup.pbobjc.m */; };
+		18F6BA082B404208006FB2AF /* ImMessage.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F6B9FD2B404206006FB2AF /* ImMessage.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18F6BA092B404208006FB2AF /* ImLogin.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F6B9FF2B404207006FB2AF /* ImLogin.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		18F6BA0A2B404208006FB2AF /* ImSwitchService.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F6BA002B404207006FB2AF /* ImSwitchService.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		18FF1D18185177F700C19036 /* DDSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FF1D17185177F700C19036 /* DDSound.m */; };
 		37E4C02E1A6CAE4600178EA8 /* MTDatabaseUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E4C02D1A6CAE4600178EA8 /* MTDatabaseUtil.m */; };
 		37E4C0381A6E486A00178EA8 /* MTSysConfigEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E4C0371A6E486A00178EA8 /* MTSysConfigEntity.m */; };
@@ -153,14 +163,6 @@
 		5772C9C918D00B9B008FE09F /* release-to-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 5772C9C718D00B9B008FE09F /* release-to-refresh.png */; };
 		5772C9CB18D00CBD008FE09F /* icon_close.png in Resources */ = {isa = PBXBuildFile; fileRef = 5772C9CA18D00CBD008FE09F /* icon_close.png */; };
 		5772C9CE18D00E62008FE09F /* icon_statusbar.tif in Resources */ = {isa = PBXBuildFile; fileRef = 5772C9CC18D00E62008FE09F /* icon_statusbar.tif */; };
-		577BB80B1A64F78E00264086 /* IMBaseDefine.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 577BB7FC1A64F78E00264086 /* IMBaseDefine.pb.m */; };
-		577BB80C1A64F78E00264086 /* IMBuddy.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 577BB7FE1A64F78E00264086 /* IMBuddy.pb.m */; };
-		577BB80D1A64F78E00264086 /* IMGroup.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 577BB8001A64F78E00264086 /* IMGroup.pb.m */; };
-		577BB80E1A64F78E00264086 /* IMLogin.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 577BB8021A64F78E00264086 /* IMLogin.pb.m */; };
-		577BB80F1A64F78E00264086 /* IMMessage.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 577BB8041A64F78E00264086 /* IMMessage.pb.m */; };
-		577BB8101A64F78E00264086 /* IMOther.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 577BB8061A64F78E00264086 /* IMOther.pb.m */; };
-		577BB8111A64F78E00264086 /* IMSwitchService.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 577BB8081A64F78E00264086 /* IMSwitchService.pb.m */; };
-		577BB8121A64F78E00264086 /* IMXIAOT.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 577BB80A1A64F78E00264086 /* IMXIAOT.pb.m */; };
 		577C167F18474005009718D7 /* DDMainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 577C167E18474005009718D7 /* DDMainWindow.xib */; };
 		577C168218474317009718D7 /* DDMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 577C168118474317009718D7 /* DDMainWindowController.m */; };
 		577C168518474649009718D7 /* icon_online.png in Resources */ = {isa = PBXBuildFile; fileRef = 577C168318474649009718D7 /* icon_online.png */; };
@@ -597,7 +599,6 @@
 		81ECFE441A82338D00445985 /* voice_other.png in Resources */ = {isa = PBXBuildFile; fileRef = 81ECFE421A82338D00445985 /* voice_other.png */; };
 		81FA3B2A1A68DEBC00B379D1 /* DDHistoryMessageAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 81FA3B291A68DEBC00B379D1 /* DDHistoryMessageAPI.m */; };
 		8AEFB8421920968C006A5C88 /* DDSendP2PCmdAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AEFB8411920968C006A5C88 /* DDSendP2PCmdAPI.m */; };
-		9068ED71E21126C61D07D32B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F31B5BDBE8F1E507D5515C9 /* libPods.a */; };
 		C40417B31A68C20E00242E20 /* MTLastMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C40417B21A68C20E00242E20 /* MTLastMessageManager.m */; };
 		C40417B61A68D9B500242E20 /* MTUnreadMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C40417B51A68D9B500242E20 /* MTUnreadMessageManager.m */; };
 		C40417B91A69047E00242E20 /* MTMessageEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = C40417B81A69047E00242E20 /* MTMessageEntity.mm */; };
@@ -914,6 +915,7 @@
 		EF29F2BD1AB80077001FC3EE /* MTDepartmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EF29F2BC1AB80077001FC3EE /* MTDepartmentManager.m */; };
 		EF29F2C01AB81E15001FC3EE /* DDDepartmentInfoAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = EF29F2BF1AB81E15001FC3EE /* DDDepartmentInfoAPI.m */; };
 		EF29F2C31AB82087001FC3EE /* MTDepartmentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = EF29F2C21AB82087001FC3EE /* MTDepartmentEntity.m */; };
+		F48E07965A63917F15B5571D /* libPods-TeamTalk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4F92B4B8C4CD55199CDF2B0 /* libPods-TeamTalk.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -921,10 +923,12 @@
 			isa = PBXBuildRule;
 			compilerSpec = com.apple.compilers.proxy.script;
 			fileType = pattern.proxy;
+			inputFiles = (
+			);
 			isEditable = 1;
 			outputFiles = (
 			);
-			script = "";
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
 		};
 /* End PBXBuildRule section */
 
@@ -982,6 +986,26 @@
 		18C769F9188E444B0066AA8C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		18C769FB188E44720066AA8C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Libraries/Reachability/Reachability.h; sourceTree = "<group>"; };
 		18C769FC188E44720066AA8C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Libraries/Reachability/Reachability.m; sourceTree = "<group>"; };
+		18F6B9ED2B404200006FB2AF /* ImServer.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImServer.pbobjc.h; sourceTree = "<group>"; };
+		18F6B9EE2B404200006FB2AF /* ImOther.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImOther.pbobjc.h; sourceTree = "<group>"; };
+		18F6B9EF2B404201006FB2AF /* ImFile.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImFile.pbobjc.h; sourceTree = "<group>"; };
+		18F6B9F02B404201006FB2AF /* ImInternal.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImInternal.pbobjc.m; sourceTree = "<group>"; };
+		18F6B9F12B404202006FB2AF /* ImBuddy.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImBuddy.pbobjc.m; sourceTree = "<group>"; };
+		18F6B9F22B404202006FB2AF /* ImBaseDefine.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImBaseDefine.pbobjc.m; sourceTree = "<group>"; };
+		18F6B9F32B404202006FB2AF /* ImBaseDefine.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImBaseDefine.pbobjc.h; sourceTree = "<group>"; };
+		18F6B9F42B404203006FB2AF /* ImFile.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImFile.pbobjc.m; sourceTree = "<group>"; };
+		18F6B9F52B404203006FB2AF /* ImMessage.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImMessage.pbobjc.h; sourceTree = "<group>"; };
+		18F6B9F62B404204006FB2AF /* ImServer.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImServer.pbobjc.m; sourceTree = "<group>"; };
+		18F6B9F72B404204006FB2AF /* ImOther.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImOther.pbobjc.m; sourceTree = "<group>"; };
+		18F6B9F82B404204006FB2AF /* ImGroup.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImGroup.pbobjc.m; sourceTree = "<group>"; };
+		18F6B9F92B404204006FB2AF /* ImLogin.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImLogin.pbobjc.h; sourceTree = "<group>"; };
+		18F6B9FA2B404205006FB2AF /* ImInternal.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImInternal.pbobjc.h; sourceTree = "<group>"; };
+		18F6B9FB2B404206006FB2AF /* ImBuddy.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImBuddy.pbobjc.h; sourceTree = "<group>"; };
+		18F6B9FC2B404206006FB2AF /* ImGroup.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImGroup.pbobjc.h; sourceTree = "<group>"; };
+		18F6B9FD2B404206006FB2AF /* ImMessage.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImMessage.pbobjc.m; sourceTree = "<group>"; };
+		18F6B9FE2B404207006FB2AF /* ImSwitchService.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImSwitchService.pbobjc.h; sourceTree = "<group>"; };
+		18F6B9FF2B404207006FB2AF /* ImLogin.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImLogin.pbobjc.m; sourceTree = "<group>"; };
+		18F6BA002B404207006FB2AF /* ImSwitchService.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImSwitchService.pbobjc.m; sourceTree = "<group>"; };
 		18FF1D16185177F700C19036 /* DDSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDSound.h; path = utilities/DDSound.h; sourceTree = "<group>"; };
 		18FF1D17185177F700C19036 /* DDSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDSound.m; path = utilities/DDSound.m; sourceTree = "<group>"; };
 		37E4C02C1A6CAE4600178EA8 /* MTDatabaseUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDatabaseUtil.h; sourceTree = "<group>"; };
@@ -990,7 +1014,6 @@
 		37E4C0371A6E486A00178EA8 /* MTSysConfigEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSysConfigEntity.m; sourceTree = "<group>"; };
 		37E4C0391A6E487E00178EA8 /* MTSysConfigModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSysConfigModule.h; sourceTree = "<group>"; };
 		37E4C03A1A6E487E00178EA8 /* MTSysConfigModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSysConfigModule.m; sourceTree = "<group>"; };
-		535EC6602DDC418112EEFEF8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		5700BF0818A8A4B00060092F /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		5700BF0B18A8A5AD0060092F /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		5709F94D1848682D0096D176 /* DDImageSpreadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDImageSpreadView.h; path = interface/mainWindow/DDImageSpreadView.h; sourceTree = "<group>"; };
@@ -1172,22 +1195,6 @@
 		5772C9CA18D00CBD008FE09F /* icon_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_close.png; path = resource/icon_close.png; sourceTree = "<group>"; };
 		5772C9CC18D00E62008FE09F /* icon_statusbar.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = icon_statusbar.tif; path = resource/icon_statusbar.tif; sourceTree = "<group>"; };
 		5772C9CD18D00E62008FE09F /* tab_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_bg.png; path = resource/tab_bg.png; sourceTree = "<group>"; };
-		577BB7FB1A64F78E00264086 /* IMBaseDefine.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMBaseDefine.pb.h; sourceTree = "<group>"; };
-		577BB7FC1A64F78E00264086 /* IMBaseDefine.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMBaseDefine.pb.m; sourceTree = "<group>"; };
-		577BB7FD1A64F78E00264086 /* IMBuddy.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMBuddy.pb.h; sourceTree = "<group>"; };
-		577BB7FE1A64F78E00264086 /* IMBuddy.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMBuddy.pb.m; sourceTree = "<group>"; };
-		577BB7FF1A64F78E00264086 /* IMGroup.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMGroup.pb.h; sourceTree = "<group>"; };
-		577BB8001A64F78E00264086 /* IMGroup.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMGroup.pb.m; sourceTree = "<group>"; };
-		577BB8011A64F78E00264086 /* IMLogin.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMLogin.pb.h; sourceTree = "<group>"; };
-		577BB8021A64F78E00264086 /* IMLogin.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMLogin.pb.m; sourceTree = "<group>"; };
-		577BB8031A64F78E00264086 /* IMMessage.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMMessage.pb.h; sourceTree = "<group>"; };
-		577BB8041A64F78E00264086 /* IMMessage.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMMessage.pb.m; sourceTree = "<group>"; };
-		577BB8051A64F78E00264086 /* IMOther.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMOther.pb.h; sourceTree = "<group>"; };
-		577BB8061A64F78E00264086 /* IMOther.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMOther.pb.m; sourceTree = "<group>"; };
-		577BB8071A64F78E00264086 /* IMSwitchService.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMSwitchService.pb.h; sourceTree = "<group>"; };
-		577BB8081A64F78E00264086 /* IMSwitchService.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMSwitchService.pb.m; sourceTree = "<group>"; };
-		577BB8091A64F78E00264086 /* IMXIAOT.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMXIAOT.pb.h; sourceTree = "<group>"; };
-		577BB80A1A64F78E00264086 /* IMXIAOT.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMXIAOT.pb.m; sourceTree = "<group>"; };
 		577C167E18474005009718D7 /* DDMainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DDMainWindow.xib; path = interface/mainWindow/DDMainWindow.xib; sourceTree = "<group>"; };
 		577C168018474317009718D7 /* DDMainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDMainWindowController.h; path = interface/mainWindow/DDMainWindowController.h; sourceTree = "<group>"; };
 		577C168118474317009718D7 /* DDMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDMainWindowController.m; path = interface/mainWindow/DDMainWindowController.m; sourceTree = "<group>"; };
@@ -1693,7 +1700,6 @@
 		6DE7620E18867FE2000EDC39 /* PullToRefreshDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PullToRefreshDelegate.h; path = utilities/ScrollToRefresh/PullToRefreshDelegate.h; sourceTree = "<group>"; };
 		6DE7620F18867FE2000EDC39 /* PullToRefreshScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PullToRefreshScrollView.h; path = utilities/ScrollToRefresh/PullToRefreshScrollView.h; sourceTree = "<group>"; };
 		6DE7621018867FE2000EDC39 /* PullToRefreshScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PullToRefreshScrollView.m; path = utilities/ScrollToRefresh/PullToRefreshScrollView.m; sourceTree = "<group>"; };
-		74019794B7AD12641993FBE9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		811405D21A68EFA6009CFC06 /* DDUnreadMessageAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDUnreadMessageAPI.h; sourceTree = "<group>"; };
 		811405D31A68EFA6009CFC06 /* DDUnreadMessageAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDUnreadMessageAPI.m; sourceTree = "<group>"; };
 		8195ED4F1A7651E700DA5CA0 /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
@@ -1740,7 +1746,8 @@
 		81FA3B291A68DEBC00B379D1 /* DDHistoryMessageAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHistoryMessageAPI.m; sourceTree = "<group>"; };
 		8AEFB8401920968C006A5C88 /* DDSendP2PCmdAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDSendP2PCmdAPI.h; sourceTree = "<group>"; };
 		8AEFB8411920968C006A5C88 /* DDSendP2PCmdAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDSendP2PCmdAPI.m; sourceTree = "<group>"; };
-		8F31B5BDBE8F1E507D5515C9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		91CB2128E335557707C01F52 /* Pods-TeamTalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamTalk.debug.xcconfig"; path = "Target Support Files/Pods-TeamTalk/Pods-TeamTalk.debug.xcconfig"; sourceTree = "<group>"; };
+		B4F92B4B8C4CD55199CDF2B0 /* libPods-TeamTalk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TeamTalk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C40417B11A68C20E00242E20 /* MTLastMessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTLastMessageManager.h; path = modules/message/MTLastMessageManager.h; sourceTree = "<group>"; };
 		C40417B21A68C20E00242E20 /* MTLastMessageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTLastMessageManager.m; path = modules/message/MTLastMessageManager.m; sourceTree = "<group>"; };
 		C40417B41A68D9B500242E20 /* MTUnreadMessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTUnreadMessageManager.h; sourceTree = "<group>"; };
@@ -2220,6 +2227,7 @@
 		EF29F2BF1AB81E15001FC3EE /* DDDepartmentInfoAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDepartmentInfoAPI.m; sourceTree = "<group>"; };
 		EF29F2C11AB82087001FC3EE /* MTDepartmentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDepartmentEntity.h; sourceTree = "<group>"; };
 		EF29F2C21AB82087001FC3EE /* MTDepartmentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDepartmentEntity.m; sourceTree = "<group>"; };
+		F20869F3D681496F57C1B8D8 /* Pods-TeamTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamTalk.release.xcconfig"; path = "Target Support Files/Pods-TeamTalk/Pods-TeamTalk.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2240,7 +2248,7 @@
 				57AB317F1828816100B7766E /* Security.framework in Frameworks */,
 				573847331820CDA000443653 /* Cocoa.framework in Frameworks */,
 				5700BF0918A8A4B00060092F /* Sparkle.framework in Frameworks */,
-				9068ED71E21126C61D07D32B /* libPods.a in Frameworks */,
+				F48E07965A63917F15B5571D /* libPods-TeamTalk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2258,7 +2266,6 @@
 				C48E2F581A622843002F3FEB /* Session1 */,
 				C48E2F3C1A6224B3002F3FEB /* OriginEntity */,
 				C48E2F3D1A6224B3002F3FEB /* OriginModule */,
-				81DEF4E61A5B774600F0799D /* pb */,
 				C42410CC199734C300B6B945 /* ServiceAccount */,
 				C4F7E5F31908D7E0006E31F3 /* API */,
 				C48E79F818FFD73500A1FA66 /* MessageReview */,
@@ -2412,6 +2419,41 @@
 				18C769FC188E44720066AA8C /* Reachability.m */,
 			);
 			name = Reachability;
+			sourceTree = "<group>";
+		};
+		18F6B9EB2B403878006FB2AF /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				C48B104818D1B18500DEF8C6 /* IOKit.framework */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		18F6B9EC2B404160006FB2AF /* PB */ = {
+			isa = PBXGroup;
+			children = (
+				18F6B9F32B404202006FB2AF /* ImBaseDefine.pbobjc.h */,
+				18F6B9F22B404202006FB2AF /* ImBaseDefine.pbobjc.m */,
+				18F6B9FB2B404206006FB2AF /* ImBuddy.pbobjc.h */,
+				18F6B9F12B404202006FB2AF /* ImBuddy.pbobjc.m */,
+				18F6B9EF2B404201006FB2AF /* ImFile.pbobjc.h */,
+				18F6B9F42B404203006FB2AF /* ImFile.pbobjc.m */,
+				18F6B9FC2B404206006FB2AF /* ImGroup.pbobjc.h */,
+				18F6B9F82B404204006FB2AF /* ImGroup.pbobjc.m */,
+				18F6B9FA2B404205006FB2AF /* ImInternal.pbobjc.h */,
+				18F6B9F02B404201006FB2AF /* ImInternal.pbobjc.m */,
+				18F6B9F92B404204006FB2AF /* ImLogin.pbobjc.h */,
+				18F6B9FF2B404207006FB2AF /* ImLogin.pbobjc.m */,
+				18F6B9F52B404203006FB2AF /* ImMessage.pbobjc.h */,
+				18F6B9FD2B404206006FB2AF /* ImMessage.pbobjc.m */,
+				18F6B9EE2B404200006FB2AF /* ImOther.pbobjc.h */,
+				18F6B9F72B404204006FB2AF /* ImOther.pbobjc.m */,
+				18F6B9ED2B404200006FB2AF /* ImServer.pbobjc.h */,
+				18F6B9F62B404204006FB2AF /* ImServer.pbobjc.m */,
+				18F6B9FE2B404207006FB2AF /* ImSwitchService.pbobjc.h */,
+				18F6BA002B404207006FB2AF /* ImSwitchService.pbobjc.m */,
+			);
+			path = PB;
 			sourceTree = "<group>";
 		};
 		37E4C02B1A6CAD5400178EA8 /* DB */ = {
@@ -2586,7 +2628,8 @@
 				573847561820CDA000443653 /* TeamTalkTests */,
 				573847311820CDA000443653 /* Frameworks */,
 				573847301820CDA000443653 /* Products */,
-				D2DB4085FFF0FDA637621A14 /* Pods */,
+				18F6B9EB2B403878006FB2AF /* Recovered References */,
+				8807179085ED9D21FE24E312 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2616,7 +2659,7 @@
 				57AB317E1828816100B7766E /* Security.framework */,
 				573847321820CDA000443653 /* Cocoa.framework */,
 				573847341820CDA000443653 /* Other Frameworks */,
-				8F31B5BDBE8F1E507D5515C9 /* libPods.a */,
+				B4F92B4B8C4CD55199CDF2B0 /* libPods-TeamTalk.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2634,6 +2677,7 @@
 		573847381820CDA000443653 /* TeamTalk */ = {
 			isa = PBXGroup;
 			children = (
+				18F6B9EC2B404160006FB2AF /* PB */,
 				8179EECE1A6E5CBE000AADA3 /* html */,
 				C4C926D8190F424A005B3234 /* customView */,
 				C48E79F118FE861800A1FA66 /* Services */,
@@ -3602,28 +3646,13 @@
 			path = html;
 			sourceTree = "<group>";
 		};
-		81DEF4E61A5B774600F0799D /* pb */ = {
+		8807179085ED9D21FE24E312 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				577BB7FB1A64F78E00264086 /* IMBaseDefine.pb.h */,
-				577BB7FC1A64F78E00264086 /* IMBaseDefine.pb.m */,
-				577BB7FD1A64F78E00264086 /* IMBuddy.pb.h */,
-				577BB7FE1A64F78E00264086 /* IMBuddy.pb.m */,
-				577BB7FF1A64F78E00264086 /* IMGroup.pb.h */,
-				577BB8001A64F78E00264086 /* IMGroup.pb.m */,
-				577BB8011A64F78E00264086 /* IMLogin.pb.h */,
-				577BB8021A64F78E00264086 /* IMLogin.pb.m */,
-				577BB8031A64F78E00264086 /* IMMessage.pb.h */,
-				577BB8041A64F78E00264086 /* IMMessage.pb.m */,
-				577BB8051A64F78E00264086 /* IMOther.pb.h */,
-				577BB8061A64F78E00264086 /* IMOther.pb.m */,
-				577BB8071A64F78E00264086 /* IMSwitchService.pb.h */,
-				577BB8081A64F78E00264086 /* IMSwitchService.pb.m */,
-				577BB8091A64F78E00264086 /* IMXIAOT.pb.h */,
-				577BB80A1A64F78E00264086 /* IMXIAOT.pb.m */,
+				91CB2128E335557707C01F52 /* Pods-TeamTalk.debug.xcconfig */,
+				F20869F3D681496F57C1B8D8 /* Pods-TeamTalk.release.xcconfig */,
 			);
-			name = pb;
-			path = modules/pb;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		C408E8C7191CD9D5005F5150 /* Users */ = {
@@ -4426,15 +4455,6 @@
 			path = Libraries/Speex;
 			sourceTree = "<group>";
 		};
-		D2DB4085FFF0FDA637621A14 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				74019794B7AD12641993FBE9 /* Pods.debug.xcconfig */,
-				535EC6602DDC418112EEFEF8 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4442,12 +4462,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 573847601820CDA000443653 /* Build configuration list for PBXNativeTarget "TeamTalk" */;
 			buildPhases = (
-				5B4EB9AF98993B8F2DA57993 /* Check Pods Manifest.lock */,
+				22C9ECC6DC24388E572B4F10 /* [CP] Check Pods Manifest.lock */,
 				5738472B1820CDA000443653 /* Sources */,
 				5738472C1820CDA000443653 /* Frameworks */,
 				5738472D1820CDA000443653 /* Resources */,
 				5700BF0618A8A4880060092F /* Copy Files */,
-				4339E9449C259D1050E09245 /* Copy Pods Resources */,
 			);
 			buildRules = (
 				C407F20B19604CFD00ED6ED8 /* PBXBuildRule */,
@@ -4470,7 +4489,7 @@
 				ORGANIZATIONNAME = mogujie;
 				TargetAttributes = {
 					5738472E1820CDA000443653 = {
-						DevelopmentTeam = X8LV58VH9V;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 0;
@@ -4484,6 +4503,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -5068,34 +5088,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4339E9449C259D1050E09245 /* Copy Pods Resources */ = {
+		22C9ECC6DC24388E572B4F10 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
+			inputFileListPaths = (
 			);
-			name = "Copy Pods Resources";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TeamTalk-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5B4EB9AF98993B8F2DA57993 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -5131,6 +5143,7 @@
 				5733D832184F2DFF00737695 /* AITextAttributes.m in Sources */,
 				57B95BBD1A7CCEE8004DFB22 /* MASShortcut+Monitoring.m in Sources */,
 				572A87E218B74E7B003E3FC8 /* DDClickCell.m in Sources */,
+				18F6BA072B404208006FB2AF /* ImGroup.pbobjc.m in Sources */,
 				6D1CC7AC18A62FF0002CAE5F /* L4Properties.m in Sources */,
 				57124E56187E331A006D2DCA /* ImageAndTextCell.m in Sources */,
 				573AF6071A67FED000B6D3B8 /* LoginEntity.m in Sources */,
@@ -5139,6 +5152,7 @@
 				C4C926F6190F51C4005B3234 /* DDLeftBarViewController.m in Sources */,
 				C408E8CE191CDAE4005F5150 /* DDFileLoginAPI.m in Sources */,
 				57D5D165184C76D900852738 /* DDSplitView.m in Sources */,
+				18F6BA022B404208006FB2AF /* ImBuddy.pbobjc.m in Sources */,
 				572A880518B773EF003E3FC8 /* BaseNode.m in Sources */,
 				57B62327183072FB00F2B249 /* SBJsonStreamParserAccumulator.m in Sources */,
 				C4AB955418DBF006000181AD /* DrawView.m in Sources */,
@@ -5169,6 +5183,7 @@
 				C48D604018BED99500F5ED30 /* SpellLibrary.m in Sources */,
 				C406E70918D8616B005092C3 /* DDChangableAttactment.m in Sources */,
 				57B6232E183072FB00F2B249 /* SBJsonUTF8Stream.m in Sources */,
+				18F6BA082B404208006FB2AF /* ImMessage.pbobjc.m in Sources */,
 				578D5EAF188383EE00568EE6 /* DDImageMessage.m in Sources */,
 				C4A09C99190FC4CA00B39BF3 /* DDGroupVCModule.m in Sources */,
 				C40F95311919FB4F005CACBF /* DDUserMsgReceivedACKAPI.m in Sources */,
@@ -5178,6 +5193,7 @@
 				570D6E4C1839B28000F68CB0 /* AIFileManagerAdditions.m in Sources */,
 				C40F95341919FB75005CACBF /* DDGroupMsgReceivedACKAPI.m in Sources */,
 				C4C926DB190F4274005B3234 /* DDGridBackgroundView.m in Sources */,
+				18F6BA092B404208006FB2AF /* ImLogin.pbobjc.m in Sources */,
 				5733D841184F33F500737695 /* AIPasteboardAdditions.m in Sources */,
 				6D1CC7A618A62FF0002CAE5F /* L4Logger.m in Sources */,
 				C4A09CC01910D19B00B39BF3 /* DDSearchViewController.m in Sources */,
@@ -5206,7 +5222,6 @@
 				579E54791A67C3B4003031A1 /* DDHttpModule.m in Sources */,
 				C4FE22301920C8D700FFB520 /* DDOtherSendOfflineFileAPI.m in Sources */,
 				C4498A0918D71A92009FEA4A /* NSTextView+Rect.m in Sources */,
-				577BB80D1A64F78E00264086 /* IMGroup.pb.m in Sources */,
 				6D1CC7B118A62FF0002CAE5F /* L4StringMatchFilter.m in Sources */,
 				57B95BBF1A7CCEE8004DFB22 /* MASShortcutView.m in Sources */,
 				C4C926F9190F526F005B3234 /* DDLeftBarItem.m in Sources */,
@@ -5224,6 +5239,7 @@
 				6D1CC7A318A62FF0002CAE5F /* L4LevelMatchFilter.m in Sources */,
 				C48E79E018FB861A00A1FA66 /* DDLoginWindowControllerModule.m in Sources */,
 				C47934D419166415009C39AE /* DDAddGroupMemberDepartmentRowView.m in Sources */,
+				18F6BA052B404208006FB2AF /* ImServer.pbobjc.m in Sources */,
 				C48B104718D1AE9000DEF8C6 /* CrashReportManager.m in Sources */,
 				C427BF9119A32C0900A010AA /* MessageDate.m in Sources */,
 				183B53921872B720009073EC /* DDModuleDataManager.m in Sources */,
@@ -5232,13 +5248,11 @@
 				C46C51BC18D2DBC000149B7F /* DDChattingContactListCell.m in Sources */,
 				EF29F2C31AB82087001FC3EE /* MTDepartmentEntity.m in Sources */,
 				C42410CF199734E100B6B945 /* DDServiceAccountModule.m in Sources */,
-				577BB8101A64F78E00264086 /* IMOther.pb.m in Sources */,
 				5709F95E18486E320096D176 /* DDImageView.m in Sources */,
 				C4FA6BD91908F5BD0097849B /* DDSuperAPI.m in Sources */,
 				C48E399E18F8EA4F00C610EB /* DDTcpClientManager.m in Sources */,
 				C47934B219163C1F009C39AE /* HoverTableRowView.m in Sources */,
 				6DDB0D3A18EC17FF00A1DA57 /* GCDAsyncSocket.m in Sources */,
-				577BB80F1A64F78E00264086 /* IMMessage.pb.m in Sources */,
 				57285D5618B19BD000E90EC2 /* DDOptionsBase.m in Sources */,
 				C48E79F018FE2AF000A1FA66 /* DDPathHelp.m in Sources */,
 				C4FE223F1920CF4A00FFB520 /* DDDeleteOfflineFileAPI.m in Sources */,
@@ -5294,12 +5308,13 @@
 				6D1CC7A418A62FF0002CAE5F /* L4LevelRangeFilter.m in Sources */,
 				57B62326183072FB00F2B249 /* SBJsonStreamParser.m in Sources */,
 				C4A09CC31910D2BA00B39BF3 /* DDSearchResultCell.m in Sources */,
+				18F6BA0A2B404208006FB2AF /* ImSwitchService.pbobjc.m in Sources */,
 				C4C472FC18EFE5EF00BC4E73 /* DDTcpServer.m in Sources */,
 				C4A6F1E618EFD69400A6AD61 /* DDHttpServer.m in Sources */,
 				6DD3197C188E3C8B00ED5FE8 /* EmotionCellView.m in Sources */,
-				577BB8121A64F78E00264086 /* IMXIAOT.pb.m in Sources */,
 				6DD31979188E3C5200ED5FE8 /* EmotionViewController.m in Sources */,
 				6D1CC79F18A62FF0002CAE5F /* L4Filter.m in Sources */,
+				18F6BA042B404208006FB2AF /* ImFile.pbobjc.m in Sources */,
 				C44C20431900B2AE0069A31F /* DDMessageReviewModule.m in Sources */,
 				57B6232A183072FB00F2B249 /* SBJsonStreamWriter.m in Sources */,
 				6D1CC79C18A62FF0002CAE5F /* L4DailyRollingFileAppender.m in Sources */,
@@ -5344,6 +5359,7 @@
 				8AEFB8421920968C006A5C88 /* DDSendP2PCmdAPI.m in Sources */,
 				C46C810F197500FA00157856 /* DDCornerRadiusTextField.m in Sources */,
 				81DEF50D1A5B901B00F0799D /* NSDictionary+Safe.m in Sources */,
+				18F6BA012B404208006FB2AF /* ImInternal.pbobjc.m in Sources */,
 				6D1CC79918A62FF0002CAE5F /* L4AppenderSkeleton.m in Sources */,
 				6D1CC7A218A62FF0002CAE5F /* L4Level.m in Sources */,
 				57AB4F111821EAD500603621 /* NSEvent+DDEventAdditions.m in Sources */,
@@ -5357,6 +5373,7 @@
 				C4EBA72A192D91E400B72723 /* DDUserDetailInfoAPI.m in Sources */,
 				57149FF1184592B700DDBA25 /* DDAutoScrollView.m in Sources */,
 				57B6232B183072FB00F2B249 /* SBJsonStreamWriterAccumulator.m in Sources */,
+				18F6BA032B404208006FB2AF /* ImBaseDefine.pbobjc.m in Sources */,
 				C40F95251919D682005CACBF /* DDUnrequestSuperAPI.m in Sources */,
 				183B538618714739009073EC /* NSDictionary+MGJ.m in Sources */,
 				C48D603A18BC670900F5ED30 /* DDUserDataModel.m in Sources */,
@@ -5386,7 +5403,6 @@
 				579E54781A67C3B4003031A1 /* DDHttpEntity.m in Sources */,
 				C479350719178A89009C39AE /* DDMessagesReviewContentViewController.m in Sources */,
 				C4FA6BDC190909EA0097849B /* DDRecentConactsAPI.m in Sources */,
-				577BB80B1A64F78E00264086 /* IMBaseDefine.pb.m in Sources */,
 				C40F953B191A011A005CACBF /* DDGroupInfoAPI.m in Sources */,
 				C4A6F1EC18EFD6CE00A6AD61 /* DDMsgServer.m in Sources */,
 				5733D82F184F2D1600737695 /* AIColorAdditions.m in Sources */,
@@ -5394,8 +5410,8 @@
 				579E547D1A67C426003031A1 /* DDLogic.m in Sources */,
 				577C169418476804009718D7 /* DDMainWindow.m in Sources */,
 				5738478E1820CE9900443653 /* NSStream+NSStreamAddition.m in Sources */,
+				18F6BA062B404208006FB2AF /* ImOther.pbobjc.m in Sources */,
 				183B5371186D58C2009073EC /* TcpProtocolHeader.m in Sources */,
-				577BB8111A64F78E00264086 /* IMSwitchService.pb.m in Sources */,
 				C417C39C1A737C2C003984D7 /* NSImageView+MTAddition.m in Sources */,
 				6D1CC7A518A62FF0002CAE5F /* L4LogEvent.m in Sources */,
 				57B62324183072FB00F2B249 /* NSObject+SBJson.m in Sources */,
@@ -5432,10 +5448,8 @@
 				183B5380187141A6009073EC /* NSData+NSJSONSerialization.m in Sources */,
 				5733D82C184F2C4A00737695 /* AIAttributedStringAdditions.m in Sources */,
 				C4498A0718D71A92009FEA4A /* MessageShowView.m in Sources */,
-				577BB80E1A64F78E00264086 /* IMLogin.pb.m in Sources */,
 				C47934881915F217009C39AE /* NSView+LayerAddition.m in Sources */,
 				C438032418C5C916002555BB /* DDUserInfoManager.m in Sources */,
-				577BB80C1A64F78E00264086 /* IMBuddy.pb.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5547,10 +5561,14 @@
 		};
 		573847611820CDA000443653 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 74019794B7AD12641993FBE9 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 91CB2128E335557707C01F52 /* Pods-TeamTalk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamTalk/TeamTalk-Prefix.pch";
@@ -5563,10 +5581,11 @@
 					/Users/golastroom/Downloads,
 					"$(PROJECT_DIR)",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = TeamTalk;
-				SDKROOT = macosx10.9;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx13.0;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5574,10 +5593,14 @@
 		};
 		573847621820CDA000443653 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 535EC6602DDC418112EEFEF8 /* Pods.release.xcconfig */;
+			baseConfigurationReference = F20869F3D681496F57C1B8D8 /* Pods-TeamTalk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TeamTalk/TeamTalk-Prefix.pch";
@@ -5590,10 +5613,11 @@
 					/Users/golastroom/Downloads,
 					"$(PROJECT_DIR)",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = TeamTalk;
-				SDKROOT = macosx10.9;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx13.0;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)";
 				WRAPPER_EXTENSION = app;
 			};

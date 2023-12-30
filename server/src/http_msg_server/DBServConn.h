@@ -12,7 +12,8 @@
 #include "ServInfo.h"
 #include "RouteServConn.h"
 
-namespace HTTP {
+namespace HTTP
+{
 
 class CDBServConn : public CImConn
 {
@@ -31,6 +32,7 @@ public:
 
 	virtual void HandlePdu(CImPdu* pPdu);
 private:
+    // dbproxy_server 即将退出时会发送该消息
 	void _HandleStopReceivePacket(CImPdu* pPdu);
     void _HandleCreateGroupRsp(CImPdu* pPdu);
     void _HandleChangeMemberRsp(CImPdu* pPdu);

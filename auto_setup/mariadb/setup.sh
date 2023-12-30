@@ -27,7 +27,7 @@ MYSQL_PASSWORD=12345
 
 CENTOS_VERSION=6
 
-print_hello(){
+print_hello() {
 	echo "==========================================="
 	echo "$1 mysql for TeamTalk"
 	echo "==========================================="
@@ -43,7 +43,7 @@ check_user() {
 check_os() {
 	OS_VERSION=$(less /etc/redhat-release)
 	OS_BIT=$(getconf LONG_BIT)
-	#echo "$OS_VERSION, $OS_BIT bit..." 
+	echo "$OS_VERSION, $OS_BIT bit..." 
 	if [[ $OS_VERSION =~ "CentOS" ]]; then
 		if [ $OS_BIT == 64 ]; then
 			if [[ $OS_VERSION =~ "7" ]]; then
@@ -73,6 +73,7 @@ check_run() {
 clean_yum() {
 	YUM_PID=/var/run/yum.pid
 	if [ -f "$YUM_PID" ]; then
+	    # 启用调试模式（xtrace），在执行某个命令之前先打印
 		set -x
 		rm -f YUM_PID
 		killall yum
@@ -200,6 +201,7 @@ build_mysql() {
 }
 
 run_mysql() {
+	# 返回与条件匹配的进程的进程ID（PID）
 	PROCESS=$(pgrep mysql)
 	if [ -z "$PROCESS" ]; then 
 		echo "no mysql is running..." 
@@ -246,8 +248,7 @@ create_database() {
 }
 
 build_all() {
-
-	#echo "$OS_VERSION, $OS_BIT bit..." 
+	echo "$OS_VERSION, $OS_BIT bit..." 
 	if [ $CENTOS_VERSION -eq 7 ]; then
 		build_mysql
 		if [ $? -eq 0 ]; then

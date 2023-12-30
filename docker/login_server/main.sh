@@ -4,8 +4,8 @@ server_ip(){
         arp $1 | sed "s/.*(\([0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\)).*/\1/g"
 }
 
-sed -i "s/msfs=.*/msfs=http:\/\/$( server_ip "${MsfsServer}" )\//g" /teamtalk/login_server/loginserver.conf
-sed -i "s/discovery=http.*/discovery=http:\/\/$( server_ip "${WebServer}" )\/api\/discovery/g" /teamtalk/login_server/loginserver.conf
+sed -i "s/msfs=.*/msfs=http:\/\/$( server_ip "${MSFS_SERVER}" )\//g" /teamtalk/login_server/loginserver.conf
+sed -i "s/discovery=http.*/discovery=http:\/\/$( server_ip "${WEB_SERVER}" )\/api\/discovery/g" /teamtalk/login_server/loginserver.conf
 server=login_server
 echo -e "\033[32m $server ==> START ... \033[0m"
 ./restart.sh $server log

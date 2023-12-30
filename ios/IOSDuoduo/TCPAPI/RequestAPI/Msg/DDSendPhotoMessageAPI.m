@@ -122,7 +122,7 @@ static int max_try_upload_times = 5;
     [self.queue addOperation:operation];
     
 }
-+(NSString *)imageUrl:(NSString *)content{
++ (NSString *)imageUrl:(NSString *)content{
     NSRange range = [content rangeOfString:@"path="];
     NSString* url = nil;
     if ([content length] > range.location + range.length)

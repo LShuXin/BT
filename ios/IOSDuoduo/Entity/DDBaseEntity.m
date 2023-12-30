@@ -8,11 +8,14 @@
 
 #import "DDBaseEntity.h"
 
+
 @implementation DDBaseEntity
+
 -(NSUInteger)getOriginalID
 {
     NSArray *array = [self.objID componentsSeparatedByString:@"_"];
-    if (array[1]) {
+    if (array[1])
+    {
         return array[1];
     }
     return 0;

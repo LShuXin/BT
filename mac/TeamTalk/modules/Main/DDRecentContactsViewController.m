@@ -22,7 +22,7 @@
 #import "DDGroupInfoManager.h"
 #import "NSView+LayerAddition.h"
 #import "MTSessionModule.h"
-#import "IMBaseDefine.pb.h"
+#import "IMBaseDefine.pbobjc.h"
 #import "MTUserEntity.h"
 #import "MTUserModule.h"
 #import "MTMessageModule.h"
@@ -141,7 +141,7 @@
     {
         DDUserStateEntity* userState = change[@"new"];
         NSString* userID = userState.userId;
-        NSString* sessionID = [MTSessionEntity getSessionIDForOriginID:userID sessionType:SessionTypeSessionTypeSingle];
+        NSString* sessionID = [MTSessionEntity getSessionIDForOriginID:userID sessionType:SessionType_SessionTypeSingle];
         if ([[[MTSessionModule shareInstance]sessions] containsObject:sessionID]) {
             NSUInteger row = [[[MTSessionModule shareInstance] sessions] indexOfObject:sessionID];
             [_tableView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
@@ -297,7 +297,7 @@
     NSString* sessionID = [[MTSessionModule shareInstance]sessions][rowNumber];
     MTSessionEntity* session = [[MTSessionModule shareInstance] getSessionBySessionID:sessionID];
     BOOL removeItemShow = YES;
-    if (session.sessionType == SessionTypeSessionTypeSingle)
+    if (session.sessionType == SessionType_SessionTypeSingle)
     {
 //        UserEntity* user = [getDDUserlistModule() getUserById:session.orginId];
 //        if((user.userRole & 0x20000000) != 0)
@@ -337,7 +337,7 @@
         
     }
     //设置屏蔽菜单
-    if (session.sessionType == SessionTypeSessionTypeSingle)
+    if (session.sessionType == SessionType_SessionTypeSingle)
     {
         NSMenuItem* shieldMenuItem = [menu itemAtIndex:5];
         [shieldMenuItem setHidden:YES];

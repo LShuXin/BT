@@ -85,7 +85,7 @@
 
     if (![[_userStates allKeys] containsObject:userID])
     {
-        return UserStatTypeUserStatusOffline;
+        return UserStatType_UserStatusOffline;
     }
     else
     {
@@ -164,7 +164,7 @@
             //修改用户状态
             UserStat *userStat = (UserStat*)object;
             NSString *strUserId = [NSString stringWithFormat:@"%i",userStat.userId];
-            if(userStat.status==UserStatTypeUserStatusOffline){
+            if(userStat.status==UserStatType_UserStatusOffline){
                 [self p_removeOnlineUser:strUserId];
             }else{
                 [self p_addOnlineUser:strUserId state:userStat.status];
@@ -214,7 +214,7 @@
         if(!error){
             NSArray *allUserState  = (NSArray *)response;
             [allUserState enumerateObjectsUsingBlock:^(UserStat *obj, NSUInteger idx, BOOL *stop) {
-                if (obj.status!=UserStatTypeUserStatusOffline) {
+                if (obj.status!=UserStatType_UserStatusOffline) {
                     [_userStates setObject:@(obj.status) forKey:[NSString stringWithFormat:@"%i",obj.userId]];
                 }
             }];

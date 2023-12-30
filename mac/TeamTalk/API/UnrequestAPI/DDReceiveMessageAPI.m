@@ -8,7 +8,7 @@
 
 #import "DDReceiveMessageAPI.h"
 #import "MTMessageEntity.h"
-#import "IMMessage.pb.h"
+#import "IMMessage.pbobjc.h"
 #import "MTSessionEntity.h"
 @implementation DDReceiveMessageAPI
 /**
@@ -41,7 +41,7 @@
 {
     UnrequestAPIAnalysis analysis = (id)^(NSData* data)
     {
-        IMMsgData *msgRsp = [IMMsgData parseFromData:data];
+        IMMsgData *msgRsp = [IMMsgData parseFromData:data error: nil];
         
         MTMessageEntity *message = [[MTMessageEntity alloc] initWithMessageData:msgRsp];
         

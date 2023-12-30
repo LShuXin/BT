@@ -25,7 +25,8 @@ CFileModel::~CFileModel()
 
 CFileModel* CFileModel::getInstance()
 {
-    if (m_pInstance == NULL) {
+    if (m_pInstance == NULL)
+    {
         m_pInstance = new CFileModel();
     }
     return m_pInstance;
@@ -37,9 +38,9 @@ void CFileModel::getOfflineFile(uint32_t userId, list<IM::BaseDefine::OfflineFil
     CDBConn* pDBConn = pDBManager->GetDBConn("teamtalk_slave");
     if (pDBConn)
     {
-        string strSql = "select * from IMTransmitFile where toId="+int2string(userId) + " and status=0 order by created";
+        string strSql = "select * from IMTransmitFile where toId=" + int2string(userId) + " and status=0 order by created";
         CResultSet* pResultSet = pDBConn->ExecuteQuery(strSql.c_str());
-        if(pResultSet)
+        if (pResultSet)
         {
             while (pResultSet->Next())
             {
@@ -72,7 +73,7 @@ void CFileModel::addOfflineFile(uint32_t fromId, uint32_t toId, string& taskId, 
     {
         string strSql = "insert into IMTransmitFile (`fromId`,`toId`,`fileName`,`size`,`taskId`,`status`,`created`,`updated`) values(?,?,?,?,?,?,?,?)";
         
-        // 必须在释放连接前delete CPrepareStatement对象，否则有可能多个线程操作mysql对象，会crash
+        // 必须在释放连接前 delete CPrepareStatement 对象，否则有可能多个线程操作 mysql 对象，会 crash
         CPrepareStatement* pStmt = new CPrepareStatement();
         if (pStmt->Init(pDBConn->GetMysql(), strSql))
         {
@@ -112,7 +113,7 @@ void CFileModel::delOfflineFile(uint32_t fromId, uint32_t toId, string& taskId)
     if (pDBConn)
     {
         string strSql = "delete from IMTransmitFile where  fromId=" + int2string(fromId) + " and toId="+int2string(toId) + " and taskId='" + taskId + "'";
-        if(pDBConn->ExecuteUpdate(strSql.c_str()))
+        if (pDBConn->ExecuteUpdate(strSql.c_str()))
         {
             log("delete offline file success.%d->%d:%s", fromId, toId, taskId.c_str());
         }

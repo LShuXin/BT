@@ -37,8 +37,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIColor.h>
 
-@interface UIColor (AQGridView)
+@interface UIColor(AQGridView)
 
-+ (UIColor *) AQDefaultGridCellSeparatorColor;
++ (UIColor*)AQDefaultGridCellSeparatorColor;
 
 @end

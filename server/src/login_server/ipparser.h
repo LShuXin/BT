@@ -12,15 +12,18 @@
 #ifndef _IPPARSER_H_
 #define _IPPARSER_H_
 
+
 #include "util.h"
+
 
 class IpParser
 {
     public:
         IpParser();
         virtual ~IpParser();
-    bool isTelcome(const char* ip);
+        // 简单判断传入的字符数组指针是否是一个点分十进制的ip地址
+        bool isTelcome(const char* ip);
 };
 
-#endif
 
+#endif

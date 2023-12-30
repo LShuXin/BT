@@ -283,14 +283,14 @@ typedef void(^MTCheckoutMessageSendrInfoCompletion)();
                     if (!sessionEntity)
                     {
                         SessionType sessionType = [MTSessionEntity getSessionTypeFromSessionID:key];
-                        if (sessionType == SessionTypeSessionTypeSingle)
+                        if (sessionType == SessionType_SessionTypeSingle)
                         {
                             MTUserEntity* user = (MTUserEntity*)[[MTUserModule shareInstance] getOriginEntityWithOriginID:key];
                             MTSessionEntity* sessionEntity = [[MTSessionModule shareInstance] addSessionFromOriginEntity:user saveToDB:YES];
                             [_unreadMessageManager setUnreadMessageCounnt:[obj intValue] forSessionID:sessionEntity.sessionID];
                             
                         }
-                        else if (sessionType == SessionTypeSessionTypeGroup)
+                        else if (sessionType == SessionType_SessionTypeGroup)
                         {
                             NSString* groupID = [MTSessionEntity getOriginIDFromSessionID:key];
                             MTGroupEntity* group = (MTGroupEntity*)[[MTGroupModule shareInsatnce] getOriginEntityWithOriginID:groupID];
@@ -415,9 +415,9 @@ typedef void(^MTCheckoutMessageSendrInfoCompletion)();
     DDReceiveMsgDataReadNotifyAPI *msgDataReadN = [[DDReceiveMsgDataReadNotifyAPI alloc] init];
     [msgDataReadN registerAPIInAPIScheduleReceiveData:^(id object, NSError *error) {
        // NSString *userId = [object objectForKey:@"userId"];
-        NSString *originId = [object objectForKey:@"sessionId"];
+        NSString *originId = object[@"sessionId"];
        // UInt32 msgId = [object objectForKey:@"msgId"];
-        SessionType sessionType = [[object objectForKey:@"sessionType"] intValue];
+        SessionType sessionType = [object[@"sessionType"] intValue];
         NSString* sessionID = [MTSessionEntity getSessionIDForOriginID:originId sessionType:sessionType];
     
         [self clearUnreadMessagesForSessionID:sessionID];
@@ -483,7 +483,7 @@ typedef void(^MTCheckoutMessageSendrInfoCompletion)();
     else
     {
         SessionType sessionType = [MTSessionEntity getSessionTypeFromSessionID:sessionID];
-        if (sessionType == SessionTypeSessionTypeSingle)
+        if (sessionType == SessionType_SessionTypeSingle)
         {
             NSString* userID = [MTSessionEntity getOriginIDFromSessionID:sessionID];
             MTUserEntity* user = (MTUserEntity*)[[MTUserModule shareInstance] getOriginEntityWithOriginID:userID];
@@ -506,7 +506,7 @@ typedef void(^MTCheckoutMessageSendrInfoCompletion)();
                 }];
             }
         }
-        else if(sessionType == SessionTypeSessionTypeGroup)
+        else if(sessionType == SessionType_SessionTypeGroup)
         {
             NSString* groupID = [MTSessionEntity getOriginIDFromSessionID:sessionID];
             MTGroupEntity* group = (MTGroupEntity*)[[MTGroupModule shareInsatnce] getOriginEntityWithOriginID:groupID];

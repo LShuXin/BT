@@ -8,24 +8,29 @@
 
 #import "DDepartment.h"
 
+
 @implementation DDepartment
-- (instancetype)init
+
+-(instancetype)init
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         self.ID = 0;
-        self.parentID=0;
-        self.title=@"";
-        self.description=@"";
-        self.leader=@"";
-       // self.status=0;
-        self.count=0;
+        self.parentID = 0;
+        self.title = @"";
+        self.description = @"";
+        self.leader = @"";
+        // self.status = 0;
+        self.count = 0;
 
     }
     return self;
 }
-+(id)departmentFromDic:(DepartInfo *)info
+
++(id)departmentFromDic:(DepartInfo*)info
 {
     return info;
 }
+
 @end

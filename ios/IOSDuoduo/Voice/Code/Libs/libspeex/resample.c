@@ -85,7 +85,7 @@ static void speex_free (void *ptr) {free(ptr);}
 #ifdef FIXED_POINT
 #define WORD2INT(x) ((x) < -32767 ? -32768 : ((x) > 32766 ? 32767 : (x)))  
 #else
-#define WORD2INT(x) ((x) < -32767.5f ? -32768 : ((x) > 32766.5f ? 32767 : floor(.5+(x))))  
+#define WORD2INT(x) ((x) < -32767.5f ? -32768 : ((x) > 32766.5f ? 32767 : floor(.5+ (x))))  
 #endif
                
 #define IMAX(a,b) ((a) > (b) ? (a) : (b))
@@ -456,10 +456,10 @@ static int resampler_basic_interpolate_single(SpeexResamplerState *st, spx_uint3
 
       for(j=0;j<N;j++) {
         const spx_word16_t curr_in=iptr[j];
-        accum[0] += MULT16_16(curr_in,st->sinc_table[4+(j+1)*st->oversample-offset-2]);
-        accum[1] += MULT16_16(curr_in,st->sinc_table[4+(j+1)*st->oversample-offset-1]);
-        accum[2] += MULT16_16(curr_in,st->sinc_table[4+(j+1)*st->oversample-offset]);
-        accum[3] += MULT16_16(curr_in,st->sinc_table[4+(j+1)*st->oversample-offset+1]);
+        accum[0] += MULT16_16(curr_in,st->sinc_table[4+ (j+1)*st->oversample-offset-2]);
+        accum[1] += MULT16_16(curr_in,st->sinc_table[4+ (j+1)*st->oversample-offset-1]);
+        accum[2] += MULT16_16(curr_in,st->sinc_table[4+ (j+1)*st->oversample-offset]);
+        accum[3] += MULT16_16(curr_in,st->sinc_table[4+ (j+1)*st->oversample-offset+1]);
       }
 
       cubic_coef(frac, interp);
@@ -518,10 +518,10 @@ static int resampler_basic_interpolate_double(SpeexResamplerState *st, spx_uint3
 
       for(j=0;j<N;j++) {
         const double curr_in=iptr[j];
-        accum[0] += MULT16_16(curr_in,st->sinc_table[4+(j+1)*st->oversample-offset-2]);
-        accum[1] += MULT16_16(curr_in,st->sinc_table[4+(j+1)*st->oversample-offset-1]);
-        accum[2] += MULT16_16(curr_in,st->sinc_table[4+(j+1)*st->oversample-offset]);
-        accum[3] += MULT16_16(curr_in,st->sinc_table[4+(j+1)*st->oversample-offset+1]);
+        accum[0] += MULT16_16(curr_in,st->sinc_table[4+ (j+1)*st->oversample-offset-2]);
+        accum[1] += MULT16_16(curr_in,st->sinc_table[4+ (j+1)*st->oversample-offset-1]);
+        accum[2] += MULT16_16(curr_in,st->sinc_table[4+ (j+1)*st->oversample-offset]);
+        accum[3] += MULT16_16(curr_in,st->sinc_table[4+ (j+1)*st->oversample-offset+1]);
       }
 
       cubic_coef(frac, interp);
@@ -682,10 +682,10 @@ static void update_filter(SpeexResamplerState *st)
             /* If the new filter length is still bigger than the "augmented" length */
             /* Copy data going backward */
             for (j=0;j<olen-1;j++)
-               st->mem[i*st->mem_alloc_size+(st->filt_len-2-j)] = st->mem[i*st->mem_alloc_size+(olen-2-j)];
+               st->mem[i*st->mem_alloc_size+ (st->filt_len-2-j)] = st->mem[i*st->mem_alloc_size+ (olen-2-j)];
             /* Then put zeros for lack of anything better */
             for (;j<st->filt_len-1;j++)
-               st->mem[i*st->mem_alloc_size+(st->filt_len-2-j)] = 0;
+               st->mem[i*st->mem_alloc_size+ (st->filt_len-2-j)] = 0;
             /* Adjust last_sample */
             st->last_sample[i] += (st->filt_len - olen)/2;
          } else {

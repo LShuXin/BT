@@ -169,13 +169,13 @@
 - (void)openUserChatWithUser:(NSString*)userID
 {
     MTUserEntity* user = (MTUserEntity*)[[MTUserModule shareInstance] getOriginEntityWithOriginID:userID];
-    NSString* sessionID = [MTSessionEntity getSessionIDForOriginID:userID sessionType:SessionTypeSessionTypeSingle];
+    NSString* sessionID = [MTSessionEntity getSessionIDForOriginID:userID sessionType:SessionType_SessionTypeSingle];
     if (user)
     {
         MTSessionEntity* session = [[MTSessionModule shareInstance] getSessionBySessionID:sessionID];
         if (!session)
         {
-            session = [[MTSessionEntity alloc] initWithOriginID:user.ID type:SessionTypeSessionTypeSingle];
+            session = [[MTSessionEntity alloc] initWithOriginID:user.ID type:SessionType_SessionTypeSingle];
             [[MTSessionModule shareInstance] addSessions:@[session] saveToDB:YES];
         }
         [session updateUpdateTime:[[NSDate date] timeIntervalSince1970]];
@@ -187,14 +187,14 @@
 
 - (void)openGroupChatWithGroup:(NSString*)groupID
 {
-    NSString* sessionID = [MTSessionEntity getSessionIDForOriginID:groupID sessionType:SessionTypeSessionTypeGroup];
+    NSString* sessionID = [MTSessionEntity getSessionIDForOriginID:groupID sessionType:SessionType_SessionTypeGroup];
     MTGroupEntity* group = (MTGroupEntity*)[[MTGroupModule shareInsatnce] getOriginEntityWithOriginID:groupID];
     if (group)
     {
         MTSessionEntity* session = [[MTSessionModule shareInstance] getSessionBySessionID:sessionID];
         if (!session)
         {
-            session = [[MTSessionEntity alloc] initWithOriginID:groupID type:SessionTypeSessionTypeGroup];
+            session = [[MTSessionEntity alloc] initWithOriginID:groupID type:SessionType_SessionTypeGroup];
         }
         [[MTSessionModule shareInstance] addSessions:@[session] saveToDB:YES];
         [session updateUpdateTime:[[NSDate date] timeIntervalSince1970]];
@@ -269,7 +269,7 @@ static NSString* const SESSION_ID = @"sessionId";          //群消息到达
         
         //标题过滤
         MTSessionEntity* session = [[MTSessionModule shareInstance] getSessionBySessionID:sId];
-        if (session.sessionType == SessionTypeSessionTypeGroup)
+        if (session.sessionType == SessionType_SessionTypeGroup)
         {
             notification.title = [NSString stringWithFormat:@"%@-%@",session.name,title];
         }
@@ -525,7 +525,7 @@ static NSString* const SESSION_ID = @"sessionId";          //群消息到达
     else if (index == 1)
     {
         MTSessionEntity* session = [[MTSessionModule shareInstance] getSessionBySessionID:lastSessionID];
-        if (session.sessionType == SessionTypeSessionTypeGroup)
+        if (session.sessionType == SessionType_SessionTypeGroup)
         {
             NSString* groupID = session.originID;
             MTGroupEntity* groupEntity = (MTGroupEntity*)[[MTGroupModule shareInsatnce] getOriginEntityWithOriginID:groupID];

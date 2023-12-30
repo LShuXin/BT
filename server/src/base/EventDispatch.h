@@ -44,7 +44,8 @@ private:
 	void _CheckTimer();
     void _CheckLoop();
 
-	typedef struct {
+	typedef struct
+	{
 		callback_t	callback;
 		void*		user_data;
 		uint64_t	interval;

@@ -8,9 +8,11 @@
 #ifndef SERVINFO_H_
 #define SERVINFO_H_
 
+
 #include "util.h"
 #include "imconn.h"
 #include "ConfigFileReader.h"
+
 
 #define MAX_RECONNECT_CNT 64
 #define MIN_RECONNECT_CNT 4
@@ -79,5 +81,6 @@ void serv_reset(serv_info_t *server_list, uint32_t server_count, uint32_t serv_i
 
 serv_info_t *read_server_config(CConfigFileReader *config_file, const char *server_ip_format,
 								const char *server_port_format, uint32_t &server_count);
+
 
 #endif /* SERVINFO_H_ */

@@ -8,10 +8,13 @@
 
 #import "DDUserModule.h"
 #import "DDDatabaseUtil.h"
+
+
 @interface DDUserModule(PrivateAPI)
 
-- (void)n_receiveUserLogoutNotification:(NSNotification*)notification;
-- (void)n_receiveUserLoginNotification:(NSNotification*)notification;
+-(void)n_receiveUserLogoutNotification:(NSNotification*)notification;
+-(void)n_receiveUserLoginNotification:(NSNotification*)notification;
+
 @end
 
 @implementation DDUserModule
@@ -19,7 +22,7 @@
     NSMutableDictionary* _allUsers;
 }
 
-+ (instancetype)shareInstance
++(instancetype)shareInstance
 {
     static DDUserModule* g_userModule;
     static dispatch_once_t onceToken;
@@ -29,7 +32,7 @@
     return g_userModule;
 }
 
-- (id)init
+-(id)init
 {
     self = [super init];
     if (self)
@@ -37,19 +40,26 @@
         _allUsers = [[NSMutableDictionary alloc] init];
         _recentUsers = [[NSMutableDictionary alloc] init];
         
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(n_receiveUserLogoutNotification:) name:MGJUserDidLogoutNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(n_receiveUserLoginNotification:) name:DDNotificationUserLoginSuccess object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(n_receiveUserLoginNotification:) name:DDNotificationUserReloginSuccess object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:@selector(n_receiveUserLogoutNotification:)
+//                                                     name:MGJUserDidLogoutNotification
+//                                                   object:nil];
         
-
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(n_receiveUserLoginNotification:)
+                                                     name:DDNotificationUserLoginSuccess
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(n_receiveUserLoginNotification:)
+                                                     name:DDNotificationUserReloginSuccess
+                                                   object:nil];
     }
     return self;
 }
 
-
-- (void)addMaintanceUser:(DDUserEntity*)user
+-(void)addMaintanceUser:(DDUserEntity*)user
 {
-    
     if (!user)
     {
         return;
@@ -59,19 +69,19 @@
         _allUsers = [[NSMutableDictionary alloc] init];
     }
     [_allUsers setValue:user forKey:user.objID];
-    
 }
--(NSArray *)getAllMaintanceUser
+
+-(NSArray*)getAllMaintanceUser
 {
     return [_allUsers allValues];
 }
-- (void )getUserForUserID:(NSString*)userID Block:(void(^)(DDUserEntity *user))block
+
+-(void)getUserForUserID:(NSString*)userID Block:(void(^)(DDUserEntity* user))block
 {
     return block(_allUsers[userID]);
-
 }
 
-- (void)addRecentUser:(DDUserEntity*)user
+-(void)addRecentUser:(DDUserEntity*)user
 {
     if (!user)
     {
@@ -85,29 +95,28 @@
     if (![allKeys containsObject:user.objID])
     {
         [self.recentUsers setValue:user forKey:user.objID];
-        [[DDDatabaseUtil instance] insertUsers:@[user] completion:^(NSError *error) {
-            
+        [[DDDatabaseUtil instance] insertUsers:@[user] completion:^(NSError* error) {
+
         }];
     }
-   
 }
 
-
+// 加载本地最近联系人
 - (void)loadAllRecentUsers:(DDLoadRecentUsersCompletion)completion
 {
-    
-    //加载本地最近联系人
-    }
+
+}
 
 #pragma mark - 
 #pragma mark PrivateAPI
-- (void)n_receiveUserLogoutNotification:(NSNotification*)notification
+// 用户登出
+-(void)n_receiveUserLogoutNotification:(NSNotification*)notification
 {
-    //用户登出
     _recentUsers = nil;
 }
 
-- (void)n_receiveUserLoginNotification:(NSNotification*)notification
+// 用户登录
+-(void)n_receiveUserLoginNotification:(NSNotification*)notification
 {
     if (!_recentUsers)
     {

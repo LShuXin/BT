@@ -20,7 +20,8 @@
 #include "IM.Server.pb.h"
 #include "UserModel.h"
 
-namespace DB_PROXY {
+namespace DB_PROXY
+{
 
     void getUnreadMsgCounter(CImPdu* pPdu, uint32_t conn_uuid)
     {

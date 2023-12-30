@@ -9,14 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "NSIndexSet+AQIndexesOutsideSet.h"
 
-@implementation NSIndexSet (AQIndexesOutsideSet)
+@implementation NSIndexSet(AQIndexesOutsideSet)
 
-- (NSIndexSet *) aq_indexesOutsideIndexSet: (NSIndexSet *) otherSet
+-(NSIndexSet*)aq_indexesOutsideIndexSet:(NSIndexSet*)otherSet
 {
 	NSMutableIndexSet * mutable = [self mutableCopy];
 	[mutable removeIndexes: otherSet];
 	NSIndexSet * result = [mutable copy];
-	return ( result );
+	return (result);
 }
 
 @end

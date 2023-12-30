@@ -230,7 +230,7 @@ EXPORT void speex_bits_pack(SpeexBits *bits, int data, int nbBits)
 {
    unsigned int d=data;
 
-   if (bits->charPtr+((nbBits+bits->bitPtr)>>LOG2_BITS_PER_CHAR) >= bits->buf_size)
+   if (bits->charPtr+ ((nbBits+bits->bitPtr)>>LOG2_BITS_PER_CHAR) >= bits->buf_size)
    {
       speex_notify("Buffer too small to pack bits");
       if (bits->owner)

@@ -7,7 +7,7 @@
 //
 
 #import "DDDepartmentInfoAPI.h"
-#import "IMBuddy.pb.h"
+#import "IMBuddy.pbobjc.h"
 #import "MTDepartmentEntity.h"
 @implementation DDDepartmentInfoAPI
 /**
@@ -70,9 +70,9 @@
     
     Analysis analysis = (id)^(NSData* data)
     {
-        IMDepartmentRsp *departRsp = [IMDepartmentRsp parseFromData:data];
+        IMDepartmentRsp *departRsp = [IMDepartmentRsp parseFromData:data error:nil];
         NSInteger lastUpdateTime = departRsp.latestUpdateTime;
-        NSArray* departments = departRsp.deptList;
+        NSArray* departments = departRsp.deptListArray;
         
         NSMutableArray* theDepartments = [[NSMutableArray alloc] init];
         for (DepartInfo * departInfo in departments)
@@ -97,7 +97,7 @@
 {
     Package package = (id)^(id object,uint32_t seqNo)
     {
-        IMDepartmentReqBuilder* requestBuilder = [IMDepartmentReq builder];
+        IMDepartmentReq* requestBuilder = [[IMDepartmentReq alloc] init];
         
         NSArray* array = (NSArray*)object;
         
@@ -113,7 +113,7 @@
         [dataout writeTcpProtocolHeader:MODULE_ID_SESSION
                                     cId:CMD_FRI_LIST_DEPARTMENT_REQ
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[requestBuilder build].data];
+        [dataout directWriteBytes:[requestBuilder data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

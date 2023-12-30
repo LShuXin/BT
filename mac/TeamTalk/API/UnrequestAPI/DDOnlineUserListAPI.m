@@ -7,29 +7,29 @@
 //
 
 #import "DDOnlineUserListAPI.h"
-#import "IMBuddy.pb.h"
+#import "IMBuddy.pbobjc.h"
 
 
 @implementation DDOnlineUserListAPI
 
 - (int)requestServiceID
 {
-    return ServiceIDSidBuddyList;
+    return ServiceID_SidBuddyList;
 }
 
 - (int)responseServiceID
 {
-    return ServiceIDSidBuddyList;
+    return ServiceID_SidBuddyList;
 }
 
 - (int)requestCommendID
 {
-    return BuddyListCmdIDCidBuddyListUsersStatusRequest;
+    return BuddyListCmdID_CidBuddyListUsersStatusRequest;
 }
 
 - (int)responseCommendID
 {
-    return BuddyListCmdIDCidBuddyListUsersStatusResponse;
+    return BuddyListCmdID_CidBuddyListUsersStatusResponse;
 }
 
 - (int)requestTimeOutTimeInterval
@@ -49,9 +49,9 @@
     
     Analysis analysis = (id)^(NSData* data)
     {
-        IMUsersStatRsp *allUserStateRsp = [IMUsersStatRsp parseFromData:data];
+        IMUsersStatRsp *allUserStateRsp = [IMUsersStatRsp parseFromData:data error:nil];
         
-        NSArray *usersStatList = allUserStateRsp.userStatList;
+        NSArray *usersStatList = allUserStateRsp.userStatListArray;
         
         return usersStatList;
     };
@@ -67,7 +67,7 @@
 {
     Package package = (id)^(id object,uint32_t seqNo)
     {
-        IMUsersStatReqBuilder *reqBuilder =[IMUsersStatReq builder];
+        IMUsersStatReq *reqBuilder =[[IMUsersStatReq alloc] init];
         
         [reqBuilder setUserId:0];
         [reqBuilder setUserIdListArray:(NSArray *)object];
@@ -77,7 +77,7 @@
         [dataout writeTcpProtocolHeader:[self requestServiceID]
                                     cId:[self requestCommendID]
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[reqBuilder build].data];
+        [dataout directWriteBytes:[reqBuilder data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

@@ -8,8 +8,8 @@
 
 #import "NSDictionary+JSON.h"
 
-@implementation NSDictionary (JSON)
-- (NSString*)jsonString
+@implementation NSDictionary(JSON)
+-(NSString*)jsonString
 {
     NSData* infoJsonData = [NSJSONSerialization dataWithJSONObject:self options:NSJSONWritingPrettyPrinted error:nil];
     NSString* json = [[NSString alloc] initWithData:infoJsonData encoding:NSUTF8StringEncoding];

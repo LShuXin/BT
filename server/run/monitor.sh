@@ -111,6 +111,6 @@ case $1 in
         ;;
     *)
         echo "Usage: "
-        echo "  ./monitor.sh (login_server|msg_server|route_server|http_msg_server|db_proxy_server|file_server|push_server|msfs|test ) [log]"
+        echo "  ./monitor.sh (login_server|msg_server|route_server|http_msg_server|db_proxy_server|file_server|push_server|msfs|test) [log]"
         ;;
 esac

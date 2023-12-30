@@ -11,6 +11,6 @@ public class UrlConstant {
     public final static String AVATAR_URL_PREFIX = "";
 
     // access 地址
-    public final static String ACCESS_MSG_ADDRESS = "http://192.168.199.115:8080/msg_server";
+    public final static String ACCESS_MSG_ADDRESS = "http://192.168.199.166:8080/msg_server";
 
 }

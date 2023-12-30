@@ -7,7 +7,7 @@
 //
 
 #import "DDGetLastMessageIDAPI.h"
-#import "IMMessage.pb.h"
+#import "IMMessage.pbobjc.h"
 @implementation DDGetLastMessageIDAPI
 /**
  *  请求超时时间
@@ -68,7 +68,7 @@
 {
     Analysis analysis = (id)^(NSData* data)
     {
-        IMGetLatestMsgIdRsp* getLastestMsgIDRsp = [IMGetLatestMsgIdRsp parseFromData:data];
+        IMGetLatestMsgIdRsp* getLastestMsgIDRsp = [IMGetLatestMsgIdRsp parseFromData:data error: nil];
 //        NSString* requestUserID = [NSString stringWithFormat:@"%i",getLastestMsgIDRsp.userId];
 //        SessionType sessionType = getLastestMsgIDRsp.sessionType;
 //        NSString* originID = [NSString stringWithFormat:@"%i",getLastestMsgIDRsp.sessionId];
@@ -88,7 +88,7 @@
 {
     Package package = (id)^(id object,uint16_t seqNo)
     {
-        IMGetLatestMsgIdReqBuilder *req = [IMGetLatestMsgIdReq builder];
+        IMGetLatestMsgIdReq *req = [[IMGetLatestMsgIdReq alloc] init];
         [req setUserId:[[DDClientState shareInstance].userID intValue]];
         
         NSArray* array = (NSArray*)object;
@@ -103,7 +103,7 @@
         [dataout writeTcpProtocolHeader:DDSERVICE_MESSAGE
                                     cId:CMD_MSG_GET_LASTEST_MSG_ID_REQ
                                   seqNo:seqNo];
-        [dataout directWriteBytes:[req build].data];
+        [dataout directWriteBytes:[req data]];
         [dataout writeDataCount];
         return [dataout toByteArray];
     };

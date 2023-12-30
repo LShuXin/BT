@@ -27,7 +27,7 @@ public class GroupEvent {
         this.event = event;
     }
 
-    public enum Event{
+    public enum Event {
         NONE,
 
         GROUP_INFO_OK,

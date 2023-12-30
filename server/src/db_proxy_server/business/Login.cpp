@@ -26,9 +26,9 @@ CInterLoginStrategy g_loginStrategy;
 
 hash_map<string, list<uint32_t> > g_hmLimits;
 CLock g_cLimitLock;
-namespace DB_PROXY {
-    
-    
+namespace DB_PROXY
+{
+
 void doLogin(CImPdu* pPdu, uint32_t conn_uuid)
 {
     
@@ -37,7 +37,7 @@ void doLogin(CImPdu* pPdu, uint32_t conn_uuid)
     IM::Server::IMValidateReq msg;
     IM::Server::IMValidateRsp msgResp;
     
-    if(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()))
+    if (msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()))
     {
         
         string strDomain = msg.user_name();
@@ -90,9 +90,8 @@ void doLogin(CImPdu* pPdu, uint32_t conn_uuid)
         } while(false);
         
         log("%s request login.", strDomain.c_str());
-        
-        
-        
+
+
         IM::BaseDefine::UserInfo cUser;
         
         if(g_loginStrategy.doLogin(strDomain, strPass, cUser))
@@ -115,6 +114,7 @@ void doLogin(CImPdu* pPdu, uint32_t conn_uuid)
             CAutoLock cAutoLock(&g_cLimitLock);
             list<uint32_t>& lsErrorTime = g_hmLimits[strDomain];
             lsErrorTime.clear();
+            log("get userinfo success");
         }
         else
         {
@@ -134,12 +134,12 @@ void doLogin(CImPdu* pPdu, uint32_t conn_uuid)
         msgResp.set_result_code(2);
         msgResp.set_result_string("服务端内部错误");
     }
-    
-    
+
     pPduResp->SetPBMsg(&msgResp);
     pPduResp->SetSeqNum(pPdu->GetSeqNum());
     pPduResp->SetServiceId(IM::BaseDefine::SID_OTHER);
     pPduResp->SetCommandId(IM::BaseDefine::CID_OTHER_VALIDATE_RSP);
+    log("add response success");
     CProxyConn::AddResponsePdu(conn_uuid, pPduResp);
 }
 

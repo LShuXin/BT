@@ -23,13 +23,13 @@
 #include "IM.Internal.pb.h"
 
 
-namespace DB_PROXY {
-
+namespace DB_PROXY
+{
     void getUserInfo(CImPdu* pPdu, uint32_t conn_uuid)
     {
         IM::Buddy::IMUsersInfoReq msg;
         IM::Buddy::IMUsersInfoRsp msgResp;
-        if(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()))
+        if (msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()))
         {
             CImPdu* pPduRes = new CImPdu;
             
@@ -37,17 +37,18 @@ namespace DB_PROXY {
             uint32_t userCount = msg.user_id_list_size();
             
             std::list<uint32_t> idList;
-            for(uint32_t i = 0; i < userCount;++i) {
+            for (uint32_t i = 0; i < userCount; ++i)
+            {
                 idList.push_back(msg.user_id_list(i));
             }
             std::list<IM::BaseDefine::UserInfo> lsUser;
             CUserModel::getInstance()->getUsers(idList, lsUser);
             msgResp.set_user_id(from_user_id);
-            for(list<IM::BaseDefine::UserInfo>::iterator it=lsUser.begin();
-                it!=lsUser.end(); ++it)
+
+            for (list<IM::BaseDefine::UserInfo>::iterator it = lsUser.begin(); it != lsUser.end(); ++it)
             {
                 IM::BaseDefine::UserInfo* pUser = msgResp.add_user_info_list();
-    //            *pUser = *it;
+                // *pUser = *it;
                 pUser->set_user_id(it->user_id());
                 pUser->set_user_gender(it->user_gender());
                 pUser->set_user_nick_name(it->user_nick_name());
@@ -78,7 +79,7 @@ namespace DB_PROXY {
     {
         IM::Buddy::IMAllUserReq msg;
         IM::Buddy::IMAllUserRsp msgResp;
-        if(msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()))
+        if (msg.ParseFromArray(pPdu->GetBodyData(), pPdu->GetBodyLength()))
         {
             CImPdu* pPduRes = new CImPdu;
             
@@ -93,10 +94,10 @@ namespace DB_PROXY {
             
             msgResp.set_user_id(nReqId);
             msgResp.set_latest_update_time(nLastTime);
-            for (list<IM::BaseDefine::UserInfo>::iterator it=lsUsers.begin();
-                 it!=lsUsers.end(); ++it) {
+            for (list<IM::BaseDefine::UserInfo>::iterator it=lsUsers.begin(); it != lsUsers.end(); ++it)
+            {
                 IM::BaseDefine::UserInfo* pUser = msgResp.add_user_list();
-                //            *pUser = *it;
+                // *pUser = *it;
                 pUser->set_user_id(it->user_id());
                 pUser->set_user_gender(it->user_gender());
                 pUser->set_user_nick_name(it->user_nick_name());

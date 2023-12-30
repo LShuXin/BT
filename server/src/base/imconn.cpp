@@ -29,12 +29,16 @@ void imconn_callback(void* callback_data, uint8_t msg, uint32_t handle, void* pP
 	NOTUSED_ARG(pParam);
 
 	if (!callback_data)
-		return;
+    {
+        return;
+    }
 
 	ConnMap_t* conn_map = (ConnMap_t*)callback_data;
 	CImConn* pConn = FindImConn(conn_map, handle);
 	if (!pConn)
-		return;
+    {
+        return;
+    }
 
 	//log("msg=%d, handle=%d ", msg, handle);
 
@@ -60,7 +64,6 @@ void imconn_callback(void* callback_data, uint8_t msg, uint32_t handle, void* pP
 	pConn->ReleaseRef();
 }
 
-//////////////////////////
 CImConn::CImConn()
 {
 	//log("CImConn::CImConn ");
@@ -80,7 +83,7 @@ CImConn::~CImConn()
 int CImConn::Send(void* data, int len)
 {
 	m_last_send_tick = get_tick_count();
-//	++g_send_pkt_cnt;
+    // ++g_send_pkt_cnt;
 
 	if (m_busy)
 	{
@@ -90,14 +93,17 @@ int CImConn::Send(void* data, int len)
 
 	int offset = 0;
 	int remain = len;
-	while (remain > 0) {
+	while (remain > 0)
+	{
 		int send_size = remain;
-		if (send_size > NETLIB_MAX_SOCKET_BUF_SIZE) {
+		if (send_size > NETLIB_MAX_SOCKET_BUF_SIZE)
+		{
 			send_size = NETLIB_MAX_SOCKET_BUF_SIZE;
 		}
 
 		int ret = netlib_send(m_handle, (char*)data + offset , send_size);
-		if (ret <= 0) {
+		if (ret <= 0)
+		{
 			ret = 0;
 			break;
 		}
@@ -126,11 +132,15 @@ void CImConn::OnRead()
 	{
 		uint32_t free_buf_len = m_in_buf.GetAllocSize() - m_in_buf.GetWriteOffset();
 		if (free_buf_len < READ_BUF_SIZE)
-			m_in_buf.Extend(READ_BUF_SIZE);
+        {
+            m_in_buf.Extend(READ_BUF_SIZE);
+        }
 
 		int ret = netlib_recv(m_handle, m_in_buf.GetBuffer() + m_in_buf.GetWriteOffset(), READ_BUF_SIZE);
 		if (ret <= 0)
-			break;
+        {
+            break;
+        }
 
 		m_recv_bytes += ret;
 		m_in_buf.IncWriteOffset(ret);
@@ -150,12 +160,19 @@ void CImConn::OnRead()
 			m_in_buf.Read(NULL, pdu_len);
 			delete pPdu;
             pPdu = NULL;
-//			++g_recv_pkt_cnt;
+            // ++g_recv_pkt_cnt;
 		}
-	} catch (CPduException& ex) {
+	}
+	catch (CPduException& ex)
+	{
 		log("!!!catch exception, sid=%u, cid=%u, err_code=%u, err_msg=%s, close the connection ",
-				ex.GetServiceId(), ex.GetCommandId(), ex.GetErrorCode(), ex.GetErrorMsg());
-        if (pPdu) {
+				ex.GetServiceId(),
+				ex.GetCommandId(),
+				ex.GetErrorCode(),
+				ex.GetErrorMsg());
+
+        if (pPdu)
+        {
             delete pPdu;
             pPdu = NULL;
         }
@@ -166,16 +183,21 @@ void CImConn::OnRead()
 void CImConn::OnWrite()
 {
 	if (!m_busy)
-		return;
+    {
+        return;
+    }
 
-	while (m_out_buf.GetWriteOffset() > 0) {
+	while (m_out_buf.GetWriteOffset() > 0)
+	{
 		int send_size = m_out_buf.GetWriteOffset();
-		if (send_size > NETLIB_MAX_SOCKET_BUF_SIZE) {
+		if (send_size > NETLIB_MAX_SOCKET_BUF_SIZE)
+		{
 			send_size = NETLIB_MAX_SOCKET_BUF_SIZE;
 		}
 
 		int ret = netlib_send(m_handle, m_out_buf.GetBuffer(), send_size);
-		if (ret <= 0) {
+		if (ret <= 0)
+		{
 			ret = 0;
 			break;
 		}
@@ -183,7 +205,8 @@ void CImConn::OnWrite()
 		m_out_buf.Read(NULL, ret);
 	}
 
-	if (m_out_buf.GetWriteOffset() == 0) {
+	if (m_out_buf.GetWriteOffset() == 0)
+	{
 		m_busy = false;
 	}
 

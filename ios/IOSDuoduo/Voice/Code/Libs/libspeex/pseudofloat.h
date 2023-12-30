@@ -186,7 +186,7 @@ static inline spx_float_t FLOAT_MULT(spx_float_t a, spx_float_t b)
 {
    spx_float_t r;
    r.m = (spx_int16_t)((spx_int32_t)(a).m*(b).m>>15);
-   r.e = (a).e+(b).e+15;
+   r.e = (a).e+ (b).e+15;
    if (r.m>0)
    {
       if (r.m<16384)
@@ -209,7 +209,7 @@ static inline spx_float_t FLOAT_AMULT(spx_float_t a, spx_float_t b)
 {
    spx_float_t r;
    r.m = (spx_int16_t)((spx_int32_t)(a).m*(b).m>>15);
-   r.e = (a).e+(b).e+15;
+   r.e = (a).e+ (b).e+15;
    return r;   
 }
 
@@ -225,7 +225,7 @@ static inline spx_float_t FLOAT_SHL(spx_float_t a, int b)
 static inline spx_int16_t FLOAT_EXTRACT16(spx_float_t a)
 {
    if (a.e<0)
-      return EXTRACT16((EXTEND32(a.m)+(EXTEND32(1)<<(-a.e-1)))>>-a.e);
+      return EXTRACT16((EXTEND32(a.m)+ (EXTEND32(1)<<(-a.e-1)))>>-a.e);
    else
       return a.m<<a.e;
 }
@@ -233,7 +233,7 @@ static inline spx_int16_t FLOAT_EXTRACT16(spx_float_t a)
 static inline spx_int32_t FLOAT_EXTRACT32(spx_float_t a)
 {
    if (a.e<0)
-      return (EXTEND32(a.m)+(EXTEND32(1)<<(-a.e-1)))>>-a.e;
+      return (EXTEND32(a.m)+ (EXTEND32(1)<<(-a.e-1)))>>-a.e;
    else
       return EXTEND32(a.m)<<a.e;
 }
@@ -363,7 +363,7 @@ static inline spx_float_t FLOAT_SQRT(spx_float_t a)
 #define FLOAT_DIV32(a,b) ((a)/(b))
 #define FLOAT_EXTRACT16(a) (a)
 #define FLOAT_EXTRACT32(a) (a)
-#define FLOAT_ADD(a,b) ((a)+(b))
+#define FLOAT_ADD(a,b) ((a)+ (b))
 #define FLOAT_SUB(a,b) ((a)-(b))
 #define REALFLOAT(x) (x)
 #define FLOAT_DIV32_FLOAT(a,b) ((a)/(b))

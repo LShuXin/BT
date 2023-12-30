@@ -9,7 +9,7 @@
 #import "AnalysisImage.h"
 #import "DDMessageModule.h"
 @implementation AnalysisImage
-+(void)analysisImage:(DDMessageEntity *)message Block:(void(^)(NSMutableArray *array))block
++ (void)analysisImage:(DDMessageEntity *)message Block:(void(^)(NSMutableArray *array))block
 {
  
     NSMutableArray *arr = [NSMutableArray new];

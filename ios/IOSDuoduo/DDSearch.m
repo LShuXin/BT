@@ -12,18 +12,19 @@
 #import "DDUserEntity.h"
 #import "GroupEntity.h"
 #import "SpellLibrary.h"
+
+
 @interface DDSearch(PrivateAPI)
-
-- (NSArray*)p_getAllUsersAndGroups;
-- (NSString*)p_getIDForObject:(id)sender;
-
+-(NSArray*)p_getAllUsersAndGroups;
+-(NSString*)p_getIDForObject:(id)sender;
 @end
 
 @implementation DDSearch
 {
     NSArray* _allUsersAndGroups;
 }
-+ (instancetype)instance
+
++(instancetype)instance
 {
     static DDSearch* g_search;
     static dispatch_once_t onceToken;
@@ -34,7 +35,7 @@
 }
 
 #pragma mark - Public API
-- (void)searchContent:(NSString*)content completion:(SearchCompletion)completion
+-(void)searchContent:(NSString*)content completion:(SearchCompletion)completion
 {
     content = [content lowercaseString];
     [[DDSundriesCenter instance] pushTaskToSerialQueue:^{

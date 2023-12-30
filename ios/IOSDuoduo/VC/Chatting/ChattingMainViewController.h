@@ -33,7 +33,7 @@ typedef void(^TimeCellAddBlock)(bool isok);
 @property (assign, nonatomic, readonly) UIEdgeInsets originalTableViewContentInset;
 @property (nonatomic, strong) UIRefreshControl* refreshControl;
 @property (assign)BOOL hadLoadHistory;
-+(instancetype )shareInstance;
++ (instancetype )shareInstance;
 
 -(void)sendImageMessage:(Photo *)photo Image:(UIImage *)image;
 /**

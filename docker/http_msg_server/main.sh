@@ -3,11 +3,11 @@ server_ip(){
         arp $1 | sed "s/.*(\([0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\)).*/\1/g"
 }
 
-sed -i "s/DBServerIP1=.*/DBServerIP1=$( server_ip "${DBServerIP1}" )/g" /teamtalk/http_msg_server/httpmsgserver.conf
+sed -i "s/DBServerIP1=.*/DBServerIP1=$( server_ip "${DB_SERVER_IP1}" )/g" /teamtalk/http_msg_server/httpmsgserver.conf
 sed -i "s/DBServerIP2=.*/#DBServerIP2=127.0.0.1/g" /teamtalk/http_msg_server/httpmsgserver.conf
 sed -i "s/DBServerPort2.*/#DBServerPort2=10600/g" /teamtalk/http_msg_server/httpmsgserver.conf
 
-sed -i "s/RouteServerIP1.*/RouteServerIP1=$( server_ip "${RouteServerIP1}" )/g" /teamtalk/http_msg_server/httpmsgserver.conf
+sed -i "s/RouteServerIP1.*/RouteServerIP1=$( server_ip "${ROUTE_SERVER_IP1}" )/g" /teamtalk/http_msg_server/httpmsgserver.conf
 sed -i "s/RouteServerPort1=.*/RouteServerPort1=8200/g" /teamtalk/http_msg_server/httpmsgserver.conf
 server=http_msg_server
 echo -e "\033[32m $server ==> START... \033[0m"

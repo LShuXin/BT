@@ -77,7 +77,6 @@ public class MainActivity extends FragmentActivity {
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.addCategory(Intent.CATEGORY_HOME);
         startActivity(i);
-
     }
 
 
@@ -207,7 +206,6 @@ public class MainActivity extends FragmentActivity {
             int unreadNum = imService.getUnReadMsgManager().getTotalUnreadCount();
             mTabButtons[0].setUnreadNotify(unreadNum);
         }
-
     }
 
     public void onEventMainThread(LoginEvent event) {
@@ -221,7 +219,6 @@ public class MainActivity extends FragmentActivity {
         finish();
         logger.d("mainactivity#login#kill self, and start login activity");
         jumpToLoginPage();
-
     }
 
     private void jumpToLoginPage() {

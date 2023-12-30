@@ -19,35 +19,38 @@
 #import "ReceiveKickoffAPI.h"
 #import "LogoutAPI.h"
 #import "DDClientState.h"
-#import "IMLogin.pb.h"
+#import "IMLogin.pbobjc.h"
+
+
 @interface RuntimeStatus()
 @property(strong)NSMutableArray *userDefaults;
 @property(strong)NSMutableArray *shieldingArray;
-
 @end
+
 @implementation RuntimeStatus
 
-+ (instancetype)instance
++(instancetype)instance
 {
     static RuntimeStatus* g_runtimeState;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         g_runtimeState = [[RuntimeStatus alloc] init];
-        
     });
     return g_runtimeState;
 }
-- (instancetype)init
+
+-(instancetype)init
 {
     self = [super init];
     if (self) {
         self.user = [DDUserEntity new];
-        self.userDefaults =[NSMutableArray arrayWithContentsOfFile:fixedlist];
+        self.userDefaults = [NSMutableArray arrayWithContentsOfFile:fixedlist];
         self.shieldingArray = [NSMutableArray arrayWithContentsOfFile:shieldinglist];
         [self registerAPI];
     }
     return self;
 }
+
 -(void)registerAPI
 {
     //接收踢出
@@ -55,130 +58,147 @@
     [receiveKick registerAPIInAPIScheduleReceiveData:^(id object, NSError *error) {
         KickReasonType type = [object integerValue];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"KickOffUser" object:@(type)];
-        
-    }
-     
-    ];
+    }];
 }
+
 -(void)updateData
 {
     [DDMessageModule shareInstance];
     [DDClientStateMaintenanceManager shareInstance];
     [DDGroupModule instance];
 }
+
 -(void)insertToFixedTop:(NSString *)idString
 {
-    
-    
-    
-    if (self.userDefaults == nil || [self.userDefaults count] == 0) {
+    if (self.userDefaults == nil || [self.userDefaults count] == 0)
+    {
         self.userDefaults = [NSMutableArray new];
         [self.userDefaults addObject:idString];
-       
-    }else
+    }
+    else
     {
         if (![self.userDefaults containsObject:idString]) {
             [self.userDefaults addObject:idString];
-            
         }
     }
     [self.userDefaults writeToFile:fixedlist atomically:YES];
 }
+
 -(void)removeFromFixedTop:(NSString *)idString
 {
     
-    if (self.userDefaults != nil) {
+    if (self.userDefaults != nil)
+    {
         [self.userDefaults removeObject:idString];
-       
     }
-     [self.userDefaults writeToFile:fixedlist atomically:YES];
+
+    [self.userDefaults writeToFile:fixedlist atomically:YES];
     // [self.userDefaults synchronize];
 }
+
 -(BOOL)isInFixedTop:(NSString *)idString
 {
-
-    if (self.userDefaults == nil) {
-        return NO;
-    }else
+    if (self.userDefaults == nil)
     {
-        if (![self.userDefaults containsObject:idString]) {
+        return NO;
+    }
+    else
+    {
+        if (![self.userDefaults containsObject:idString])
+        {
             return NO;
-        }else
+        }
+        else
         {
             return YES;
         }
     }
     return NO;
-
 }
+
 -(NSUInteger)getFixedTopCount
 {
-
     return [self.userDefaults count];
 }
+
 -(void)addToShielding:(NSString *)string
 {
- 
-    
-    if (self.shieldingArray == nil || [self.shieldingArray count] == 0) {
-        self.shieldingArray =[NSMutableArray new];
-        [self.shieldingArray addObject:string];
- 
-    }else
+    if (self.shieldingArray == nil || [self.shieldingArray count] == 0)
     {
-        if (![self.shieldingArray containsObject:string]) {
+        self.shieldingArray = [NSMutableArray new];
+        [self.shieldingArray addObject:string];
+    }
+    else
+    {
+        if (![self.shieldingArray containsObject:string])
+        {
             [self.shieldingArray addObject:string];
-           // [self.userDefaults setObject:array forKey:SHIELDINGKEY];
+            // [self.userDefaults setObject:array forKey:SHIELDINGKEY];
         }
     }
     [self.shieldingArray writeToFile:shieldinglist atomically:YES];
-    //[self.userDefaults synchronize];
+    // [self.userDefaults synchronize];
 }
+
 -(void)removeIDFromShielding:(NSString *)idString
 {
-       if (self.shieldingArray != nil) {
+    if (self.shieldingArray != nil)
+    {
         [self.shieldingArray removeObject:idString];
-       // [self.userDefaults setObject:array forKey:SHIELDINGKEY];
+        // [self.userDefaults setObject:array forKey:SHIELDINGKEY];
     }
-    //[self.userDefaults synchronize];
+    // [self.userDefaults synchronize];
     [self.shieldingArray writeToFile:shieldinglist atomically:YES];
 }
+
 -(BOOL)isInShielding:(NSString *)idString
 {
-   // NSMutableArray *array = [self.userDefaults objectForKey:SHIELDINGKEY];
-    if (self.shieldingArray == nil) {
-        return NO;
-    }else
+    // NSMutableArray *array = [self.userDefaults objectForKey:SHIELDINGKEY];
+    if (self.shieldingArray == nil)
     {
-        if (![self.shieldingArray containsObject:idString]) {
+        return NO;
+    }
+    else
+    {
+        if (![self.shieldingArray containsObject:idString])
+        {
             return NO;
-        }else
+        }
+        else
         {
             return YES;
         }
     }
     return NO;
-    
 }
--(void)showAlertView:(NSString *)title Description:(NSString *)string
+
+-(void)showAlertView:(NSString *)title description:(NSString *)string
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:string delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:string
+                                                   delegate:self
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:nil, nil];
     [alert show];
 }
+
 -(NSInteger)changeIDToOriginal:(NSString *)sessionID
 {
     NSArray *array = [sessionID componentsSeparatedByString:@"_"];
-    if (array[1]) {
+    if (array[1])
+    {
         return [array[1] integerValue];
     }
     return 0;
 }
+
 -(NSString *)changeOriginalToLocalID:(NSUInteger)orignalID SessionType:(SessionType)sessionType
 {
-    if(sessionType == SessionTypeSessionTypeSingle)
+    if (sessionType == SessionType_SessionTypeSingle)
     {
         return [DDUserEntity pbUserIdToLocalID:orignalID];
     }
     return [GroupEntity pbGroupIdToLocalID:orignalID];
 }
+
 @end

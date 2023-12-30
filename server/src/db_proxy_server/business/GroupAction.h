@@ -14,8 +14,14 @@
 
 #include "ImPduBase.h"
 
-namespace DB_PROXY {
-
+namespace DB_PROXY
+{
+    /**
+     *  创建群组
+     *
+     *  @param pPdu      收到的packet包指针
+     *  @param conn_uuid 该包过来的socket 描述符
+     */
     void createGroup(CImPdu* pPdu, uint32_t conn_uuid);
     
     void getNormalGroupList(CImPdu* pPdu, uint32_t conn_uuid);
@@ -27,7 +33,6 @@ namespace DB_PROXY {
     void setGroupPush(CImPdu* pPdu, uint32_t conn_uuid);
     
     void getGroupPush(CImPdu* pPdu, uint32_t conn_uuid);
-
 };
 
 
