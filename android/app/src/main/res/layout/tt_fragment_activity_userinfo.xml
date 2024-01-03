@@ -6,6 +6,7 @@
 
     <fragment
         android:name="com.mogujie.tt.ui.fragment.UserInfoFragment"
+        android:id="@+id/UserInfoFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

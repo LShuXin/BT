@@ -10,6 +10,9 @@
 #import "DDMessageEntity.h"
 #import "Encapsulator.h"
 #import "IMMessage.pbobjc.h"
+#import "RuntimeStatus.h"
+
+
 @implementation GetMessageQueueAPI
 /**
  *  请求超时时间
@@ -73,16 +76,16 @@
     {
         IMGetMsgListRsp *rsp =[IMGetMsgListRsp parseFromData:data error:nil];
         SessionType sessionType = rsp.sessionType;
+
         NSString *sessionID = [TheRuntime changeOriginalToLocalID:rsp.sessionId sessionType:sessionType];
-        NSUInteger begin = rsp.msgIdBegin;
-         NSMutableArray *msgArray = [NSMutableArray new];
+        // NSUInteger begin = rsp.msgIdBegin;
+        NSMutableArray *msgArray = [NSMutableArray new];
         for (MsgInfo *msgInfo in rsp.msgListArray) {
             DDMessageEntity *msg = [DDMessageEntity makeMessageFromPB:msgInfo SessionType:sessionType];
-            msg.sessionId=sessionID;
-            msg.state=DDmessageSendSuccess;
+            msg.sessionId = sessionID;
+            msg.state = DDmessageSendSuccess;
             [msgArray addObject:msg];
         }
-        
         
         return msgArray;
     };

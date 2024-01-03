@@ -217,8 +217,9 @@ dbproxyserver.conf 目前配置了如下几个 redis 缓存池：
 	    }
 	    return s_db_manager;
 	}
-	
-	
+
+
+​	
 	int CDBManager::Init()
 	{
 			CConfigFileReader config_file("dbproxyserver.conf");
@@ -368,8 +369,9 @@ dbproxyserver.conf 目前配置了如下几个 redis 缓存池：
 	 
 	    return 0;
 	}
-	
-	
+
+
+​	
 	void CWorkerThread::Start()
 	{
 		  (void)pthread_create(&m_thread_id, NULL, StartRoutine, this);
@@ -386,10 +388,11 @@ dbproxyserver.conf 目前配置了如下几个 redis 缓存池：
 	 
 	return NULL;
 	}
-	
-	
-	
-	
+
+
+​	
+​	
+​	
 	void CWorkerThread::Execute()
 	{
 	    while (true)
@@ -432,8 +435,9 @@ dbproxyserver.conf 目前配置了如下几个 redis 缓存池：
 ### 初始化二：将各个任务 id 与对应的处理函数绑定起来：
 
 	s_handler_map = CHandlerMap::getInstance();
-	
-	
+
+
+​	
 	CHandlerMap* CHandlerMap::getInstance()
 	{
 	    if (!s_handler_instance)
@@ -443,8 +447,9 @@ dbproxyserver.conf 目前配置了如下几个 redis 缓存池：
 	    }
 	    return s_handler_instance;
 	}
-	
-	
+
+
+​	
 	void CHandlerMap::Init()
 	{
 	    // DB_PROXY是命名空间，不是类名
@@ -493,9 +498,10 @@ dbproxyserver.conf 目前配置了如下几个 redis 缓存池：
 		  m_handler_map.insert(make_pair(uint32_t(CID_OTHER_VALIDATE_REQ), DB_PROXY::doLogin));
 	    m_handler_map.insert(make_pair(uint32_t(CID_LOGIN_REQ_PUSH_SHIELD), DB_PROXY::doPushShield));
 	    m_handler_map.insert(make_pair(uint32_t(CID_LOGIN_REQ_QUERY_PUSH_SHIELD), DB_PROXY::doQueryPushShield));
-	    
-	    
-	    
+
+
+​	    
+​	    
 	    // recent session
 	    m_handler_map.insert(make_pair(uint32_t(CID_BUDDY_LIST_RECENT_CONTACT_SESSION_REQUEST), DB_PROXY::getRecentSession));
 	    m_handler_map.insert(make_pair(uint32_t(CID_BUDDY_LIST_REMOVE_SESSION_REQ), DB_PROXY::deleteRecentSession));
@@ -505,8 +511,9 @@ dbproxyserver.conf 目前配置了如下几个 redis 缓存池：
 	    m_handler_map.insert(make_pair(uint32_t(CID_BUDDY_LIST_ALL_USER_REQUEST), DB_PROXY::getChangedUser));
 	    m_handler_map.insert(make_pair(uint32_t(CID_BUDDY_LIST_DEPARTMENT_REQUEST), DB_PROXY::getChgedDepart));
 	    m_handler_map.insert(make_pair(uint32_t(CID_BUDDY_LIST_CHANGE_SIGN_INFO_REQUEST), DB_PROXY::changeUserSignInfo));
-	
-	
+
+
+​	
 	    // message content
 	    m_handler_map.insert(make_pair(uint32_t(CID_MSG_DATA), DB_PROXY::sendMessage));
 	    m_handler_map.insert(make_pair(uint32_t(CID_MSG_LIST_REQUEST), DB_PROXY::getMessage));
@@ -522,8 +529,9 @@ dbproxyserver.conf 目前配置了如下几个 redis 缓存池：
 	    // push 推送设置
 	    m_handler_map.insert(make_pair(uint32_t(CID_GROUP_SHIELD_GROUP_REQUEST), DB_PROXY::setGroupPush));
 	    m_handler_map.insert(make_pair(uint32_t(CID_OTHER_GET_SHIELD_REQ), DB_PROXY::getGroupPush));
-	
-	
+
+
+​	
 	    // group
 	    m_handler_map.insert(make_pair(uint32_t(CID_GROUP_NORMAL_LIST_REQUEST), DB_PROXY::getNormalGroupList));
 	    m_handler_map.insert(make_pair(uint32_t(CID_GROUP_INFO_REQUEST), DB_PROXY::getGroupInfo));
@@ -535,8 +543,9 @@ dbproxyserver.conf 目前配置了如下几个 redis 缓存池：
 	    m_handler_map.insert(make_pair(uint32_t(CID_FILE_ADD_OFFLINE_REQ), DB_PROXY::addOfflineFile));
 	    m_handler_map.insert(make_pair(uint32_t(CID_FILE_DEL_OFFLINE_REQ), DB_PROXY::delOfflineFile));
 	}
-	
-	
+
+
+​	
 
 
 
@@ -850,8 +859,9 @@ void AddBaseSocket(CBaseSocket* pSocket)
     {
     	  CEventDispatch::Instance()->StartDispatch(wait_timeout);
     }
-    
-    
+
+
+​    
     void CEventDispatch::StartDispatch(uint32_t wait_timeout)
     {
         fd_set read_set, write_set, excep_set;
@@ -1132,16 +1142,18 @@ void CBaseSocket::OnRead()
 	    {
 	        return;
 	    }
-	      
-	
+
+
+​	
 	    ConnMap_t* conn_map = (ConnMap_t*)callback_data;
 	    CImConn* pConn = FindImConn(conn_map, handle);
 	    if (!pConn)
 	    {
 	        return;
 	    }
-	      
-	
+
+
+​	
 	    // log("msg=%d, handle=%d ", msg, handle);
 	    switch (msg)
 	    {
@@ -1646,8 +1658,9 @@ CProxyConn::AddResponsePdu(conn_uuid, pPduResp)
 	{
 		  CProxyConn::SendResponsePduList();
 	}
-	
-	
+
+
+​	
 	void CProxyConn::SendResponsePduList()
 	{
 	    s_list_lock.lock();
@@ -1693,8 +1706,9 @@ CProxyConn::AddResponsePdu(conn_uuid, pPduResp)
 
 
 	CProxyConn* pConn = get_proxy_conn_by_uuid(pResp->conn_uuid);
-	
-	
+
+
+​	
 	CProxyConn* get_proxy_conn_by_uuid(uint32_t uuid)
 	{
 	    CProxyConn* pConn = NULL;
@@ -1912,16 +1926,18 @@ static uint32_t	s_uuid_alloctor;
 	    {
 	        return;
 	    }
-	      
-	
+
+
+​	
 	    ConnMap_t* conn_map = (ConnMap_t*)callback_data;
 	    CImConn* pConn = FindImConn(conn_map, handle);
 	    if (!pConn)
 	    {
 	        return;
 	    }
-	      
-	
+
+
+​	
 	    // log("msg=%d, handle=%d ", msg, handle);
 	 
 	    switch (msg)
@@ -2042,8 +2058,9 @@ _CheckTimer();
 	        }
 	    }
 	}
-	
-	
+
+
+​	
 	uint64_t get_tick_count()
 	{
 	#ifdef _WIN32

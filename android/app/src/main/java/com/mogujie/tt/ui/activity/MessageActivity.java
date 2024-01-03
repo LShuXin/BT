@@ -25,6 +25,7 @@ import android.provider.Settings;
 import android.text.Editable;
 import android.text.Selection;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -233,6 +234,7 @@ public class MessageActivity extends TTBaseActivity
 
     // 触发条件,imservice链接成功，或者newIntent
     private void initData() {
+        Log.d("LShuXin", "MessageActivity initData");
         historyTimes = 0;
         adapter.clearItem();
         ImageMessage.clearImageMessageList();
@@ -698,7 +700,7 @@ public class MessageActivity extends TTBaseActivity
      */
     private void reqHistoryMsg() {
         historyTimes++;
-        List<MessageEntity> msgList = imService.getMessageManager().loadHistoryMsg(historyTimes,currentSessionKey,peerEntity);
+        List<MessageEntity> msgList = imService.getMessageManager().loadHistoryMsg(historyTimes, currentSessionKey, peerEntity);
         pushList(msgList);
         scrollToBottomListItem();
     }

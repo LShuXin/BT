@@ -29,7 +29,7 @@ message IMFilePullDataReq {
     //cmd id:    0x0504
     string task_id = 1;
     uint32 user_id = 2;
-    IM.BaseDefine.FileType trans_mode = 3;
+    IM.BaseDefine.XFileType trans_mode = 3;
     uint32 offset = 4;
     uint32 data_size = 5;
 }
@@ -49,7 +49,7 @@ message IMFileReq {
     uint32 to_user_id = 2;
     string file_name = 3;
     uint32 file_size = 4;
-    IM.BaseDefine.FileType trans_mode = 5;
+    IM.BaseDefine.XFileType trans_mode = 5;
 }
 
 message IMFileRsp {
@@ -60,7 +60,7 @@ message IMFileRsp {
     string file_name = 4;
     string task_id = 5;
     repeated IM.BaseDefine.IpAddr ip_addr_list = 6;
-    IM.BaseDefine.FileType trans_mode = 7;
+    IM.BaseDefine.XFileType trans_mode = 7;
 }
 
 message IMFileNotify{
@@ -71,7 +71,7 @@ message IMFileNotify{
     uint32 file_size = 4;
     string task_id = 5;
     repeated IM.BaseDefine.IpAddr ip_addr_list = 6;
-    IM.BaseDefine.FileType trans_mode = 7;
+    IM.BaseDefine.XFileType trans_mode = 7;
     uint32 offline_ready = 8;                //1:True 0:False
 }
 

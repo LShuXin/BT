@@ -192,7 +192,7 @@
     return 0;
 }
 
--(NSString *)changeOriginalToLocalID:(NSUInteger)orignalID SessionType:(SessionType)sessionType
+-(NSString *)changeOriginalToLocalID:(NSUInteger)orignalID sessionType:(SessionType)sessionType
 {
     if (sessionType == SessionType_SessionTypeSingle)
     {

@@ -2,6 +2,7 @@ package com.mogujie.tt.imservice.manager;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.protobuf.ByteString;
 import com.google.protobuf.CodedInputStream;
@@ -364,29 +365,36 @@ public class IMMessageManager extends IMManager{
 
 
     // 拉取历史消息 {from MessageActivity}
-    public List<MessageEntity> loadHistoryMsg(int pullTimes,String sessionKey,PeerEntity peerEntity){
+    public List<MessageEntity> loadHistoryMsg(int pullTimes, String sessionKey, PeerEntity peerEntity) {
         int lastMsgId = 99999999;
         int lastCreateTime = 1455379200;
         int count = SysConstant.MSG_CNT_PER_PAGE;
         SessionEntity sessionEntity = IMSessionManager.instance().findSession(sessionKey);
         if (sessionEntity != null) {
             // 以前已经聊过天，删除之后，sessionEntity不存在
-            logger.i("#loadHistoryMsg# sessionEntity is null");
+            Log.i("LShuXin", "#loadHistoryMsg# sessionEntity is not null");
             lastMsgId = sessionEntity.getLatestMsgId();
-            // 这个地方设定有问题，先使用最大的时间,session的update设定存在问题
-            //lastCreateTime = sessionEntity.getUpdated();
+            // 这个地方设定有问题，先使用最大的时间, session 的 update 设定存在问题
+            // lastCreateTime = sessionEntity.getUpdated();
         }
 
-        if(lastMsgId <1 || TextUtils.isEmpty(sessionKey)){
+        if (lastMsgId < 1 || TextUtils.isEmpty(sessionKey)) {
+            Log.i("LShuXin", "lastMsgId < 1 || TextUtils.isEmpty(sessionKey)");
             return Collections.emptyList();
         }
-        if(count > lastMsgId){
+
+        // 确保拉取消息的数量要小于消息总数量
+        if (count > lastMsgId) {
             count = lastMsgId;
         }
         List<MessageEntity> msgList = doLoadHistoryMsg(
-                pullTimes, peerEntity.getPeerId(),
+                pullTimes,
+                peerEntity.getPeerId(),
                 peerEntity.getType(),
-                sessionKey, lastMsgId, lastCreateTime, count);
+                sessionKey,
+                lastMsgId,
+                lastCreateTime,
+                count);
 
         return msgList;
     }
@@ -420,19 +428,21 @@ public class IMMessageManager extends IMManager{
      * @param count
      * @return
      */
-    private List<MessageEntity> doLoadHistoryMsg(int pullTimes,final int peerId,final int peerType, final String sessionKey,int lastMsgId,int lastCreateTime,int count){
-        if(lastMsgId <1 || TextUtils.isEmpty(sessionKey)){
+    private List<MessageEntity> doLoadHistoryMsg(int pullTimes, final int peerId, final int peerType, final String sessionKey, int lastMsgId, int lastCreateTime, int count) {
+        if (lastMsgId < 1 || TextUtils.isEmpty(sessionKey)) {
+            Log.i("LShuXin", "lastMsgId < 1 || TextUtils.isEmpty(sessionKey)");
             return Collections.emptyList();
         }
-        if(count > lastMsgId){
+        if (count > lastMsgId) {
             count = lastMsgId;
         }
         // 降序结果输出desc
-        List<MessageEntity> listMsg = dbInterface.getHistoryMsg(sessionKey,lastMsgId,lastCreateTime,count);
+        List<MessageEntity> listMsg = dbInterface.getHistoryMsg(sessionKey, lastMsgId, lastCreateTime, count);
+        Log.i("LShuXin", "dbInterface.getHistoryMsg(" + sessionKey + ", " + lastMsgId + ", " + lastCreateTime + ", " + count + ")");
         // asyn task refresh
         int resSize = listMsg.size();
-        logger.d("LoadHistoryMsg return size is %d",resSize);
-        if(resSize==0 || pullTimes == 1 || pullTimes %3==0){
+        Log.i("LShuXin", "LoadHistoryMsg return size is " + resSize);
+        if (resSize == 0 || pullTimes == 1 || pullTimes %3 == 0) {
             RefreshHistoryMsgEvent historyMsgEvent = new RefreshHistoryMsgEvent();
             historyMsgEvent.pullTimes = pullTimes;
             historyMsgEvent.count = count;

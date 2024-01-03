@@ -121,7 +121,7 @@ message IMFileTransferReq {
     uint32 to_user_id = 2;
     string file_name = 3;
     uint32 file_size = 4;
-    IM.BaseDefine.FileType trans_mode = 5;
+    IM.BaseDefine.XFileType trans_mode = 5;
     optional bytes attach_data = 20;
 }
 
@@ -133,7 +133,7 @@ message IMFileTransferRsp {
     optional string file_name = 4;
     optional uint32 file_size = 5;
     optional string task_id = 6;
-    optional IM.BaseDefine.FileType trans_mode = 7;
+    optional IM.BaseDefine.XFileType trans_mode = 7;
     optional bytes attach_data = 20;
 }
 

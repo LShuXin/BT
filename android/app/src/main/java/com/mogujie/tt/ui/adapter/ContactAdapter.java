@@ -2,6 +2,7 @@ package com.mogujie.tt.ui.adapter;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -141,6 +142,7 @@ public class ContactAdapter extends BaseAdapter implements
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.d("kkkkkkkk", "ppppppppp");
         Object object =  getItem(position);
         if(object instanceof UserEntity){
             UserEntity userEntity = (UserEntity) object;
@@ -188,6 +190,7 @@ public class ContactAdapter extends BaseAdapter implements
 
     @Override
     public Object getItem(int position) {
+        Log.e("hahahah", "jijijijiji");
         int typeIndex =  getItemViewType(position);
         ContactType renderType = ContactType.values()[typeIndex];
         switch (renderType){

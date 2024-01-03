@@ -118,9 +118,7 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (null != curView) {
             ((ViewGroup) curView.getParent()).removeView(curView);
             return curView;
@@ -156,7 +154,7 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
         // showLoadingProgressBar(true);
     }
 
-    private void initAdapter(){
+    private void initAdapter() {
         contactAdapter = new ContactAdapter(getActivity(),imService);
         departmentAdapter = new DeptAdapter(getActivity(),imService);
         allContactListView.setAdapter(contactAdapter);

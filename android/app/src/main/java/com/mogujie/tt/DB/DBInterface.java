@@ -298,15 +298,16 @@ public class DBInterface {
     // order by created desc
     // limit count;
     // 按照时间排序
-    public List<MessageEntity> getHistoryMsg(String chatKey,int lastMsgId,int lastCreateTime,int count){
-        /**解决消息重复的问题*/
-        int preMsgId = lastMsgId +1;
+    /**
+     * 从数据库拉取历史消息，为什么需要 lastMsgId、lastCreateTime 两个约束条件
+     * @param chatKey session_key
+     * @param lastMsgId 最后一条消息的 id
+     * @param lastCreateTime 最后一条消息的创建时间
+     * */
+    public List<MessageEntity> getHistoryMsg(String chatKey, int lastMsgId, int lastCreateTime, int count) {
         MessageDao dao = openReadableDb().getMessageDao();
-        List<MessageEntity> listMsg = dao.queryBuilder().where(MessageDao.Properties.Created.le(lastCreateTime)
-                    , MessageDao.Properties.SessionKey.eq(chatKey)
-                    ,MessageDao.Properties.MsgId.notEq(preMsgId))
-                    .whereOr(MessageDao.Properties.MsgId.le(lastMsgId),
-                             MessageDao.Properties.MsgId.gt(90000000))
+        List<MessageEntity> listMsg = dao.queryBuilder()
+                .where(MessageDao.Properties.SessionKey.eq(chatKey), MessageDao.Properties.MsgId.le(lastMsgId))
                     .orderDesc(MessageDao.Properties.Created)
                     .orderDesc(MessageDao.Properties.MsgId)
                     .limit(count)
