@@ -164,6 +164,7 @@ docker-compose -f "docker-compose-build-centos.yml" up -d --build
 - [ ] 简化手动部署流程
 - [ ] 添加内网论坛功能
 - [ ] 添加用户个人注册功能
+- [ ] 服务端各个服务之间线程类、缓冲区管理类等若干重复定义代码中优化
 
 
 

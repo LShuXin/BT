@@ -28,6 +28,9 @@ public abstract class TTBaseActivity extends Activity {
     protected LinearLayout baseRoot;
     protected float x1, y1, x2, y2 = 0;
 
+    /**
+     * 初始化页面基础布局，初始化对页面基础布局所涉及组件的引用
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,9 @@ public abstract class TTBaseActivity extends Activity {
         setContentView(topContentView);
     }
 
+    /**
+     * 设置导航栏返回按钮的文案
+     * */
     protected void setLeftText(String text) {
         if (null == text) {
             return;
@@ -58,6 +64,9 @@ public abstract class TTBaseActivity extends Activity {
         letTitleTxt.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * 设置导航栏标题
+     * */
     protected void setTitle(String title) {
         if (title == null) {
             return;
@@ -71,10 +80,14 @@ public abstract class TTBaseActivity extends Activity {
 
     @Override
     public void setTitle(int id) {
+        // ??
         String strTitle = getResources().getString(id);
         setTitle(strTitle);
     }
 
+    /**
+     * 设置导航栏返回按钮图片资源
+     * */
     protected void setLeftButton(int resID) {
         if (resID <= 0) {
             return;
@@ -84,6 +97,9 @@ public abstract class TTBaseActivity extends Activity {
         topLeftBtn.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * 设置导航栏右侧 action 按钮图片资源
+     * */
     protected void setRightButton(int resID) {
         if (resID <= 0) {
             return;
@@ -93,6 +109,9 @@ public abstract class TTBaseActivity extends Activity {
         topRightBtn.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * 设置导航栏背景
+     * */
     protected void setTopBar(int resID) {
         if (resID <= 0) {
             return;

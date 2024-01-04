@@ -69,7 +69,7 @@ public class LoadImageService extends IntentService {
 
             if (TextUtils.isEmpty(result)) {
                 logger.i("upload image faild,cause by result is empty/null");
-                EventBus.getDefault().post(new MessageEvent(MessageEvent.Event.IMAGE_UPLOAD_FAILD
+                EventBus.getDefault().post(new MessageEvent(MessageEvent.Event.IMAGE_UPLOAD_FAILURE
                         , messageInfo));
             } else {
                 logger.i("upload image succcess,imageUrl is %s", result);

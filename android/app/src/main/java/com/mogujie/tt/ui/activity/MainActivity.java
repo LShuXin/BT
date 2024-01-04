@@ -43,10 +43,10 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        logger.d("MainActivity#savedInstanceState:%s", savedInstanceState);
-        //todo eric when crash, this will be called, why?
+        logger.d("main_activity#onCreate savedInstanceState: %s", savedInstanceState);
+        // when crash, this will be called, why?
         if (savedInstanceState != null) {
-            logger.w("MainActivity#crashed and restarted, just exit");
+            logger.w("main_activity#onCreate crashed and restarted, just exit");
             jumpToLoginPage();
             finish();
         }
@@ -79,6 +79,32 @@ public class MainActivity extends FragmentActivity {
         startActivity(i);
     }
 
+    // onNewIntent 是在一个活动（Activity）已经存在并处于活动状态（非销毁状态）时，
+    // 通过 startActivity 启动该活动的时候调用的。它允许你处理新的 Intent，通常用
+    // 于更新活动的内容或执行其他相关操作
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleLocateDepartment(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        logger.d("main_activity#onDestroy");
+        EventBus.getDefault().unregister(this);
+        imServiceConnector.disconnect(this);
+        super.onDestroy();
+    }
 
     private void initFragment() {
         mFragments = new Fragment[4];
@@ -106,7 +132,7 @@ public class MainActivity extends FragmentActivity {
         mTabButtons[1].setSelectedImage(getResources().getDrawable(R.drawable.tt_tab_contact_sel));
         mTabButtons[1].setUnselectedImage(getResources().getDrawable(R.drawable.tt_tab_contact_nor));
 
-        mTabButtons[2].setTitle(getString(R.string.main_innernet));
+        mTabButtons[2].setTitle(getString(R.string.main_inner_net));
         mTabButtons[2].setIndex(2);
         mTabButtons[2].setSelectedImage(getResources().getDrawable(R.drawable.tt_tab_internal_select));
         mTabButtons[2].setUnselectedImage(getResources().getDrawable(R.drawable.tt_tab_internal_nor));
@@ -135,61 +161,37 @@ public class MainActivity extends FragmentActivity {
         mTabButtons[which].setSelectedButton(true);
     }
 
+    /** 会话 tab 未读消息数 */
     public void setUnreadMessageCnt(int unreadCnt) {
         mTabButtons[0].setUnreadNotify(unreadCnt);
     }
 
-
-    /**
-     * 双击事件
-     */
+    /** 双击聊天 tab 时直接跳转到含有未读消息的会话位置 */
     public void chatDoubleListener() {
         setFragmentIndicator(0);
         ((ChatFragment) mFragments[0]).scrollToUnreadPosition();
     }
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        handleLocateDepratment(intent);
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    private void handleLocateDepratment(Intent intent) {
+    /**
+     * 如果传入了部门 ID，则直接跳转到联系人页面的对应部门处
+     * */
+    private void handleLocateDepartment(Intent intent) {
         int departmentIdToLocate = intent.getIntExtra(IntentConstant.KEY_LOCATE_DEPARTMENT, -1);
         if (departmentIdToLocate == -1) {
             return;
         }
 
-        logger.d("department#got department to locate id:%d", departmentIdToLocate);
+        logger.d("main_activity#handleLocateDepartment department to locate: %d", departmentIdToLocate);
         setFragmentIndicator(1);
         ContactFragment fragment = (ContactFragment) mFragments[1];
         if (fragment == null) {
-            logger.e("department#fragment is null");
+            logger.e("main_activity#handleLocateDepartment department fragment is null");
             return;
         }
         fragment.locateDepartment(departmentIdToLocate);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
-        logger.d("mainactivity#onDestroy");
-        EventBus.getDefault().unregister(this);
-        imServiceConnector.disconnect(this);
-        super.onDestroy();
-    }
-
-
+    /** EventBus 事件处理 */
     public void onEventMainThread(UnreadEvent event) {
         switch (event.event) {
             case SESSION_READED_UNREAD_MSG:
@@ -200,8 +202,8 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
+    /** 更新未读消息数量 */
     private void showUnreadMessageCount() {
-        //todo eric when to
         if (imService != null) {
             int unreadNum = imService.getUnReadMsgManager().getTotalUnreadCount();
             mTabButtons[0].setUnreadNotify(unreadNum);
@@ -215,9 +217,9 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void handleOnLogout() {
-        logger.d("mainactivity#login#handleOnLogout");
+        logger.d("main_activity#handleOnLogout");
         finish();
-        logger.d("mainactivity#login#kill self, and start login activity");
+        logger.d("main_activity#handleOnLogout killed self, and start login activity");
         jumpToLoginPage();
     }
 

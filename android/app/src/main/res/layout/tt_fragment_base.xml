@@ -5,20 +5,25 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
+
+
+
+
+    <!--  通用导航栏：左侧返回按钮 + 居中标题 + 右侧按钮/可点击文案  -->
     <FrameLayout
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_bar_default_height"
         android:background="@drawable/tt_top_default_bk"
         android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
+        android:paddingRight="15dp" >
 
+        <!-- 左侧返回按钮 + 文案（比如“返回”） -->
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            
             android:id="@+id/top_left_container" >
 
             <ImageView
@@ -39,6 +44,7 @@
                 android:textSize="14sp" />
         </RelativeLayout>
 
+        <!-- 导航栏中间部分，title/搜索框 -->
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -56,10 +62,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/top_title_size"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:textStyle="italic" />
-
-            
+                android:paddingRight="5dp" />
 
             <com.mogujie.tt.ui.widget.SearchEditText
                 android:id="@+id/chat_title_search"
@@ -80,12 +83,13 @@
                 android:textSize="14sp" />
         </FrameLayout>
 
+        <!-- 右侧功能按钮/可点击文案 -->
         <ImageView
             android:id="@+id/right_btn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="right|center_vertical"
-            android:scaleType="center" 
+            android:scaleType="center"
             android:visibility="gone"/>
 
         <TextView
@@ -96,13 +100,18 @@
             android:textColor="@color/default_title_color"
             android:textSize="14sp" />
     </FrameLayout>
-        
+
+
+
+
+    <!-- 联系人界面导航栏中的 tab -->
 	<FrameLayout
         android:id="@+id/contactTopBar"
         android:layout_width="match_parent"
         android:layout_height="39dp"
         android:background="@drawable/tt_top_default_bk" 
         android:visibility="gone">
+
     	<com.mogujie.tt.ui.widget.TopTabButton
 	        android:id="@+id/contact_tile"
 	        android:layout_width="wrap_content"
@@ -110,12 +119,12 @@
 	        android:layout_gravity="top|center_horizontal"
 	        android:clickable="true" />
     </FrameLayout>	
-    
-	<View
-           	android:layout_width="fill_parent"
-           	android:layout_height="0.5dp"
-           	android:background="@drawable/tt_divide_line" />
-    
+
+
+
+
+
+    <!-- 搜索页导航栏中的搜索框 -->
     <FrameLayout
         android:id="@+id/searchbar"
         android:layout_width="match_parent"
@@ -140,6 +149,12 @@
             android:textSize="14sp" />
         
     </FrameLayout>
+
+
+
+
+
+    <!-- 导航栏底部横线 -->
 	<View
            	android:layout_width="fill_parent"
            	android:layout_height="0.5dp"

@@ -53,7 +53,7 @@ import de.greenrobot.event.EventBus;
 
 /**
  * @author Nana
- * @Description 最近联系人Fragment页
+ * @Description 最近联系人（会话列表） Fragment 页
  * @date 2014-7-24
  */
 public class ChatFragment extends MainFragment
@@ -72,18 +72,17 @@ public class ChatFragment extends MainFragment
     private ProgressBar reconnectingProgressBar;
     private IMService imService;
 
-    //是否是手动点击重练。fasle:不显示各种弹出小气泡. true:显示小气泡直到错误出现
+    // 是否手动点击重连。
+    // false: 不显示各种弹出小气泡
+    // true: 显示小气泡直到错误出现
     private volatile boolean isManualMConnect = false;
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-    }
 
     private final IMServiceConnector imServiceConnector = new IMServiceConnector() {
 
         @Override
         public void onServiceDisconnected() {
+            // EventBus 注册的就是 IMService 通知，IMService 断开后就不必让此 Fragment 作为通知的订阅者
+            // 等 IMService 下次连接成功做再将此 Fragment 注册为订阅者就行
             if (EventBus.getDefault().isRegistered(ChatFragment.this)) {
                 EventBus.getDefault().unregister(ChatFragment.this);
             }
@@ -91,16 +90,15 @@ public class ChatFragment extends MainFragment
 
         @Override
         public void onIMServiceConnected() {
-            // TODO Auto-generated method stub
-            logger.d("chatfragment#recent#onIMServiceConnected");
+            logger.d("chat_fragment#onIMServiceConnected");
             imService = imServiceConnector.getIMService();
             if (imService == null) {
                 // why ,some reason
                 return;
             }
-            // 依赖联系人回话、未读消息、用户的信息三者的状态
+            // 依赖联系人会话、未读消息、用户的信息三者的状态
             onRecentContactDataReady();
-            // registerSticky方法用于注册“粘性”事件订阅者，这意味着订阅者会接收到之前发送的
+            // registerSticky 方法用于注册“粘性”事件订阅者，这意味着订阅者会接收到之前发送的
             // 最新事件（如果有的话），然后继续接收后续的事件。
             EventBus.getDefault().registerSticky(ChatFragment.this);
         }
@@ -110,15 +108,14 @@ public class ChatFragment extends MainFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         imServiceConnector.connect(getActivity());
-        logger.d("chatfragment#onCreate");
+        logger.d("chat_fragment#onCreate");
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle bundle) {
-        logger.d("onCreateView");
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
+        logger.d("chat_fragment#onCreateView");
         if (null != curView) {
-            logger.d("curView is not null, remove it");
+            logger.d("chat_fragment#onCreateView curView is not null, remove it");
             ((ViewGroup) curView.getParent()).removeView(curView);
         }
         curView = inflater.inflate(R.layout.tt_fragment_chat, topContentView);
@@ -130,10 +127,45 @@ public class ChatFragment extends MainFragment
         notifyImage = curView.findViewById(R.id.imageWifi);
 
         super.init(curView);
-        initTitleView();// 初始化顶部view
-        initContactListView(); // 初始化联系人列表视图
-        showProgressBar();// 创建时没有数据，显示加载动画
+        // 初始化顶部view
+        initTitleView();
+        // 初始化联系人列表视图
+        initContactListView();
+        // 创建时没有数据，显示加载动画
+        showProgressBar();
         return curView;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+    }
+
+    @Override
+    public void onStart() {
+        logger.d("chat_fragment#onStart");
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        logger.d("chat_fragment#onStop");
+        super.onStop();
+    }
+
+    @Override
+    public void onPause() {
+        logger.d("chat_fragment#onPause");
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        if (EventBus.getDefault().isRegistered(ChatFragment.this)) {
+            EventBus.getDefault().unregister(ChatFragment.this);
+        }
+        imServiceConnector.disconnect(getActivity());
+        super.onDestroy();
     }
 
     /**
@@ -153,35 +185,8 @@ public class ChatFragment extends MainFragment
 
         // this is critical, disable loading when finger sliding, otherwise
         // you'll find sliding is not very smooth
-        contactListView.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(),
-                true, true));
-    }
-
-    @Override
-    public void onStart() {
-        logger.d("chatfragment#onStart");
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        logger.d("chatfragment#onStop");
-        super.onStop();
-    }
-
-    @Override
-    public void onPause() {
-        logger.d("chatfragment#onPause");
-        super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        if (EventBus.getDefault().isRegistered(ChatFragment.this)) {
-            EventBus.getDefault().unregister(ChatFragment.this);
-        }
-        imServiceConnector.disconnect(getActivity());
-        super.onDestroy();
+        contactListView.setOnScrollListener(
+                new PauseOnScrollListener(ImageLoader.getInstance(), true, true));
     }
 
     @Override
@@ -200,14 +205,14 @@ public class ChatFragment extends MainFragment
 
         RecentInfo recentInfo = contactAdapter.getItem(position);
         if (recentInfo == null) {
-            logger.e("recent#null recentInfo -> position:%d", position);
+            logger.e("chat_fragment#onItemClick recentInfo at position %d null", position);
             return;
         }
         IMUIHelper.openChatActivity(getActivity(), recentInfo.getSessionKey());
     }
 
     public void onEventMainThread(SessionEvent sessionEvent) {
-        logger.d("chatfragment#SessionEvent# -> %s", sessionEvent);
+        logger.d("chat_fragment#onEventMainThread sessionEvent: %s", sessionEvent);
         switch (sessionEvent) {
             case RECENT_SESSION_LIST_UPDATE:
             case RECENT_SESSION_LIST_SUCCESS:
@@ -221,18 +226,18 @@ public class ChatFragment extends MainFragment
         switch (event.getEvent()) {
             case GROUP_INFO_OK:
             case CHANGE_GROUP_MEMBER_SUCCESS:
-                onRecentContactDataReady();
-                searchDataReady();
+            case GROUP_INFO_UPDATED:
+                {
+                    onRecentContactDataReady();
+                    searchDataReady();
+                }
                 break;
 
-            case GROUP_INFO_UPDATED:
-                onRecentContactDataReady();
-                searchDataReady();
-                break;
             case SHIELD_GROUP_OK:
                 // 更新最下栏的未读计数、更新session
                 onShieldSuccess(event.getGroupEntity());
                 break;
+
             case SHIELD_GROUP_FAIL:
             case SHIELD_GROUP_TIMEOUT:
                 onShieldFail();
@@ -261,30 +266,29 @@ public class ChatFragment extends MainFragment
     }
 
     public void onEventMainThread(LoginEvent loginEvent) {
-        logger.d("chatfragment#LoginEvent# -> %s", loginEvent);
+        logger.d("chat_fragment#onEventMainThread loginEvent: %s", loginEvent);
         switch (loginEvent) {
             case LOCAL_LOGIN_SUCCESS:
-            case LOGINING: {
-                logger.d("chatFragment#login#recv handleDoingLogin event");
-                if (reconnectingProgressBar != null) {
-                    reconnectingProgressBar.setVisibility(View.VISIBLE);
+            case LOGINING:
+                {
+                    if (reconnectingProgressBar != null) {
+                        reconnectingProgressBar.setVisibility(View.VISIBLE);
+                    }
                 }
-            }
-            break;
+                break;
 
             case LOCAL_LOGIN_MSG_SERVICE:
-            case LOGIN_OK: {
-                isManualMConnect = false;
-                logger.d("chatfragment#loginOk");
-                noNetworkView.setVisibility(View.GONE);
-            }
-            break;
+            case LOGIN_OK:
+                {
+                    isManualMConnect = false;
+                    noNetworkView.setVisibility(View.GONE);
+                }
+                break;
 
             case LOGIN_AUTH_FAILED:
-            case LOGIN_INNER_FAILED: {
+            case LOGIN_INNER_FAILED:
                 onLoginFailure(loginEvent);
-            }
-            break;
+                break;
 
             case PC_OFFLINE:
             case KICK_PC_SUCCESS:
@@ -294,6 +298,7 @@ public class ChatFragment extends MainFragment
             case KICK_PC_FAILED:
                 Toast.makeText(getActivity(), getString(R.string.kick_pc_failed), Toast.LENGTH_SHORT).show();
                 break;
+
             case PC_ONLINE:
                 onPCLoginStatusNotify(true);
                 break;
@@ -303,7 +308,6 @@ public class ChatFragment extends MainFragment
                 break;
         }
     }
-
 
     public void onEventMainThread(SocketEvent socketEvent) {
         switch (socketEvent) {
@@ -331,7 +335,7 @@ public class ChatFragment extends MainFragment
         }
         isManualMConnect = false;
         String errorTip = getString(IMUIHelper.getLoginErrorTip(event));
-        logger.d("login#errorTip:%s", errorTip);
+        logger.d("chat_fragment#onLoginFailure errorTip: %s", errorTip);
         reconnectingProgressBar.setVisibility(View.GONE);
         Toast.makeText(getActivity(), errorTip, Toast.LENGTH_SHORT).show();
     }
@@ -342,22 +346,19 @@ public class ChatFragment extends MainFragment
         }
         isManualMConnect = false;
         String errorTip = getString(IMUIHelper.getSocketErrorTip(event));
-        logger.d("login#errorTip:%s", errorTip);
+        logger.d("chat_fragment#onSocketFailure errorTip: %s", errorTip);
         reconnectingProgressBar.setVisibility(View.GONE);
         Toast.makeText(getActivity(), errorTip, Toast.LENGTH_SHORT).show();
     }
 
-    // 更新页面以及 下面的未读总计数
+    // 屏蔽群成功，更新页面以内容以及下面的未读总计数
     private void onShieldSuccess(GroupEntity entity) {
         if (entity == null) {
             return;
         }
-        // 更新某个sessionId
         contactAdapter.updateRecentInfoByShield(entity);
         IMUnreadMsgManager unreadMsgManager = imService.getUnReadMsgManager();
-
         int totalUnreadMsgCnt = unreadMsgManager.getTotalUnreadCount();
-        logger.d("unread#total cnt %d", totalUnreadMsgCnt);
         ((MainActivity) getActivity()).setUnreadMessageCnt(totalUnreadMsgCnt);
     }
 
@@ -366,8 +367,7 @@ public class ChatFragment extends MainFragment
     }
 
     /**
-     * 搜索数据OK
-     * 群组数据与 user数据都已经完毕
+     * 搜索数据需要一些前置处理，处理完成后才显示搜索框
      */
     public void searchDataReady() {
         if (imService.getContactManager().isUserDataReady() &&
@@ -382,13 +382,13 @@ public class ChatFragment extends MainFragment
      * @param isOnline
      */
     public void onPCLoginStatusNotify(boolean isOnline) {
-        logger.d("chatfragment#onPCLoginStatusNotify");
+        logger.d("chat_fragment#onPCLoginStatusNotify");
         if (isOnline) {
             reconnectingProgressBar.setVisibility(View.GONE);
             noNetworkView.setVisibility(View.VISIBLE);
             notifyImage.setImageResource(R.drawable.pc_notify);
             displayView.setText(R.string.pc_status_notify);
-            /**添加踢出事件*/
+
             noNetworkView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -402,7 +402,7 @@ public class ChatFragment extends MainFragment
     }
 
     private void handleServerDisconnected() {
-        logger.d("chatfragment#handleServerDisconnected");
+        logger.d("chat_fragment#handleServerDisconnected");
 
         if (reconnectingProgressBar != null) {
             reconnectingProgressBar.setVisibility(View.GONE);

@@ -7,13 +7,9 @@
     android:paddingBottom="20dp"
     android:paddingRight="10dp" >
 
-    <com.mogujie.tt.ui.widget.IMBaseImageView
-        android:id="@+id/user_portrait"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentRight="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/tt_default_user_portrait_corner" />
+
+
+
 
     <LinearLayout
         android:id="@+id/content_layout"
@@ -45,21 +41,7 @@
             android:layout_marginRight="8dp"
             android:visibility="gone" />
 
-        <!--
-             <TextView
-            android:id="@+id/message_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
-            android:background="@drawable/tt_mine_item_bg"
-            android:paddingBottom="13dp"
-            android:paddingLeft="13dp"
-            android:paddingRight="20dp"
-            android:paddingTop="13dp"
-            android:text="111111111111111111111111111111111111111111"
-            android:textSize="14sp" />
-        -->
-
+        <!-- autoLink 如何不设置为 all，会出现 https 的链接点击之后变成 http 的，神奇 -->
         <TextView
             android:id="@+id/message_content"
             android:layout_width="wrap_content"
@@ -75,7 +57,20 @@
             android:textColor="#ffffff"
             android:textSize="17sp"
             android:textColorLink="#ffffff"
-            />
+            android:autoLink="all" />
     </LinearLayout>
+
+
+
+
+
+    <!-- 头像 -->
+    <com.mogujie.tt.ui.widget.IMBaseImageView
+        android:id="@+id/user_portrait"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tt_default_user_portrait_corner" />
 
 </com.mogujie.tt.ui.widget.message.TextRenderView>

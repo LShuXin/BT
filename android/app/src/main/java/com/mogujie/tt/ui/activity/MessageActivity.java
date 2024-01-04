@@ -175,34 +175,6 @@ public class MessageActivity extends TTBaseActivity
      */
     private Toast mToast;
 
-    public void showToast(int resId) {
-        String text = getResources().getString(resId);
-        if (mToast == null) {
-            mToast = Toast.makeText(MessageActivity.this, text, Toast.LENGTH_SHORT);
-        } else {
-            mToast.setText(text);
-            mToast.setDuration(Toast.LENGTH_SHORT);
-        }
-        mToast.setGravity(Gravity.CENTER, 0, 0);
-        mToast.show();
-    }
-
-    public void cancelToast() {
-        if (mToast != null) {
-            mToast.cancel();
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        IMApplication.gifRunning = false;
-        cancelToast();
-        super.onBackPressed();
-    }
-
-    /**
-     * end 全局Toast
-     */
     private final IMServiceConnector imServiceConnector = new IMServiceConnector() {
         @Override
         public void onIMServiceConnected() {
@@ -218,56 +190,21 @@ public class MessageActivity extends TTBaseActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        logger.d("message_activity#onCreate:%s", this);
+        logger.d("message_activity#onCreate: %s", this);
         super.onCreate(savedInstanceState);
+
         currentSessionKey = getIntent().getStringExtra(IntentConstant.KEY_SESSION_KEY);
+
         initSoftInputMethod();
         initEmo();
         initAlbumHelper();
         initAudioHandler();
         initAudioSensor();
         initView();
+
         imServiceConnector.connect(this);
         EventBus.getDefault().register(this, SysConstant.MESSAGE_EVENTBUS_PRIORITY);
         logger.d("message_activity#register im service and eventBus");
-    }
-
-    // 触发条件,imservice链接成功，或者newIntent
-    private void initData() {
-        Log.d("LShuXin", "MessageActivity initData");
-        historyTimes = 0;
-        adapter.clearItem();
-        ImageMessage.clearImageMessageList();
-        loginUser = imService.getLoginManager().getLoginInfo();
-        peerEntity = imService.getSessionManager().findPeerEntity(currentSessionKey);
-        // 头像、历史消息加载、取消通知
-        setTitleByUser();
-        reqHistoryMsg();
-        adapter.setImService(imService, loginUser);
-        imService.getUnReadMsgManager().readUnreadSession(currentSessionKey);
-        imService.getNotificationManager().cancelSessionNotifications(currentSessionKey);
-    }
-
-    private void initSoftInputMethod() {
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-
-        receiver = new switchInputMethodReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("android.intent.action.INPUT_METHOD_CHANGED");
-        registerReceiver(receiver, filter);
-
-        SystemConfigSp.instance().init(this);
-        String str = Settings.Secure.getString(MessageActivity.this.getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
-        String[] strArr = str.split("\\.");
-        if (strArr.length >= 3) {
-            currentInputMethod = strArr[1];
-            if (SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.DEFAULTINPUTMETHOD).equals(currentInputMethod)) {
-                keyboardHeight = SystemConfigSp.instance().getIntConfig(SystemConfigSp.SysCfgDimension.KEYBOARDHEIGHT);
-            } else {
-                SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.DEFAULTINPUTMETHOD, currentInputMethod);
-            }
-        }
     }
 
     /**
@@ -320,6 +257,84 @@ public class MessageActivity extends TTBaseActivity
         super.onDestroy();
     }
 
+    @Override
+    public void onBackPressed() {
+        IMApplication.gifRunning = false;
+        cancelToast();
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (RESULT_OK != resultCode)
+            return;
+        switch (requestCode) {
+            case SysConstant.CAMERA_WITH_DATA:
+                handleTakePhotoData(data);
+                break;
+            case SysConstant.ALBUM_BACK_DATA:
+                logger.d("pic#ALBUM_BACK_DATA");
+                setIntent(data);
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void showToast(int resId) {
+        String text = getResources().getString(resId);
+        if (mToast == null) {
+            mToast = Toast.makeText(MessageActivity.this, text, Toast.LENGTH_SHORT);
+        } else {
+            mToast.setText(text);
+            mToast.setDuration(Toast.LENGTH_SHORT);
+        }
+        mToast.setGravity(Gravity.CENTER, 0, 0);
+        mToast.show();
+    }
+
+    public void cancelToast() {
+        if (mToast != null) {
+            mToast.cancel();
+        }
+    }
+
+    // 触发条件：imservice 连接成功、newIntent
+    private void initData() {
+        historyTimes = 0;
+        adapter.clearItem();
+        ImageMessage.clearImageMessageList();
+        loginUser = imService.getLoginManager().getLoginInfo();
+        peerEntity = imService.getSessionManager().findPeerEntity(currentSessionKey);
+        // 头像、历史消息加载、取消通知
+        setTitleByUser();
+        reqHistoryMsg();
+        adapter.setImService(imService, loginUser);
+        imService.getUnReadMsgManager().readUnreadSession(currentSessionKey);
+        imService.getNotificationManager().cancelSessionNotifications(currentSessionKey);
+    }
+
+    private void initSoftInputMethod() {
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        receiver = new switchInputMethodReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("android.intent.action.INPUT_METHOD_CHANGED");
+        registerReceiver(receiver, filter);
+
+        SystemConfigSp.instance().init(this);
+        String str = Settings.Secure.getString(MessageActivity.this.getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
+        String[] strArr = str.split("\\.");
+        if (strArr.length >= 3) {
+            currentInputMethod = strArr[1];
+            if (SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.DEFAULTINPUTMETHOD).equals(currentInputMethod)) {
+                keyboardHeight = SystemConfigSp.instance().getIntConfig(SystemConfigSp.SysCfgDimension.KEYBOARDHEIGHT);
+            } else {
+                SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.DEFAULTINPUTMETHOD, currentInputMethod);
+            }
+        }
+    }
+
     /**
      * 设定聊天名称
      * 1. 如果是user类型， 点击触发UserProfile
@@ -349,22 +364,6 @@ public class MessageActivity extends TTBaseActivity
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (RESULT_OK != resultCode)
-            return;
-        switch (requestCode) {
-            case SysConstant.CAMERA_WITH_DATA:
-                handleTakePhotoData(data);
-                break;
-            case SysConstant.ALBUM_BACK_DATA:
-                logger.d("pic#ALBUM_BACK_DATA");
-                setIntent(data);
-                break;
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
     private void handleImagePickData(List<ImageItem> list) {
         ArrayList<ImageMessage> listMsg = new ArrayList<>();
         ArrayList<ImageItem> itemList = (ArrayList<ImageItem>) list;
@@ -377,11 +376,6 @@ public class MessageActivity extends TTBaseActivity
     }
 
 
-    public void onEventMainThread(SelectEvent event) {
-        List<ImageItem> itemList = event.getList();
-        if (itemList != null || itemList.size() > 0)
-            handleImagePickData(itemList);
-    }
 
     /**
      * 背景: 1.EventBus的cancelEventDelivery的只能在postThread中运行，而且没有办法绕过这一点
@@ -405,44 +399,60 @@ public class MessageActivity extends TTBaseActivity
         }
     }
 
+    /**
+     * EventBus 消息处理： 选择图片
+     * */
+    public void onEventMainThread(SelectEvent event) {
+        List<ImageItem> itemList = event.getList();
+        if (itemList != null || itemList.size() > 0)
+        {
+            handleImagePickData(itemList);
+        }
+    }
+
+    /**
+     * EventBus 消息处理：与消息发送接受有关的消息
+     * */
     public void onEventMainThread(MessageEvent event) {
         MessageEvent.Event type = event.getEvent();
         MessageEntity entity = event.getMessageEntity();
-        switch (type) {
-            case ACK_SEND_MESSAGE_OK: {
-                onMsgAck(event.getMessageEntity());
-            }
-            break;
 
+        switch (type) {
+            case ACK_SEND_MESSAGE_OK:
+                {
+                    onMsgAck(event.getMessageEntity());
+                }
+                break;
             case ACK_SEND_MESSAGE_FAILURE:
                 // 失败情况下新添提醒
                 showToast(R.string.message_send_failed);
-            case ACK_SEND_MESSAGE_TIME_OUT: {
-                onMsgUnAckTimeoutOrFailure(event.getMessageEntity());
-            }
-            break;
-
-            case HANDLER_IMAGE_UPLOAD_FAILD: {
-                logger.d("pic#onUploadImageFaild");
-                ImageMessage imageMessage = (ImageMessage) event.getMessageEntity();
-                adapter.updateItemState(imageMessage);
-                showToast(R.string.message_send_failed);
-            }
-            break;
-
-            case HANDLER_IMAGE_UPLOAD_SUCCESS: {
-                ImageMessage imageMessage = (ImageMessage) event.getMessageEntity();
-                adapter.updateItemState(imageMessage);
-            }
-            break;
-
-            case HISTORY_MSG_OBTAIN: {
-                if (historyTimes == 1) {
-                    adapter.clearItem();
-                    reqHistoryMsg();
+            case ACK_SEND_MESSAGE_TIME_OUT:
+                {
+                    onMsgUnAckTimeoutOrFailure(event.getMessageEntity());
                 }
-            }
-            break;
+                break;
+            case HANDLER_IMAGE_UPLOAD_FAILURE:
+                {
+                    logger.d("pic#onUploadImageFaild");
+                    ImageMessage imageMessage = (ImageMessage) event.getMessageEntity();
+                    adapter.updateItemState(imageMessage);
+                    showToast(R.string.message_send_failed);
+                }
+                break;
+            case HANDLER_IMAGE_UPLOAD_SUCCESS:
+                {
+                    ImageMessage imageMessage = (ImageMessage) event.getMessageEntity();
+                    adapter.updateItemState(imageMessage);
+                }
+                break;
+            case HISTORY_MSG_OBTAIN:
+                {
+                    if (historyTimes == 1) {
+                        adapter.clearItem();
+                        reqHistoryMsg();
+                    }
+                }
+                break;
         }
     }
 
@@ -578,7 +588,7 @@ public class MessageActivity extends TTBaseActivity
      * 有点庞大 todo
      */
     private void initView() {
-        // 绑定布局资源(注意放所有资源初始化之前)
+        // 绑定布局资源(注意放在所有资源初始化之前)
         LayoutInflater.from(this).inflate(R.layout.tt_activity_message, topContentView);
 
         //TOP_CONTENT_VIEW
@@ -840,141 +850,148 @@ public class MessageActivity extends TTBaseActivity
             case R.id.right_btn:
                 showGroupManageActivity();
                 break;
-            case R.id.show_add_photo_btn: {
-                recordAudioBtn.setVisibility(View.GONE);
-                keyboardInputImg.setVisibility(View.GONE);
-                messageEdt.setVisibility(View.VISIBLE);
-                audioInputImg.setVisibility(View.VISIBLE);
-                addEmoBtn.setVisibility(View.VISIBLE);
+            case R.id.show_add_photo_btn:
+                {
+                    recordAudioBtn.setVisibility(View.GONE);
+                    keyboardInputImg.setVisibility(View.GONE);
+                    messageEdt.setVisibility(View.VISIBLE);
+                    audioInputImg.setVisibility(View.VISIBLE);
+                    addEmoBtn.setVisibility(View.VISIBLE);
 
-                if (keyboardHeight != 0) {
-                    this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
-                }
-                if (addOthersPanelView.getVisibility() == View.VISIBLE) {
-                    if (!messageEdt.hasFocus()) {
-                        messageEdt.requestFocus();
+                    if (keyboardHeight != 0) {
+                        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
                     }
-                    inputManager.toggleSoftInputFromWindow(messageEdt.getWindowToken(), 1, 0);
-                    if (keyboardHeight == 0) {
-                        addOthersPanelView.setVisibility(View.GONE);
+                    if (addOthersPanelView.getVisibility() == View.VISIBLE) {
+                        if (!messageEdt.hasFocus()) {
+                            messageEdt.requestFocus();
+                        }
+                        inputManager.toggleSoftInputFromWindow(messageEdt.getWindowToken(), 1, 0);
+                        if (keyboardHeight == 0) {
+                            addOthersPanelView.setVisibility(View.GONE);
+                        }
+                    } else if (addOthersPanelView.getVisibility() == View.GONE) {
+                        addOthersPanelView.setVisibility(View.VISIBLE);
+                        inputManager.hideSoftInputFromWindow(messageEdt.getWindowToken(), 0);
                     }
-                } else if (addOthersPanelView.getVisibility() == View.GONE) {
-                    addOthersPanelView.setVisibility(View.VISIBLE);
-                    inputManager.hideSoftInputFromWindow(messageEdt.getWindowToken(), 0);
-                }
-                if (null != emoLayout
-                        && emoLayout.getVisibility() == View.VISIBLE) {
-                    emoLayout.setVisibility(View.GONE);
-                }
-
-                scrollToBottomListItem();
-            }
-            break;
-            case R.id.take_photo_btn: {
-                if (albumList.size() < 1) {
-                    Toast.makeText(MessageActivity.this,
-                            getResources().getString(R.string.not_found_album), Toast.LENGTH_LONG)
-                            .show();
-                    return;
-                }
-                // 选择图片的时候要将session的整个回话 传过来
-                Intent intent = new Intent(MessageActivity.this, PickPhotoActivity.class);
-                intent.putExtra(IntentConstant.KEY_SESSION_KEY, currentSessionKey);
-                startActivityForResult(intent, SysConstant.ALBUM_BACK_DATA);
-
-                MessageActivity.this.overridePendingTransition(R.anim.tt_album_enter, R.anim.tt_stay);
-                //addOthersPanelView.setVisibility(View.GONE);
-                messageEdt.clearFocus();//切记清除焦点
-                scrollToBottomListItem();
-            }
-            break;
-            case R.id.take_camera_btn: {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                takePhotoSavePath = CommonUtil.getImageSavePath(System
-                        .currentTimeMillis()
-                        + ".jpg");
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(takePhotoSavePath)));
-                startActivityForResult(intent, SysConstant.CAMERA_WITH_DATA);
-                //addOthersPanelView.setVisibility(View.GONE);
-                messageEdt.clearFocus();//切记清除焦点
-                scrollToBottomListItem();
-            }
-            break;
-            case R.id.show_emo_btn: {
-                /**yingmu 调整成键盘输出*/
-                recordAudioBtn.setVisibility(View.GONE);
-                keyboardInputImg.setVisibility(View.GONE);
-                messageEdt.setVisibility(View.VISIBLE);
-                audioInputImg.setVisibility(View.VISIBLE);
-                addEmoBtn.setVisibility(View.VISIBLE);
-                /**end*/
-                if (keyboardHeight != 0) {
-                    this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
-                }
-                if (emoLayout.getVisibility() == View.VISIBLE) {
-                    if (!messageEdt.hasFocus()) {
-                        messageEdt.requestFocus();
-                    }
-                    inputManager.toggleSoftInputFromWindow(messageEdt.getWindowToken(), 1, 0);
-                    if (keyboardHeight == 0) {
+                    if (null != emoLayout
+                            && emoLayout.getVisibility() == View.VISIBLE) {
                         emoLayout.setVisibility(View.GONE);
                     }
-                } else if (emoLayout.getVisibility() == View.GONE) {
-                    emoLayout.setVisibility(View.VISIBLE);
-                    yayaEmoGridView.setVisibility(View.VISIBLE);
-                    emoRadioGroup.check(R.id.tab1);
-                    emoGridView.setVisibility(View.GONE);
-                    inputManager.hideSoftInputFromWindow(messageEdt.getWindowToken(), 0);
-                }
-                if (addOthersPanelView.getVisibility() == View.VISIBLE) {
-                    addOthersPanelView.setVisibility(View.GONE);
-                }
-            }
-            break;
-            case R.id.send_message_btn: {
-                logger.d("message_activity#send btn clicked");
 
-                String content = messageEdt.getText().toString();
-                logger.d("message_activity#chat content:%s", content);
-                if (content.trim().equals("")) {
-                    Toast.makeText(MessageActivity.this,
-                            getResources().getString(R.string.message_null), Toast.LENGTH_LONG).show();
-                    return;
+                    scrollToBottomListItem();
                 }
-                TextMessage textMessage = TextMessage.buildForSend(content, loginUser, peerEntity);
-                imService.getMessageManager().sendText(textMessage);
-                messageEdt.setText("");
-                pushList(textMessage);
-                scrollToBottomListItem();
-            }
-            break;
-            case R.id.voice_btn: {
-                inputManager.hideSoftInputFromWindow(messageEdt.getWindowToken(), 0);
-                messageEdt.setVisibility(View.GONE);
-                audioInputImg.setVisibility(View.GONE);
-                recordAudioBtn.setVisibility(View.VISIBLE);
-                keyboardInputImg.setVisibility(View.VISIBLE);
-                emoLayout.setVisibility(View.GONE);
-                addOthersPanelView.setVisibility(View.GONE);
-                messageEdt.setText("");
-            }
-            break;
-            case R.id.show_keyboard_btn: {
-                recordAudioBtn.setVisibility(View.GONE);
-                keyboardInputImg.setVisibility(View.GONE);
-                messageEdt.setVisibility(View.VISIBLE);
-                audioInputImg.setVisibility(View.VISIBLE);
-                addEmoBtn.setVisibility(View.VISIBLE);
-            }
-            break;
+                break;
+            case R.id.take_photo_btn:
+                {
+                    if (albumList.size() < 1) {
+                        Toast.makeText(MessageActivity.this,
+                                getResources().getString(R.string.not_found_album), Toast.LENGTH_LONG)
+                                .show();
+                        return;
+                    }
+                    // 选择图片的时候要将session的整个回话 传过来
+                    Intent intent = new Intent(MessageActivity.this, PickPhotoActivity.class);
+                    intent.putExtra(IntentConstant.KEY_SESSION_KEY, currentSessionKey);
+                    startActivityForResult(intent, SysConstant.ALBUM_BACK_DATA);
+
+                    MessageActivity.this.overridePendingTransition(R.anim.tt_album_enter, R.anim.tt_stay);
+                    //addOthersPanelView.setVisibility(View.GONE);
+                    messageEdt.clearFocus();//切记清除焦点
+                    scrollToBottomListItem();
+                }
+                break;
+            case R.id.take_camera_btn:
+                {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    takePhotoSavePath = CommonUtil.getImageSavePath(System
+                            .currentTimeMillis()
+                            + ".jpg");
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(takePhotoSavePath)));
+                    startActivityForResult(intent, SysConstant.CAMERA_WITH_DATA);
+                    //addOthersPanelView.setVisibility(View.GONE);
+                    messageEdt.clearFocus();//切记清除焦点
+                    scrollToBottomListItem();
+                }
+                break;
+            case R.id.show_emo_btn:
+                {
+                    /**yingmu 调整成键盘输出*/
+                    recordAudioBtn.setVisibility(View.GONE);
+                    keyboardInputImg.setVisibility(View.GONE);
+                    messageEdt.setVisibility(View.VISIBLE);
+                    audioInputImg.setVisibility(View.VISIBLE);
+                    addEmoBtn.setVisibility(View.VISIBLE);
+                    /**end*/
+                    if (keyboardHeight != 0) {
+                        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
+                    }
+                    if (emoLayout.getVisibility() == View.VISIBLE) {
+                        if (!messageEdt.hasFocus()) {
+                            messageEdt.requestFocus();
+                        }
+                        inputManager.toggleSoftInputFromWindow(messageEdt.getWindowToken(), 1, 0);
+                        if (keyboardHeight == 0) {
+                            emoLayout.setVisibility(View.GONE);
+                        }
+                    } else if (emoLayout.getVisibility() == View.GONE) {
+                        emoLayout.setVisibility(View.VISIBLE);
+                        yayaEmoGridView.setVisibility(View.VISIBLE);
+                        emoRadioGroup.check(R.id.tab1);
+                        emoGridView.setVisibility(View.GONE);
+                        inputManager.hideSoftInputFromWindow(messageEdt.getWindowToken(), 0);
+                    }
+                    if (addOthersPanelView.getVisibility() == View.VISIBLE) {
+                        addOthersPanelView.setVisibility(View.GONE);
+                    }
+                }
+                break;
+            case R.id.send_message_btn:
+                {
+                    logger.d("message_activity#send btn clicked");
+
+                    String content = messageEdt.getText().toString();
+                    logger.d("message_activity#chat content:%s", content);
+                    if (content.trim().equals("")) {
+                        Toast.makeText(MessageActivity.this,
+                                getResources().getString(R.string.message_null), Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    TextMessage textMessage = TextMessage.buildForSend(content, loginUser, peerEntity);
+                    imService.getMessageManager().sendText(textMessage);
+                    messageEdt.setText("");
+                    pushList(textMessage);
+                    scrollToBottomListItem();
+                }
+                break;
+            case R.id.voice_btn:
+                {
+                    inputManager.hideSoftInputFromWindow(messageEdt.getWindowToken(), 0);
+                    messageEdt.setVisibility(View.GONE);
+                    audioInputImg.setVisibility(View.GONE);
+                    recordAudioBtn.setVisibility(View.VISIBLE);
+                    keyboardInputImg.setVisibility(View.VISIBLE);
+                    emoLayout.setVisibility(View.GONE);
+                    addOthersPanelView.setVisibility(View.GONE);
+                    messageEdt.setText("");
+                }
+                break;
+            case R.id.show_keyboard_btn:
+                {
+                    recordAudioBtn.setVisibility(View.GONE);
+                    keyboardInputImg.setVisibility(View.GONE);
+                    messageEdt.setVisibility(View.VISIBLE);
+                    audioInputImg.setVisibility(View.VISIBLE);
+                    addEmoBtn.setVisibility(View.VISIBLE);
+                }
+                break;
             case R.id.message_text:
                 break;
             case R.id.tt_new_msg_tip:
-            {
-                scrollToBottomListItem();
-                textView_new_msg_tip.setVisibility(View.GONE);
-            }
-            break;
+                {
+                    scrollToBottomListItem();
+                    textView_new_msg_tip.setVisibility(View.GONE);
+                }
+                break;
         }
     }
 

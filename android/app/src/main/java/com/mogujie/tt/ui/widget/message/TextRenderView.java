@@ -19,14 +19,14 @@ import com.mogujie.tt.ui.helper.Emoparser;
  *
  * 样式根据mine 与other不同可以分成两个
  */
-public class TextRenderView extends  BaseMsgRenderView {
+public class TextRenderView extends BaseMsgRenderView {
     /** 文字消息体 */
     private TextView messageContent;
 
-    public static TextRenderView inflater(Context context,ViewGroup viewGroup,boolean isMine){
-        int resource = isMine?R.layout.tt_mine_text_message_item:R.layout.tt_other_text_message_item;
+    public static TextRenderView inflater(Context context, ViewGroup viewGroup, boolean isMine) {
+        int resource = isMine ? R.layout.tt_mine_text_message_item : R.layout.tt_other_text_message_item;
 
-        TextRenderView  textRenderView = (TextRenderView) LayoutInflater.from(context).inflate(resource, viewGroup, false);
+        TextRenderView textRenderView = (TextRenderView) LayoutInflater.from(context).inflate(resource, viewGroup, false);
         textRenderView.setMine(isMine);
         textRenderView.setParentView(viewGroup);
         return textRenderView;
@@ -48,15 +48,14 @@ public class TextRenderView extends  BaseMsgRenderView {
      * @param userEntity
      */
     @Override
-    public void render(MessageEntity messageEntity, UserEntity userEntity,Context context) {
-        super.render(messageEntity, userEntity,context);
+    public void render(MessageEntity messageEntity, UserEntity userEntity, Context context) {
+        super.render(messageEntity, userEntity, context);
         TextMessage textMessage = (TextMessage) messageEntity;
         // 按钮的长按也是上层设定的
         // url 路径可以设定 跳转哦哦
         String content = textMessage.getContent();
         messageContent.setText(Emoparser.getInstance(getContext()).emoCharsequence(content)); // 所以上层还是处理好之后再给我 Emoparser 处理之后的
         extractUrl2Link(messageContent);
-
     }
     private static final String SCHEMA ="com.mogujie.tt://message_private_url";
     private static final String PARAM_UID ="uid";
@@ -64,7 +63,7 @@ public class TextRenderView extends  BaseMsgRenderView {
 
     private void extractUrl2Link(TextView v) {
         java.util.regex.Pattern wikiWordMatcher = java.util.regex.Pattern.compile(urlRegex);
-        String mentionsScheme = String.format("%s/?%s=",SCHEMA, PARAM_UID);
+        String mentionsScheme = String.format("%s/?%s=", SCHEMA, PARAM_UID);
         Linkify.addLinks(v, wikiWordMatcher, mentionsScheme);
     }
 

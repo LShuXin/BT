@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.mogujie.tt.R;
 import com.mogujie.tt.ui.base.TTBaseFragmentActivity;
 
+/** 聊天页面 */
 public class ChatFragmentActivity extends TTBaseFragmentActivity {
     
     @Override

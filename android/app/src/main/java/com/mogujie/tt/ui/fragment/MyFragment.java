@@ -181,7 +181,7 @@ public class MyFragment extends MainFragment {
         hideContent();
 
         // 设置顶部标题栏
-        setTopTitle(getActivity().getString(R.string.page_me));
+        setTopTitle(getActivity().getString(R.string.main_me_tab));
         // 设置页面其它控件
 
     }

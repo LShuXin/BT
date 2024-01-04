@@ -38,7 +38,7 @@ public class InternalFragment extends TTBaseFragment {
 
     private void initRes() {
         // 设置顶部标题栏
-        setTopTitle(getActivity().getString(R.string.main_innernet));
+        setTopTitle(getActivity().getString(R.string.main_inner_net));
         internalListView = curView.findViewById(R.id.internalListView);
         internalListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

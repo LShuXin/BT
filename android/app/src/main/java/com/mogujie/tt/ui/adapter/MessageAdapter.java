@@ -108,19 +108,19 @@ public class MessageAdapter extends BaseAdapter {
             Integer in = msg.getCreated();
             msgObjectList.add(in);
         }
-        /**消息的判断*/
+
         if (msg.getDisplayType() == DBConstant.SHOW_MIX_TEXT) {
             MixMessage mixMessage = (MixMessage) msg;
             msgObjectList.addAll(mixMessage.getMsgList());
         } else {
             msgObjectList.add(msg);
         }
+
         if (msg instanceof ImageMessage) {
             ImageMessage.addToImageMessageList((ImageMessage) msg);
         }
         logger.d("#messageAdapter#addItem");
         notifyDataSetChanged();
-
     }
 
     private boolean isMsgGif(MessageEntity msg) {
@@ -134,7 +134,7 @@ public class MessageAdapter extends BaseAdapter {
     }
 
     public MessageEntity getTopMsgEntity() {
-        if (msgObjectList.size() <= 0) {
+        if (msgObjectList.size() == 0) {
             return null;
         }
         for (Object result : msgObjectList) {
@@ -218,18 +218,8 @@ public class MessageAdapter extends BaseAdapter {
         msgObjectList.clear();
     }
 
-    /**
-     * msgId 是消息ID
-     * localId是本地的ID
-     * position 是list 的位置
-     * <p/>
-     * 只更新item的状态
-     * 刷新单条记录
-     * <p/>
-     */
+    /** 更新消息的状态 */
     public void updateItemState(int position, final MessageEntity messageEntity) {
-        //更新DB
-        //更新单条记录
         imService.getDbInterface().insertOrUpdateMessage(messageEntity);
         notifyDataSetChanged();
     }
@@ -573,7 +563,7 @@ public class MessageAdapter extends BaseAdapter {
         UserEntity userEntity = imService.getContactManager().findContact(textMessage.getFromId());
 
         if (null == convertView) {
-            textRenderView = TextRenderView.inflater(ctx, viewGroup, isMine); //new TextRenderView(ctx,viewGroup,isMine);
+            textRenderView = TextRenderView.inflater(ctx, viewGroup, isMine);
         } else {
             textRenderView = (TextRenderView) convertView;
         }
@@ -685,7 +675,6 @@ public class MessageAdapter extends BaseAdapter {
             // 改用map的形式
             switch (renderType) {
                 case MESSAGE_TYPE_INVALID:
-                    // 直接返回
                     logger.e("[fatal erro] render type:MESSAGE_TYPE_INVALID");
                     break;
 
@@ -696,24 +685,30 @@ public class MessageAdapter extends BaseAdapter {
                 case MESSAGE_TYPE_MINE_AUDIO:
                     convertView = audioMsgRender(position, convertView, parent, true);
                     break;
+
                 case MESSAGE_TYPE_OTHER_AUDIO:
                     convertView = audioMsgRender(position, convertView, parent, false);
                     break;
+
                 case MESSAGE_TYPE_MINE_GIF_IMAGE:
                     convertView = GifImageMsgRender(position, convertView, parent, true);
                     break;
+
                 case MESSAGE_TYPE_OTHER_GIF_IMAGE:
                     convertView = GifImageMsgRender(position, convertView, parent, false);
                     break;
+
                 case MESSAGE_TYPE_MINE_IMAGE:
                     convertView = imageMsgRender(position, convertView, parent, true);
                     break;
+
                 case MESSAGE_TYPE_OTHER_IMAGE:
                     convertView = imageMsgRender(position, convertView, parent, false);
-                    break;
+
                 case MESSAGE_TYPE_MINE_TETX:
                     convertView = textMsgRender(position, convertView, parent, true);
                     break;
+
                 case MESSAGE_TYPE_OTHER_TEXT:
                     convertView = textMsgRender(position, convertView, parent, false);
                     break;
@@ -721,6 +716,7 @@ public class MessageAdapter extends BaseAdapter {
                 case MESSAGE_TYPE_MINE_GIF:
                     convertView = gifMsgRender(position, convertView, parent, true);
                     break;
+
                 case MESSAGE_TYPE_OTHER_GIF:
                     convertView = gifMsgRender(position, convertView, parent, false);
                     break;

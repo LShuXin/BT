@@ -111,7 +111,7 @@ public class IMMessageManager extends IMManager{
     public void onEvent(MessageEvent event){
         MessageEvent.Event  type = event.getEvent();
         switch (type){
-            case IMAGE_UPLOAD_FAILD:{
+            case IMAGE_UPLOAD_FAILURE:{
                 logger.d("pic#onUploadImageFaild");
                 ImageMessage imageMessage = (ImageMessage)event.getMessageEntity();
                 imageMessage.setLoadStatus(MessageConstant.IMAGE_LOADED_FAILURE);
@@ -119,7 +119,7 @@ public class IMMessageManager extends IMManager{
                 dbInterface.insertOrUpdateMessage(imageMessage);
 
                 /**通知Activity层 失败*/
-                event.setEvent(MessageEvent.Event.HANDLER_IMAGE_UPLOAD_FAILD);
+                event.setEvent(MessageEvent.Event.HANDLER_IMAGE_UPLOAD_FAILURE);
                 event.setMessageEntity(imageMessage);
                 triggerEvent(event);
             }break;

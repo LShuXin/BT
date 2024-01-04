@@ -123,7 +123,7 @@ public class ImageRenderView extends BaseMsgRenderView {
      * 2. 发送信息
      */
     @Override
-    public void msgSendinging(final MessageEntity entity) {
+    public void msgSending(final MessageEntity entity) {
         if(isMine())
         {
             if(FileUtil.isFileExist(((ImageMessage)entity).getPath()))

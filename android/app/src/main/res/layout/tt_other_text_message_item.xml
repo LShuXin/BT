@@ -57,21 +57,6 @@
                 android:textColorLink="@android:color/black"
                 />
 
-            <!--
-                 <TextView
-                android:id="@+id/message_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/tt_other_item_bg"
-                android:paddingBottom="13dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="13dp"
-                android:paddingTop="13dp"
-                android:text="1111111111111"
-                android:textColor="@android:color/white"
-                android:textSize="14sp" />
-            -->
-
             <ImageView
                 android:id="@+id/message_state_failed"
                 android:layout_width="15dp"
