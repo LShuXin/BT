@@ -49,7 +49,7 @@ void CFileHandler::HandleClientFileRequest(CMsgConn* pMsgConn, CImPdu* pPdu)
         msg2.set_to_user_id(to_id);
         msg2.set_file_name(file_name);
         msg2.set_file_size(file_size);
-        msg2.set_trans_mode((IM::BaseDefine::FileType)trans_mode);
+        msg2.set_trans_mode((IM::BaseDefine::XFileType)trans_mode);
         msg2.set_attach_data(attach.GetBuffer(), attach.GetLength());
         CImPdu pdu;
         pdu.SetPBMsg(&msg2);
@@ -98,7 +98,7 @@ void CFileHandler::HandleClientFileRequest(CMsgConn* pMsgConn, CImPdu* pPdu)
         msg2.set_to_user_id(to_id);
         msg2.set_file_name(file_name);
         msg2.set_task_id("");
-        msg2.set_trans_mode((IM::BaseDefine::FileType)trans_mode);
+        msg2.set_trans_mode((IM::BaseDefine::XFileType)trans_mode);
         CImPdu pdu;
         pdu.SetPBMsg(&msg2);
         pdu.SetServiceId(SID_FILE);

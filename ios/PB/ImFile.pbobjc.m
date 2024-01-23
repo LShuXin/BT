@@ -278,7 +278,7 @@ void SetIMFileState_State_RawValue(IMFileState *message, int32_t value) {
 typedef struct IMFilePullDataReq__storage_ {
   uint32_t _has_storage_[1];
   uint32_t userId;
-  FileType transMode;
+  XFileType transMode;
   uint32_t offset;
   uint32_t dataSize;
   NSString *taskId;
@@ -310,7 +310,7 @@ typedef struct IMFilePullDataReq__storage_ {
       },
       {
         .name = "transMode",
-        .dataTypeSpecific.enumDescFunc = FileType_EnumDescriptor,
+        .dataTypeSpecific.enumDescFunc = XFileType_EnumDescriptor,
         .number = IMFilePullDataReq_FieldNumber_TransMode,
         .hasIndex = 2,
         .offset = (uint32_t)offsetof(IMFilePullDataReq__storage_, transMode),
@@ -470,7 +470,7 @@ typedef struct IMFileReq__storage_ {
   uint32_t fromUserId;
   uint32_t toUserId;
   uint32_t fileSize;
-  FileType transMode;
+  XFileType transMode;
   NSString *fileName;
 } IMFileReq__storage_;
 
@@ -518,7 +518,7 @@ typedef struct IMFileReq__storage_ {
       },
       {
         .name = "transMode",
-        .dataTypeSpecific.enumDescFunc = FileType_EnumDescriptor,
+        .dataTypeSpecific.enumDescFunc = XFileType_EnumDescriptor,
         .number = IMFileReq_FieldNumber_TransMode,
         .hasIndex = 4,
         .offset = (uint32_t)offsetof(IMFileReq__storage_, transMode),
@@ -573,7 +573,7 @@ typedef struct IMFileRsp__storage_ {
   uint32_t resultCode;
   uint32_t fromUserId;
   uint32_t toUserId;
-  FileType transMode;
+  XFileType transMode;
   NSString *fileName;
   NSString *taskId;
   NSMutableArray *ipAddrListArray;
@@ -641,7 +641,7 @@ typedef struct IMFileRsp__storage_ {
       },
       {
         .name = "transMode",
-        .dataTypeSpecific.enumDescFunc = FileType_EnumDescriptor,
+        .dataTypeSpecific.enumDescFunc = XFileType_EnumDescriptor,
         .number = IMFileRsp_FieldNumber_TransMode,
         .hasIndex = 5,
         .offset = (uint32_t)offsetof(IMFileRsp__storage_, transMode),
@@ -697,7 +697,7 @@ typedef struct IMFileNotify__storage_ {
   uint32_t fromUserId;
   uint32_t toUserId;
   uint32_t fileSize;
-  FileType transMode;
+  XFileType transMode;
   uint32_t offlineReady;
   NSString *fileName;
   NSString *taskId;
@@ -766,7 +766,7 @@ typedef struct IMFileNotify__storage_ {
       },
       {
         .name = "transMode",
-        .dataTypeSpecific.enumDescFunc = FileType_EnumDescriptor,
+        .dataTypeSpecific.enumDescFunc = XFileType_EnumDescriptor,
         .number = IMFileNotify_FieldNumber_TransMode,
         .hasIndex = 5,
         .offset = (uint32_t)offsetof(IMFileNotify__storage_, transMode),

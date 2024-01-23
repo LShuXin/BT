@@ -160,7 +160,7 @@ yum update -y
 ### 3.5 安装基础软件包
 
 ```
-yum -y install net-tools initscripts wget vim git texinfo patch make cmake gcc gcc-c++ gcc-g77 flex bison file libtool libtool-libs autoconf kernel-devel libjpeg libjpeg-devel libpng libpng-devel libpng10 libpng10-devel gd gd-devel freetype freetype-devel libxml2 libxml2-devel zlib zlib-devel glib2 glib2-devel bzip2 bzip2-devel libevent libevent-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel libidn libidn-devel openssl openssl-devel vim-minimal nano fonts-chinese gettext gettext-devel ncurses-devel gmp-devel pspell-devel unzip libcap diffutils zip libtool nc lsof tcpdump
+yum -y install net-tools initscripts wget vim git texinfo patch make cmake gcc gcc-c++ gcc-g77 flex bison file libtool libtool-libs autoconf kernel-devel libjpeg libjpeg-devel libpng libpng-devel libpng10 libpng10-devel gd gd-devel freetype freetype-devel libxml2 libxml2-devel zlib zlib-devel glib2 glib2-devel bzip2 bzip2-devel libevent libevent-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel libidn libidn-devel openssl openssl-devel vim-minimal nano fonts-chinese gettext gettext-devel ncurses-devel gmp-devel pspell-devel unzip libcap diffutils zip libtool boost-devel nc lsof tcpdump
 ```
 
 ### 3.6 升级 Git
@@ -1272,15 +1272,15 @@ exit
 
 ```
 sudo firewall-cmd --zone=public --permanent --add-port=80/tcp
-sudo firewall-cmd --zone=public --permanent --add-port=8080/tcp
-sudo firewall-cmd --zone=public --permanent --add-port=8008/tcp
 sudo firewall-cmd --zone=public --permanent --add-port=8000/tcp
-sudo firewall-cmd --zone=public --permanent --add-port=10600/tcp
+sudo firewall-cmd --zone=public --permanent --add-port=8008/tcp
+sudo firewall-cmd --zone=public --permanent --add-port=8080/tcp
 sudo firewall-cmd --zone=public --permanent --add-port=8200/tcp
 sudo firewall-cmd --zone=public --permanent --add-port=8400/tcp
 sudo firewall-cmd --zone=public --permanent --add-port=8500/tcp
 sudo firewall-cmd --zone=public --permanent --add-port=8600/tcp
 sudo firewall-cmd --zone=public --permanent --add-port=8700/tcp
+sudo firewall-cmd --zone=public --permanent --add-port=10600/tcp
 
 // 可选，如果想要从外部连接数据库
 sudo firewall-cmd --zone=public --permanent --add-port=6379/tcp

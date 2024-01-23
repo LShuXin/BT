@@ -1405,15 +1405,15 @@ public final class IMFile {
     int getUserId();
 
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 3;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 3;</code>
      * @return The enum numeric value on the wire for transMode.
      */
     int getTransModeValue();
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 3;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 3;</code>
      * @return The transMode.
      */
-    com.mogujie.tt.protobuf.IMBaseDefine.FileType getTransMode();
+    com.mogujie.tt.protobuf.IMBaseDefine.XFileType getTransMode();
 
     /**
      * <code>uint32 offset = 4;</code>
@@ -1534,7 +1534,7 @@ public final class IMFile {
     public static final int TRANS_MODE_FIELD_NUMBER = 3;
     private int transMode_;
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 3;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 3;</code>
      * @return The enum numeric value on the wire for transMode.
      */
     @java.lang.Override
@@ -1542,31 +1542,31 @@ public final class IMFile {
       return transMode_;
     }
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 3;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 3;</code>
      * @return The transMode.
      */
     @java.lang.Override
-    public com.mogujie.tt.protobuf.IMBaseDefine.FileType getTransMode() {
-      com.mogujie.tt.protobuf.IMBaseDefine.FileType result = com.mogujie.tt.protobuf.IMBaseDefine.FileType.forNumber(transMode_);
-      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.FileType.UNRECOGNIZED : result;
+    public com.mogujie.tt.protobuf.IMBaseDefine.XFileType getTransMode() {
+      com.mogujie.tt.protobuf.IMBaseDefine.XFileType result = com.mogujie.tt.protobuf.IMBaseDefine.XFileType.forNumber(transMode_);
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.XFileType.UNRECOGNIZED : result;
     }
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 3;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 3;</code>
      * @param value The enum numeric value on the wire for transMode to set.
      */
     private void setTransModeValue(int value) {
         transMode_ = value;
     }
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 3;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 3;</code>
      * @param value The transMode to set.
      */
-    private void setTransMode(com.mogujie.tt.protobuf.IMBaseDefine.FileType value) {
+    private void setTransMode(com.mogujie.tt.protobuf.IMBaseDefine.XFileType value) {
       transMode_ = value.getNumber();
       
     }
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 3;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 3;</code>
      */
     private void clearTransMode() {
       
@@ -1818,7 +1818,7 @@ public final class IMFile {
       }
 
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 3;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 3;</code>
        * @return The enum numeric value on the wire for transMode.
        */
       @java.lang.Override
@@ -1826,7 +1826,7 @@ public final class IMFile {
         return instance.getTransModeValue();
       }
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 3;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 3;</code>
        * @param value The transMode to set.
        * @return This builder for chaining.
        */
@@ -1836,25 +1836,25 @@ public final class IMFile {
         return this;
       }
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 3;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 3;</code>
        * @return The transMode.
        */
       @java.lang.Override
-      public com.mogujie.tt.protobuf.IMBaseDefine.FileType getTransMode() {
+      public com.mogujie.tt.protobuf.IMBaseDefine.XFileType getTransMode() {
         return instance.getTransMode();
       }
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 3;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 3;</code>
        * @param value The enum numeric value on the wire for transMode to set.
        * @return This builder for chaining.
        */
-      public Builder setTransMode(com.mogujie.tt.protobuf.IMBaseDefine.FileType value) {
+      public Builder setTransMode(com.mogujie.tt.protobuf.IMBaseDefine.XFileType value) {
         copyOnWrite();
         instance.setTransMode(value);
         return this;
       }
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 3;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearTransMode() {
@@ -2604,15 +2604,15 @@ public final class IMFile {
     int getFileSize();
 
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 5;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 5;</code>
      * @return The enum numeric value on the wire for transMode.
      */
     int getTransModeValue();
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 5;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 5;</code>
      * @return The transMode.
      */
-    com.mogujie.tt.protobuf.IMBaseDefine.FileType getTransMode();
+    com.mogujie.tt.protobuf.IMBaseDefine.XFileType getTransMode();
   }
   /**
    * Protobuf type {@code IM.File.IMFileReq}
@@ -2765,7 +2765,7 @@ public final class IMFile {
     public static final int TRANS_MODE_FIELD_NUMBER = 5;
     private int transMode_;
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 5;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 5;</code>
      * @return The enum numeric value on the wire for transMode.
      */
     @java.lang.Override
@@ -2773,31 +2773,31 @@ public final class IMFile {
       return transMode_;
     }
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 5;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 5;</code>
      * @return The transMode.
      */
     @java.lang.Override
-    public com.mogujie.tt.protobuf.IMBaseDefine.FileType getTransMode() {
-      com.mogujie.tt.protobuf.IMBaseDefine.FileType result = com.mogujie.tt.protobuf.IMBaseDefine.FileType.forNumber(transMode_);
-      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.FileType.UNRECOGNIZED : result;
+    public com.mogujie.tt.protobuf.IMBaseDefine.XFileType getTransMode() {
+      com.mogujie.tt.protobuf.IMBaseDefine.XFileType result = com.mogujie.tt.protobuf.IMBaseDefine.XFileType.forNumber(transMode_);
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.XFileType.UNRECOGNIZED : result;
     }
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 5;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 5;</code>
      * @param value The enum numeric value on the wire for transMode to set.
      */
     private void setTransModeValue(int value) {
         transMode_ = value;
     }
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 5;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 5;</code>
      * @param value The transMode to set.
      */
-    private void setTransMode(com.mogujie.tt.protobuf.IMBaseDefine.FileType value) {
+    private void setTransMode(com.mogujie.tt.protobuf.IMBaseDefine.XFileType value) {
       transMode_ = value.getNumber();
       
     }
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 5;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 5;</code>
      */
     private void clearTransMode() {
       
@@ -3045,7 +3045,7 @@ public final class IMFile {
       }
 
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 5;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 5;</code>
        * @return The enum numeric value on the wire for transMode.
        */
       @java.lang.Override
@@ -3053,7 +3053,7 @@ public final class IMFile {
         return instance.getTransModeValue();
       }
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 5;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 5;</code>
        * @param value The transMode to set.
        * @return This builder for chaining.
        */
@@ -3063,25 +3063,25 @@ public final class IMFile {
         return this;
       }
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 5;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 5;</code>
        * @return The transMode.
        */
       @java.lang.Override
-      public com.mogujie.tt.protobuf.IMBaseDefine.FileType getTransMode() {
+      public com.mogujie.tt.protobuf.IMBaseDefine.XFileType getTransMode() {
         return instance.getTransMode();
       }
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 5;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 5;</code>
        * @param value The enum numeric value on the wire for transMode to set.
        * @return This builder for chaining.
        */
-      public Builder setTransMode(com.mogujie.tt.protobuf.IMBaseDefine.FileType value) {
+      public Builder setTransMode(com.mogujie.tt.protobuf.IMBaseDefine.XFileType value) {
         copyOnWrite();
         instance.setTransMode(value);
         return this;
       }
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 5;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 5;</code>
        * @return This builder for chaining.
        */
       public Builder clearTransMode() {
@@ -3234,15 +3234,15 @@ public final class IMFile {
     int getIpAddrListCount();
 
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
      * @return The enum numeric value on the wire for transMode.
      */
     int getTransModeValue();
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
      * @return The transMode.
      */
-    com.mogujie.tt.protobuf.IMBaseDefine.FileType getTransMode();
+    com.mogujie.tt.protobuf.IMBaseDefine.XFileType getTransMode();
   }
   /**
    * Protobuf type {@code IM.File.IMFileRsp}
@@ -3538,7 +3538,7 @@ public final class IMFile {
     public static final int TRANS_MODE_FIELD_NUMBER = 7;
     private int transMode_;
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
      * @return The enum numeric value on the wire for transMode.
      */
     @java.lang.Override
@@ -3546,31 +3546,31 @@ public final class IMFile {
       return transMode_;
     }
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
      * @return The transMode.
      */
     @java.lang.Override
-    public com.mogujie.tt.protobuf.IMBaseDefine.FileType getTransMode() {
-      com.mogujie.tt.protobuf.IMBaseDefine.FileType result = com.mogujie.tt.protobuf.IMBaseDefine.FileType.forNumber(transMode_);
-      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.FileType.UNRECOGNIZED : result;
+    public com.mogujie.tt.protobuf.IMBaseDefine.XFileType getTransMode() {
+      com.mogujie.tt.protobuf.IMBaseDefine.XFileType result = com.mogujie.tt.protobuf.IMBaseDefine.XFileType.forNumber(transMode_);
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.XFileType.UNRECOGNIZED : result;
     }
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
      * @param value The enum numeric value on the wire for transMode to set.
      */
     private void setTransModeValue(int value) {
         transMode_ = value;
     }
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
      * @param value The transMode to set.
      */
-    private void setTransMode(com.mogujie.tt.protobuf.IMBaseDefine.FileType value) {
+    private void setTransMode(com.mogujie.tt.protobuf.IMBaseDefine.XFileType value) {
       transMode_ = value.getNumber();
       
     }
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
      */
     private void clearTransMode() {
       
@@ -3969,7 +3969,7 @@ public final class IMFile {
       }
 
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
        * @return The enum numeric value on the wire for transMode.
        */
       @java.lang.Override
@@ -3977,7 +3977,7 @@ public final class IMFile {
         return instance.getTransModeValue();
       }
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
        * @param value The transMode to set.
        * @return This builder for chaining.
        */
@@ -3987,25 +3987,25 @@ public final class IMFile {
         return this;
       }
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
        * @return The transMode.
        */
       @java.lang.Override
-      public com.mogujie.tt.protobuf.IMBaseDefine.FileType getTransMode() {
+      public com.mogujie.tt.protobuf.IMBaseDefine.XFileType getTransMode() {
         return instance.getTransMode();
       }
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
        * @param value The enum numeric value on the wire for transMode to set.
        * @return This builder for chaining.
        */
-      public Builder setTransMode(com.mogujie.tt.protobuf.IMBaseDefine.FileType value) {
+      public Builder setTransMode(com.mogujie.tt.protobuf.IMBaseDefine.XFileType value) {
         copyOnWrite();
         instance.setTransMode(value);
         return this;
       }
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
        * @return This builder for chaining.
        */
       public Builder clearTransMode() {
@@ -4161,15 +4161,15 @@ public final class IMFile {
     int getIpAddrListCount();
 
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
      * @return The enum numeric value on the wire for transMode.
      */
     int getTransModeValue();
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
      * @return The transMode.
      */
-    com.mogujie.tt.protobuf.IMBaseDefine.FileType getTransMode();
+    com.mogujie.tt.protobuf.IMBaseDefine.XFileType getTransMode();
 
     /**
      * <pre>
@@ -4475,7 +4475,7 @@ public final class IMFile {
     public static final int TRANS_MODE_FIELD_NUMBER = 7;
     private int transMode_;
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
      * @return The enum numeric value on the wire for transMode.
      */
     @java.lang.Override
@@ -4483,31 +4483,31 @@ public final class IMFile {
       return transMode_;
     }
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
      * @return The transMode.
      */
     @java.lang.Override
-    public com.mogujie.tt.protobuf.IMBaseDefine.FileType getTransMode() {
-      com.mogujie.tt.protobuf.IMBaseDefine.FileType result = com.mogujie.tt.protobuf.IMBaseDefine.FileType.forNumber(transMode_);
-      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.FileType.UNRECOGNIZED : result;
+    public com.mogujie.tt.protobuf.IMBaseDefine.XFileType getTransMode() {
+      com.mogujie.tt.protobuf.IMBaseDefine.XFileType result = com.mogujie.tt.protobuf.IMBaseDefine.XFileType.forNumber(transMode_);
+      return result == null ? com.mogujie.tt.protobuf.IMBaseDefine.XFileType.UNRECOGNIZED : result;
     }
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
      * @param value The enum numeric value on the wire for transMode to set.
      */
     private void setTransModeValue(int value) {
         transMode_ = value;
     }
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
      * @param value The transMode to set.
      */
-    private void setTransMode(com.mogujie.tt.protobuf.IMBaseDefine.FileType value) {
+    private void setTransMode(com.mogujie.tt.protobuf.IMBaseDefine.XFileType value) {
       transMode_ = value.getNumber();
       
     }
     /**
-     * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+     * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
      */
     private void clearTransMode() {
       
@@ -4944,7 +4944,7 @@ public final class IMFile {
       }
 
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
        * @return The enum numeric value on the wire for transMode.
        */
       @java.lang.Override
@@ -4952,7 +4952,7 @@ public final class IMFile {
         return instance.getTransModeValue();
       }
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
        * @param value The transMode to set.
        * @return This builder for chaining.
        */
@@ -4962,25 +4962,25 @@ public final class IMFile {
         return this;
       }
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
        * @return The transMode.
        */
       @java.lang.Override
-      public com.mogujie.tt.protobuf.IMBaseDefine.FileType getTransMode() {
+      public com.mogujie.tt.protobuf.IMBaseDefine.XFileType getTransMode() {
         return instance.getTransMode();
       }
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
        * @param value The enum numeric value on the wire for transMode to set.
        * @return This builder for chaining.
        */
-      public Builder setTransMode(com.mogujie.tt.protobuf.IMBaseDefine.FileType value) {
+      public Builder setTransMode(com.mogujie.tt.protobuf.IMBaseDefine.XFileType value) {
         copyOnWrite();
         instance.setTransMode(value);
         return this;
       }
       /**
-       * <code>.IM.BaseDefine.FileType trans_mode = 7;</code>
+       * <code>.IM.BaseDefine.XFileType trans_mode = 7;</code>
        * @return This builder for chaining.
        */
       public Builder clearTransMode() {

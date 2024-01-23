@@ -2828,11 +2828,11 @@ class IMFileTransferReq final :
 
   // .IM.BaseDefine.FileType trans_mode = 5;
   void clear_trans_mode();
-  ::IM::BaseDefine::FileType trans_mode() const;
-  void set_trans_mode(::IM::BaseDefine::FileType value);
+  ::IM::BaseDefine::XFileType trans_mode() const;
+  void set_trans_mode(::IM::BaseDefine::XFileType value);
   private:
-  ::IM::BaseDefine::FileType _internal_trans_mode() const;
-  void _internal_set_trans_mode(::IM::BaseDefine::FileType value);
+  ::IM::BaseDefine::XFileType _internal_trans_mode() const;
+  void _internal_set_trans_mode(::IM::BaseDefine::XFileType value);
   public:
 
   // @@protoc_insertion_point(class_scope:IM.Server.IMFileTransferReq)
@@ -3067,11 +3067,11 @@ class IMFileTransferRsp final :
   bool _internal_has_trans_mode() const;
   public:
   void clear_trans_mode();
-  ::IM::BaseDefine::FileType trans_mode() const;
-  void set_trans_mode(::IM::BaseDefine::FileType value);
+  ::IM::BaseDefine::XFileType trans_mode() const;
+  void set_trans_mode(::IM::BaseDefine::XFileType value);
   private:
-  ::IM::BaseDefine::FileType _internal_trans_mode() const;
-  void _internal_set_trans_mode(::IM::BaseDefine::FileType value);
+  ::IM::BaseDefine::XFileType _internal_trans_mode() const;
+  void _internal_set_trans_mode(::IM::BaseDefine::XFileType value);
   public:
 
   // @@protoc_insertion_point(class_scope:IM.Server.IMFileTransferRsp)
@@ -5031,18 +5031,18 @@ inline void IMFileTransferReq::set_file_size(::PROTOBUF_NAMESPACE_ID::uint32 val
 inline void IMFileTransferReq::clear_trans_mode() {
   trans_mode_ = 0;
 }
-inline ::IM::BaseDefine::FileType IMFileTransferReq::_internal_trans_mode() const {
-  return static_cast< ::IM::BaseDefine::FileType >(trans_mode_);
+inline ::IM::BaseDefine::XFileType IMFileTransferReq::_internal_trans_mode() const {
+  return static_cast< ::IM::BaseDefine::XFileType >(trans_mode_);
 }
-inline ::IM::BaseDefine::FileType IMFileTransferReq::trans_mode() const {
+inline ::IM::BaseDefine::XFileType IMFileTransferReq::trans_mode() const {
   // @@protoc_insertion_point(field_get:IM.Server.IMFileTransferReq.trans_mode)
   return _internal_trans_mode();
 }
-inline void IMFileTransferReq::_internal_set_trans_mode(::IM::BaseDefine::FileType value) {
+inline void IMFileTransferReq::_internal_set_trans_mode(::IM::BaseDefine::XFileType value) {
   
   trans_mode_ = value;
 }
-inline void IMFileTransferReq::set_trans_mode(::IM::BaseDefine::FileType value) {
+inline void IMFileTransferReq::set_trans_mode(::IM::BaseDefine::XFileType value) {
   _internal_set_trans_mode(value);
   // @@protoc_insertion_point(field_set:IM.Server.IMFileTransferReq.trans_mode)
 }
@@ -5325,18 +5325,18 @@ inline void IMFileTransferRsp::clear_trans_mode() {
   trans_mode_ = 0;
   _has_bits_[0] &= ~0x00000010u;
 }
-inline ::IM::BaseDefine::FileType IMFileTransferRsp::_internal_trans_mode() const {
-  return static_cast< ::IM::BaseDefine::FileType >(trans_mode_);
+inline ::IM::BaseDefine::XFileType IMFileTransferRsp::_internal_trans_mode() const {
+  return static_cast< ::IM::BaseDefine::XFileType >(trans_mode_);
 }
-inline ::IM::BaseDefine::FileType IMFileTransferRsp::trans_mode() const {
+inline ::IM::BaseDefine::XFileType IMFileTransferRsp::trans_mode() const {
   // @@protoc_insertion_point(field_get:IM.Server.IMFileTransferRsp.trans_mode)
   return _internal_trans_mode();
 }
-inline void IMFileTransferRsp::_internal_set_trans_mode(::IM::BaseDefine::FileType value) {
+inline void IMFileTransferRsp::_internal_set_trans_mode(::IM::BaseDefine::XFileType value) {
   _has_bits_[0] |= 0x00000010u;
   trans_mode_ = value;
 }
-inline void IMFileTransferRsp::set_trans_mode(::IM::BaseDefine::FileType value) {
+inline void IMFileTransferRsp::set_trans_mode(::IM::BaseDefine::XFileType value) {
   _internal_set_trans_mode(value);
   // @@protoc_insertion_point(field_set:IM.Server.IMFileTransferRsp.trans_mode)
 }

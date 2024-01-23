@@ -904,7 +904,7 @@ void CFileConn::_HandleClientFilePullFileRsp(CImPdu *pPdu)
                     IM::File::IMFilePullDataReq msg2;
                     msg2.set_task_id(task_id);
                     msg2.set_user_id(user_id);
-                    msg2.set_trans_mode((::IM::BaseDefine::FileType)t->transfer_mode);
+                    msg2.set_trans_mode((::IM::BaseDefine::XFileType)t->transfer_mode);
                     msg2.set_offset(offset);
                     msg2.set_data_size(size);
                     CImPdu pdu;
@@ -930,7 +930,7 @@ void CFileConn::_HandleClientFilePullFileRsp(CImPdu *pPdu)
                         IM::File::IMFilePullDataReq msg2;
                         msg2.set_task_id(task_id);
                         msg2.set_user_id(user_id);
-                        msg2.set_trans_mode((::IM::BaseDefine::FileType)t->transfer_mode);
+                        msg2.set_trans_mode((::IM::BaseDefine::XFileType)t->transfer_mode);
                         msg2.set_offset(offset);
                         msg2.set_data_size(size);
                         CImPdu pdu;
@@ -974,7 +974,7 @@ void CFileConn::_HandleClientFilePullFileRsp(CImPdu *pPdu)
             IM::File::IMFilePullDataReq msg2;
             msg2.set_task_id(task_id);
             msg2.set_user_id(user_id);
-            msg2.set_trans_mode((::IM::BaseDefine::FileType)t->transfer_mode);
+            msg2.set_trans_mode((::IM::BaseDefine::XFileType)t->transfer_mode);
             msg2.set_offset(next_offset);
             msg2.set_data_size(next_size);
             CImPdu pdu;

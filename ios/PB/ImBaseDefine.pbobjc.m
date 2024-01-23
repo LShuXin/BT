@@ -959,25 +959,25 @@ BOOL GroupModifyType_IsValidValue(int32_t value__) {
   }
 }
 
-#pragma mark - Enum FileType
+#pragma mark - Enum XFileType
 
-GPBEnumDescriptor *FileType_EnumDescriptor(void) {
+GPBEnumDescriptor *XFileType_EnumDescriptor(void) {
   static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "FileTypeNone\000FileTypeOnline\000FileTypeOffl"
         "ine\000";
     static const int32_t values[] = {
-        FileType_FileTypeNone,
-        FileType_FileTypeOnline,
-        FileType_FileTypeOffline,
+        XFileType_FileTypeNone,
+        XFileType_FileTypeOnline,
+        XFileType_FileTypeOffline,
     };
     GPBEnumDescriptor *worker =
-        [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(FileType)
+        [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(XFileType)
                                        valueNames:valueNames
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
-                                     enumVerifier:FileType_IsValidValue];
+                                     enumVerifier:XFileType_IsValidValue];
     GPBEnumDescriptor *expected = nil;
     if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
@@ -986,11 +986,11 @@ GPBEnumDescriptor *FileType_EnumDescriptor(void) {
   return descriptor;
 }
 
-BOOL FileType_IsValidValue(int32_t value__) {
+BOOL XFileType_IsValidValue(int32_t value__) {
   switch (value__) {
-    case FileType_FileTypeNone:
-    case FileType_FileTypeOnline:
-    case FileType_FileTypeOffline:
+    case XFileType_FileTypeNone:
+    case XFileType_FileTypeOnline:
+    case XFileType_FileTypeOffline:
       return YES;
     default:
       return NO;

@@ -1,45 +1,27 @@
 # redis_server
 
-提供 `openeuler_redis_server`、`centos_redis_server` 两个版本，分别基于 `openeuler/openeuler:20.03`、 `centos:centos7.9.2009`
+提供 `1569663570/openeuler2003_redis_server`、`1569663570/centos792009_redis_server` 两个版本，分别基于 `openeuler/openeuler:20.03`、 `centos:centos7.9.2009` 基础镜像构建
 
 ## 快速使用
 
-### 运行系统
-
 ```shell
-docker run -d -tid --name openeuler_redis_server --privileged=true --ENV BIND=0.0.0.0 1569663570/openeuler_redis_server /sbin/init
-
-或
-
-docker run -d -tid --name centos_redis_server --privileged=true --ENV BIND=0.0.0.0 1569663570/centos_redis_server /sbin/init
+apples-Mac-mini-1243:redis_server apple$ cd centos/
+apples-Mac-mini-1243:centos apple$ chmod +x run.sh 
+apples-Mac-mini-1243:centos apple$ ./run.sh 
+188142135d33de2d47374947ab036cda0fe0b7f1f6fb7b02d74f97f77bd6a562
+apples-Mac-mini-1243:centos apple$ 
 ```
 
-### 进入系统
+## 自定义镜像
 
 ```shell
-docker exec -it openeuler_redis_server /bin/bash
-
-或
-
-docker exec -it centos_redis_server /bin/bash
+apples-Mac-mini-1243:redis_server apple$ cd centos/
+apples-Mac-mini-1243:centos apple$ chmod +x build.sh 
+apples-Mac-mini-1243:centos apple$ ./build.sh 
 ```
 
-### 环境变量
+## 环境变量
 
 ```shell
 BIND
-```
-
-### 构建自定义镜像
-
-```shell
-cd docker/redis_server/openeuler_redis_server
-chmod +x ./build.sh
-./build.sh
-
-或
-
-cd docker/redis_server/centos_redis_server
-chmod +x ./build.sh
-./build.sh
 ```

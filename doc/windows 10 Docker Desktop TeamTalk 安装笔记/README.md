@@ -15,7 +15,7 @@ docker容器已经共享到[Docker Hub](https://hub.docker.com/r/lsqtzj/teamtalk
 # 1、运行docker centos:7 版本系统
 
 ```cobol
-docker run -d -p 80:80 -p 8080:8080 -p 8008:8008 -p 8000:8000 -p 10600:10600 -p 8200:8200 -p 8400:8400 -p 8500:8500 -p 8600:8600 -p 8700:8700 -tid --name teamtalk --privileged=true centos:7 /sbin/init
+docker run -d -p 80:80 -p 8080:8080 -p 8008:8008 -p 8000:8000 -p 10600:10600 -p 8200:8200 -p 8400:8400 -p 8500:8500 -p 8600:8600 -p 8700:8700 -tid --name teamtalk --privileged=true centos:centos7.9.2009 /sbin/init
 ```
 
 这里开放的端口为服务端口后面需要使用。

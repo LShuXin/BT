@@ -1,0 +1,1 @@
+docker run -d -p 6379:6379 1569663570/centos792009_redis_server:latest

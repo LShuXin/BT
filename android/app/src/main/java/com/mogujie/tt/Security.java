@@ -7,7 +7,7 @@ public class Security {
 
 	public native byte[] EncryptPass(String strPass);
 	
-	static{
+	static {
 		System.loadLibrary("security");
 	}
 	

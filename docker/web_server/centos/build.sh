@@ -1,0 +1,1 @@
+docker build -t 1569663570/centos792009_web_server -f Dockerfile ../../../

@@ -31,7 +31,7 @@ CF_EXTERN_C_BEGIN
 @class OfflineFileInfo;
 GPB_ENUM_FWD_DECLARE(ClientFileRole);
 GPB_ENUM_FWD_DECLARE(ClientFileState);
-GPB_ENUM_FWD_DECLARE(FileType);
+GPB_ENUM_FWD_DECLARE(XFileType);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -145,7 +145,7 @@ GPB_FINAL @interface IMFilePullDataReq : GPBMessage
 
 @property(nonatomic, readwrite) uint32_t userId;
 
-@property(nonatomic, readwrite) enum FileType transMode;
+@property(nonatomic, readwrite) enum XFileType transMode;
 
 @property(nonatomic, readwrite) uint32_t offset;
 
@@ -211,7 +211,7 @@ GPB_FINAL @interface IMFileReq : GPBMessage
 
 @property(nonatomic, readwrite) uint32_t fileSize;
 
-@property(nonatomic, readwrite) enum FileType transMode;
+@property(nonatomic, readwrite) enum XFileType transMode;
 
 @end
 
@@ -256,7 +256,7 @@ GPB_FINAL @interface IMFileRsp : GPBMessage
 /** The number of items in @c ipAddrListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger ipAddrListArray_Count;
 
-@property(nonatomic, readwrite) enum FileType transMode;
+@property(nonatomic, readwrite) enum XFileType transMode;
 
 @end
 
@@ -302,7 +302,7 @@ GPB_FINAL @interface IMFileNotify : GPBMessage
 /** The number of items in @c ipAddrListArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger ipAddrListArray_Count;
 
-@property(nonatomic, readwrite) enum FileType transMode;
+@property(nonatomic, readwrite) enum XFileType transMode;
 
 /** 1:True 0:False */
 @property(nonatomic, readwrite) uint32_t offlineReady;

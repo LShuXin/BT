@@ -699,11 +699,11 @@ class IMFilePullDataReq final :
 
   // .IM.BaseDefine.FileType trans_mode = 3;
   void clear_trans_mode();
-  ::IM::BaseDefine::FileType trans_mode() const;
-  void set_trans_mode(::IM::BaseDefine::FileType value);
+  ::IM::BaseDefine::XFileType trans_mode() const;
+  void set_trans_mode(::IM::BaseDefine::XFileType value);
   private:
-  ::IM::BaseDefine::FileType _internal_trans_mode() const;
-  void _internal_set_trans_mode(::IM::BaseDefine::FileType value);
+  ::IM::BaseDefine::XFileType _internal_trans_mode() const;
+  void _internal_set_trans_mode(::IM::BaseDefine::XFileType value);
   public:
 
   // uint32 offset = 4;
@@ -1076,11 +1076,11 @@ class IMFileReq final :
 
   // .IM.BaseDefine.FileType trans_mode = 5;
   void clear_trans_mode();
-  ::IM::BaseDefine::FileType trans_mode() const;
-  void set_trans_mode(::IM::BaseDefine::FileType value);
+  ::IM::BaseDefine::XFileType trans_mode() const;
+  void set_trans_mode(::IM::BaseDefine::XFileType value);
   private:
-  ::IM::BaseDefine::FileType _internal_trans_mode() const;
-  void _internal_set_trans_mode(::IM::BaseDefine::FileType value);
+  ::IM::BaseDefine::XFileType _internal_trans_mode() const;
+  void _internal_set_trans_mode(::IM::BaseDefine::XFileType value);
   public:
 
   // @@protoc_insertion_point(class_scope:IM.File.IMFileReq)
@@ -1287,11 +1287,11 @@ class IMFileRsp final :
 
   // .IM.BaseDefine.FileType trans_mode = 7;
   void clear_trans_mode();
-  ::IM::BaseDefine::FileType trans_mode() const;
-  void set_trans_mode(::IM::BaseDefine::FileType value);
+  ::IM::BaseDefine::XFileType trans_mode() const;
+  void set_trans_mode(::IM::BaseDefine::XFileType value);
   private:
-  ::IM::BaseDefine::FileType _internal_trans_mode() const;
-  void _internal_set_trans_mode(::IM::BaseDefine::FileType value);
+  ::IM::BaseDefine::XFileType _internal_trans_mode() const;
+  void _internal_set_trans_mode(::IM::BaseDefine::XFileType value);
   public:
 
   // @@protoc_insertion_point(class_scope:IM.File.IMFileRsp)
@@ -1501,11 +1501,11 @@ class IMFileNotify final :
 
   // .IM.BaseDefine.FileType trans_mode = 7;
   void clear_trans_mode();
-  ::IM::BaseDefine::FileType trans_mode() const;
-  void set_trans_mode(::IM::BaseDefine::FileType value);
+  ::IM::BaseDefine::XFileType trans_mode() const;
+  void set_trans_mode(::IM::BaseDefine::XFileType value);
   private:
-  ::IM::BaseDefine::FileType _internal_trans_mode() const;
-  void _internal_set_trans_mode(::IM::BaseDefine::FileType value);
+  ::IM::BaseDefine::XFileType _internal_trans_mode() const;
+  void _internal_set_trans_mode(::IM::BaseDefine::XFileType value);
   public:
 
   // uint32 offline_ready = 8;
@@ -2541,18 +2541,18 @@ inline void IMFilePullDataReq::set_user_id(::PROTOBUF_NAMESPACE_ID::uint32 value
 inline void IMFilePullDataReq::clear_trans_mode() {
   trans_mode_ = 0;
 }
-inline ::IM::BaseDefine::FileType IMFilePullDataReq::_internal_trans_mode() const {
-  return static_cast< ::IM::BaseDefine::FileType >(trans_mode_);
+inline ::IM::BaseDefine::XFileType IMFilePullDataReq::_internal_trans_mode() const {
+  return static_cast< ::IM::BaseDefine::XFileType >(trans_mode_);
 }
-inline ::IM::BaseDefine::FileType IMFilePullDataReq::trans_mode() const {
+inline ::IM::BaseDefine::XFileType IMFilePullDataReq::trans_mode() const {
   // @@protoc_insertion_point(field_get:IM.File.IMFilePullDataReq.trans_mode)
   return _internal_trans_mode();
 }
-inline void IMFilePullDataReq::_internal_set_trans_mode(::IM::BaseDefine::FileType value) {
+inline void IMFilePullDataReq::_internal_set_trans_mode(::IM::BaseDefine::XFileType value) {
   
   trans_mode_ = value;
 }
-inline void IMFilePullDataReq::set_trans_mode(::IM::BaseDefine::FileType value) {
+inline void IMFilePullDataReq::set_trans_mode(::IM::BaseDefine::XFileType value) {
   _internal_set_trans_mode(value);
   // @@protoc_insertion_point(field_set:IM.File.IMFilePullDataReq.trans_mode)
 }
@@ -2867,18 +2867,18 @@ inline void IMFileReq::set_file_size(::PROTOBUF_NAMESPACE_ID::uint32 value) {
 inline void IMFileReq::clear_trans_mode() {
   trans_mode_ = 0;
 }
-inline ::IM::BaseDefine::FileType IMFileReq::_internal_trans_mode() const {
-  return static_cast< ::IM::BaseDefine::FileType >(trans_mode_);
+inline ::IM::BaseDefine::XFileType IMFileReq::_internal_trans_mode() const {
+  return static_cast< ::IM::BaseDefine::XFileType >(trans_mode_);
 }
-inline ::IM::BaseDefine::FileType IMFileReq::trans_mode() const {
+inline ::IM::BaseDefine::XFileType IMFileReq::trans_mode() const {
   // @@protoc_insertion_point(field_get:IM.File.IMFileReq.trans_mode)
   return _internal_trans_mode();
 }
-inline void IMFileReq::_internal_set_trans_mode(::IM::BaseDefine::FileType value) {
+inline void IMFileReq::_internal_set_trans_mode(::IM::BaseDefine::XFileType value) {
   
   trans_mode_ = value;
 }
-inline void IMFileReq::set_trans_mode(::IM::BaseDefine::FileType value) {
+inline void IMFileReq::set_trans_mode(::IM::BaseDefine::XFileType value) {
   _internal_set_trans_mode(value);
   // @@protoc_insertion_point(field_set:IM.File.IMFileReq.trans_mode)
 }
@@ -3080,18 +3080,18 @@ IMFileRsp::ip_addr_list() const {
 inline void IMFileRsp::clear_trans_mode() {
   trans_mode_ = 0;
 }
-inline ::IM::BaseDefine::FileType IMFileRsp::_internal_trans_mode() const {
-  return static_cast< ::IM::BaseDefine::FileType >(trans_mode_);
+inline ::IM::BaseDefine::XFileType IMFileRsp::_internal_trans_mode() const {
+  return static_cast< ::IM::BaseDefine::XFileType >(trans_mode_);
 }
-inline ::IM::BaseDefine::FileType IMFileRsp::trans_mode() const {
+inline ::IM::BaseDefine::XFileType IMFileRsp::trans_mode() const {
   // @@protoc_insertion_point(field_get:IM.File.IMFileRsp.trans_mode)
   return _internal_trans_mode();
 }
-inline void IMFileRsp::_internal_set_trans_mode(::IM::BaseDefine::FileType value) {
+inline void IMFileRsp::_internal_set_trans_mode(::IM::BaseDefine::XFileType value) {
   
   trans_mode_ = value;
 }
-inline void IMFileRsp::set_trans_mode(::IM::BaseDefine::FileType value) {
+inline void IMFileRsp::set_trans_mode(::IM::BaseDefine::XFileType value) {
   _internal_set_trans_mode(value);
   // @@protoc_insertion_point(field_set:IM.File.IMFileRsp.trans_mode)
 }
@@ -3293,18 +3293,18 @@ IMFileNotify::ip_addr_list() const {
 inline void IMFileNotify::clear_trans_mode() {
   trans_mode_ = 0;
 }
-inline ::IM::BaseDefine::FileType IMFileNotify::_internal_trans_mode() const {
-  return static_cast< ::IM::BaseDefine::FileType >(trans_mode_);
+inline ::IM::BaseDefine::XFileType IMFileNotify::_internal_trans_mode() const {
+  return static_cast< ::IM::BaseDefine::XFileType >(trans_mode_);
 }
-inline ::IM::BaseDefine::FileType IMFileNotify::trans_mode() const {
+inline ::IM::BaseDefine::XFileType IMFileNotify::trans_mode() const {
   // @@protoc_insertion_point(field_get:IM.File.IMFileNotify.trans_mode)
   return _internal_trans_mode();
 }
-inline void IMFileNotify::_internal_set_trans_mode(::IM::BaseDefine::FileType value) {
+inline void IMFileNotify::_internal_set_trans_mode(::IM::BaseDefine::XFileType value) {
   
   trans_mode_ = value;
 }
-inline void IMFileNotify::set_trans_mode(::IM::BaseDefine::FileType value) {
+inline void IMFileNotify::set_trans_mode(::IM::BaseDefine::XFileType value) {
   _internal_set_trans_mode(value);
   // @@protoc_insertion_point(field_set:IM.File.IMFileNotify.trans_mode)
 }

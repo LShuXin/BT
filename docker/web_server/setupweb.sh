@@ -1,6 +1,7 @@
 #!/bin/bash
+
 server_ip() {
-        arp $1 | sed "s/.*(\([0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\)).*/\1/g"
+    arp $1 | sed "s/.*(\([0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\)).*/\1/g"
 }
 
 echo "setup database"
@@ -19,4 +20,11 @@ sed -i "s/display_startup_errors = Off/display_startup_errors = On/g" /usr/local
 sed -i "s/error_reporting =.*/error_reporting = E_ALL/g" /usr/local/php/etc/php.ini
 sed -i "s/\[www\]/\[www\]\nphp_flag\[display_errors\] = on/g" /usr/local/php/etc/php-fpm.conf
 
-exec /opt/main.sh
+
+/etc/init.d/nginx start
+/etc/init.d/php-fpm start
+
+server=web_server
+echo -e "\033[32m $server ==> START ... \033[0m"
+
+tail -f /dev/null

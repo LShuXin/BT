@@ -41,4 +41,6 @@ TT.udb
 
 *.log
 
-/docker/mysql_data
+/mysql_data
+/VMwareTools-10.3.22-15902021.tar.gz
+/docker/develop_server/gcc-11.2.0.tar.gz

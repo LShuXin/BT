@@ -5583,7 +5583,7 @@ template <> struct is_proto_enum< ::IM::BaseDefine::MsgType> : ::std::true_type 
 template <> struct is_proto_enum< ::IM::BaseDefine::ClientType> : ::std::true_type {};
 template <> struct is_proto_enum< ::IM::BaseDefine::GroupType> : ::std::true_type {};
 template <> struct is_proto_enum< ::IM::BaseDefine::GroupModifyType> : ::std::true_type {};
-template <> struct is_proto_enum< ::IM::BaseDefine::FileType> : ::std::true_type {};
+template <> struct is_proto_enum< ::IM::BaseDefine::XFileType> : ::std::true_type {};
 template <> struct is_proto_enum< ::IM::BaseDefine::ClientFileState> : ::std::true_type {};
 template <> struct is_proto_enum< ::IM::BaseDefine::ClientFileRole> : ::std::true_type {};
 template <> struct is_proto_enum< ::IM::BaseDefine::FileServerError> : ::std::true_type {};

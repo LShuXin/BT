@@ -84,6 +84,7 @@
         {
             DDLog(@"服务器信息：%@", dic);
             _priorIP = [dic objectForKey:@"priorIP"];
+            // _priorIP = @"192.168.199.132";
             _port    = [[dic objectForKey:@"port"] integerValue];
             TheRuntime.msfs = [dic objectForKey:@"msfsPrior"];
             TheRuntime.discoverUrl = [dic objectForKey:@"discovery"];

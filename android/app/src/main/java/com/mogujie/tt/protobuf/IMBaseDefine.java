@@ -3449,9 +3449,9 @@ public final class IMBaseDefine {
   }
 
   /**
-   * Protobuf enum {@code IM.BaseDefine.FileType}
+   * Protobuf enum {@code IM.BaseDefine.XFileType}
    */
-  public enum FileType
+  public enum XFileType
       implements com.google.protobuf.Internal.EnumLite {
     /**
      * <code>FILE_TYPE_NONE = 0;</code>
@@ -3497,11 +3497,11 @@ public final class IMBaseDefine {
      * @deprecated Use {@link #forNumber(int)} instead.
      */
     @java.lang.Deprecated
-    public static FileType valueOf(int value) {
+    public static XFileType valueOf(int value) {
       return forNumber(value);
     }
 
-    public static FileType forNumber(int value) {
+    public static XFileType forNumber(int value) {
       switch (value) {
         case 0: return FILE_TYPE_NONE;
         case 1: return FILE_TYPE_ONLINE;
@@ -3510,40 +3510,40 @@ public final class IMBaseDefine {
       }
     }
 
-    public static com.google.protobuf.Internal.EnumLiteMap<FileType>
+    public static com.google.protobuf.Internal.EnumLiteMap<XFileType>
         internalGetValueMap() {
       return internalValueMap;
     }
     private static final com.google.protobuf.Internal.EnumLiteMap<
-        FileType> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<FileType>() {
+        XFileType> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<XFileType>() {
             @java.lang.Override
-            public FileType findValueByNumber(int number) {
-              return FileType.forNumber(number);
+            public XFileType findValueByNumber(int number) {
+              return XFileType.forNumber(number);
             }
           };
 
     public static com.google.protobuf.Internal.EnumVerifier 
         internalGetVerifier() {
-      return FileTypeVerifier.INSTANCE;
+      return XFileTypeVerifier.INSTANCE;
     }
 
-    private static final class FileTypeVerifier implements 
+    private static final class XFileTypeVerifier implements 
          com.google.protobuf.Internal.EnumVerifier { 
-            static final com.google.protobuf.Internal.EnumVerifier           INSTANCE = new FileTypeVerifier();
+            static final com.google.protobuf.Internal.EnumVerifier           INSTANCE = new XFileTypeVerifier();
             @java.lang.Override
             public boolean isInRange(int number) {
-              return FileType.forNumber(number) != null;
+              return XFileType.forNumber(number) != null;
             }
           };
 
     private final int value;
 
-    private FileType(int value) {
+    private XFileType(int value) {
       this.value = value;
     }
 
-    // @@protoc_insertion_point(enum_scope:IM.BaseDefine.FileType)
+    // @@protoc_insertion_point(enum_scope:IM.BaseDefine.XFileType)
   }
 
   /**

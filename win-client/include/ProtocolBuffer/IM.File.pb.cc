@@ -1045,7 +1045,7 @@ const char* IMFilePullDataReq::_InternalParse(const char* ptr, ::PROTOBUF_NAMESP
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
           ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_trans_mode(static_cast<::IM::BaseDefine::FileType>(val));
+          _internal_set_trans_mode(static_cast<::IM::BaseDefine::XFileType>(val));
         } else
           goto handle_unusual;
         continue;
@@ -1676,7 +1676,7 @@ const char* IMFileReq::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
           ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_trans_mode(static_cast<::IM::BaseDefine::FileType>(val));
+          _internal_set_trans_mode(static_cast<::IM::BaseDefine::XFileType>(val));
         } else
           goto handle_unusual;
         continue;
@@ -2014,7 +2014,7 @@ const char* IMFileRsp::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 56)) {
           ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_trans_mode(static_cast<::IM::BaseDefine::FileType>(val));
+          _internal_set_trans_mode(static_cast<::IM::BaseDefine::XFileType>(val));
         } else
           goto handle_unusual;
         continue;
@@ -2394,7 +2394,7 @@ const char* IMFileNotify::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_I
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 56)) {
           ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_trans_mode(static_cast<::IM::BaseDefine::FileType>(val));
+          _internal_set_trans_mode(static_cast<::IM::BaseDefine::XFileType>(val));
         } else
           goto handle_unusual;
         continue;

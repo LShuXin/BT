@@ -34,7 +34,7 @@ CF_EXTERN_C_BEGIN
 @class UserInfo;
 @class UserTokenInfo;
 GPB_ENUM_FWD_DECLARE(ClientType);
-GPB_ENUM_FWD_DECLARE(FileType);
+GPB_ENUM_FWD_DECLARE(XFileType);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -429,7 +429,7 @@ GPB_FINAL @interface IMFileTransferReq : GPBMessage
 
 @property(nonatomic, readwrite) uint32_t fileSize;
 
-@property(nonatomic, readwrite) enum FileType transMode;
+@property(nonatomic, readwrite) enum XFileType transMode;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;
 /** Test to see if @c attachData has been set. */
@@ -482,7 +482,7 @@ GPB_FINAL @interface IMFileTransferRsp : GPBMessage
 /** Test to see if @c taskId has been set. */
 @property(nonatomic, readwrite) BOOL hasTaskId;
 
-@property(nonatomic, readwrite) enum FileType transMode;
+@property(nonatomic, readwrite) enum XFileType transMode;
 
 @property(nonatomic, readwrite) BOOL hasTransMode;
 @property(nonatomic, readwrite, copy, null_resettable) NSData *attachData;

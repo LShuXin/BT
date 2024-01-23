@@ -1090,7 +1090,7 @@ typedef struct IMFileTransferReq__storage_ {
   uint32_t fromUserId;
   uint32_t toUserId;
   uint32_t fileSize;
-  FileType transMode;
+  XFileType transMode;
   NSString *fileName;
   NSData *attachData;
 } IMFileTransferReq__storage_;
@@ -1139,7 +1139,7 @@ typedef struct IMFileTransferReq__storage_ {
       },
       {
         .name = "transMode",
-        .dataTypeSpecific.enumDescFunc = FileType_EnumDescriptor,
+        .dataTypeSpecific.enumDescFunc = XFileType_EnumDescriptor,
         .number = IMFileTransferReq_FieldNumber_TransMode,
         .hasIndex = 4,
         .offset = (uint32_t)offsetof(IMFileTransferReq__storage_, transMode),
@@ -1205,7 +1205,7 @@ typedef struct IMFileTransferRsp__storage_ {
   uint32_t fromUserId;
   uint32_t toUserId;
   uint32_t fileSize;
-  FileType transMode;
+  XFileType transMode;
   NSString *fileName;
   NSString *taskId;
   NSData *attachData;
@@ -1273,7 +1273,7 @@ typedef struct IMFileTransferRsp__storage_ {
       },
       {
         .name = "transMode",
-        .dataTypeSpecific.enumDescFunc = FileType_EnumDescriptor,
+        .dataTypeSpecific.enumDescFunc = XFileType_EnumDescriptor,
         .number = IMFileTransferRsp_FieldNumber_TransMode,
         .hasIndex = 6,
         .offset = (uint32_t)offsetof(IMFileTransferRsp__storage_, transMode),

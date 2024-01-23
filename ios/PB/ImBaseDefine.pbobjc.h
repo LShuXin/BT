@@ -726,27 +726,27 @@ GPBEnumDescriptor *GroupModifyType_EnumDescriptor(void);
  **/
 BOOL GroupModifyType_IsValidValue(int32_t value);
 
-#pragma mark - Enum FileType
+#pragma mark - Enum XFileType
 
-typedef GPB_ENUM(FileType) {
+typedef GPB_ENUM(XFileType) {
   /**
    * Value used if any message's field encounters a value that is not defined
    * by this enum. The message will also have C functions to get/set the rawValue
    * of the field.
    **/
-  FileType_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
-  FileType_FileTypeNone = 0,
-  FileType_FileTypeOnline = 1,
-  FileType_FileTypeOffline = 2,
+  XFileType_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  XFileType_FileTypeNone = 0,
+  XFileType_FileTypeOnline = 1,
+  XFileType_FileTypeOffline = 2,
 };
 
-GPBEnumDescriptor *FileType_EnumDescriptor(void);
+GPBEnumDescriptor *XFileType_EnumDescriptor(void);
 
 /**
  * Checks to see if the given value is defined by the enum or was not known at
  * the time this source was generated.
  **/
-BOOL FileType_IsValidValue(int32_t value);
+BOOL XFileType_IsValidValue(int32_t value);
 
 #pragma mark - Enum ClientFileState
 

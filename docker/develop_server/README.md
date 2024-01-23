@@ -1,24 +1,34 @@
-# develop_server
+# develop
 
-> 在制作镜像时，自己的 Docker 实际已经配置了国内镜像源，但是在构建时仍然开着 vpn，因此最初构建时总是会发生超时，关掉 vpn 后不再超时。
+> 在制作镜像时，自己的 Docker 实际已经配置了国内镜像源，但是在构建时仍然开着 VPN，在这种情况下构建时会发生下载依赖失败，关掉 VPN 后不再超时。
 >
 > 镜像提供 openeuler/centos 两个版本
 >
-> xxx_develop_base、xxx_develop_server 这两个镜像的 Dockerfile 可以自定义清除缓存/减少层数操作，但是不要删除已经安装的基础软件，因为其他镜像在以此镜像为基础镜像进行构建时，在编译新的服务的时候需要用到这些基础包管理工具、编译环境等软件。
+> develop_base、develop_server 这种镜像安排使 develop_base 专注于提供开发环境、编译环境，develop_server 专注于以 develop_base 为基础镜像完成服务端代码构建，当修改服务端代码后再次编译服务端时，不需要在镜像中重新构建开发环境，节省了时间；此外 develop_base 也可以直接用作开发环境
 >
-> 可以先将 Dockerfile 写成多层镜像的构建方式，镜像构建成功之后再将可以合并的指令合并在一起，以减少镜像的层数，这种方式有助于快速定位构建镜像过程中出现的错误；当一开始就以减少镜像层数为目标将指令写在一起时，当镜像构建过程中发生错误时定位问题时可能会相对比较麻烦，因为有时候错误不明显，控制台只是提示某条构建指令执行失败了，而这里的“某条指令”可能是用 && 连接的一系列指令。此外，对于一些构建失败的情况，如果确定是某条构建指令失败了，但是并不知道具体的原因，此时可以先将从出问题的构建指令起到最后一条构建指令注释掉，先制作出一个能运行的镜像，运行该镜像，然后进入容器手动执行前面注释掉的构建指令，这样也可以加快排查错误。
+> 在编写很长的 Dockerfile 时，可以先将 Dockerfile 写成多层镜像的构建方式，镜像构建成功之后再将可以合并的指令合并在一起，以减少镜像的层数，这种方式有助于快速定位构建镜像过程中出现的错误；当一开始就以减少镜像层数为目标将指令写在一起时，当镜像构建过程中发生错误时定位问题时可能会相对比较麻烦，因为有时候错误不明显，控制台只是提示某条构建指令执行失败了，而这里的“某条指令”可能是用 && 连接的一系列指令。此外，对于一些构建失败的情况，如果确定是某条构建指令失败了，但是并不知道具体的原因，此时可以先将从出问题的构建指令起到最后一条构建指令注释掉，先制作出一个能运行的镜像，运行该镜像，然后进入容器手动执行前面注释掉的构建指令，这样也可以加快排查错误。
 
-## openeuler_develop_base/centos_develop_base
+## develop_base
 
-构建此镜像的 Dockerfile 为 Dockerfile.base。 镜像基于 openeuler/openeuler:20.03（centos:centos7.9.2009），集成 gcc-8.5.0、libmcrypt-2.5.8、termcap-1.3.1、mhash-0.9.9.9、apache-log4cxx-0.12.1、protobuf-3.18.0、hiredis，主要用于编译 TeamTalk。本镜像 `1569663570/openeuler_develop_base（1569663570/centos_develop_base）` 已上传到 Docker Hub。
+构建此镜像的 Dockerfile 为 Dockerfile.base。 此镜像集成了 gcc-8.5.0、CMake2.7.1、libmcrypt-2.5.8、termcap-1.3.1、mhash-0.9.9.9、apache-log4cxx-0.12.1、protobuf-3.18.0、hiredis，本镜像可作为编译服务端的基础镜像，制作此镜像的目的为节省打包、开发环境配置时间，镜像已上传致 Docker Hub。可采用如下方式手动构建新镜像：
 
-构建方式：在 docker/develop_server/openeuler_develop_server（docker/develop_server/centos_develop_server） 目录下运行 ./build_base.bat(或者 ./build_base.sh)
+```shell
+cd /centos
+chmod +x ./build_base.sh && ./build_base.sh
 
-## openeuler_develop_server/centos_develop_server
+```
 
-openeuler_develop_server（centos_develop_server） 以 openeuler_develop_base（centos_develop_base） 为基础环境，集成了 TeamTalk 的开发环境，拆成两个镜像是为了避免 Dockerfile 修改后需要长时间的重复编译。本镜像 `1569663570/openeuler_develop_server（1569663570/centos_develop_server）` 已上传到 Docker Hub。
+## develop_server
 
-构建方式：在 docker/develop_server/openeuler_develop_server（或 docker/develop_server/centos_develop_server） 目录下运行 ./build_develop_server.bat(或者 ./build_develop_server.sh)
+develop_server 以 develop_base 为基础环境，可直接在 develop_server 镜像内进行服务端编译，镜像已上传致 Docker Hub。可采用如下方式手动构建新镜像：
+
+```shell
+cd /centos
+chmod +x ./build_develop_server.sh && ./build_develop_server.sh
+```
+
+
+
 
 ## openeuler/centos
 

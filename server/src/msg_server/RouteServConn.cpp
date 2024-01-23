@@ -409,7 +409,7 @@ void CRouteServConn::_HandleUsersStatusResponse(CImPdu* pPdu)
         CHECK_PB_PARSE_MSG(msg3.ParseFromArray(attach_data.GetPdu(), attach_data.GetPduLength()));
         uint32_t handle = attach_data.GetHandle();
         
-        IM::BaseDefine::FileType trans_mode = IM::BaseDefine::FILE_TYPE_OFFLINE;
+        IM::BaseDefine::XFileType trans_mode = IM::BaseDefine::FILE_TYPE_OFFLINE;
         if (user_stat.status() == IM::BaseDefine::USER_STATUS_ONLINE)
         {
             trans_mode = IM::BaseDefine::FILE_TYPE_ONLINE;
