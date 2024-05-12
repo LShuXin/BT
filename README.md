@@ -5,7 +5,6 @@
 >
 > 强烈推荐看本项目之前先详细学习一下[张远龙](https://github.com/balloonwj)所著《C++ 服务器开发精髓》一书，本人最初阅读 TeamTalk 项目源码时并不具备 C++ 网络编程、多线程工作经验，所以阅读代码过程中遇到了很多问题，只能边读边查，导致进度缓慢，而且非常容易陷入到细节中去导致无法对服务的整体架构有一个全面的了解。直到有幸收到好友赠送的《C++ 服务器开发精髓》一书，按照书中安排敲完一遍多线程编程、网络编程后再来看代码，发现此时基本不会陷入到技术细节中了，因为你会发现书中介绍的线程技术、网络编程都能在 TeamTalk 中找到影子，而且作者在书中多次提到了 TeamTalk。此外作者开发的 [flamingo](https://github.com/balloonwj/flamingo)是另一款开源 IM 系统，也是非常值得结合《C++ 服务器开发精髓》去读的。
 >
-> 
 >
 > 其它一些说明：
 >
@@ -17,8 +16,6 @@
 >
 > 暂时没有PC客户端的维护计划
 
-
-
 ## 一、项目介绍
 
 - 开源协议：[Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
@@ -26,15 +23,11 @@
 - 特点：开源与产品并重
 - 功能：可靠的消息传递机制；支持文字、图片、语音等富文本信息，支持文件收发等
 
-
-
 ## 二、分支说明
 
 - master 分支与 <https://gitee.com/CyrusZHou/TeamTalk> 项目 master 分支代码一致；
 
 - main、dev 分支为我本人维护的分支
-
-
 
 ## 三、项目架构
 
@@ -88,6 +81,8 @@ docker-compose -f "docker-compose-build-centos.yml" up -d --build
 计划中
 
 ## 五、客户端
+
+> 2024年5月12日添加 core_proxy_server, 客户端只需要知道反向代理服务器地址即可
 
 ### 5.1 IOS
 
@@ -146,6 +141,7 @@ docker-compose -f "docker-compose-build-centos.yml" up -d --build
 - [ ] 提供基于 Docker(Openeuler) 的解决方案
 - [ ] 提供基于 Docker(Debian) 的解决方案
 - [ ] 提供基于 Docker(Ubantu) 的解决方案
+- [x] 添加反向代理服务器
 - [ ] 提供 K8S 部署方案
 - [x] 升级 Android 到 API 29
 - [x] 解决 Android 上无法登录
@@ -155,7 +151,7 @@ docker-compose -f "docker-compose-build-centos.yml" up -d --build
 - [ ] 解决 Android 布局问题
 - [x] 升级 IOS 到 IOS 11
 - [x] 升级 IOS PB 到 3.x 版本
-- [ ] 解决 IOS 上的布局适配问题
+- [ ] 解决 IOS 上的布局适配问题，去掉所有xib布局文件
 - [ ] 解决图片服务器连接问题
 - [ ] Win 客户端验证（x）
 - [ ] Mac 客户端验证（x）
@@ -176,6 +172,9 @@ docker-compose -f "docker-compose-build-centos.yml" up -d --build
 - [ ] 添加内网论坛功能
 - [ ] 添加用户个人注册功能
 - [ ] 服务端各个服务之间线程类、缓冲区管理类等若干重复定义代码中优化
+- [ ] 将登录服务单独抽离，采用 http 服务实现登录授权
+- [ ] 添加 discover_server
+- [ ] 将 msg_server 的负载均衡交给 nginx
 - [ ] 对照 flamingo 重构代码
 
 ## 八、参考链接

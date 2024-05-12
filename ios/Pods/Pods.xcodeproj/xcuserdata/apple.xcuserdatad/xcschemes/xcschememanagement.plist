@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FMDB-FMDB.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FMDB.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -39,7 +44,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-TeamTalk.xcscheme</key>
+		<key>Pods-BigTalk.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

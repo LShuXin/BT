@@ -1,0 +1,1 @@
+docker build -t core_proxy_server:latest -f Dockerfile ../../
