@@ -60,7 +60,7 @@
 
 - (void)updateFrame:(CGSize)size
 {
-    CGFloat r = radius+ (lineWidth/2);
+    CGFloat r = radius+(lineWidth/2);
     
     CGFloat originX = size.width - (2*r) - 5;
     CGFloat originY = (size.height - (2*r))/2;
@@ -71,7 +71,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    UIBezierPath* aPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(radius+ (lineWidth/2), radius+ (lineWidth/2))
+    UIBezierPath* aPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(radius+(lineWidth/2), radius+(lineWidth/2))
                                                          radius:radius
                                                      startAngle:DEGREES_TO_RADIANS(START_DEGREE_OFFSET)
                                                        endAngle:DEGREES_TO_RADIANS(currentAngle)
