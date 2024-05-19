@@ -402,7 +402,7 @@
     }];
 }
 
--(void)deleteMesagesBySessionId:(NSString *)sessionId completion:(DeleteSessionCompletion)completion
+-(void)deleteMessagesBySessionId:(NSString *)sessionId completion:(DeleteSessionCompletion)completion
 {
     [_dataBaseQueue inDatabase:^(FMDatabase *db) {
         NSString *sqlString = [NSString stringWithFormat:@"DELETE FROM %@ WHERE session_id = ?", TABLE_MESSAGES];
@@ -413,7 +413,7 @@
     }];
 }
 
--(void)deleteMessage:(BTMessageEntity *)message completion:(DeleteSessionCompletion)completion
+-(void)deleteMessages:(BTMessageEntity *)message completion:(DeleteSessionCompletion)completion
 {
     [_dataBaseQueue inDatabase:^(FMDatabase *db) {
         NSString *sqlString = [NSString stringWithFormat:@"DELETE FROM %@ WHERE msg_id = ?", TABLE_MESSAGES];

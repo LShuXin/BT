@@ -39,8 +39,8 @@
                                 if (group)
                                 {
                                     [self addGroup:group];
-                                    [[BTDatabaseUtil instance] updateRecentGroup:group completion:^(NSError *error) {
-                                        BTLog(@"insert group to database error.");
+                                    [[BTDatabaseUtil instance] updateGroup:group completion:^(NSError *error) {
+                                        BTLog(@"insert group into database error");
                                     }];
                                 }
                             }
@@ -114,7 +114,7 @@
                     if (group)
                     {
                         [self addGroup:group];
-                        [[BTDatabaseUtil instance] updateRecentGroup:group completion:^(NSError *error) {
+                        [[BTDatabaseUtil instance] updateGroup:group completion:^(NSError *error) {
                             BTLog(@"insert group to database error.");
                         }];
                     }

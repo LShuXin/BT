@@ -12,12 +12,12 @@
 
 -(int)responseServiceID
 {
-    return SERVICE_GROUP;
+    return SID_GROUP;
 }
 
 -(int)responseCommandID
 {
-    return CMD_ID_GROUP_CHANGE_GROUP_REQ;
+    return CID_CHANGE_GROUP_REQ;
 }
 
 -(UnrequestAPIAnalysis)unrequestAnalysis

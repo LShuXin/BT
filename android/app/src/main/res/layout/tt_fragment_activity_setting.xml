@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.mogujie.tt.ui.fragment.SettingFragment"
+        android:name="com.lsx.bigtalk.ui.fragment.SettingFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

@@ -1,18 +1,12 @@
 //
 //  PlayerManager.m
-//  OggSpeex
-//
-//  Created by Jiang Chuncheng on 6/25/13.
-//  Copyright (c) 2013 Sense Force. All rights reserved.
 //
 
 #import "PlayerManager.h"
 
-@interface PlayerManager ()
-
-- (void)startProximityMonitering;  //开启距离感应器监听(开始播放时)
-- (void)stopProximityMonitering;   //关闭距离感应器监听(播放完成时)
-
+@interface PlayerManager()
+-(void)startProximityMonitering;  //开启距离感应器监听(开始播放时)
+-(void)stopProximityMonitering;   //关闭距离感应器监听(播放完成时)
 @end
 
 @implementation PlayerManager
@@ -24,32 +18,21 @@
 
 static PlayerManager *mPlayerManager = nil;
 
-+ (PlayerManager *)sharedManager {
++(PlayerManager *)sharedManager
+{
     static PlayerManager *g_playerManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         g_playerManager = [[PlayerManager alloc] init];
     });
     return g_playerManager;
-//    @synchronized(self) {
-//        if (mPlayerManager == nil)
-//        {
-//            mPlayerManager = [[PlayerManager alloc] init];
-//            
-//            [[NSNotificationCenter defaultCenter] addObserver:mPlayerManager
-//                                                     selector:@selector(sensorStateChange:)
-//                                                         name:@"UIDeviceProximityStateDidChangeNotification"
-//                                                       object:nil];
-//        }
-//    }
-//    return mPlayerManager;
 }
 
-+ (id)allocWithZone:(NSZone *)zone
++(id)allocWithZone:(NSZone *)zone
 {
     @synchronized(self)
     {
-        if(mPlayerManager == nil)
+        if (mPlayerManager == nil)
         {
             mPlayerManager = [super allocWithZone:zone];
             return mPlayerManager;
@@ -59,33 +42,45 @@ static PlayerManager *mPlayerManager = nil;
     return nil;
 }
 
-- (id)init {
-    if (self = [super init]) {
+-(id)init
+{
+    if (self = [super init])
+    {
         
         [[NSNotificationCenter defaultCenter] addObserver:mPlayerManager
                                                  selector:@selector(sensorStateChange:)
                                                      name:@"UIDeviceProximityStateDidChangeNotification"
                                                    object:nil];
         
-        //初始化播放器的时候如下设置
-        UInt32 sessionCategory = kAudioSessionCategory_MediaPlayback;
-        AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);
-        UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
-        AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(audioRouteOverride), &audioRouteOverride);
-        
         AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-        //默认情况下扬声器播放
-        [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
-        [audioSession setActive:YES error:nil];
+        NSError *error = nil;
+
+        if (![audioSession setCategory:AVAudioSessionCategoryPlayback error:&error])
+        {
+            NSLog(@"error occurred while setting audio session category: %@", error.localizedDescription);
+        }
+
+        if (![audioSession setActive:YES error:&error])
+        {
+            NSLog(@"error occurred while activating audio session: %@", error.localizedDescription);
+        }
+
+        if (![audioSession overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:&error])
+        {
+            NSLog(@"error occurred while overriding audio output port: %@", error.localizedDescription);
+        }
     }
     return self;
 }
 
-- (void)playAudioWithFileName:(NSString *)filename delegate:(id<PlayingDelegate>)newDelegate {
-    if ( ! filename) {
+-(void)playAudioWithFileName:(NSString *)filename delegate:(id<PlayingDelegate>)newDelegate
+{
+    if (!filename)
+    {
         return;
     }
-    if ([filename rangeOfString:@".spx"].location != NSNotFound) {
+    if ([filename rangeOfString:@".spx"].location != NSNotFound)
+    {
         [[AVAudioSession sharedInstance] setActive:YES error:nil];
         
         [self stopPlaying];
@@ -98,10 +93,11 @@ static PlayerManager *mPlayerManager = nil;
         [self startProximityMonitering];
         _playingFileName = [filename copy];
         [self.decapsulator play];
-        
     }
-    else if ([filename rangeOfString:@".mp3"].location != NSNotFound) {
-        if ( ! [[NSFileManager defaultManager] fileExistsAtPath:filename]) {
+    else if ([filename rangeOfString:@".mp3"].location != NSNotFound)
+    {
+        if ( ! [[NSFileManager defaultManager] fileExistsAtPath:filename])
+        {
             NSLog(@"要播放的文件不存在:%@", filename);
             _playingFileName = nil;
             [self.delegate playingStoped];
@@ -130,20 +126,22 @@ static PlayerManager *mPlayerManager = nil;
     }
 }
 
-- (void)playAudioWithFileName:(NSString *)filename playerType:(PlayerType)type delegate:(id<PlayingDelegate>)newDelegate
+-(void)playAudioWithFileName:(NSString *)filename playerType:(PlayerType)type delegate:(id<PlayingDelegate>)newDelegate
 {
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
-    if ([filename rangeOfString:@".spx"].location != NSNotFound) {
+    if ([filename rangeOfString:@".spx"].location != NSNotFound)
+    {
         [self stopPlaying];
         self.delegate = newDelegate;
         
         self.decapsulator = [[Decapsulator alloc] initWithFileName:filename];
         self.decapsulator.delegate = self;
         [self.decapsulator play];
-        
     }
-    else if ([filename rangeOfString:@".mp3"].location != NSNotFound) {
-        if ( ! [[NSFileManager defaultManager] fileExistsAtPath:filename]) {
+    else if ([filename rangeOfString:@".mp3"].location != NSNotFound)
+    {
+        if (![[NSFileManager defaultManager] fileExistsAtPath:filename])
+        {
             NSLog(@"要播放的文件不存在:%@", filename);
             _playingFileName = nil;
             [self.delegate playingStoped];
@@ -156,60 +154,68 @@ static PlayerManager *mPlayerManager = nil;
         
         NSError *error;
         self.avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:filename] error:&error];
-        if (self.avAudioPlayer) {
+        if (self.avAudioPlayer)
+        {
             self.avAudioPlayer.delegate = self;
             [self.avAudioPlayer play];
         }
-        else {
-            _playingFileName = nil;
-            [self.delegate playingStoped];
-        }
-    }else if([filename rangeOfString:@".caf"].location != NSNotFound)
-    {
-        //        if ( ! [[NSFileManager defaultManager] fileExistsAtPath:filename]) {
-        //            NSLog(@"要播放的文件不存在:%@", filename);
-        //            [self.delegate playingStoped];
-        //            [newDelegate playingStoped];
-        //            return;
-        //        }
-        _playingFileName = nil;
-        [self.delegate playingStoped];
-        self.delegate = newDelegate;
-        
-        NSError *error;
-        NSArray *array  =[filename componentsSeparatedByString:@"."];
-        NSString *bundlePath=[[NSBundle mainBundle]pathForResource:@"Resource" ofType:@"bundle"];
-        NSBundle *bundle=[NSBundle bundleWithPath:bundlePath];
-        NSString *soundPath=[bundle pathForResource:array[0] ofType:@"caf"inDirectory:nil];
-        if (soundPath ==nil) {
-            NSLog(@"要播放的文件不存在:%@", filename);
-            [self.delegate playingStoped];
-            [newDelegate playingStoped];
-            return;
-        }
-        NSURL *soundUrl=[[NSURL alloc] initFileURLWithPath:soundPath];
-        self.avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:&error];
-        if (self.avAudioPlayer) {
-            self.avAudioPlayer.delegate = self;
-            [self.avAudioPlayer play];
-        }
-        else {
+        else
+        {
             _playingFileName = nil;
             [self.delegate playingStoped];
         }
     }
-    else {
+    else if ([filename rangeOfString:@".caf"].location != NSNotFound)
+    {
+        _playingFileName = nil;
+        [self.delegate playingStoped];
+        self.delegate = newDelegate;
+        
+        NSArray *pathComponents = [filename componentsSeparatedByString:@"."];
+        NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:[pathComponents objectAtIndex:0] ofType:@"caf"];
+        if (soundFilePath == nil)
+        {
+            NSLog(@"audio file does not exists: %@", filename);
+            [self.delegate playingStoped];
+            [newDelegate playingStoped];
+            return;
+        }
+        
+        NSURL *soundUrl = [NSURL fileURLWithPath:soundFilePath];
+        NSError *error;
+        self.avAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:&error];
+        if (error)
+        {
+            BTLog(@"init AVAudioPlayer failed: %@", error);
+            return;
+        }
+
+
+        if (self.avAudioPlayer)
+        {
+            self.avAudioPlayer.delegate = self;
+            [self.avAudioPlayer prepareToPlay];
+            [self.avAudioPlayer play];
+        }
+        else
+        {
+            _playingFileName = nil;
+            [self.delegate playingStoped];
+        }
+    }
+    else
+    {
         _playingFileName = nil;
         [self.delegate playingStoped];
     }
     
     switch (type)
     {
-        case DDEarPhone:
+        case EarPhone:
             //听筒
             [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
             break;
-        case DDSpeaker:
+        case Speaker:
             //扬声器
             [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
             break;

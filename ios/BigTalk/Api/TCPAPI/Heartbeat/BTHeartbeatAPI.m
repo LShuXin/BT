@@ -15,22 +15,22 @@
 
 -(int)requestServiceID
 {
-    return DDHEARTBEAT_SID;
-}
-
--(int)responseServiceID
-{
-    return DDHEARTBEAT_SID;
+    return SID_HEARTBEAT;
 }
 
 -(int)requestCommandID
 {
-    return REQ_CID;
+    return CID_HEARTBEAT_REQ;
+}
+
+-(int)responseServiceID
+{
+    return SID_HEARTBEAT;
 }
 
 -(int)responseCommandID
 {
-    return RES_CID;
+    return CID_HEARTBEAT_RES;
 }
 
 -(Analysis)analysisReturnData
@@ -47,8 +47,8 @@
         IMHeartBeat *heartBeat = [[IMHeartBeat alloc] init];
         BTDataOutputStream *outputStream = [[BTDataOutputStream alloc] init];
         [outputStream writeInt:0];
-        [outputStream writeTcpProtocolHeaderUseServiceID:DDHEARTBEAT_SID
-                                               commandID:REQ_CID
+        [outputStream writeTcpProtocolHeaderUseServiceID:SID_HEARTBEAT
+                                               commandID:CID_HEARTBEAT_REQ
                                                    seqNo:seqNo];
         [outputStream directWriteBytes:[heartBeat data]];
         [outputStream writeDataCount];

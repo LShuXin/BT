@@ -17,17 +17,17 @@
 
 -(int)requestServiceID
 {
-    return MODULE_ID_FRIENDLIST;
-}
-
--(int)responseServiceID
-{
-    return MODULE_ID_FRIENDLIST;
+    return SID_MESSAGE;
 }
 
 -(int)requestCommandID
 {
     return 18;
+}
+
+-(int)responseServiceID
+{
+    return SID_MESSAGE;
 }
 
 -(int)responseCommandID
@@ -58,7 +58,7 @@
         IMUsersInfoReq *userInfoReq = [[IMUsersInfoReq alloc] init];
         [userInfoReq setUserId:0];
         [userInfoReq setUserIdListArray:users];
-        [outputStream writeTcpProtocolHeaderUseServiceID:MODULE_ID_FRIENDLIST
+        [outputStream writeTcpProtocolHeaderUseServiceID:SID_MESSAGE
                                                commandID:18
                                                    seqNo:seqNo];
         [outputStream writeBytes:[userInfoReq data]];

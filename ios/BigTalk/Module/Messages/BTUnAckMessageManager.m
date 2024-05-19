@@ -70,11 +70,10 @@
 
 -(void)addMessageToUnAckQueue:(BTMessageEntity *)message
 {
-    NSLog(@"add message to unack queue %lu, %@", message.msgId, [message description]);
+    BTLog(@"add message to unAck queue, message id: %lu, message description: %@", message.msgId, [message description]);
     MessageAndTime *msgAndTime = [MessageAndTime new];
     msgAndTime.msg = message;
     msgAndTime.nowDate = [[NSDate date] timeIntervalSince1970];
-    NSLog(@"%lu", msgAndTime.nowDate);
     if (self.msgDic)
     {
         [self.msgDic setObject:msgAndTime forKey:@(message.msgId)];
@@ -88,7 +87,7 @@
         NSUInteger msgTimeOut = obj.nowDate + MESSAGE_TIMEOUT_SEC;
         if (timeNow >= msgTimeOut)
         {
-            NSLog(@"timeout time is %lu, msg id is %lu", msgTimeOut, obj.msg.msgId);
+            NSLog(@"message timeout, because the message was not acked by server in %lu, the message id is %lu", msgTimeOut, obj.msg.msgId);
             obj.msg.state = MSG_SEND_FAILURE;
             [[BTDatabaseUtil instance] updateMessage:obj.msg completion:^(BOOL result) {
                 

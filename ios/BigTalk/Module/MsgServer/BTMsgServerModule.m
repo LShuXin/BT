@@ -50,14 +50,13 @@ typedef void(^CheckSuccess)(id object);
         NSArray *parameter = @[userId, password, clientVersion, clientType];
         
         BTLoginMsgServerAPI *api = [[BTLoginMsgServerAPI alloc] init];
-        BTLog(@"登录参数：%@", parameter);
+        BTLog(@"login to msg_server, the params is: \n%@", parameter);
         [api requestWithObject:parameter completion:^(id response, NSError *error) {
             if (!error)
             {
                 if (response)
                 {
                     NSString *resultString = response[@"resultString"];
-                    BTLog(@"msg_server auth result: %@", resultString);
                     if (resultString == nil)
                     {
                          BTLog(@"login msg_server success");

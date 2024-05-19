@@ -1,3 +1,11 @@
+/*
+ * @LastEditors: liushuxin
+ * @LastEditTime: 2024-05-19 22:46:56
+ * @FilePath: /BT/ios/BigTalk/Entity/BTMessageEntity.h
+ * @Description: 
+ * 
+ * Copyright (c) 2024 by liushuxina@gmail.com All Rights Reserved. 
+ */
 //
 //  BTMessageEntity.h
 //
@@ -40,8 +48,8 @@ typedef NS_ENUM(NSUInteger, BTMessageState)
 #define kBTVoiceLength                    @"voiceLength"
 #define kBTVoicePlayed                    @"voicePlayed"
 
-#define kBTImageLocal                     @"local"
-#define kBTImageUrl                       @"url"
+#define kBTImageLocalPath                 @"local"
+#define kBTImageRemoteUrl                 @"url"
 
 
 @interface BTMessageEntity : NSObject

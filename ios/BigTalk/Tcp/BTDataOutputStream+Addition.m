@@ -16,7 +16,6 @@
     [self writeShort:0];
     [self writeShort:servieID];
     [self writeShort:commandID];
-    // [self writeShort:0];
     [self writeShort:seqNo];
     [self writeShort:1];
 }

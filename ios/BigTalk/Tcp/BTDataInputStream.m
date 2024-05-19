@@ -117,7 +117,7 @@
 
 -(NSData*)readDataWithLength:(int)len
 {
-    BTLog(@"================>>>> lenght: %ld len:%d", (long)length, len);
+    // BTLog(@"================>>>> lenght: %ld len:%d", (long)length, len);
     NSData* d = [data subdataWithRange:NSMakeRange(length, len)];
     length = length + len;
     return d;
@@ -125,10 +125,7 @@
 
 -(NSData*)readLeftData
 {
-    BTLog(@"=====>>> length %ld data's length %ld",
-          (long)length,
-          (unsigned long)[data length]);
-    
+    //BTLog(@"=====>>> length %ld data's length %ld", (long)length, (unsigned long)[data length]);
     if ([data length] > length)
     {
         NSData* d = [data subdataWithRange:NSMakeRange(length, [data length])];

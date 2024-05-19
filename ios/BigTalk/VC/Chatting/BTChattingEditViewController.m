@@ -170,7 +170,7 @@
             [self.collectionView reloadData];
             self.group=response;
             //[[BTGroupModule instance] addGroup:response];
-            [[BTDatabaseUtil instance] updateRecentGroup:response completion:^(NSError *error) {
+            [[BTDatabaseUtil instance] updateGroup:response completion:^(NSError *error) {
                 
             }];
         }
@@ -280,7 +280,7 @@
         BTEditGroupViewController *newEdit = [BTEditGroupViewController new];
         newEdit.session = self.session;
         newEdit.group = self.group;
-        newEdit.isCreat = self.group.objId ? NO : YES;
+        newEdit.isCreate = self.group.objId ? NO : YES;
         newEdit.users = self.items;
         newEdit.editController = self;
         [self.navigationController pushViewController:newEdit animated:YES];
@@ -389,7 +389,7 @@
             return ;
         }
         self.group.isShield=!self.group.isShield;
-        [[BTDatabaseUtil instance] updateRecentGroup:self.group completion:^(NSError *error) {
+        [[BTDatabaseUtil instance] updateGroup:self.group completion:^(NSError *error) {
             
         }];
     }];

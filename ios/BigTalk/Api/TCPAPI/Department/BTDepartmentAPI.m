@@ -17,14 +17,14 @@
     return 2;
 }
 
--(int)responseServiceID
-{
-    return 2;
-}
-
 -(int)requestCommandID
 {
     return 18;
+}
+
+-(int)responseServiceID
+{
+    return 2;
 }
 
 -(int)responseCommandID

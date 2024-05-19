@@ -15,17 +15,17 @@
 
 -(int)requestServiceID
 {
-    return DDSERVICE_MESSAGE;
-}
-
--(int)responseServiceID
-{
-    return 0;
+    return SID_MESSAGE;
 }
 
 -(int)requestCommandID
 {
     return CID_MSG_READ_ACK;
+}
+
+-(int)responseServiceID
+{
+    return 0;
 }
 
 -(int)responseCommandID
@@ -54,7 +54,7 @@
         
         BTDataOutputStream *outputStream = [[BTDataOutputStream alloc] init];
         [outputStream writeInt:0];
-        [outputStream writeTcpProtocolHeaderUseServiceID:DDSERVICE_MESSAGE
+        [outputStream writeTcpProtocolHeaderUseServiceID:SID_MESSAGE
                                                commandID:CID_MSG_READ_ACK
                                                    seqNo:seqNo];
         [outputStream directWriteBytes:[readAck data]];

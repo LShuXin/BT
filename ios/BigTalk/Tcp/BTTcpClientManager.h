@@ -11,12 +11,14 @@
 {
 @private
     NSInputStream *_inStream;
-    NSOutputStream *_outStream;
     NSLock *_receiveLock;
 	NSMutableData *_receiveBuffer;
+    
+    NSOutputStream *_outStream;
     NSLock *_sendLock;
 	NSMutableArray *_sendBuffers;
 	BTSendBuffer *_lastSendBuffer;
+    
 	BOOL _noDataSent;
     int32_t cDataLen;
 }

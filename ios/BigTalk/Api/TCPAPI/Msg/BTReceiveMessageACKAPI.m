@@ -15,22 +15,22 @@
 
 -(int)requestServiceID
 {
-    return DDSERVICE_MESSAGE;
-}
-
--(int)responseServiceID
-{
-    return DDSERVICE_MESSAGE;
+    return SID_MESSAGE;
 }
 
 -(int)requestCommandID
 {
-    return DDCMD_MSG_RECEIVE_DATA_ACK;
+    return CID_MSG_DATA_ACK;
+}
+
+-(int)responseServiceID
+{
+    return SID_MESSAGE;
 }
 
 -(int)responseCommandID
 {
-    return DDCMD_MSG_RECEIVE_DATA_ACK;
+    return CID_MSG_DATA_ACK;
 }
 
 -(Analysis)analysisReturnData
@@ -53,8 +53,8 @@
         [dataAck setSessionType:[array[3] integerValue]];
 
         [outputStream writeInt:0];
-        [outputStream writeTcpProtocolHeaderUseServiceID:DDSERVICE_MESSAGE
-                                               commandID:DDCMD_MSG_RECEIVE_DATA_ACK
+        [outputStream writeTcpProtocolHeaderUseServiceID:SID_MESSAGE
+                                               commandID:CID_MSG_DATA_ACK
                                                    seqNo:seqNo];
         [outputStream directWriteBytes:[dataAck data]];
         [outputStream writeDataCount];

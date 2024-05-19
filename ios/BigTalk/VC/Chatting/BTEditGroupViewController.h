@@ -8,8 +8,6 @@
 
 
 @class BTSessionEntity;
-typedef void(^RefreshBlock)(NSString *sessionId);
-
 
 @interface BTEditGroupViewController : BTRootViewController<UISearchBarDelegate,
                                                             UISearchDisplayDelegate,
@@ -21,7 +19,7 @@ typedef void(^RefreshBlock)(NSString *sessionId);
 @property(copy)NSString *sessionId;
 @property(strong)BTSessionEntity *session;
 @property(assign)BOOL isGroupCreator;
-@property(assign)BOOL isCreat;
+@property(assign)BOOL isCreate;
 @property(weak)BTGroupEntity *group;
 @property(strong)BTChattingEditViewController *editController;
 @end

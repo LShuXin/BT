@@ -15,17 +15,17 @@
 
 -(int)requestServiceID
 {
-    return SERVICE_GROUP;
-}
-
--(int)responseServiceID
-{
-    return SERVICE_GROUP;
+    return SID_GROUP;
 }
 
 -(int)requestCommandID
 {
     return CID_GROUP_SHIELD_GROUP_REQUEST;
+}
+
+-(int)responseServiceID
+{
+    return SID_GROUP;
 }
 
 -(int)responseCommandID
@@ -55,7 +55,7 @@
         
         BTDataOutputStream *outputStream = [[BTDataOutputStream alloc] init];
         [outputStream writeInt:0];
-        [outputStream writeTcpProtocolHeaderUseServiceID:SERVICE_GROUP
+        [outputStream writeTcpProtocolHeaderUseServiceID:SID_GROUP
                                                commandID:CID_GROUP_SHIELD_GROUP_REQUEST
                                   seqNo:seqNo];
         [outputStream directWriteBytes:[groupShield data]];

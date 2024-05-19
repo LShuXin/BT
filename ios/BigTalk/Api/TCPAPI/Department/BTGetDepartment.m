@@ -13,25 +13,24 @@
     return TimeOutTimeInterval;
 }
 
-
 -(int)requestServiceID
 {
-    return MODULE_ID_SESSION;
-}
-
--(int)responseServiceID
-{
-    return MODULE_ID_SESSION;
+    return SID_SESSION;
 }
 
 -(int)requestCommandID
 {
-    return DEPARTINFO_REQ;
+    return CID_DEPARTINFO_REQ;
+}
+
+-(int)responseServiceID
+{
+    return SID_SESSION;
 }
 
 -(int)responseCommandID
 {
-    return DEPARTINFO_RES;
+    return CID_DEPARTINFO_RES;
 }
 
 -(Analysis)analysisReturnData
@@ -60,8 +59,8 @@
         [req setLatestUpdateTime:[array[0] integerValue]];
         BTDataOutputStream *outputStream = [[BTDataOutputStream alloc] init];
         [outputStream writeInt:0];
-        [outputStream writeTcpProtocolHeaderUseServiceID:MODULE_ID_SESSION
-                                               commandID:DEPARTINFO_REQ
+        [outputStream writeTcpProtocolHeaderUseServiceID:SID_SESSION
+                                               commandID:CID_DEPARTINFO_REQ
                                                    seqNo:seqNo];
         [outputStream directWriteBytes:[req data]];
         [outputStream writeDataCount];

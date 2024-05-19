@@ -23,22 +23,22 @@
 
 -(int)requestServiceID
 {
-    return DDSERVICE_MESSAGE;
-}
-
--(int)responseServiceID
-{
-    return DDSERVICE_MESSAGE;
+    return SID_MESSAGE;
 }
 
 -(int)requestCommandID
 {
-    return CID_MSG_UNREAD_CNT_REQUEST;
+    return CID_MSG_UNREAD_CNT_REQ;
+}
+
+-(int)responseServiceID
+{
+    return SID_MESSAGE;
 }
 
 -(int)responseCommandID
 {
-    return CID_MSG_UNREAD_CNT_RESPONSE;
+    return CID_MSG_UNREAD_CNT_RES;
 }
 
 -(Analysis)analysisReturnData
@@ -87,8 +87,8 @@
         [unreadReq setUserId:0];
         BTDataOutputStream *outputStream  = [[BTDataOutputStream alloc] init];
         [outputStream writeInt:0];
-        [outputStream writeTcpProtocolHeaderUseServiceID:DDSERVICE_MESSAGE
-                                               commandID:CID_MSG_UNREAD_CNT_REQUEST
+        [outputStream writeTcpProtocolHeaderUseServiceID:SID_MESSAGE
+                                               commandID:CID_MSG_UNREAD_CNT_REQ
                                                    seqNo:seqNo];
         [outputStream directWriteBytes:[unreadReq data]];
         [outputStream writeDataCount];

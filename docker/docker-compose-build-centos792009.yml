@@ -1,5 +1,7 @@
+# 这一行指定了 Docker Compose 文件的版本。版本号 3.8 是 Docker Compose 文件格式的版本，它决定了文件的语法和支持的功能。
 version: "3.8"
 
+# 这是一个服务定义的部分，其中包含了多个服务的配置信息。
 services:
   develop_server:
     image: 1569663570/centos792009_develop_server

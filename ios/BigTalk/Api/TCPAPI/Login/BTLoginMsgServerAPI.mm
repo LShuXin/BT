@@ -19,22 +19,22 @@
 
 -(int)requestServiceID
 {
-    return DDSERVICE_LOGIN;
-}
-
--(int)responseServiceID
-{
-    return DDSERVICE_LOGIN;
+    return SID_LOGIN;
 }
 
 -(int)requestCommandID
 {
-    return DDCMD_LOGIN_REQ_USERLOGIN;
+    return CID_LOGIN_REQ;
+}
+
+-(int)responseServiceID
+{
+    return SID_LOGIN;
 }
 
 -(int)responseCommandID
 {
-    return DDCMD_LOGIN_RES_USERLOGIN;
+    return CID_LOGIN_RES;
 }
 
 -(Analysis)analysisReturnData
@@ -74,8 +74,8 @@
        
         BTDataOutputStream *outputStream = [[BTDataOutputStream alloc] init];
         [outputStream writeInt:0];
-        [outputStream writeTcpProtocolHeaderUseServiceID:DDSERVICE_LOGIN
-                                               commandID:DDCMD_LOGIN_REQ_USERLOGIN
+        [outputStream writeTcpProtocolHeaderUseServiceID:SID_LOGIN
+                                               commandID:CID_LOGIN_REQ
                                                    seqNo:seqNo];
 
         IMLoginReq *login = [[IMLoginReq alloc] init];

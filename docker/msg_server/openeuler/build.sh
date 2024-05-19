@@ -1,1 +1,0 @@
-docker build -t 1569663570/openeuler_msg_server:latest -f Dockerfile ../../../

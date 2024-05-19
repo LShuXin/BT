@@ -13,7 +13,6 @@
 #import "BTEmotionsViewController.h"
 #import "BTPublicDefine.h"
 
-typedef void(^TimeCellAddBlock)(bool isok);
 @class BTChatUtilityViewController;
 @class BTEmotionsViewController;
 @class BTSessionEntity;
@@ -21,16 +20,16 @@ typedef void(^TimeCellAddBlock)(bool isok);
 
 
 @interface BTChattingMainViewController : UIViewController<UITextViewDelegate,
-                                                        JSMessageInputViewDelegate,
-                                                        UITableViewDataSource,
-                                                        UITableViewDelegate,
-                                                        RecordingDelegate,
-                                                        PlayingDelegate,
-                                                        UIScrollViewDelegate,
-                                                        UIGestureRecognizerDelegate,
-                                                        UIAlertViewDelegate,
-                                                        BTEmotionsViewControllerDelegate,
-                                                        UINavigationControllerDelegate>
+                                                           JSMessageInputViewDelegate,
+                                                           UITableViewDataSource,
+                                                           UITableViewDelegate,
+                                                           RecordingDelegate,
+                                                           PlayingDelegate,
+                                                           UIScrollViewDelegate,
+                                                           UIGestureRecognizerDelegate,
+                                                           UIAlertViewDelegate,
+                                                           BTEmotionsViewControllerDelegate,
+                                                           UINavigationControllerDelegate>
 {
     BTRecordingView *_recordingView;
 }
@@ -44,6 +43,7 @@ typedef void(^TimeCellAddBlock)(bool isok);
 @property(assign, nonatomic, readonly)UIEdgeInsets originalTableViewContentInset;
 @property(nonatomic, strong)UIRefreshControl *refreshControl;
 @property(assign)BOOL hadLoadHistory;
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 
 +(instancetype)shareInstance;
 
@@ -60,5 +60,5 @@ typedef void(^TimeCellAddBlock)(bool isok);
 
 
 @interface BTChattingMainViewController(ChattingInput)
-- (void)initialInput;
+-(void)initialInput;
 @end

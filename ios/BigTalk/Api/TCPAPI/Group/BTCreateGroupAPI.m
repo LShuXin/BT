@@ -17,23 +17,22 @@
 
 -(int)requestServiceID
 {
-    return SERVICE_GROUP;
+    return SID_GROUP;
+}
+
+-(int)requestCommandID
+{
+    return CID_CREATE_TMP_GROUP_REQ;
 }
 
 -(int)responseServiceID
 {
-    return SERVICE_GROUP;
-}
-
-
--(int)requestCommandID
-{
-    return CMD_ID_GROUP_CREATE_TMP_GROUP_REQ;
+    return SID_GROUP;
 }
 
 -(int)responseCommandID
 {
-    return CMD_ID_GROUP_CREATE_TMP_GROUP_RES;
+    return CID_CREATE_TMP_GROUP_RES;
 }
 
 -(Analysis)analysisReturnData
@@ -90,8 +89,8 @@
         [req setMemberIdListArray:pbUserIds];
         BTDataOutputStream *outputStream = [[BTDataOutputStream alloc] init];
         [outputStream writeInt:0];
-        [outputStream writeTcpProtocolHeaderUseServiceID:SERVICE_GROUP
-                                               commandID:CMD_ID_GROUP_CREATE_TMP_GROUP_REQ
+        [outputStream writeTcpProtocolHeaderUseServiceID:SID_GROUP
+                                               commandID:CID_CREATE_TMP_GROUP_REQ
                                                    seqNo:seqNo];
         [outputStream directWriteBytes:[req data]];
         [outputStream writeDataCount];

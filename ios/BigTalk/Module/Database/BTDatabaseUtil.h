@@ -76,12 +76,12 @@ typedef void(^InsertRecentContactsComplection)(NSError *error);
 -(void)insertContacts:(NSArray *)contacts completion:(InsertRecentContactsComplection)completion;
 -(void)getAllContacts:(LoadAllContactsComplection)completion;
 -(void)getContactByUserId:(NSString *)userId completion:(void(^)(BTUserEntity *user))completion;
--(void)updateRecentGroup:(BTGroupEntity *)group completion:(InsertRecentContactsComplection)completion;
+-(void)updateGroup:(BTGroupEntity *)group completion:(InsertRecentContactsComplection)completion;
 -(void)updateSession:(BTSessionEntity *)session completion:(InsertRecentContactsComplection)completion;
 -(void)loadAllGroupsCompletion:(LoadRecentContactsComplection)completion;
 -(void)loadAllSessionsCompletion:(LoadAllSessionsComplection)completion;
 -(void)removeSession:(NSString *)sessionId;
--(void)deleteMesages:(BTMessageEntity *)message completion:(DeleteSessionCompletion)completion;
+-(void)deleteMessages:(BTMessageEntity *)message completion:(DeleteSessionCompletion)completion;
 -(void)loadGroupByGroupIdCompletion:(NSString *)groupId completion:(LoadRecentContactsComplection)completion;
 // TODO
 -(void)getAllDepartmentsCompletion:(LoadAllContactsComplection)completion;

@@ -12,8 +12,8 @@
 
 typedef NS_ENUM(NSUInteger, PlayerType)
 {
-    DDEarPhone,
-    DDSpeaker
+    EarPhone,
+    Speaker
 };
 
 @protocol PlayingDelegate <NSObject>

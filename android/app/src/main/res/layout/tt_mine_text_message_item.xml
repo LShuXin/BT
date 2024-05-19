@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.mogujie.tt.ui.widget.message.TextRenderView
+<com.lsx.bigtalk.ui.widget.message.TextRenderView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -65,7 +65,7 @@
 
 
     <!-- 头像 -->
-    <com.mogujie.tt.ui.widget.IMBaseImageView
+    <com.lsx.bigtalk.ui.widget.IMBaseImageView
         android:id="@+id/user_portrait"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -73,4 +73,4 @@
         android:scaleType="centerCrop"
         android:src="@drawable/tt_default_user_portrait_corner" />
 
-</com.mogujie.tt.ui.widget.message.TextRenderView>
+</com.lsx.bigtalk.ui.widget.message.TextRenderView>

@@ -9,12 +9,12 @@
 @implementation BTMsgReadNotify
 -(int)responseServiceID
 {
-    return DDSERVICE_MESSAGE;
+    return SID_MESSAGE;
 }
 
 -(int)responseCommandID
 {
-    return MSG_MSG_READ_NOTIFY;
+    return CID_MSG_READ_NOTIFY;
 }
 
 -(UnrequestAPIAnalysis)unrequestAnalysis

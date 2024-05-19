@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/contactFragment"
-        android:name="com.mogujie.tt.ui.fragment.SearchFragment"
+        android:name="com.lsx.bigtalk.ui.fragment.SearchFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

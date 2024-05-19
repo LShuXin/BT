@@ -16,22 +16,22 @@
 
 -(int)requestServiceID
 {
-    return SERVICE_GROUP;
-}
-
--(int)responseServiceID
-{
-    return SERVICE_GROUP;
+    return SID_GROUP;
 }
 
 -(int)requestCommandID
 {
-    return CMD_ID_GROUP_USER_LIST_REQ;
+    return CID_GROUP_USER_LIST_REQ;
+}
+
+-(int)responseServiceID
+{
+    return SID_GROUP;
 }
 
 -(int)responseCommandID
 {
-    return CMD_ID_GROUP_USER_LIST_RES;
+    return CID_GROUP_USER_LIST_RES;
 }
 
 -(Analysis)analysisReturnData
@@ -63,8 +63,8 @@
         [groupInfoListReq setUserId:0];
         [groupInfoListReq setGroupVersionListArray:[NSMutableArray arrayWithObject:groupInfo]];
         [outputStream writeInt:0];
-        [outputStream writeTcpProtocolHeaderUseServiceID:SERVICE_GROUP
-                                               commandID:CMD_ID_GROUP_USER_LIST_REQ
+        [outputStream writeTcpProtocolHeaderUseServiceID:SID_GROUP
+                                               commandID:CID_GROUP_USER_LIST_REQ
                                                    seqNo:seqNo];
         [outputStream directWriteBytes:[groupInfoListReq data]];
         [outputStream writeDataCount];

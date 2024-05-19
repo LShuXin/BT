@@ -168,8 +168,8 @@ static float const minCellLength = 17;
     switch (self.location)
     {
         case BUBBLE_RIGHT:
-            _voiceImageView.left = self.bubbleImageView.left + [self contentLeftGapWithBubble];
-            [_timeLabel setFrame:CGRectMake(self.bubbleImageView.right + 5, 0, 20, 15)];
+            _voiceImageView.left = self.bubbleImageView.left + [self contentLeftGapWithBubble] + 6.0;
+            [_timeLabel setFrame:CGRectMake(_voiceImageView.right + 3, 0, 20, 15)];
             _timeLabel.centerY = self.bubbleImageView.centerY;
             [_timeLabel setTextAlignment:NSTextAlignmentLeft];
             
@@ -273,6 +273,12 @@ static float const minCellLength = 17;
     }
     [muData appendBytes:ch length:4];
     [muData appendData:data];
+    BTLog(@"send void message, data: %@, filePath: %@, sessionId: %@, isGroup: %d, message: %@",
+          muData,
+          filePath,
+          message.sessionId,
+          message.isGroupMessage,
+          message);
     [[BTMessageSendManager instance] sendVoiceMessage:muData
                                              filePath:filePath
                                             sessionId:message.sessionId
