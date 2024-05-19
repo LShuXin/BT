@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/webviewFragment"
-        android:name="com.mogujie.tt.ui.fragment.WebviewFragment"
+        android:name="com.lsx.bigtalk.ui.fragment.WebviewFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

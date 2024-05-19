@@ -1,6 +1,7 @@
 version: "3.8"
-  
+
 services:
+  # 应用程序的核心开发服务器
   develop_server:
     image: 1569663570/centos792009_develop_server
     restart: always
@@ -13,6 +14,10 @@ services:
       TZ: Asia/Shanghai
     extra_hosts:
       - "develop_server:6.1.0.2"
+      - "core_proxy_server:6.1.0.3"
+      - "web_server:6.1.0.6"
+      - "redis_server:6.1.0.7"
+      - "mariadb_server:6.1.0.8"
       - "login_server:6.1.0.10"
       - "msfs_server:6.1.0.11"      
       - "file_server:6.1.0.12"
@@ -21,10 +26,8 @@ services:
       - "route_server:6.1.0.15"
       - "db_proxy_server:6.1.0.16"
       - "msg_server:6.1.0.17"
-      - "web_server:6.1.0.6"
-      - "redis_server:6.1.0.7"
-      - "mariadb_server:6.1.0.8"
       
+  # 管理后台 web 服务
   web_server:
     image: 1569663570/centos792009_web_server
     restart: always
@@ -45,6 +48,10 @@ services:
       HTTP_URL: http_msg_server:8400    
     extra_hosts:
       - "develop_server:6.1.0.2"
+      - "core_proxy_server:6.1.0.3"
+      - "web_server:6.1.0.6"
+      - "redis_server:6.1.0.7"
+      - "mariadb_server:6.1.0.8"
       - "login_server:6.1.0.10"
       - "msfs_server:6.1.0.11"      
       - "file_server:6.1.0.12"
@@ -53,9 +60,6 @@ services:
       - "route_server:6.1.0.15"
       - "db_proxy_server:6.1.0.16"
       - "msg_server:6.1.0.17"
-      - "web_server:6.1.0.6"
-      - "redis_server:6.1.0.7"
-      - "mariadb_server:6.1.0.8"
     depends_on:      
       - develop_server
       - redis_server
@@ -78,6 +82,10 @@ services:
       WEB_SERVER: web_server
     extra_hosts:
       - "develop_server:6.1.0.2"
+      - "core_proxy_server:6.1.0.3"
+      - "web_server:6.1.0.6"
+      - "redis_server:6.1.0.7"
+      - "mariadb_server:6.1.0.8"
       - "login_server:6.1.0.10"
       - "msfs_server:6.1.0.11"      
       - "file_server:6.1.0.12"
@@ -86,11 +94,8 @@ services:
       - "route_server:6.1.0.15"
       - "db_proxy_server:6.1.0.16"
       - "msg_server:6.1.0.17"
-      - "web_server:6.1.0.6"
-      - "redis_server:6.1.0.7"
-      - "mariadb_server:6.1.0.8"
-    depends_on:    
-      - develop_server  
+    depends_on:
+      - develop_server
       - redis_server
       - mariadb_server
 
@@ -115,6 +120,10 @@ services:
       FILE_SERVER: file_server
     extra_hosts:
       - "develop_server:6.1.0.2"
+      - "core_proxy_server:6.1.0.3"
+      - "web_server:6.1.0.6"
+      - "redis_server:6.1.0.7"
+      - "mariadb_server:6.1.0.8"
       - "login_server:6.1.0.10"
       - "msfs_server:6.1.0.11"      
       - "file_server:6.1.0.12"
@@ -123,10 +132,7 @@ services:
       - "route_server:6.1.0.15"
       - "db_proxy_server:6.1.0.16"
       - "msg_server:6.1.0.17"
-      - "web_server:6.1.0.6"
-      - "redis_server:6.1.0.7"
-      - "mariadb_server:6.1.0.8"
-    depends_on:      
+    depends_on:
       - develop_server
       - redis_server
       - mariadb_server
@@ -155,6 +161,10 @@ services:
       GROUP_MEMBER_HOST: redis_server
     extra_hosts:
       - "develop_server:6.1.0.2"
+      - "core_proxy_server:6.1.0.3"
+      - "web_server:6.1.0.6"
+      - "redis_server:6.1.0.7"
+      - "mariadb_server:6.1.0.8"
       - "login_server:6.1.0.10"
       - "msfs_server:6.1.0.11"      
       - "file_server:6.1.0.12"
@@ -163,11 +173,8 @@ services:
       - "route_server:6.1.0.15"
       - "db_proxy_server:6.1.0.16"
       - "msg_server:6.1.0.17"
-      - "web_server:6.1.0.6"
-      - "redis_server:6.1.0.7"
-      - "mariadb_server:6.1.0.8"
-    depends_on:   
-      - develop_server   
+    depends_on:
+      - develop_server
       - redis_server
       - mariadb_server
 
@@ -185,6 +192,10 @@ services:
       TZ: Asia/Shanghai
     extra_hosts:
       - "develop_server:6.1.0.2"
+      - "core_proxy_server:6.1.0.3"
+      - "web_server:6.1.0.6"
+      - "redis_server:6.1.0.7"
+      - "mariadb_server:6.1.0.8"
       - "login_server:6.1.0.10"
       - "msfs_server:6.1.0.11"      
       - "file_server:6.1.0.12"
@@ -193,11 +204,8 @@ services:
       - "route_server:6.1.0.15"
       - "db_proxy_server:6.1.0.16"
       - "msg_server:6.1.0.17"
-      - "web_server:6.1.0.6"
-      - "redis_server:6.1.0.7"
-      - "mariadb_server:6.1.0.8"
     depends_on:
-      - develop_server    
+      - develop_server
       - redis_server
       - mariadb_server
 
@@ -217,6 +225,10 @@ services:
       ROUTE_SERVER_IP1: route_server
     extra_hosts:
       - "develop_server:6.1.0.2"
+      - "core_proxy_server:6.1.0.3"
+      - "web_server:6.1.0.6"
+      - "redis_server:6.1.0.7"
+      - "mariadb_server:6.1.0.8"
       - "login_server:6.1.0.10"
       - "msfs_server:6.1.0.11"      
       - "file_server:6.1.0.12"
@@ -225,10 +237,7 @@ services:
       - "route_server:6.1.0.15"
       - "db_proxy_server:6.1.0.16"
       - "msg_server:6.1.0.17"
-      - "web_server:6.1.0.6"
-      - "redis_server:6.1.0.7"
-      - "mariadb_server:6.1.0.8"
-    depends_on:      
+    depends_on:
       - develop_server
       - redis_server
       - mariadb_server
@@ -247,6 +256,10 @@ services:
       TZ: Asia/Shanghai
     extra_hosts:
       - "develop_server:6.1.0.2"
+      - "core_proxy_server:6.1.0.3"
+      - "web_server:6.1.0.6"
+      - "redis_server:6.1.0.7"
+      - "mariadb_server:6.1.0.8"
       - "login_server:6.1.0.10"
       - "msfs_server:6.1.0.11"      
       - "file_server:6.1.0.12"
@@ -255,11 +268,8 @@ services:
       - "route_server:6.1.0.15"
       - "db_proxy_server:6.1.0.16"
       - "msg_server:6.1.0.17"
-      - "web_server:6.1.0.6"
-      - "redis_server:6.1.0.7"
-      - "mariadb_server:6.1.0.8"
-    depends_on: 
-      - develop_server     
+    depends_on:
+      - develop_server
       - redis_server
       - mariadb_server
 
@@ -277,6 +287,10 @@ services:
       TZ: Asia/Shanghai
     extra_hosts:
       - "develop_server:6.1.0.2"
+      - "core_proxy_server:6.1.0.3"
+      - "web_server:6.1.0.6"
+      - "redis_server:6.1.0.7"
+      - "mariadb_server:6.1.0.8"
       - "login_server:6.1.0.10"
       - "msfs_server:6.1.0.11"      
       - "file_server:6.1.0.12"
@@ -285,11 +299,8 @@ services:
       - "route_server:6.1.0.15"
       - "db_proxy_server:6.1.0.16"
       - "msg_server:6.1.0.17"
-      - "web_server:6.1.0.6"
-      - "redis_server:6.1.0.7"
-      - "mariadb_server:6.1.0.8"
-    depends_on:  
-      - develop_server    
+    depends_on:
+      - develop_server
       - redis_server
       - mariadb_server
 
@@ -307,6 +318,10 @@ services:
       TZ: Asia/Shanghai
     extra_hosts:
       - "develop_server:6.1.0.2"
+      - "core_proxy_server:6.1.0.3"
+      - "web_server:6.1.0.6"
+      - "redis_server:6.1.0.7"
+      - "mariadb_server:6.1.0.8"
       - "login_server:6.1.0.10"
       - "msfs_server:6.1.0.11"      
       - "file_server:6.1.0.12"
@@ -315,11 +330,8 @@ services:
       - "route_server:6.1.0.15"
       - "db_proxy_server:6.1.0.16"
       - "msg_server:6.1.0.17"
-      - "web_server:6.1.0.6"
-      - "redis_server:6.1.0.7"
-      - "mariadb_server:6.1.0.8"
-    depends_on:  
-      - develop_server    
+    depends_on:
+      - develop_server
       - redis_server
       - mariadb_server
 
@@ -344,6 +356,10 @@ services:
       MARIADB_PASSWORD: teamtalk123@
     extra_hosts:
       - "develop_server:6.1.0.2"
+      - "core_proxy_server:6.1.0.3"
+      - "web_server:6.1.0.6"
+      - "redis_server:6.1.0.7"
+      - "mariadb_server:6.1.0.8"
       - "login_server:6.1.0.10"
       - "msfs_server:6.1.0.11"      
       - "file_server:6.1.0.12"
@@ -352,9 +368,6 @@ services:
       - "route_server:6.1.0.15"
       - "db_proxy_server:6.1.0.16"
       - "msg_server:6.1.0.17"
-      - "web_server:6.1.0.6"
-      - "redis_server:6.1.0.7"
-      - "mariadb_server:6.1.0.8"
 
   redis_server:
     image: 1569663570/centos792009_redis_server
@@ -371,6 +384,37 @@ services:
       BIND: 0.0.0.0
     extra_hosts:
       - "develop_server:6.1.0.2"
+      - "core_proxy_server:6.1.0.3"
+      - "web_server:6.1.0.6"
+      - "redis_server:6.1.0.7"
+      - "mariadb_server:6.1.0.8"
+      - "login_server:6.1.0.10"
+      - "msfs_server:6.1.0.11"      
+      - "file_server:6.1.0.12"
+      - "push_server:6.1.0.13"
+      - "http_msg_server:6.1.0.14"
+      - "route_server:6.1.0.15"
+      - "db_proxy_server:6.1.0.16"
+      - "msg_server:6.1.0.17"
+
+  core_proxy_server:
+    image: 1569663570/core_proxy_server
+    restart: always
+    container_name: core_proxy_server
+    hostname: core_proxy_server
+    networks:
+      teamtalk:
+        ipv4_address: 6.1.0.3
+    ports:
+      # 反向代理服务器对 http 请求进行转发的端口
+      - 80:80
+      # 反向代理服务器对 tcp 请求进行转发的端口
+      - 8081:8081
+    environment:
+      TZ: Asia/Shanghai
+    extra_hosts:
+      - "develop_server:6.1.0.2"
+      - "core_proxy_server:6.1.0.3"
       - "login_server:6.1.0.10"
       - "msfs_server:6.1.0.11"      
       - "file_server:6.1.0.12"
@@ -382,7 +426,21 @@ services:
       - "web_server:6.1.0.6"
       - "redis_server:6.1.0.7"
       - "mariadb_server:6.1.0.8"
+    depends_on:
+      - develop_server
+      - login_server
+      - msfs_server
+      - file_server
+      - push_server
+      - http_msg_server
+      - route_server
+      - db_proxy_server
+      - msg_server
+      - web_server
+      - redis_server
+      - mariadb_server
 
+# Docker 自定义网络，指定了该网络的子网和网关。每个服务都连接到这个网络，并分配了一个独特的 IPv4 地址，以便容器之间可以相互通信。
 networks:
   teamtalk:
     driver: bridge

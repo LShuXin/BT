@@ -16,9 +16,9 @@ static uint16_t theSeqNo = 0;
     theSeqNo++;
     _seqNo = theSeqNo;
     
-    BOOL registerAPI = [[BTAPISchedule instance] registerApi:(id<BTAPIScheduleProtocol>)self];
+    BOOL registerSuccess = [[BTAPISchedule instance] registerApi:(id<BTAPIScheduleProtocol>)self];
     
-    if (!registerAPI)
+    if (!registerSuccess)
     {
         return;
     }
@@ -38,7 +38,6 @@ static uint16_t theSeqNo = 0;
     // 发送
     if (requestData)
     {
-        NSLog(@"即将发送： %@", requestData);
         [[BTAPISchedule instance] sendData:requestData];
     }
 }

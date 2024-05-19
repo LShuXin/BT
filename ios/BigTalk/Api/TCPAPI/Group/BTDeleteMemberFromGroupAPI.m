@@ -17,22 +17,22 @@
 
 -(int)requestServiceID
 {
-    return SERVICE_GROUP;
-}
-
--(int)responseServiceID
-{
-    return SERVICE_GROUP;
+    return SID_GROUP;
 }
 
 -(int)requestCommandID
 {
-    return CMD_ID_GROUP_CHANGE_GROUP_REQ;
+    return CID_CHANGE_GROUP_REQ;
+}
+
+-(int)responseServiceID
+{
+    return SID_GROUP;
 }
 
 -(int)responseCommandID
 {
-    return CMD_ID_GROUP_CHANGE_GROUP_RES;
+    return CID_CHANGE_GROUP_RES;
 }
 
 -(Analysis)analysisReturnData
@@ -75,8 +75,8 @@
         [memberChange setMemberIdListArray:@[@(userId)]];
         BTDataOutputStream *outputStream = [[BTDataOutputStream alloc] init];
         [outputStream writeInt:0];
-        [outputStream writeTcpProtocolHeaderUseServiceID:SERVICE_GROUP
-                                                     commandID:CMD_ID_GROUP_CHANGE_GROUP_REQ
+        [outputStream writeTcpProtocolHeaderUseServiceID:SID_GROUP
+                                                     commandID:CID_CHANGE_GROUP_REQ
                                                    seqNo:seqNo];
         [outputStream directWriteBytes:[memberChange data]];
         [outputStream writeDataCount];

@@ -15,25 +15,25 @@
 
 -(int)requestServiceID
 {
-    return DDSERVICE_MESSAGE;
+    return SID_MESSAGE;
 }
 
-- (int)responseServiceID
+-(int)requestCommandID
 {
-    return DDSERVICE_MESSAGE;
+    return CID_MSG_DATA;
 }
 
-- (int)requestCommandID
+-(int)responseServiceID
 {
-    return DDCMD_MSG_DATA;
+    return SID_MESSAGE;
 }
 
-- (int)responseCommandID
+-(int)responseCommandID
 {
-    return DDCMD_MSG_RECEIVE_DATA_ACK;
+    return CID_MSG_DATA_ACK;
 }
 
-- (Analysis)analysisReturnData
+-(Analysis)analysisReturnData
 {
     Analysis analysis = (id)^(NSData *data) {
         IMMsgDataAck *msgDataAck = [IMMsgDataAck parseFromData:data error:nil];
@@ -44,7 +44,7 @@
 
 - (Package)packageRequestObject
 {
-    Package package = (id)^(id object,uint16_t seqNo) {
+    Package package = (id)^(id object, uint16_t seqNo) {
         /**
          index0: fromId
          index1: toId,
@@ -70,8 +70,8 @@
         
         BTDataOutputStream *outputStream = [[BTDataOutputStream alloc] init];
         [outputStream writeInt:0];
-        [outputStream writeTcpProtocolHeaderUseServiceID:DDSERVICE_MESSAGE
-                                               commandID:DDCMD_MSG_DATA
+        [outputStream writeTcpProtocolHeaderUseServiceID:SID_MESSAGE
+                                               commandID:CID_MSG_DATA
                                                    seqNo:seqNo];
         [outputStream directWriteBytes:msgdata.data];
         [outputStream writeDataCount];

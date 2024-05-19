@@ -54,9 +54,11 @@ static NSInteger timeoutInterval = 10;
         _connecting = YES;
         _success = [success copy];
         _failure = [failure copy];
+
+       
         [[BTTcpClientManager instance] disconnect];
         [[BTTcpClientManager instance] connect:ip port:port status:1];
-        BTLog(@"connectting to tcp_server...\nip: %@\nport: %d", ip, (int)port);
+        BTLog(@"connectting to tcp_server %@:%d ...", ip, (int)port);
         NSUInteger nowTimes = _connectTimes;
         double delayInSeconds = timeoutInterval;
         // 相当于 js 中的setTimeout

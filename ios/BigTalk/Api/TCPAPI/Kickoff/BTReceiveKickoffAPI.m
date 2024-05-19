@@ -9,12 +9,12 @@
 @implementation BTReceiveKickoffAPI
 -(int)responseServiceID
 {
-    return DDSERVICE_LOGIN;
+    return SID_LOGIN;
 }
 
 -(int)responseCommandID
 {
-    return DDCMD_LOGIN_KICK_USER;
+    return CID_KICK_USER_RES;
 }
 
 -(UnrequestAPIAnalysis)unrequestAnalysis

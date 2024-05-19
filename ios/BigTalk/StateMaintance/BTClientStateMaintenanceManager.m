@@ -240,7 +240,7 @@ static NSInteger const reloginTimeinterval = 5;
 // 运行在发送心跳的Timer上（即心跳请求）
 -(void)p_onSendHeartBeatTimer:(NSTimer*)timer
 {
-    BTLog(@"*********嘣*********");
+    BTLog(@"*********ping*********");
     BTHeartbeatAPI* heartBeatAPI = [[BTHeartbeatAPI alloc] init];
     [heartBeatAPI requestWithObject:nil completion:nil];
 }
@@ -290,8 +290,7 @@ static NSInteger const reloginTimeinterval = 5;
             powN = 0;
             [BTRecentUsersViewController shareInstance].title = @"TeamTalk";
             [BTNotificationHelper postNotification:BTNotificationUserReloginSuccess userInfo:nil object:nil];
-            BTLog(@"relogin success");
-            } failure:^(NSString* error) {
+            } failure:^(NSString *error) {
                 BTLog(@"relogin failure:%@", error);
                 if ([error isEqualToString:@"未登录"])
                 {

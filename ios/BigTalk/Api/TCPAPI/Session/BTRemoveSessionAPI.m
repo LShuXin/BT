@@ -15,22 +15,22 @@
 
 -(int)requestServiceID
 {
-    return MODULE_ID_SESSION;
-}
-
--(int)responseServiceID
-{
-    return MODULE_ID_SESSION;
+    return SID_SESSION;
 }
 
 -(int)requestCommandID
 {
-    return MODULE_ID_SESSION;
+    return SID_SESSION;
+}
+
+-(int)responseServiceID
+{
+    return SID_SESSION;
 }
 
 -(int)responseCommandID
 {
-    return REMOVE_SESSION_RES;
+    return CID_REMOVE_SESSION_RES;
 }
 
 -(Analysis)analysisReturnData
@@ -55,8 +55,8 @@
         [removeSession setSessionType:sessionType];
         BTDataOutputStream *outputStream = [[BTDataOutputStream alloc] init];
         [outputStream writeInt:0];
-        [outputStream writeTcpProtocolHeaderUseServiceID:MODULE_ID_SESSION
-                                               commandID:REMOVE_SESSION_REQ
+        [outputStream writeTcpProtocolHeaderUseServiceID:SID_SESSION
+                                               commandID:CID_REMOVE_SESSION_REQ
                                                    seqNo:seqNo];
         [outputStream directWriteBytes:[removeSession data]];
         [outputStream writeDataCount];

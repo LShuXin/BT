@@ -3,7 +3,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <com.mogujie.tt.ui.widget.CustomViewPager
+    <com.lsx.bigtalk.ui.widget.CustomViewPager
         android:id="@+id/viewPager"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />

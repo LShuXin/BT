@@ -28,6 +28,28 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1832E51D2BF9CBB900C62FCA"
+               BuildableName = "BigTalkTests.xctest"
+               BlueprintName = "BigTalkTests"
+               ReferencedContainer = "container:BigTalk.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1832E52A2BF9CBDC00C62FCA"
+               BuildableName = "BigTalkUITests.xctest"
+               BlueprintName = "BigTalkUITests"
+               ReferencedContainer = "container:BigTalk.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -54,6 +76,11 @@
          <EnvironmentVariable
             key = "IDEPreferLogStreaming"
             value = "YES"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "IDELogRedirectionPolicy"
+            value = "oslogToStdio"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

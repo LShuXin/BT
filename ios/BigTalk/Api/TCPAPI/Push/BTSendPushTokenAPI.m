@@ -16,22 +16,22 @@
 
 -(int)requestServiceID
 {
-    return DDSERVICE_LOGIN;
-}
-
--(int)responseServiceID
-{
-    return DDSERVICE_LOGIN;
+    return SID_LOGIN;
 }
 
 -(int)requestCommandID
 {
-    return CMD_PUSH_TOKEN_REQ;
+    return CID_PUSH_TOKEN_REQ;
+}
+
+-(int)responseServiceID
+{
+    return SID_LOGIN;
 }
 
 -(int)responseCommandID
 {
-    return CMD_PUSH_TOKEN_RES;
+    return CID_PUSH_TOKEN_RES;
 }
 
 -(Analysis)analysisReturnData
@@ -52,8 +52,8 @@
         [deviceToken setDeviceToken:token];
         BTDataOutputStream *outputStream = [[BTDataOutputStream alloc] init];
         [outputStream writeInt:0];
-        [outputStream writeTcpProtocolHeaderUseServiceID:DDSERVICE_LOGIN
-                                               commandID:CMD_PUSH_TOKEN_REQ
+        [outputStream writeTcpProtocolHeaderUseServiceID:SID_LOGIN
+                                               commandID:CID_PUSH_TOKEN_REQ
                                                    seqNo:seqNo];
         [outputStream directWriteBytes:[deviceToken data]];
         [outputStream writeDataCount];

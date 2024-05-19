@@ -1,6 +1,5 @@
 //
 //  BTAPIScheduleProtocol.h
-//  发出请求并且等待服务端返回结果
 //
 
 #import <Foundation/Foundation.h>
@@ -26,14 +25,14 @@ typedef NSMutableData*(^Package)(id object, uint16_t seqNO);
 -(int)requestServiceID;
 
 /**
- *  请求返回体中携带的 serviceID
- */
--(int)responseServiceID;
-
-/**
  *  请求对应的 commandID
  */
 -(int)requestCommandID;
+
+/**
+ *  请求返回体中携带的 serviceID
+ */
+-(int)responseServiceID;
 
 /**
  *  请求返回体中携带的 commandID

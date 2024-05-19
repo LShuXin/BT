@@ -51,8 +51,7 @@ static NSUInteger const showPromptGapSec = 300;
 -(void)getNewMsg:(BTChatLoadMoreHistoryCompletion)completion
 {
     [[BTMessageModule shareInstance] getMessageFromServerFromMsgId:0 session:self.sessionEntity count:BT_PAGE_ITEM_COUNT completion:^(NSMutableArray *response, NSError *error) {
-        // TODO: rename
-        NSUInteger msgId = [[response valueForKeyPath:@"@max.msgID"] integerValue];
+        NSUInteger msgId = [[response valueForKeyPath:@"@max.msgId"] integerValue];
         if (msgId != 0)
         {
             if (response)
@@ -88,8 +87,7 @@ static NSUInteger const showPromptGapSec = 300;
         if (fromMsgId != 1)
         {
             [[BTMessageModule shareInstance] getMessageFromServerFromMsgId:fromMsgId session:self.sessionEntity count:count completion:^(NSArray *response, NSError *error) {
-                // TODO: rename
-                NSUInteger msgId = [[response valueForKeyPath:@"@max.msgID"] integerValue];
+                NSUInteger msgId = [[response valueForKeyPath:@"@max.msgId"] integerValue];
                 if (msgId != 0)
                 {
                     if (response)
@@ -146,7 +144,6 @@ static NSUInteger const showPromptGapSec = 300;
         //after loading finish ,then add to messages
         if ([BTClientState shareInstance].networkState == NETWORK_DISCONNECT)
         {
-            BTLog(@"load more history message, network disconnect");
             [self p_addHistoryMessages:messages completion:completion];
         }
         else
@@ -154,9 +151,14 @@ static NSUInteger const showPromptGapSec = 300;
             if ([messages count] != 0)
             {
                 
+                [messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    BTLog(@"message loaded: %ld", (unsigned long)[(BTMessageEntity *)obj msgId]);
+                }];
+                
                 BOOL isHaveMissMsg = [self p_isHaveMissMsg:messages];
-                if (isHaveMissMsg || ([self getMinMsgId] - [self getMaxMsgId:messages] != 0))
+                if (isHaveMissMsg)
                 {
+                    BTLog(@"have missing messages");
                     
                     [self loadHostoryMessageFromServer:[self getMinMsgId] completion:^(NSUInteger addcount, NSError *error) {
                         if (addcount)
@@ -171,7 +173,7 @@ static NSUInteger const showPromptGapSec = 300;
                 }
                 else
                 {
-                    // TODO: 检查消息是否连续
+                    BTLog(@"don't have missing messages");
                     [self p_addHistoryMessages:messages completion:completion];
                 }
             }
@@ -355,10 +357,10 @@ static NSUInteger const showPromptGapSec = 300;
         if (
             [messageContent rangeOfString:kBTImageMessagePrefix].length > 0
             &&
-            [messageContent rangeOfString:kBTImageLocal].length > 0
+            [messageContent rangeOfString:kBTImageLocalPath].length > 0
             &&
-            [messageContent rangeOfString:kBTImageUrl].length > 0
-        )
+            [messageContent rangeOfString:kBTImageRemoteUrl].length > 0
+           )
         {
             BTMessageEntity *messageEntity = [[BTMessageEntity alloc] initWithMsgId:[BTMessageModule generateMessageId]
                                                                             msgType:message.msgType
@@ -482,7 +484,8 @@ static NSUInteger const showPromptGapSec = 300;
     NSUInteger diff = maxMsgId - minMsgId;
     if (diff + 1 != [messages count])
     {
-        return YES;
+        // TODO:
+        return NO;
     }
     return NO;
 }

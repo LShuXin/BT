@@ -18,7 +18,7 @@
 #define IM_PDU_HEADER_LEN   16
 #define IM_PDU_VERSION      1
 
-#define BT_BASE_URL         @"http://www.mogujie.com/"
+#define BT_BASE_URL         @"http://192.168.214.1/"
 
 // login server info
 #define LOGIN_SERVER_URL    @"http://192.168.214.1/login"

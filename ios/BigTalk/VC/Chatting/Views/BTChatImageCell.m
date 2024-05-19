@@ -76,10 +76,10 @@
             
             return;
         }
-        if (messageContent[kBTImageLocal])
+        if (messageContent[kBTImageLocalPath])
         {
             //加载本地图片
-            NSString *localPath = messageContent[kBTImageLocal];
+            NSString *localPath = messageContent[kBTImageLocalPath];
             NSData *data = [[BTPhotosCache sharedPhotoCache] photoCacheForKey:localPath];
             UIImage *image = [[UIImage alloc] initWithData:data];
             [self.msgImgView setImage:image];
@@ -87,7 +87,7 @@
         else
         {
             //加载服务器上的图片
-            NSString *url = messageContent[kBTImageUrl];
+            NSString *url = messageContent[kBTImageRemoteUrl];
             __weak BTChatImageCell *weakSelf = self;
             
             [self showSending];
@@ -178,7 +178,7 @@
 {
     [self showSending];
     NSDictionary *dic = [NSDictionary initWithJsonString:message.msgContent];
-    NSString *locaPath = dic[kBTImageLocal];
+    NSString *locaPath = dic[kBTImageLocalPath];
     __block UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:locaPath];
     if (!image)
     {
@@ -194,7 +194,7 @@
     [[BTSendPhotoMessageAPI sharedPhotoCache] uploadImage:locaPath success:^(NSString *imageURL) {
         NSDictionary *tempMessageContent = [NSDictionary initWithJsonString:message.msgContent];
         NSMutableDictionary *mutalMessageContent = [[NSMutableDictionary alloc] initWithDictionary:tempMessageContent];
-        [mutalMessageContent setValue:imageURL forKey:kBTImageUrl];
+        [mutalMessageContent setValue:imageURL forKey:kBTImageRemoteUrl];
         NSString *messageContent = [mutalMessageContent jsonString];
         message.msgContent = messageContent;
         image = nil;

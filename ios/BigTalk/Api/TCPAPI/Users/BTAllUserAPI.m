@@ -16,22 +16,22 @@
 
 -(int)requestServiceID
 {
-    return MODULE_ID_SESSION;
-}
-
--(int)responseServiceID
-{
-    return MODULE_ID_SESSION;
+    return SID_SESSION;
 }
 
 -(int)requestCommandID
 {
-    return CMD_FRI_ALL_USER_REQ;
+    return CID_FRI_ALL_USER_REQ;
+}
+
+-(int)responseServiceID
+{
+    return SID_SESSION;
 }
 
 -(int)responseCommandID
 {
-    return CMD_FRI_ALL_USER_RES;
+    return CID_FRI_ALL_USER_RES;
 }
 
 -(Analysis)analysisReturnData
@@ -66,8 +66,8 @@
 
         BTDataOutputStream *outputStream = [[BTDataOutputStream alloc] init];
         [outputStream writeInt:0];
-        [outputStream writeTcpProtocolHeaderUseServiceID:MODULE_ID_SESSION
-                                               commandID:CMD_FRI_ALL_USER_REQ
+        [outputStream writeTcpProtocolHeaderUseServiceID:SID_SESSION
+                                               commandID:CID_FRI_ALL_USER_REQ
                                                    seqNo:seqNo];
         [outputStream directWriteBytes:[reqBuilder data]];
         [outputStream writeDataCount];

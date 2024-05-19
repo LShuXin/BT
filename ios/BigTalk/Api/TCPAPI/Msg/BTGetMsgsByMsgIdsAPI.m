@@ -15,22 +15,22 @@
 
 -(int)requestServiceID
 {
-    return DDSERVICE_MESSAGE;
-}
-
--(int)responseServiceID
-{
-    return DDSERVICE_MESSAGE;
+    return SID_MESSAGE;
 }
 
 -(int)requestCommandID
 {
-    return GET_MSG_BY_IDS_REQ;
+    return CID_GET_MSG_BY_IDS_REQ;
+}
+
+-(int)responseServiceID
+{
+    return SID_MESSAGE;
 }
 
 -(int)responseCommandID
 {
-    return GET_MSG_BY_IDS_RES;
+    return CID_GET_MSG_BY_IDS_RES;
 }
 
 -(Analysis)analysisReturnData
@@ -57,8 +57,8 @@
         
         BTDataOutputStream *outputStream = [[BTDataOutputStream alloc] init];
         [outputStream writeInt:0];
-        [outputStream writeTcpProtocolHeaderUseServiceID:DDSERVICE_MESSAGE
-                                               commandID:GET_MSG_BY_IDS_REQ
+        [outputStream writeTcpProtocolHeaderUseServiceID:SID_MESSAGE
+                                               commandID:CID_GET_MSG_BY_IDS_REQ
                                                    seqNo:seqNo];
         [outputStream directWriteBytes:[req data]];
         [outputStream writeDataCount];

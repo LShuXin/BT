@@ -1,9 +1,5 @@
 //
-//  DDGroupMsgReceivedACKAPI.h
-//  Duoduo
-//
-//  Created by 独嘉 on 14-5-7.
-//  Copyright (c) 2014年 zuoye. All rights reserved.
+//  BTGroupMsgReceivedACKAPI.h
 //
 
 #import "BTSuperAPI.h"

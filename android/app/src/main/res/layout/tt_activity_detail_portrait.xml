@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.mogujie.tt.ui.widget.ZoomableImageView
+    <com.lsx.bigtalk.ui.widget.ZoomableImageView
         android:id="@+id/detail_portrait"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

@@ -72,7 +72,7 @@ static uint32_t seqNo = 0;
         if ([message isImageMessage])
         {
             NSDictionary *dic = [NSDictionary initWithJsonString:message.msgContent];
-            NSString *urlPath = dic[kBTImageUrl];
+            NSString *urlPath = dic[kBTImageRemoteUrl];
             newContent = urlPath;
         }
 
@@ -103,8 +103,8 @@ static uint32_t seqNo = 0;
         [sendMessageAPI requestWithObject:object completion:^(id response, NSError *error) {
             if (!error)
             {
-                NSLog(@"message send success");
-                [[BTDatabaseUtil instance] deleteMesages:message completion:^(BOOL success) {
+                NSLog(@"message send success, message id: %d, message content: %@", (unsigned int)message.msgId, message.msgContent);
+                [[BTDatabaseUtil instance] deleteMessages:message completion:^(BOOL success) {
                    
                 }];
             
@@ -115,11 +115,10 @@ static uint32_t seqNo = 0;
                 session.timeInterval = message.msgTime;
                 [[NSNotificationCenter defaultCenter] postNotificationName:BTNotificationSendMessageSuccess object:session];
                 [[BTDatabaseUtil instance] insertMessages:@[message] success:^{
-                     
+                    completion(message, nil);
                 } failure:^(NSString *error) {
-                     
+                    BTLog(@"message return from server insert into db failed: %@", error);
                 }];
-                completion(message, nil);
             }
             else
             {
@@ -147,12 +146,13 @@ static uint32_t seqNo = 0;
     dispatch_async(self.sendMessageQueue, ^{
         BTSendMessageAPI *sendMessageAPI = [[BTSendMessageAPI alloc] init];
         NSString *myUserId = [BTRuntimeStatus instance].user.objId;
-        NSArray *array = @[myUserId, sessionId, voice, @(msg.msgType), @(0)];
+        
+        NSArray *array = @[@(1), sessionId, voice, @(msg.msgType), @(0)];
         [sendMessageAPI requestWithObject:array completion:^(id response, NSError *error) {
             if (!error)
             {
-                NSLog(@"send void message success");
-                [[BTDatabaseUtil instance] deleteMesages:msg completion:^(BOOL success) {
+                NSLog(@"send void message success: %@", [((BTMessageEntity *)msg) msgContent]);
+                [[BTDatabaseUtil instance] deleteMessages:msg completion:^(BOOL success) {
                     
                 }];
                 
@@ -175,6 +175,7 @@ static uint32_t seqNo = 0;
             }
             else
             {
+                BTLog(@"send voice message error: %@", error);
                 NSError *error = [NSError errorWithDomain:@"send void message failed" code:0 userInfo:nil];
                 completion(nil, error);
             }

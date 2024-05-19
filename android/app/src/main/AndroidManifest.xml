@@ -195,9 +195,9 @@
                 <action android:name="android.intent.action.VIEW" />
 
                 <!-- 这个 <data> 元素定义了要处理的数据的方案（scheme）。在这种情况下，-->
-                <!-- 方案是 com.mogujie.tt。这意味着当其他应用发送具有这个方案的 VIEW -->
+                <!-- 方案是 com.lsx.bigtalk。这意味着当其他应用发送具有这个方案的 VIEW -->
                 <!-- 意图给你的应用时，这个活动将被调用来处理该意图。-->
-                <data android:scheme="com.mogujie.tt" />
+                <data android:scheme="com.lsx.bigtalk" />
             </intent-filter>
         </activity>
         <activity

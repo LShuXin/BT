@@ -68,11 +68,15 @@
     self.items = [NSMutableDictionary new];
     self.model = [BTContactsModule new];
     self.addArray = [NSMutableArray new];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(saveSelectItems)];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"确定"
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self
+                                                            action:@selector(saveSelectItems)];
     [item setTitle:@"确定"];
     super.navigationItem.rightBarButtonItem = item;
     // self.searchBar.showsCancelButton = YES;
-    self.searchController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
+    self.searchController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar
+                                                              contentsController:self];
     self.searchController.delegate = self;
     self.searchController.searchResultsDataSource = self;
     self.searchController.searchResultsDelegate = self;
@@ -133,7 +137,7 @@
 
 -(void)saveSelectItems
 {
-    if (self.isCreat)
+    if (self.isCreate)
     {
         [self createGroup];
     }
@@ -220,7 +224,7 @@
         return [arr count];
     }
     
-  return [self.searchResult count];
+    return [self.searchResult count];
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -313,7 +317,7 @@
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BTEditContactsCell *oneCell =(BTEditContactsCell *) [tableView cellForRowAtIndexPath: indexPath];
+    BTEditContactsCell *oneCell = (BTEditContactsCell *)[tableView cellForRowAtIndexPath: indexPath];
     // 分组首字母
     NSString *keyStr = [[self allKeys] objectAtIndex:indexPath.section];
     NSArray *userArray =[self.items objectForKey:keyStr];
@@ -345,7 +349,7 @@
         user = self.searchResult[indexPath.row];
     }
     
-    BTEditContactsCell *oneCell = (BTEditContactsCell *) [tableView cellForRowAtIndexPath: indexPath];
+    BTEditContactsCell *oneCell = (BTEditContactsCell *)[tableView cellForRowAtIndexPath: indexPath];
 
     if (![self.editArray containsObject:user])
     {
@@ -376,7 +380,7 @@
         if (response != nil)
         {
             self.editController.group.groupUserIds = response;
-            [[BTDatabaseUtil instance] updateRecentGroup: self.editController.group completion:^(NSError *error) {
+            [[BTDatabaseUtil instance] updateGroup: self.editController.group completion:^(NSError *error) {
                 BTLog(@"update group error , group id is : %@", self.editController.group.objId);
             }];
             [self.navigationController popToViewController:self.editController animated:YES];
@@ -390,14 +394,30 @@
     }];
 }
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+-(void)createGroup
 {
-    if (buttonIndex == 1)
-    {
-        UITextField *tf= [alertView textFieldAtIndex:0];
-        if (tf.text.length != 0)
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"创建讨论组"
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"给讨论组起个名字吧";
+    }];
+    
+    UIAlertAction *cancelAlertAction = [UIAlertAction actionWithTitle:@"取消"
+                                                                style:UIAlertActionStyleCancel
+                                                              handler:^(UIAlertAction * _Nonnull action) {
+        BTLog(@"cancel group creation");
+    }];
+    
+    UIAlertAction *confirmAlertAction = [UIAlertAction actionWithTitle:@"确定"
+                                                                 style:UIAlertActionStyleDefault
+                                                               handler:^(UIAlertAction * _Nonnull action) {
+     
+        UITextField *groupNameTextField = alertController.textFields.firstObject;
+        if (groupNameTextField.text.length != 0)
         {
-            BTCreateGroupAPI *creatGroup = [[BTCreateGroupAPI alloc] init];
+            BTCreateGroupAPI *createGroupAPI = [[BTCreateGroupAPI alloc] init];
             __block NSMutableArray *userIds = [NSMutableArray new];
             [userIds addObject:BTRuntime.user.objId];
             [self.editArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -407,9 +427,9 @@
                     [userIds addObject:user.objId];
                 }
             }];
-            NSString *groupName = tf.text.length != 0 ? tf.text : [self creatGroupName];
+            NSString *groupName = groupNameTextField.text.length != 0 ? groupNameTextField.text : [self generateDefaultGroupName];
             NSArray *array = @[groupName, @"", userIds];
-            [creatGroup requestWithObject:array completion:^(BTGroupEntity *response, NSError *error) {
+            [createGroupAPI requestWithObject:array completion:^(BTGroupEntity *response, NSError *error) {
                 if (response != nil)
                 {
                     response.groupCreatorId = BTRuntime.user.objId;
@@ -425,7 +445,7 @@
                     [[BTDatabaseUtil instance] updateSession:session completion:^(NSError *error) {
                         
                     }];
-                    [[BTDatabaseUtil instance] updateRecentGroup:response completion:^(NSError *error) {
+                    [[BTDatabaseUtil instance] updateGroup:response completion:^(NSError *error) {
                         
                     }];
                     [[BTChattingMainViewController shareInstance] showChattingContentForSession:session];
@@ -445,31 +465,23 @@
                 }
             }];
         }
-    }
-}
-
--(void)createGroup
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"创建讨论组"
-                                                    message:nil
-                                                   delegate:self
-                                          cancelButtonTitle:@"取消"
-                                          otherButtonTitles:@"确定", nil];
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [alert show];
+    }];
+    
+    [alertController addAction:cancelAlertAction];
+    [alertController addAction:confirmAlertAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 -(void)showAlert:(NSString *)string
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
-                                                    message:string
-                                                   delegate:self
-                                          cancelButtonTitle:@"确定"
-                                          otherButtonTitles:nil, nil];
-    [alert show];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@""
+                                                                             message:string
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
--(NSString *)creatGroupName
+-(NSString *)generateDefaultGroupName
 {
     NSMutableString *string = [NSMutableString new];
     [self.editArray enumerateObjectsUsingBlock:^(BTUserEntity *obj, NSUInteger idx, BOOL *stop) {
@@ -482,4 +494,5 @@
 
     return string;
 }
+
 @end

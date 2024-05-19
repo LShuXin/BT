@@ -6,14 +6,14 @@
 
     <fragment
         android:id="@+id/fragment_chat"
-        class="com.mogujie.tt.ui.fragment.ChatFragment"
+        class="com.lsx.bigtalk.ui.fragment.ChatFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />
 
     <fragment
         android:id="@+id/fragment_contact"
-        class="com.mogujie.tt.ui.fragment.ContactFragment"
+        class="com.lsx.bigtalk.ui.fragment.ContactFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />
@@ -23,11 +23,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        class="com.mogujie.tt.ui.fragment.InternalFragment" />
+        class="com.lsx.bigtalk.ui.fragment.InternalFragment" />
 
     <fragment
         android:id="@+id/fragment_my"
-        class="com.mogujie.tt.ui.fragment.MyFragment"
+        class="com.lsx.bigtalk.ui.fragment.MyFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />
@@ -41,25 +41,25 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
-        <com.mogujie.tt.ui.widget.NaviTabButton
+        <com.lsx.bigtalk.ui.widget.NaviTabButton
             android:id="@+id/tabbutton_chat"
             android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_weight="1" />
 
-        <com.mogujie.tt.ui.widget.NaviTabButton
+        <com.lsx.bigtalk.ui.widget.NaviTabButton
             android:id="@+id/tabbutton_contact"
             android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_weight="1" />
 
-        <com.mogujie.tt.ui.widget.NaviTabButton
+        <com.lsx.bigtalk.ui.widget.NaviTabButton
             android:id="@+id/tabbutton_internal"
             android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_weight="1" />
 
-        <com.mogujie.tt.ui.widget.NaviTabButton
+        <com.lsx.bigtalk.ui.widget.NaviTabButton
             android:id="@+id/tabbutton_my"
             android:layout_width="0dip"
             android:layout_height="fill_parent"

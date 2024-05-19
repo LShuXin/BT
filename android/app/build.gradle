@@ -7,7 +7,7 @@ repositories {
 
 android {
     defaultConfig {
-        applicationId "com.mogujie.tt"
+        applicationId "com.lsx.bigtalk"
         minSdk 29
         versionCode 1
         versionName '1.0.0'
@@ -37,7 +37,7 @@ android {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
     }
-    namespace 'com.mogujie.tt'
+    namespace 'com.lsx.bigtalk'
     compileSdk 29
     ndkVersion '23.1.7779620'
 }

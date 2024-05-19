@@ -11,7 +11,7 @@
         android:focusableInTouchMode="true"
         android:orientation="vertical" >
 
-        <com.mogujie.tt.ui.widget.SearchEditText
+        <com.lsx.bigtalk.ui.widget.SearchEditText
             android:id="@+id/filter_edit"
             android:layout_width="fill_parent"
             android:layout_height="23dp"
@@ -71,7 +71,7 @@
                 android:textSize="30dp"
                 android:visibility="invisible" />
 
-            <com.mogujie.tt.ui.widget.SortSideBar
+            <com.lsx.bigtalk.ui.widget.SortSideBar
                 android:id="@+id/sidrbar"
                 android:layout_width="30dp"
                 android:layout_height="fill_parent"

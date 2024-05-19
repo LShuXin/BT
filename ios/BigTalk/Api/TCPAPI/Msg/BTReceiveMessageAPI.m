@@ -14,12 +14,12 @@
 
 -(int)responseServiceID
 {
-    return DDSERVICE_MESSAGE;
+    return SID_MESSAGE;
 }
 
 -(int)responseCommandID
 {
-    return DDCMD_MSG_DATA;
+    return CID_MSG_DATA;
 }
 
 -(UnrequestAPIAnalysis)unrequestAnalysis

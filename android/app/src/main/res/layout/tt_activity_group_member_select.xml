@@ -7,7 +7,7 @@
         android:id="@+id/pf_main_bottom_fragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        class="com.mogujie.tt.ui.fragment.GroupMemberSelectFragment" >
+        class="com.lsx.bigtalk.ui.fragment.GroupMemberSelectFragment" >
     </fragment>
 
 </RelativeLayout>

@@ -46,7 +46,7 @@
                 android:textSize="30dp"
                 android:visibility="invisible" />
 
-            <com.mogujie.tt.ui.widget.SortSideBar
+            <com.lsx.bigtalk.ui.widget.SortSideBar
                 android:id="@+id/sidrbar"
                 android:layout_width="30dp"
                 android:layout_height="fill_parent"
