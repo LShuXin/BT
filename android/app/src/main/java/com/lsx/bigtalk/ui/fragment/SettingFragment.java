@@ -6,19 +6,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 
+import androidx.annotation.NonNull;
+
 import com.lsx.bigtalk.DB.sp.ConfigurationSp;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.config.SysConstant;
 import com.lsx.bigtalk.imservice.service.IMService;
 import com.lsx.bigtalk.ui.helper.CheckboxConfigHelper;
-import com.lsx.bigtalk.ui.base.TTBaseFragment;
+import com.lsx.bigtalk.ui.base.BTBaseFragment;
 import com.lsx.bigtalk.imservice.support.IMServiceConnector;
-import com.lsx.bigtalk.utils.Logger;
 
 /**
  * 设置页面
  */
-public class SettingFragment extends TTBaseFragment{
+public class SettingFragment extends BTBaseFragment {
 	private View curView = null;
 	private CheckBox notificationNoDisturbCheckBox;
 	private CheckBox notificationGotSoundCheckBox;
@@ -43,14 +44,14 @@ public class SettingFragment extends TTBaseFragment{
     };
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 		imServiceConnector.connect(this.getActivity());
 		if (null != curView) {
 			((ViewGroup) curView.getParent()).removeView(curView);
 			return curView;
 		}
-		curView = inflater.inflate(R.layout.tt_fragment_setting, topContentView);
+		curView = inflater.inflate(R.layout.setting_fragment, baseFragmentLayout);
 		initRes();
 		return curView;
 	}
@@ -88,8 +89,8 @@ public class SettingFragment extends TTBaseFragment{
 	 */
 	private void initRes() {
 		// 设置标题栏
-		setTopTitle(getActivity().getString(R.string.setting_page_name));
-		setTopLeftButton(R.drawable.tt_top_back);
+		setTopCenterTitleText(getActivity().getString(R.string.setting_page_name));
+		setTopLeftBtnImage(R.drawable.tt_top_back);
 		topLeftContainerLayout.setOnClickListener(new View.OnClickListener() {
 
 			@Override

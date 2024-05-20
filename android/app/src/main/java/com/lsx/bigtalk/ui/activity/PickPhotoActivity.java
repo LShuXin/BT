@@ -50,7 +50,7 @@ public class PickPhotoActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         logger.d("pic#PickPhotoActivity onCreate");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tt_activity_pick_photo);
+        setContentView(R.layout.pick_photo_activity);
         initData();
         initView();
     }
@@ -98,7 +98,7 @@ public class PickPhotoActivity extends Activity {
             public void onClick(View v) {
                 setResult(Activity.RESULT_OK, null);
                 PickPhotoActivity.this.finish();
-                overridePendingTransition(R.anim.tt_stay, R.anim.tt_album_exit);
+                overridePendingTransition(R.anim.stay_y, R.anim.album_bottom_exit);
             }
         });
 

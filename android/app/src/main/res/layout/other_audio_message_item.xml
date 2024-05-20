@@ -59,7 +59,7 @@
                     android:id="@+id/audio_antt_view"
                     android:layout_width="11dp"
                     android:layout_height="17dp"
-                    android:background="@anim/tt_voice_play_other" />
+                    android:background="@anim/voice_play_other" />
             </LinearLayout>
 
             <TextView

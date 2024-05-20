@@ -49,7 +49,7 @@ public class PreviewActivity extends Activity
         logger.d("pic#PreviewActivity onCreate");
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.tt_activity_preview);
+        setContentView(R.layout.preview_activity);
         initView();
         loadView();
     }

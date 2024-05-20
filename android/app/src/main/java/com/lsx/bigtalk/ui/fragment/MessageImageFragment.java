@@ -65,7 +65,7 @@ public class MessageImageFragment extends Fragment {
                     ((ViewGroup) curView.getParent()).removeView(curView);
                 }
             }
-            curView = inflater.inflate(R.layout.fragment_message_image, null);
+            curView = inflater.inflate(R.layout.message_image_fragment, null);
             initRes(curView);
             initData();
             return curView;
@@ -96,7 +96,7 @@ public class MessageImageFragment extends Fragment {
                     if (isAdded()) {
                         getActivity().finish();
                         getActivity().overridePendingTransition(
-                                R.anim.tt_stay, R.anim.tt_image_exit);
+                                R.anim.stay_y, R.anim.image_right_exit);
                     }
                 }
             });

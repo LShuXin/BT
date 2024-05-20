@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.lsx.bigtalk.DB.entity.GroupEntity;
 import com.lsx.bigtalk.DB.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.DBConstant;
 import com.lsx.bigtalk.config.SysConstant;
 import com.lsx.bigtalk.imservice.service.IMService;
 import com.lsx.bigtalk.ui.widget.IMBaseImageView;
@@ -250,7 +249,7 @@ public class ContactAdapter extends BaseAdapter implements
         }
         if (view == null) {
             userHolder = new UserHolder();
-            view = LayoutInflater.from(ctx).inflate(R.layout.tt_item_contact, parent,false);
+            view = LayoutInflater.from(ctx).inflate(R.layout.item_contact, parent,false);
             userHolder.nameView = view.findViewById(R.id.contact_item_title);
             userHolder.realNameView = view.findViewById(R.id.contact_realname_title);
             userHolder.sectionView = view.findViewById(R.id.contact_category_title);
@@ -312,7 +311,7 @@ public class ContactAdapter extends BaseAdapter implements
         }
         if (view == null) {
             groupHolder = new GroupHolder();
-            view = LayoutInflater.from(ctx).inflate(R.layout.tt_item_contact_group, parent,false);
+            view = LayoutInflater.from(ctx).inflate(R.layout.item_contact_group, parent,false);
             groupHolder.nameView = view.findViewById(R.id.contact_item_title);
             groupHolder.sectionView = view.findViewById(R.id.contact_category_title);
             groupHolder.avatar = view.findViewById(R.id.contact_portrait);

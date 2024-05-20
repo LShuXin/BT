@@ -27,7 +27,7 @@ public class TimeRenderView extends LinearLayout {
     }
 
     public static TimeRenderView inflater(Context context, ViewGroup viewGroup) {
-        TimeRenderView timeRenderView = (TimeRenderView) LayoutInflater.from(context).inflate(R.layout.tt_message_title_time, viewGroup, false);
+        TimeRenderView timeRenderView = (TimeRenderView) LayoutInflater.from(context).inflate(R.layout.message_title_time, viewGroup, false);
         return timeRenderView;
     }
 

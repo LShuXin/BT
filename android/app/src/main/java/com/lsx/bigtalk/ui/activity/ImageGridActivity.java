@@ -115,7 +115,7 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         imServiceConnector.connect(this);
-        setContentView(R.layout.tt_activity_image_grid);
+        setContentView(R.layout.image_grid_activity);
         context = this;
         name = (String) getIntent().getSerializableExtra(
                 IntentConstant.EXTRA_ALBUM_NAME);

@@ -25,7 +25,6 @@ import android.provider.Settings;
 import android.text.Editable;
 import android.text.Selection;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -353,7 +352,7 @@ public class MessageActivity extends BTBaseActivity
             }
             break;
             case DBConstant.SESSION_TYPE_SINGLE: {
-                topTitleTxt.setOnClickListener(new View.OnClickListener() {
+                topCenterTitleTextView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         IMUIHelper.openUserProfileActivity(MessageActivity.this, peerEntity.getPeerId());
@@ -589,20 +588,20 @@ public class MessageActivity extends BTBaseActivity
      */
     private void initView() {
         // 绑定布局资源(注意放在所有资源初始化之前)
-        LayoutInflater.from(this).inflate(R.layout.tt_activity_message, topContentView);
+        LayoutInflater.from(this).inflate(R.layout.message_activity, appBarLayout);
 
         //TOP_CONTENT_VIEW
-        setLeftButton(R.drawable.tt_top_back);
-        setLeftText(getResources().getString(R.string.top_left_back));
-        setRightButton(R.drawable.tt_top_right_group_manager);
-        topLeftBtn.setOnClickListener(this);
-        letTitleTxt.setOnClickListener(this);
-        topRightBtn.setOnClickListener(this);
+        setTopLeftBtnImage(R.drawable.tt_top_back);
+        setTopLeftBtnTitleText(getResources().getString(R.string.top_left_back));
+        setTopRightBtnImage(R.drawable.tt_top_right_group_manager);
+        topLeftBtnImageView.setOnClickListener(this);
+        topLeftBtnTitleTextView.setOnClickListener(this);
+        topRightBtnImageView.setOnClickListener(this);
 
         // 列表控件(开源PTR)
         lvPTR = this.findViewById(R.id.message_list);
         textView_new_msg_tip = findViewById(R.id.tt_new_msg_tip);
-        lvPTR.getRefreshableView().addHeaderView(LayoutInflater.from(this).inflate(R.layout.tt_messagelist_header,lvPTR.getRefreshableView(), false));
+        lvPTR.getRefreshableView().addHeaderView(LayoutInflater.from(this).inflate(R.layout.message_list_header,lvPTR.getRefreshableView(), false));
         Drawable loadingDrawable = getResources().getDrawable(R.drawable.pull_to_refresh_indicator);
         final int indicatorWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 29,
                 getResources().getDisplayMetrics());
@@ -679,7 +678,7 @@ public class MessageActivity extends BTBaseActivity
 
         //LOADING
         View view = LayoutInflater.from(MessageActivity.this)
-                .inflate(R.layout.tt_progress_ly, null);
+                .inflate(R.layout.progress_ly, null);
         progressbar = view.findViewById(R.id.tt_progress);
         LayoutParams pgParms = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
@@ -687,7 +686,7 @@ public class MessageActivity extends BTBaseActivity
         addContentView(view, pgParms);
 
         //ROOT_LAYOUT_LISTENER
-        baseRoot.getViewTreeObserver().addOnGlobalLayoutListener(onGlobalLayoutListener);
+        appBarRoot.getViewTreeObserver().addOnGlobalLayoutListener(onGlobalLayoutListener);
     }
 
     /**
@@ -698,7 +697,7 @@ public class MessageActivity extends BTBaseActivity
         soundVolumeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         soundVolumeDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        soundVolumeDialog.setContentView(R.layout.tt_sound_volume_dialog);
+        soundVolumeDialog.setContentView(R.layout.sound_volume_dialog);
         soundVolumeDialog.setCanceledOnTouchOutside(true);
         soundVolumeImg = soundVolumeDialog.findViewById(R.id.sound_volume_img);
         soundVolumeLayout = soundVolumeDialog.findViewById(R.id.sound_volume_bk);
@@ -894,7 +893,7 @@ public class MessageActivity extends BTBaseActivity
                     intent.putExtra(IntentConstant.KEY_SESSION_KEY, currentSessionKey);
                     startActivityForResult(intent, SysConstant.ALBUM_BACK_DATA);
 
-                    MessageActivity.this.overridePendingTransition(R.anim.tt_album_enter, R.anim.tt_stay);
+                    MessageActivity.this.overridePendingTransition(R.anim.album_bottom_enter, R.anim.stay_y);
                     //addOthersPanelView.setVisibility(View.GONE);
                     messageEdt.clearFocus();//切记清除焦点
                     scrollToBottomListItem();
@@ -1288,7 +1287,7 @@ public class MessageActivity extends BTBaseActivity
         @Override
         public void onGlobalLayout() {
             Rect r = new Rect();
-            baseRoot.getGlobalVisibleRect(r);
+            appBarRoot.getGlobalVisibleRect(r);
             // 进入Activity时会布局，第一次调用onGlobalLayout，先记录开始软键盘没有弹出时底部的位置
             if (rootBottom == Integer.MIN_VALUE) {
                 rootBottom = r.bottom;

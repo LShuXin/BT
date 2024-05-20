@@ -29,7 +29,7 @@ public class PreviewGifActivity extends Activity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tt_activity_preview_gif);
+        setContentView(R.layout.preview_gif_activity);
         gifView = findViewById(R.id.gif);
         backView = findViewById(R.id.back_btn);
         backView.setOnClickListener(this);

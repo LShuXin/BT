@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.lsx.bigtalk.DB.entity.DepartmentEntity;
 import com.lsx.bigtalk.DB.entity.GroupEntity;
 import com.lsx.bigtalk.DB.entity.UserEntity;
@@ -118,12 +120,12 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (null != curView) {
             ((ViewGroup) curView.getParent()).removeView(curView);
             return curView;
         }
-        curView = inflater.inflate(R.layout.tt_fragment_contact, topContentView);
+        curView = inflater.inflate(R.layout.contact_fragment, baseFragmentLayout);
         initRes();
         return curView;
     }
@@ -133,8 +135,8 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
      */
     private void initRes() {
         // 设置顶部标题栏
-        showContactTopBar();
-        hideTopBar();
+        showTopTabButtonGroup();
+        hideAppBar();
 
         super.init(curView);
         showProgressBar();
@@ -171,11 +173,11 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
     public void locateDepartment(int departmentId) {
         logger.d("department#locateDepartment id:%s", departmentId);
 
-        if (topContactTitle == null) {
+        if (topTabButtonGroup == null) {
             logger.e("department#TopTabButton is null");
             return;
         }
-        Button tabDepartmentBtn = topContactTitle.getTabDepartmentBtn();
+        Button tabDepartmentBtn = topTabButtonGroup.getTabDepartmentBtn();
         if (tabDepartmentBtn == null) {
             return;
         }
@@ -228,7 +230,7 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
         if (imService.getGroupManager().isGroupReady()) {
             renderGroupList();
         }
-        showSearchFrameLayout();
+        showTopSearchBarFrameLayout();
     }
 
 
@@ -310,7 +312,7 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
     public void searchDataReady() {
         if (imService.getContactManager().isUserDataReady() &&
                 imService.getGroupManager().isGroupReady()) {
-            showSearchFrameLayout();
+            showTopSearchBarFrameLayout();
         }
     }
 }

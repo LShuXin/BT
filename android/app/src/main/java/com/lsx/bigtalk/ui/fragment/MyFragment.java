@@ -17,6 +17,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.lsx.bigtalk.DB.entity.UserEntity;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.config.SysConstant;
@@ -65,7 +67,7 @@ public class MyFragment extends MainFragment {
     };
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
 
@@ -76,7 +78,7 @@ public class MyFragment extends MainFragment {
             ((ViewGroup) curView.getParent()).removeView(curView);
             return curView;
         }
-        curView = inflater.inflate(R.layout.tt_fragment_my, topContentView);
+        curView = inflater.inflate(R.layout.mine_fragment, baseFragmentLayout);
 
         initRes();
 
@@ -99,7 +101,7 @@ public class MyFragment extends MainFragment {
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), android.R.style.Theme_Holo_Light_Dialog));
                 LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View dialog_view = inflater.inflate(R.layout.tt_custom_dialog, null);
+                View dialog_view = inflater.inflate(R.layout.custom_dialog, null);
                 final EditText editText = dialog_view.findViewById(R.id.dialog_edit_content);
                 editText.setVisibility(View.GONE);
                 TextView textText = dialog_view.findViewById(R.id.dialog_title);
@@ -143,7 +145,7 @@ public class MyFragment extends MainFragment {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), android.R.style.Theme_Holo_Light_Dialog));
                 LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View dialog_view = inflater.inflate(R.layout.tt_custom_dialog, null);
+                View dialog_view = inflater.inflate(R.layout.custom_dialog, null);
                 final EditText editText = dialog_view.findViewById(R.id.dialog_edit_content);
                 editText.setVisibility(View.GONE);
                 TextView textText = dialog_view.findViewById(R.id.dialog_title);
@@ -181,7 +183,7 @@ public class MyFragment extends MainFragment {
         hideContent();
 
         // 设置顶部标题栏
-        setTopTitle(getActivity().getString(R.string.main_me_tab));
+        setTopCenterTitleText(getActivity().getString(R.string.main_me_tab));
         // 设置页面其它控件
 
     }

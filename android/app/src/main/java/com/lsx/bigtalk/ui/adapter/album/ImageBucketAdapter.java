@@ -86,7 +86,7 @@ public class ImageBucketAdapter extends BaseAdapter {
         try {
             if (null == convertView) {
                 holder = new Holder();
-                convertView = View.inflate(act, R.layout.tt_item_image_pick, null);
+                convertView = View.inflate(act, R.layout.item_image_pick, null);
                 holder.iv = convertView.findViewById(R.id.image);
                 holder.name = convertView.findViewById(R.id.name);
                 holder.count = convertView.findViewById(R.id.count);

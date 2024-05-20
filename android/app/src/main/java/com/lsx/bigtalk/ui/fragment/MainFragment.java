@@ -4,9 +4,9 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.ui.base.TTBaseFragment;
+import com.lsx.bigtalk.ui.base.BTBaseFragment;
 
-public abstract class MainFragment extends TTBaseFragment {
+public abstract class MainFragment extends BTBaseFragment {
     private ProgressBar progressbar;
 
     public void init(View curView) {

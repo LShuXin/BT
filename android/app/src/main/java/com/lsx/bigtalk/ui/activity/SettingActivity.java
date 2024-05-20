@@ -3,15 +3,15 @@ package com.lsx.bigtalk.ui.activity;
 import android.os.Bundle;
 
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.ui.base.TTBaseFragmentActivity;
+import com.lsx.bigtalk.ui.base.BTBaseFragmentActivity;
 
-public class SettingActivity extends TTBaseFragmentActivity {
+public class SettingActivity extends BTBaseFragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tt_fragment_activity_setting);
+        setContentView(R.layout.setting_fragment_activity);
     }
 
     @Override

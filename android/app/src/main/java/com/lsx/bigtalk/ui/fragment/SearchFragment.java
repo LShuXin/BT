@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+
 import com.mogujie.tools.ScreenTools;
 import com.lsx.bigtalk.DB.entity.DepartmentEntity;
 import com.lsx.bigtalk.DB.entity.GroupEntity;
@@ -16,7 +18,7 @@ import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.imservice.support.IMServiceConnector;
 import com.lsx.bigtalk.imservice.service.IMService;
 import com.lsx.bigtalk.ui.adapter.SearchAdapter;
-import com.lsx.bigtalk.ui.base.TTBaseFragment;
+import com.lsx.bigtalk.ui.base.BTBaseFragment;
 import com.lsx.bigtalk.utils.Logger;
 
 import java.util.List;
@@ -24,7 +26,7 @@ import java.util.List;
 /**
  * @yingmu  modify
  */
-public class SearchFragment extends TTBaseFragment {
+public class SearchFragment extends BTBaseFragment {
 
 	private final Logger logger = Logger.getLogger(SearchFragment.class);
 	private View curView = null;
@@ -47,15 +49,15 @@ public class SearchFragment extends TTBaseFragment {
     };
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
 		imServiceConnector.connect(this.getActivity());
 		if (null != curView) {
 			((ViewGroup) curView.getParent()).removeView(curView);
 			return curView;
 		}
-		curView = inflater.inflate(R.layout.tt_fragment_search, topContentView);
+		curView = inflater.inflate(R.layout.search_fragment, baseFragmentLayout);
         noSearchResultView = curView.findViewById(R.id.layout_no_search_result);
 		initTopBar();
         listView = curView.findViewById(R.id.search);
@@ -68,13 +70,13 @@ public class SearchFragment extends TTBaseFragment {
 	}
 
 	private void initTopBar() {
-		setTopBar(R.drawable.tt_top_default_bk);
+        setAppBarImage(R.drawable.tt_top_default_bk);
 		showTopSearchBar();
-		setTopLeftButton(R.drawable.tt_top_back);
-		hideTopRightButton();
+		setTopLeftBtnImage(R.drawable.tt_top_back);
+		hideTopRightBtn();
 
-        topLeftBtn.setPadding(0, 0, ScreenTools.instance(getActivity()).dip2px(30), 0);
-		topLeftBtn.setOnClickListener(new View.OnClickListener() {
+        topLeftBtnImageView.setPadding(0, 0, ScreenTools.instance(getActivity()).dip2px(30), 0);
+		topLeftBtnImageView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -82,7 +84,7 @@ public class SearchFragment extends TTBaseFragment {
             }
         });
 
-		topSearchEdt.addTextChangedListener(new TextWatcher() {
+        topSearchBarSearchEditText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {

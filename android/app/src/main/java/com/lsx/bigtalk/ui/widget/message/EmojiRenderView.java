@@ -29,7 +29,7 @@ public class EmojiRenderView extends  BaseMsgRenderView {
     private GifView messageContent;
 
     public static EmojiRenderView inflater(Context context,ViewGroup viewGroup,boolean isMine){
-        int resource = isMine?R.layout.tt_mine_emoji_message_item :R.layout.tt_other_emoji_message_item;
+        int resource = isMine?R.layout.mine_emoji_message_item :R.layout.other_emoji_message_item;
         EmojiRenderView gifRenderView = (EmojiRenderView) LayoutInflater.from(context).inflate(resource, viewGroup, false);
         gifRenderView.setMine(isMine);
         gifRenderView.setParentView(viewGroup);

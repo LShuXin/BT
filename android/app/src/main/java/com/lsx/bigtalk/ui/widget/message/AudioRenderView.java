@@ -53,7 +53,7 @@ public class AudioRenderView extends  BaseMsgRenderView {
 
     public static AudioRenderView inflater(Context ctx,ViewGroup viewGroup,boolean isMine){
 
-        int resoure = isMine?R.layout.tt_mine_audio_message_item:R.layout.tt_other_audio_message_item;
+        int resoure = isMine?R.layout.mine_audio_message_item :R.layout.other_audio_message_item;
         //tt_other_audio_message_item
         AudioRenderView audioRenderView = (AudioRenderView) LayoutInflater.from(ctx).inflate(resoure,viewGroup,false);
         audioRenderView.setMine(isMine);
@@ -148,7 +148,7 @@ public class AudioRenderView extends  BaseMsgRenderView {
 
         //针对path 的设定
         if (null != audioPath) {
-            int resource = isMine?R.anim.tt_voice_play_mine:R.anim.tt_voice_play_other;
+            int resource = isMine?R.anim.voice_play_mine :R.anim.voice_play_other;
             audioAnttView.setBackgroundResource(resource);
             AnimationDrawable animationDrawable = (AnimationDrawable) audioAnttView.getBackground();
 

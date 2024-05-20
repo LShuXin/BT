@@ -145,7 +145,7 @@ public class ChatAdapter extends BaseAdapter {
         RecentInfo recentInfo = recentSessionList.get(position);
         ContactViewHolder holder;
         if (null == convertView) {
-            convertView = mInflater.inflate(R.layout.tt_item_chat, parent, false);
+            convertView = mInflater.inflate(R.layout.item_chat, parent, false);
             holder = new ContactViewHolder();
             holder.avatar = convertView.findViewById(R.id.contact_portrait);
             holder.uname = convertView.findViewById(R.id.shop_name);
@@ -174,7 +174,7 @@ public class ChatAdapter extends BaseAdapter {
         RecentInfo recentInfo = recentSessionList.get(position);
         GroupViewHolder holder;
         if (null == convertView) {
-            convertView = mInflater.inflate(R.layout.tt_item_chat_group, parent, false);
+            convertView = mInflater.inflate(R.layout.item_chat_group, parent, false);
             holder = new GroupViewHolder();
             holder.avatarLayout = convertView.findViewById(R.id.contact_portrait);
             holder.uname = convertView.findViewById(R.id.shop_name);

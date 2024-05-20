@@ -33,7 +33,7 @@ public class MGProgressbar extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService
                 (Context.LAYOUT_INFLATER_SERVICE);
 
-        inflater.inflate(R.layout.tt_progress, this, true);
+        inflater.inflate(R.layout.progress, this, true);
         mProgressBar = findViewById(R.id.progress_bar);
         mLoadingText = findViewById(R.id.loading_text);
         mRefreshButton = findViewById(R.id.refresh_button);

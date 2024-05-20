@@ -57,7 +57,7 @@ public class MessageOperatePopup implements View.OnClickListener, View.OnTouchLi
 
     @SuppressWarnings("deprecation")
     private MessageOperatePopup(Context ctx, View parent) {
-        View view = LayoutInflater.from(ctx).inflate(R.layout.tt_popup_list,
+        View view = LayoutInflater.from(ctx).inflate(R.layout.popup_list,
                 null);
         this.context = ctx;
 

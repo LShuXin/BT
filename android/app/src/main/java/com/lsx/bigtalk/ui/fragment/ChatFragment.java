@@ -20,11 +20,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.lsx.bigtalk.config.DBConstant;
 import com.lsx.bigtalk.DB.entity.GroupEntity;
-import com.lsx.bigtalk.DB.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.protobuf.helper.EntityChangeEngine;
 import com.lsx.bigtalk.ui.adapter.ChatAdapter;
 import com.lsx.bigtalk.utils.IMUIHelper;
 import com.lsx.bigtalk.imservice.entity.RecentInfo;
@@ -39,7 +39,6 @@ import com.lsx.bigtalk.imservice.manager.IMLoginManager;
 import com.lsx.bigtalk.imservice.manager.IMReconnectManager;
 import com.lsx.bigtalk.imservice.manager.IMUnreadMsgManager;
 import com.lsx.bigtalk.imservice.service.IMService;
-import com.lsx.bigtalk.protobuf.IMBaseDefine;
 import com.lsx.bigtalk.ui.activity.MainActivity;
 import com.lsx.bigtalk.imservice.support.IMServiceConnector;
 import com.lsx.bigtalk.utils.NetworkUtil;
@@ -112,13 +111,13 @@ public class ChatFragment extends MainFragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle bundle) {
         logger.d("chat_fragment#onCreateView");
         if (null != curView) {
             logger.d("chat_fragment#onCreateView curView is not null, remove it");
             ((ViewGroup) curView.getParent()).removeView(curView);
         }
-        curView = inflater.inflate(R.layout.tt_fragment_chat, topContentView);
+        curView = inflater.inflate(R.layout.chat_fragment, baseFragmentLayout);
         // 多端登陆也在用这个view
         noNetworkView = curView.findViewById(R.id.layout_no_network);
         noChatView = curView.findViewById(R.id.layout_no_chat);
@@ -173,7 +172,7 @@ public class ChatFragment extends MainFragment
      */
     private void initTitleView() {
         // 设置标题
-        setTopTitleBold(getActivity().getString(R.string.chat_title));
+        setTopCenterTitleTextBold(getActivity().getString(R.string.chat_title));
     }
 
     private void initContactListView() {
@@ -372,7 +371,7 @@ public class ChatFragment extends MainFragment
     public void searchDataReady() {
         if (imService.getContactManager().isUserDataReady() &&
                 imService.getGroupManager().isGroupReady()) {
-            showSearchFrameLayout();
+            showTopSearchBarFrameLayout();
         }
     }
 
@@ -459,7 +458,7 @@ public class ChatFragment extends MainFragment
         setNoChatView(recentSessionList);
         contactAdapter.setData(recentSessionList);
         hideProgressBar();
-        showSearchFrameLayout();
+        showTopSearchBarFrameLayout();
     }
 
     private void setNoChatView(List<RecentInfo> recentSessionList) {

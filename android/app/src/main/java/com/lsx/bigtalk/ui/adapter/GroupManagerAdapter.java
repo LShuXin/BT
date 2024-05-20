@@ -175,7 +175,7 @@ public class GroupManagerAdapter extends BaseAdapter {
         if(convertView==null)
         {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.tt_group_manage_grid_item, null);
+            convertView = inflater.inflate(R.layout.group_manage_grid_item, null);
 
             holder = new GroupHolder();
             holder.imageView = convertView.findViewById(R.id.grid_item_image);

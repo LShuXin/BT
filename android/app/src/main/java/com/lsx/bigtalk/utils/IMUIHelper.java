@@ -125,7 +125,7 @@ public class IMUIHelper {
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(context, android.R.style.Theme_Holo_Light_Dialog));
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View dialog_view = inflater.inflate(R.layout.tt_custom_dialog, null);
+        View dialog_view = inflater.inflate(R.layout.custom_dialog, null);
         final EditText editText = dialog_view.findViewById(R.id.dialog_edit_content);
         editText.setVisibility(visibale);
         TextView textText = dialog_view.findViewById(R.id.dialog_title);
