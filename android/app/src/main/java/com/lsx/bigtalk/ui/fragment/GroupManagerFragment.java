@@ -12,6 +12,8 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.lsx.bigtalk.DB.entity.PeerEntity;
 import com.lsx.bigtalk.config.DBConstant;
 import com.lsx.bigtalk.DB.entity.GroupEntity;
@@ -23,7 +25,7 @@ import com.lsx.bigtalk.ui.adapter.GroupManagerAdapter;
 import com.lsx.bigtalk.ui.helper.CheckboxConfigHelper;
 import com.lsx.bigtalk.imservice.event.GroupEvent;
 import com.lsx.bigtalk.imservice.service.IMService;
-import com.lsx.bigtalk.ui.base.TTBaseFragment;
+import com.lsx.bigtalk.ui.base.BTBaseFragment;
 import com.lsx.bigtalk.imservice.support.IMServiceConnector;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
@@ -41,7 +43,7 @@ import de.greenrobot.event.EventBus;
  * group:  群成员，加减号 ， 修改成功之后，跳到群管理页面
  * 临时群任何人都可以加人，但是只有群主可以踢人”这个逻辑修改下，正式群暂时只给createId开放
  */
-public class GroupManagerFragment extends TTBaseFragment{
+public class GroupManagerFragment extends BTBaseFragment {
     private View curView = null;
     /**adapter配置*/
     private GridView gridView;
@@ -68,12 +70,12 @@ public class GroupManagerFragment extends TTBaseFragment{
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (null != curView) {
             ((ViewGroup) curView.getParent()).removeView(curView);
             return curView;
         }
-        curView = inflater.inflate(R.layout.tt_fragment_group_manage, topContentView);
+        curView = inflater.inflate(R.layout.group_manage_fragment, baseFragmentLayout);
         noDisturbCheckbox = curView.findViewById(R.id.NotificationNoDisturbCheckbox);
         topSessionCheckBox = curView.findViewById(R.id.NotificationTopMessageCheckbox);
         initRes();
@@ -82,7 +84,7 @@ public class GroupManagerFragment extends TTBaseFragment{
 
     private void initRes() {
         // 设置标题栏
-        setTopLeftButton(R.drawable.tt_top_back);
+        setTopLeftBtnImage(R.drawable.tt_top_back);
         setTopLeftText(getActivity().getString(R.string.top_left_back));
         topLeftContainerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,7 +138,7 @@ public class GroupManagerFragment extends TTBaseFragment{
 
 
     private void initView() {
-        setTopTitle(getString(R.string.chat_detail));
+        setTopCenterTitleText(getString(R.string.chat_detail));
         if (null == imService || null == curView ) {
             logger.e("groupmgr#init failed,cause by imService or curView is null");
             return;

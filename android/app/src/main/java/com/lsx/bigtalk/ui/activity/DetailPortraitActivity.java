@@ -20,7 +20,7 @@ public class DetailPortraitActivity extends Activity  {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.tt_activity_detail_portrait);
+		setContentView(R.layout.detail_portrait_activity);
 		
 		Intent intent = getIntent();
 		if (intent == null) {
@@ -62,7 +62,7 @@ public class DetailPortraitActivity extends Activity  {
                         {
                             DetailPortraitActivity.this.finish();
                             overridePendingTransition(
-                                    R.anim.tt_stay, R.anim.tt_image_exit);
+                                    R.anim.stay_y, R.anim.image_right_exit);
                         }
                     }
                 });

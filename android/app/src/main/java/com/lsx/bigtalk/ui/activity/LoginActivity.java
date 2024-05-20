@@ -1,15 +1,10 @@
 package com.lsx.bigtalk.ui.activity;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.view.ContextThemeWrapper;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -162,7 +157,7 @@ public class LoginActivity extends BTBaseActivity {
         imServiceConnector.connect(LoginActivity.this);
         EventBus.getDefault().register(this);
 
-        setContentView(R.layout.tt_activity_login);
+        setContentView(R.layout.login_activity);
 
         mNameView = findViewById(R.id.name);
         mPasswordView = findViewById(R.id.password);
@@ -215,7 +210,7 @@ public class LoginActivity extends BTBaseActivity {
         });
 
         if (autoLogin) {
-            Animation splashAnimation = AnimationUtils.loadAnimation(this, R.anim.login_splash);
+            Animation splashAnimation = AnimationUtils.loadAnimation(this, R.anim.splash_fade_in);
             if (splashAnimation == null) {
                 logger.e("LoginActivity#loadAnimation 'login_splash' failed");
                 return;

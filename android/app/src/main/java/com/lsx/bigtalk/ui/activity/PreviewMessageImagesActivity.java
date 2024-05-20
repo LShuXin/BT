@@ -51,7 +51,7 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_preview_message_images);
+        setContentView(R.layout.preview_message_images_activity);
         imageList = ImageMessage.getImageMessageList();
         try {
             messageInfo = (ImageMessage) getIntent().getSerializableExtra(IntentConstant.CUR_MESSAGE);

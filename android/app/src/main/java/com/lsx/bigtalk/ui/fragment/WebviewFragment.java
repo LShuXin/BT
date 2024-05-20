@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import androidx.annotation.NonNull;
+
 import com.lsx.bigtalk.R;
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -17,14 +19,14 @@ public class WebviewFragment extends MainFragment {
 	private static String url;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         extractUidFromUri();
 		if (null != curView) {
             ((ViewGroup) curView.getParent()).removeView(curView);
             return curView;
         }
-        curView = inflater.inflate(R.layout.tt_fragment_webview, topContentView);
+        curView = inflater.inflate(R.layout.webview_fragment, baseFragmentLayout);
         super.init(curView);
         showProgressBar();
         initRes();
@@ -34,8 +36,8 @@ public class WebviewFragment extends MainFragment {
 	
     private void initRes() {
         // 设置顶部标题栏
-        setTopTitleBold(getActivity().getString(R.string.main_inner_net));
-		setTopLeftButton(R.drawable.tt_top_back);
+        setTopCenterTitleTextBold(getActivity().getString(R.string.main_inner_net));
+		setTopLeftBtnImage(R.drawable.tt_top_back);
 		topLeftContainerLayout.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -54,7 +56,7 @@ public class WebviewFragment extends MainFragment {
 
 			@Override
 			public void onPageFinished(WebView view, String url) {
-				setTopTitle(view.getTitle());
+				setTopCenterTitleText(view.getTitle());
                 hideProgressBar();
 			}
 

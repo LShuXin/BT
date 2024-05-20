@@ -8,26 +8,28 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.config.IntentConstant;
 import com.lsx.bigtalk.ui.activity.WebViewFragmentActivity;
 import com.lsx.bigtalk.ui.adapter.InternalAdapter;
-import com.lsx.bigtalk.ui.base.TTBaseFragment;
+import com.lsx.bigtalk.ui.base.BTBaseFragment;
 
-public class InternalFragment extends TTBaseFragment {
+public class InternalFragment extends BTBaseFragment {
     private View curView = null;
     private ListView internalListView;
     private InternalAdapter mAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (null != curView) {
             ((ViewGroup) curView.getParent()).removeView(curView);
             return curView;
         }
-        curView = inflater.inflate(R.layout.tt_fragment_internal,
-                topContentView);
+        curView = inflater.inflate(R.layout.internal_fragment,
+                baseFragmentLayout);
 
         initRes();
         mAdapter = new InternalAdapter(this.getActivity());
@@ -38,7 +40,7 @@ public class InternalFragment extends TTBaseFragment {
 
     private void initRes() {
         // 设置顶部标题栏
-        setTopTitle(getActivity().getString(R.string.main_inner_net));
+        setTopCenterTitleText(getActivity().getString(R.string.main_inner_net));
         internalListView = curView.findViewById(R.id.internalListView);
         internalListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

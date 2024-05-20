@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.lsx.bigtalk.DB.entity.DepartmentEntity;
 import com.lsx.bigtalk.DB.entity.UserEntity;
 import com.lsx.bigtalk.R;
@@ -74,15 +76,15 @@ public class UserInfoFragment extends MainFragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
 		imServiceConnector.connect(getActivity());
 		if (null != curView) {
 			((ViewGroup) curView.getParent()).removeView(curView);
 			return curView;
 		}
-		curView = inflater.inflate(R.layout.tt_fragment_user_detail, topContentView);
+		curView = inflater.inflate(R.layout.user_detail_fragment, baseFragmentLayout);
 		super.init(curView);
 		showProgressBar();
 		initRes();
@@ -104,8 +106,8 @@ public class UserInfoFragment extends MainFragment {
 	 */
 	private void initRes() {
 		// 设置标题栏
-		setTopTitle(getActivity().getString(R.string.page_user_detail));
-		setTopLeftButton(R.drawable.tt_top_back);
+		setTopCenterTitleText(getActivity().getString(R.string.page_user_detail));
+		setTopLeftBtnImage(R.drawable.tt_top_back);
 		topLeftContainerLayout.setOnClickListener(new View.OnClickListener() {
 
 			@Override

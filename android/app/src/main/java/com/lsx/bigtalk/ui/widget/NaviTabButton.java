@@ -43,7 +43,7 @@ public class NaviTabButton extends FrameLayout {
         this.mContext = context;
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.tt_navi_tab_button, this, true);
+        inflater.inflate(R.layout.navi_tab_button, this, true);
         RelativeLayout container = findViewById(R.id.tab_btn_container);
 
         mImage = findViewById(R.id.tab_btn_default);

@@ -24,7 +24,7 @@ public class TextRenderView extends BaseMsgRenderView {
     private TextView messageContent;
 
     public static TextRenderView inflater(Context context, ViewGroup viewGroup, boolean isMine) {
-        int resource = isMine ? R.layout.tt_mine_text_message_item : R.layout.tt_other_text_message_item;
+        int resource = isMine ? R.layout.mine_text_message_item : R.layout.other_text_message_item;
 
         TextRenderView textRenderView = (TextRenderView) LayoutInflater.from(context).inflate(resource, viewGroup, false);
         textRenderView.setMine(isMine);

@@ -216,7 +216,7 @@ public class SearchAdapter extends BaseAdapter implements
         }
         if (view == null) {
             userHolder = new UserHolder();
-            view = LayoutInflater.from(ctx).inflate(R.layout.tt_item_contact, parent, false);
+            view = LayoutInflater.from(ctx).inflate(R.layout.item_contact, parent, false);
             userHolder.nameView = view.findViewById(R.id.contact_item_title);
             userHolder.realNameView = view.findViewById(R.id.contact_realname_title);
             userHolder.sectionView = view.findViewById(R.id.contact_category_title);
@@ -264,7 +264,7 @@ public class SearchAdapter extends BaseAdapter implements
         }
         if (view == null) {
             groupHolder = new GroupHolder();
-            view = LayoutInflater.from(ctx).inflate(R.layout.tt_item_contact_group, parent, false);
+            view = LayoutInflater.from(ctx).inflate(R.layout.item_contact_group, parent, false);
             groupHolder.nameView = view.findViewById(R.id.contact_item_title);
             groupHolder.sectionView = view.findViewById(R.id.contact_category_title);
             groupHolder.avatar = view.findViewById(R.id.contact_portrait);
@@ -321,7 +321,7 @@ public class SearchAdapter extends BaseAdapter implements
         }
         if (view == null) {
             deptHolder = new DeptHolder();
-            view = LayoutInflater.from(ctx).inflate(R.layout.tt_item_contact, parent, false);
+            view = LayoutInflater.from(ctx).inflate(R.layout.item_contact, parent, false);
             deptHolder.avatar = view.findViewById(R.id.contact_portrait);
             deptHolder.nameView = view.findViewById(R.id.contact_item_title);
             deptHolder.sectionView = view.findViewById(R.id.contact_category_title);

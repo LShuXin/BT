@@ -20,6 +20,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.lsx.bigtalk.DB.entity.GroupEntity;
 import com.lsx.bigtalk.DB.entity.PeerEntity;
 import com.lsx.bigtalk.DB.entity.UserEntity;
@@ -37,7 +39,6 @@ import com.lsx.bigtalk.ui.widget.SortSideBar.OnTouchingLetterChangedListener;
 import com.lsx.bigtalk.utils.IMUIHelper;
 import com.lsx.bigtalk.utils.Logger;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -89,13 +90,13 @@ public class GroupMemberSelectFragment extends MainFragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (null != curView) {
             ((ViewGroup) curView.getParent()).removeView(curView);
             return curView;
         }
-        curView = inflater.inflate(R.layout.tt_fragment_group_member_select, topContentView);
+        curView = inflater.inflate(R.layout.group_member_select_fragment, baseFragmentLayout);
         super.init(curView);
         initRes();
         return curView;
@@ -174,7 +175,7 @@ public class GroupMemberSelectFragment extends MainFragment
     private void initRes() {
         // 设置标题栏
         // todo eric
-        setTopTitle(getString(R.string.choose_contact));
+        setTopCenterTitleText(getString(R.string.choose_contact));
         setTopRightText(getActivity().getString(R.string.confirm));
         topLeftContainerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,7 +185,7 @@ public class GroupMemberSelectFragment extends MainFragment
         });
         setTopLeftText(getResources().getString(R.string.cancel));
 
-        topRightTitleTxt.setOnClickListener(new OnClickListener() {
+        topRightBtnTitleTextView.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -219,7 +220,7 @@ public class GroupMemberSelectFragment extends MainFragment
                         android.R.style.Theme_Holo_Light_Dialog));
 
                 LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View dialog_view = inflater.inflate(R.layout.tt_custom_dialog, null);
+                View dialog_view = inflater.inflate(R.layout.custom_dialog, null);
                 final EditText editText = dialog_view.findViewById(R.id.dialog_edit_content);
                 TextView textText = dialog_view.findViewById(R.id.dialog_title);
                 textText.setText(R.string.create_temp_group_dialog_title);

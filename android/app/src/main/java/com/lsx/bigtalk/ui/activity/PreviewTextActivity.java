@@ -14,7 +14,7 @@ public class PreviewTextActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tt_activity_preview_text);
+        setContentView(R.layout.preview_text_activity);
 
         txtContent = findViewById(R.id.content);
 

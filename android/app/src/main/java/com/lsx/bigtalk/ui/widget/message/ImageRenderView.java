@@ -43,7 +43,7 @@ public class ImageRenderView extends BaseMsgRenderView {
     }
 
     public static ImageRenderView inflater(Context context,ViewGroup viewGroup,boolean isMine){
-        int resource = isMine?R.layout.tt_mine_image_message_item:R.layout.tt_other_image_message_item;
+        int resource = isMine?R.layout.mine_image_message_item :R.layout.other_image_message_item;
         ImageRenderView imageRenderView = (ImageRenderView) LayoutInflater.from(context).inflate(resource, viewGroup, false);
         imageRenderView.setMine(isMine);
         imageRenderView.setParentView(viewGroup);

@@ -66,18 +66,18 @@
     </style>
 
     <style name="AnimAlbum" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/tt_album_enter</item>
-        <item name="android:windowExitAnimation">@anim/tt_album_exit</item>
+        <item name="android:windowEnterAnimation">@anim/album_bottom_enter</item>
+        <item name="android:windowExitAnimation">@anim/album_bottom_exit</item>
     </style>
 
     <style name="AnimImage" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/tt_image_enter</item>
-        <item name="android:windowExitAnimation">@anim/tt_image_exit</item>
+        <item name="android:windowEnterAnimation">@anim/image_right_enter</item>
+        <item name="android:windowExitAnimation">@anim/image_right_exit</item>
     </style>
 
     <style name="AnimSpeeker" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/tt_speeker_in</item>
-        <item name="android:windowExitAnimation">@anim/tt_speeker_out</item>
+        <item name="android:windowEnterAnimation">@anim/speeker_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/speeker_fade_out</item>
     </style>
 
     <style name="SoundVolumeStyle" parent="@android:style/Theme.Dialog">

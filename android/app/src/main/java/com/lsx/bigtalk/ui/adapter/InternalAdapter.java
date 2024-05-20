@@ -71,7 +71,7 @@ public class InternalAdapter extends BaseAdapter {
             InternalItem info = datalist.get(position);
             ViewHoler holder;
             if (null == convertView) {
-                convertView = LayoutInflater.from(ctx).inflate(R.layout.tt_item_internalitem, parent, false);
+                convertView = LayoutInflater.from(ctx).inflate(R.layout.item_internal_item, parent, false);
                 holder = new ViewHoler();
                 holder.title = convertView.findViewById(R.id.tt_internal_item_title);
                 convertView.setTag(holder);

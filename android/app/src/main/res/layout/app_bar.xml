@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:background="@color/default_fragment_title_bk_color"
     android:orientation="vertical"
-    android:id="@+id/act_base_root"
+    android:id="@+id/app_bar_root"
     >
 
     <FrameLayout
-        android:id="@+id/topbar"
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_bar_default_height"
         android:background="@drawable/tt_top_default_bk" >
@@ -18,17 +18,19 @@
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:scaleType="center"
-            android:src="@drawable/tt_back_btn" />
+            android:src="@drawable/tt_back_btn"
+            android:contentDescription="@string/pop_back" />
 
         <TextView
             android:id="@+id/left_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp"
             android:textColor="@color/default_black_color"
             android:textSize="14sp"
-            android:paddingRight="20dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             />
@@ -48,8 +50,9 @@
             android:id="@+id/right_btn"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:layout_gravity="right|center_vertical"
-            android:scaleType="center" />
+            android:layout_gravity="end|center_vertical"
+            android:scaleType="center"
+            android:contentDescription="@string/action" />
     </FrameLayout>
     
     <View

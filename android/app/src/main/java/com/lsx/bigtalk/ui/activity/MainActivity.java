@@ -56,7 +56,7 @@ public class MainActivity extends FragmentActivity {
         imServiceConnector.connect(this);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.tt_activity_main);
+        setContentView(R.layout.main_activity);
 
         initTab();
         initFragment();

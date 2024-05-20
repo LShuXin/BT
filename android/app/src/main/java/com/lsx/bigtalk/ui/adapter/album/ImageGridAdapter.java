@@ -117,7 +117,7 @@ public class ImageGridAdapter extends BaseAdapter {
         try {
             if (null == convertView) {
                 holder = new Holder();
-                convertView = View.inflate(activity, R.layout.tt_item_image_grid,
+                convertView = View.inflate(activity, R.layout.item_image_grid,
                         null);
                 holder.iv = convertView.findViewById(R.id.image);
                 holder.selected = convertView

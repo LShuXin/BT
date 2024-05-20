@@ -405,7 +405,7 @@ public class MessageAdapter extends BaseAdapter {
                 bundle.putSerializable(IntentConstant.CUR_MESSAGE, imageMessage);
                 i.putExtras(bundle);
                 ctx.startActivity(i);
-                ((Activity) ctx).overridePendingTransition(R.anim.tt_image_enter, R.anim.tt_stay);
+                ((Activity) ctx).overridePendingTransition(R.anim.image_right_enter, R.anim.stay_y);
             }
         });
 
@@ -474,7 +474,7 @@ public class MessageAdapter extends BaseAdapter {
                 Intent intent = new Intent(ctx, PreviewGifActivity.class);
                 intent.putExtra(IntentConstant.PREVIEW_TEXT_CONTENT, url);
                 ctx.startActivity(intent);
-                ((Activity) ctx).overridePendingTransition(R.anim.tt_image_enter, R.anim.tt_stay);
+                ((Activity) ctx).overridePendingTransition(R.anim.image_right_enter, R.anim.stay_y);
             }
         });
         imageRenderView.render(imageMessage, userEntity, ctx);
@@ -658,7 +658,7 @@ public class MessageAdapter extends BaseAdapter {
                 Intent intent = new Intent(ctx, PreviewGifActivity.class);
                 intent.putExtra(IntentConstant.PREVIEW_TEXT_CONTENT, content);
                 ctx.startActivity(intent);
-                ((Activity) ctx).overridePendingTransition(R.anim.tt_image_enter, R.anim.tt_stay);
+                ((Activity) ctx).overridePendingTransition(R.anim.image_right_enter, R.anim.stay_y);
             }
         });
 

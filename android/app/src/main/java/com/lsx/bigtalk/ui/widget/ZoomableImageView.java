@@ -410,7 +410,7 @@ public class ZoomableImageView extends ImageView{
         }
 
         public void setupDialogViews(final Dialog dialog){
-            View dialogLyout = LayoutInflater.from(getContext()).inflate(R.layout.tt_dialog_call, null);
+            View dialogLyout = LayoutInflater.from(getContext()).inflate(R.layout.dialog_call, null);
 
             Button callButton = dialogLyout.findViewById(R.id.call);
             callButton.setText(getContext().getText(R.string.save_image));

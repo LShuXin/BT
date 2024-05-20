@@ -14,7 +14,7 @@ import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.config.HandlerConstant;
 import com.lsx.bigtalk.ui.fragment.ContactFragment;
 
-public class TopTabButton extends FrameLayout {
+public class TopTabButtonGroup extends FrameLayout {
     private Context context = null;
     private Button tabALLBtn = null;
     private Button tabDepartmentBtn = null;
@@ -23,19 +23,19 @@ public class TopTabButton extends FrameLayout {
 		return tabDepartmentBtn;
 	}
 
-	public TopTabButton(Context cxt) {
+	public TopTabButtonGroup(Context cxt) {
         super(cxt);
         this.context = cxt;
         initView();
     }
 
-    public TopTabButton(Context cxt, AttributeSet attrs) {
+    public TopTabButtonGroup(Context cxt, AttributeSet attrs) {
         super(cxt,attrs);
         this.context = cxt;
         initView();
     }
 
-    public TopTabButton(Context cxt, AttributeSet attrs, int defStyle) {
+    public TopTabButtonGroup(Context cxt, AttributeSet attrs, int defStyle) {
         super(cxt, attrs, defStyle);
         this.context = cxt;
         initView();
@@ -45,7 +45,7 @@ public class TopTabButton extends FrameLayout {
         // 加载布局
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.tt_top_tab_button, this);
+        inflater.inflate(R.layout.top_tab_button, this);
 
         tabALLBtn = findViewById(R.id.all_btn);
         tabDepartmentBtn = findViewById(R.id.department_btn);

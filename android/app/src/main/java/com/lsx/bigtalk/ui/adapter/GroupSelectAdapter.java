@@ -162,7 +162,7 @@ public class GroupSelectAdapter extends BaseAdapter  implements SectionIndexer,
         UserHolder userHolder = null;
         if (view == null) {
             userHolder = new UserHolder();
-            view = LayoutInflater.from(ctx).inflate(R.layout.tt_item_contact, parent,false);
+            view = LayoutInflater.from(ctx).inflate(R.layout.item_contact, parent,false);
             userHolder.nameView = view.findViewById(R.id.contact_item_title);
             userHolder.realNameView = view.findViewById(R.id.contact_realname_title);
             userHolder.sectionView = view.findViewById(R.id.contact_category_title);

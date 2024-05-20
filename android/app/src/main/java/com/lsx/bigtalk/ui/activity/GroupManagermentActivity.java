@@ -13,7 +13,7 @@ public class GroupManagermentActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        setContentView(R.layout.tt_activity_groupmanage);
+        setContentView(R.layout.group_manage_activity);
     }
 
     @Override

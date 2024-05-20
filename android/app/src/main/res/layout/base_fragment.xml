@@ -5,13 +5,9 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-
-
-
-
     <!--  通用导航栏：左侧返回按钮 + 居中标题 + 右侧按钮/可点击文案  -->
     <FrameLayout
-        android:id="@+id/topbar"
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_bar_default_height"
         android:background="@drawable/tt_top_default_bk"
@@ -112,7 +108,7 @@
         android:background="@drawable/tt_top_default_bk" 
         android:visibility="gone">
 
-    	<com.lsx.bigtalk.ui.widget.TopTabButton
+    	<com.lsx.bigtalk.ui.widget.TopTabButtonGroup
 	        android:id="@+id/contact_tile"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"

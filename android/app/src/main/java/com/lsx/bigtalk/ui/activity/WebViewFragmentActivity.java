@@ -5,10 +5,10 @@ import android.os.Bundle;
 
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.config.IntentConstant;
-import com.lsx.bigtalk.ui.base.TTBaseFragmentActivity;
+import com.lsx.bigtalk.ui.base.BTBaseFragmentActivity;
 import com.lsx.bigtalk.ui.fragment.WebviewFragment;
 
-public class WebViewFragmentActivity extends TTBaseFragmentActivity {
+public class WebViewFragmentActivity extends BTBaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,7 +16,7 @@ public class WebViewFragmentActivity extends TTBaseFragmentActivity {
         if (intent.hasExtra(IntentConstant.WEBVIEW_URL)) {
             WebviewFragment.setUrl(intent.getStringExtra(IntentConstant.WEBVIEW_URL));
         }
-        setContentView(R.layout.tt_fragment_activity_webview);
+        setContentView(R.layout.webview_fragment_activity);
     }
 
     @Override
