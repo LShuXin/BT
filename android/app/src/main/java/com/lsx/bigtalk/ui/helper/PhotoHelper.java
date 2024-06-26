@@ -60,7 +60,7 @@ public class PhotoHelper {
     }
 
     public void takePhoto() {
-        if (CommonUtil.checkSDCard()) {
+        if (CommonUtil.isSDCardExist()) {
             doTakePhoto(context);
         } else {
             Toast.makeText(context,
@@ -174,7 +174,7 @@ public class PhotoHelper {
                 Uri.fromFile(new File(takePhotoSavePath)));
         // intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
         ((MessageActivity) context).startActivityForResult(intent,
-                SysConstant.CAMERA_WITH_DATA);
+                SysConstant.CAMERA_FOR_DATA);
     }
 
     /**

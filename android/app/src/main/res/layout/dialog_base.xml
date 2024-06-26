@@ -50,10 +50,10 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/tt_dialog_negative_btn_bg"
+            android:background="@drawable/dialog_negative_btn_bg"
             android:singleLine="true"
             tools:text="取消"
-            android:textColor="@color/tt_dialog_negative_text_color"
+            android:textColor="@color/negative_text_color"
             android:textSize="17sp" />
 
         <Button
@@ -62,10 +62,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_weight="1"
-            android:background="@drawable/tt_dialog_positive_btn_bg"
+            android:background="@drawable/dialog_positive_btn_bg"
             android:singleLine="true"
             tools:text="确定"
-            android:textColor="@color/tt_positive_text_color"
+            android:textColor="@color/positive_text_color"
             android:textSize="17sp" />
     </LinearLayout>
 

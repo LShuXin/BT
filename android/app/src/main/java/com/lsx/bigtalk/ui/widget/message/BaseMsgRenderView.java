@@ -14,7 +14,7 @@ import com.lsx.bigtalk.DB.entity.UserEntity;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.config.MessageConstant;
 import com.lsx.bigtalk.config.SysConstant;
-import com.lsx.bigtalk.utils.IMUIHelper;
+import com.lsx.bigtalk.helper.IMUIHelper;
 import com.lsx.bigtalk.ui.widget.IMBaseImageView;
 
 /**
@@ -99,7 +99,7 @@ public abstract class BaseMsgRenderView extends RelativeLayout {
         int msgStatus = messageEntity.getStatus();
 
         //头像设置
-        portrait.setDefaultImageRes(R.drawable.tt_default_user_portrait_corner);
+        portrait.setDefaultImageRes(R.drawable.default_user_avatar);
         portrait.setCorner(5);
         portrait.setAvatarAppend(SysConstant.AVATAR_APPEND_100);
         portrait.setImageUrl(avatar);

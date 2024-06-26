@@ -1,4 +1,3 @@
-
 package com.lsx.bigtalk.ui.activity;
 
 import android.app.Activity;
@@ -23,11 +22,7 @@ import com.lsx.bigtalk.utils.Logger;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * @author Nana
- * @Description 相册列表
- * @date 2014-5-6
- */
+
 public class PickPhotoActivity extends Activity {
     List<ImageBucket> dataList = null;
     ListView listView = null;
@@ -64,7 +59,7 @@ public class PickPhotoActivity extends Activity {
         helper = AlbumHelper.getHelper(getApplicationContext());
         dataList = helper.getImagesBucketList(true);
         bimap = BitmapFactory.decodeResource(getResources(),
-                R.drawable.tt_default_album_grid_image);
+                R.drawable.default_album_grid_image);
     }
 
     /**

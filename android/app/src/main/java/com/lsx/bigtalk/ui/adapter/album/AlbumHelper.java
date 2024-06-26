@@ -1,14 +1,4 @@
-
 package com.lsx.bigtalk.ui.adapter.album;
-
-import android.content.ContentResolver;
-import android.content.Context;
-import android.database.Cursor;
-import android.provider.MediaStore.Audio.Albums;
-import android.provider.MediaStore.Images.Media;
-import android.provider.MediaStore.Images.Thumbnails;
-
-import com.lsx.bigtalk.utils.Logger;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,16 +9,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-/**
- * @Description 相册相关处理
- * @author Nana
- * @date 2014-5-6
- */
+import android.content.ContentResolver;
+import android.content.Context;
+import android.database.Cursor;
+import android.provider.MediaStore.Audio.Albums;
+import android.provider.MediaStore.Images.Media;
+import android.provider.MediaStore.Images.Thumbnails;
+
+import com.lsx.bigtalk.utils.Logger;
+
+
 public class AlbumHelper {
     Context context = null;
     ContentResolver contentResolver = null;
 
-    // 缩略图列表
     HashMap<String, String> thumbnailList = new HashMap<String, String>();
     List<HashMap<String, String>> albumList = new ArrayList<HashMap<String, String>>();
     HashMap<String, ImageBucket> bucketList = new HashMap<String, ImageBucket>();

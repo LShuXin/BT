@@ -121,7 +121,7 @@ public class MessageOperatePopup implements View.OnClickListener, View.OnTouchLi
         //下面全用回调 todo
 
         // 语音类型
-        if (type == DBConstant.SHOW_AUDIO_TYPE) {
+        if (type == DBConstant.SHOW_TYPE_AUDIO) {
             speakerBtn.setVisibility(View.VISIBLE);
             if (AudioPlayerHandler.getInstance().getAudioMode(context) == AudioManager.MODE_NORMAL) {
                 speakerBtn.setText(R.string.call_mode);
@@ -142,7 +142,7 @@ public class MessageOperatePopup implements View.OnClickListener, View.OnTouchLi
         if (bResend && bSelf) {
             resendBtn.setVisibility(View.VISIBLE);
             bresendShow = true;
-            if (type == DBConstant.SHOW_ORIGIN_TEXT_TYPE) {
+            if (type == DBConstant.SHOW_TYPE_PLAIN_TEXT) {
                 copyBtn.setVisibility(View.VISIBLE);
                 bcopyShow = true;
             } else {
@@ -152,7 +152,7 @@ public class MessageOperatePopup implements View.OnClickListener, View.OnTouchLi
         } else if (!bResend && bSelf) {
             resendBtn.setVisibility(View.GONE);
             bresendShow = false;
-            if (type != DBConstant.SHOW_IMAGE_TYPE && type != DBConstant.SHOW_AUDIO_TYPE && type != DBConstant.SHOW_GIF_TYPE)  {
+            if (type != DBConstant.SHOW_TYPE_IMAGE && type != DBConstant.SHOW_TYPE_AUDIO && type != DBConstant.SHOW_TYPE_GIF)  {
                 copyBtn.setVisibility(View.VISIBLE);
                 bcopyShow = true;
             } else {
@@ -160,7 +160,7 @@ public class MessageOperatePopup implements View.OnClickListener, View.OnTouchLi
                 bcopyShow = false;
             }
         } else {
-            if (type != DBConstant.SHOW_IMAGE_TYPE && type != DBConstant.SHOW_AUDIO_TYPE && type != DBConstant.SHOW_GIF_TYPE) {
+            if (type != DBConstant.SHOW_TYPE_IMAGE && type != DBConstant.SHOW_TYPE_AUDIO && type != DBConstant.SHOW_TYPE_GIF) {
                 copyBtn.setVisibility(View.VISIBLE);
                 bcopyShow = true;
             }else {
@@ -176,11 +176,11 @@ public class MessageOperatePopup implements View.OnClickListener, View.OnTouchLi
                     .getDimension(R.dimen.message_item_popup_width_double_short);
             mPopup.setWidth(mWidth);
             Drawable bgLeft = resource
-                    .getDrawable(R.drawable.tt_bg_popup_left_nomal);
+                    .getDrawable(R.drawable.bubble_mine_nomal);
             copyBtn.setBackgroundDrawable(bgLeft);
             copyBtn.setPadding(0, 13, 0, 8);
             Drawable bgRight = resource
-                    .getDrawable(R.drawable.tt_bg_popup_right_nomal);
+                    .getDrawable(R.drawable.bubble_others_nomal);
             resendBtn.setBackgroundDrawable(bgRight);
             resendBtn.setPadding(0, 13, 0, 8);
         } else if (bcopyShow || bresendShow) {
@@ -191,10 +191,10 @@ public class MessageOperatePopup implements View.OnClickListener, View.OnTouchLi
                         .getDimension(R.dimen.message_item_popup_width_double_long);
                 mPopup.setWidth(mWidth);
                 Drawable bgLeft = resource
-                        .getDrawable(R.drawable.tt_bg_popup_left_nomal);
+                        .getDrawable(R.drawable.bubble_mine_nomal);
                 speakerBtn.setBackgroundDrawable(bgLeft);
                 Drawable bgRight = resource
-                        .getDrawable(R.drawable.tt_bg_popup_right_nomal);
+                        .getDrawable(R.drawable.bubble_others_nomal);
                 speakerBtn.setPadding(0, 13, 0, 8);
                 resendBtn.setBackgroundDrawable(bgRight);
                 resendBtn.setPadding(0, 13, 0, 8);
@@ -205,7 +205,7 @@ public class MessageOperatePopup implements View.OnClickListener, View.OnTouchLi
                         .getDimension(R.dimen.message_item_popup_width_single_short);
                 mPopup.setWidth(mWidth);
                 Drawable bgNormal = resource
-                        .getDrawable(R.drawable.tt_bg_popup_normal);
+                        .getDrawable(R.drawable.popup_normal);
                 copyBtn.setBackgroundDrawable(bgNormal);
                 resendBtn.setBackgroundDrawable(bgNormal);
                 copyBtn.setPadding(0, 13, 0, 8);
@@ -218,7 +218,7 @@ public class MessageOperatePopup implements View.OnClickListener, View.OnTouchLi
                     .getDimension(R.dimen.message_item_popup_width_single_long);
             mPopup.setWidth(mWidth);
             Drawable bgNormal = resource
-                    .getDrawable(R.drawable.tt_bg_popup_normal);
+                    .getDrawable(R.drawable.popup_normal);
             speakerBtn.setBackgroundDrawable(bgNormal);
             speakerBtn.setPadding(0, 13, 0, 8);
         } else {
@@ -290,10 +290,10 @@ public class MessageOperatePopup implements View.OnClickListener, View.OnTouchLi
                 Drawable drawable = null;
                 if (bcopyShow && bresendShow) {
                     drawable = resource
-                            .getDrawable(R.drawable.tt_bg_popup_left_nomal);
+                            .getDrawable(R.drawable.bubble_mine_nomal);
                 } else if (bcopyShow || bresendShow) {
                     drawable = resource
-                            .getDrawable(R.drawable.tt_bg_popup_normal);
+                            .getDrawable(R.drawable.popup_normal);
                 }
                 if (drawable != null) {
                     copyBtn.setBackgroundDrawable(drawable);
@@ -303,14 +303,14 @@ public class MessageOperatePopup implements View.OnClickListener, View.OnTouchLi
                 Drawable drawable = null;
                 if (bcopyShow && bresendShow) {
                     drawable = resource
-                            .getDrawable(R.drawable.tt_bg_popup_right_nomal);
+                            .getDrawable(R.drawable.bubble_others_nomal);
                 } else if (bcopyShow || bresendShow) {
                     if (bspeakerShow) {
                         drawable = resource
-                                .getDrawable(R.drawable.tt_bg_popup_right_nomal);
+                                .getDrawable(R.drawable.bubble_others_nomal);
                     } else {
                         drawable = resource
-                                .getDrawable(R.drawable.tt_bg_popup_normal);
+                                .getDrawable(R.drawable.popup_normal);
                     }
                 }
                 if (drawable != null) {
@@ -321,10 +321,10 @@ public class MessageOperatePopup implements View.OnClickListener, View.OnTouchLi
                 Drawable drawable = null;
                 if (bresendShow) {
                     drawable = resource
-                            .getDrawable(R.drawable.tt_bg_popup_left_nomal);
+                            .getDrawable(R.drawable.bubble_mine_nomal);
                 } else if (bspeakerShow) {
                     drawable = resource
-                            .getDrawable(R.drawable.tt_bg_popup_normal);
+                            .getDrawable(R.drawable.popup_normal);
                 }
                 if (drawable != null) {
                     speakerBtn.setBackgroundDrawable(drawable);
@@ -337,12 +337,12 @@ public class MessageOperatePopup implements View.OnClickListener, View.OnTouchLi
                 Drawable drawableCopy = null;
                 if (bcopyShow && bresendShow) {
                     drawableCopy = resource
-                            .getDrawable(R.drawable.tt_bg_popup_left_pressed);
+                            .getDrawable(R.drawable.bubble_mine_pressed);
                     drawableResend = resource
-                            .getDrawable(R.drawable.tt_bg_popup_right_nomal);
+                            .getDrawable(R.drawable.bubble_others_nomal);
                 } else if (bcopyShow || bresendShow) {
                     drawableCopy = resource
-                            .getDrawable(R.drawable.tt_bg_popup_pressed);
+                            .getDrawable(R.drawable.popup_pressed);
                 }
                 if (drawableCopy != null) {
                     copyBtn.setBackgroundDrawable(drawableCopy);
@@ -358,18 +358,18 @@ public class MessageOperatePopup implements View.OnClickListener, View.OnTouchLi
                 Drawable drawableSpeaker = null;
                 if (bcopyShow && bresendShow) {
                     drawableCopy = resource
-                            .getDrawable(R.drawable.tt_bg_popup_left_nomal);
+                            .getDrawable(R.drawable.bubble_mine_nomal);
                     drawableResend = resource
-                            .getDrawable(R.drawable.tt_bg_popup_right_pressed);
+                            .getDrawable(R.drawable.bubble_others_pressed);
                 } else if (bcopyShow || bresendShow) {
                     if (bspeakerShow) {
                         drawableSpeaker = resource
-                                .getDrawable(R.drawable.tt_bg_popup_left_nomal);
+                                .getDrawable(R.drawable.bubble_mine_nomal);
                         drawableResend = resource
-                                .getDrawable(R.drawable.tt_bg_popup_right_pressed);
+                                .getDrawable(R.drawable.bubble_others_pressed);
                     } else {
                         drawableResend = resource
-                                .getDrawable(R.drawable.tt_bg_popup_pressed);
+                                .getDrawable(R.drawable.popup_pressed);
                     }
                 }
                 if (drawableResend != null) {
@@ -390,12 +390,12 @@ public class MessageOperatePopup implements View.OnClickListener, View.OnTouchLi
                 Drawable drawableSpeaker = null;
                 if (bresendShow && bspeakerShow) {
                     drawableSpeaker = resource
-                            .getDrawable(R.drawable.tt_bg_popup_left_pressed);
+                            .getDrawable(R.drawable.bubble_mine_pressed);
                     drawableResend = resource
-                            .getDrawable(R.drawable.tt_bg_popup_right_nomal);
+                            .getDrawable(R.drawable.bubble_others_nomal);
                 } else if (bspeakerShow) {
                     drawableSpeaker = resource
-                            .getDrawable(R.drawable.tt_bg_popup_pressed);
+                            .getDrawable(R.drawable.popup_pressed);
                 }
                 if (drawableResend != null) {
                     resendBtn.setBackgroundDrawable(drawableResend);

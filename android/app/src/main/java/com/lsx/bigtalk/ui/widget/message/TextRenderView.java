@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.lsx.bigtalk.DB.entity.MessageEntity;
 import com.lsx.bigtalk.DB.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.imservice.entity.TextMessage;
+import com.lsx.bigtalk.imservice.entity.TextMessageEntity;
 import com.lsx.bigtalk.ui.helper.Emoparser;
 
 /**
@@ -24,7 +24,7 @@ public class TextRenderView extends BaseMsgRenderView {
     private TextView messageContent;
 
     public static TextRenderView inflater(Context context, ViewGroup viewGroup, boolean isMine) {
-        int resource = isMine ? R.layout.mine_text_message_item : R.layout.other_text_message_item;
+        int resource = isMine ? R.layout.mine_text_message_item : R.layout.others_text_message_item;
 
         TextRenderView textRenderView = (TextRenderView) LayoutInflater.from(context).inflate(resource, viewGroup, false);
         textRenderView.setMine(isMine);
@@ -50,7 +50,7 @@ public class TextRenderView extends BaseMsgRenderView {
     @Override
     public void render(MessageEntity messageEntity, UserEntity userEntity, Context context) {
         super.render(messageEntity, userEntity, context);
-        TextMessage textMessage = (TextMessage) messageEntity;
+        TextMessageEntity textMessage = (TextMessageEntity) messageEntity;
         // 按钮的长按也是上层设定的
         // url 路径可以设定 跳转哦哦
         String content = textMessage.getContent();

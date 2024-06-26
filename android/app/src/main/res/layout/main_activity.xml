@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/fragment_chat"
-        class="com.lsx.bigtalk.ui.fragment.ChatFragment"
+        class="com.lsx.bigtalk.ui.fragment.SessionFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        class="com.lsx.bigtalk.ui.fragment.InternalFragment" />
+        class="com.lsx.bigtalk.ui.fragment.FinderFragment" />
 
     <fragment
         android:id="@+id/fragment_my"
@@ -35,7 +35,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/tt_tab_bk"
+        android:background="@drawable/tab_bg"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingLeft="15dp"

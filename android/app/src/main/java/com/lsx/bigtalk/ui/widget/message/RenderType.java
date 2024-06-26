@@ -6,7 +6,7 @@ package com.lsx.bigtalk.ui.widget.message;
  */
 public enum  RenderType {
     MESSAGE_TYPE_INVALID,
-    MESSAGE_TYPE_MINE_TETX ,
+    MESSAGE_TYPE_MINE_TEXT ,
     MESSAGE_TYPE_MINE_GIF ,
     MESSAGE_TYPE_MINE_IMAGE,
     MESSAGE_TYPE_MINE_GIF_IMAGE,

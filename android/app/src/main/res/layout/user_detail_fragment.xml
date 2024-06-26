@@ -138,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|right"
                     android:layout_marginRight="15dp"
-                    android:background="@drawable/tele"
+                    android:background="@drawable/phone"
                     android:padding="3dip"/>
             </TableRow>
 
@@ -207,7 +207,7 @@
             android:layout_marginTop="25dp"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
-            android:background="@drawable/tt_default_btn_bk"
+            android:background="@drawable/default_btn_bg"
             android:text="@string/chat"
             android:textColor="@android:color/white"
             android:textSize="19sp" />
@@ -218,7 +218,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:indeterminateDrawable="@drawable/tt_progressbar"
+        android:indeterminateDrawable="@drawable/progress_bar"
         android:indeterminateDuration="4000"
         android:visibility="visible" />
 </RelativeLayout>

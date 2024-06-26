@@ -8,7 +8,7 @@
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_bar_default_height"
-        android:background="@drawable/tt_top_default_bk" >
+        android:background="@drawable/appbar_default_bg" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
             android:focusable="true"
             android:gravity="right|center_vertical"
             android:text="@string/cancel"
-            android:textColor="@drawable/tt_text_while"
+            android:textColor="@drawable/text_while"
             android:textSize="@dimen/album_top_cancel_size" />
     </RelativeLayout>
 
@@ -44,7 +44,7 @@
         android:dividerHeight="1dp"
         android:paddingBottom="8dip"
         android:drawSelectorOnTop="false"
-        android:listSelector="@drawable/tt_pickimage_item_bg"
+        android:listSelector="@drawable/pick_image_item_bg"
         android:cacheColorHint="#00000000"
         >
     </ListView>

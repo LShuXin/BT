@@ -29,7 +29,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="8dp"
                 android:visibility="gone"
-                android:src="@drawable/tt_group_tag_admin"/>
+                android:src="@drawable/group_tag_admin"/>
 
             <LinearLayout
                 android:id="@+id/deleteLayout"
@@ -43,7 +43,7 @@
                     android:id="@+id/grid_delete_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/tt_clear_bar" >
+                    android:background="@drawable/clear" >
                 </ImageView>
             </LinearLayout>
 

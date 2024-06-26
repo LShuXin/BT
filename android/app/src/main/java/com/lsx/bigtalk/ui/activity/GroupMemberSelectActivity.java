@@ -1,4 +1,3 @@
-
 package com.lsx.bigtalk.ui.activity;
 
 import android.content.Intent;
@@ -7,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.FragmentActivity;
 
 import com.lsx.bigtalk.R;
+
 
 public class GroupMemberSelectActivity extends FragmentActivity {
 
@@ -18,7 +18,9 @@ public class GroupMemberSelectActivity extends FragmentActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (RESULT_OK != resultCode) {
-        }
+        super.onActivityResult(requestCode, resultCode, data);
+//        if (RESULT_OK != resultCode) {
+//
+//        }
     }
 }

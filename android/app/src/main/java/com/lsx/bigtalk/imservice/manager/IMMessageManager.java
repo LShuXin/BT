@@ -1,5 +1,13 @@
 package com.lsx.bigtalk.imservice.manager;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
@@ -14,12 +22,12 @@ import com.lsx.bigtalk.DB.entity.MessageEntity;
 import com.lsx.bigtalk.config.MessageConstant;
 import com.lsx.bigtalk.config.SysConstant;
 import com.lsx.bigtalk.imservice.callback.Packetlistener;
-import com.lsx.bigtalk.imservice.entity.AudioMessage;
-import com.lsx.bigtalk.imservice.entity.ImageMessage;
-import com.lsx.bigtalk.imservice.entity.TextMessage;
+import com.lsx.bigtalk.imservice.entity.AudioMessageEntity;
+import com.lsx.bigtalk.imservice.entity.ImageMessageEntity;
+import com.lsx.bigtalk.imservice.entity.TextMessageEntity;
 import com.lsx.bigtalk.imservice.event.MessageEvent;
 import com.lsx.bigtalk.imservice.event.PriorityEvent;
-import com.lsx.bigtalk.imservice.event.RefreshHistoryMsgEvent;
+import com.lsx.bigtalk.imservice.event.HistoryMsgRefreshEvent;
 import com.lsx.bigtalk.imservice.service.LoadImageService;
 import com.lsx.bigtalk.protobuf.helper.EntityChangeEngine;
 import com.lsx.bigtalk.protobuf.helper.Java2ProtoBuf;
@@ -29,48 +37,42 @@ import com.lsx.bigtalk.protobuf.IMMessage;
 import com.lsx.bigtalk.imservice.support.SequenceNumberMaker;
 import com.lsx.bigtalk.utils.Logger;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import de.greenrobot.event.EventBus;
 
-/**
- * 消息的处理
- */
-public class IMMessageManager extends IMManager{
+
+public class IMMessageManager extends IMManager {
     private final Logger logger = Logger.getLogger(IMMessageManager.class);
-	private static final IMMessageManager inst = new IMMessageManager();
-	public static IMMessageManager instance() {
-			return inst;
-	}
-
-    private final IMSocketManager imSocketManager = IMSocketManager.instance();
-    private final IMSessionManager sessionManager = IMSessionManager.instance();
+    private final IMSocketManager imSocketManager = IMSocketManager.getInstance();
+    private final IMSessionManager imSessionManager = IMSessionManager.getInstance();
     private final DBInterface dbInterface = DBInterface.instance();
-
-    // 消息发送超时时间爱你设定
-    // todo eric, after testing ok, make it a longer value
-    private final long TIMEOUT_MILLISECONDS = 6 * 1000;
-    private final long IMAGE_TIMEOUT_MILLISECONDS = 4 * 60 * 1000;
-
-
-    private long getTimeoutTolerance(MessageEntity msg) {
-        if (msg.getDisplayType() == DBConstant.SHOW_IMAGE_TYPE) {
-            return IMAGE_TIMEOUT_MILLISECONDS;
+    @SuppressLint("StaticFieldLeak")
+    private static IMMessageManager instance;
+    public static IMMessageManager getInstance() {
+        if (null == instance) {
+            instance = new IMMessageManager();
         }
-        return TIMEOUT_MILLISECONDS;
+        return instance;
     }
 
-    /**
-     * 接受到消息，并且向服务端发送确认
-     * @param msg
-     */
-    public void ackReceiveMsg(MessageEntity msg){
-        logger.d("chat#ackReceiveMsg -> msg:%s", msg);
+    @Override
+    public void doOnStart() {
+
+    }
+
+    @Override
+    public void reset() {
+        EventBus.getDefault().unregister(instance);
+    }
+    
+    private long getTimeoutTolerance(MessageEntity msg) {
+        if (msg.getDisplayType() == DBConstant.SHOW_TYPE_IMAGE) {
+            return 4 * 60 * 1000;
+        }
+        return 6 * 1000;
+    }
+    
+    public void ackReceiveMsg(MessageEntity msg) {
+        logger.d("IMMessageManager#ackReceiveMsg -> msg:%s", msg);
         IMBaseDefine.SessionType sessionType = Java2ProtoBuf.getProtoSessionType(msg.getSessionType());
         IMMessage.IMMsgDataAck imMsgDataAck = IMMessage.IMMsgDataAck.newBuilder()
                 .setMsgId(msg.getMsgId())
@@ -80,53 +82,40 @@ public class IMMessageManager extends IMManager{
                 .build();
         int sid = IMBaseDefine.ServiceID.SID_MSG_VALUE;
         int cid = IMBaseDefine.MessageCmdID.CID_MSG_DATA_ACK_VALUE;
-        imSocketManager.sendRequest(imMsgDataAck,sid,cid);
+        imSocketManager.sendRequest(imMsgDataAck, sid, cid);
     }
-
-    @Override
-    public void doOnStart() {
-    }
-
-    public void onLoginSuccess(){
-        if(!EventBus.getDefault().isRegistered(inst)){
-            EventBus.getDefault().register(inst);
+    
+    public void onLoginSuccess() {
+        if (!EventBus.getDefault().isRegistered(instance)) {
+            EventBus.getDefault().register(instance);
         }
     }
-
-    @Override
-    public void reset() {
-        EventBus.getDefault().unregister(inst);
-    }
-
-    /**
-     * 自身的事件驱动
-     * @param event
-     */
+    
     public void triggerEvent(Object event) {
         EventBus.getDefault().post(event);
     }
-
-
-    /**图片的处理放在这里，因为在发送图片的过程中，很可能messageActivity已经关闭掉*/
-    public void onEvent(MessageEvent event){
-        MessageEvent.Event  type = event.getEvent();
-        switch (type){
-            case IMAGE_UPLOAD_FAILURE:{
-                logger.d("pic#onUploadImageFaild");
-                ImageMessage imageMessage = (ImageMessage)event.getMessageEntity();
+    
+    public void onEvent(MessageEvent event) {
+        MessageEvent.Event type = event.getEvent();
+        switch (type) {
+            case IMAGE_UPLOAD_FAILURE:
+            {
+                logger.d("IMMessageManager#onEvent#IMAGE_UPLOAD_FAILURE");
+                ImageMessageEntity imageMessage = (ImageMessageEntity)event.getMessageEntity();
                 imageMessage.setLoadStatus(MessageConstant.IMAGE_LOADED_FAILURE);
                 imageMessage.setStatus(MessageConstant.MSG_FAILURE);
                 dbInterface.insertOrUpdateMessage(imageMessage);
-
-                /**通知Activity层 失败*/
-                event.setEvent(MessageEvent.Event.HANDLER_IMAGE_UPLOAD_FAILURE);
+                event.setEvent(MessageEvent.Event.IMAGE_UPLOAD_FAILED);
                 event.setMessageEntity(imageMessage);
                 triggerEvent(event);
-            }break;
-
-            case IMAGE_UPLOAD_SUCCESS:{
+                break;
+            }
+            case IMAGE_UPLOAD_SUCCESS:
+            {
+                logger.d("IMMessageManager#onEvent#IMAGE_UPLOAD_SUCCESS");
                 onImageLoadSuccess(event);
-            }break;
+                break;
+            }
         }
     }
 
@@ -138,8 +127,8 @@ public class IMMessageManager extends IMManager{
      * 如果当前线程是UI线程，事件会被加到一个队列中，由一个线程依次处理这些事件，
      * 如果某个事件处理时间太长，会阻塞后面的事件的派发或处理
      * */
-    public void onEventBackgroundThread(RefreshHistoryMsgEvent historyMsgEvent){
-        doRefreshLocalMsg(historyMsgEvent);
+    public void onEventBackgroundThread(HistoryMsgRefreshEvent historyMsgEvent) {
+        refreshLocalMsg(historyMsgEvent);
     }
 
 
@@ -151,10 +140,10 @@ public class IMMessageManager extends IMManager{
      * 这个地方用DB id作为主键
      */
     public void sendMessage(MessageEntity msgEntity) {
-        logger.d("chat#sendMessage, msg:%s", msgEntity);
+        logger.d("IMMessageManager#sendMessage, msg:%s", msgEntity);
         // 发送情况下 msg_id 都是0
         // 服务端是从1开始计数的
-        if(!SequenceNumberMaker.getInstance().isFailure(msgEntity.getMsgId())){
+        if (!SequenceNumberMaker.getInstance().isFailure(msgEntity.getMsgId())) {
             throw new RuntimeException("#sendMessage# msgId is wrong,cause by 0!");
         }
 
@@ -173,203 +162,163 @@ public class IMMessageManager extends IMManager{
         int sid = IMBaseDefine.ServiceID.SID_MSG_VALUE;
         int cid = IMBaseDefine.MessageCmdID.CID_MSG_DATA_VALUE;
 
-
-        final MessageEntity messageEntity  = msgEntity;
-        imSocketManager.sendRequest(msgData,sid,cid,new Packetlistener(getTimeoutTolerance(messageEntity)) {
+        final MessageEntity messageEntity = msgEntity;
+        imSocketManager.sendRequest(msgData, sid, cid, new Packetlistener(getTimeoutTolerance(messageEntity)) {
             @Override
             public void onSuccess(Object response) {
                 try {
                     IMMessage.IMMsgDataAck imMsgDataAck = IMMessage.IMMsgDataAck.parseFrom((CodedInputStream)response);
-                    logger.i("chat#onAckSendedMsg");
-                    if(imMsgDataAck.getMsgId() <=0){
+                    logger.i("IMMessageManager#sendMessage#onSuccess");
+
+                    if (imMsgDataAck.getMsgId() <= 0) {
                         throw  new RuntimeException("Msg ack error,cause by msgId <=0");
                     }
                     messageEntity.setStatus(MessageConstant.MSG_SUCCESS);
                     messageEntity.setMsgId(imMsgDataAck.getMsgId());
-                    /**主键ID已经存在，直接替换*/
                     dbInterface.insertOrUpdateMessage(messageEntity);
-                    /**更新sessionEntity lastMsgId问题*/
-                    sessionManager.updateSession(messageEntity);
-                    triggerEvent(new MessageEvent(MessageEvent.Event.ACK_SEND_MESSAGE_OK,messageEntity));
+                    imSessionManager.updateSession(messageEntity);
+                    triggerEvent(new MessageEvent(MessageEvent.Event.SEND_MESSAGE_SUCCESS, messageEntity));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             @Override
             public void onFaild() {
+                logger.i("IMMessageManager#sendMessage#onFaild");
                 messageEntity.setStatus(MessageConstant.MSG_FAILURE);
                 dbInterface.insertOrUpdateMessage(messageEntity);
-                triggerEvent(new MessageEvent(MessageEvent.Event.ACK_SEND_MESSAGE_FAILURE,messageEntity));
+                triggerEvent(new MessageEvent(MessageEvent.Event.SEND_MESSAGE_FAILED, messageEntity));
             }
+
             @Override
             public void onTimeout() {
+                logger.i("IMMessageManager#sendMessage#onTimeout");
                 messageEntity.setStatus(MessageConstant.MSG_FAILURE);
                 dbInterface.insertOrUpdateMessage(messageEntity);
-                triggerEvent(new MessageEvent(MessageEvent.Event.ACK_SEND_MESSAGE_TIME_OUT,messageEntity));
+                triggerEvent(new MessageEvent(MessageEvent.Event.SEND_MESSAGE_TIMEOUT, messageEntity));
             }
         });
     }
 
-    /**
-     * 收到服务端原始信息
-     * 1. 解析消息的类型
-     * 2. 根据不同的类型,转化成不同的消息
-     * 3. 先保存在DB[insertOrreplace]中，session的更新，Unread的更新
-     * 4上层通知
-     * @param imMsgData
-     */
-    public void onRecvMessage(IMMessage.IMMsgData imMsgData) {
-        logger.i("chat#onRecvMessage");
+    public void onReceiveMessage(IMMessage.IMMsgData imMsgData) {
+        logger.i("IMMessageManager#onRecvMessage");
         if (imMsgData == null) {
-            logger.e("chat#decodeMessageInfo failed,cause by is null");
+            logger.i("IMMessageManager#onRecvMessage#null");
             return;
         }
 
-        MessageEntity recvMessage = ProtoBuf2JavaBean.getMessageEntity(imMsgData);
-        int loginId = IMLoginManager.instance().getLoginId();
-        boolean isSend = recvMessage.isSend(loginId);
-        recvMessage.buildSessionKey(isSend);
-        recvMessage.setStatus(MessageConstant.MSG_SUCCESS);
-        /**对于混合消息，未读消息计数还是1,session已经更新*/
+        MessageEntity receivedMessage = ProtoBuf2JavaBean.getMessageEntity(imMsgData);
+        int loginId = IMLoginManager.getInstance().getLoginId();
+        boolean isSend = receivedMessage.isSend(loginId);
+        receivedMessage.buildSessionKey(isSend);
+        receivedMessage.setStatus(MessageConstant.MSG_SUCCESS);
 
-        dbInterface.insertOrUpdateMessage(recvMessage);
-        sessionManager.updateSession(recvMessage);
+        dbInterface.insertOrUpdateMessage(receivedMessage);
+        imSessionManager.updateSession(receivedMessage);
 
-        /**
-         *  发送已读确认由上层的activity处理 特殊处理
-         *  1. 未读计数、 通知、session页面
-         *  2. 当前会话
-         * */
-        PriorityEvent  notifyEvent = new PriorityEvent();
+        PriorityEvent notifyEvent = new PriorityEvent();
         notifyEvent.event = PriorityEvent.Event.MSG_RECEIVED_MESSAGE;
-        notifyEvent.object = recvMessage;
+        notifyEvent.object = receivedMessage;
         triggerEvent(notifyEvent);
     }
-
-
-    /**-------------------其实可以继续分层切分---------消息发送相关-------------------------------*/
-    /**
-     * 1. 先保存DB
-     * 2. push到adapter中
-     * 3. 等待ack,更新页面
-     * */
-	public void sendText(TextMessage textMessage) {
-        logger.i("chat#text#textMessage");
+    
+	public void sendText(TextMessageEntity textMessage) {
+        logger.i("IMMessageManager#sendText");
         textMessage.setStatus(MessageConstant.MSG_SENDING);
-        long pkId =  DBInterface.instance().insertOrUpdateMessage(textMessage);
-        sessionManager.updateSession(textMessage);
+        DBInterface.instance().insertOrUpdateMessage(textMessage);
+        imSessionManager.updateSession(textMessage);
 		sendMessage(textMessage);
 	}
 
-	public void sendVoice(AudioMessage audioMessage) {
-		logger.i("chat#audio#sendVoice");
+	public void sendVoice(AudioMessageEntity audioMessage) {
+		logger.i("IMMessageManager#audio#sendVoice");
         audioMessage.setStatus(MessageConstant.MSG_SENDING);
-        long pkId =  DBInterface.instance().insertOrUpdateMessage(audioMessage);
-        sessionManager.updateSession(audioMessage);
+        DBInterface.instance().insertOrUpdateMessage(audioMessage);
+        imSessionManager.updateSession(audioMessage);
 		sendMessage(audioMessage);
 	}
-
-
-    public void sendSingleImage(ImageMessage msg){
-        logger.d("ImMessageManager#sendImage ");
-        ArrayList<ImageMessage> msgList = new ArrayList<>();
+    
+    public void sendSingleImage(ImageMessageEntity msg) {
+        logger.d("IMMessageManager#sendSingleImage");
+        ArrayList<ImageMessageEntity> msgList = new ArrayList<>();
         msgList.add(msg);
         sendImages(msgList);
     }
-
-    /**
-     * 发送图片消息
-     * @param msgList
-     */
-    public void sendImages(List<ImageMessage> msgList) {
-        logger.i("chat#image#sendImages size:%d",msgList.size());
-        if(null == msgList || msgList.size() <=0){
+    
+    public void sendImages(List<ImageMessageEntity> msgList) {
+        logger.i("IMMessageManager#sendImages#size:%d", msgList.size());
+        if (msgList.isEmpty()) {
             return ;
         }
 
         int len = msgList.size();
-        ArrayList<MessageEntity> needDbList = new ArrayList<>();
-        for (ImageMessage msg : msgList) {
-            needDbList.add(msg);
-        }
+        ArrayList<MessageEntity> needDbList = new ArrayList<>(msgList);
         DBInterface.instance().batchInsertOrUpdateMessage(needDbList);
 
-		for (ImageMessage msg : msgList) {
-			logger.d("chat#pic#sendImage  msg:%s",msg);
-			// image message would wrapped as a text message after uploading
+		for (ImageMessageEntity msg : msgList) {
+			logger.d("IMMessageManager#sendImage msg:%s", msg);
             int loadStatus = msg.getLoadStatus();
-
-            switch (loadStatus){
+            switch (loadStatus) {
                 case MessageConstant.IMAGE_LOADED_FAILURE:
                 case MessageConstant.IMAGE_UNLOAD:
                 case MessageConstant.IMAGE_LOADING:
+                {
                     msg.setLoadStatus(MessageConstant.IMAGE_LOADING);
                     Intent loadImageIntent = new Intent(ctx, LoadImageService.class);
-                    loadImageIntent.putExtra(SysConstant.UPLOAD_IMAGE_INTENT_PARAMS,msg);
+                    loadImageIntent.putExtra(SysConstant.UPLOAD_IMAGE_INTENT_PARAMS, msg);
                     ctx.startService(loadImageIntent);
                     break;
+                }
+
                 case MessageConstant.IMAGE_LOADED_SUCCESS:
-                        sendMessage(msg);
+                {
+                    sendMessage(msg);
                     break;
+                }
                 default:
                     throw new RuntimeException("sendImages#status不可能出现的状态");
             }
 		}
-        /**将最后一条更新到Session上面*/
-        sessionManager.updateSession(msgList.get(len-1));
+        imSessionManager.updateSession(msgList.get(len - 1));
 	}
 
-    /**
-     * 重新发送 message数据包
-     * 1.检测DB状态
-     * 2.删除DB状态 [不用删除]
-     * 3.调用对应的发送
-     * 判断消息的类型、判断是否是重发的状态
-     * */
+
 	public void resendMessage(MessageEntity msgInfo) {
         if (msgInfo == null) {
-            logger.d("chat#resendMessage msgInfo is null or already send success!");
             return;
         }
-        /**check 历史原因处理*/
-        if(!SequenceNumberMaker.getInstance().isFailure(msgInfo.getMsgId())){
-            // 之前的状态处理有问题
+
+        if (!SequenceNumberMaker.getInstance().isFailure(msgInfo.getMsgId())) {
             msgInfo.setStatus(MessageConstant.MSG_SUCCESS);
             dbInterface.insertOrUpdateMessage(msgInfo);
-            triggerEvent(new MessageEvent(MessageEvent.Event.ACK_SEND_MESSAGE_OK,msgInfo));
+            triggerEvent(new MessageEvent(MessageEvent.Event.SEND_MESSAGE_SUCCESS, msgInfo));
             return;
         }
-
-        logger.d("chat#resendMessage msgInfo %s",msgInfo);
-        /**重新设定message 的时间,已经从DB中删除*/
-        int nowTime = (int) (System.currentTimeMillis()/1000);
+        
+        int nowTime = (int) (System.currentTimeMillis() / 1000);
         msgInfo.setUpdated(nowTime);
         msgInfo.setCreated(nowTime);
-
-        /**判断信息的类型*/
+        
         int msgType = msgInfo.getDisplayType();
-        switch (msgType){
-            case DBConstant.SHOW_ORIGIN_TEXT_TYPE:
-                  sendText((TextMessage)msgInfo);
+        switch (msgType) {
+            case DBConstant.SHOW_TYPE_PLAIN_TEXT:
+                  sendText((TextMessageEntity)msgInfo);
                   break;
-            case DBConstant.SHOW_IMAGE_TYPE:
-                    sendSingleImage((ImageMessage) msgInfo);
+            case DBConstant.SHOW_TYPE_IMAGE:
+                sendSingleImage((ImageMessageEntity) msgInfo);
                 break;
-            case DBConstant.SHOW_AUDIO_TYPE:
-                   sendVoice((AudioMessage)msgInfo); break;
+            case DBConstant.SHOW_TYPE_AUDIO:
+                sendVoice((AudioMessageEntity)msgInfo); break;
             default:
-                throw new IllegalArgumentException("#resendMessage#enum type is wrong!!,cause by displayType"+msgType);
+                throw new IllegalArgumentException("#resendMessage#enum type is wrong!!,cause by displayType" + msgType);
         }
 	}
-
-
-
-    // 拉取历史消息 {from MessageActivity}
+    
     public List<MessageEntity> loadHistoryMsg(int pullTimes, String sessionKey, PeerEntity peerEntity) {
         int lastMsgId = 99999999;
         int lastCreateTime = 1455379200;
-        int count = SysConstant.MSG_CNT_PER_PAGE;
-        SessionEntity sessionEntity = IMSessionManager.instance().findSession(sessionKey);
+        int count = SysConstant.MSG_PAGE_SIZE;
+        SessionEntity sessionEntity = IMSessionManager.getInstance().findSession(sessionKey);
         if (sessionEntity != null) {
             // 以前已经聊过天，删除之后，sessionEntity不存在
             Log.i("LShuXin", "#loadHistoryMsg# sessionEntity is not null");
@@ -387,7 +336,8 @@ public class IMMessageManager extends IMManager{
         if (count > lastMsgId) {
             count = lastMsgId;
         }
-        List<MessageEntity> msgList = doLoadHistoryMsg(
+
+        return doLoadHistoryMsg(
                 pullTimes,
                 peerEntity.getPeerId(),
                 peerEntity.getType(),
@@ -395,42 +345,33 @@ public class IMMessageManager extends IMManager{
                 lastMsgId,
                 lastCreateTime,
                 count);
-
-        return msgList;
     }
 
     // 根据次数有点粗暴
-    public List<MessageEntity> loadHistoryMsg(MessageEntity entity,int pullTimes){
-        logger.d("IMMessageActivity#LoadHistoryMsg");
-        // 在滑动的过程中请求，msgId请求下一条的
+    public List<MessageEntity> loadHistoryMsg(MessageEntity entity, int pullTimes){
         int reqLastMsgId = entity.getMsgId() - 1;
-        int loginId = IMLoginManager.instance().getLoginId();
+        int loginId = IMLoginManager.getInstance().getLoginId();
         int reqLastCreateTime = entity.getCreated();
         String chatKey = entity.getSessionKey();
-        int cnt = SysConstant.MSG_CNT_PER_PAGE;
-        List<MessageEntity> msgList = doLoadHistoryMsg(pullTimes,
+        int cnt = SysConstant.MSG_PAGE_SIZE;
+        return doLoadHistoryMsg(
+                pullTimes,
                 entity.getPeerId(entity.isSend(loginId)),
                 entity.getSessionType(),
                 chatKey, reqLastMsgId, reqLastCreateTime, cnt);
-        return msgList;
     }
 
-    /**
-     * 从DB中请求信息
-     * 1. 从最近会话点击进入，拉取消息
-     * 2. 在消息页面下拉刷新
-     * @param pullTimes
-     * @param peerId
-     * @param peerType
-     * @param sessionKey
-     * @param lastMsgId
-     * @param lastCreateTime
-     * @param count
-     * @return
-     */
-    private List<MessageEntity> doLoadHistoryMsg(int pullTimes, final int peerId, final int peerType, final String sessionKey, int lastMsgId, int lastCreateTime, int count) {
+
+    private List<MessageEntity> doLoadHistoryMsg(
+        int pullTimes,
+        final int peerId,
+        final int peerType,
+        final String sessionKey,
+        int lastMsgId,
+        int lastCreateTime,
+        int count
+    ) {
         if (lastMsgId < 1 || TextUtils.isEmpty(sessionKey)) {
-            Log.i("LShuXin", "lastMsgId < 1 || TextUtils.isEmpty(sessionKey)");
             return Collections.emptyList();
         }
         if (count > lastMsgId) {
@@ -443,7 +384,7 @@ public class IMMessageManager extends IMManager{
         int resSize = listMsg.size();
         Log.i("LShuXin", "LoadHistoryMsg return size is " + resSize);
         if (resSize == 0 || pullTimes == 1 || pullTimes %3 == 0) {
-            RefreshHistoryMsgEvent historyMsgEvent = new RefreshHistoryMsgEvent();
+            HistoryMsgRefreshEvent historyMsgEvent = new HistoryMsgRefreshEvent();
             historyMsgEvent.pullTimes = pullTimes;
             historyMsgEvent.count = count;
             historyMsgEvent.lastMsgId = lastMsgId;
@@ -456,17 +397,12 @@ public class IMMessageManager extends IMManager{
         return listMsg;
     }
 
-    /**
-     * asyn task
-     * 因为是多端同步，本地信息并不一定完成，拉取时提前异步检测
-     * */
-    private void doRefreshLocalMsg(RefreshHistoryMsgEvent hisEvent){
-        /**check DB数据的一致性*/
-        int lastSuccessMsgId = hisEvent.lastMsgId;
-        List<MessageEntity> listMsg = hisEvent.listMsg;
+    private void refreshLocalMsg(HistoryMsgRefreshEvent historyMsgRefreshEvent) {
+        int lastSuccessMsgId = historyMsgRefreshEvent.lastMsgId;
+        List<MessageEntity> listMsg = historyMsgRefreshEvent.listMsg;
 
         int resSize = listMsg.size();
-        if(hisEvent.pullTimes > 1) {
+        if (historyMsgRefreshEvent.pullTimes > 1) {
             for (int index = resSize - 1; index >= 0; index--) {
                 MessageEntity entity = listMsg.get(index);
                 if (!SequenceNumberMaker.getInstance().isFailure(entity.getMsgId())) {
@@ -486,210 +422,186 @@ public class IMMessageManager extends IMManager{
                 }
         }
 
-        final int refreshCnt = hisEvent.count * 3;
-        int peerId = hisEvent.peerId;
-        int peerType = hisEvent.peerType;
-        String sessionKey = hisEvent.sessionKey;
+        final int refreshCnt = historyMsgRefreshEvent.count * 3;
+        int peerId = historyMsgRefreshEvent.peerId;
+        int peerType = historyMsgRefreshEvent.peerType;
+        String sessionKey = historyMsgRefreshEvent.sessionKey;
         boolean localFailure =  SequenceNumberMaker.getInstance().isFailure(lastSuccessMsgId);
         if(localFailure){
             logger.e("LoadHistoryMsg# all msg is failure!");
-            if(hisEvent.pullTimes ==1){
-                reqHistoryMsgNet(peerId,peerType,lastSuccessMsgId,refreshCnt);
+            if(historyMsgRefreshEvent.pullTimes ==1){
+                fetchHistoryMsg(peerId,peerType,lastSuccessMsgId,refreshCnt);
             }
         }else {
             /**正常*/
-            refreshDBMsg(peerId, peerType, sessionKey, lastSuccessMsgId, refreshCnt);
+            updateMissedMsg(peerId, peerType, sessionKey, lastSuccessMsgId, refreshCnt);
         }
     }
 
-    /**
-     * 历史消息直接从DB中获取。
-     * 所以要保证DB数据没有问题
-     */
-    public void refreshDBMsg(int peerId,int peedType,String chatKey,int lastMsgId,int refreshCnt){
-        if(lastMsgId <1){return;}
-        int beginMsgId = lastMsgId - refreshCnt;
-        if(beginMsgId<1){beginMsgId=1;}
-
-        // 返回的结果是升序
-        List<Integer> msgIdList =  dbInterface.refreshHistoryMsgId(chatKey, beginMsgId, lastMsgId);
-        if(msgIdList.size() == (lastMsgId-beginMsgId+1)){
-            logger.d("refreshDBMsg#do need refresh Message!,cause sizeOfList is right");
+    public void updateMissedMsg(int sessionId, int sessionType, String chatKey, int msgIdEnd, int msgCnt) {
+        if (msgIdEnd < 1) {
             return;
         }
-        // 查找缺失的msgid
-        List<Integer> needReqList = new ArrayList<>();
-        for(int startIndex=beginMsgId,endIndex=lastMsgId;startIndex<=endIndex;startIndex++){
-            if(!msgIdList.contains(startIndex)){
-                needReqList.add(startIndex);
+        int msgIdBeg = msgIdEnd - msgCnt;
+        if (msgIdBeg < 1) {
+            msgIdBeg = 1;
+        }
+
+        List<Integer> msgIdList = dbInterface.refreshHistoryMsgId(chatKey, msgIdBeg, msgIdBeg);
+        if (msgIdList.size() == msgIdEnd - msgIdBeg + 1) {
+            logger.d("IMMessageManager#updateMissedMsg#no message missed");
+            return;
+        }
+        List<Integer> missedMsgIds = new ArrayList<>();
+        for (int i = msgIdBeg; i <= msgIdEnd; i++) {
+            if (!msgIdList.contains(i)) {
+                missedMsgIds.add(i);
             }
         }
-        // 请求缺失的消息
-        if(needReqList.size()>0){
-            reqMsgById(peerId,peedType,needReqList);
+        if (!missedMsgIds.isEmpty()) {
+            fetchMsgById(sessionId, sessionType, missedMsgIds);
         }
     }
 
-
-    private void reqMsgById(int peerId,int sessionType,List<Integer> msgIds){
-        int userId = IMLoginManager.instance().getLoginId();
-        IMBaseDefine.SessionType  sType = Java2ProtoBuf.getProtoSessionType(sessionType);
-        IMMessage.IMGetMsgByIdReq  imGetMsgByIdReq = IMMessage.IMGetMsgByIdReq.newBuilder()
-                .setSessionId(peerId)
+    private void fetchMsgById(int sessionId, int sessionType, List<Integer> msgIds) {
+        int userId = IMLoginManager.getInstance().getLoginId();
+        IMBaseDefine.SessionType protoSessionType = Java2ProtoBuf.getProtoSessionType(sessionType);
+        IMMessage.IMGetMsgByIdReq imGetMsgByIdReq = IMMessage.IMGetMsgByIdReq.newBuilder()
+                .setSessionId(sessionId)
                 .setUserId(userId)
-                .setSessionType(sType)
+                .setSessionType(protoSessionType)
                 .addAllMsgIdList(msgIds)
                 .build();
         int sid = IMBaseDefine.ServiceID.SID_MSG_VALUE;
         int cid = IMBaseDefine.MessageCmdID.CID_MSG_GET_BY_MSG_ID_REQ_VALUE;
-        imSocketManager.sendRequest(imGetMsgByIdReq,sid,cid);
+        imSocketManager.sendRequest(imGetMsgByIdReq, sid, cid);
     }
 
-    public void onReqMsgById(IMMessage.IMGetMsgByIdRsp rsp){
-        int userId = rsp.getUserId();
-        int peerId = rsp.getSessionId();
-        int sessionType = ProtoBuf2JavaBean.getJavaSessionType(rsp.getSessionType());
-        String sessionKey = EntityChangeEngine.getSessionKey(peerId,sessionType);
-
-        List<IMBaseDefine.MsgInfo>  msgList = rsp.getMsgListList();
-        if(msgList.size() <=0){
-            logger.i("onReqMsgById# have no msgList");
+    public void handleFetchMsgByIdResp(IMMessage.IMGetMsgByIdRsp resp) {
+        int userId = resp.getUserId();
+        int sessionId = resp.getSessionId();
+        int sessionType = ProtoBuf2JavaBean.getJavaSessionType(resp.getSessionType());
+        String sessionKey = EntityChangeEngine.getSessionKey(sessionId, sessionType);
+        List<IMBaseDefine.MsgInfo> msgList = resp.getMsgListList();
+        if (msgList.isEmpty()) {
             return;
         }
         List<MessageEntity> dbEntity = new ArrayList<>();
-        for(IMBaseDefine.MsgInfo msg:msgList){
+        for (IMBaseDefine.MsgInfo msg : msgList) {
             MessageEntity entity = ProtoBuf2JavaBean.getMessageEntity(msg);
-            if(entity == null){
-                logger.d("#IMMessageManager# onReqHistoryMsg#analyzeMsg is null,%s",entity);
+            if (entity == null) {
                 continue;
             }
 
             entity.setSessionKey(sessionKey);
-            switch (sessionType){
-                case DBConstant.SESSION_TYPE_GROUP:{
-                    entity.setToId(peerId);
-                }break;
-                case DBConstant.SESSION_TYPE_SINGLE:{
-                    if(entity.getFromId() == userId){
-                        entity.setToId(peerId);
-                    }else{
+            switch (sessionType) {
+                case DBConstant.SESSION_TYPE_GROUP:
+                {
+                    entity.setToId(sessionId);
+                    break;
+                }
+                case DBConstant.SESSION_TYPE_SINGLE:
+                {
+                    if (entity.getFromId() == userId) {
+                        entity.setToId(sessionId);
+                    } else {
                         entity.setToId(userId);
                     }
-                }break;
+                    break;
+                }
             }
 
             dbEntity.add(entity);
         }
         dbInterface.batchInsertOrUpdateMessage(dbEntity);
-        /**事件驱动通知*/
         MessageEvent event = new MessageEvent();
-        event.setEvent(MessageEvent.Event.HISTORY_MSG_OBTAIN);
+        event.setEvent(MessageEvent.Event.HISTORY_MSG_OBTAINED);
         triggerEvent(event);
     }
 
-
-    /**
-     * network 请求历史消息
-     */
-    public  void reqHistoryMsgNet(int peerId,int peerType, int lastMsgId, int cnt){
-        int loginId = IMLoginManager.instance().getLoginId();
+    public  void fetchHistoryMsg(int sessionId, int sessionType, int lastMsgId, int cnt) {
+        int loginId = IMLoginManager.getInstance().getLoginId();
 
         IMMessage.IMGetMsgListReq req = IMMessage.IMGetMsgListReq.newBuilder()
                 .setUserId(loginId)
-                .setSessionType(Java2ProtoBuf.getProtoSessionType(peerType))
-                .setSessionId(peerId)
+                .setSessionType(Java2ProtoBuf.getProtoSessionType(sessionType))
+                .setSessionId(sessionId)
                 .setMsgIdBegin(lastMsgId)
                 .setMsgCnt(cnt)
                 .build();
 
         int sid = IMBaseDefine.ServiceID.SID_MSG_VALUE;
         int cid = IMBaseDefine.MessageCmdID.CID_MSG_LIST_REQUEST_VALUE;
-        imSocketManager.sendRequest(req,sid,cid);
+        imSocketManager.sendRequest(req, sid, cid);
     }
-
-    /**
-     * 收到消息的具体信息
-     * 保存在DB中
-     * 通知上层，请求消息成功
-     *
-     *对于群而言，如果消息数目返回的数值小于请求的cnt,则表示群的消息能拉取的到头了，更早的消息没有权限拉取。
-     *如果msg_cnt 和 msg_id_begin计算得到的最早消息id与实际返回的最早消息id不一致，说明服务器消息有缺失，需要
-     *客户端做一个缺失标记，避免下次再次拉取。
-     * */
-     public void onReqHistoryMsg(IMMessage.IMGetMsgListRsp rsp){
-           // 判断loginId 判断sessionId
+    
+     public void handleFetchHistoryMsgResp(IMMessage.IMGetMsgListRsp rsp) {
            int userId = rsp.getUserId();
            int sessionType = ProtoBuf2JavaBean.getJavaSessionType(rsp.getSessionType());
-           int peerId = rsp.getSessionId();
-           String sessionKey = EntityChangeEngine.getSessionKey(peerId,sessionType);
-           int msgBegin = rsp.getMsgIdBegin();
-
+           int sessionId = rsp.getSessionId();
+           String sessionKey = EntityChangeEngine.getSessionKey(sessionId, sessionType);
            List<IMBaseDefine.MsgInfo> msgList = rsp.getMsgListList();
-
            ArrayList<MessageEntity> result = new ArrayList<>();
-           for(IMBaseDefine.MsgInfo msgInfo:msgList){
+           for (IMBaseDefine.MsgInfo msgInfo : msgList) {
                MessageEntity messageEntity = ProtoBuf2JavaBean.getMessageEntity(msgInfo);
-               if(messageEntity == null){
-                   logger.d("#IMMessageManager# onReqHistoryMsg#analyzeMsg is null,%s",messageEntity);
+               if (messageEntity == null) {
                    continue;
                }
                messageEntity.setSessionKey(sessionKey);
-               switch (sessionType){
-                   case DBConstant.SESSION_TYPE_GROUP:{
-                       messageEntity.setToId(peerId);
-                   }break;
-                   case DBConstant.SESSION_TYPE_SINGLE:{
-                       if(messageEntity.getFromId() == userId){
-                           messageEntity.setToId(peerId);
-                       }else{
+               switch (sessionType) {
+                   case DBConstant.SESSION_TYPE_GROUP:
+                   {
+                       messageEntity.setToId(sessionId);
+                       break;
+                   }
+                   case DBConstant.SESSION_TYPE_SINGLE:
+                   {
+                       if (messageEntity.getFromId() == userId) {
+                           messageEntity.setToId(sessionId);
+                       } else {
                            messageEntity.setToId(userId);
                        }
-                   }break;
+                       break;
+                   }
                }
                result.add(messageEntity);
             }
-         /**事件的通知 check */
-         if(result.size()>0) {
+
+         if (!result.isEmpty()) {
              dbInterface.batchInsertOrUpdateMessage(result);
              MessageEvent event = new MessageEvent();
-             event.setEvent(MessageEvent.Event.HISTORY_MSG_OBTAIN);
+             event.setEvent(MessageEvent.Event.HISTORY_MSG_OBTAINED);
              triggerEvent(event);
          }
      }
-
-    /**下载图片的整体迁移出来*/
-    private void onImageLoadSuccess(MessageEvent imageEvent){
-
-        ImageMessage imageMessage = (ImageMessage)imageEvent.getMessageEntity();
-        logger.d("pic#onImageUploadFinish");
-        String imageUrl = imageMessage.getUrl();
-        logger.d("pic#imageUrl:%s", imageUrl);
-        String realImageURL = "";
+     
+    private void onImageLoadSuccess(MessageEvent messageEvent) {
+        ImageMessageEntity imageMessageEntity = (ImageMessageEntity)messageEvent.getMessageEntity();
+        String imageUrl = imageMessageEntity.getUrl();
+        String realImageUrl = "";
         try {
-            realImageURL = URLDecoder.decode(imageUrl, "utf-8");
-            logger.d("pic#realImageUrl:%s", realImageURL);
+            realImageUrl = URLDecoder.decode(imageUrl, "utf-8");
         } catch (UnsupportedEncodingException e) {
             logger.e(e.toString());
         }
 
-        imageMessage.setUrl(realImageURL);
-        imageMessage.setStatus(MessageConstant.MSG_SUCCESS);
-        imageMessage.setLoadStatus(MessageConstant.IMAGE_LOADED_SUCCESS);
-        dbInterface.insertOrUpdateMessage(imageMessage);
+        imageMessageEntity.setUrl(realImageUrl);
+        imageMessageEntity.setStatus(MessageConstant.MSG_SUCCESS);
+        imageMessageEntity.setLoadStatus(MessageConstant.IMAGE_LOADED_SUCCESS);
+        dbInterface.insertOrUpdateMessage(imageMessageEntity);
 
-        /**通知Activity层 成功 ， 事件通知*/
-        imageEvent.setEvent(MessageEvent.Event.HANDLER_IMAGE_UPLOAD_SUCCESS);
-        imageEvent.setMessageEntity(imageMessage);
-        triggerEvent(imageEvent);
+        messageEvent.setEvent(MessageEvent.Event.IMAGE_UPLOAD_SUCCESS);
+        messageEvent.setMessageEntity(imageMessageEntity);
+        triggerEvent(messageEvent);
 
-        imageMessage.setContent(MessageConstant.IMAGE_MSG_START
-                + realImageURL + MessageConstant.IMAGE_MSG_END);
-        sendMessage(imageMessage);
+        imageMessageEntity.setContent(MessageConstant.IMAGE_MSG_PREFIX
+                + realImageUrl + MessageConstant.IMAGE_MSG_SUFFIX);
+        sendMessage(imageMessageEntity);
     }
 
 //    /**获取session内的最后一条回话*/
 //    private void reqSessionLastMsgId(int sessionId,int sessionType,Packetlistener packetlistener){
-//        int userId = IMLoginManager.instance().getLoginId();
+//        int userId = IMLoginManager.getInstance().getLoginId();
 //        IMMessage.IMGetLatestMsgIdReq latestMsgIdReq = IMMessage.IMGetLatestMsgIdReq.newBuilder()
 //                .setUserId(userId)
 //                .setSessionId(sessionId)

@@ -7,7 +7,7 @@
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/default_bk"
+        android:background="@color/default_bg"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -19,23 +19,21 @@
             android:paddingBottom="25dp">
 
             <com.lsx.bigtalk.ui.widget.IMBaseImageView
-                android:id="@+id/user_portrait"
+                android:id="@+id/user_avatar"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="15dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="15dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/tt_default_user_portrait_corner" />
+                android:src="@drawable/default_user_avatar" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:layout_toRightOf="@id/user_portrait"
-                android:gravity="center|center_vertical"
-
-                >
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@id/user_avatar"
+                android:gravity="center|center_vertical">
 
                 <TextView
                     android:id="@+id/nickName"
@@ -57,10 +55,10 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="15dp"
-                android:src="@drawable/tt_default_arrow" />
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/default_arrow" />
         </RelativeLayout>
 
 
@@ -73,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:text="@string/notify_setting"
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
@@ -81,10 +79,10 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="15dp"
-                android:src="@drawable/tt_default_arrow"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/default_arrow"
                 android:visibility="visible" />
 
         </RelativeLayout>
@@ -92,8 +90,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/tt_divide_line" />
+            android:layout_marginStart="10dp"
+            android:background="@drawable/divide_line" />
 
         <RelativeLayout
             android:id="@+id/clearPage"
@@ -104,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:text="@string/thumb_remove"
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
@@ -112,10 +110,10 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="15dp"
-                android:src="@drawable/tt_default_arrow"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/default_arrow"
                 android:visibility="gone" />
 
         </RelativeLayout>
@@ -123,8 +121,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/tt_divide_line" />
+            android:layout_marginStart="10dp"
+            android:background="@drawable/divide_line" />
 
         <RelativeLayout
             android:id="@+id/exitPage"
@@ -135,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:text="@string/exit"
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
@@ -143,10 +141,10 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="15dp"
-                android:src="@drawable/tt_default_arrow"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/default_arrow"
                 android:visibility="gone" />
 
         </RelativeLayout>
@@ -154,8 +152,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/tt_divide_line" />
+            android:layout_marginStart="10dp"
+            android:background="@drawable/divide_line" />
     </LinearLayout>
 
     <ProgressBar
@@ -163,7 +161,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:indeterminateDrawable="@drawable/tt_progressbar"
+        android:indeterminateDrawable="@drawable/progress_bar"
         android:indeterminateDuration="4000"
         android:visibility="visible" />
 

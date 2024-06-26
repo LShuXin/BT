@@ -1,8 +1,11 @@
 package com.lsx.bigtalk.ui.adapter;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,56 +21,25 @@ import com.lsx.bigtalk.config.SysConstant;
 import com.lsx.bigtalk.imservice.service.IMService;
 import com.lsx.bigtalk.ui.widget.IMBaseImageView;
 import com.lsx.bigtalk.ui.widget.IMGroupAvatar;
-import com.lsx.bigtalk.utils.IMUIHelper;
+import com.lsx.bigtalk.helper.IMUIHelper;
 import com.lsx.bigtalk.utils.Logger;
 import com.lsx.bigtalk.utils.ScreenUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
-/**
- * @author : yingmu on 15-3-18.
- * @email : yingmu@mogujie.com.
- *
- * 通讯录默认页 “全部”展示
- * 包含字母序
- *
- * todo 这几个adapter都有公用的部分，今后如果需求变更有需要，抽离父类adapter
- * [DeptAdapter] [GroupSelectAdapter] [SearchAdapter]
- */
 public class ContactAdapter extends BaseAdapter implements
         SectionIndexer,
         AdapterView.OnItemClickListener,
-        AdapterView.OnItemLongClickListener{
+        AdapterView.OnItemLongClickListener {
 
     private final Logger logger = Logger.getLogger(ContactAdapter.class);
     public List<GroupEntity> groupList = new ArrayList<>();
     public List<UserEntity> userList = new ArrayList<>();
-
     private final Context ctx;
     private final IMService imService;
 
     public ContactAdapter(Context context,IMService imService){
         this.ctx = context;
         this.imService = imService;
-    }
-
-    public void putUserList(List<UserEntity> pUserList){
-        this.userList.clear();
-        if(pUserList == null || pUserList.size() <=0){
-            return;
-        }
-        this.userList = pUserList;
-        notifyDataSetChanged();
-    }
-    public void putGroupList(List<GroupEntity> pGroupList){
-        this.groupList.clear();
-        if(pGroupList == null || pGroupList.size() <=0) {
-            return;
-        }
-        this.groupList = pGroupList;
-        notifyDataSetChanged();
     }
 
     /**
@@ -138,36 +110,32 @@ public class ContactAdapter extends BaseAdapter implements
         return 0;
     }
 
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("kkkkkkkk", "ppppppppp");
-        Object object =  getItem(position);
-        if(object instanceof UserEntity){
+        Object object = getItem(position);
+        if (object instanceof UserEntity) {
             UserEntity userEntity = (UserEntity) object;
             IMUIHelper.openUserProfileActivity(ctx, userEntity.getPeerId());
-        }else if(object instanceof GroupEntity){
+        } else if (object instanceof GroupEntity) {
             GroupEntity groupEntity = (GroupEntity) object;
-            IMUIHelper.openChatActivity(ctx,groupEntity.getSessionKey());
-        }else{
+            IMUIHelper.openChatActivity(ctx, groupEntity.getSessionKey());
         }
     }
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        Object object =  getItem(position);
-        if(object instanceof UserEntity){
+        Object object = getItem(position);
+        if (object instanceof UserEntity) {
             UserEntity contact = (UserEntity) object;
-            IMUIHelper.handleContactItemLongClick(contact, ctx);
-        }else{
+            IMUIHelper.handleMsgContactItemLongPressed(contact, ctx);
         }
         return true;
     }
 
     @Override
     public int getItemViewType(int position) {
-        int groupSize = groupList==null?0:groupList.size();
-        if(groupSize > position){
+        int groupSize = groupList == null ? 0 : groupList.size();
+        if (position < groupSize) {
             return ContactType.GROUP.ordinal();
         }
         return ContactType.USER.ordinal();
@@ -180,30 +148,29 @@ public class ContactAdapter extends BaseAdapter implements
 
     @Override
     public int getCount() {
-        int groupSize = groupList==null?0:groupList.size();
-        int userSize = userList==null?0:userList.size();
-        int sum = groupSize + userSize;
-        return sum;
+        int groupSize = groupList == null ? 0 : groupList.size();
+        int userSize = userList == null ? 0 : userList.size();
+        return groupSize + userSize;
     }
-
 
     @Override
     public Object getItem(int position) {
-        Log.e("hahahah", "jijijijiji");
-        int typeIndex =  getItemViewType(position);
+        int typeIndex = getItemViewType(position);
         ContactType renderType = ContactType.values()[typeIndex];
-        switch (renderType){
-            case USER:{
-                int groupSize = groupList==null?0:groupList.size();
+        switch (renderType) {
+            case USER:
+            {
+                int groupSize = groupList == null ? 0 : groupList.size();
                 int realIndex = position - groupSize;
-                if(realIndex <0){
+                if (realIndex < 0) {
                     throw new IllegalArgumentException("ContactAdapter#getItem#user类型判断错误!");
                 }
                 return userList.get(realIndex);
             }
-            case GROUP:{
-                int groupSize = groupList==null?0:groupList.size();
-                if(position > groupSize){
+            case GROUP:
+            {
+                int groupSize = groupList == null ? 0 : groupList.size();
+                if (position > groupSize || null == groupList) {
                     throw new IllegalArgumentException("ContactAdapter#getItem#group类型判断错误");
                 }
                 return groupList.get(position);
@@ -213,38 +180,53 @@ public class ContactAdapter extends BaseAdapter implements
         }
     }
 
-
     @Override
     public long getItemId(int position) {
         return position;
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        int typeIndex =  getItemViewType(position);
+        int typeIndex = getItemViewType(position);
         ContactType renderType = ContactType.values()[typeIndex];
         View view = null;
-        switch (renderType){
-            case USER:{
-                view = renderUser(position,convertView,parent);
-            }
+        switch (renderType) {
+            case USER:
+            {
+                view = renderUser(position, convertView, parent);
                 break;
-            case GROUP:{
-                view = renderGroup(position,convertView,parent);
             }
+            case GROUP:
+            {
+                view = renderGroup(position, convertView, parent);
                 break;
+            }
         }
         return view;
     }
 
+    public void putUserList(List<UserEntity> userList){
+        this.userList.clear();
+        if (userList == null || userList.isEmpty()) {
+            return;
+        }
+        this.userList = userList;
+        notifyDataSetChanged();
+    }
 
-    public View renderUser(int position, View view, ViewGroup parent){
-        UserHolder userHolder = null;
-        UserEntity  userEntity= (UserEntity)getItem(position);
-        if(userEntity == null){
-            logger.e("ContactAdapter#renderUser#userEntity is null!position:%d",position);
-            // todo 这个会报错误的，怎么处理
+    public void putGroupList(List<GroupEntity> groupList) {
+        this.groupList.clear();
+        if (groupList == null || groupList.isEmpty()) {
+            return;
+        }
+        this.groupList = groupList;
+        notifyDataSetChanged();
+    }
+
+    public View renderUser(int position, View view, ViewGroup parent) {
+        UserHolder userHolder;
+        UserEntity userEntity = (UserEntity)getItem(position);
+        if (userEntity == null) {
             return null;
         }
         if (view == null) {
@@ -260,38 +242,34 @@ public class ContactAdapter extends BaseAdapter implements
             userHolder = (UserHolder) view.getTag();
         }
 
-        /***reset-- 控件的默认值*/
         userHolder.nameView.setText(userEntity.getMainName());
-        userHolder.avatar.setImageResource(R.drawable.tt_default_user_portrait_corner);
+        userHolder.avatar.setImageResource(R.drawable.default_user_avatar);
         userHolder.divider.setVisibility(View.VISIBLE);
         userHolder.sectionView.setVisibility(View.GONE);
 
         // 字母序第一个要展示
         // todo pinyin控件不能处理多音字的情况，或者UserEntity类型的统统用pinyin字段进行判断
         String sectionName = userEntity.getSectionName();
-       // 正式群在用户列表的上方展示
-        int groupSize = groupList == null?0:groupList.size();
+        int groupSize = groupList == null ? 0 : groupList.size();
         if (position == groupSize) {
             userHolder.sectionView.setVisibility(View.VISIBLE);
             userHolder.sectionView.setText(sectionName);
-
-            //分栏已经显示，最上面的分割线不用显示
             userHolder.divider.setVisibility(View.GONE);
-        }else{
+        } else {
             // 获取上一个实体的preSectionName,这个时候position > groupSize
-            UserEntity preUser =  (UserEntity)getItem(position-1);
+            UserEntity preUser = (UserEntity)getItem(position-1);
             String preSectionName = preUser.getSectionName();
-            if(TextUtils.isEmpty(preSectionName) || !preSectionName.equals(sectionName)){
+            if (TextUtils.isEmpty(preSectionName) || !preSectionName.equals(sectionName)) {
                 userHolder.sectionView.setVisibility(View.VISIBLE);
                 userHolder.sectionView.setText(sectionName);
                 // 不显示分割线
                 userHolder.divider.setVisibility(View.GONE);
-            }else{
+            } else {
                 userHolder.sectionView.setVisibility(View.GONE);
             }
         }
 
-        userHolder.avatar.setDefaultImageRes(R.drawable.tt_default_user_portrait_corner);
+        userHolder.avatar.setDefaultImageRes(R.drawable.default_user_avatar);
         userHolder.avatar.setCorner(0);
         userHolder.avatar.setAvatarAppend(SysConstant.AVATAR_APPEND_100);
         userHolder.avatar.setImageUrl(userEntity.getAvatar());
@@ -302,11 +280,10 @@ public class ContactAdapter extends BaseAdapter implements
     }
 
 
-    public View renderGroup(int position, View view, ViewGroup parent){
-        GroupHolder groupHolder = null;
+    public View renderGroup(int position, View view, ViewGroup parent) {
+        GroupHolder groupHolder;
         GroupEntity groupEntity = (GroupEntity) getItem(position);
-        if(groupEntity == null){
-            logger.e("ContactAdapter#renderGroup#groupEntity is null!position:%d",position);
+        if (groupEntity == null) {
             return null;
         }
         if (view == null) {
@@ -323,10 +300,8 @@ public class ContactAdapter extends BaseAdapter implements
 
         groupHolder.nameView.setText(groupEntity.getMainName());
         groupHolder.sectionView.setVisibility(View.GONE);
-
-        // 分割线的处理【位于控件的最上面】
         groupHolder.divider.setVisibility(View.VISIBLE);
-        if(position  == 0){
+        if (position == 0) {
             groupHolder.divider.setVisibility(View.GONE);
         }
 
@@ -334,10 +309,9 @@ public class ContactAdapter extends BaseAdapter implements
         List<String> avatarUrlList = new ArrayList<>();
         Set<Integer> userIds = groupEntity.getlistGroupMemberIds();
         int i = 0;
-        for(Integer buddyId:userIds){
-            UserEntity entity = imService.getContactManager().findContact(buddyId);
+        for (Integer buddyId : userIds) {
+            UserEntity entity = imService.getIMContactManager().findContact(buddyId);
             if (entity == null) {
-                //logger.d("已经离职。userId:%d", buddyId);
                 continue;
             }
             avatarUrlList.add(entity.getAvatar());
@@ -346,31 +320,23 @@ public class ContactAdapter extends BaseAdapter implements
             }
             i++;
         }
-        setGroupAvatar(groupHolder.avatar,avatarUrlList);
+        setGroupAvatar(groupHolder.avatar, avatarUrlList);
         return view;
     }
 
-
-    /**
-     * 与search 有公用的地方，可以抽取IMUIHelper
-     * 设置群头像
-     * @param avatar
-     * @param avatarUrlList
-     */
-    private void setGroupAvatar(IMGroupAvatar avatar,List<String> avatarUrlList){
+    private void setGroupAvatar(IMGroupAvatar avatar, List<String> avatarUrlList) {
         try {
             avatar.setViewSize(ScreenUtil.instance(ctx).dip2px(38));
             avatar.setChildCorner(2);
             avatar.setAvatarUrlAppend(SysConstant.AVATAR_APPEND_32);
             avatar.setParentPadding(3);
             avatar.setAvatarUrls((ArrayList<String>) avatarUrlList);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.e(e.toString());
         }
     }
 
 
-    // 将分割线放在上面，利于判断
     public static class UserHolder {
         View divider;
         TextView sectionView;
@@ -386,7 +352,7 @@ public class ContactAdapter extends BaseAdapter implements
         IMGroupAvatar avatar;
     }
 
-    private enum ContactType{
+    private enum ContactType {
         USER,
         GROUP
     }

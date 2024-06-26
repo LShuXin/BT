@@ -9,11 +9,11 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.config.IntentConstant;
-import com.lsx.bigtalk.imservice.event.LoginEvent;
+import com.lsx.bigtalk.imservice.event.LoginStatus;
 import com.lsx.bigtalk.imservice.event.UnreadEvent;
 import com.lsx.bigtalk.imservice.service.IMService;
 import com.lsx.bigtalk.imservice.support.IMServiceConnector;
-import com.lsx.bigtalk.ui.fragment.ChatFragment;
+import com.lsx.bigtalk.ui.fragment.SessionFragment;
 import com.lsx.bigtalk.ui.fragment.ContactFragment;
 import com.lsx.bigtalk.ui.widget.NaviTabButton;
 import com.lsx.bigtalk.utils.Logger;
@@ -124,23 +124,23 @@ public class MainActivity extends FragmentActivity {
 
         mTabButtons[0].setTitle(getString(R.string.main_chat));
         mTabButtons[0].setIndex(0);
-        mTabButtons[0].setSelectedImage(getResources().getDrawable(R.drawable.tt_tab_chat_sel));
-        mTabButtons[0].setUnselectedImage(getResources().getDrawable(R.drawable.tt_tab_chat_nor));
+        mTabButtons[0].setSelectedImage(getResources().getDrawable(R.drawable.tab_chat_active));
+        mTabButtons[0].setUnselectedImage(getResources().getDrawable(R.drawable.tab_chat_deactive));
 
         mTabButtons[1].setTitle(getString(R.string.main_contact));
         mTabButtons[1].setIndex(1);
-        mTabButtons[1].setSelectedImage(getResources().getDrawable(R.drawable.tt_tab_contact_sel));
-        mTabButtons[1].setUnselectedImage(getResources().getDrawable(R.drawable.tt_tab_contact_nor));
+        mTabButtons[1].setSelectedImage(getResources().getDrawable(R.drawable.tab_contact_active));
+        mTabButtons[1].setUnselectedImage(getResources().getDrawable(R.drawable.tab_contact_deactive));
 
         mTabButtons[2].setTitle(getString(R.string.main_inner_net));
         mTabButtons[2].setIndex(2);
-        mTabButtons[2].setSelectedImage(getResources().getDrawable(R.drawable.tt_tab_internal_select));
-        mTabButtons[2].setUnselectedImage(getResources().getDrawable(R.drawable.tt_tab_internal_nor));
+        mTabButtons[2].setSelectedImage(getResources().getDrawable(R.drawable.finder_active));
+        mTabButtons[2].setUnselectedImage(getResources().getDrawable(R.drawable.finder_deactive));
 
         mTabButtons[3].setTitle(getString(R.string.main_me_tab));
         mTabButtons[3].setIndex(3);
-        mTabButtons[3].setSelectedImage(getResources().getDrawable(R.drawable.tt_tab_me_sel));
-        mTabButtons[3].setUnselectedImage(getResources().getDrawable(R.drawable.tt_tab_me_nor));
+        mTabButtons[3].setSelectedImage(getResources().getDrawable(R.drawable.tab_me_active));
+        mTabButtons[3].setUnselectedImage(getResources().getDrawable(R.drawable.tab_me_deactive));
     }
 
     public void setFragmentIndicator(int which) {
@@ -169,7 +169,7 @@ public class MainActivity extends FragmentActivity {
     /** 双击聊天 tab 时直接跳转到含有未读消息的会话位置 */
     public void chatDoubleListener() {
         setFragmentIndicator(0);
-        ((ChatFragment) mFragments[0]).scrollToUnreadPosition();
+        ((SessionFragment) mFragments[0]).scrollToUnreadPosition();
     }
 
     /**
@@ -194,7 +194,7 @@ public class MainActivity extends FragmentActivity {
     /** EventBus 事件处理 */
     public void onEventMainThread(UnreadEvent event) {
         switch (event.event) {
-            case SESSION_READED_UNREAD_MSG:
+            case SESSION_READ_UNREAD_MSG:
             case UNREAD_MSG_LIST_OK:
             case UNREAD_MSG_RECEIVED:
                 showUnreadMessageCount();
@@ -205,13 +205,13 @@ public class MainActivity extends FragmentActivity {
     /** 更新未读消息数量 */
     private void showUnreadMessageCount() {
         if (imService != null) {
-            int unreadNum = imService.getUnReadMsgManager().getTotalUnreadCount();
+            int unreadNum = imService.getIMUnReadMsgManager().getTotalUnreadCount();
             mTabButtons[0].setUnreadNotify(unreadNum);
         }
     }
 
-    public void onEventMainThread(LoginEvent event) {
-        if (Objects.requireNonNull(event) == LoginEvent.LOGIN_OUT) {
+    public void onEventMainThread(LoginStatus event) {
+        if (Objects.requireNonNull(event) == LoginStatus.LOGIN_OUT) {
             handleOnLogout();
         }
     }

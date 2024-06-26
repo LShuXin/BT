@@ -3,7 +3,7 @@
     style="@style/AnimSpeeker"
     android:layout_width="match_parent"
     android:layout_height="@dimen/top_bar_default_height"
-    android:background="@drawable/tt_speeker_tip_bg"
+    android:background="@drawable/speeker_tip_bg"
     android:gravity="center" >
 
     <TextView

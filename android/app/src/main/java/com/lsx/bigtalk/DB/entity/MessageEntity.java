@@ -168,15 +168,15 @@ public class MessageEntity implements java.io.Serializable {
 
 
     public String getMessageDisplay() {
-        switch (displayType){
-            case DBConstant.SHOW_AUDIO_TYPE:
+        switch (displayType) {
+            case DBConstant.SHOW_TYPE_AUDIO:
                 return DBConstant.DISPLAY_FOR_AUDIO;
-            case DBConstant.SHOW_ORIGIN_TEXT_TYPE:
+            case DBConstant.SHOW_TYPE_PLAIN_TEXT:
                 return content;
-            case DBConstant.SHOW_IMAGE_TYPE:
+            case DBConstant.SHOW_TYPE_IMAGE:
                 return DBConstant.DISPLAY_FOR_IMAGE;
-            case DBConstant.SHOW_MIX_TEXT:
-                return DBConstant.DISPLAY_FOR_MIX;
+            case DBConstant.SHOW_TYPE_RICH_TEXT:
+                return DBConstant.DISPLAY_FOR_RICH_TEXT;
             default:
                 return DBConstant.DISPLAY_FOR_ERROR;
         }

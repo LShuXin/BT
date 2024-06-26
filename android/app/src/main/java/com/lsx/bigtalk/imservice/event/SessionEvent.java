@@ -1,17 +1,10 @@
 package com.lsx.bigtalk.imservice.event;
 
-/**
- * @author : yingmu on 14-12-30.
- * @email : yingmu@mogujie.com.
- */
-public enum  SessionEvent {
 
-   RECENT_SESSION_LIST_SUCCESS,
-   RECENT_SESSION_LIST_FAILURE,
+public enum SessionEvent {
 
-   //回话人列表更新
-   RECENT_SESSION_LIST_UPDATE,
-
-   SET_SESSION_TOP
-
+   SESSION_LIST_SUCCESS,
+   SESSION_LIST_FAILURE,
+   SESSION_UPDATE,
+   SET_SESSION_SPIN
 }

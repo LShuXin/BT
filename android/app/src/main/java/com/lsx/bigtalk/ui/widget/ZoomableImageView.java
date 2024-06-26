@@ -11,24 +11,22 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.ui.activity.DetailPortraitActivity;
+import com.lsx.bigtalk.ui.activity.ImagePreviewActivity;
 import com.lsx.bigtalk.utils.Logger;
 
-/**
- * Created by zhujian on 15/1/19.
- */
-public class ZoomableImageView extends ImageView{
 
+public class ZoomableImageView extends androidx.appcompat.widget.AppCompatImageView {
     private static final Logger logger = Logger.getLogger(ZoomableImageView.class);
     private float maxScale = 3f;
     private float minScale = 1f;
 
     private enum State {
-        INIT, DRAG, ZOOM
+        INIT,
+        DRAG,
+        ZOOM
     }
 
     private State state;
@@ -42,11 +40,11 @@ public class ZoomableImageView extends ImageView{
     private int viewHeight;
     private float afterScaleDrawableWidth;
     private float afterScaleDrawableHeight;
-    private DetailPortraitActivity.finishActivity finishActivity;
+    private ImagePreviewActivity.finishActivity finishActivity;
 
     private ScaleGestureDetector scaleDetector;
 
-    private GestureDetector doubleTapDetecture;
+    private GestureDetector doubleTapDetector;
 
     public ZoomableImageView(Context context) {
         super(context);
@@ -63,7 +61,7 @@ public class ZoomableImageView extends ImageView{
         setUp(context);
     }
 
-    public void setFinishActivity(DetailPortraitActivity.finishActivity finishInterface)
+    public void setFinishActivity(ImagePreviewActivity.finishActivity finishInterface)
     {
         this.finishActivity = finishInterface;
     }
@@ -84,7 +82,7 @@ public class ZoomableImageView extends ImageView{
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         scaleDetector.onTouchEvent(event);
-        doubleTapDetecture.onTouchEvent(event);
+        doubleTapDetector.onTouchEvent(event);
 
         PointF current = new PointF(event.getX(), event.getY());
 
@@ -145,7 +143,7 @@ public class ZoomableImageView extends ImageView{
         matrix = new Matrix();
         state = State.INIT;
         scaleDetector = new ScaleGestureDetector(context, new ScaleListener());
-        doubleTapDetecture = new GestureDetector(context, new GestureListener());
+        doubleTapDetector = new GestureDetector(context, new GestureListener());
         setScaleType(ScaleType.MATRIX);
     }
 
@@ -418,7 +416,7 @@ public class ZoomableImageView extends ImageView{
                 @Override
                 public void onClick(View view) {
                     dialog.dismiss();
-                    Toast.makeText(getContext(), "图片已经保存到"+DetailPortraitActivity.imageUri.substring(8), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "图片已经保存到"+ ImagePreviewActivity.imageUrl.substring(8), Toast.LENGTH_LONG).show();
                 }
             });
             dialog.setContentView(dialogLyout);

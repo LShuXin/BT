@@ -18,10 +18,10 @@ import com.lsx.bigtalk.DB.entity.SessionEntity;
 import com.lsx.bigtalk.DB.entity.UserEntity;
 import com.lsx.bigtalk.config.DBConstant;
 import com.lsx.bigtalk.config.MessageConstant;
-import com.lsx.bigtalk.imservice.entity.AudioMessage;
-import com.lsx.bigtalk.imservice.entity.ImageMessage;
-import com.lsx.bigtalk.imservice.entity.MixMessage;
-import com.lsx.bigtalk.imservice.entity.TextMessage;
+import com.lsx.bigtalk.imservice.entity.AudioMessageEntity;
+import com.lsx.bigtalk.imservice.entity.ImageMessageEntity;
+import com.lsx.bigtalk.imservice.entity.RichTextMessageEntity;
+import com.lsx.bigtalk.imservice.entity.TextMessageEntity;
 import com.lsx.bigtalk.utils.Logger;
 
 import org.json.JSONException;
@@ -344,12 +344,12 @@ public class DBInterface {
         ,MessageDao.Properties.SessionKey.eq(message.getSessionKey())).unique();
 
         long resId = parent.getId();
-        if(parent.getDisplayType() != DBConstant.SHOW_MIX_TEXT){
+        if(parent.getDisplayType() != DBConstant.SHOW_TYPE_RICH_TEXT){
             return resId;
         }
 
         boolean needUpdate = false;
-        MixMessage mixParent = (MixMessage) formatMessage(parent);
+        RichTextMessageEntity mixParent = (RichTextMessageEntity) formatMessage(parent);
         List<MessageEntity> msgList = mixParent.getMsgList();
         for(int index =0;index < msgList.size(); index ++){
             if(msgList.get(index).getId() ==  message.getId()){
@@ -438,21 +438,21 @@ public class DBInterface {
          MessageEntity messageEntity = null;
             int displayType = msg.getDisplayType();
             switch (displayType){
-                case DBConstant.SHOW_MIX_TEXT:
+                case DBConstant.SHOW_TYPE_RICH_TEXT:
                     try {
-                        messageEntity =  MixMessage.parseFromDB(msg);
+                        messageEntity =  RichTextMessageEntity.parseFromDB(msg);
                     } catch (JSONException e) {
                         logger.e(e.toString());
                     }
                     break;
-                case DBConstant.SHOW_AUDIO_TYPE:
-                    messageEntity = AudioMessage.parseFromDB(msg);
+                case DBConstant.SHOW_TYPE_AUDIO:
+                    messageEntity = AudioMessageEntity.parseFromDB(msg);
                     break;
-                case DBConstant.SHOW_IMAGE_TYPE:
-                    messageEntity = ImageMessage.parseFromDB(msg);
+                case DBConstant.SHOW_TYPE_IMAGE:
+                    messageEntity = ImageMessageEntity.parseFromDB(msg);
                     break;
-                case DBConstant.SHOW_ORIGIN_TEXT_TYPE:
-                    messageEntity = TextMessage.parseFromDB(msg);
+                case DBConstant.SHOW_TYPE_PLAIN_TEXT:
+                    messageEntity = TextMessageEntity.parseFromDB(msg);
                     break;
             }
         return messageEntity;
@@ -467,21 +467,21 @@ public class DBInterface {
         for(MessageEntity info:msgList){
             int displayType = info.getDisplayType();
             switch (displayType){
-                case DBConstant.SHOW_MIX_TEXT:
+                case DBConstant.SHOW_TYPE_RICH_TEXT:
                     try {
-                        newList.add(MixMessage.parseFromDB(info));
+                        newList.add(RichTextMessageEntity.parseFromDB(info));
                     } catch (JSONException e) {
                         logger.e(e.toString());
                     }
                     break;
-                case DBConstant.SHOW_AUDIO_TYPE:
-                    newList.add(AudioMessage.parseFromDB(info));
+                case DBConstant.SHOW_TYPE_AUDIO:
+                    newList.add(AudioMessageEntity.parseFromDB(info));
                     break;
-                case DBConstant.SHOW_IMAGE_TYPE:
-                    newList.add(ImageMessage.parseFromDB(info));
+                case DBConstant.SHOW_TYPE_IMAGE:
+                    newList.add(ImageMessageEntity.parseFromDB(info));
                     break;
-                case DBConstant.SHOW_ORIGIN_TEXT_TYPE:
-                    newList.add(TextMessage.parseFromDB(info));
+                case DBConstant.SHOW_TYPE_PLAIN_TEXT:
+                    newList.add(TextMessageEntity.parseFromDB(info));
                     break;
             }
         }

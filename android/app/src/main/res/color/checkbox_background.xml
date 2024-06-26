@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!--已经在群组中，不能再操作-->
-    <item android:drawable="@drawable/seleted" android:state_enabled="false"/>
-    <item android:drawable="@drawable/uncheck" android:state_checked="false"/>
-    <item android:drawable="@drawable/check" android:state_checked="true"/>
-
+    <item
+        android:state_enabled="false"
+        android:drawable="@drawable/ratio_unchecked" />
+    <item
+        android:state_checked="false"
+        android:drawable="@drawable/ratio_checked" />
+    <item
+        android:state_checked="true"
+        android:drawable="@drawable/checked" />
 </selector>

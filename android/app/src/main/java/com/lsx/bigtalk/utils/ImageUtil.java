@@ -1,5 +1,7 @@
 package com.lsx.bigtalk.utils;
 
+import java.io.File;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,26 +11,22 @@ import android.util.DisplayMetrics;
 
 import com.lsx.bigtalk.ui.helper.PhotoHelper;
 
-import java.io.File;
 
-/**
- * @Description 图片处理
- * @author Nana
- * @date 2014-8-4
- *
- */
 public class ImageUtil {
     private static final Logger logger = Logger.getLogger(ImageUtil.class);
 
-	public static Bitmap getBigBitmapForDisplay(String imagePath,
-			Context context) {
-		if (null == imagePath || !new File(imagePath).exists())
+	public static Bitmap getBigBitmapForDisplay(String imagePath, Context context) {
+		if (null == imagePath || !new File(imagePath).exists()) {
 			return null;
+		}
+
 		try {
-			int degeree = PhotoHelper.readPictureDegree(imagePath);
+			int degree = PhotoHelper.readPictureDegree(imagePath);
 			Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-			if (bitmap == null)
+			if (bitmap == null) {
 				return null;
+			}
+
 			DisplayMetrics dm = new DisplayMetrics();
 			((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(dm);
 			float scale = bitmap.getWidth() / (float) dm.widthPixels;
@@ -36,11 +34,9 @@ public class ImageUtil {
 			if (scale > 1) {
 				newBitMap = zoomBitmap(bitmap, (int) (bitmap.getWidth() / scale), (int) (bitmap.getHeight() / scale));
 				bitmap.recycle();
-				Bitmap resultBitmap = PhotoHelper.rotaingImageView(degeree, newBitMap);
-				return resultBitmap;
+                return PhotoHelper.rotaingImageView(degree, newBitMap);
 			}
-			Bitmap resultBitmap = PhotoHelper.rotaingImageView(degeree, bitmap);
-			return resultBitmap;
+            return PhotoHelper.rotaingImageView(degree, bitmap);
 		} catch (Exception e) {
 			logger.e(e.getMessage());
 			return null;
@@ -58,12 +54,10 @@ public class ImageUtil {
 			float scaleWidth = ((float) width / w);
 			float scaleHeight = ((float) height / h);
 			matrix.postScale(scaleWidth, scaleHeight);
-			Bitmap newbmp = Bitmap.createBitmap(bitmap, 0, 0, w, h, matrix, true);
-			return newbmp;
+            return Bitmap.createBitmap(bitmap, 0, 0, w, h, matrix, true);
 		} catch (Exception e) {
 			logger.e(e.getMessage());
 			return null;
 		}
 	}
-
 }

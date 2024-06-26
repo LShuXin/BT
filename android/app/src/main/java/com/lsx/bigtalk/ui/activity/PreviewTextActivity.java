@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.config.IntentConstant;
 
+
 public class PreviewTextActivity extends Activity {
     TextView txtContent = null;
 

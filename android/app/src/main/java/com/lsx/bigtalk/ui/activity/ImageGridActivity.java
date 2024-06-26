@@ -1,13 +1,19 @@
-
 package com.lsx.bigtalk.ui.activity;
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,49 +28,35 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import de.greenrobot.event.EventBus;
+
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.ui.adapter.album.ImageGridAdapter;
 import com.lsx.bigtalk.ui.adapter.album.ImageGridAdapter.TextCallback;
 import com.lsx.bigtalk.ui.adapter.album.ImageItem;
 import com.lsx.bigtalk.config.IntentConstant;
 import com.lsx.bigtalk.config.SysConstant;
-import com.lsx.bigtalk.imservice.event.SelectEvent;
+import com.lsx.bigtalk.imservice.event.ImageSelectEvent;
 import com.lsx.bigtalk.imservice.service.IMService;
 import com.lsx.bigtalk.imservice.support.IMServiceConnector;
 import com.lsx.bigtalk.utils.Logger;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import de.greenrobot.event.EventBus;
-
-/**
- * @Description 相册图片列表
- * @author Nana
- * @date 2014-5-9
- */
 public class ImageGridActivity extends Activity implements OnTouchListener {
+    private static WeakReference<ImageGridActivity> imageGridActivityWeakRef = null;
     private List<ImageItem> dataList = null;
     private GridView gridView = null;
-    private TextView title = null;
-    private TextView cancel = null;
-    private static TextView finish = null;
-    private TextView preview = null;
+    private TextView finish = null;
     private String name = null;
-    private ImageView leftBtn = null;
-    private static Context context = null;
-    private static ImageGridAdapter adapter = null;
+    private ImageGridAdapter adapter = null;
 	private final Logger logger = Logger.getLogger(ImageGridActivity.class);
-
-    private IMService imService;
-
-	private final IMServiceConnector imServiceConnector = new IMServiceConnector(){
+    private final IMServiceConnector imServiceConnector = new IMServiceConnector() {
         @Override
         public void onIMServiceConnected() {
-            imService = imServiceConnector.getIMService();
-            if(imService == null){
+            IMService imService = imServiceConnector.getIMService();
+            if (imService == null) {
                 throw new RuntimeException("#connect imservice success,but is null");
             }
         }
@@ -75,29 +67,16 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
         }
     };
 
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 0) {
-                Toast.makeText(ImageGridActivity.this,
-                        "最多选择" + SysConstant.MAX_SELECT_IMAGE_COUNT + "张图片",
-                        Toast.LENGTH_LONG).show();
-            }
-        }
-    };
-
     OnScrollListener onScrollListener = new OnScrollListener() {
         @Override
         public void onScrollStateChanged(AbsListView view, int scrollState) {
             switch (scrollState) {
                 case OnScrollListener.SCROLL_STATE_FLING:
+                case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
                     adapter.lock();
                     break;
                 case OnScrollListener.SCROLL_STATE_IDLE:
                     adapter.unlock();
-                    break;
-                case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
-                    adapter.lock();
                     break;
                 default:
                     break;
@@ -116,7 +95,7 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
         super.onCreate(savedInstanceState);
         imServiceConnector.connect(this);
         setContentView(R.layout.image_grid_activity);
-        context = this;
+        imageGridActivityWeakRef = new WeakReference<>(this);
         name = (String) getIntent().getSerializableExtra(
                 IntentConstant.EXTRA_ALBUM_NAME);
         dataList = (List<ImageItem>) getIntent().getSerializableExtra(
@@ -125,16 +104,27 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
         initAdapter();
     }
 
-    private void initAdapter() {
-        adapter = new ImageGridAdapter(ImageGridActivity.this, dataList,
-                mHandler);
-        adapter.setTextCallback(new TextCallback() {
-            public void onListen(int count) {
-                setSendText(count);
-            }
-        });
-        gridView.setAdapter(adapter);
-        gridView.setOnScrollListener(onScrollListener);
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        setAdapterSelectedMap(null);
+        imServiceConnector.disconnect(this);
+        super.onStop();
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                adapter.unlock();
+                break;
+            case MotionEvent.ACTION_UP:
+                view.performClick();
+                break;
+            default:
+                break;
+        }
+        return false;
     }
 
     private void initView() {
@@ -148,19 +138,21 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
             }
         });
 
-        title = findViewById(R.id.base_fragment_title);
+        TextView title = findViewById(R.id.base_fragment_title);
         if (name.length() > 12) {
             name = name.substring(0, 11) + "...";
         }
         title.setText(name);
-        leftBtn = findViewById(R.id.back_btn);
+
+        ImageView leftBtn = findViewById(R.id.back_btn);
         leftBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 ImageGridActivity.this.finish();
             }
         });
-        cancel = findViewById(R.id.cancel);
+
+        TextView cancel = findViewById(R.id.cancel);
         cancel.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,30 +160,22 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
                 ImageGridActivity.this.finish();
             }
         });
+
         finish = findViewById(R.id.finish);
         finish.setOnClickListener(new OnClickListener() {
-
             public void onClick(View v) {
             	logger.d("pic#click send image btn");
-                if (adapter.getSelectMap().size() > 0) {
+                if (!adapter.getSelectMap().isEmpty()) {
                     List<ImageItem> itemList = new ArrayList<>();
-                    Iterator<Integer> iter = adapter.getSelectMap().keySet()
-                            .iterator();
 
-                    for(Map.Entry<Integer,ImageItem> entity :adapter.getSelectMap().entrySet()){
-                         int position = entity.getKey();
-                         ImageItem imageItem = entity.getValue();
-
-                    }
-                    while (iter.hasNext()) {
-                        int position = iter.next();
+                    for (int position : adapter.getSelectMap().keySet()) {
                         ImageItem imgItem = adapter.getSelectMap()
                                 .get(position);
                         itemList.add(imgItem);
                     }
 
                     setSendText(0);
-                    EventBus.getDefault().post(new SelectEvent(itemList));
+                    EventBus.getDefault().post(new ImageSelectEvent(itemList));
                     ImageGridActivity.this.setResult(RESULT_OK, null);
                     ImageGridActivity.this.finish();
                 } else {
@@ -200,18 +184,15 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
                             .show();
                 }
             }
-
         });
-        preview = findViewById(R.id.preview);
+        TextView preview = findViewById(R.id.preview);
         preview.setOnClickListener(new OnClickListener() {
-
             public void onClick(View v) {
-
-                if (adapter.getSelectMap().size() > 0) {
+                if (!adapter.getSelectMap().isEmpty()) {
                     Intent intent = new Intent(ImageGridActivity.this,
                             PreviewActivity.class);
                     startActivityForResult(intent,
-                            SysConstant.ALBUM_PREVIEW_BACK);
+                            SysConstant.IMAGE_PREVIEW_FROM_ALBUM);
                 } else {
                     Toast.makeText(ImageGridActivity.this,
                             R.string.need_choose_images, Toast.LENGTH_SHORT)
@@ -221,51 +202,73 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
         });
     }
 
-    @Override
-    protected void onDestroy() {
-        setAdapterSelectedMap(null);
-        imServiceConnector.disconnect(this);
-        super.onStop();
+    private void initAdapter() {
+        adapter = new ImageGridAdapter(ImageGridActivity.this, dataList, new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                if (msg.what == 0) {
+                    Toast.makeText(ImageGridActivity.this,
+                            "最多选择" + SysConstant.MAX_SELECT_IMAGE_COUNT + "张图片",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        adapter.setTextCallback(new TextCallback() {
+            public void onListen(int count) {
+                setSendText(count);
+            }
+        });
+        gridView.setAdapter(adapter);
+        gridView.setOnScrollListener(onScrollListener);
     }
 
+    @SuppressLint("SetTextI18n")
     public static void setSendText(int selNum) {
+        if (null == getActivity()) {
+            return;
+        }
         if (selNum == 0) {
-            finish.setText(context.getResources().getString(R.string.send));
+            getActivity().finish.setText(getActivity().getResources().getString(R.string.send));
         } else {
-            finish.setText(context.getResources().getString(R.string.send)
+            getActivity().finish.setText(getActivity().getResources().getString(R.string.send)
                     + "(" + selNum + ")");
         }
     }
 
     public static void setAdapterSelectedMap(Map<Integer, ImageItem> map) {
-        Iterator<Integer> it = adapter.getSelectMap().keySet().iterator();
+        if (null == getActivity()) {
+            return;
+        }
+        Iterator<Integer> it = getActivity().adapter.getSelectMap().keySet().iterator();
         if (map != null) {
             while (it.hasNext()) {
                 int key = it.next();
-                adapter.updateSelectedStatus(key, map.containsKey(key));
+                getActivity().adapter.updateSelectedStatus(key, map.containsKey(key));
             }
-            adapter.setSelectMap(map);
-            adapter.setSelectTotalNum(map.size());
+            getActivity().adapter.setSelectMap(map);
+            getActivity().adapter.setSelectTotalNum(map.size());
         } else {
             while (it.hasNext()) {
                 int key = it.next();
-                adapter.updateSelectedStatus(key, false);
+                getActivity().adapter.updateSelectedStatus(key, false);
             }
-            adapter.setSelectMap(null);
-            adapter.setSelectTotalNum(0);
+            getActivity().adapter.setSelectMap(null);
+            getActivity().adapter.setSelectTotalNum(0);
         }
-        adapter.notifyDataSetChanged();
+        getActivity().adapter.notifyDataSetChanged();
     }
 
     public static ImageGridAdapter getAdapter() {
-        return adapter;
+        if (null == getActivity()) {
+            return null;
+        }
+        return getActivity().adapter;
     }
 
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-            adapter.unlock();
+    static ImageGridActivity getActivity() {
+        if (null != imageGridActivityWeakRef) {
+            return imageGridActivityWeakRef.get();
         }
-        return false;
+        return null;
     }
 }

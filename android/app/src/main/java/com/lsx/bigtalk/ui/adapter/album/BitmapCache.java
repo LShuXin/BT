@@ -1,5 +1,14 @@
-
 package com.lsx.bigtalk.ui.adapter.album;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.lang.ref.SoftReference;
+import java.nio.file.Files;
+import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -11,31 +20,14 @@ import android.widget.ImageView;
 import com.lsx.bigtalk.ui.activity.PickPhotoActivity;
 import com.lsx.bigtalk.utils.Logger;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.lang.ref.SoftReference;
-import java.util.HashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
-/**
- * @Description 相册图片缓存
- * @author Nana
- * @date 2014-5-9
- */
 public class BitmapCache extends Activity {
-
     public Handler handler = new Handler();
     public final String TAG = getClass().getSimpleName();
     private static final HashMap<String, SoftReference<Bitmap>> imageCache = new HashMap<String, SoftReference<Bitmap>>();
-    int threadCount = Runtime.getRuntime().availableProcessors();
-    ExecutorService executorService = Executors
-            .newFixedThreadPool(threadCount + 1);
-
+    private final int threadCount = Runtime.getRuntime().availableProcessors();
+    private final ExecutorService executorService = Executors.newFixedThreadPool(threadCount + 1);
     private static BitmapCache instance = null;
-
     private final Logger logger = Logger.getLogger(BitmapCache.class);
 
     public static synchronized BitmapCache getInstance() {
@@ -71,8 +63,7 @@ public class BitmapCache extends Activity {
 
             if (imageCache.containsKey(path)) {
                 SoftReference<Bitmap> reference = imageCache.get(path);
-                Bitmap bmp = reference.get();
-                return bmp;
+                return reference.get();
             }
             return null;
         } catch (Exception e) {
@@ -81,8 +72,7 @@ public class BitmapCache extends Activity {
         }
     }
 
-    public void displayBmp(final ImageView iv, final String thumbPath,
-            final String sourcePath, final ImageCallback callback) {
+    public void displayBmp(final ImageView iv, final String thumbPath, final String sourcePath, final ImageCallback callback) {
         try {
             if (TextUtils.isEmpty(thumbPath) && TextUtils.isEmpty(sourcePath)) {
                 return;
@@ -110,12 +100,12 @@ public class BitmapCache extends Activity {
                         if (isThumbPath) {
                             thumb = BitmapFactory.decodeFile(thumbPath);
                             if (null == thumb) {
-                                thumb = revitionImageSize(sourcePath);
+                                thumb = revisionImageSize(sourcePath);
                             }
                         } else {
-                            thumb = revitionImageSize(sourcePath);
+                            thumb = revisionImageSize(sourcePath);
                         }
-                    } catch (Exception e) {
+                    } catch (Exception ignored) {
 
                     }
                     if (null == thumb) {
@@ -140,10 +130,10 @@ public class BitmapCache extends Activity {
         }
     }
 
-    public Bitmap revitionImageSize(String path) throws IOException {
+    public Bitmap revisionImageSize(String path) throws IOException {
         BufferedInputStream in = null;
         try {
-            in = new BufferedInputStream(new FileInputStream(new File(path)));
+            in = new BufferedInputStream(Files.newInputStream(new File(path).toPath()));
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;
             BitmapFactory.decodeStream(in, null, options);
@@ -154,8 +144,8 @@ public class BitmapCache extends Activity {
             while (true) {
                 if ((options.outWidth >> i <= 256)
                         && (options.outHeight >> i <= 256)) {
-                    in = new BufferedInputStream(new FileInputStream(new File(
-                            path)));
+                    in = new BufferedInputStream(Files.newInputStream(new File(
+                            path).toPath()));
                     options.inSampleSize = (int) Math.pow(2.0D, i);
                     options.inJustDecodeBounds = false;
                     bitmap = BitmapFactory.decodeStream(in, null, options);
@@ -176,7 +166,6 @@ public class BitmapCache extends Activity {
     }
 
     public interface ImageCallback {
-        void imageLoad(ImageView imageView, Bitmap bitmap,
-                Object... params);
+        void imageLoad(ImageView imageView, Bitmap bitmap, Object... params);
     }
 }

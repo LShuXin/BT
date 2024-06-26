@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/default_bk"
+    android:background="@color/default_bg"
     android:paddingBottom="20dp"
     android:paddingRight="10dp" >
 
@@ -13,7 +13,7 @@
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/tt_default_user_portrait_corner" />
+        android:src="@drawable/default_user_avatar" />
 
     <LinearLayout
         android:id="@+id/content_layout"
@@ -34,7 +34,7 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/message_image_desc"
             android:layout_marginRight="8dp"
-            android:src="@drawable/tt_msg_tip"
+            android:src="@drawable/msg_failed"
             android:visibility="gone" />
 
         <ProgressBar

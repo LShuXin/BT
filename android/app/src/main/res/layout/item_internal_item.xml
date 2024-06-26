@@ -12,7 +12,7 @@
         android:layout_gravity="center_vertical"
         android:textColor="@android:color/black"
         android:textSize="15sp"
-        android:drawableRight="@drawable/tt_default_arrow"
+        android:drawableRight="@drawable/default_arrow"
         android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="15dp"
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="10dp"
-        android:background="@drawable/tt_divide_line"
+        android:background="@drawable/divide_line"
         android:layout_alignParentBottom="true"
         />
 

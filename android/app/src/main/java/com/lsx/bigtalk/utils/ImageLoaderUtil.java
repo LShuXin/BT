@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.config.SysConstant;
 import com.lsx.bigtalk.ui.helper.CircleBitmapDisplayer;
+
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
@@ -72,7 +73,7 @@ public class ImageLoaderUtil {
     public static DisplayImageOptions getAvatarOptions(int corner,int defaultRes){
         try {
             if (defaultRes <= 0) {
-                defaultRes = R.drawable.tt_default_user_portrait_corner;
+                defaultRes = R.drawable.default_user_avatar;
             }
             if (avatarOptionsMaps.containsKey(defaultRes)) {
                 Map<Integer, DisplayImageOptions> displayOption = avatarOptionsMaps.get(defaultRes);
@@ -121,7 +122,7 @@ public class ImageLoaderUtil {
     public static DisplayImageOptions getAvatarOptions2(int corner,int defaultRes){
         try {
             if (defaultRes <= 0) {
-                defaultRes = R.drawable.tt_default_user_portrait_corner;
+                defaultRes = R.drawable.default_user_avatar;
             }
             if (avatarOptionsMaps.containsKey(defaultRes)) {
                 Map<Integer, DisplayImageOptions> displayOption = avatarOptionsMaps.get(defaultRes);
@@ -164,10 +165,7 @@ public class ImageLoaderUtil {
                 IMImageLoadInstance.clearMemoryCache();
                 IMImageLoadInstance.clearDiskCache();
             }
-            if(null!=avatarOptionsMaps)
-            {
-                avatarOptionsMaps.clear();
-            }
+            avatarOptionsMaps.clear();
         } catch (Exception e) {
             logger.e(e.toString());
         }

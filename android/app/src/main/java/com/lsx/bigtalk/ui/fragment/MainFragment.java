@@ -6,6 +6,7 @@ import android.widget.ProgressBar;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.ui.base.BTBaseFragment;
 
+
 public abstract class MainFragment extends BTBaseFragment {
     private ProgressBar progressbar;
 

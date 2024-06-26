@@ -6,7 +6,7 @@ import android.os.Bundle;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.config.IntentConstant;
 import com.lsx.bigtalk.ui.base.BTBaseFragmentActivity;
-import com.lsx.bigtalk.ui.fragment.WebviewFragment;
+import com.lsx.bigtalk.ui.fragment.WebViewFragment;
 
 public class WebViewFragmentActivity extends BTBaseFragmentActivity {
     @Override
@@ -14,7 +14,7 @@ public class WebViewFragmentActivity extends BTBaseFragmentActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         if (intent.hasExtra(IntentConstant.WEBVIEW_URL)) {
-            WebviewFragment.setUrl(intent.getStringExtra(IntentConstant.WEBVIEW_URL));
+            WebViewFragment.setUrl(intent.getStringExtra(IntentConstant.WEBVIEW_URL));
         }
         setContentView(R.layout.webview_fragment_activity);
     }

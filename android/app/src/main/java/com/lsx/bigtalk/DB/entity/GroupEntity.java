@@ -6,7 +6,7 @@ package com.lsx.bigtalk.DB.entity;
 import android.text.TextUtils;
 
 import com.lsx.bigtalk.config.DBConstant;
-import com.lsx.bigtalk.imservice.entity.SearchElement;
+import com.lsx.bigtalk.imservice.SearchElement;
 import com.lsx.bigtalk.utils.pinyin.PinYin;
 
 import java.util.Collections;

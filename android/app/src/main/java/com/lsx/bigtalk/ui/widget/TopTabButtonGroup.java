@@ -57,13 +57,13 @@ public class TopTabButtonGroup extends FrameLayout {
             public void onClick(View v) {
                 Handler handler = ContactFragment.getHandler();
                 Message message = handler.obtainMessage();
-                message.what=HandlerConstant.HANDLER_CHANGE_CONTACT_TAB;
+                message.what = HandlerConstant.CONTACT_TAB_CHANGED;
                 message.obj = 1;
                 handler.sendMessage(message);
 
                 setSelTextColor(1);
-                tabDepartmentBtn.setBackgroundResource(R.drawable.tt_contact_top_right_sel);
-                tabALLBtn.setBackgroundResource(R.drawable.tt_contact_top_left_nor);
+                tabDepartmentBtn.setBackgroundResource(R.drawable.contact_top_right_selected);
+                tabALLBtn.setBackgroundResource(R.drawable.contact_top_left_normal);
             }
         });
 
@@ -74,13 +74,13 @@ public class TopTabButtonGroup extends FrameLayout {
             public void onClick(View v) {
                 Handler handler = ContactFragment.getHandler();
                 Message message = handler.obtainMessage();
-                message.what=HandlerConstant.HANDLER_CHANGE_CONTACT_TAB;
+                message.what=HandlerConstant.CONTACT_TAB_CHANGED;
                 message.obj = 0;
                 handler.sendMessage(message);
 
                 setSelTextColor(0);
-                tabALLBtn.setBackgroundResource(R.drawable.tt_contact_top_left_sel);
-                tabDepartmentBtn.setBackgroundResource(R.drawable.tt_contact_top_right_nor);
+                tabALLBtn.setBackgroundResource(R.drawable.contact_top_left_selected);
+                tabDepartmentBtn.setBackgroundResource(R.drawable.contact_top_right_normal);
             }
         });
 

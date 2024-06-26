@@ -20,9 +20,8 @@ import com.lsx.bigtalk.DB.sp.LoginSp;
 import com.lsx.bigtalk.DB.sp.SystemConfigSp;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.config.IntentConstant;
-import com.lsx.bigtalk.config.UrlConstant;
-import com.lsx.bigtalk.utils.IMUIHelper;
-import com.lsx.bigtalk.imservice.event.LoginEvent;
+import com.lsx.bigtalk.helper.IMUIHelper;
+import com.lsx.bigtalk.imservice.event.LoginStatus;
 import com.lsx.bigtalk.imservice.event.SocketEvent;
 import com.lsx.bigtalk.imservice.manager.IMLoginManager;
 import com.lsx.bigtalk.imservice.service.IMService;
@@ -47,13 +46,12 @@ import de.greenrobot.event.EventBus;
 public class LoginActivity extends BTBaseActivity {
     private final Logger logger = Logger.getLogger(LoginActivity.class);
     private final Handler uiHandler = new Handler();
-    private EditText mNameView;
-    private EditText mPasswordView;
+    private EditText nameEditText;
+    private EditText pwdEditText;
     private View loginPage;
     private View splashPage;
-    private View mLoginStatusView;
-    private InputMethodManager inputManager;
-
+    private View loginStatusView;
+    private InputMethodManager inputMethodManager;
     private IMService imService;
     private boolean autoLogin = true;
     private boolean loginSuccess = false;
@@ -71,13 +69,13 @@ public class LoginActivity extends BTBaseActivity {
             try {
                 do {
                     if (imService == null) {
-                        logger.d("LoginActivity#imService is null");
+                        logger.d("LoginActivity#onIMServiceConnected#imService is null");
                         break;
                     }
-                    IMLoginManager loginManager = imService.getLoginManager();
+                    IMLoginManager imLoginManager = imService.getIMLoginManager();
                     LoginSp loginSp = imService.getLoginSp();
-                    if (loginManager == null || loginSp == null) {
-                        logger.d("LoginActivity#loginManager == null || loginSp == null");
+                    if (imLoginManager == null || loginSp == null) {
+                        logger.d("LoginActivity#imLoginManager == null || loginSp == null");
                         break;
                     }
 
@@ -87,12 +85,12 @@ public class LoginActivity extends BTBaseActivity {
                         break;
                     }
 
-                    mNameView.setText(loginIdentity.getLoginName());
+                    nameEditText.setText(loginIdentity.getLoginName());
                     if (TextUtils.isEmpty(loginIdentity.getPwd())) {
                         logger.d("LoginActivity#pwd is empty");
                         break;
                     }
-                    mPasswordView.setText(loginIdentity.getPwd());
+                    pwdEditText.setText(loginIdentity.getPwd());
 
                     if (!autoLogin) {
                         break;
@@ -102,11 +100,10 @@ public class LoginActivity extends BTBaseActivity {
                     return;
                 } while (false);
 
-                // 异常分支都会执行这个
                 manualLogin();
             } catch (Exception e) {
                 // 任何未知的异常
-                logger.w("LoginActivity#load login Identity failed: %s", e.getMessage());
+                logger.w("LoginActivity#auto/manual login failed: %s", e.getMessage());
                 manualLogin();
             }
         }
@@ -129,11 +126,11 @@ public class LoginActivity extends BTBaseActivity {
             @Override
             public void run() {
                 logger.d("LoginActivity#auto login...");
-                if (imService == null || imService.getLoginManager() == null) {
+                if (imService == null || imService.getIMLoginManager() == null) {
                     Toast.makeText(LoginActivity.this, getString(R.string.login_failed), Toast.LENGTH_SHORT).show();
                     showLoginPage();
                 }
-                imService.getLoginManager().login(loginIdentity);
+                imService.getIMLoginManager().login(loginIdentity);
             }
         }, 500);
     }
@@ -148,37 +145,37 @@ public class LoginActivity extends BTBaseActivity {
         super.onCreate(savedInstanceState);
         logger.d("LoginActivity#onCreate");
 
-        inputManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         SystemConfigSp.instance().init(getApplicationContext());
-        if (TextUtils.isEmpty(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.LOGINSERVER))) {
-            SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.LOGINSERVER, UrlConstant.ACCESS_MSG_ADDRESS);
-        }
 
         imServiceConnector.connect(LoginActivity.this);
         EventBus.getDefault().register(this);
 
         setContentView(R.layout.login_activity);
 
-        mNameView = findViewById(R.id.name);
-        mPasswordView = findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        nameEditText = findViewById(R.id.name);
+        pwdEditText = findViewById(R.id.password);
+        pwdEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                if (id == EditorInfo.IME_ACTION_DONE) {
                     attemptLogin();
                     return true;
                 }
                 return false;
             }
         });
-        mLoginStatusView = findViewById(R.id.login_status);
-        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
+
+        findViewById(R.id.login_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                inputManager.hideSoftInputFromWindow(mPasswordView.getWindowToken(), 0);
+                inputMethodManager.hideSoftInputFromWindow(pwdEditText.getWindowToken(), 0);
                 attemptLogin();
             }
         });
+
+        loginStatusView = findViewById(R.id.login_status);
+
         initAutoLogin();
     }
 
@@ -196,13 +193,13 @@ public class LoginActivity extends BTBaseActivity {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
-                if (mPasswordView != null) {
-                    inputManager.hideSoftInputFromWindow(mPasswordView.getWindowToken(), 0);
+                v.performClick();
+                if (pwdEditText != null) {
+                    inputMethodManager.hideSoftInputFromWindow(pwdEditText.getWindowToken(), 0);
                 }
 
-                if (mNameView != null) {
-                    inputManager.hideSoftInputFromWindow(mNameView.getWindowToken(), 0);
+                if (nameEditText != null) {
+                    inputMethodManager.hideSoftInputFromWindow(nameEditText.getWindowToken(), 0);
                 }
 
                 return false;
@@ -220,7 +217,6 @@ public class LoginActivity extends BTBaseActivity {
         }
     }
 
-    // 主动退出的时候， 这个地方会有值,更具pwd来判断
     private boolean shouldAutoLogin() {
         Intent intent = getIntent();
         if (intent != null) {
@@ -231,52 +227,42 @@ public class LoginActivity extends BTBaseActivity {
         return true;
     }
 
-
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-
         imServiceConnector.disconnect(LoginActivity.this);
         EventBus.getDefault().unregister(this);
         splashPage = null;
         loginPage = null;
+        super.onDestroy();
     }
 
     public void attemptLogin() {
-        String loginName = mNameView.getText().toString();
-        String mPassword = mPasswordView.getText().toString();
+        String loginName = nameEditText.getText().toString();
+        String mPassword = pwdEditText.getText().toString();
         boolean cancel = false;
         View focusView = null;
 
         if (TextUtils.isEmpty(mPassword)) {
             Toast.makeText(this, getString(R.string.error_pwd_required), Toast.LENGTH_SHORT).show();
-            focusView = mPasswordView;
+            focusView = pwdEditText;
             cancel = true;
         }
 
         if (TextUtils.isEmpty(loginName)) {
             Toast.makeText(this, getString(R.string.error_name_required), Toast.LENGTH_SHORT).show();
-            focusView = mNameView;
+            focusView = nameEditText;
             cancel = true;
         }
 
         if (cancel) {
             focusView.requestFocus();
         } else {
-            showProgress(true);
+            loginStatusView.setVisibility(View.VISIBLE);
             if (imService != null) {
                 loginName = loginName.trim();
                 mPassword = mPassword.trim();
-                imService.getLoginManager().login(loginName, mPassword);
+                imService.getIMLoginManager().login(loginName, mPassword);
             }
-        }
-    }
-
-    private void showProgress(final boolean show) {
-        if (show) {
-            mLoginStatusView.setVisibility(View.VISIBLE);
-        } else {
-            mLoginStatusView.setVisibility(View.GONE);
         }
     }
 
@@ -296,10 +282,7 @@ public class LoginActivity extends BTBaseActivity {
         super.onStop();
     }
 
-    /**
-     * ----------------------------event 事件驱动----------------------------
-     */
-    public void onEventMainThread(LoginEvent event) {
+    public void onEventMainThread(LoginStatus event) {
         switch (event) {
             case LOCAL_LOGIN_SUCCESS:
             case LOGIN_OK:
@@ -319,14 +302,9 @@ public class LoginActivity extends BTBaseActivity {
     }
 
     public void onEventMainThread(SocketEvent event) {
-        switch (event) {
-            case CONNECT_MSG_SERVER_FAILED:
-            case REQ_MSG_SERVER_ADDRS_FAILED:
-            {
-                if (!loginSuccess) {
-                    onSocketFailure(event);
-                }
-                break;
+        if (event == SocketEvent.CONNECT_MSG_SERVER_FAILED) {
+            if (!loginSuccess) {
+                onSocketFailure(event);
             }
         }
     }
@@ -339,21 +317,21 @@ public class LoginActivity extends BTBaseActivity {
         LoginActivity.this.finish();
     }
 
-    private void onLoginFailure(LoginEvent event) {
+    private void onLoginFailure(LoginStatus event) {
         logger.e("LoginActivity#onLoginFailure errorCode:%s", event.name());
         showLoginPage();
         String errorTip = getString(IMUIHelper.getLoginErrorTip(event));
         logger.d("LoginActivity#onLoginFailure errorTip:%s", errorTip);
-        mLoginStatusView.setVisibility(View.GONE);
+        loginStatusView.setVisibility(View.GONE);
         Toast.makeText(this, errorTip, Toast.LENGTH_SHORT).show();
     }
 
     private void onSocketFailure(SocketEvent event) {
-        logger.e("LoginActivity#onSocketFailure errorCode:%s", event.name());
+        logger.e("LoginActivity#onSocketFailure:%s", event.name());
         showLoginPage();
         String errorTip = getString(IMUIHelper.getSocketErrorTip(event));
         logger.d("LoginActivity#onSocketFailure errorTip:%s", errorTip);
-        mLoginStatusView.setVisibility(View.GONE);
+        loginStatusView.setVisibility(View.GONE);
         Toast.makeText(this, errorTip, Toast.LENGTH_SHORT).show();
     }
 }

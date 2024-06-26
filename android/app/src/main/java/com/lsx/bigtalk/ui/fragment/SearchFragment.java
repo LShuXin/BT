@@ -17,7 +17,7 @@ import com.lsx.bigtalk.DB.entity.UserEntity;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.imservice.support.IMServiceConnector;
 import com.lsx.bigtalk.imservice.service.IMService;
-import com.lsx.bigtalk.ui.adapter.SearchAdapter;
+import com.lsx.bigtalk.ui.adapter.SearchResAdapter;
 import com.lsx.bigtalk.ui.base.BTBaseFragment;
 import com.lsx.bigtalk.utils.Logger;
 
@@ -32,7 +32,7 @@ public class SearchFragment extends BTBaseFragment {
 	private View curView = null;
 	private ListView listView;
     private View noSearchResultView;
-	private SearchAdapter adapter;
+	private SearchResAdapter adapter;
 	IMService imService;
 
     private final IMServiceConnector imServiceConnector = new IMServiceConnector(){
@@ -70,9 +70,9 @@ public class SearchFragment extends BTBaseFragment {
 	}
 
 	private void initTopBar() {
-        setAppBarImage(R.drawable.tt_top_default_bk);
+        setAppBarImage(R.drawable.appbar_default_bg);
 		showTopSearchBar();
-		setTopLeftBtnImage(R.drawable.tt_top_back);
+		setTopLeftBtnImage(R.drawable.top_back);
 		hideTopRightBtn();
 
         topLeftBtnImageView.setPadding(0, 0, ScreenTools.instance(getActivity()).dip2px(30), 0);
@@ -109,7 +109,7 @@ public class SearchFragment extends BTBaseFragment {
 	}
 
     private void initAdapter(){
-        adapter = new SearchAdapter(getActivity(),imService);
+        adapter = new SearchResAdapter(getActivity(),imService);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(adapter);
         listView.setOnItemLongClickListener(adapter);
@@ -117,15 +117,15 @@ public class SearchFragment extends BTBaseFragment {
 
     // 文字高亮search 模块
 	private void searchEntityLists(String key) {
-        List<UserEntity> contactList = imService.getContactManager().getSearchContactList(key);
+        List<UserEntity> contactList = imService.getIMContactManager().searchUserContact(key);
         int contactSize = contactList.size();
         adapter.putUserList(contactList);
 
-        List<GroupEntity> groupList = imService.getGroupManager().getSearchAllGroupList(key);
+        List<GroupEntity> groupList = imService.getIMGroupManager().searchGroup(key);
         int groupSize = groupList.size();
         adapter.putGroupList(groupList);
 
-        List<DepartmentEntity> departmentList = imService.getContactManager().getSearchDepartList(key);
+        List<DepartmentEntity> departmentList = imService.getIMContactManager().searchDeptContact(key);
         int deptSize = departmentList.size();
         adapter.putDeptList(departmentList);
 

@@ -15,6 +15,7 @@ import com.lsx.bigtalk.ui.activity.MainActivity;
 import com.lsx.bigtalk.utils.Logger;
 import com.lsx.bigtalk.ui.helper.listener.OnDoubleClickListener;
 
+
 public class NaviTabButton extends FrameLayout {
 	private int mIndex;
 
@@ -50,9 +51,8 @@ public class NaviTabButton extends FrameLayout {
         mTitle = findViewById(R.id.tab_btn_title);
         mNotify = findViewById(R.id.tab_unread_notify);
 
-        /**双击的判断是有延迟的,为了其他三个按钮click的点击速度，所以区别对待*/
         if (mIndex == 0) {
-            OnDoubleClickListener touchListener = new OnDoubleClickListener() {
+            OnDoubleClickListener onDoubleClickListener = new OnDoubleClickListener() {
                 @Override
                 public void onDoubleClick(View view) {
                     if (mIndex == 0) {
@@ -64,7 +64,7 @@ public class NaviTabButton extends FrameLayout {
                 public void onClick(View view) {
                 }
             };
-            container.setOnTouchListener(touchListener);
+            container.setOnTouchListener(onDoubleClickListener);
         }
 
        View.OnClickListener clickListener = new View.OnClickListener() {
@@ -74,7 +74,6 @@ public class NaviTabButton extends FrameLayout {
            }
        };
        container.setOnClickListener(clickListener);
-
     }
 
 	public void setIndex(int index) {
@@ -89,7 +88,7 @@ public class NaviTabButton extends FrameLayout {
 		this.mSelectedImg = img;
 	}
 
-	private void setSelectedColor(Boolean selected) {
+	private void setSelectedTitleColor(Boolean selected) {
 		if (selected) {
 			mTitle.setTextColor(getResources().getColor(
 					R.color.default_blue_color));
@@ -100,7 +99,7 @@ public class NaviTabButton extends FrameLayout {
 	}
 
 	public void setSelectedButton(Boolean selected) {
-		setSelectedColor(selected);
+		setSelectedTitleColor(selected);
 		if (selected) {
 			mImage.setImageDrawable(mSelectedImg);
 		} else {

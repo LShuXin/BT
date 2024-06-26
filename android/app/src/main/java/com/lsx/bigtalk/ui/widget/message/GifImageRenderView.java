@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import com.lsx.bigtalk.DB.entity.MessageEntity;
 import com.lsx.bigtalk.DB.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.imservice.entity.ImageMessage;
+import com.lsx.bigtalk.imservice.entity.ImageMessageEntity;
 import com.lsx.bigtalk.ui.widget.GifLoadTask;
 import com.lsx.bigtalk.ui.widget.GifView;
 
@@ -23,7 +23,7 @@ public class GifImageRenderView extends  BaseMsgRenderView {
         return messageContent;
     }
     public static GifImageRenderView inflater(Context context,ViewGroup viewGroup,boolean isMine){
-        int resource = isMine? R.layout.mine_gif_image_message_item :R.layout.other_gif_image_message_item;
+        int resource = isMine? R.layout.mine_gif_image_message_item :R.layout.others_gif_image_message_item;
         GifImageRenderView gifRenderView = (GifImageRenderView) LayoutInflater.from(context).inflate(resource, viewGroup, false);
         gifRenderView.setMine(isMine);
         return gifRenderView;
@@ -46,7 +46,7 @@ public class GifImageRenderView extends  BaseMsgRenderView {
     @Override
     public void render(MessageEntity messageEntity, UserEntity userEntity,Context context) {
         super.render(messageEntity, userEntity,context);
-        ImageMessage imageMessage = (ImageMessage) messageEntity;
+        ImageMessageEntity imageMessage = (ImageMessageEntity) messageEntity;
         String url = imageMessage.getUrl();
         new GifLoadTask() {
             @Override

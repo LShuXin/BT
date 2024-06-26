@@ -1,6 +1,16 @@
-
 package com.lsx.bigtalk.ui.activity;
 
+import static com.lsx.bigtalk.R.*;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -19,6 +29,7 @@ import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.provider.Settings;
@@ -47,9 +58,18 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
+
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
+
+import de.greenrobot.event.EventBus;
+
 import com.lsx.bigtalk.DB.entity.GroupEntity;
 import com.lsx.bigtalk.DB.entity.MessageEntity;
 import com.lsx.bigtalk.DB.entity.PeerEntity;
@@ -61,13 +81,13 @@ import com.lsx.bigtalk.config.DBConstant;
 import com.lsx.bigtalk.config.HandlerConstant;
 import com.lsx.bigtalk.config.IntentConstant;
 import com.lsx.bigtalk.config.SysConstant;
-import com.lsx.bigtalk.imservice.entity.AudioMessage;
-import com.lsx.bigtalk.imservice.entity.ImageMessage;
-import com.lsx.bigtalk.imservice.entity.TextMessage;
-import com.lsx.bigtalk.imservice.entity.UnreadEntity;
+import com.lsx.bigtalk.imservice.entity.AudioMessageEntity;
+import com.lsx.bigtalk.imservice.entity.ImageMessageEntity;
+import com.lsx.bigtalk.imservice.entity.TextMessageEntity;
+import com.lsx.bigtalk.imservice.entity.UnreadMessageEntity;
 import com.lsx.bigtalk.imservice.event.MessageEvent;
 import com.lsx.bigtalk.imservice.event.PriorityEvent;
-import com.lsx.bigtalk.imservice.event.SelectEvent;
+import com.lsx.bigtalk.imservice.event.ImageSelectEvent;
 import com.lsx.bigtalk.imservice.manager.IMLoginManager;
 import com.lsx.bigtalk.imservice.manager.IMStackManager;
 import com.lsx.bigtalk.imservice.service.IMService;
@@ -81,32 +101,14 @@ import com.lsx.bigtalk.ui.helper.AudioPlayerHandler;
 import com.lsx.bigtalk.ui.helper.AudioRecordHandler;
 import com.lsx.bigtalk.ui.helper.Emoparser;
 import com.lsx.bigtalk.ui.widget.CustomEditView;
-import com.lsx.bigtalk.ui.widget.EmoGridView;
-import com.lsx.bigtalk.ui.widget.EmoGridView.OnEmoGridViewItemClick;
+import com.lsx.bigtalk.ui.widget.EmojiGridView;
 import com.lsx.bigtalk.ui.widget.MGProgressbar;
-import com.lsx.bigtalk.ui.widget.YayaEmoGridView;
+import com.lsx.bigtalk.ui.widget.YayaEmojiGridView;
 import com.lsx.bigtalk.utils.CommonUtil;
-import com.lsx.bigtalk.utils.IMUIHelper;
+import com.lsx.bigtalk.helper.IMUIHelper;
 import com.lsx.bigtalk.utils.Logger;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import de.greenrobot.event.EventBus;
-
-/**
- * @author Nana
- * @Description 主消息界面
- * @date 2014-7-15
- * <p/>
- */
 public class MessageActivity extends BTBaseActivity
         implements
         OnRefreshListener2<ListView>,
@@ -114,107 +116,88 @@ public class MessageActivity extends BTBaseActivity
         OnTouchListener,
         TextWatcher,
         SensorEventListener {
-
-    private static Handler uiHandler = null;// 处理语音
-
-
-    private PullToRefreshListView lvPTR = null;
-    private CustomEditView messageEdt = null;
-    private TextView sendBtn = null;
-    private Button recordAudioBtn = null;
-    private ImageView keyboardInputImg = null;
-    private ImageView soundVolumeImg = null;
-    private LinearLayout soundVolumeLayout = null;
-
-
-    private ImageView audioInputImg = null;
+    
+    private final Logger logger = Logger.getLogger(MessageActivity.class);
+    private static Handler recordMsgHandler = null;
+    private PullToRefreshListView pullToRefreshListView = null;
+    private CustomEditView messageEditView = null;
+    private TextView sendMsgBtn = null;
+    private Button recordFlatBtn = null;
+    private ImageView addTextBtn = null;
+    private ImageView volumnImageView = null;
+    private LinearLayout volumeBg = null;
+    private ImageView addRecordBtn = null;
     private ImageView addPhotoBtn = null;
-    private ImageView addEmoBtn = null;
-    private LinearLayout emoLayout = null;
-    private EmoGridView emoGridView = null;
-    private YayaEmoGridView yayaEmoGridView = null;
-    private RadioGroup emoRadioGroup = null;
+    private ImageView addEmojiBtn = null;
+    private LinearLayout emojiPanelView = null;
+    private EmojiGridView emojiGridView = null;
+    private YayaEmojiGridView yayaemojiGridView = null;
+    private RadioGroup emojiRadioGroup = null;
     private String audioSavePath = null;
     private InputMethodManager inputManager = null;
     private AudioRecordHandler audioRecorderInstance = null;
-    private TextView textView_new_msg_tip = null;
-
-    private MessageAdapter adapter = null;
-    private Thread audioRecorderThread = null;
-    private Dialog soundVolumeDialog = null;
-    private View addOthersPanelView = null;
-    private AlbumHelper albumHelper = null;
+    private TextView new_msg_tips = null;
+    private MessageAdapter messageAdapter = null;
+    private Dialog volumeDialog = null;
+    private View photoPanelView = null;
 
 
     private List<ImageBucket> albumList = null;
     MGProgressbar progressbar = null;
-
-    //private boolean audioReday = false; 语音先关的
+    
     private SensorManager sensorManager = null;
     private Sensor sensor = null;
 
 
-    private String takePhotoSavePath = "";
-    private final Logger logger = Logger.getLogger(MessageActivity.class);
+    private String photoSavePath = "";
+
     private IMService imService;
-    private UserEntity loginUser;
+    private UserEntity loginUserEntity;
     private PeerEntity peerEntity;
-
-    // 当前的session
     private String currentSessionKey;
-    private int historyTimes = 0;
+    private int historyMsgPageNo = 0;
 
-    //键盘布局相关参数
-    int rootBottom = Integer.MIN_VALUE, keyboardHeight = 0;
-    switchInputMethodReceiver receiver;
+    int rootBottom = Integer.MIN_VALUE;
+    int keyboardHeight = 0;
+    InputMethodSwitchBroadcastReceiver inputMethodSwitchBroadcastReceiver;
     private String currentInputMethod;
-
-    /**
-     * 全局Toast
-     */
     private Toast mToast;
 
     private final IMServiceConnector imServiceConnector = new IMServiceConnector() {
         @Override
         public void onIMServiceConnected() {
-            logger.d("message_activity#onIMServiceConnected");
+            logger.d("MessageActivity#onIMServiceConnected");
             imService = imServiceConnector.getIMService();
             initData();
         }
 
         @Override
         public void onServiceDisconnected() {
+            logger.d("MessageActivity#onServiceDisconnected");
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        logger.d("message_activity#onCreate: %s", this);
         super.onCreate(savedInstanceState);
 
         currentSessionKey = getIntent().getStringExtra(IntentConstant.KEY_SESSION_KEY);
 
-        initSoftInputMethod();
-        initEmo();
-        initAlbumHelper();
-        initAudioHandler();
-        initAudioSensor();
+        initSoftInput();
+        initImageRelated();
+        initAudioRelated();
         initView();
 
         imServiceConnector.connect(this);
         EventBus.getDefault().register(this, SysConstant.MESSAGE_EVENTBUS_PRIORITY);
-        logger.d("message_activity#register im service and eventBus");
     }
-
-    /**
-     * 本身位于Message页面，点击通知栏其他session的消息
-     */
+    
     @Override
     protected void onNewIntent(Intent intent) {
-        logger.d("message_activity#onNewIntent:%s", this);
+        logger.d("MessageActivity#onNewIntent:%s", this);
         super.onNewIntent(intent);
         setIntent(intent);
-        historyTimes = 0;
+        historyMsgPageNo = 0;
         if (intent == null) {
             return;
         }
@@ -222,7 +205,7 @@ public class MessageActivity extends BTBaseActivity
         if (newSessionKey == null) {
             return;
         }
-        logger.d("chat#newSessionInfo:%s", newSessionKey);
+        logger.d("MessageActivity#onNewIntent#newSessionKey:%s", newSessionKey);
         if (!newSessionKey.equals(currentSessionKey)) {
             currentSessionKey = newSessionKey;
             initData();
@@ -231,28 +214,27 @@ public class MessageActivity extends BTBaseActivity
 
     @Override
     protected void onResume() {
-        logger.d("message_activity#onresume:%s", this);
+        logger.d("MessageActivity#onResume");
         super.onResume();
         IMApplication.gifRunning = true;
-        historyTimes = 0;
+        historyMsgPageNo = 0;
         // not the first time
         if (imService != null) {
-            // 处理session的未读信息
-            handleUnreadMsgs();
+            consumeUnreadMsgs();
         }
     }
 
     @Override
     protected void onDestroy() {
-        logger.d("message_activity#onDestroy:%s", this);
-        historyTimes = 0;
+        logger.d("MessageActivity#onDestroy");
+        historyMsgPageNo = 0;
         imServiceConnector.disconnect(this);
         EventBus.getDefault().unregister(this);
-        adapter.clearItem();
+        messageAdapter.clearItem();
         albumList.clear();
         sensorManager.unregisterListener(this, sensor);
-        ImageMessage.clearImageMessageList();
-        unregisterReceiver(receiver);
+        ImageMessageEntity.clearImageMessageList();
+        unregisterReceiver(inputMethodSwitchBroadcastReceiver);
         super.onDestroy();
     }
 
@@ -265,14 +247,15 @@ public class MessageActivity extends BTBaseActivity
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (RESULT_OK != resultCode)
+        if (RESULT_OK != resultCode) {
             return;
+        }
+            
         switch (requestCode) {
-            case SysConstant.CAMERA_WITH_DATA:
-                handleTakePhotoData(data);
+            case SysConstant.CAMERA_FOR_DATA:
+                handleTakePhotoSuccess(data);
                 break;
-            case SysConstant.ALBUM_BACK_DATA:
-                logger.d("pic#ALBUM_BACK_DATA");
+            case SysConstant.ALBUM_FOR_DATA:
                 setIntent(data);
                 break;
         }
@@ -296,30 +279,29 @@ public class MessageActivity extends BTBaseActivity
             mToast.cancel();
         }
     }
-
-    // 触发条件：imservice 连接成功、newIntent
+    
     private void initData() {
-        historyTimes = 0;
-        adapter.clearItem();
-        ImageMessage.clearImageMessageList();
-        loginUser = imService.getLoginManager().getLoginInfo();
-        peerEntity = imService.getSessionManager().findPeerEntity(currentSessionKey);
+        historyMsgPageNo = 0;
+        messageAdapter.clearItem();
+        ImageMessageEntity.clearImageMessageList();
+        loginUserEntity = imService.getIMLoginManager().getUserEntity();
+        peerEntity = imService.getIMSessionManager().findPeerEntity(currentSessionKey);
         // 头像、历史消息加载、取消通知
         setTitleByUser();
-        reqHistoryMsg();
-        adapter.setImService(imService, loginUser);
-        imService.getUnReadMsgManager().readUnreadSession(currentSessionKey);
-        imService.getNotificationManager().cancelSessionNotifications(currentSessionKey);
+        loadHistoryMsg();
+        messageAdapter.setImService(imService, loginUserEntity);
+        imService.getIMUnReadMsgManager().readUnreadSession(currentSessionKey);
+        imService.getIMNotificationManager().cancelSessionNotifications(currentSessionKey);
     }
 
-    private void initSoftInputMethod() {
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+    private void initSoftInput() {
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        receiver = new switchInputMethodReceiver();
+        inputMethodSwitchBroadcastReceiver = new InputMethodSwitchBroadcastReceiver();
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.intent.action.INPUT_METHOD_CHANGED");
-        registerReceiver(receiver, filter);
+        registerReceiver(inputMethodSwitchBroadcastReceiver, filter);
 
         SystemConfigSp.instance().init(this);
         String str = Settings.Secure.getString(MessageActivity.this.getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
@@ -333,45 +315,43 @@ public class MessageActivity extends BTBaseActivity
             }
         }
     }
-
-    /**
-     * 设定聊天名称
-     * 1. 如果是user类型， 点击触发UserProfile
-     * 2. 如果是群组，检测自己是不是还在群中
-     */
+    
     private void setTitleByUser() {
         setTitle(peerEntity.getMainName());
-        int peerType = peerEntity.getType();
-        switch (peerType) {
-            case DBConstant.SESSION_TYPE_GROUP: {
+        int sessionType = peerEntity.getType();
+        switch (sessionType) {
+            case DBConstant.SESSION_TYPE_GROUP: 
+            {
                 GroupEntity group = (GroupEntity) peerEntity;
-                Set<Integer> memberLists = group.getlistGroupMemberIds();
-                if (!memberLists.contains(loginUser.getPeerId())) {
+                Set<Integer> memberIds = group.getlistGroupMemberIds();
+                if (!memberIds.contains(loginUserEntity.getPeerId())) {
+                    // the app user is not in the group
                     Toast.makeText(MessageActivity.this, R.string.no_group_member, Toast.LENGTH_SHORT).show();
                 }
+                break;
             }
-            break;
-            case DBConstant.SESSION_TYPE_SINGLE: {
+            case DBConstant.SESSION_TYPE_SINGLE: 
+            {
                 topCenterTitleTextView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         IMUIHelper.openUserProfileActivity(MessageActivity.this, peerEntity.getPeerId());
                     }
                 });
+                break;
             }
-            break;
         }
     }
 
-    private void handleImagePickData(List<ImageItem> list) {
-        ArrayList<ImageMessage> listMsg = new ArrayList<>();
+    private void handleChoosePhotoSuccess(List<ImageItem> list) {
+        ArrayList<ImageMessageEntity> imageMsgList = new ArrayList<>();
         ArrayList<ImageItem> itemList = (ArrayList<ImageItem>) list;
         for (ImageItem item : itemList) {
-            ImageMessage imageMessage = ImageMessage.buildForSend(item, loginUser, peerEntity);
-            listMsg.add(imageMessage);
-            pushList(imageMessage);
+            ImageMessageEntity imageMessage = ImageMessageEntity.buildForSend(item, loginUserEntity, peerEntity);
+            imageMsgList.add(imageMessage);
+            pushMsg(imageMessage);
         }
-        imService.getMessageManager().sendImages(listMsg);
+        imService.getIMMessageManager().sendImages(imageMsgList);
     }
 
 
@@ -385,459 +365,404 @@ public class MessageActivity extends BTBaseActivity
      * todo  need find good solution
      */
     public void onEvent(PriorityEvent event) {
-        if (Objects.requireNonNull(event.event) == PriorityEvent.Event.MSG_RECEIVED_MESSAGE) {
+        if (event.event == PriorityEvent.Event.MSG_RECEIVED_MESSAGE) {
             MessageEntity entity = (MessageEntity) event.object;
-            /**正式当前的会话*/
             if (currentSessionKey.equals(entity.getSessionKey())) {
                 Message message = Message.obtain();
-                message.what = HandlerConstant.MSG_RECEIVED_MESSAGE;
+                message.what = HandlerConstant.MESSAGE_RECEIVED;
                 message.obj = entity;
-                uiHandler.sendMessage(message);
+                recordMsgHandler.sendMessage(message);
                 EventBus.getDefault().cancelEventDelivery(event);
             }
         }
     }
-
-    /**
-     * EventBus 消息处理： 选择图片
-     * */
-    public void onEventMainThread(SelectEvent event) {
+    
+    public void onEventMainThread(ImageSelectEvent event) {
         List<ImageItem> itemList = event.getList();
-        if (itemList != null || itemList.size() > 0)
+        if (itemList != null && !itemList.isEmpty())
         {
-            handleImagePickData(itemList);
+            handleChoosePhotoSuccess(itemList);
         }
     }
-
-    /**
-     * EventBus 消息处理：与消息发送接受有关的消息
-     * */
+    
     public void onEventMainThread(MessageEvent event) {
-        MessageEvent.Event type = event.getEvent();
-        MessageEntity entity = event.getMessageEntity();
-
-        switch (type) {
-            case ACK_SEND_MESSAGE_OK:
-                {
-                    onMsgAck(event.getMessageEntity());
-                }
+        switch (event.getEvent()) {
+            case SEND_MESSAGE_SUCCESS:
+            {
+                handleMsgSendSuccess(event.getMessageEntity());
                 break;
-            case ACK_SEND_MESSAGE_FAILURE:
-                // 失败情况下新添提醒
+            }
+            case SEND_MESSAGE_FAILED:
                 showToast(R.string.message_send_failed);
-            case ACK_SEND_MESSAGE_TIME_OUT:
-                {
-                    onMsgUnAckTimeoutOrFailure(event.getMessageEntity());
+            case SEND_MESSAGE_TIMEOUT:
+            {
+                handleMsgSendFailed(event.getMessageEntity());
+                break;
+            }
+            case IMAGE_UPLOAD_FAILED:
+            {
+                ImageMessageEntity imageMessage = (ImageMessageEntity) event.getMessageEntity();
+                messageAdapter.updateItemState(imageMessage);
+                showToast(R.string.message_send_failed);
+                break;
+            }
+            case IMAGE_UPLOAD_SUCCESS:
+            {
+                ImageMessageEntity imageMessage = (ImageMessageEntity) event.getMessageEntity();
+                messageAdapter.updateItemState(imageMessage);
+                break;
+            }
+            case HISTORY_MSG_OBTAINED:
+            {
+                if (historyMsgPageNo == 1) {
+                    messageAdapter.clearItem();
+                    loadHistoryMsg();
                 }
                 break;
-            case HANDLER_IMAGE_UPLOAD_FAILURE:
-                {
-                    logger.d("pic#onUploadImageFaild");
-                    ImageMessage imageMessage = (ImageMessage) event.getMessageEntity();
-                    adapter.updateItemState(imageMessage);
-                    showToast(R.string.message_send_failed);
-                }
-                break;
-            case HANDLER_IMAGE_UPLOAD_SUCCESS:
-                {
-                    ImageMessage imageMessage = (ImageMessage) event.getMessageEntity();
-                    adapter.updateItemState(imageMessage);
-                }
-                break;
-            case HISTORY_MSG_OBTAIN:
-                {
-                    if (historyTimes == 1) {
-                        adapter.clearItem();
-                        reqHistoryMsg();
-                    }
-                }
-                break;
+            }
+                
         }
     }
-
-    /**
-     * audio状态的语音还在使用这个
-     */
-    protected void initAudioHandler() {
-        uiHandler = new Handler() {
-            public void handleMessage(Message msg) {
+    
+    protected void initAudioRelated() {
+        recordMsgHandler = new Handler(Looper.getMainLooper()) {
+            public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
                 switch (msg.what) {
-                    case HandlerConstant.HANDLER_RECORD_FINISHED:
+                    case HandlerConstant.RECORD_FINISHED:
+                    {
                         onRecordVoiceEnd((Float) msg.obj);
-                        break;
-
-                    // 录音结束
-                    case HandlerConstant.HANDLER_STOP_PLAY:
+                        break; 
+                    }
+                    case HandlerConstant.PLAY_STOPPED:
+                    {
                         // 其他地方处理了
-                        //adapter.stopVoicePlayAnim((String) msg.obj);
+                        // adapter.stopVoicePlayAnim((String) msg.obj);
                         break;
-
+                    }
                     case HandlerConstant.RECEIVE_MAX_VOLUME:
+                    {
                         onReceiveMaxVolume((Integer) msg.obj);
                         break;
-
+                    }
                     case HandlerConstant.RECORD_AUDIO_TOO_LONG:
-                        doFinishRecordAudio();
+                    {
+                        onRecordLengthReachMax();
                         break;
-
-                    case HandlerConstant.MSG_RECEIVED_MESSAGE:
+                    }
+                    case HandlerConstant.MESSAGE_RECEIVED:
+                    {
                         MessageEntity entity = (MessageEntity) msg.obj;
-                        onMsgRecv(entity);
+                        handleMsgReceived(entity);
                         break;
-
+                    }
                     default:
                         break;
                 }
             }
         };
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
-
-    /**
-     * [备注] DB保存，与session的更新manager已经做了
-     *
-     * @param messageEntity
-     */
-    private void onMsgAck(MessageEntity messageEntity) {
-        logger.d("message_activity#onMsgAck");
-        int msgId = messageEntity.getMsgId();
-        logger.d("chat#onMsgAck, msgId:%d", msgId);
-
-        /**到底采用哪种ID呐??*/
-        long localId = messageEntity.getId();
-        adapter.updateItemState(messageEntity);
+    
+    private void handleMsgSendSuccess(MessageEntity messageEntity) {
+        messageAdapter.updateItemState(messageEntity);
     }
-
-
-    private void handleUnreadMsgs() {
-        logger.d("messageacitivity#handleUnreadMsgs sessionId:%s", currentSessionKey);
-        // 清除未读消息
-        UnreadEntity unreadEntity = imService.getUnReadMsgManager().findUnread(currentSessionKey);
+    
+    private void consumeUnreadMsgs() {
+        logger.d("MessageActivity#consumeUnreadMsgs");
+        UnreadMessageEntity unreadEntity = imService.getIMUnReadMsgManager().findUnread(currentSessionKey);
         if (null == unreadEntity) {
             return;
         }
         int unReadCnt = unreadEntity.getUnReadCnt();
         if (unReadCnt > 0) {
-            imService.getNotificationManager().cancelSessionNotifications(currentSessionKey);
-            adapter.notifyDataSetChanged();
-            scrollToBottomListItem();
+            imService.getIMNotificationManager().cancelSessionNotifications(currentSessionKey);
+            messageAdapter.notifyDataSetChanged();
+            scrollToBottom();
         }
     }
-
-
-    // 肯定是在当前的session内
-    private void onMsgRecv(MessageEntity entity) {
-        logger.d("message_activity#onMsgRecv");
-
-        imService.getUnReadMsgManager().ackReadMsg(entity);
-        logger.d("chat#start pushList");
-        pushList(entity);
-        ListView lv = lvPTR.getRefreshableView();
-        if (lv != null) {
-
-            if (lv.getLastVisiblePosition() < adapter.getCount()) {
-                textView_new_msg_tip.setVisibility(View.VISIBLE);
+    
+    private void handleMsgReceived(MessageEntity entity) {
+        logger.d("MessageActivity#handleMsgReceived");
+        imService.getIMUnReadMsgManager().ackReadMsg(entity);
+        pushMsg(entity);
+        ListView listView = pullToRefreshListView.getRefreshableView();
+        if (listView != null) {
+            if (listView.getLastVisiblePosition() < messageAdapter.getCount()) {
+                new_msg_tips.setVisibility(View.VISIBLE);
             } else {
-                scrollToBottomListItem();
+                scrollToBottom();
             }
         }
     }
-
-
-    private void onMsgUnAckTimeoutOrFailure(MessageEntity messageEntity) {
-        logger.d("chat#onMsgUnAckTimeoutOrFailure, msgId:%s", messageEntity.getMsgId());
-        // msgId 应该还是为0
-        adapter.updateItemState(messageEntity);
+    
+    private void handleMsgSendFailed(MessageEntity messageEntity) {
+        logger.d("MessageActivity#handleMsgSendFailed");
+        messageAdapter.updateItemState(messageEntity);
     }
 
-
-    /**
-     * @Description 显示联系人界面
-     */
     private void showGroupManageActivity() {
-        Intent i = new Intent(this, GroupManagermentActivity.class);
+        Intent i = new Intent(this, GroupManageActivity.class);
         i.putExtra(IntentConstant.KEY_SESSION_KEY, currentSessionKey);
         startActivity(i);
     }
 
-    /**
-     * @Description 初始化AudioManager，用于访问控制音量和钤声模式
-     */
-    private void initAudioSensor() {
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
-    }
-
-    /**
-     * @Description 初始化数据（相册,表情,数据库相关）
-     */
-    private void initAlbumHelper() {
-        albumHelper = AlbumHelper.getHelper(MessageActivity.this);
+    private void initImageRelated() {
+        Emoparser.getInstance(MessageActivity.this);
+        IMApplication.gifRunning = true;
+        AlbumHelper albumHelper = AlbumHelper.getHelper(MessageActivity.this);
         albumList = albumHelper.getImagesBucketList(false);
     }
 
-    private void initEmo() {
-        Emoparser.getInstance(MessageActivity.this);
-        IMApplication.gifRunning = true;
-    }
-
-    /**
-     * @Description 初始化界面控件
-     * 有点庞大 todo
-     */
+    @SuppressLint("ClickableViewAccessibility")
     private void initView() {
-        // 绑定布局资源(注意放在所有资源初始化之前)
-        LayoutInflater.from(this).inflate(R.layout.message_activity, appBarLayout);
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
 
-        //TOP_CONTENT_VIEW
-        setTopLeftBtnImage(R.drawable.tt_top_back);
+        layoutInflater.inflate(R.layout.message_activity, baseActivity);
+
+
+        // app bar
+        setTopLeftBtnImage(R.drawable.top_back);
         setTopLeftBtnTitleText(getResources().getString(R.string.top_left_back));
-        setTopRightBtnImage(R.drawable.tt_top_right_group_manager);
+        setTopRightBtnImage(R.drawable.group_manage);
         topLeftBtnImageView.setOnClickListener(this);
         topLeftBtnTitleTextView.setOnClickListener(this);
         topRightBtnImageView.setOnClickListener(this);
 
-        // 列表控件(开源PTR)
-        lvPTR = this.findViewById(R.id.message_list);
-        textView_new_msg_tip = findViewById(R.id.tt_new_msg_tip);
-        lvPTR.getRefreshableView().addHeaderView(LayoutInflater.from(this).inflate(R.layout.message_list_header,lvPTR.getRefreshableView(), false));
-        Drawable loadingDrawable = getResources().getDrawable(R.drawable.pull_to_refresh_indicator);
-        final int indicatorWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 29,
-                getResources().getDisplayMetrics());
-        loadingDrawable.setBounds(new Rect(0, indicatorWidth, 0, indicatorWidth));
-        lvPTR.getLoadingLayoutProxy().setLoadingDrawable(loadingDrawable);
-        lvPTR.getRefreshableView().setCacheColorHint(Color.WHITE);
-        lvPTR.getRefreshableView().setSelector(new ColorDrawable(Color.WHITE));
-        lvPTR.getRefreshableView().setOnTouchListener(lvPTROnTouchListener);
-        adapter = new MessageAdapter(this);
-        lvPTR.setAdapter(adapter);
-        lvPTR.setOnRefreshListener(this);
-        lvPTR.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), true, true) {
+
+        // msg list
+        pullToRefreshListView = findViewById(R.id.message_list);
+        new_msg_tips = findViewById(R.id.new_msg_tips);
+        pullToRefreshListView.getRefreshableView().addHeaderView(
+                layoutInflater.inflate(R.layout.message_list_header, pullToRefreshListView.getRefreshableView(), false));
+        Drawable loadingDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.pull_to_refresh_indicator, this.getTheme());
+        final int indicatorSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 29, getResources().getDisplayMetrics());
+        if (null != loadingDrawable) {
+           loadingDrawable.setBounds(new Rect(0, indicatorSize, 0, indicatorSize));
+        }
+        pullToRefreshListView.getLoadingLayoutProxy().setLoadingDrawable(loadingDrawable);
+        pullToRefreshListView.getRefreshableView().setCacheColorHint(Color.WHITE);
+        pullToRefreshListView.getRefreshableView().setSelector(new ColorDrawable(Color.WHITE));
+        pullToRefreshListView.getRefreshableView().setOnTouchListener((v, event) -> {
+            v.performClick();
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                messageEditView.clearFocus();
+                if (emojiPanelView.getVisibility() == View.VISIBLE) {
+                    emojiPanelView.setVisibility(View.GONE);
+                }
+
+                if (photoPanelView.getVisibility() == View.VISIBLE) {
+                    photoPanelView.setVisibility(View.GONE);
+                }
+                inputManager.hideSoftInputFromWindow(messageEditView.getWindowToken(), 0);
+            }
+            return false;
+        });
+        messageAdapter = new MessageAdapter(this);
+        pullToRefreshListView.setAdapter(messageAdapter);
+        pullToRefreshListView.setOnRefreshListener(this);
+        pullToRefreshListView.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), true, true) {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
                     if (view.getLastVisiblePosition() == (view.getCount() - 1)) {
-                        textView_new_msg_tip.setVisibility(View.GONE);
+                        new_msg_tips.setVisibility(View.GONE);
                     }
                 }
             }
         });
-        textView_new_msg_tip.setOnClickListener(this);
+        new_msg_tips.setOnClickListener(this);
 
-        // 界面底部输入框布局
-        sendBtn = this.findViewById(R.id.send_message_btn);
-        recordAudioBtn = this.findViewById(R.id.record_voice_btn);
-        audioInputImg = this.findViewById(R.id.voice_btn);
-        messageEdt = this.findViewById(R.id.message_text);
-        RelativeLayout.LayoutParams messageEdtParam = (LayoutParams) messageEdt.getLayoutParams();
-        messageEdtParam.addRule(RelativeLayout.LEFT_OF, R.id.show_emo_btn);
-        messageEdtParam.addRule(RelativeLayout.RIGHT_OF, R.id.voice_btn);
-        keyboardInputImg = this.findViewById(R.id.show_keyboard_btn);
-        addPhotoBtn = this.findViewById(R.id.show_add_photo_btn);
-        addEmoBtn = this.findViewById(R.id.show_emo_btn);
-        messageEdt.setOnFocusChangeListener(msgEditOnFocusChangeListener);
-        messageEdt.setOnClickListener(this);
-        messageEdt.addTextChangedListener(this);
+
+        // input utils
+        addRecordBtn = findViewById(R.id.add_record_btn);
+        addRecordBtn.setOnClickListener(this);
+        addTextBtn = findViewById(R.id.add_text_btn);
+        addTextBtn.setOnClickListener(this);
+
+        recordFlatBtn = findViewById(R.id.record_flat_btn);
+        recordFlatBtn.setOnTouchListener(this);
+        messageEditView = findViewById(id.message_editView);
+        messageEditView.setOnFocusChangeListener(msgEditOnFocusChangeListener);
+        messageEditView.setOnClickListener(this);
+        messageEditView.addTextChangedListener(this);
+
+        addEmojiBtn = findViewById(R.id.add_emoji_btn);
+        addEmojiBtn.setOnClickListener(this);
+
+        RelativeLayout.LayoutParams messageEditViewLayoutParam = (LayoutParams) messageEditView.getLayoutParams();
+        messageEditViewLayoutParam.addRule(RelativeLayout.RIGHT_OF, R.id.add_record_btn);
+        messageEditViewLayoutParam.addRule(RelativeLayout.LEFT_OF, R.id.add_emoji_btn);
+
+        sendMsgBtn = findViewById(R.id.send_message_btn);
+        sendMsgBtn.setOnClickListener(this);
+
+        addPhotoBtn = findViewById(R.id.add_photo_btn);
         addPhotoBtn.setOnClickListener(this);
-        addEmoBtn.setOnClickListener(this);
-        keyboardInputImg.setOnClickListener(this);
-        audioInputImg.setOnClickListener(this);
-        recordAudioBtn.setOnTouchListener(this);
-        sendBtn.setOnClickListener(this);
-        initSoundVolumeDlg();
+        
+        
+        // volumn panel 
+        volumeDialog = new Dialog(this, R.style.volumeDialogStyle);
+        volumeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        Objects.requireNonNull(volumeDialog.getWindow()).setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        volumeDialog.setContentView(R.layout.volume_dialog);
+        volumeDialog.setCanceledOnTouchOutside(true);
+        volumnImageView = volumeDialog.findViewById(R.id.volume_img);
+        volumeBg = volumeDialog.findViewById(R.id.volume_bg);
 
-        //OTHER_PANEL_VIEW
-        addOthersPanelView = findViewById(R.id.add_others_panel);
-        LayoutParams params = (LayoutParams) addOthersPanelView.getLayoutParams();
+        
+        // photo panel
+        photoPanelView = findViewById(id.photo_panel);
+        LayoutParams photoPanelViewLayoutparams = (LayoutParams) photoPanelView.getLayoutParams();
         if (keyboardHeight > 0) {
-            params.height = keyboardHeight;
-            addOthersPanelView.setLayoutParams(params);
+            photoPanelViewLayoutparams.height = keyboardHeight;
+            photoPanelView.setLayoutParams(photoPanelViewLayoutparams);
         }
+        View choosePhotoBtn = findViewById(R.id.choose_photo_btn);
+        choosePhotoBtn.setOnClickListener(this);
         View takePhotoBtn = findViewById(R.id.take_photo_btn);
-        View takeCameraBtn = findViewById(R.id.take_camera_btn);
         takePhotoBtn.setOnClickListener(this);
-        takeCameraBtn.setOnClickListener(this);
 
-        //EMO_LAYOUT
-        emoLayout = findViewById(R.id.emo_layout);
-        LayoutParams paramEmoLayout = (LayoutParams) emoLayout.getLayoutParams();
+
+        // emoji panel
+        emojiPanelView = findViewById(R.id.emoji_layout);
+        LayoutParams emojiPanelViewLayoutParams = (LayoutParams) emojiPanelView.getLayoutParams();
         if (keyboardHeight > 0) {
-            paramEmoLayout.height = keyboardHeight;
-            emoLayout.setLayoutParams(paramEmoLayout);
+            emojiPanelViewLayoutParams.height = keyboardHeight;
+            emojiPanelView.setLayoutParams(emojiPanelViewLayoutParams);
         }
-        emoGridView = findViewById(R.id.emo_gridview);
-        yayaEmoGridView = findViewById(R.id.yaya_emo_gridview);
-        emoRadioGroup = findViewById(R.id.emo_tab_group);
-        emoGridView.setOnEmoGridViewItemClick(onEmoGridViewItemClick);
-        emoGridView.setAdapter();
-        yayaEmoGridView.setOnEmoGridViewItemClick(yayaOnEmoGridViewItemClick);
-        yayaEmoGridView.setAdapter();
-        emoRadioGroup.setOnCheckedChangeListener(emoOnCheckedChangeListener);
+        emojiGridView = findViewById(R.id.emo_gridview);
+        emojiGridView.setOnEmojiGridViewItemClick(onEmojiGridViewItemClick);
+        emojiGridView.setAdapter();
+        yayaemojiGridView = findViewById(R.id.yaya_emo_gridview);
+        yayaemojiGridView.setOnYayaEmojiGridViewItemClick(yayaOnemojiGridViewItemClick);
+        yayaemojiGridView.setAdapter();
+        emojiRadioGroup = findViewById(R.id.emoji_radio_group);
+        emojiRadioGroup.setOnCheckedChangeListener(emoOnCheckedChangeListener);
 
 
-        //LOADING
+        // loading
         View view = LayoutInflater.from(MessageActivity.this)
                 .inflate(R.layout.progress_ly, null);
         progressbar = view.findViewById(R.id.tt_progress);
-        LayoutParams pgParms = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+        LayoutParams progressBarLayoutParams = new LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
-        pgParms.bottomMargin = 50;
-        addContentView(view, pgParms);
+        progressBarLayoutParams.bottomMargin = 50;
+        addContentView(view, progressBarLayoutParams);
 
         //ROOT_LAYOUT_LISTENER
         appBarRoot.getViewTreeObserver().addOnGlobalLayoutListener(onGlobalLayoutListener);
     }
 
-    /**
-     * @Description 初始化音量对话框
-     */
-    private void initSoundVolumeDlg() {
-        soundVolumeDialog = new Dialog(this, R.style.SoundVolumeStyle);
-        soundVolumeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        soundVolumeDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        soundVolumeDialog.setContentView(R.layout.sound_volume_dialog);
-        soundVolumeDialog.setCanceledOnTouchOutside(true);
-        soundVolumeImg = soundVolumeDialog.findViewById(R.id.sound_volume_img);
-        soundVolumeLayout = soundVolumeDialog.findViewById(R.id.sound_volume_bk);
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration config) {
+        super.onConfigurationChanged(config);
+    }
+    
+    private void loadHistoryMsg() {
+        historyMsgPageNo++;
+        List<MessageEntity> msgList = imService.getIMMessageManager().loadHistoryMsg(historyMsgPageNo, currentSessionKey, peerEntity);
+        pushMsg(msgList);
+        scrollToBottom();
     }
 
-    /**
-     * 1.初始化请求历史消息
-     * 2.本地消息不全，也会触发
-     */
-    private void reqHistoryMsg() {
-        historyTimes++;
-        List<MessageEntity> msgList = imService.getMessageManager().loadHistoryMsg(historyTimes, currentSessionKey, peerEntity);
-        pushList(msgList);
-        scrollToBottomListItem();
-    }
-    /**
-     * @param msg
-     */
-    public void pushList(MessageEntity msg) {
-        logger.d("chat#pushList msgInfo:%s", msg);
-        adapter.addItem(msg);
+    public void pushMsg(MessageEntity msg) {
+        logger.d("MessageActivity#pushMsg %s", msg);
+        messageAdapter.addItem(msg);
     }
 
-    public void pushList(List<MessageEntity> entityList) {
-        logger.d("chat#pushList list:%d", entityList.size());
-        adapter.loadHistoryList(entityList);
+    public void pushMsg(List<MessageEntity> entityList) {
+        logger.d("MessageActivity#pushMsg %d", entityList.size());
+        messageAdapter.loadHistoryList(entityList);
     }
-
-
-    /**
-     * @Description 录音超时(60s)，发消息调用该方法
-     */
-    public void doFinishRecordAudio() {
+    
+    public void onRecordLengthReachMax() {
         try {
             if (audioRecorderInstance.isRecording()) {
                 audioRecorderInstance.setRecording(false);
             }
-            if (soundVolumeDialog.isShowing()) {
-                soundVolumeDialog.dismiss();
+            if (volumeDialog.isShowing()) {
+                volumeDialog.dismiss();
             }
 
-            recordAudioBtn.setBackgroundResource(R.drawable.tt_pannel_btn_voiceforward_normal);
+            recordFlatBtn.setBackgroundResource(R.drawable.pannel_btn_voiceforward_normal);
 
             audioRecorderInstance.setRecordTime(SysConstant.MAX_SOUND_RECORD_TIME);
             onRecordVoiceEnd(SysConstant.MAX_SOUND_RECORD_TIME);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    /**
-     * @param voiceValue
-     * @Description 根据分贝值设置录音时的音量动画
-     */
     private void onReceiveMaxVolume(int voiceValue) {
         if (voiceValue < 200.0) {
-            soundVolumeImg.setImageResource(R.drawable.tt_sound_volume_01);
+            volumnImageView.setImageResource(R.drawable.volume_01);
         } else if (voiceValue > 200.0 && voiceValue < 600) {
-            soundVolumeImg.setImageResource(R.drawable.tt_sound_volume_02);
+            volumnImageView.setImageResource(R.drawable.volume_02);
         } else if (voiceValue > 600.0 && voiceValue < 1200) {
-            soundVolumeImg.setImageResource(R.drawable.tt_sound_volume_03);
+            volumnImageView.setImageResource(R.drawable.volume_03);
         } else if (voiceValue > 1200.0 && voiceValue < 2400) {
-            soundVolumeImg.setImageResource(R.drawable.tt_sound_volume_04);
+            volumnImageView.setImageResource(R.drawable.volume_04);
         } else if (voiceValue > 2400.0 && voiceValue < 10000) {
-            soundVolumeImg.setImageResource(R.drawable.tt_sound_volume_05);
+            volumnImageView.setImageResource(R.drawable.volume_05);
         } else if (voiceValue > 10000.0 && voiceValue < 28000.0) {
-            soundVolumeImg.setImageResource(R.drawable.tt_sound_volume_06);
+            volumnImageView.setImageResource(R.drawable.volume_06);
         } else if (voiceValue > 28000.0) {
-            soundVolumeImg.setImageResource(R.drawable.tt_sound_volume_07);
+            volumnImageView.setImageResource(R.drawable.volume_07);
         }
     }
 
-
-    @Override
-    public void onConfigurationChanged(Configuration config) {
-        super.onConfigurationChanged(config);
-    }
-
-    /**
-     * @param data
-     * @Description 处理拍照后的数据
-     * 应该是从某个 activity回来的
-     */
-    private void handleTakePhotoData(Intent data) {
-        ImageMessage imageMessage = ImageMessage.buildForSend(takePhotoSavePath, loginUser, peerEntity);
-        List<ImageMessage> sendList = new ArrayList<>(1);
+    private void handleTakePhotoSuccess(Intent ignored_) {
+        ImageMessageEntity imageMessage = ImageMessageEntity.buildForSend(photoSavePath, loginUserEntity, peerEntity);
+        List<ImageMessageEntity> sendList = new ArrayList<>(1);
         sendList.add(imageMessage);
-        imService.getMessageManager().sendImages(sendList);
-        // 格式有些问题
-        pushList(imageMessage);
-        messageEdt.clearFocus();//消除焦点
+        imService.getIMMessageManager().sendImages(sendList);
+        pushMsg(imageMessage);
+        messageEditView.clearFocus();//消除焦点
     }
 
-    /**
-     * @param audioLen
-     * @Description 录音结束后处理录音数据
-     */
     private void onRecordVoiceEnd(float audioLen) {
-        logger.d("message_activity#chat#audio#onRecordVoiceEnd audioLen:%f", audioLen);
-        AudioMessage audioMessage = AudioMessage.buildForSend(audioLen, audioSavePath, loginUser, peerEntity);
-        imService.getMessageManager().sendVoice(audioMessage);
-        pushList(audioMessage);
+        logger.d("MessageActivity#chat#onRecordVoiceEnd %f", audioLen);
+        AudioMessageEntity audioMessage = AudioMessageEntity.buildForSend(audioLen, audioSavePath, loginUserEntity, peerEntity);
+        imService.getIMMessageManager().sendVoice(audioMessage);
+        pushMsg(audioMessage);
     }
 
     @Override
     public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+        
     }
 
     @Override
-    public void onPullDownToRefresh(
-            final PullToRefreshBase<ListView> refreshView) {
-        // 获取消息
+    public void onPullDownToRefresh(final PullToRefreshBase<ListView> refreshView) {
         refreshView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                ListView mlist = lvPTR.getRefreshableView();
-                int preSum = mlist.getCount();
-                MessageEntity messageEntity = adapter.getTopMsgEntity();
-                if (messageEntity != null) {
-                    List<MessageEntity> historyMsgInfo = imService.getMessageManager().loadHistoryMsg(messageEntity, historyTimes);
-                    if (historyMsgInfo.size() > 0) {
-                        historyTimes++;
-                        adapter.loadHistoryList(historyMsgInfo);
+                ListView msgListView = pullToRefreshListView.getRefreshableView();
+                int preCount = msgListView.getCount();
+                MessageEntity topMessageEntity = messageAdapter.getTopMsgEntity();
+                if (topMessageEntity != null) {
+                    List<MessageEntity> historyMsgInfo = imService.getIMMessageManager().loadHistoryMsg(topMessageEntity, historyMsgPageNo);
+                    if (!historyMsgInfo.isEmpty()) {
+                        historyMsgPageNo++;
+                        messageAdapter.loadHistoryList(historyMsgInfo);
                     }
                 }
 
-                int afterSum = mlist.getCount();
-                mlist.setSelection(afterSum - preSum);
-                /**展示位置为这次消息的最末尾*/
-                //mlist.setSelection(size);
-                // 展示顶部
-//                if (!(mlist).isStackFromBottom()) {
-//                    mlist.setStackFromBottom(true);
-//                }
-//                mlist.setStackFromBottom(false);
+                int afterCount = msgListView.getCount();
+                msgListView.setSelection(afterCount - preCount);
                 refreshView.onRefreshComplete();
             }
         }, 200);
     }
 
-
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         final int id = v.getId();
@@ -849,218 +774,209 @@ public class MessageActivity extends BTBaseActivity
             case R.id.right_btn:
                 showGroupManageActivity();
                 break;
-            case R.id.show_add_photo_btn:
-                {
-                    recordAudioBtn.setVisibility(View.GONE);
-                    keyboardInputImg.setVisibility(View.GONE);
-                    messageEdt.setVisibility(View.VISIBLE);
-                    audioInputImg.setVisibility(View.VISIBLE);
-                    addEmoBtn.setVisibility(View.VISIBLE);
+            case R.id.add_photo_btn:
+            {
+                recordFlatBtn.setVisibility(View.GONE);
+                addTextBtn.setVisibility(View.GONE);
+                messageEditView.setVisibility(View.VISIBLE);
+                addRecordBtn.setVisibility(View.VISIBLE);
+                addEmojiBtn.setVisibility(View.VISIBLE);
 
-                    if (keyboardHeight != 0) {
-                        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
-                    }
-                    if (addOthersPanelView.getVisibility() == View.VISIBLE) {
-                        if (!messageEdt.hasFocus()) {
-                            messageEdt.requestFocus();
-                        }
-                        inputManager.toggleSoftInputFromWindow(messageEdt.getWindowToken(), 1, 0);
-                        if (keyboardHeight == 0) {
-                            addOthersPanelView.setVisibility(View.GONE);
-                        }
-                    } else if (addOthersPanelView.getVisibility() == View.GONE) {
-                        addOthersPanelView.setVisibility(View.VISIBLE);
-                        inputManager.hideSoftInputFromWindow(messageEdt.getWindowToken(), 0);
-                    }
-                    if (null != emoLayout
-                            && emoLayout.getVisibility() == View.VISIBLE) {
-                        emoLayout.setVisibility(View.GONE);
-                    }
-
-                    scrollToBottomListItem();
+                if (keyboardHeight != 0) {
+                    this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
                 }
+                if (photoPanelView.getVisibility() == View.VISIBLE) {
+                    if (!messageEditView.hasFocus()) {
+                        messageEditView.requestFocus();
+                    }
+                    inputManager.toggleSoftInputFromWindow(messageEditView.getWindowToken(), 1, 0);
+                    if (keyboardHeight == 0) {
+                        photoPanelView.setVisibility(View.GONE);
+                    }
+                } else if (photoPanelView.getVisibility() == View.GONE) {
+                    photoPanelView.setVisibility(View.VISIBLE);
+                    inputManager.hideSoftInputFromWindow(messageEditView.getWindowToken(), 0);
+                }
+                if (null != emojiPanelView
+                        && emojiPanelView.getVisibility() == View.VISIBLE) {
+                    emojiPanelView.setVisibility(View.GONE);
+                }
+
+                scrollToBottom();
                 break;
+            }
+            case R.id.choose_photo_btn:
+            {
+                if (albumList.isEmpty()) {
+                    Toast.makeText(MessageActivity.this, getResources().getString(R.string.not_found_album), Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Intent intent = new Intent(MessageActivity.this, PickPhotoActivity.class);
+                intent.putExtra(IntentConstant.KEY_SESSION_KEY, currentSessionKey);
+                startActivityForResult(intent, SysConstant.ALBUM_FOR_DATA);
+
+                MessageActivity.this.overridePendingTransition(R.anim.album_bottom_enter, R.anim.stay_y);
+                messageEditView.clearFocus();
+                scrollToBottom();
+                break;
+            }
             case R.id.take_photo_btn:
-                {
-                    if (albumList.size() < 1) {
-                        Toast.makeText(MessageActivity.this,
-                                getResources().getString(R.string.not_found_album), Toast.LENGTH_LONG)
-                                .show();
-                        return;
-                    }
-                    // 选择图片的时候要将session的整个回话 传过来
-                    Intent intent = new Intent(MessageActivity.this, PickPhotoActivity.class);
-                    intent.putExtra(IntentConstant.KEY_SESSION_KEY, currentSessionKey);
-                    startActivityForResult(intent, SysConstant.ALBUM_BACK_DATA);
+            {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                photoSavePath = CommonUtil.getImageSavePath(System.currentTimeMillis() + ".jpg");
+                assert photoSavePath != null;
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(photoSavePath)));
+                startActivityForResult(intent, SysConstant.CAMERA_FOR_DATA);
+                messageEditView.clearFocus();
+                scrollToBottom();
+                break;
+            }
+            case R.id.add_emoji_btn:
+            {
+                recordFlatBtn.setVisibility(View.GONE);
+                addTextBtn.setVisibility(View.GONE);
+                messageEditView.setVisibility(View.VISIBLE);
+                addRecordBtn.setVisibility(View.VISIBLE);
+                addEmojiBtn.setVisibility(View.VISIBLE);
 
-                    MessageActivity.this.overridePendingTransition(R.anim.album_bottom_enter, R.anim.stay_y);
-                    //addOthersPanelView.setVisibility(View.GONE);
-                    messageEdt.clearFocus();//切记清除焦点
-                    scrollToBottomListItem();
+                if (keyboardHeight != 0) {
+                    this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
+                }
+                if (emojiPanelView.getVisibility() == View.VISIBLE) {
+                    if (!messageEditView.hasFocus()) {
+                        messageEditView.requestFocus();
+                    }
+                    inputManager.toggleSoftInputFromWindow(messageEditView.getWindowToken(), 1, 0);
+                    if (keyboardHeight == 0) {
+                        emojiPanelView.setVisibility(View.GONE);
+                    }
+                } else if (emojiPanelView.getVisibility() == View.GONE) {
+                    emojiPanelView.setVisibility(View.VISIBLE);
+                    yayaemojiGridView.setVisibility(View.VISIBLE);
+                    emojiRadioGroup.check(R.id.tab1);
+                    emojiGridView.setVisibility(View.GONE);
+                    inputManager.hideSoftInputFromWindow(messageEditView.getWindowToken(), 0);
+                }
+                if (photoPanelView.getVisibility() == View.VISIBLE) {
+                    photoPanelView.setVisibility(View.GONE);
                 }
                 break;
-            case R.id.take_camera_btn:
-                {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    takePhotoSavePath = CommonUtil.getImageSavePath(System
-                            .currentTimeMillis()
-                            + ".jpg");
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(takePhotoSavePath)));
-                    startActivityForResult(intent, SysConstant.CAMERA_WITH_DATA);
-                    //addOthersPanelView.setVisibility(View.GONE);
-                    messageEdt.clearFocus();//切记清除焦点
-                    scrollToBottomListItem();
-                }
-                break;
-            case R.id.show_emo_btn:
-                {
-                    /**yingmu 调整成键盘输出*/
-                    recordAudioBtn.setVisibility(View.GONE);
-                    keyboardInputImg.setVisibility(View.GONE);
-                    messageEdt.setVisibility(View.VISIBLE);
-                    audioInputImg.setVisibility(View.VISIBLE);
-                    addEmoBtn.setVisibility(View.VISIBLE);
-                    /**end*/
-                    if (keyboardHeight != 0) {
-                        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
-                    }
-                    if (emoLayout.getVisibility() == View.VISIBLE) {
-                        if (!messageEdt.hasFocus()) {
-                            messageEdt.requestFocus();
-                        }
-                        inputManager.toggleSoftInputFromWindow(messageEdt.getWindowToken(), 1, 0);
-                        if (keyboardHeight == 0) {
-                            emoLayout.setVisibility(View.GONE);
-                        }
-                    } else if (emoLayout.getVisibility() == View.GONE) {
-                        emoLayout.setVisibility(View.VISIBLE);
-                        yayaEmoGridView.setVisibility(View.VISIBLE);
-                        emoRadioGroup.check(R.id.tab1);
-                        emoGridView.setVisibility(View.GONE);
-                        inputManager.hideSoftInputFromWindow(messageEdt.getWindowToken(), 0);
-                    }
-                    if (addOthersPanelView.getVisibility() == View.VISIBLE) {
-                        addOthersPanelView.setVisibility(View.GONE);
-                    }
-                }
-                break;
+            }
             case R.id.send_message_btn:
-                {
-                    logger.d("message_activity#send btn clicked");
-
-                    String content = messageEdt.getText().toString();
-                    logger.d("message_activity#chat content:%s", content);
-                    if (content.trim().equals("")) {
-                        Toast.makeText(MessageActivity.this,
-                                getResources().getString(R.string.message_null), Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    TextMessage textMessage = TextMessage.buildForSend(content, loginUser, peerEntity);
-                    imService.getMessageManager().sendText(textMessage);
-                    messageEdt.setText("");
-                    pushList(textMessage);
-                    scrollToBottomListItem();
+            {
+                String content = messageEditView.getText().toString();
+                if (content.trim().isEmpty()) {
+                    Toast.makeText(MessageActivity.this, getResources().getString(R.string.message_null), Toast.LENGTH_LONG).show();
+                    return;
                 }
+                TextMessageEntity textMessageEntity = TextMessageEntity.buildForSend(content, loginUserEntity, peerEntity);
+                imService.getIMMessageManager().sendText(textMessageEntity);
+                messageEditView.setText("");
+                pushMsg(textMessageEntity);
+                scrollToBottom();
                 break;
-            case R.id.voice_btn:
-                {
-                    inputManager.hideSoftInputFromWindow(messageEdt.getWindowToken(), 0);
-                    messageEdt.setVisibility(View.GONE);
-                    audioInputImg.setVisibility(View.GONE);
-                    recordAudioBtn.setVisibility(View.VISIBLE);
-                    keyboardInputImg.setVisibility(View.VISIBLE);
-                    emoLayout.setVisibility(View.GONE);
-                    addOthersPanelView.setVisibility(View.GONE);
-                    messageEdt.setText("");
-                }
+            }
+            case R.id.add_record_btn:
+            {
+                inputManager.hideSoftInputFromWindow(messageEditView.getWindowToken(), 0);
+                messageEditView.setVisibility(View.GONE);
+                addRecordBtn.setVisibility(View.GONE);
+                recordFlatBtn.setVisibility(View.VISIBLE);
+                addTextBtn.setVisibility(View.VISIBLE);
+                emojiPanelView.setVisibility(View.GONE);
+                photoPanelView.setVisibility(View.GONE);
+                messageEditView.setText("");
                 break;
-            case R.id.show_keyboard_btn:
-                {
-                    recordAudioBtn.setVisibility(View.GONE);
-                    keyboardInputImg.setVisibility(View.GONE);
-                    messageEdt.setVisibility(View.VISIBLE);
-                    audioInputImg.setVisibility(View.VISIBLE);
-                    addEmoBtn.setVisibility(View.VISIBLE);
-                }
+            }
+            case R.id.add_text_btn:
+            {
+                recordFlatBtn.setVisibility(View.GONE);
+                addTextBtn.setVisibility(View.GONE);
+                messageEditView.setVisibility(View.VISIBLE);
+                addRecordBtn.setVisibility(View.VISIBLE);
+                addEmojiBtn.setVisibility(View.VISIBLE);
                 break;
-            case R.id.message_text:
+            }
+            case R.id.message_editView:
                 break;
-            case R.id.tt_new_msg_tip:
-                {
-                    scrollToBottomListItem();
-                    textView_new_msg_tip.setVisibility(View.GONE);
-                }
-                break;
+            case R.id.new_msg_tips:
+            {
+                scrollToBottom();
+                new_msg_tips.setVisibility(View.GONE);
+            }
+            break;
         }
     }
 
-    // 主要是录制语音的
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        v.performClick();
         int id = v.getId();
-        scrollToBottomListItem();
-        if (id == R.id.record_voice_btn) {
+        scrollToBottom();
+        if (id == R.id.add_record_btn) {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
-                if (AudioPlayerHandler.getInstance().isPlaying())
+                if (AudioPlayerHandler.getInstance().isPlaying()) {
                     AudioPlayerHandler.getInstance().stopPlayer();
+                }
+
                 y1 = event.getY();
-                recordAudioBtn.setBackgroundResource(R.drawable.tt_pannel_btn_voiceforward_pressed);
-                recordAudioBtn.setText(MessageActivity.this.getResources().getString(
+                recordFlatBtn.setBackgroundResource(R.drawable.pannel_btn_voiceforward_pressed);
+                recordFlatBtn.setText(MessageActivity.this.getResources().getString(
                         R.string.release_to_send_voice));
 
-                soundVolumeImg.setImageResource(R.drawable.tt_sound_volume_01);
-                soundVolumeImg.setVisibility(View.VISIBLE);
-                soundVolumeLayout.setBackgroundResource(R.drawable.tt_sound_volume_default_bk);
-                soundVolumeDialog.show();
+                volumnImageView.setImageResource(R.drawable.volume_01);
+                volumnImageView.setVisibility(View.VISIBLE);
+                volumeBg.setBackgroundResource(R.drawable.recordding);
+                volumeDialog.show();
                 audioSavePath = CommonUtil
-                        .getAudioSavePath(IMLoginManager.instance().getLoginId());
+                        .getAudioSavePath(IMLoginManager.getInstance().getLoginId());
 
                 // 这个callback很蛋疼，发送消息从MotionEvent.ACTION_UP 判断
                 audioRecorderInstance = new AudioRecordHandler(audioSavePath);
 
-                audioRecorderThread = new Thread(audioRecorderInstance);
+                Thread audioRecorderThread = new Thread(audioRecorderInstance);
                 audioRecorderInstance.setRecording(true);
                 logger.d("message_activity#audio#audio record thread starts");
                 audioRecorderThread.start();
             } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
                 y2 = event.getY();
                 if (y1 - y2 > 180) {
-                    soundVolumeImg.setVisibility(View.GONE);
-                    soundVolumeLayout.setBackgroundResource(R.drawable.tt_sound_volume_cancel_bk);
+                    volumnImageView.setVisibility(View.GONE);
+                    volumeBg.setBackgroundResource(R.drawable.record_will_cancel);
                 } else {
-                    soundVolumeImg.setVisibility(View.VISIBLE);
-                    soundVolumeLayout.setBackgroundResource(R.drawable.tt_sound_volume_default_bk);
+                    volumnImageView.setVisibility(View.VISIBLE);
+                    volumeBg.setBackgroundResource(R.drawable.recordding);
                 }
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
                 y2 = event.getY();
                 if (audioRecorderInstance.isRecording()) {
                     audioRecorderInstance.setRecording(false);
                 }
-                if (soundVolumeDialog.isShowing()) {
-                    soundVolumeDialog.dismiss();
+                if (volumeDialog.isShowing()) {
+                    volumeDialog.dismiss();
                 }
-                recordAudioBtn.setBackgroundResource(R.drawable.tt_pannel_btn_voiceforward_normal);
-                recordAudioBtn.setText(MessageActivity.this.getResources().getString(
+                recordFlatBtn.setBackgroundResource(R.drawable.pannel_btn_voiceforward_normal);
+                recordFlatBtn.setText(MessageActivity.this.getResources().getString(
                         R.string.tip_for_voice_forward));
                 if (y1 - y2 <= 180) {
                     if (audioRecorderInstance.getRecordTime() >= 0.5) {
                         if (audioRecorderInstance.getRecordTime() < SysConstant.MAX_SOUND_RECORD_TIME) {
-                            Message msg = uiHandler.obtainMessage();
-                            msg.what = HandlerConstant.HANDLER_RECORD_FINISHED;
+                            Message msg = recordMsgHandler.obtainMessage();
+                            msg.what = HandlerConstant.RECORD_FINISHED;
                             msg.obj = audioRecorderInstance.getRecordTime();
-                            uiHandler.sendMessage(msg);
+                            recordMsgHandler.sendMessage(msg);
                         }
                     } else {
-                        soundVolumeImg.setVisibility(View.GONE);
-                        soundVolumeLayout
-                                .setBackgroundResource(R.drawable.tt_sound_volume_short_tip_bk);
-                        soundVolumeDialog.show();
+                        volumnImageView.setVisibility(View.GONE);
+                        volumeBg
+                                .setBackgroundResource(R.drawable.record_too_short);
+                        volumeDialog.show();
                         Timer timer = new Timer();
                         timer.schedule(new TimerTask() {
                             public void run() {
-                                if (soundVolumeDialog.isShowing())
-                                    soundVolumeDialog.dismiss();
+                                if (volumeDialog.isShowing())
+                                    volumeDialog.dismiss();
                                 this.cancel();
                             }
                         }, 700);
@@ -1073,10 +989,8 @@ public class MessageActivity extends BTBaseActivity
 
     @Override
     protected void onStop() {
-        logger.d("message_activity#onStop:%s", this);
-
-        if (null != adapter) {
-            adapter.hidePopup();
+        if (null != messageAdapter) {
+            messageAdapter.hidePopup();
         }
 
         AudioPlayerHandler.getInstance().clear();
@@ -1085,7 +999,6 @@ public class MessageActivity extends BTBaseActivity
 
     @Override
     protected void onStart() {
-        logger.d("message_activity#onStart:%s", this);
         super.onStart();
     }
 
@@ -1094,40 +1007,33 @@ public class MessageActivity extends BTBaseActivity
     }
 
     @Override
-    public void beforeTextChanged(CharSequence s, int start, int count,
-                                  int after) {
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         if (s.length() > 0) {
-            sendBtn.setVisibility(View.VISIBLE);
-            RelativeLayout.LayoutParams param = (LayoutParams) messageEdt
+            sendMsgBtn.setVisibility(View.VISIBLE);
+            RelativeLayout.LayoutParams param = (LayoutParams) messageEditView
                     .getLayoutParams();
-            param.addRule(RelativeLayout.LEFT_OF, R.id.show_emo_btn);
+            param.addRule(RelativeLayout.LEFT_OF, R.id.add_emoji_btn);
             addPhotoBtn.setVisibility(View.GONE);
         } else {
             addPhotoBtn.setVisibility(View.VISIBLE);
-            RelativeLayout.LayoutParams param = (LayoutParams) messageEdt
+            RelativeLayout.LayoutParams param = (LayoutParams) messageEditView
                     .getLayoutParams();
-            param.addRule(RelativeLayout.LEFT_OF, R.id.show_emo_btn);
-            sendBtn.setVisibility(View.GONE);
+            param.addRule(RelativeLayout.LEFT_OF, R.id.add_emoji_btn);
+            sendMsgBtn.setVisibility(View.GONE);
         }
     }
-
-    /**
-     * @Description 滑动到列表底部
-     */
-    private void scrollToBottomListItem() {
-        logger.d("message_activity#scrollToBottomListItem");
-
-        // todo eric, why use the last one index + 2 can real scroll to the
-        // bottom?
-        ListView lv = lvPTR.getRefreshableView();
-        if (lv != null) {
-            lv.setSelection(adapter.getCount() + 1);
+    
+    private void scrollToBottom() {
+        ListView listView = pullToRefreshListView.getRefreshableView();
+        if (listView != null) {
+            listView.setSelection(messageAdapter.getCount() + 1);
         }
-        textView_new_msg_tip.setVisibility(View.GONE);
+        new_msg_tips.setVisibility(View.GONE);
     }
 
     @Override
@@ -1159,13 +1065,13 @@ public class MessageActivity extends BTBaseActivity
         }
     }
 
-    public static Handler getUiHandler() {
-        return uiHandler;
+    public static Handler getRecordMsgHandler() {
+        return recordMsgHandler;
     }
 
     private void actFinish() {
-        inputManager.hideSoftInputFromWindow(messageEdt.getWindowToken(), 0);
-        IMStackManager.getStackManager().popTopActivitys(MainActivity.class);
+        inputManager.hideSoftInputFromWindow(messageEditView.getWindowToken(), 0);
+        IMStackManager.getStackManager().popTopActivitiesUntil(MainActivity.class);
         IMApplication.gifRunning = false;
         MessageActivity.this.finish();
     }
@@ -1175,26 +1081,26 @@ public class MessageActivity extends BTBaseActivity
         public void onCheckedChanged(RadioGroup radioGroup, int id) {
             switch (id) {
                 case R.id.tab2:
-                    if (emoGridView.getVisibility() != View.VISIBLE) {
-                        yayaEmoGridView.setVisibility(View.GONE);
-                        emoGridView.setVisibility(View.VISIBLE);
+                    if (emojiGridView.getVisibility() != View.VISIBLE) {
+                        yayaemojiGridView.setVisibility(View.GONE);
+                        emojiGridView.setVisibility(View.VISIBLE);
                     }
                     break;
                 case R.id.tab1:
-                    if (yayaEmoGridView.getVisibility() != View.VISIBLE) {
-                        emoGridView.setVisibility(View.GONE);
-                        yayaEmoGridView.setVisibility(View.VISIBLE);
+                    if (yayaemojiGridView.getVisibility() != View.VISIBLE) {
+                        emojiGridView.setVisibility(View.GONE);
+                        yayaemojiGridView.setVisibility(View.VISIBLE);
                     }
                     break;
             }
         }
     };
 
-    private final YayaEmoGridView.OnEmoGridViewItemClick yayaOnEmoGridViewItemClick = new YayaEmoGridView.OnEmoGridViewItemClick() {
+    private final YayaEmojiGridView.OnYayaEmojiGridViewItemClick yayaOnemojiGridViewItemClick = new YayaEmojiGridView.OnYayaEmojiGridViewItemClick() {
         @Override
         public void onItemClick(int facesPos, int viewIndex) {
             int resId = Emoparser.getInstance(MessageActivity.this).getYayaResIdList()[facesPos];
-            logger.d("message_activity#yayaEmoGridView be clicked");
+            logger.d("message_activity#yayaemojiGridView be clicked");
 
             String content = Emoparser.getInstance(MessageActivity.this).getYayaIdPhraseMap()
                     .get(resId);
@@ -1204,33 +1110,33 @@ public class MessageActivity extends BTBaseActivity
                 return;
             }
 
-            TextMessage textMessage = TextMessage.buildForSend(content, loginUser, peerEntity);
-            imService.getMessageManager().sendText(textMessage);
-            pushList(textMessage);
-            scrollToBottomListItem();
+            TextMessageEntity textMessage = TextMessageEntity.buildForSend(content, loginUserEntity, peerEntity);
+            imService.getIMMessageManager().sendText(textMessage);
+            pushMsg(textMessage);
+            scrollToBottom();
         }
     };
 
-    private final OnEmoGridViewItemClick onEmoGridViewItemClick = new OnEmoGridViewItemClick() {
+    private final EmojiGridView.OnEmojiGridViewItemClick onEmojiGridViewItemClick = new EmojiGridView.OnEmojiGridViewItemClick() {
         @Override
         public void onItemClick(int facesPos, int viewIndex) {
-            int deleteId = (++viewIndex) * (SysConstant.pageSize - 1);
+            int deleteId = (++viewIndex) * (SysConstant.MSG_PAGE_SIZE - 1);
             if (deleteId > Emoparser.getInstance(MessageActivity.this).getResIdList().length) {
                 deleteId = Emoparser.getInstance(MessageActivity.this).getResIdList().length;
             }
             if (deleteId == facesPos) {
-                String msgContent = messageEdt.getText().toString();
+                String msgContent = messageEditView.getText().toString();
                 if (msgContent.isEmpty())
                     return;
                 if (msgContent.contains("["))
                     msgContent = msgContent.substring(0, msgContent.lastIndexOf("["));
-                messageEdt.setText(msgContent);
+                messageEditView.setText(msgContent);
             } else {
                 int resId = Emoparser.getInstance(MessageActivity.this).getResIdList()[facesPos];
                 String pharse = Emoparser.getInstance(MessageActivity.this).getIdPhraseMap()
                         .get(resId);
-                int startIndex = messageEdt.getSelectionStart();
-                Editable edit = messageEdt.getEditableText();
+                int startIndex = messageEditView.getSelectionStart();
+                Editable edit = messageEditView.getEditableText();
                 if (startIndex < 0 || startIndex >= edit.length()) {
                     if (null != pharse) {
                         edit.append(pharse);
@@ -1241,28 +1147,9 @@ public class MessageActivity extends BTBaseActivity
                     }
                 }
             }
-            Editable edtable = messageEdt.getText();
+            Editable edtable = messageEditView.getText();
             int position = edtable.length();
             Selection.setSelection(edtable, position);
-        }
-    };
-
-    private final OnTouchListener lvPTROnTouchListener = new View.OnTouchListener() {
-
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                messageEdt.clearFocus();
-                if (emoLayout.getVisibility() == View.VISIBLE) {
-                    emoLayout.setVisibility(View.GONE);
-                }
-
-                if (addOthersPanelView.getVisibility() == View.VISIBLE) {
-                    addOthersPanelView.setVisibility(View.GONE);
-                }
-                inputManager.hideSoftInputFromWindow(messageEdt.getWindowToken(), 0);
-            }
-            return false;
         }
     };
 
@@ -1271,12 +1158,12 @@ public class MessageActivity extends BTBaseActivity
         public void onFocusChange(View v, boolean hasFocus) {
             if (hasFocus) {
                 if (keyboardHeight == 0) {
-                    addOthersPanelView.setVisibility(View.GONE);
-                    emoLayout.setVisibility(View.GONE);
+                    photoPanelView.setVisibility(View.GONE);
+                    emojiPanelView.setVisibility(View.GONE);
                 } else {
                     MessageActivity.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
-                    if (addOthersPanelView.getVisibility() == View.GONE) {
-                        addOthersPanelView.setVisibility(View.VISIBLE);
+                    if (photoPanelView.getVisibility() == View.GONE) {
+                        photoPanelView.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -1299,15 +1186,15 @@ public class MessageActivity extends BTBaseActivity
                 keyboardHeight = rootBottom - r.bottom;
                 SystemConfigSp.instance().init(MessageActivity.this);
                 SystemConfigSp.instance().setIntConfig(SystemConfigSp.SysCfgDimension.KEYBOARDHEIGHT, keyboardHeight);
-                LayoutParams params = (LayoutParams) addOthersPanelView.getLayoutParams();
+                LayoutParams params = (LayoutParams) photoPanelView.getLayoutParams();
                 params.height = keyboardHeight;
-                LayoutParams params1 = (LayoutParams) emoLayout.getLayoutParams();
+                LayoutParams params1 = (LayoutParams) emojiPanelView.getLayoutParams();
                 params1.height = keyboardHeight;
             }
         }
     };
 
-    private class switchInputMethodReceiver extends BroadcastReceiver {
+    private class InputMethodSwitchBroadcastReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -1320,11 +1207,11 @@ public class MessageActivity extends BTBaseActivity
                         currentInputMethod = strCompany;
                         SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.DEFAULTINPUTMETHOD, currentInputMethod);
                         keyboardHeight = 0;
-                        addOthersPanelView.setVisibility(View.GONE);
-                        emoLayout.setVisibility(View.GONE);
+                        photoPanelView.setVisibility(View.GONE);
+                        emojiPanelView.setVisibility(View.GONE);
                         MessageActivity.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-//                        inputManager.showSoftInput(messageEdt,0);
-                        messageEdt.requestFocus();
+//                        inputManager.showSoftInput(messageEditView,0);
+                        messageEditView.requestFocus();
                     }
                 }
             }

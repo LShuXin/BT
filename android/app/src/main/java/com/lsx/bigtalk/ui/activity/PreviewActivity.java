@@ -10,6 +10,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -24,11 +25,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- * @author Nana
- * @Description 图片预览
- * @date 2014-5-9
- */
+
 public class PreviewActivity extends Activity
         implements
         ViewPager.OnPageChangeListener {
@@ -37,7 +34,6 @@ public class PreviewActivity extends Activity
     private ImageView[] tips;
     private ImageView[] mImageViews;
     private ViewGroup group;
-    private ImageView back;
     private ImageView select;
     private final ImageGridAdapter adapter = ImageGridActivity.getAdapter();
     private final Map<Integer, Integer> removePosition = new HashMap<Integer, Integer>();
@@ -46,55 +42,11 @@ public class PreviewActivity extends Activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        logger.d("pic#PreviewActivity onCreate");
         super.onCreate(savedInstanceState);
-
+        logger.d("PreviewActivity#onCreate");
         setContentView(R.layout.preview_activity);
         initView();
         loadView();
-    }
-
-    private void initView() {
-        viewPager = findViewById(R.id.viewPager);
-        group = findViewById(R.id.viewGroup);
-        back = findViewById(R.id.back_btn);
-        select = findViewById(R.id.select_btn);
-        back.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                @SuppressWarnings("rawtypes")
-                Iterator it = removePosition.keySet().iterator();
-                while (it.hasNext()) {
-                    int key = (Integer) it.next();
-                    adapter.getSelectMap().remove(key);
-                }
-                ImageGridActivity.setAdapterSelectedMap(ImageGridActivity.getAdapter().getSelectMap());
-                removePosition.clear();
-                PreviewActivity.this.finish();
-            }
-        });
-        select.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (adapter.getSelectMap().containsKey(curImagePosition)) {
-                    ImageItem item = adapter.getSelectMap().get(curImagePosition);
-                    item.setSelected(!item.isSelected());
-                    if (item.isSelected()) {
-                        int selTotal = adapter.getSelectTotalNum();
-                        adapter.setSelectTotalNum(++selTotal);
-                        removePosition.remove(curImagePosition);
-                        ImageGridActivity.setSendText(selTotal);
-                        select.setImageResource(R.drawable.tt_album_img_selected);
-                    } else {
-                        int selTotal = adapter.getSelectTotalNum();
-                        adapter.setSelectTotalNum(--selTotal);
-                        removePosition.put(curImagePosition, curImagePosition);
-                        ImageGridActivity.setSendText(selTotal);
-                        select.setImageResource(R.drawable.tt_album_img_select_nor);
-                    }
-                }
-            }
-        });
     }
 
     @Override
@@ -102,9 +54,53 @@ public class PreviewActivity extends Activity
         super.onDestroy();
     }
 
-    private void loadView() {
-        mImageViews = new ImageView[adapter.getSelectMap().size()];
+    private void initView() {
+        viewPager = findViewById(R.id.viewPager);
+        group = findViewById(R.id.viewGroup);
+        select = findViewById(R.id.select_btn);
+        ImageView back = findViewById(R.id.back_btn);
+        back.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null != adapter) {
+                    for (int key : removePosition.keySet()) {
+                        adapter.getSelectMap().remove(key);
+                    }
+                    ImageGridActivity.setAdapterSelectedMap(adapter.getSelectMap());
+                    removePosition.clear();
+                }
+                PreviewActivity.this.finish();
+            }
+        });
+        select.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null == adapter) {
+                    return;
+                }
+                if (adapter.getSelectMap().containsKey(curImagePosition)) {
+                    ImageItem item = adapter.getSelectMap().get(curImagePosition);
+                    if (item != null) {
+                        item.setSelected(!item.isSelected());
+                    }
+                    if (item != null && item.isSelected()) {
+                        int selTotal = adapter.getSelectTotalNum();
+                        adapter.setSelectTotalNum(++selTotal);
+                        removePosition.remove(curImagePosition);
+                        ImageGridActivity.setSendText(selTotal);
+                        select.setImageResource(R.drawable.album_img_selected);
+                    }
+                }
+            }
+        });
+    }
 
+    private void loadView() {
+        if (null == adapter) {
+            return;
+        }
+
+        mImageViews = new ImageView[adapter.getSelectMap().size()];
         if (adapter.getSelectMap().size() > 1) {
             tips = new ImageView[adapter.getSelectMap().size()];
             for (int i = 0; i < tips.length; i++) {
@@ -112,11 +108,12 @@ public class PreviewActivity extends Activity
                 imageView.setLayoutParams(new LayoutParams(10, 10));
                 tips[i] = imageView;
                 if (i == 0) {
-                    tips[i].setBackgroundResource(R.drawable.tt_default_dot_down);
+                    tips[i].setBackgroundResource(R.drawable.default_dot_down);
                 } else {
-                    tips[i].setBackgroundResource(R.drawable.tt_default_dot_up);
+                    tips[i].setBackgroundResource(R.drawable.default_dot_up);
                 }
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(new ViewGroup.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                        new ViewGroup.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
                 layoutParams.leftMargin = 5;
                 layoutParams.rightMargin = 5;
                 group.addView(imageView, layoutParams);
@@ -156,18 +153,11 @@ public class PreviewActivity extends Activity
 
     }
 
-    private void setImageBackground(int selectItems) {
-        for (int i = 0; i < tips.length; i++) {
-            if (i == selectItems) {
-                tips[i].setBackgroundResource(R.drawable.tt_default_dot_down);
-            } else {
-                tips[i].setBackgroundResource(R.drawable.tt_default_dot_up);
-            }
-        }
-    }
-
     @Override
     public void onPageSelected(int position) {
+        if (null == adapter) {
+            return;
+        }
         @SuppressWarnings("rawtypes")
         Iterator it = adapter.getSelectMap().keySet().iterator();
         int index = -1;
@@ -176,9 +166,9 @@ public class PreviewActivity extends Activity
             if (++index == position) {
                 curImagePosition = key;// 对应适配器中图片列表的真实位置
                 if (adapter.getSelectMap().get(key).isSelected()) {
-                    select.setImageResource(R.drawable.tt_album_img_selected);
+                    select.setImageResource(R.drawable.album_img_selected);
                 } else {
-                    select.setImageResource(R.drawable.tt_album_img_select_nor);
+                    select.setImageResource(R.drawable.album_img_unselected);
                 }
             }
         }
@@ -193,22 +183,33 @@ public class PreviewActivity extends Activity
         }
 
         @Override
-        public boolean isViewFromObject(View view, Object obj) {
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object obj) {
             return view == obj;
         }
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
+        public void destroyItem(ViewGroup container, int position, @NonNull Object object) {
             container.removeView((View) object);
         }
 
+        @NonNull
         @Override
-        public Object instantiateItem(View container, int position) {
+        public Object instantiateItem(@NonNull View container, int position) {
             try {
                 ((ViewGroup) container).addView(mImageViews[position]);
             } catch (Exception e) {
             }
             return mImageViews[position];
+        }
+    }
+
+    private void setImageBackground(int selectItems) {
+        for (int i = 0; i < tips.length; i++) {
+            if (i == selectItems) {
+                tips[i].setBackgroundResource(R.drawable.default_dot_down);
+            } else {
+                tips[i].setBackgroundResource(R.drawable.default_dot_up);
+            }
         }
     }
 

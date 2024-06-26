@@ -48,7 +48,7 @@ extern "C" {
     
 #ifdef __ANDROID__
 
-    jbyteArray Java_com_mogujie_tt_Security_EncryptMsg(JNIEnv* env, jobject obj, jstring jstr)
+    jbyteArray Java_com_lsx_bigtalk_Security_EncryptMsg(JNIEnv* env, jobject obj, jstring jstr)
     {
         const char *pInData = env->GetStringUTFChars(jstr, NULL);		//待加密内容,转换格式
         uint32_t nInLen = strlen(pInData);
@@ -88,7 +88,7 @@ extern "C" {
     /**
      * 解密
      */
-    jbyteArray Java_com_mogujie_tt_Security_DecryptMsg(JNIEnv* env, jobject obj, jstring jstr)
+    jbyteArray Java_com_lsx_bigtalk_Security_DecryptMsg(JNIEnv* env, jobject obj, jstring jstr)
     {
         const char *pInData = env->GetStringUTFChars(jstr, NULL);   //获取待揭秘内容,转换格式
         uint32_t nInLen = strlen(pInData);
@@ -135,7 +135,7 @@ extern "C" {
         return carr;
     }
     
-    jbyteArray Java_com_mogujie_tt_Security_EncryptPass(JNIEnv* env, jobject obj, jstring jstr)
+    jbyteArray Java_com_lsx_bigtalk_Security_EncryptPass(JNIEnv* env, jobject obj, jstring jstr)
     {
         const char *pInData = env->GetStringUTFChars(jstr, NULL);		//待加密内容,转换格式
         uint32_t nInLen = strlen(pInData);

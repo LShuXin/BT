@@ -10,18 +10,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Binder;
-import android.os.Build;
 import android.os.IBinder;
 
-import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.lsx.bigtalk.DB.DBInterface;
 import com.lsx.bigtalk.DB.entity.MessageEntity;
 import com.lsx.bigtalk.DB.sp.ConfigurationSp;
 import com.lsx.bigtalk.DB.sp.LoginSp;
+import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.config.SysConstant;
-import com.lsx.bigtalk.imservice.event.LoginEvent;
+import com.lsx.bigtalk.imservice.event.LoginStatus;
 import com.lsx.bigtalk.imservice.event.PriorityEvent;
 import com.lsx.bigtalk.imservice.manager.IMContactManager;
 import com.lsx.bigtalk.imservice.manager.IMGroupManager;
@@ -36,8 +35,6 @@ import com.lsx.bigtalk.imservice.manager.IMUnreadMsgManager;
 import com.lsx.bigtalk.utils.ImageLoaderUtil;
 import com.lsx.bigtalk.utils.Logger;
 
-import java.util.Objects;
-
 import de.greenrobot.event.EventBus;
 
 /**
@@ -48,10 +45,6 @@ import de.greenrobot.event.EventBus;
  */
 public class IMService extends Service {
     private final Logger logger = Logger.getLogger(IMService.class);
-
-    /**
-     * binder
-     */
     private final IMServiceBinder binder = new IMServiceBinder();
 
     public class IMServiceBinder extends Binder {
@@ -62,21 +55,21 @@ public class IMService extends Service {
 
     @Override
     public IBinder onBind(Intent arg0) {
-        logger.i("IMService onBind");
+        logger.i("IMService#onBind");
         return binder;
     }
 
     //所有的管理类
-    private final IMSocketManager socketMgr = IMSocketManager.instance();
-    private final IMLoginManager loginMgr = IMLoginManager.instance();
-    private final IMContactManager contactMgr = IMContactManager.instance();
-    private final IMGroupManager groupMgr = IMGroupManager.instance();
-    private final IMMessageManager messageMgr = IMMessageManager.instance();
-    private final IMSessionManager sessionMgr = IMSessionManager.instance();
-    private final IMReconnectManager reconnectMgr = IMReconnectManager.instance();
-    private final IMUnreadMsgManager unReadMsgMgr = IMUnreadMsgManager.instance();
-    private final IMNotificationManager notificationMgr = IMNotificationManager.instance();
-    private final IMHeartBeatManager heartBeatManager = IMHeartBeatManager.instance();
+    private final IMSocketManager imSocketManager = IMSocketManager.getInstance();
+    private final IMLoginManager imLoginManager = IMLoginManager.getInstance();
+    private final IMContactManager imContactManager = IMContactManager.getInstance();
+    private final IMGroupManager imGroupManager = IMGroupManager.getInstance();
+    private final IMMessageManager imMessageManager = IMMessageManager.getInstance();
+    private final IMSessionManager imSessionManager = IMSessionManager.getInstance();
+    private final IMReconnectManager imReconnectManager = IMReconnectManager.getInstance();
+    private final IMUnreadMsgManager imUnReadMsgManager = IMUnreadMsgManager.getInstance();
+    private final IMNotificationManager imNotificationManager = IMNotificationManager.getInstance();
+    private final IMHeartBeatManager imHeartBeatManager = IMHeartBeatManager.getInstance();
 
     private ConfigurationSp configSp;
     private final LoginSp loginSp = LoginSp.instance();
@@ -84,8 +77,8 @@ public class IMService extends Service {
 
     @Override
     public void onCreate() {
-        logger.i("IMService onCreate");
         super.onCreate();
+        logger.i("IMService#onCreate");
         EventBus.getDefault().register(this, SysConstant.SERVICE_EVENTBUS_PRIORITY);
         // make the service foreground, so stop "360 yi jian qingli"(a clean
         // tool) to stop our app
@@ -100,11 +93,9 @@ public class IMService extends Service {
         // todo 在onCreate中使用startForeground
         // 在这个地方是否执行 stopForeground呐
         EventBus.getDefault().unregister(this);
-        handleLoginout();
-        // DB的资源的释放
+        handleLogout();
         dbInterface.close();
-
-        IMNotificationManager.instance().cancelAllNotifications();
+        imNotificationManager.cancelAllNotifications();
         super.onDestroy();
     }
 
@@ -112,17 +103,14 @@ public class IMService extends Service {
      * 收到消息需要上层的activity判断 {MessageActicity onEvent(PriorityEvent event)}，这个地方是特殊分支
      */
     public void onEvent(PriorityEvent event) {
-        if (Objects.requireNonNull(event.event) == PriorityEvent.Event.MSG_RECEIVED_MESSAGE) {
+        if (event.event == PriorityEvent.Event.MSG_RECEIVED_MESSAGE) {
             MessageEntity entity = (MessageEntity) event.object;
-            /**非当前的会话*/
-            logger.d("messageactivity#not this session msg -> id:%s", entity.getFromId());
-            messageMgr.ackReceiveMsg(entity);
-            unReadMsgMgr.add(entity);
+            imMessageManager.ackReceiveMsg(entity);
+            imUnReadMsgManager.add(entity);
         }
     }
 
-    // EventBus 事件驱动
-    public void onEvent(LoginEvent event) {
+    public void onEvent(LoginStatus event) {
         switch (event) {
             case LOGIN_OK:
                 onNormalLoginOk();
@@ -131,32 +119,29 @@ public class IMService extends Service {
                 onLocalLoginOk();
                 break;
             case LOCAL_LOGIN_MSG_SERVICE:
-                onLocalNetOk();
+                onRemoteLoginOk();
                 break;
             case LOGIN_OUT:
-                handleLoginout();
+                handleLogout();
                 break;
         }
     }
 
-    // 负责初始化 每个manager
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        logger.i("IMService onStartCommand");
-        //应用开启初始化 下面这几个怎么释放 todo
+        logger.i("IMService#onStartCommand");
         Context ctx = getApplicationContext();
         loginSp.init(ctx);
-        // 放在这里还有些问题 todo
-        socketMgr.onStartIMManager(ctx);
-        loginMgr.onStartIMManager(ctx);
-        contactMgr.onStartIMManager(ctx);
-        messageMgr.onStartIMManager(ctx);
-        groupMgr.onStartIMManager(ctx);
-        sessionMgr.onStartIMManager(ctx);
-        unReadMsgMgr.onStartIMManager(ctx);
-        notificationMgr.onStartIMManager(ctx);
-        reconnectMgr.onStartIMManager(ctx);
-        heartBeatManager.onStartIMManager(ctx);
+        imSocketManager.onStartIMManager(ctx);
+        imLoginManager.onStartIMManager(ctx);
+        imContactManager.onStartIMManager(ctx);
+        imMessageManager.onStartIMManager(ctx);
+        imGroupManager.onStartIMManager(ctx);
+        imSessionManager.onStartIMManager(ctx);
+        imUnReadMsgManager.onStartIMManager(ctx);
+        imNotificationManager.onStartIMManager(ctx);
+        imReconnectManager.onStartIMManager(ctx);
+        imHeartBeatManager.onStartIMManager(ctx);
 
         ImageLoaderUtil.initImageLoaderConfig(ctx);
         return START_STICKY;
@@ -168,162 +153,125 @@ public class IMService extends Service {
      * userName/pwd -> reqMessage ->connect -> loginMessage ->loginSuccess
      */
     private void onNormalLoginOk() {
-        logger.d("imservice#onLogin Successful");
-        //初始化其他manager todo 这个地方注意上下文的清除
+        logger.d("IMService#onNormalLoginOk");
         Context ctx = getApplicationContext();
-        int loginId = loginMgr.getLoginId();
+        int loginId = imLoginManager.getLoginId();
         configSp = ConfigurationSp.instance(ctx, loginId);
         dbInterface.initDbHelp(ctx, loginId);
 
-        contactMgr.onNormalLoginOk();
-        sessionMgr.onNormalLoginOk();
-        groupMgr.onNormalLoginOk();
-        unReadMsgMgr.onNormalLoginOk();
+        imContactManager.onNormalLoginOk();
+        imSessionManager.onNormalLoginOk();
+        imGroupManager.onNormalLoginOk();
+        imUnReadMsgManager.onNormalLoginOk();
+        imReconnectManager.onNormalLoginOk();
 
-        reconnectMgr.onNormalLoginOk();
-        //依赖的状态比较特殊
-        messageMgr.onLoginSuccess();
-        notificationMgr.onLoginSuccess();
-        heartBeatManager.onloginNetSuccess();
-        // 这个时候loginManage中的localLogin 被置为true
+        imMessageManager.onLoginSuccess();
+        imNotificationManager.onLoginSuccess();
+        imHeartBeatManager.onRemoteLoginOk();
     }
 
-
-    /**
-     * 自动登陆/离线登陆成功
-     * autoLogin -> DB(loginInfo,loginId...) -> loginSucsess
-     */
     private void onLocalLoginOk() {
         Context ctx = getApplicationContext();
-        int loginId = loginMgr.getLoginId();
+        int loginId = imLoginManager.getLoginId();
         configSp = ConfigurationSp.instance(ctx, loginId);
         dbInterface.initDbHelp(ctx, loginId);
 
-        contactMgr.onLocalLoginOk();
-        groupMgr.onLocalLoginOk();
-        sessionMgr.onLocalLoginOk();
-        reconnectMgr.onLocalLoginOk();
-        notificationMgr.onLoginSuccess();
-        messageMgr.onLoginSuccess();
+        imContactManager.onLocalLoginOk();
+        imGroupManager.onLocalLoginOk();
+        imSessionManager.onLocalLoginOk();
+        imReconnectManager.onLocalLoginOk();
+        imNotificationManager.onLoginSuccess();
+        imMessageManager.onLoginSuccess();
     }
 
-    /**
-     * 1. 从本机加载成功之后，请求MessageService建立链接成功(loginMessageSuccess)
-     * 2. 重练成功之后
-     */
-    private void onLocalNetOk() {
-        /**为了防止逗比直接把loginId与userName的对应直接改了,重刷一遍*/
+    private void onRemoteLoginOk() {
         Context ctx = getApplicationContext();
-        int loginId = loginMgr.getLoginId();
+        int loginId = imLoginManager.getLoginId();
         configSp = ConfigurationSp.instance(ctx, loginId);
         dbInterface.initDbHelp(ctx, loginId);
 
-        contactMgr.onLocalNetOk();
-        groupMgr.onLocalNetOk();
-        sessionMgr.onLocalNetOk();
-        unReadMsgMgr.onLocalNetOk();
-        reconnectMgr.onLocalNetOk();
-        heartBeatManager.onloginNetSuccess();
+        imContactManager.onRemoteLoginOk();
+        imGroupManager.onRemoteLoginOk();
+        imSessionManager.onLocalNetOk();
+        imUnReadMsgManager.onRemoteLoginOk();
+        imReconnectManager.onRemoteLoginOk();
+        imHeartBeatManager.onRemoteLoginOk();
     }
 
-    private void handleLoginout() {
-        logger.d("imservice#handleLoginout");
-
+    private void handleLogout() {
+        logger.d("IMService#handleLogout");
         // login需要监听socket的变化,在这个地方不能释放，设计上的不合理?
-        socketMgr.reset();
-        loginMgr.reset();
-        contactMgr.reset();
-        messageMgr.reset();
-        groupMgr.reset();
-        sessionMgr.reset();
-        unReadMsgMgr.reset();
-        notificationMgr.reset();
-        reconnectMgr.reset();
-        heartBeatManager.reset();
+        imSocketManager.reset();
+        imLoginManager.reset();
+        imContactManager.reset();
+        imMessageManager.reset();
+        imGroupManager.reset();
+        imSessionManager.reset();
+        imUnReadMsgManager.reset();
+        imNotificationManager.reset();
+        imReconnectManager.reset();
+        imHeartBeatManager.reset();
         configSp = null;
         EventBus.getDefault().removeAllStickyEvents();
     }
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        logger.d("imservice#onTaskRemoved");
-        // super.onTaskRemoved(rootIntent);
+        logger.d("IMService#onTaskRemoved");
         this.stopSelf();
     }
-
-    /**
-     * 启动前台服务
-     */
+    
     private void startForeground() {
-        String channelId = null;
-        // 8.0 以上需要特殊处理
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            channelId = createNotificationChannel("kim.hsl", "IMService");
-        } else {
-            channelId = "";
-        }
+        String channelId = createNotificationChannel();
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId);
         Notification notification = builder.setOngoing(true)
-                //.setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_launcher)
                 .setPriority(PRIORITY_MIN)
                 .setCategory(Notification.CATEGORY_SERVICE)
                 .build();
         startForeground(1, notification);
     }
-
-    /**
-     * 创建通知通道
-     *
-     * @param channelId
-     * @param channelName
-     * @return
-     */
-    @RequiresApi(Build.VERSION_CODES.O)
-    private String createNotificationChannel(String channelId, String channelName) {
-        NotificationChannel chan = new NotificationChannel(channelId,
-                channelName, NotificationManager.IMPORTANCE_NONE);
-        chan.setLightColor(Color.BLUE);
-        chan.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+    
+    private String createNotificationChannel() {
+        NotificationChannel channel = new NotificationChannel("kim.hsl",
+                "IMService", NotificationManager.IMPORTANCE_NONE);
+        channel.setLightColor(Color.BLUE);
+        channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
         NotificationManager service = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        service.createNotificationChannel(chan);
-        return channelId;
+        service.createNotificationChannel(channel);
+        return "kim.hsl";
+    }
+    
+    public IMLoginManager getIMLoginManager() {
+        return imLoginManager;
     }
 
-    /**
-     * -----------------get/set 的实体定义---------------------
-     */
-    public IMLoginManager getLoginManager() {
-        return loginMgr;
+    public IMContactManager getIMContactManager() {
+        return imContactManager;
     }
 
-    public IMContactManager getContactManager() {
-        return contactMgr;
+    public IMMessageManager getIMMessageManager() {
+        return imMessageManager;
+    }
+    
+    public IMGroupManager getIMGroupManager() {
+        return imGroupManager;
     }
 
-    public IMMessageManager getMessageManager() {
-        return messageMgr;
+    public IMSessionManager getIMSessionManager() {
+        return imSessionManager;
     }
 
-
-    public IMGroupManager getGroupManager() {
-        return groupMgr;
+    public IMReconnectManager getIMReconnectManager() {
+        return imReconnectManager;
+    }
+    
+    public IMUnreadMsgManager getIMUnReadMsgManager() {
+        return imUnReadMsgManager;
     }
 
-    public IMSessionManager getSessionManager() {
-        return sessionMgr;
-    }
-
-    public IMReconnectManager getReconnectManager() {
-        return reconnectMgr;
-    }
-
-
-    public IMUnreadMsgManager getUnReadMsgManager() {
-        return unReadMsgMgr;
-    }
-
-    public IMNotificationManager getNotificationManager() {
-        return notificationMgr;
+    public IMNotificationManager getIMNotificationManager() {
+        return imNotificationManager;
     }
 
     public DBInterface getDbInterface() {
