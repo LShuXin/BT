@@ -1,25 +1,24 @@
 package com.lsx.bigtalk;
 
 public class Security {
-	
 	public native byte[] DecryptMsg(String strMsg);
 	public native byte[] EncryptMsg(String strMsg);
 
-	public native byte[] EncryptPass(String strPass);
+	public native byte[] EncryptPwd(String strPwd);
 	
 	static {
 		System.loadLibrary("security");
 	}
 	
-	private static Security m_pInstance;
+	private static Security instance;
 	
 	public static Security getInstance() {
 		synchronized (Security.class) {
-			if (m_pInstance == null) {
-				m_pInstance = new Security();
+			if (instance == null) {
+				instance = new Security();
 			}
 
-			return m_pInstance;
+			return instance;
 		}
 	}
 }

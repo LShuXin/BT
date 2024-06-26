@@ -1,5 +1,8 @@
 package com.lsx.bigtalk.imservice.manager;
 
+import java.util.Objects;
+
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -12,46 +15,47 @@ import androidx.core.app.NotificationCompat.Builder;
 import android.view.View;
 
 import com.lsx.bigtalk.DB.entity.GroupEntity;
-import com.lsx.bigtalk.DB.entity.PeerEntity;
 import com.lsx.bigtalk.DB.entity.UserEntity;
 import com.lsx.bigtalk.DB.sp.ConfigurationSp;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.config.DBConstant;
 import com.lsx.bigtalk.config.IntentConstant;
 import com.lsx.bigtalk.config.SysConstant;
-import com.lsx.bigtalk.imservice.entity.UnreadEntity;
+import com.lsx.bigtalk.imservice.entity.UnreadMessageEntity;
 import com.lsx.bigtalk.imservice.event.GroupEvent;
 import com.lsx.bigtalk.imservice.event.UnreadEvent;
-import com.lsx.bigtalk.protobuf.helper.EntityChangeEngine;
 import com.lsx.bigtalk.ui.activity.MessageActivity;
-import com.lsx.bigtalk.utils.IMUIHelper;
+import com.lsx.bigtalk.helper.IMUIHelper;
 import com.lsx.bigtalk.utils.Logger;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
-import java.util.Objects;
-
 import de.greenrobot.event.EventBus;
 
 /**
- * 伪推送; app退出之后就不会收到推送的信息
+ * fake notification; unable to receive notification once the app exit
  * 通知栏新消息通知
  * a.每个session 只显示一条
  * b.每个msg 信息都显示
  * 配置依赖与 configure
  */
-public class IMNotificationManager extends IMManager{
 
+public class IMNotificationManager extends IMManager {
     private final Logger logger = Logger.getLogger(IMNotificationManager.class);
-	private static final IMNotificationManager inst = new IMNotificationManager();
-	public static IMNotificationManager instance() {
-			return inst;
-	}
     private ConfigurationSp configurationSp;
+	@SuppressLint("StaticFieldLeak")
+    private static IMNotificationManager instance;
+	public static synchronized IMNotificationManager getInstance() {
+        if (null == instance) {
+            instance = new IMNotificationManager();
+        }
+        return instance;
+	}
 
 	private IMNotificationManager() {
+        
 	}
 
     @Override
@@ -59,11 +63,11 @@ public class IMNotificationManager extends IMManager{
         cancelAllNotifications();
     }
 
-    public void onLoginSuccess(){
-        int loginId = IMLoginManager.instance().getLoginId();
-        configurationSp = ConfigurationSp.instance(ctx,loginId);
-        if(!EventBus.getDefault().isRegistered(inst)){
-            EventBus.getDefault().register(inst);
+    public void onLoginSuccess() {
+        int loginId = IMLoginManager.getInstance().getLoginId();
+        configurationSp = ConfigurationSp.instance(ctx, loginId);
+        if (!EventBus.getDefault().isRegistered(instance)) {
+            EventBus.getDefault().register(instance);
         }
     }
 
@@ -71,46 +75,36 @@ public class IMNotificationManager extends IMManager{
         EventBus.getDefault().unregister(this);
         cancelAllNotifications();
     }
-
-
-    public void onEventMainThread(UnreadEvent event){
-        if (Objects.requireNonNull(event.event) == UnreadEvent.Event.UNREAD_MSG_RECEIVED) {
-            UnreadEntity unreadEntity = event.entity;
-            handleMsgRecv(unreadEntity);
+    
+    public void onEventMainThread(UnreadEvent event) {
+        if (event.event == UnreadEvent.Event.UNREAD_MSG_RECEIVED) {
+            UnreadMessageEntity unreadEntity = event.entity;
+            handleMsgReceived(unreadEntity);
         }
     }
-
-    // 屏蔽群，相关的通知全部删除
-    public void onEventMainThread(GroupEvent event){
+    
+    public void onEventMainThread(GroupEvent event) {
         GroupEntity gEntity = event.getGroupEntity();
-        if(event.getEvent()== GroupEvent.Event.SHIELD_GROUP_OK){
-            if(gEntity == null){
+        if (event.getEvent() == GroupEvent.Event.SHIELD_GROUP_OK) {
+            if (gEntity == null) {
                 return;
             }
             cancelSessionNotifications(gEntity.getSessionKey());
         }
     }
 
-    private void handleMsgRecv(UnreadEntity entity) {
-        logger.d("notification#recv unhandled message");
+    private void handleMsgReceived(UnreadMessageEntity entity) {
+        logger.d("IMNotificationManager#handleMsgReceived");
         int peerId = entity.getPeerId();
-        int sessionType =  entity.getSessionType();
-        logger.d("notification#msg no one handled, peerId:%d, sessionType:%d", peerId, sessionType);
+        int sessionType = entity.getSessionType();
+        logger.d("IMNotificationManager#handleMsgReceived#peerId:%d, sessionType:%d", peerId, sessionType);
 
-        //判断是否设定了免打扰
-        if(entity.isForbidden()){
-               logger.d("notification#GROUP_STATUS_SHIELD");
-               return;
+        if (entity.getIsShield()) {
+           logger.d("IMNotificationManager#handleMsgReceived#SHIELD");
+           return;
         }
 
-        //PC端是否登陆 取消 【暂时先关闭】
-//        if(IMLoginManager.instance().isPcOnline()){
-//            logger.d("notification#isPcOnline");
-//            return;
-//        }
-
-        // 全局开关
-        boolean  globallyOnOff = configurationSp.getCfg(SysConstant.SETTING_GLOBAL,ConfigurationSp.CfgDimension.NOTIFICATION);
+        boolean globallyOnOff = configurationSp.getCfg(SysConstant.SETTING_GLOBAL,ConfigurationSp.CfgDimension.NOTIFICATION);
         if (globallyOnOff) {
             logger.d("notification#shouldGloballyShowNotification is false, return");
             return;
@@ -123,17 +117,15 @@ public class IMNotificationManager extends IMManager{
             return;
         }
 
-        //if the message is a multi login message which send from another terminal,not need notificate to status bar
-        // 判断是否是自己的消息
-        if(IMLoginManager.instance().getLoginId() != peerId){
+        if (IMLoginManager.getInstance().getLoginId() != peerId) {
              showNotification(entity);
         }
     }
 
 
 	public void cancelAllNotifications() {
-		logger.d("notification#cancelAllNotifications");
-        if(null == ctx){
+		logger.d("IMNotificationManager#cancelAllNotifications");
+        if (null == ctx) {
             return;
         }
 		NotificationManager notifyMgr = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -143,13 +135,8 @@ public class IMNotificationManager extends IMManager{
 		notifyMgr.cancelAll();
 	}
 
-
-    /**
-     * 在通知栏中删除特定回话的状态
-     * @param sessionKey
-     */
     public void cancelSessionNotifications(String sessionKey) {
-        logger.d("notification#cancelSessionNotifications");
+        logger.d("IMNotificationManager#cancelSessionNotifications");
         NotificationManager notifyMgr = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
         if (null == notifyMgr) {
             return;
@@ -158,8 +145,7 @@ public class IMNotificationManager extends IMManager{
         notifyMgr.cancel(notificationId);
     }
 
-
-	private void showNotification(final UnreadEntity unreadEntity) {
+	private void showNotification(final UnreadMessageEntity unreadEntity) {
 		// todo eric need to set the exact size of the big icon
         // 服务端有些特定的支持 尺寸是不是要调整一下 todo 100*100  下面的就可以不要了
 		ImageSize targetSize = new ImageSize(80, 80);
@@ -172,7 +158,7 @@ public class IMNotificationManager extends IMManager{
         int totalUnread = unreadEntity.getUnReadCnt();
 
         if(unreadEntity.getSessionType() == DBConstant.SESSION_TYPE_SINGLE){
-            UserEntity contact = IMContactManager.instance().findContact(peerId);
+            UserEntity contact = IMContactManager.getInstance().findContact(peerId);
             if(contact !=null){
                 title = contact.getMainName();
                 avatarUrl = contact.getAvatar();
@@ -182,7 +168,7 @@ public class IMNotificationManager extends IMManager{
             }
 
         }else{
-            GroupEntity group = IMGroupManager.instance().findGroup(peerId);
+            GroupEntity group = IMGroupManager.getInstance().findGroup(peerId);
             if(group !=null){
                 title = group.getMainName();
                 avatarUrl = group.getAvatar();
@@ -233,7 +219,7 @@ public class IMNotificationManager extends IMManager{
 		Builder builder = new NotificationCompat.Builder(ctx);
 		builder.setContentTitle(title);
 		builder.setContentText(ticker);
-		builder.setSmallIcon(R.drawable.tt_small_icon);
+		builder.setSmallIcon(R.drawable.small_brand);
 		builder.setTicker(ticker);
 		builder.setWhen(System.currentTimeMillis());
 		builder.setAutoCancel(true);

@@ -1,5 +1,8 @@
 package com.lsx.bigtalk.ui.adapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,34 +20,28 @@ import com.lsx.bigtalk.config.SysConstant;
 import com.lsx.bigtalk.imservice.manager.IMContactManager;
 import com.lsx.bigtalk.imservice.service.IMService;
 import com.lsx.bigtalk.ui.widget.IMBaseImageView;
-import com.lsx.bigtalk.utils.IMUIHelper;
+import com.lsx.bigtalk.helper.IMUIHelper;
 import com.lsx.bigtalk.utils.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
 
-/**
- * @author : yingmu on 15-3-18.
- * @email : yingmu@mogujie.com.
- */
-public class DeptAdapter extends BaseAdapter implements SectionIndexer,
+public class DeptAdapter extends BaseAdapter implements
+        SectionIndexer,
         AdapterView.OnItemClickListener,
-        AdapterView.OnItemLongClickListener{
+        AdapterView.OnItemLongClickListener {
 
     private final Logger logger = Logger.getLogger(DeptAdapter.class);
     private List<UserEntity> userList = new ArrayList<>();
-
     private final Context ctx;
     private final IMService imService;
 
-    public DeptAdapter(Context context,IMService imService){
+    public DeptAdapter(Context context, IMService imService) {
         this.ctx = context;
         this.imService = imService;
     }
 
-    public void putUserList(List<UserEntity> pUserList){
+    public void putUserList(List<UserEntity> pUserList) {
         this.userList.clear();
-        if(pUserList == null || pUserList.size() <=0){
+        if (pUserList == null || pUserList.isEmpty()) {
             return;
         }
         this.userList = pUserList;
@@ -81,24 +78,20 @@ public class DeptAdapter extends BaseAdapter implements SectionIndexer,
      */
     @Override
     public int getPositionForSection(int sectionIndex) {
-        logger.d("pinyin#getPositionForSection secton:%d", sectionIndex);
         int index = 0;
-        IMContactManager imContactManager = imService.getContactManager();
-        for(UserEntity entity:userList){
+        IMContactManager imContactManager = imService.getIMContactManager();
+        for (UserEntity entity : userList) {
             DepartmentEntity department = imContactManager.findDepartment(entity.getDepartmentId());
             if (department == null) {
                 return 0;
             }
             String deptPinyin = department.getPinyinElement().pinyin;
-            int firstCharacter = TextUtils.isEmpty(deptPinyin)?-1:deptPinyin.charAt(0);
-            // logger.d("firstCharacter:%d", firstCharacter);
+            int firstCharacter = TextUtils.isEmpty(deptPinyin) ? -1 : deptPinyin.charAt(0);
             if (firstCharacter == sectionIndex) {
-                logger.d("pinyin#find sectionName");
                 return index;
             }
             index++;
         }
-        logger.e("pinyin#can't find such section:%d", sectionIndex);
         return -1;
     }
 
@@ -123,52 +116,47 @@ public class DeptAdapter extends BaseAdapter implements SectionIndexer,
         return 0;
     }
 
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        UserEntity userEntity =  (UserEntity) getItem(position);
+        UserEntity userEntity = (UserEntity) getItem(position);
         IMUIHelper.openUserProfileActivity(ctx, userEntity.getPeerId());
     }
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        UserEntity userEntity =  (UserEntity) getItem(position);
-        IMUIHelper.handleContactItemLongClick(userEntity, ctx);
+        UserEntity userEntity = (UserEntity) getItem(position);
+        IMUIHelper.handleMsgContactItemLongPressed(userEntity, ctx);
         return true;
     }
 
     @Override
     public int getCount() {
-        if(userList != null){
+        if (userList != null) {
             return userList.size();
         }
         return 0;
     }
 
-
     @Override
     public Object getItem(int position) {
-        if(userList != null && position < userList.size()){
+        if (userList != null && position < userList.size()) {
             return userList.get(position);
         }
         return null;
     }
-
 
     @Override
     public long getItemId(int position) {
         return position;
     }
 
-
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         UserEntity userEntity = (UserEntity) getItem(position);
-        if(userEntity == null){
-            logger.e("DeptAdapter#renderUser#userEntity is null!position:%d",position);
+        if (userEntity == null) {
             return null;
         }
-        UserHolder userHolder = null;
+        UserHolder userHolder;
         if (view == null) {
             userHolder = new UserHolder();
             view = LayoutInflater.from(ctx).inflate(R.layout.item_contact, parent,false);
@@ -182,33 +170,29 @@ public class DeptAdapter extends BaseAdapter implements SectionIndexer,
             userHolder = (UserHolder) view.getTag();
         }
 
-        /**reset--- 控件默认值-*/
         userHolder.nameView.setText(userEntity.getMainName());
-        userHolder.avatar.setImageResource(R.drawable.tt_default_user_portrait_corner);
+        userHolder.avatar.setImageResource(R.drawable.default_user_avatar);
         userHolder.divider.setVisibility(View.VISIBLE);
         userHolder.sectionView.setVisibility(View.GONE);
 
-        // 字母序第一个要展示
-        DepartmentEntity deptEntity = imService.getContactManager().findDepartment(userEntity.getDepartmentId());
-        String sectionName = deptEntity==null?"":deptEntity.getDepartName();
-
+        DepartmentEntity deptEntity = imService.getIMContactManager().findDepartment(userEntity.getDepartmentId());
+        String sectionName = deptEntity == null ? "" : deptEntity.getDepartName();
         String preSectionName = null;
-        if(position > 0){
-            int preDeptId = ((UserEntity)getItem(position-1)).getDepartmentId();
-            DepartmentEntity preDept = imService.getContactManager().findDepartment(preDeptId);
-            preSectionName = preDept==null?"":preDept.getDepartName();
+        if (position > 0) {
+            int preDeptId = ((UserEntity)getItem(position - 1)).getDepartmentId();
+            DepartmentEntity preDept = imService.getIMContactManager().findDepartment(preDeptId);
+            preSectionName = preDept == null ? "" : preDept.getDepartName();
         }
 
-        if(TextUtils.isEmpty(preSectionName) || !preSectionName.equals(sectionName)){
+        if (TextUtils.isEmpty(preSectionName) || !preSectionName.equals(sectionName)) {
             userHolder.sectionView.setVisibility(View.VISIBLE);
             userHolder.sectionView.setText(sectionName);
-            // 最上面的分割线不展示
             userHolder.divider.setVisibility(View.GONE);
-        }else{
+        } else {
             userHolder.sectionView.setVisibility(View.GONE);
         }
 
-        userHolder.avatar.setDefaultImageRes(R.drawable.tt_default_user_portrait_corner);
+        userHolder.avatar.setDefaultImageRes(R.drawable.default_user_avatar);
         userHolder.avatar.setCorner(0);
         userHolder.avatar.setAvatarAppend(SysConstant.AVATAR_APPEND_100);
         userHolder.avatar.setImageUrl(userEntity.getAvatar());
@@ -226,14 +210,12 @@ public class DeptAdapter extends BaseAdapter implements SectionIndexer,
         IMBaseImageView avatar;
     }
 
-    /**-------搜索栏----部门定位------------*/
     public int locateDepartment(String departmentTitle) {
-        logger.d("department#locateDepartment departmentTitle:%s", departmentTitle);
         int index = 0;
-        for (UserEntity entity:userList) {
-            DepartmentEntity deptEntity = imService.getContactManager().findDepartment(entity.getDepartmentId());
-            String sectionName = deptEntity==null?"":deptEntity.getDepartName();
-            if (sectionName != null && !sectionName.isEmpty() && (0 == sectionName.compareToIgnoreCase(departmentTitle)) ) {
+        for (UserEntity entity : userList) {
+            DepartmentEntity deptEntity = imService.getIMContactManager().findDepartment(entity.getDepartmentId());
+            String sectionName = deptEntity == null ? "" : deptEntity.getDepartName();
+            if (sectionName != null && !sectionName.isEmpty() && (0 == sectionName.compareToIgnoreCase(departmentTitle))) {
                 return index;
             }
             index++;

@@ -93,7 +93,7 @@ public class ConfigurationSp {
         editor.putStringSet(CfgDimension.SESSIONTOP.name(), newList);
         //提交当前数据
         editor.apply();
-        EventBus.getDefault().post(SessionEvent.SET_SESSION_TOP);
+        EventBus.getDefault().post(SessionEvent.SET_SESSION_SPIN);
     }
 
 

@@ -15,7 +15,7 @@ import com.lsx.bigtalk.DB.entity.UserEntity;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.config.MessageConstant;
 import com.lsx.bigtalk.ui.helper.AudioPlayerHandler;
-import com.lsx.bigtalk.imservice.entity.AudioMessage;
+import com.lsx.bigtalk.imservice.entity.AudioMessageEntity;
 import com.lsx.bigtalk.utils.CommonUtil;
 import com.lsx.bigtalk.utils.ScreenUtil;
 
@@ -53,7 +53,7 @@ public class AudioRenderView extends  BaseMsgRenderView {
 
     public static AudioRenderView inflater(Context ctx,ViewGroup viewGroup,boolean isMine){
 
-        int resoure = isMine?R.layout.mine_audio_message_item :R.layout.other_audio_message_item;
+        int resoure = isMine?R.layout.mine_audio_message_item :R.layout.others_audio_message_item;
         //tt_other_audio_message_item
         AudioRenderView audioRenderView = (AudioRenderView) LayoutInflater.from(ctx).inflate(resoure,viewGroup,false);
         audioRenderView.setMine(isMine);
@@ -81,7 +81,7 @@ public class AudioRenderView extends  BaseMsgRenderView {
     @Override
     public void render(final MessageEntity messageEntity,final UserEntity userEntity,final Context ctx) {
         super.render(messageEntity, userEntity,ctx);
-        final AudioMessage audioMessage = (AudioMessage)messageEntity;
+        final AudioMessageEntity audioMessage = (AudioMessageEntity)messageEntity;
 
         final String audioPath = audioMessage.getAudioPath();
         final int audioReadStatus = audioMessage.getReadStatus();
@@ -101,7 +101,7 @@ public class AudioRenderView extends  BaseMsgRenderView {
                             audioUnreadNotify.setVisibility(View.GONE);
                         }
                         break;
-                    case MessageConstant.AUDIO_READED:
+                    case MessageConstant.AUDIO_READ:
                         if(btnImageListener != null){
                             btnImageListener.onClickReaded();
                         }
@@ -148,7 +148,7 @@ public class AudioRenderView extends  BaseMsgRenderView {
 
         //针对path 的设定
         if (null != audioPath) {
-            int resource = isMine?R.anim.voice_play_mine :R.anim.voice_play_other;
+            int resource = isMine ? R.drawable.voice_play_mine : R.drawable.voice_play_others;
             audioAnttView.setBackgroundResource(resource);
             AnimationDrawable animationDrawable = (AnimationDrawable) audioAnttView.getBackground();
 
@@ -163,7 +163,7 @@ public class AudioRenderView extends  BaseMsgRenderView {
             }
 
             switch (audioReadStatus){
-                case MessageConstant.AUDIO_READED:
+                case MessageConstant.AUDIO_READ:
                     audioAlreadyRead();
                     break;
                 case MessageConstant.AUDIO_UNREAD:

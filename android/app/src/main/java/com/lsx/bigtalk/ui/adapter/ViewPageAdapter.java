@@ -1,47 +1,48 @@
 package com.lsx.bigtalk.ui.adapter;
 
+import java.util.List;
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
+import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.lsx.bigtalk.utils.Logger;
 
-import java.util.List;
 
 public class ViewPageAdapter extends PagerAdapter {
     private final List<GridView> mListViews;
     private final Logger logger = Logger.getLogger(ViewPageAdapter.class);
 
     public ViewPageAdapter(List<GridView> mListViews) {
-        this.mListViews = mListViews;// 构造方法，参数是我们的页卡，这样比较方便。
+        this.mListViews = mListViews;
     }
 
     @Override
     public int getCount() {
-        return mListViews.size();// 返回页卡的数量
+        return mListViews.size();
     }
 
     @Override
-    public int getItemPosition(Object object) {
+    public int getItemPosition(@NonNull Object object) {
         return super.getItemPosition(object);
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         try {
-            container.removeView(mListViews.get(position));// 删除页卡
+            container.removeView(mListViews.get(position));
         } catch (Exception e) {
             logger.e(e.getMessage());
         }
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
         try {
-            container.addView(mListViews.get(position), 0);// 添加页卡
+            container.addView(mListViews.get(position), 0);
             return mListViews.get(position);
         } catch (Exception e) {
             logger.e(e.getMessage());
@@ -50,8 +51,8 @@ public class ViewPageAdapter extends PagerAdapter {
     }
 
     @Override
-    public boolean isViewFromObject(View arg0, Object arg1) {
-        return arg0 == arg1;// 官方建议这样写
+    public boolean isViewFromObject(@NonNull View arg0, @NonNull Object arg1) {
+        return arg0 == arg1;
     }
 
 }

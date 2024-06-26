@@ -7,15 +7,11 @@ import java.util.Date;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Logger {
-	/**
-	 * log tag
-	 */
-	private final String tagName = "MoGuLogger";// tag name
-	private static int logLevel = Log.ERROR;
-	//private static int logLevel = Log.DEBUG;
 
-	private static Logger inst;
+public class Logger {
+	private final String tagName = "BTLogger";
+	private static int logLevel = Log.ERROR;
+	private static Logger p_mInstance;
 	private final Lock lock;
 
 	private Logger() {
@@ -23,16 +19,16 @@ public class Logger {
 	}
 
 	public static synchronized Logger getLogger(Class<?> key) {
-		if (inst == null) {
-			inst = new Logger();
+		if (p_mInstance == null) {
+			p_mInstance = new Logger();
 		}
-		return inst;
+		return p_mInstance;
 	}
 
 	private String getFunctionName() {
 		StackTraceElement[] sts = Thread.currentThread().getStackTrace();
 
-		if (sts == null) {
+		if (p_mInstance == null) {
 			return null;
 		}
 
@@ -61,8 +57,7 @@ public class Logger {
 		String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").format(new Date());
 		String message = (functionName == null ? msg : (functionName + " - "
 				+ threadId + " - " + msg));
-        String finalRes = currentTime + " - " + message;
-		return finalRes;
+        return currentTime + " - " + message;
 	}
 
 	/**
@@ -138,22 +133,25 @@ public class Logger {
 	 */
 	public void error(Exception e) {
 		if (logLevel <= Log.ERROR) {
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 			lock.lock();
 			try {
 				String name = getFunctionName();
 				StackTraceElement[] sts = e.getStackTrace();
 
 				if (name != null) {
-					sb.append(name + " - " + e + "\r\n");
+					sb.append(name).append(" - ").append(e).append("\r\n");
 				} else {
-					sb.append(e + "\r\n");
+					sb.append(e).append("\r\n");
 				}
-				if (sts != null) {
+				if (p_mInstance != null) {
 					for (StackTraceElement st : sts) {
 						if (st != null) {
-							sb.append("[ " + st.getFileName() + ":"
-									+ st.getLineNumber() + " ]\r\n");
+							sb.append("[ ")
+									.append(st.getFileName())
+									.append(":")
+									.append(st.getLineNumber())
+									.append(" ]\r\n");
 						}
 					}
 				}

@@ -1,6 +1,6 @@
 package com.lsx.bigtalk.utils;
 
-import com.lsx.bigtalk.imservice.entity.MsgAnalyzeEngine;
+import com.lsx.bigtalk.imservice.callback.MsgAnalyzeEngine;
 
 /**
  * @Description 汉字转换为拼音

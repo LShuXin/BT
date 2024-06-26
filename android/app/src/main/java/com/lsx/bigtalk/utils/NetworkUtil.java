@@ -1,40 +1,56 @@
-
 package com.lsx.bigtalk.utils;
 
+import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+
+import java.util.Objects;
+
 
 public class NetworkUtil {
-
     /** 网络不可用 */
-    public static final int NONETWORK = 0;
+    public static final int NETWORK_NONE = 0;
     /** 是wifi连接 */
-    public static final int WIFI = 1;
+    public static final int NETWORK_WIFI = 1;
     /** 不是wifi连接 */
-    public static final int NOWIFI = 2;
+    public static final int NETWORK_OTHERS = 2;
 
-    public static int getNetWorkType(Context context) {
-        if (!isNetWorkAvalible(context)) {
-            return NetworkUtil.NONETWORK;
+    public static int getNetWorkType(Application application) {
+        if (!isNetWorkAvailable(application)) {
+            return NetworkUtil.NETWORK_NONE;
         }
-        ConnectivityManager cm = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        // cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-        if (cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting())
-            return NetworkUtil.WIFI;
-        else
-            return NetworkUtil.NOWIFI;
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) application.getSystemService(Context.CONNECTIVITY_SERVICE);
+        Network nw = connectivityManager.getActiveNetwork();
+        NetworkCapabilities actNw = connectivityManager.getNetworkCapabilities(nw);
+
+        if (Objects.requireNonNull(actNw).hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+            return NetworkUtil.NETWORK_WIFI;
+        } else {
+            return NetworkUtil.NETWORK_OTHERS;
+        }
     }
 
-    public static boolean isNetWorkAvalible(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (cm == null) {
+    public static boolean isNetWorkAvailable(Application application) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) application.getSystemService(Context.CONNECTIVITY_SERVICE);
+        Network nw = connectivityManager.getActiveNetwork();
+        if (nw == null) {
             return false;
-        }
-        NetworkInfo ni = cm.getActiveNetworkInfo();
-        return ni != null && ni.isAvailable();
+        };
+        NetworkCapabilities actNw = connectivityManager.getNetworkCapabilities(nw);
+        return actNw != null
+            &&
+            (
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                ||
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                ||
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
+                ||
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH)
+            );
     }
 
 }

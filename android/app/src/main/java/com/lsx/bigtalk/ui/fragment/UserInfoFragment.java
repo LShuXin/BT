@@ -19,11 +19,11 @@ import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.config.DBConstant;
 import com.lsx.bigtalk.config.IntentConstant;
 import com.lsx.bigtalk.config.SysConstant;
-import com.lsx.bigtalk.utils.IMUIHelper;
+import com.lsx.bigtalk.helper.IMUIHelper;
 import com.lsx.bigtalk.imservice.event.UserInfoEvent;
 import com.lsx.bigtalk.imservice.manager.IMLoginManager;
 import com.lsx.bigtalk.imservice.service.IMService;
-import com.lsx.bigtalk.ui.activity.DetailPortraitActivity;
+import com.lsx.bigtalk.ui.activity.ImagePreviewActivity;
 import com.lsx.bigtalk.imservice.support.IMServiceConnector;
 import com.lsx.bigtalk.ui.widget.IMBaseImageView;
 
@@ -50,12 +50,12 @@ public class UserInfoFragment extends MainFragment {
                 return;
             }
 
-            currentUserId = getActivity().getIntent().getIntExtra(IntentConstant.KEY_PEERID,0);
+            currentUserId = getActivity().getIntent().getIntExtra(IntentConstant.KEY_PEER_ID,0);
             if(currentUserId == 0){
                 logger.e("detail#intent params error!!");
                 return;
             }
-            currentUser = imService.getContactManager().findContact(currentUserId);
+            currentUser = imService.getIMContactManager().findContact(currentUserId);
             if(currentUser != null) {
                 initBaseProfile();
                 initDetailProfile();
@@ -63,7 +63,7 @@ public class UserInfoFragment extends MainFragment {
             ArrayList<Integer> userIds = new ArrayList<>(1);
             //just single type
             userIds.add(currentUserId);
-            imService.getContactManager().reqGetDetaillUsers(userIds);
+            imService.getIMContactManager().fetchUsersDetail(userIds);
         }
         @Override
         public void onServiceDisconnected() {}
@@ -107,7 +107,7 @@ public class UserInfoFragment extends MainFragment {
 	private void initRes() {
 		// 设置标题栏
 		setTopCenterTitleText(getActivity().getString(R.string.page_user_detail));
-		setTopLeftBtnImage(R.drawable.tt_top_back);
+		setTopLeftBtnImage(R.drawable.top_back);
 		topLeftContainerLayout.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -124,7 +124,7 @@ public class UserInfoFragment extends MainFragment {
 
     public void onEventMainThread(UserInfoEvent event){
 		if (Objects.requireNonNull(event) == UserInfoEvent.USER_INFO_UPDATE) {
-			UserEntity entity = imService.getContactManager().findContact(currentUserId);
+			UserEntity entity = imService.getIMContactManager().findContact(currentUserId);
 			if (currentUser.equals(entity)) {
 				initBaseProfile();
 				initDetailProfile();
@@ -140,17 +140,17 @@ public class UserInfoFragment extends MainFragment {
 		setTextViewContent(R.id.nickName, currentUser.getMainName());
 		setTextViewContent(R.id.userName, currentUser.getRealName());
         //头像设置
-        portraitImageView.setDefaultImageRes(R.drawable.tt_default_user_portrait_corner);
+        portraitImageView.setDefaultImageRes(R.drawable.default_user_avatar);
         portraitImageView.setCorner(8);
         portraitImageView.setAvatarAppend(SysConstant.AVATAR_APPEND_200);
-        portraitImageView.setImageResource(R.drawable.tt_default_user_portrait_corner);
+        portraitImageView.setImageResource(R.drawable.default_user_avatar);
         portraitImageView.setImageUrl(currentUser.getAvatar());
 
 		portraitImageView.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), DetailPortraitActivity.class);
+				Intent intent = new Intent(getActivity(), ImagePreviewActivity.class);
 				intent.putExtra(IntentConstant.KEY_AVATAR_URL, currentUser.getAvatar());
 				intent.putExtra(IntentConstant.KEY_IS_IMAGE_CONTACT_AVATAR, true);
 				
@@ -160,7 +160,7 @@ public class UserInfoFragment extends MainFragment {
 
 		// 设置界面信息
 		Button chatBtn = curView.findViewById(R.id.chat_btn);
-		if (currentUserId == imService.getLoginManager().getLoginId()) {
+		if (currentUserId == imService.getIMLoginManager().getLoginId()) {
 			chatBtn.setVisibility(View.GONE);
 		}else{
             chatBtn.setOnClickListener(new View.OnClickListener() {
@@ -177,7 +177,7 @@ public class UserInfoFragment extends MainFragment {
 	private void initDetailProfile() {
 		logger.d("detail#initDetailProfile");
 		hideProgressBar();
-        DepartmentEntity deptEntity = imService.getContactManager().findDepartment(currentUser.getDepartmentId());
+        DepartmentEntity deptEntity = imService.getIMContactManager().findDepartment(currentUser.getDepartmentId());
 		setTextViewContent(R.id.department,deptEntity.getDepartName());
 		setTextViewContent(R.id.telno, currentUser.getPhone());
 		setTextViewContent(R.id.email, currentUser.getEmail());
@@ -190,7 +190,7 @@ public class UserInfoFragment extends MainFragment {
         emailView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if (currentUserId == IMLoginManager.instance().getLoginId())
+                if (currentUserId == IMLoginManager.getInstance().getLoginId())
                     return;
                 IMUIHelper.showCustomDialog(getActivity(),View.GONE,String.format(getString(R.string.confirm_send_email),currentUser.getEmail()),new IMUIHelper.dialogCallback() {
                     @Override
@@ -208,7 +208,7 @@ public class UserInfoFragment extends MainFragment {
 		phoneView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (currentUserId == IMLoginManager.instance().getLoginId())
+				if (currentUserId == IMLoginManager.getInstance().getLoginId())
 					return;
                 IMUIHelper.showCustomDialog(getActivity(),View.GONE,String.format(getString(R.string.confirm_dial),currentUser.getPhone()),new IMUIHelper.dialogCallback() {
                     @Override

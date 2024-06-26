@@ -20,7 +20,7 @@ public class MsgServerHandler extends SimpleChannelHandler {
             throws Exception {
         super.channelConnected(ctx, e);
         logger.d("channel#channelConnected");
-        IMSocketManager.instance().onMsgServerConnected();
+        IMSocketManager.getInstance().onMsgServerConnected();
     }
 
     @Override
@@ -34,8 +34,8 @@ public class MsgServerHandler extends SimpleChannelHandler {
          **/
         logger.d("channel#channelDisconnected");
         super.channelDisconnected(ctx, e);
-        IMSocketManager.instance().onMsgServerDisconn();
-        IMHeartBeatManager.instance().onMsgServerDisconn();
+        IMSocketManager.getInstance().handleMsgServerDisconnected();
+        IMHeartBeatManager.getInstance().handleMsgServerDisconnected();
         // 断线了，先尝试重连。统一入口，否则会产生循环锁
         //IMReconnectManager.instance().tryReconnect();
     }
@@ -48,7 +48,7 @@ public class MsgServerHandler extends SimpleChannelHandler {
         // 重置AlarmManager的时间
         ChannelBuffer channelBuffer = (ChannelBuffer) e.getMessage();
         if (null != channelBuffer)
-            IMSocketManager.instance().packetDispatch(channelBuffer);
+            IMSocketManager.getInstance().dispatchPacket(channelBuffer);
     }
 
     /**
@@ -62,7 +62,7 @@ public class MsgServerHandler extends SimpleChannelHandler {
     public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) throws Exception {
         super.exceptionCaught(ctx, e);
         if (e.getChannel() == null || !e.getChannel().isConnected()) {
-            IMSocketManager.instance().onConnectMsgServerFail();
+            IMSocketManager.getInstance().onConnectMsgServerFail();
         }
         logger.e("channel#[网络异常了]exceptionCaught:%s", e.getCause().toString());
     }

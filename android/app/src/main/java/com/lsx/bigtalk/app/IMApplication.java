@@ -8,12 +8,8 @@ import com.lsx.bigtalk.utils.Logger;
 
 
 public class IMApplication extends Application {
-
 	private final Logger logger = Logger.getLogger(IMApplication.class);
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 
 	}
@@ -21,17 +17,17 @@ public class IMApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		logger.i("IMApplication onCreate");
+		logger.i("IMApplication#onCreate");
 		startIMService();
 		ImageLoaderUtil.initImageLoaderConfig(getApplicationContext());
 	}
 
 	private void startIMService() {
-		logger.i("IMApplication startIMService");
+		logger.i("IMApplication#startIMService");
 		Intent intent = new Intent();
 		intent.setClass(this, IMService.class);
 		startService(intent);
 	}
 
-    public static boolean gifRunning = true;//gif是否运行
+    public static boolean gifRunning = true;
 }

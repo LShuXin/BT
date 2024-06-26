@@ -4,26 +4,20 @@ import com.lsx.bigtalk.DB.entity.MessageEntity;
 
 import java.util.ArrayList;
 
-/**
- * @author : yingmu on 14-12-30.
- * @email : yingmu@mogujie.com.
- *
- */
-public class MessageEvent {
 
+public class MessageEvent {
     private ArrayList<MessageEntity> msgList;
     private Event event;
 
-    public MessageEvent(){
+    public MessageEvent() {
+
     }
 
-    public MessageEvent(Event event){
-        //默认值 初始化使用
+    public MessageEvent(Event event) {
         this.event = event;
     }
 
-    public MessageEvent(Event event,MessageEntity entity){
-        //默认值 初始化使用
+    public MessageEvent(Event event, MessageEntity entity) {
         this.event = event;
         msgList = new ArrayList<>(1);
         msgList.add(entity);
@@ -32,46 +26,46 @@ public class MessageEvent {
     public enum Event {
         NONE,
 
-        HISTORY_MSG_OBTAIN,
+        HISTORY_MSG_OBTAINED,
         SENDING_MESSAGE,
-        ACK_SEND_MESSAGE_OK,
-        ACK_SEND_MESSAGE_TIME_OUT,
-        ACK_SEND_MESSAGE_FAILURE,
+        SEND_MESSAGE_SUCCESS,
+        SEND_MESSAGE_TIMEOUT,
+        SEND_MESSAGE_FAILED,
 
-        HANDLER_IMAGE_UPLOAD_FAILURE,
+        IMAGE_UPLOAD_FAILED,
         IMAGE_UPLOAD_FAILURE,
         HANDLER_IMAGE_UPLOAD_SUCCESS,
         IMAGE_UPLOAD_SUCCESS
     }
 
-    public MessageEntity getMessageEntity() {
-        if(msgList == null || msgList.size() <=0){
-            return null;
-        }
-        return msgList.get(0);
-    }
-
     public void setMessageEntity(MessageEntity messageEntity) {
-        if(msgList == null){
+        if (msgList == null) {
             msgList = new ArrayList<>();
         }
         msgList.clear();
         msgList.add(messageEntity);
     }
 
-    public ArrayList<MessageEntity> getMsgList() {
-        return msgList;
+    public MessageEntity getMessageEntity() {
+        if (msgList == null || msgList.isEmpty()){
+            return null;
+        }
+        return msgList.get(0);
     }
 
     public void setMsgList(ArrayList<MessageEntity> msgList) {
         this.msgList = msgList;
     }
 
-    public Event getEvent() {
-        return event;
+    public ArrayList<MessageEntity> getMsgList() {
+        return msgList;
     }
 
     public void setEvent(Event event) {
         this.event = event;
+    }
+
+    public Event getEvent() {
+        return event;
     }
 }

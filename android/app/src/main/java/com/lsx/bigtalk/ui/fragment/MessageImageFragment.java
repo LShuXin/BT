@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 import androidx.fragment.app.Fragment;
 
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.imservice.entity.ImageMessage;
+import com.lsx.bigtalk.imservice.entity.ImageMessageEntity;
 import com.lsx.bigtalk.imservice.service.IMService;
 import com.lsx.bigtalk.utils.FileUtil;
 import com.lsx.bigtalk.utils.ImageLoaderUtil;
@@ -29,7 +29,7 @@ public class MessageImageFragment extends Fragment {
     private View curView = null;
     protected GestureImageView view;
     protected GestureImageView newView;
-    private ImageMessage messageInfo = null;
+    private ImageMessageEntity messageInfo = null;
     private ProgressBar mProgressbar = null;
     private FrameLayout parentLayout = null;
     private IMService imService;
@@ -38,7 +38,7 @@ public class MessageImageFragment extends Fragment {
         this.imService = service;
     }
 
-    public void setImageInfo(ImageMessage imageInfo) {
+    public void setImageInfo(ImageMessageEntity imageInfo) {
         messageInfo = imageInfo;
     }
 
@@ -116,11 +116,11 @@ public class MessageImageFragment extends Fragment {
             ImageLoaderUtil.getImageLoaderInstance().displayImage(imageUrl, view, new DisplayImageOptions.Builder()
                     .cacheInMemory(false)
                     .cacheOnDisk(true)
-                    .showImageOnLoading(R.drawable.tt_message_image_default)
-                    .showImageOnFail(R.drawable.tt_message_image_error)
+                    .showImageOnLoading(R.drawable.default_message_image2)
+                    .showImageOnFail(R.drawable.message_image_error)
                     .imageScaleType(ImageScaleType.IN_SAMPLE_INT)
                     .bitmapConfig(Bitmap.Config.RGB_565)
-                    .showImageOnFail(R.drawable.tt_message_image_error)
+                    .showImageOnFail(R.drawable.message_image_error)
                     .resetViewBeforeLoading(true)
                     .build(), new SimpleImageLoadingListener() {
                 @Override

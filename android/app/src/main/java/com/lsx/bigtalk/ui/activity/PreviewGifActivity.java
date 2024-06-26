@@ -16,12 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
-/**
- * @author : fengzi on 15-1-25.
- * @email : fengzi@mogujie.com.
- * <p>
- * preview a GIF image when click on the gif message
- */
+
 public class PreviewGifActivity extends Activity implements View.OnClickListener {
     GifView gifView = null;
     ImageView backView = null;
@@ -36,10 +31,10 @@ public class PreviewGifActivity extends Activity implements View.OnClickListener
         String content = getIntent().getStringExtra(IntentConstant.PREVIEW_TEXT_CONTENT);
         if (Emoparser.getInstance(this).isMessageGif(content)) {
             InputStream is = getResources().openRawResource(Emoparser.getInstance(this).getResIdByCharSequence(content));
-            int lenght = 0;
+            int length = 0;
             try {
-                lenght = is.available();
-                byte[] buffer = ByteBuffer.allocate(lenght).array();
+                length = is.available();
+                byte[] buffer = ByteBuffer.allocate(length).array();
                 is.read(buffer);
                 gifView.setBytes(buffer);
                 gifView.startAnimation();

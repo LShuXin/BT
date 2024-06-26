@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import com.lsx.bigtalk.DB.entity.MessageEntity;
 import com.lsx.bigtalk.DB.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.imservice.entity.TextMessage;
+import com.lsx.bigtalk.imservice.entity.TextMessageEntity;
 import com.lsx.bigtalk.ui.helper.Emoparser;
 import com.lsx.bigtalk.ui.widget.GifView;
 
@@ -29,7 +29,7 @@ public class EmojiRenderView extends  BaseMsgRenderView {
     private GifView messageContent;
 
     public static EmojiRenderView inflater(Context context,ViewGroup viewGroup,boolean isMine){
-        int resource = isMine?R.layout.mine_emoji_message_item :R.layout.other_emoji_message_item;
+        int resource = isMine?R.layout.mine_emoji_message_item :R.layout.others_emoji_message_item;
         EmojiRenderView gifRenderView = (EmojiRenderView) LayoutInflater.from(context).inflate(resource, viewGroup, false);
         gifRenderView.setMine(isMine);
         gifRenderView.setParentView(viewGroup);
@@ -53,7 +53,7 @@ public class EmojiRenderView extends  BaseMsgRenderView {
     @Override
     public void render(MessageEntity messageEntity, UserEntity userEntity,Context context) {
         super.render(messageEntity, userEntity,context);
-        TextMessage textMessage = (TextMessage) messageEntity;
+        TextMessageEntity textMessage = (TextMessageEntity) messageEntity;
         String content = textMessage.getContent();
 
         InputStream is = getResources().openRawResource(Emoparser.getInstance(getContext()).getResIdByCharSequence(content));

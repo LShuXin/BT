@@ -1,5 +1,8 @@
-
 package com.lsx.bigtalk.ui.adapter.album;
+
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -18,41 +21,21 @@ import com.lsx.bigtalk.config.SysConstant;
 import com.lsx.bigtalk.ui.activity.PickPhotoActivity;
 import com.lsx.bigtalk.utils.Logger;
 
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
-/**
- * @Description 图片列表适配器
- * @author Nana
- * @date 2014-5-9
- */
 public class ImageGridAdapter extends BaseAdapter {
-
     private TextCallback textcallback = null;
-    Activity activity = null;
-    List<ImageItem> dataList = null;
+    private Activity activity = null;
+    private List<ImageItem> dataList = null;
     private Map<Integer, ImageItem> selectedMap = new TreeMap<Integer, ImageItem>();
-    BitmapCache cache = null;
+    private BitmapCache cache = null;
     private Handler mHandler = null;
     private int selectTotal = 0;
     private final Logger logger = Logger.getLogger(ImageGridAdapter.class);
     private boolean allowLoad = true;
 
-    public void lock() {
-        this.allowLoad = false;
-        notifyDataSetChanged();
-    }
-
-    public void unlock() {
-        this.allowLoad = true;
-        notifyDataSetChanged();
-    }
-
     ImageCallback callback = new ImageCallback() {
         @Override
-        public void imageLoad(ImageView imageView, Bitmap bitmap,
-                Object... params) {
+        public void imageLoad(ImageView imageView, Bitmap bitmap, Object... params) {
             try {
                 if (null != imageView && null != bitmap) {
                     String url = (String) params[0];
@@ -70,11 +53,21 @@ public class ImageGridAdapter extends BaseAdapter {
         }
     };
 
-    public ImageGridAdapter(Activity act, List<ImageItem> list, Handler mHandler) {
-        this.activity = act;
+    public void lock() {
+        this.allowLoad = false;
+        notifyDataSetChanged();
+    }
+
+    public void unlock() {
+        this.allowLoad = true;
+        notifyDataSetChanged();
+    }
+
+    public ImageGridAdapter(Activity act, List<ImageItem> list, Handler handler) {
+        activity = act;
         cache = BitmapCache.getInstance();
-        this.dataList = list;
-        this.mHandler = mHandler;
+        dataList = list;
+        mHandler = handler;
     }
 
     @Override
@@ -157,15 +150,15 @@ public class ImageGridAdapter extends BaseAdapter {
                             item.getImagePath(), callback);
                 } else {
                     holder.iv
-                            .setImageResource(R.drawable.tt_default_album_grid_image);
+                            .setImageResource(R.drawable.default_album_grid_image);
                 }
             }
 
             if (item.isSelected()) {
-                holder.selected.setImageResource(R.drawable.tt_album_img_selected);
+                holder.selected.setImageResource(R.drawable.album_img_selected);
             } else {
                 holder.selected
-                        .setImageResource(R.drawable.tt_album_img_select_nor);
+                        .setImageResource(R.drawable.album_img_unselected);
             }
             holder.iv.setOnClickListener(new OnClickListener() {
 
@@ -185,7 +178,7 @@ public class ImageGridAdapter extends BaseAdapter {
                         item.setSelected(!item.isSelected());
                         if (item.isSelected()) {
                             holder.selected
-                                    .setImageResource(R.drawable.tt_album_img_selected);
+                                    .setImageResource(R.drawable.album_img_selected);
                             selectTotal++;
                             if (null != textcallback)
                                 textcallback.onListen(selectTotal);
@@ -193,7 +186,7 @@ public class ImageGridAdapter extends BaseAdapter {
 
                         } else if (!item.isSelected()) {
                             holder.selected
-                                    .setImageResource(R.drawable.tt_album_img_select_nor);
+                                    .setImageResource(R.drawable.album_img_unselected);
                             selectTotal--;
                             if (null != textcallback)
                                 textcallback.onListen(selectTotal);
@@ -203,7 +196,7 @@ public class ImageGridAdapter extends BaseAdapter {
                         if (item.isSelected()) {
                             item.setSelected(!item.isSelected());
                             holder.selected
-                                    .setImageResource(R.drawable.tt_album_img_select_nor);
+                                    .setImageResource(R.drawable.album_img_unselected);
                             selectTotal--;
                             selectedMap.remove(position);
                         } else {
@@ -235,7 +228,7 @@ public class ImageGridAdapter extends BaseAdapter {
         textcallback = listener;
     }
 
-    class Holder {
+    static class Holder {
         private ImageView iv;
         private ImageView selected;
     }

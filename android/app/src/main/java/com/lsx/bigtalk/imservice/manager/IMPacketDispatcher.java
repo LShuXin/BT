@@ -1,5 +1,6 @@
 package com.lsx.bigtalk.imservice.manager;
 
+import java.io.IOException;
 import com.google.protobuf.CodedInputStream;
 import com.lsx.bigtalk.protobuf.IMBaseDefine;
 import com.lsx.bigtalk.protobuf.IMBuddy;
@@ -8,145 +9,163 @@ import com.lsx.bigtalk.protobuf.IMLogin;
 import com.lsx.bigtalk.protobuf.IMMessage;
 import com.lsx.bigtalk.utils.Logger;
 
-import java.io.IOException;
 
-/**
- * yingmu
- * 消息分发中心，处理消息服务器返回的数据包
- * 1. decode  header与body的解析
- * 2. 分发
- */
 public class IMPacketDispatcher {
     private static final Logger logger = Logger.getLogger(IMPacketDispatcher.class);
 
-    /**
-     * @param commandId
-     * @param buffer    有没有更加优雅的方式
-     */
-    public static void loginPacketDispatcher(int commandId, CodedInputStream buffer) {
+    public static void dispatchLoginPacket(int commandId, CodedInputStream buffer) {
         try {
             switch (commandId) {
-//            case IMBaseDefine.LoginCmdID.CID_LOGIN_RES_USERLOGIN_VALUE :
-//                IMLogin.IMLoginRes  imLoginRes = IMLogin.IMLoginRes.parseFrom(buffer);
-//                IMLoginManager.instance().onRepMsgServerLogin(imLoginRes);
-//                return;
-
+//                case IMBaseDefine.LoginCmdID.CID_LOGIN_RES_USERLOGIN_VALUE:
+//                {
+//                    IMLogin.IMLoginRes  imLoginRes = IMLogin.IMLoginRes.parseFrom(buffer);
+//                    IMLoginManager.getInstance().onRepMsgServerLogin(imLoginRes);
+//                    break;
+//                }
                 case IMBaseDefine.LoginCmdID.CID_LOGIN_RES_LOGINOUT_VALUE:
+                {
                     IMLogin.IMLogoutRsp imLogoutRsp = IMLogin.IMLogoutRsp.parseFrom(buffer);
-                    IMLoginManager.instance().onRepLoginOut(imLogoutRsp);
-                    return;
-
+                    IMLoginManager.getInstance().handleLogOutResp(imLogoutRsp);
+                    break;
+                }
                 case IMBaseDefine.LoginCmdID.CID_LOGIN_KICK_USER_VALUE:
+                {
                     IMLogin.IMKickUser imKickUser = IMLogin.IMKickUser.parseFrom(buffer);
-                    IMLoginManager.instance().onKickout(imKickUser);
+                    IMLoginManager.getInstance().onKickout(imKickUser);
+                    break;
+                }
             }
         } catch (IOException e) {
-            logger.e("loginPacketDispatcher# error,cid:%d", commandId);
+            logger.e("dispatchLoginPacket#error, cid:%d", commandId);
         }
     }
 
-    public static void buddyPacketDispatcher(int commandId, CodedInputStream buffer) {
+    public static void dispatchBuddyPacket(int commandId, CodedInputStream buffer) {
         try {
             switch (commandId) {
                 case IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_ALL_USER_RESPONSE_VALUE:
+                {
                     IMBuddy.IMAllUserRsp imAllUserRsp = IMBuddy.IMAllUserRsp.parseFrom(buffer);
-                    IMContactManager.instance().onRepAllUsers(imAllUserRsp);
-                    return;
-
+                    IMContactManager.getInstance().handleFetchAllUsersResp(imAllUserRsp);
+                    break;
+                }
                 case IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_USER_INFO_RESPONSE_VALUE:
+                {
                     IMBuddy.IMUsersInfoRsp imUsersInfoRsp = IMBuddy.IMUsersInfoRsp.parseFrom(buffer);
-                    IMContactManager.instance().onRepDetailUsers(imUsersInfoRsp);
-                    return;
+                    IMContactManager.getInstance().handleFetchUsersDetailResp(imUsersInfoRsp);
+                    break;
+                }
                 case IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_RECENT_CONTACT_SESSION_RESPONSE_VALUE:
+                {
                     IMBuddy.IMRecentContactSessionRsp recentContactSessionRsp = IMBuddy.IMRecentContactSessionRsp.parseFrom(buffer);
-                    IMSessionManager.instance().onRepRecentContacts(recentContactSessionRsp);
-                    return;
-
+                    IMSessionManager.getInstance().onRepRecentContacts(recentContactSessionRsp);
+                    break;
+                }
                 case IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_REMOVE_SESSION_RES_VALUE:
+                {
                     IMBuddy.IMRemoveSessionRsp removeSessionRsp = IMBuddy.IMRemoveSessionRsp.parseFrom(buffer);
-                    IMSessionManager.instance().onRepRemoveSession(removeSessionRsp);
-                    return;
-
+                    IMSessionManager.getInstance().onRepRemoveSession(removeSessionRsp);
+                    break;
+                }
                 case IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_PC_LOGIN_STATUS_NOTIFY_VALUE:
+                {
                     IMBuddy.IMPCLoginStatusNotify statusNotify = IMBuddy.IMPCLoginStatusNotify.parseFrom(buffer);
-                    IMLoginManager.instance().onLoginStatusNotify(statusNotify);
-                    return;
-
+                    IMLoginManager.getInstance().onLoginStatusNotify(statusNotify);
+                    break;
+                }
                 case IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_DEPARTMENT_RESPONSE_VALUE:
+                {
                     IMBuddy.IMDepartmentRsp departmentRsp = IMBuddy.IMDepartmentRsp.parseFrom(buffer);
-                    IMContactManager.instance().onRepDepartment(departmentRsp);
-
+                    IMContactManager.getInstance().handleFetchAllDeptsResp(departmentRsp);
+                    break;
+                }
             }
         } catch (IOException e) {
             logger.e("buddyPacketDispatcher# error,cid:%d", commandId);
         }
     }
 
-    public static void msgPacketDispatcher(int commandId, CodedInputStream buffer) {
+    public static void dispatchMsgPacket(int commandId, CodedInputStream buffer) {
         try {
             switch (commandId) {
                 case IMBaseDefine.MessageCmdID.CID_MSG_DATA_ACK_VALUE:
+                {
                     // have some problem  todo
                     return;
-
+                }
                 case IMBaseDefine.MessageCmdID.CID_MSG_LIST_RESPONSE_VALUE:
+                {
                     IMMessage.IMGetMsgListRsp rsp = IMMessage.IMGetMsgListRsp.parseFrom(buffer);
-                    IMMessageManager.instance().onReqHistoryMsg(rsp);
+                    IMMessageManager.getInstance().handleFetchHistoryMsgResp(rsp);
                     return;
-
+                }
                 case IMBaseDefine.MessageCmdID.CID_MSG_DATA_VALUE:
+                {
                     IMMessage.IMMsgData imMsgData = IMMessage.IMMsgData.parseFrom(buffer);
-                    IMMessageManager.instance().onRecvMessage(imMsgData);
+                    IMMessageManager.getInstance().onReceiveMessage(imMsgData);
                     return;
-
+                }
                 case IMBaseDefine.MessageCmdID.CID_MSG_READ_NOTIFY_VALUE:
+                {
                     IMMessage.IMMsgDataReadNotify readNotify = IMMessage.IMMsgDataReadNotify.parseFrom(buffer);
-                    IMUnreadMsgManager.instance().onNotifyRead(readNotify);
+                    IMUnreadMsgManager.getInstance().onNotifyRead(readNotify);
                     return;
+                }
                 case IMBaseDefine.MessageCmdID.CID_MSG_UNREAD_CNT_RESPONSE_VALUE:
+                {
                     IMMessage.IMUnreadMsgCntRsp unreadMsgCntRsp = IMMessage.IMUnreadMsgCntRsp.parseFrom(buffer);
-                    IMUnreadMsgManager.instance().onRepUnreadMsgContactList(unreadMsgCntRsp);
+                    IMUnreadMsgManager.getInstance().handleFetchUnreadMsgListResp(unreadMsgCntRsp);
                     return;
-
+                }
                 case IMBaseDefine.MessageCmdID.CID_MSG_GET_BY_MSG_ID_RES_VALUE:
+                {
                     IMMessage.IMGetMsgByIdRsp getMsgByIdRsp = IMMessage.IMGetMsgByIdRsp.parseFrom(buffer);
-                    IMMessageManager.instance().onReqMsgById(getMsgByIdRsp);
+                    IMMessageManager.getInstance().handleFetchMsgByIdResp(getMsgByIdRsp);
                     break;
-
+                }
             }
         } catch (IOException e) {
             logger.e("msgPacketDispatcher# error,cid:%d", commandId);
         }
     }
 
-    public static void groupPacketDispatcher(int commandId, CodedInputStream buffer) {
+    public static void dispatchGroupPacket(int commandId, CodedInputStream buffer) {
         try {
             switch (commandId) {
 //                case IMBaseDefine.GroupCmdID.CID_GROUP_CREATE_RESPONSE_VALUE:
+//                {
 //                    IMGroup.IMGroupCreateRsp groupCreateRsp = IMGroup.IMGroupCreateRsp.parseFrom(buffer);
-//                    IMGroupManager.instance().onReqCreateTempGroup(groupCreateRsp);
-//                    return;
-
+//                    IMGroupManager.getInstance().onReqCreateTempGroup(groupCreateRsp);
+//                    break;
+//                }
                 case IMBaseDefine.GroupCmdID.CID_GROUP_NORMAL_LIST_RESPONSE_VALUE:
+                {
                     IMGroup.IMNormalGroupListRsp normalGroupListRsp = IMGroup.IMNormalGroupListRsp.parseFrom(buffer);
-                    IMGroupManager.instance().onRepNormalGroupList(normalGroupListRsp);
-                    return;
-
+                    IMGroupManager.getInstance().handleFetchNormalGroupInfoListResp(normalGroupListRsp);
+                    break;
+                }
                 case IMBaseDefine.GroupCmdID.CID_GROUP_INFO_RESPONSE_VALUE:
+                {
                     IMGroup.IMGroupInfoListRsp groupInfoListRsp = IMGroup.IMGroupInfoListRsp.parseFrom(buffer);
-                    IMGroupManager.instance().onRepGroupDetailInfo(groupInfoListRsp);
+                    IMGroupManager.getInstance().handleFetchGroupDetailInfoResp(groupInfoListRsp);
+                    break;
+                }
+                case IMBaseDefine.GroupCmdID.CID_GROUP_CHANGE_MEMBER_RESPONSE_VALUE:
+                {
+                    IMGroup.IMGroupChangeMemberRsp groupChangeMemberRsp = IMGroup.IMGroupChangeMemberRsp.parseFrom(buffer);
+                    IMGroupManager.getInstance().onReqChangeGroupMember(groupChangeMemberRsp);
                     return;
-
-//                case IMBaseDefine.GroupCmdID.CID_GROUP_CHANGE_MEMBER_RESPONSE_VALUE:
-//                    IMGroup.IMGroupChangeMemberRsp groupChangeMemberRsp = IMGroup.IMGroupChangeMemberRsp.parseFrom(buffer);
-//                    IMGroupManager.instance().onReqChangeGroupMember(groupChangeMemberRsp);
-//                    return;
-
+                }
                 case IMBaseDefine.GroupCmdID.CID_GROUP_CHANGE_MEMBER_NOTIFY_VALUE:
+                {
                     IMGroup.IMGroupChangeMemberNotify notify = IMGroup.IMGroupChangeMemberNotify.parseFrom(buffer);
-                    IMGroupManager.instance().receiveGroupChangeMemberNotify(notify);
+                    IMGroupManager.getInstance().handleGroupMemberChangeNotify(notify);
+                    break;
+                }
                 case IMBaseDefine.GroupCmdID.CID_GROUP_SHIELD_GROUP_RESPONSE_VALUE:
-                    //todo
+                {
+
+                }
             }
         } catch (IOException e) {
             logger.e("groupPacketDispatcher# error,cid:%d", commandId);

@@ -29,7 +29,7 @@ import com.lsx.bigtalk.imservice.support.IMServiceConnector;
 import com.lsx.bigtalk.ui.activity.SettingActivity;
 import com.lsx.bigtalk.ui.widget.IMBaseImageView;
 import com.lsx.bigtalk.utils.FileUtil;
-import com.lsx.bigtalk.utils.IMUIHelper;
+import com.lsx.bigtalk.helper.IMUIHelper;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.File;
@@ -37,16 +37,15 @@ import java.util.Objects;
 
 import de.greenrobot.event.EventBus;
 
+
 public class MyFragment extends MainFragment {
     private View curView = null;
     private View contentView;
-    private View exitView;
-    private View clearView;
-    private View settingView;
 
     private final IMServiceConnector imServiceConnector = new IMServiceConnector() {
         @Override
         public void onServiceDisconnected() {
+
         }
 
         @Override
@@ -58,7 +57,7 @@ public class MyFragment extends MainFragment {
             if (imService == null) {
                 return;
             }
-            if (!imService.getContactManager().isUserDataReady()) {
+            if (!imService.getIMContactManager().getIsContactDataReady()) {
                 logger.i("detail#contact data are not ready");
             } else {
                 init(imService);
@@ -85,22 +84,19 @@ public class MyFragment extends MainFragment {
         return curView;
     }
 
-    /**
-     * @Description 初始化资源
-     */
     private void initRes() {
         super.init(curView);
 
         contentView = curView.findViewById(R.id.content);
-        exitView = curView.findViewById(R.id.exitPage);
-        clearView = curView.findViewById(R.id.clearPage);
-        settingView = curView.findViewById(R.id.settingPage);
+        View exitView = curView.findViewById(R.id.exitPage);
+        View clearView = curView.findViewById(R.id.clearPage);
+        View settingView = curView.findViewById(R.id.settingPage);
 
         clearView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), android.R.style.Theme_Holo_Light_Dialog));
-                LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater inflater = (LayoutInflater) requireActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View dialog_view = inflater.inflate(R.layout.custom_dialog, null);
                 final EditText editText = dialog_view.findViewById(R.id.dialog_edit_content);
                 editText.setVisibility(View.GONE);
@@ -109,7 +105,6 @@ public class MyFragment extends MainFragment {
                 builder.setView(dialog_view);
 
                 builder.setPositiveButton(getString(R.string.tt_ok), new DialogInterface.OnClickListener() {
-
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ImageLoader.getInstance().clearMemoryCache();
@@ -138,13 +133,12 @@ public class MyFragment extends MainFragment {
                 builder.show();
             }
         });
-        exitView.setOnClickListener(new View.OnClickListener() {
 
+        exitView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), android.R.style.Theme_Holo_Light_Dialog));
-                LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater inflater = (LayoutInflater) requireActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View dialog_view = inflater.inflate(R.layout.custom_dialog, null);
                 final EditText editText = dialog_view.findViewById(R.id.dialog_edit_content);
                 editText.setVisibility(View.GONE);
@@ -155,8 +149,8 @@ public class MyFragment extends MainFragment {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        IMLoginManager.instance().setKickout(false);
-                        IMLoginManager.instance().logOut();
+                        IMLoginManager.getInstance().setIsKickedOut(false);
+                        IMLoginManager.getInstance().logOut();
                         getActivity().finish();
                         dialog.dismiss();
                     }
@@ -176,16 +170,13 @@ public class MyFragment extends MainFragment {
         settingView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 跳转到配置页面
                 startActivity(new Intent(MyFragment.this.getActivity(), SettingActivity.class));
             }
         });
+
         hideContent();
 
-        // 设置顶部标题栏
-        setTopCenterTitleText(getActivity().getString(R.string.main_me_tab));
-        // 设置页面其它控件
-
+        setTopCenterTitleText(requireActivity().getString(R.string.main_me_tab));
     }
 
     private void hideContent() {
@@ -213,13 +204,13 @@ public class MyFragment extends MainFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        // 应该放在这里嘛??
         imServiceConnector.disconnect(getActivity());
         EventBus.getDefault().unregister(this);
     }
 
     @Override
     protected void initHandler() {
+
     }
 
     public void onEventMainThread(UserInfoEvent event) {
@@ -227,7 +218,6 @@ public class MyFragment extends MainFragment {
             init(imServiceConnector.getIMService());
         }
     }
-
 
     private void init(IMService imService) {
         showContent();
@@ -237,23 +227,22 @@ public class MyFragment extends MainFragment {
             return;
         }
 
-        final UserEntity loginContact = imService.getLoginManager().getLoginInfo();
+        final UserEntity loginContact = imService.getIMLoginManager().getUserEntity();
         if (loginContact == null) {
             return;
         }
         TextView nickNameView = curView.findViewById(R.id.nickName);
         TextView userNameView = curView.findViewById(R.id.userName);
-        IMBaseImageView portraitImageView = curView.findViewById(R.id.user_portrait);
+        IMBaseImageView avatarImageView = curView.findViewById(R.id.user_avatar);
 
         nickNameView.setText(loginContact.getMainName());
         userNameView.setText(loginContact.getRealName());
 
-        //头像设置
-        portraitImageView.setDefaultImageRes(R.drawable.tt_default_user_portrait_corner);
-        portraitImageView.setCorner(15);
-        portraitImageView.setAvatarAppend(SysConstant.AVATAR_APPEND_200);
-        portraitImageView.setImageResource(R.drawable.tt_default_user_portrait_corner);
-        portraitImageView.setImageUrl(loginContact.getAvatar());
+        avatarImageView.setDefaultImageRes(R.drawable.default_user_avatar);
+        avatarImageView.setCorner(15);
+        avatarImageView.setAvatarAppend(SysConstant.AVATAR_APPEND_200);
+        avatarImageView.setImageResource(R.drawable.default_user_avatar);
+        avatarImageView.setImageUrl(loginContact.getAvatar());
 
         RelativeLayout userContainer = curView.findViewById(R.id.user_container);
         userContainer.setOnClickListener(new View.OnClickListener() {
@@ -266,7 +255,7 @@ public class MyFragment extends MainFragment {
 
     private void deleteFilesByDirectory(File directory) {
         if (directory != null && directory.exists() && directory.isDirectory()) {
-            for (File item : directory.listFiles()) {
+            for (File item : Objects.requireNonNull(directory.listFiles())) {
                 item.delete();
             }
         } else {

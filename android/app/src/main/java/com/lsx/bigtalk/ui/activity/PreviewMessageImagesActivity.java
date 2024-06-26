@@ -14,7 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.config.IntentConstant;
-import com.lsx.bigtalk.imservice.entity.ImageMessage;
+import com.lsx.bigtalk.imservice.entity.ImageMessageEntity;
 import com.lsx.bigtalk.imservice.service.IMService;
 import com.lsx.bigtalk.imservice.support.IMServiceConnector;
 import com.lsx.bigtalk.ui.fragment.MessageImageFragment;
@@ -26,10 +26,10 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
     private LinearLayout group;
     private ImageView back;
     private int curImagePosition = -1;
-    private ImageMessage messageInfo;
+    private ImageMessageEntity messageInfo;
     ArrayList<ImageView> tips = new ArrayList<ImageView>();
     ArrayList<Fragment> fragments = new ArrayList<>();
-    private ArrayList<ImageMessage> imageList = null;
+    private ArrayList<ImageMessageEntity> imageList = null;
     public IMService imService;
 
     IMServiceConnector imServiceConnector = new IMServiceConnector() {
@@ -52,9 +52,9 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.preview_message_images_activity);
-        imageList = ImageMessage.getImageMessageList();
+        imageList = ImageMessageEntity.getImageMessageList();
         try {
-            messageInfo = (ImageMessage) getIntent().getSerializableExtra(IntentConstant.CUR_MESSAGE);
+            messageInfo = (ImageMessageEntity) getIntent().getSerializableExtra(IntentConstant.CUR_MESSAGE);
             initRes();
             imServiceConnector.connect(this);
         } catch (Exception e) {
@@ -97,7 +97,7 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
             fragments.clear();
             if (null != imageList && null != messageInfo) {
                 for (int i = 0; i < imageList.size(); i++) {
-                    ImageMessage item = imageList.get(imageList.size() - i - 1);
+                    ImageMessageEntity item = imageList.get(imageList.size() - i - 1);
                     if (null == item) {
                         continue;
                     }
@@ -129,15 +129,15 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
             group.removeAllViews();
             tips.clear();
             for (int i = 0; i < imageList.size(); i++) {
-                ImageMessage item = imageList.get(i);
+                ImageMessageEntity item = imageList.get(i);
                 if (null == item) {
                     continue;
                 }
                 ImageView imageView = new ImageView(this);
                 if (i == curImagePosition) {
-                    imageView.setBackgroundResource(R.drawable.tt_default_dot_down);
+                    imageView.setBackgroundResource(R.drawable.default_dot_down);
                 } else {
-                    imageView.setBackgroundResource(R.drawable.tt_default_dot_up);
+                    imageView.setBackgroundResource(R.drawable.default_dot_up);
                 }
                 tips.add(imageView);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
@@ -164,9 +164,9 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
             if (null != tips) {
                 for (int i = 0; i < tips.size(); i++) {
                     if (i == position) {
-                        tips.get(i).setBackgroundResource(R.drawable.tt_default_dot_down);
+                        tips.get(i).setBackgroundResource(R.drawable.default_dot_down);
                     } else {
-                        tips.get(i).setBackgroundResource(R.drawable.tt_default_dot_up);
+                        tips.get(i).setBackgroundResource(R.drawable.default_dot_up);
                     }
                 }
             }

@@ -16,8 +16,8 @@
             android:layout_width="fill_parent"
             android:layout_height="23dp"
             android:layout_margin="10dp"
-            android:background="@drawable/tt_search_edt_bk"
-            android:drawableLeft="@drawable/tt_search"
+            android:background="@drawable/search_edit_bg"
+            android:drawableLeft="@drawable/search"
             android:drawablePadding="10dp"
             android:gravity="left|center_vertical"
             android:hint="@string/menu_search"
@@ -65,7 +65,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
-                android:background="@drawable/tt_show_head_toast_bg"
+                android:background="@drawable/head_toast_bg"
                 android:gravity="center"
                 android:textColor="#ffffffff"
                 android:textSize="30dp"
@@ -86,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:indeterminateDrawable="@drawable/tt_progressbar"
+        android:indeterminateDrawable="@drawable/progress_bar"
         android:indeterminateDuration="4000"
         android:visibility="gone" />
 

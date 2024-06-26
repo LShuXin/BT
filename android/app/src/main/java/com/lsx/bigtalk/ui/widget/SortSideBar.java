@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.utils.Logger;
 
 public class SortSideBar extends View {
     private OnTouchingLetterChangedListener onTouchingLetterChangedListener;
@@ -54,7 +53,7 @@ public class SortSideBar extends View {
 
         if (b.length > 0) {
             BitmapDrawable bmpDraw = (BitmapDrawable) getResources().getDrawable(
-                    R.drawable.tt_contact_side_search);
+                    R.drawable.contact_search);
             Bitmap bmp = bmpDraw.getBitmap();
             float left = width / 2 - paint.measureText(b[0]) / 2 - 4;
             canvas.drawBitmap(bmp, left, 0, paint);

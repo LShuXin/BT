@@ -33,7 +33,7 @@
         android:paddingTop="8.5dp"
         android:paddingBottom="9dp"
         android:layout_weight="1"
-        android:background="@drawable/tt_list_item_bk" >
+        android:background="@drawable/list_item_bg" >
 
         <CheckBox
             android:id="@+id/checkBox"

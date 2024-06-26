@@ -3,46 +3,47 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/default_bk"
+    android:background="@color/default_bg"
     android:paddingBottom="20dp"
-    android:paddingRight="10dp" >
+    android:paddingStart="0dp"
+    android:paddingEnd="10dp">
 
     <com.lsx.bigtalk.ui.widget.IMBaseImageView
         android:id="@+id/user_portrait"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/tt_default_user_portrait_corner" />
+        android:src="@drawable/default_user_avatar" />
     <RelativeLayout
         android:id="@+id/content_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/user_portrait"
         android:layout_marginTop="2dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="4dp"
-        android:layout_toLeftOf="@id/user_portrait" >
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="4dp"
+        android:layout_toStartOf="@id/user_portrait">
 
         <LinearLayout
             android:id="@+id/message_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginTop="0dp"
-            android:background="@drawable/tt_my_message_bkgnd"
-            android:gravity="right"
+            android:background="@drawable/mine_message_bg"
+            android:gravity="end"
             android:orientation="vertical"
             android:paddingBottom="13dp"
-            android:paddingLeft="13dp"
-            android:paddingRight="21dp"
+            android:paddingStart="13dp"
+            android:paddingEnd="21dp"
             android:paddingTop="13dp" >
 
             <View
                 android:id="@+id/audio_antt_view"
                 android:layout_width="11dp"
                 android:layout_height="17dp"
-                android:background="@anim/voice_play_mine" />
+                android:background="@drawable/voice_play_mine" />
         </LinearLayout>
 
         <TextView
@@ -51,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/message_layout"
             android:layout_marginBottom="13dp"
-            android:layout_marginRight="7dp"
+            android:layout_marginEnd="7dp"
             android:text=""
             android:textSize="14sp" />
 
@@ -59,8 +60,8 @@
             android:id="@+id/audio_unread_notify"
             android:layout_width="10dp"
             android:layout_height="10dp"
-            android:layout_toLeftOf="@id/message_layout"
-            android:background="@drawable/tt_unread_message_notify_bg"
+            android:layout_toStartOf="@id/message_layout"
+            android:background="@drawable/unread_message_notify_bg"
             android:visibility="gone" />
 
         <ImageView
@@ -69,10 +70,10 @@
             android:layout_height="18dp"
             android:layout_alignBottom="@id/message_layout"
             android:layout_marginBottom="13dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/message_image_desc"
-            android:src="@drawable/tt_msg_tip"
+            android:src="@drawable/msg_failed"
             android:visibility="visible" />
 
         <ProgressBar
@@ -82,10 +83,10 @@
             android:layout_height="18dp"
             android:layout_alignBottom="@id/message_layout"
             android:layout_marginBottom="13dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/message_image_desc"
-            android:src="@drawable/tt_msg_tip"
+            android:src="@drawable/msg_failed"
             android:visibility="visible" />
     </RelativeLayout>
 

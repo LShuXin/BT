@@ -1,25 +1,20 @@
 package com.lsx.bigtalk.imservice.event;
 
-import com.lsx.bigtalk.imservice.entity.UnreadEntity;
+import com.lsx.bigtalk.imservice.entity.UnreadMessageEntity;
 
-/**
- * @author : yingmu on 15-1-6.
- * @email : yingmu@mogujie.com.
- */
+
 public class UnreadEvent {
-
-    public UnreadEntity entity;
+    public UnreadMessageEntity entity;
     public Event event;
 
-    public UnreadEvent(){}
-    public UnreadEvent(Event e){
-        this.event = e;
+    public UnreadEvent() {}
+    public UnreadEvent(Event event){
+        this.event = event;
     }
 
     public enum Event {
         UNREAD_MSG_LIST_OK,
         UNREAD_MSG_RECEIVED,
-
-        SESSION_READED_UNREAD_MSG
+        SESSION_READ_UNREAD_MSG
     }
 }

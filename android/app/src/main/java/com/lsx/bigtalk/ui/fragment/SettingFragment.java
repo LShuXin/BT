@@ -90,7 +90,7 @@ public class SettingFragment extends BTBaseFragment {
 	private void initRes() {
 		// 设置标题栏
 		setTopCenterTitleText(getActivity().getString(R.string.setting_page_name));
-		setTopLeftBtnImage(R.drawable.tt_top_back);
+		setTopLeftBtnImage(R.drawable.top_back);
 		topLeftContainerLayout.setOnClickListener(new View.OnClickListener() {
 
 			@Override

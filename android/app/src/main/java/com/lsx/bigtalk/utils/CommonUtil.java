@@ -1,5 +1,12 @@
-
 package com.lsx.bigtalk.utils;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -16,62 +23,37 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.lsx.bigtalk.config.SysConstant;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class CommonUtil {
     private static final Logger logger = Logger.getLogger(CommonUtil.class);
 
-    /**
-     * @param context
-     * @param activityName
-     * @return
-     * @Description 判断是否是顶部activity
-     */
-    public static boolean isTopActivy(Context context, String activityName) {
+    public static boolean isTopActivity(Context context, String activityName) {
         ActivityManager am = (ActivityManager) context
                 .getSystemService(Context.ACTIVITY_SERVICE);
-        ComponentName cName = am.getRunningTasks(1).size() > 0 ? am
+
+        ComponentName cName = !am.getRunningTasks(1).isEmpty() ? am
                 .getRunningTasks(1).get(0).topActivity : null;
 
-        if (null == cName)
+        if (null == cName) {
             return false;
+        }
         return cName.getClassName().equals(activityName);
     }
 
-    /**
-     * @return
-     * @Description 判断存储卡是否存在
-     */
-    public static boolean checkSDCard() {
+    public static boolean isSDCardExist() {
         return Environment.getExternalStorageState().equals(
                 Environment.MEDIA_MOUNTED);
     }
 
-    /**
-     * @return
-     * @Description 获取sdcard可用空间的大小
-     */
     @SuppressWarnings("deprecation")
     public static long getSDFreeSize() {
         File path = Environment.getExternalStorageDirectory();
         StatFs sf = new StatFs(path.getPath());
         long blockSize = sf.getBlockSize();
         long freeBlocks = sf.getAvailableBlocks();
-        // return freeBlocks * blockSize; //单位Byte
-        // return (freeBlocks * blockSize)/1024; //单位KB
-        return (freeBlocks * blockSize) / 1024 / 1024; // 单位MB
+        return (freeBlocks * blockSize) / 1024 / 1024;
     }
 
-    /**
-     * @return
-     * @Description 获取sdcard容量
-     */
     @SuppressWarnings({
             "deprecation", "unused"
     })
@@ -80,10 +62,7 @@ public class CommonUtil {
         StatFs sf = new StatFs(path.getPath());
         long blockSize = sf.getBlockSize();
         long allBlocks = sf.getBlockCount();
-        // 返回SD卡大小
-        // return allBlocks * blockSize; //单位Byte
-        // return (allBlocks * blockSize)/1024; //单位KB
-        return (allBlocks * blockSize) / 1024 / 1024; // 单位MB
+        return (allBlocks * blockSize) / 1024 / 1024;
     }
 
     public static byte[] intToBytes(int n) {
@@ -122,12 +101,6 @@ public class CommonUtil {
 
     }
 
-    /**
-     * 将byte数组转换为int数据
-     *
-     * @param b 字节数组
-     * @return 生成的int数据
-     */
     public static int byteArray2int(byte[] b) {
         return (((int) b[0]) << 24) + (((int) b[1]) << 16)
                 + (((int) b[2]) << 8) + b[3];
@@ -334,7 +307,7 @@ public class CommonUtil {
         String path;
         String floder = (type == SysConstant.FILE_SAVE_TYPE_IMAGE) ? "images"
                 : "audio";
-        if (CommonUtil.checkSDCard()) {
+        if (CommonUtil.isSDCardExist()) {
             path = Environment.getExternalStorageDirectory().toString()
                     + File.separator + "MGJ-IM" + File.separator + floder
                     + File.separator;

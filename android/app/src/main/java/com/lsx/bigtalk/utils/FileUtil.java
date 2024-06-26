@@ -38,6 +38,7 @@ public class FileUtil
 {
     public static String SDCardRoot;
     public static File updateFile;
+
     static
     {
         // 获取SD卡路径

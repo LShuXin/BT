@@ -66,7 +66,7 @@
     <!-- 用于声明应用程序是否支持从右到左（RTL）的布局方向-->
     <application
         android:name=".app.IMApplication"
-        android:icon="@drawable/tt_logo"
+        android:icon="@drawable/logo"
         android:largeHeap="true"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
@@ -201,7 +201,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.DetailPortraitActivity"
+            android:name=".ui.activity.ImagePreviewActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>

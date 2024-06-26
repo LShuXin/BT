@@ -1,14 +1,12 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MGIMInitAct">
-
-    <!-- Login form -->
+    tools:context=".ui.activity.LoginActivity">
 
     <FrameLayout
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/default_bk">
+        android:background="@color/default_bg">
 
         <LinearLayout
             android:id="@+id/splash_page"
@@ -17,11 +15,12 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/splash_page_bg"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/tt_splash" />
+                android:src="@drawable/splash"
+                tools:ignore="ContentDescription" />
         </LinearLayout>
 
         <LinearLayout
@@ -39,7 +38,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="50dp"
                 android:layout_marginTop="80dp"
-                android:src="@drawable/tt_login_logo" />
+                android:src="@drawable/login_page_logo"
+                tools:ignore="ContentDescription" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -59,23 +59,17 @@
                         android:id="@+id/name"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:background="@drawable/tt_message_text_bg"
+                        android:background="@drawable/text_message_bg"
                         android:hint="@string/prompt_name"
                         android:inputType="text|textPersonName|textEmailAddress"
                         android:maxLines="1"
-                        android:paddingLeft="15dp"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="0dp"
                         android:singleLine="true"
                         android:textColorHint="@color/login_hint_color"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        tools:ignore="Autofill" />
 
-                    <!-- <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignBottom="@+id/name"
-                        android:layout_alignLeft="@+id/name"
-                        android:layout_alignTop="@+id/name"
-                        android:paddingLeft="10dp"
-                        android:src="@drawable/tt_login_user" />  -->
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -87,26 +81,27 @@
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:background="@drawable/tt_message_text_bg"
+                        android:background="@drawable/text_message_bg"
                         android:hint="@string/prompt_password"
-                        android:imeActionId="@+id/login"
+                        android:imeOptions="actionDone"
                         android:imeActionLabel="@string/action_sign_in_short"
-                        android:imeOptions="actionUnspecified"
                         android:inputType="textPassword"
                         android:maxLines="1"
-                        android:paddingLeft="15dp"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="0dp"
                         android:singleLine="true"
                         android:textColorHint="@color/login_hint_color"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        tools:ignore="Autofill" />
                 </RelativeLayout>
 
                 <Button
-                    android:id="@+id/sign_in_button"
+                    android:id="@+id/login_button"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="22dp"
-                    android:background="@drawable/tt_default_btn_bk"
+                    android:background="@drawable/default_btn_bg"
                     android:text="@string/action_sign_in_register"
                     android:textColor="@android:color/white"
                     android:textSize="21sp" />
@@ -116,7 +111,6 @@
     </FrameLayout>
 
     <!-- Login progress -->
-
     <LinearLayout
         android:id="@+id/login_status"
         android:layout_width="match_parent"

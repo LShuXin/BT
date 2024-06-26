@@ -21,7 +21,7 @@ import com.lsx.bigtalk.DB.entity.UserEntity;
 import com.lsx.bigtalk.DB.sp.ConfigurationSp;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.config.IntentConstant;
-import com.lsx.bigtalk.ui.adapter.GroupManagerAdapter;
+import com.lsx.bigtalk.ui.adapter.GroupManageAdapter;
 import com.lsx.bigtalk.ui.helper.CheckboxConfigHelper;
 import com.lsx.bigtalk.imservice.event.GroupEvent;
 import com.lsx.bigtalk.imservice.service.IMService;
@@ -47,7 +47,7 @@ public class GroupManagerFragment extends BTBaseFragment {
     private View curView = null;
     /**adapter配置*/
     private GridView gridView;
-    private GroupManagerAdapter adapter;
+    private GroupManageAdapter adapter;
 
 
     /**详情的配置  勿扰以及指定聊天*/
@@ -84,7 +84,7 @@ public class GroupManagerFragment extends BTBaseFragment {
 
     private void initRes() {
         // 设置标题栏
-        setTopLeftBtnImage(R.drawable.tt_top_back);
+        setTopLeftBtnImage(R.drawable.top_back);
         setTopLeftText(getActivity().getString(R.string.top_left_back));
         topLeftContainerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,7 +149,7 @@ public class GroupManagerFragment extends BTBaseFragment {
             logger.e("groupmgr#getSessionInfoFromIntent failed");
             return;
         }
-        peerEntity = imService.getSessionManager().findPeerEntity(curSessionKey);
+        peerEntity = imService.getIMSessionManager().findPeerEntity(curSessionKey);
         if(peerEntity == null){
             logger.e("groupmgr#findPeerEntity failed,sessionKey:%s",curSessionKey);
             return;
@@ -179,7 +179,7 @@ public class GroupManagerFragment extends BTBaseFragment {
         gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));// 去掉点击时的黄色背影
         gridView.setOnScrollListener(new PauseOnScrollListener(ImageLoader.getInstance(), true, true));
 
-        adapter = new GroupManagerAdapter(getActivity(),imService,peerEntity);
+        adapter = new GroupManageAdapter(getActivity(),imService,peerEntity);
         gridView.setAdapter(adapter);
     }
 
@@ -213,7 +213,7 @@ public class GroupManagerFragment extends BTBaseFragment {
             case DBConstant.GROUP_MODIFY_TYPE_ADD:
                 ArrayList<UserEntity> newList = new ArrayList<>();
                 for(Integer userId:changeList){
-                    UserEntity userEntity =  imService.getContactManager().findContact(userId);
+                    UserEntity userEntity =  imService.getIMContactManager().findContact(userId);
                     if(userEntity!=null) {
                         newList.add(userEntity);
                     }

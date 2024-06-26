@@ -1,15 +1,6 @@
 package com.lsx.bigtalk.imservice.manager;
 
-import com.lsx.bigtalk.DB.DBInterface;
-import com.lsx.bigtalk.DB.entity.DepartmentEntity;
-import com.lsx.bigtalk.DB.entity.UserEntity;
-import com.lsx.bigtalk.imservice.event.UserInfoEvent;
-import com.lsx.bigtalk.protobuf.helper.ProtoBuf2JavaBean;
-import com.lsx.bigtalk.protobuf.IMBaseDefine;
-import com.lsx.bigtalk.protobuf.IMBuddy;
-import com.lsx.bigtalk.utils.IMUIHelper;
-import com.lsx.bigtalk.utils.Logger;
-import com.lsx.bigtalk.utils.pinyin.PinYin;
+import android.annotation.SuppressLint;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,152 +10,126 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.lsx.bigtalk.DB.DBInterface;
+import com.lsx.bigtalk.DB.entity.DepartmentEntity;
+import com.lsx.bigtalk.DB.entity.UserEntity;
+import com.lsx.bigtalk.imservice.event.UserInfoEvent;
+import com.lsx.bigtalk.protobuf.helper.ProtoBuf2JavaBean;
+import com.lsx.bigtalk.protobuf.IMBaseDefine;
+import com.lsx.bigtalk.protobuf.IMBuddy;
+import com.lsx.bigtalk.helper.IMUIHelper;
+import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.utils.pinyin.PinYin;
+
 import de.greenrobot.event.EventBus;
 
-/**
- * 负责用户信息的请求
- * 为回话页面以及联系人页面提供服务
- *
- * 联系人信息管理
- * 普通用户的version  有总版本
- * 群组没有总version的概念， 每个群有version
- * 具体请参见 服务端具体的pd协议
- */
+
 public class IMContactManager extends IMManager {
     private final Logger logger = Logger.getLogger(IMContactManager.class);
-
-    // 单例
-    private static final IMContactManager inst = new IMContactManager();
-    public static IMContactManager instance() {
-            return inst;
-    }
-    private final IMSocketManager imSocketManager = IMSocketManager.instance();
+    private final IMSocketManager imSocketManager = IMSocketManager.getInstance();
     private final DBInterface dbInterface = DBInterface.instance();
-
-    // 自身状态字段
-    private boolean  userDataReady = false;
-    private final Map<Integer,UserEntity> userMap = new ConcurrentHashMap<>();
-    private final Map<Integer,DepartmentEntity> departmentMap = new ConcurrentHashMap<>();
-
+    private boolean isContactDataReady = false;
+    private final Map<Integer, UserEntity> userMap = new ConcurrentHashMap<>();
+    private final Map<Integer, DepartmentEntity> deptMap = new ConcurrentHashMap<>();
+    @SuppressLint("StaticFieldLeak")
+    private static IMContactManager instance;
+    public static synchronized IMContactManager getInstance() {
+        if (null == instance) {
+            instance = new IMContactManager();
+        }
+        return instance;
+    }
 
     @Override
     public void doOnStart() {
+
     }
-
-    /**
-     * 登陆成功触发
-     * auto自动登陆
-     * */
-    public void onNormalLoginOk(){
-        onLocalLoginOk();
-        onLocalNetOk();
-    }
-
-    /**
-     * 加载本地DB的状态
-     * 不管是离线还是在线登陆，loadFromDb 要运行的
-     */
-    public void onLocalLoginOk(){
-        logger.d("contact#loadAllUserInfo");
-
-        List<DepartmentEntity> deptlist = dbInterface.loadAllDept();
-        logger.d("contact#loadAllDept dbsuccess");
-
-        List<UserEntity> userlist = dbInterface.loadAllUsers();
-        logger.d("contact#loadAllUserInfo dbsuccess");
-
-        for(UserEntity userInfo:userlist){
-            // todo DB的状态不包含拼音的，这个样每次都要加载啊
-            PinYin.getPinYin(userInfo.getMainName(), userInfo.getPinyinElement());
-            userMap.put(userInfo.getPeerId(),userInfo);
-        }
-
-        for(DepartmentEntity deptInfo:deptlist){
-            PinYin.getPinYin(deptInfo.getDepartName(), deptInfo.getPinyinElement());
-            departmentMap.put(deptInfo.getDepartId(),deptInfo);
-        }
-        triggerEvent(UserInfoEvent.USER_INFO_OK);
-    }
-
-    /**
-     * 网络链接成功，登陆之后请求
-     */
-    public void onLocalNetOk(){
-        // 部门信息
-        int deptUpdateTime = dbInterface.getDeptLastTime();
-        reqGetDepartment(deptUpdateTime);
-
-        // 用户信息
-        int updateTime = dbInterface.getUserInfoLastTime();
-        logger.d("contact#loadAllUserInfo req-updateTime:%d",updateTime);
-        reqGetAllUsers(updateTime);
-    }
-
 
     @Override
     public void reset() {
-        userDataReady = false;
+        isContactDataReady = false;
         userMap.clear();
     }
 
+    public void onNormalLoginOk() {
+        logger.i("IMContactManager#onNormalLoginOk");
+        onLocalLoginOk();
+        onRemoteLoginOk();
+    }
 
-    /**
-     * @param event
-     */
+    public void onLocalLoginOk() {
+        logger.d("IMContactManager#onLocalLoginOk");
+        
+        List<DepartmentEntity> deptList = dbInterface.loadAllDept();
+        logger.d("IMContactManager#load all depts from db success");
+
+        List<UserEntity> userList = dbInterface.loadAllUsers();
+        logger.d("IMContactManager#load all users from db success");
+
+        for (UserEntity userInfo : userList) {
+            PinYin.getPinYin(userInfo.getMainName(), userInfo.getPinyinElement());
+            userMap.put(userInfo.getPeerId(), userInfo);
+        }
+
+        for (DepartmentEntity deptInfo : deptList) {
+            PinYin.getPinYin(deptInfo.getDepartName(), deptInfo.getPinyinElement());
+            deptMap.put(deptInfo.getDepartId(), deptInfo);
+        }
+        triggerEvent(UserInfoEvent.USER_INFO_OK);
+        // TODO
+        // triggerEvent(UserInfoEvent.DEPT_INFO_OK);
+    }
+
+    public void onRemoteLoginOk() {
+        logger.i("IMContactManager#onRemoteLoginOk");
+
+        int latestDeptUpdateTime = dbInterface.getDeptLastTime();
+        logger.i("IMContactManager#fetch dept list(latest update time: %d)", latestDeptUpdateTime);
+        fetchAllDepts(latestDeptUpdateTime);
+
+        int latestUserUpdateTime = dbInterface.getUserInfoLastTime();
+        logger.i("IMContactManager#fetch user list(latest update time: %d)", latestUserUpdateTime);
+        fetchAllUsers(latestUserUpdateTime);
+    }
+
     public void triggerEvent(UserInfoEvent event) {
-        //先更新自身的状态
-        if (Objects.requireNonNull(event) == UserInfoEvent.USER_INFO_OK) {
-            userDataReady = true;
+        if (event == UserInfoEvent.USER_INFO_OK) {
+            isContactDataReady = true;
         }
         EventBus.getDefault().postSticky(event);
     }
 
-    /**-----------------------事件驱动---end---------*/
+    private void fetchAllUsers(int latestUserUpdateTime) {
+		int userId = IMLoginManager.getInstance().getLoginId();
 
-    private void reqGetAllUsers(int lastUpdateTime) {
-		logger.i("contact#reqGetAllUsers");
-		int userId = IMLoginManager.instance().getLoginId();
-
-        IMBuddy.IMAllUserReq imAllUserReq  = IMBuddy.IMAllUserReq.newBuilder()
+        IMBuddy.IMAllUserReq imAllUserReq = IMBuddy.IMAllUserReq.newBuilder()
                 .setUserId(userId)
-                .setLatestUpdateTime(lastUpdateTime).build();
+                .setLatestUpdateTime(latestUserUpdateTime)
+                .build();
         int sid = IMBaseDefine.ServiceID.SID_BUDDY_LIST_VALUE;
         int cid = IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_ALL_USER_REQUEST_VALUE;
-        imSocketManager.sendRequest(imAllUserReq,sid,cid);
+        imSocketManager.sendRequest(imAllUserReq, sid, cid);
 	}
-
-    /**
-     * yingmu change id from string to int
-     * @param imAllUserRsp
-     *
-     * 1.请求所有用户的信息,总的版本号version
-     * 2.匹配总的版本号，返回可能存在变更的
-     * 3.选取存在变更的，请求用户详细信息
-     * 4.更新DB，保存globalVersion 以及用户的信息
-     */
-	public void onRepAllUsers(IMBuddy.IMAllUserRsp imAllUserRsp) {
-		logger.i("contact#onRepAllUsers");
+    
+	public void handleFetchAllUsersResp(IMBuddy.IMAllUserRsp imAllUserRsp) {
+		logger.i("IMContactManager#handleFetchAllUsersResp");
         int userId = imAllUserRsp.getUserId();
-        int lastTime = imAllUserRsp.getLatestUpdateTime();
-        // lastTime 需要保存嘛? 不保存了
-
-        int count =  imAllUserRsp.getUserListCount();
-		logger.i("contact#user cnt:%d", count);
-        if(count <=0){
+        int count = imAllUserRsp.getUserListCount();
+        if (count <= 0) {
             return;
         }
 
-		int loginId = IMLoginManager.instance().getLoginId();
-        if(userId != loginId){
-            logger.e("[fatal error] userId not equels loginId ,cause by onRepAllUsers");
-            return ;
+		int loginId = IMLoginManager.getInstance().getLoginId();
+        if (userId != loginId) {
+            logger.e("[fatal error] userId not equels loginId ,cause by handleFetchAllUsersResp");
+            return;
         }
 
-        List<IMBaseDefine.UserInfo> changeList =  imAllUserRsp.getUserListList();
+        List<IMBaseDefine.UserInfo> changeList = imAllUserRsp.getUserListList();
         ArrayList<UserEntity> needDb = new ArrayList<>();
-        for(IMBaseDefine.UserInfo userInfo:changeList){
-            UserEntity entity =  ProtoBuf2JavaBean.getUserEntity(userInfo);
-            userMap.put(entity.getPeerId(),entity);
+        for (IMBaseDefine.UserInfo userInfo : changeList) {
+            UserEntity entity = ProtoBuf2JavaBean.getUserEntity(userInfo);
+            userMap.put(entity.getPeerId(), entity);
             needDb.add(entity);
         }
 
@@ -172,101 +137,82 @@ public class IMContactManager extends IMManager {
         triggerEvent(UserInfoEvent.USER_INFO_UPDATE);
 	}
 
-    public UserEntity findContact(int buddyId){
-        if(buddyId > 0 && userMap.containsKey(buddyId)){
+    public UserEntity findContact(int buddyId) {
+        if (buddyId > 0 && userMap.containsKey(buddyId)) {
             return userMap.get(buddyId);
         }
         return null;
     }
 
-    /**
-     * 请求用户详细信息
-     * @param userIds
-     */
-    public void reqGetDetaillUsers(ArrayList<Integer> userIds){
-        logger.i("contact#contact#reqGetDetaillUsers");
-        if(null == userIds || userIds.size() <=0){
-            logger.i("contact#contact#reqGetDetaillUsers return,cause by null or empty");
+    public void fetchUsersDetail(ArrayList<Integer> userIds) {
+        logger.i("IMContactManager#fetchUsersDetail");
+        if (null == userIds || userIds.isEmpty()) {
+            logger.i("IMContactManager#fetchUsersDetail return, cause by null or empty");
             return;
         }
-        int loginId = IMLoginManager.instance().getLoginId();
-        IMBuddy.IMUsersInfoReq imUsersInfoReq  =  IMBuddy.IMUsersInfoReq.newBuilder()
+        int loginId = IMLoginManager.getInstance().getLoginId();
+        IMBuddy.IMUsersInfoReq imUsersInfoReq = IMBuddy.IMUsersInfoReq.newBuilder()
                 .setUserId(loginId)
                 .addAllUserIdList(userIds)
                 .build();
 
         int sid = IMBaseDefine.ServiceID.SID_BUDDY_LIST_VALUE;
         int cid = IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_USER_INFO_REQUEST_VALUE;
-        imSocketManager.sendRequest(imUsersInfoReq,sid,cid);
+        imSocketManager.sendRequest(imUsersInfoReq, sid, cid);
     }
-
-    /**
-     * 获取用户详细的信息
-     * @param imUsersInfoRsp
-     */
-    public void  onRepDetailUsers(IMBuddy.IMUsersInfoRsp imUsersInfoRsp){
+    
+    public void handleFetchUsersDetailResp(IMBuddy.IMUsersInfoRsp imUsersInfoRsp) {
         int loginId = imUsersInfoRsp.getUserId();
         boolean needEvent = false;
         List<IMBaseDefine.UserInfo> userInfoList = imUsersInfoRsp.getUserInfoListList();
 
-        ArrayList<UserEntity>  dbNeed = new ArrayList<>();
-        for(IMBaseDefine.UserInfo userInfo:userInfoList) {
+        ArrayList<UserEntity> dbNeed = new ArrayList<>();
+        for (IMBaseDefine.UserInfo userInfo : userInfoList) {
             UserEntity userEntity = ProtoBuf2JavaBean.getUserEntity(userInfo);
             int userId = userEntity.getPeerId();
-            if (userMap.containsKey(userId) && userMap.get(userId).equals(userEntity)) {
-                //没有必要通知更新
+            if (userMap.containsKey(userId) && Objects.equals(userMap.get(userId), userEntity)) {
+                logger.i("IMContactManager#fetchUsersDetail#user already exists");
             } else {
                 needEvent = true;
                 userMap.put(userEntity.getPeerId(), userEntity);
                 dbNeed.add(userEntity);
                 if (userInfo.getUserId() == loginId) {
-                    IMLoginManager.instance().setLoginInfo(userEntity);
+                    IMLoginManager.getInstance().setUserEntity(userEntity);
                 }
             }
         }
-        // 负责userMap
-        dbInterface.batchInsertOrUpdateUser(dbNeed);
 
-        // 判断有没有必要进行推送
-        if(needEvent){
+        dbInterface.batchInsertOrUpdateUser(dbNeed);
+        
+        if (needEvent) {
             triggerEvent(UserInfoEvent.USER_INFO_UPDATE);
         }
     }
 
-
-    public DepartmentEntity findDepartment(int deptId){
-         DepartmentEntity entity = departmentMap.get(deptId);
-         return entity;
+    public DepartmentEntity findDepartment(int deptId) {
+        return deptMap.get(deptId);
     }
 
-
-    public  List<DepartmentEntity>  getDepartmentSortedList(){
-        // todo eric efficiency
-        List<DepartmentEntity> departmentList = new ArrayList<>(departmentMap.values());
-        Collections.sort(departmentList, new Comparator<DepartmentEntity>(){
+    public ArrayList<DepartmentEntity> getSortedDeptList() {
+        ArrayList<DepartmentEntity> departmentList = new ArrayList<>(deptMap.values());
+        departmentList.sort(new Comparator<DepartmentEntity>() {
             @Override
             public int compare(DepartmentEntity entity1, DepartmentEntity entity2) {
-
-                if(entity1.getPinyinElement().pinyin==null)
-                {
-                    PinYin.getPinYin(entity1.getDepartName(),entity1.getPinyinElement());
+                if (entity1.getPinyinElement().pinyin == null) {
+                    PinYin.getPinYin(entity1.getDepartName(), entity1.getPinyinElement());
                 }
-                if(entity2.getPinyinElement().pinyin==null)
-                {
-                    PinYin.getPinYin(entity2.getDepartName(),entity2.getPinyinElement());
+                if (entity2.getPinyinElement().pinyin == null) {
+                    PinYin.getPinYin(entity2.getDepartName(), entity2.getPinyinElement());
                 }
                 return entity1.getPinyinElement().pinyin.compareToIgnoreCase(entity2.getPinyinElement().pinyin);
-
             }
         });
         return departmentList;
     }
 
-
-    public  List<UserEntity> getContactSortedList() {
-        // todo eric efficiency
+    public List<UserEntity> getSortedContactList() {
         List<UserEntity> contactList = new ArrayList<>(userMap.values());
-        Collections.sort(contactList, new Comparator<UserEntity>(){
+        contactList.sort(new Comparator<UserEntity>() {
             @Override
             public int compare(UserEntity entity1, UserEntity entity2) {
                 if (entity2.getPinyinElement().pinyin.startsWith("#")) {
@@ -275,13 +221,11 @@ public class IMContactManager extends IMManager {
                     // todo eric guess: latter is > 0
                     return 1;
                 } else {
-                    if(entity1.getPinyinElement().pinyin==null)
-                    {
-                        PinYin.getPinYin(entity1.getMainName(),entity1.getPinyinElement());
+                    if (entity1.getPinyinElement().pinyin == null) {
+                        PinYin.getPinYin(entity1.getMainName(), entity1.getPinyinElement());
                     }
-                    if(entity2.getPinyinElement().pinyin==null)
-                    {
-                        PinYin.getPinYin(entity2.getMainName(),entity2.getPinyinElement());
+                    if (entity2.getPinyinElement().pinyin == null) {
+                        PinYin.getPinYin(entity2.getMainName(), entity2.getPinyinElement());
                     }
                     return entity1.getPinyinElement().pinyin.compareToIgnoreCase(entity2.getPinyinElement().pinyin);
                 }
@@ -291,15 +235,14 @@ public class IMContactManager extends IMManager {
     }
 
 
-    // 通讯录中的部门显示 需要根据优先级
     public List<UserEntity> getDepartmentTabSortedList() {
         // todo eric efficiency
         List<UserEntity> contactList = new ArrayList<>(userMap.values());
-        Collections.sort(contactList, new Comparator<UserEntity>() {
+        contactList.sort(new Comparator<UserEntity>() {
             @Override
             public int compare(UserEntity entity1, UserEntity entity2) {
-                DepartmentEntity dept1 = departmentMap.get(entity1.getDepartmentId());
-                DepartmentEntity dept2 = departmentMap.get(entity2.getDepartmentId());
+                DepartmentEntity dept1 = deptMap.get(entity1.getDepartmentId());
+                DepartmentEntity dept2 = deptMap.get(entity2.getDepartmentId());
 
                 if (entity1.getDepartmentId() == entity2.getDepartmentId()) {
                     // start compare
@@ -309,13 +252,11 @@ public class IMContactManager extends IMManager {
                         // todo eric guess: latter is > 0
                         return 1;
                     } else {
-                        if(entity1.getPinyinElement().pinyin==null)
-                        {
+                        if (entity1.getPinyinElement().pinyin == null) {
                             PinYin.getPinYin(entity1.getMainName(), entity1.getPinyinElement());
                         }
-                        if(entity2.getPinyinElement().pinyin==null)
-                        {
-                            PinYin.getPinYin(entity2.getMainName(),entity2.getPinyinElement());
+                        if (entity2.getPinyinElement().pinyin == null) {
+                            PinYin.getPinYin(entity2.getMainName(), entity2.getPinyinElement());
                         }
                         return entity1.getPinyinElement().pinyin.compareToIgnoreCase(entity2.getPinyinElement().pinyin);
                     }
@@ -328,22 +269,20 @@ public class IMContactManager extends IMManager {
         return contactList;
     }
 
-
-    // 确实要将对比的抽离出来 Collections
-    public  List<UserEntity> getSearchContactList(String key){
-       List<UserEntity> searchList = new ArrayList<>();
-       for(Map.Entry<Integer,UserEntity> entry:userMap.entrySet()){
+    public List<UserEntity> searchUserContact(String key){
+       List<UserEntity> resultList = new ArrayList<>();
+       for (Map.Entry<Integer, UserEntity> entry : userMap.entrySet()) {
            UserEntity user = entry.getValue();
            if (IMUIHelper.handleContactSearch(key, user)) {
-               searchList.add(user);
+               resultList.add(user);
            }
        }
-       return searchList;
+       return resultList;
     }
 
-    public List<DepartmentEntity> getSearchDepartList(String key) {
+    public List<DepartmentEntity> searchDeptContact(String key) {
         List<DepartmentEntity> searchList = new ArrayList<>();
-        for(Map.Entry<Integer,DepartmentEntity> entry:departmentMap.entrySet()){
+        for (Map.Entry<Integer, DepartmentEntity> entry : deptMap.entrySet()) {
             DepartmentEntity dept = entry.getValue();
             if (IMUIHelper.handleDepartmentSearch(key, dept)) {
                 searchList.add(dept);
@@ -351,66 +290,55 @@ public class IMContactManager extends IMManager {
         }
         return searchList;
     }
+    
+    public void fetchAllDepts(int lastDeptUpdateTime) {
+        int userId = IMLoginManager.getInstance().getLoginId();
 
-    /**------------------------部门相关的协议 start------------------------------*/
-
-    // 更新的方式与userInfo一直，根据时间点
-    public void reqGetDepartment(int lastUpdateTime){
-        logger.i("contact#reqGetDepartment");
-        int userId = IMLoginManager.instance().getLoginId();
-
-        IMBuddy.IMDepartmentReq imDepartmentReq  = IMBuddy.IMDepartmentReq.newBuilder()
+        IMBuddy.IMDepartmentReq imDepartmentReq = IMBuddy.IMDepartmentReq.newBuilder()
                 .setUserId(userId)
-                .setLatestUpdateTime(lastUpdateTime).build();
+                .setLatestUpdateTime(lastDeptUpdateTime).build();
         int sid = IMBaseDefine.ServiceID.SID_BUDDY_LIST_VALUE;
         int cid = IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_DEPARTMENT_REQUEST_VALUE;
-        imSocketManager.sendRequest(imDepartmentReq,sid,cid);
+        imSocketManager.sendRequest(imDepartmentReq, sid, cid);
     }
 
-    public void onRepDepartment(IMBuddy.IMDepartmentRsp imDepartmentRsp){
-        logger.i("contact#onRepDepartment");
+    public void handleFetchAllDeptsResp(IMBuddy.IMDepartmentRsp imDepartmentRsp) {
+        logger.i("IMContactManager#handleFetchAllDeptsResp");
         int userId = imDepartmentRsp.getUserId();
-        int lastTime = imDepartmentRsp.getLatestUpdateTime();
+        int latestDeptsUpdateTime = imDepartmentRsp.getLatestUpdateTime();
 
-        int count =  imDepartmentRsp.getDeptListCount();
-        logger.i("contact#department cnt:%d", count);
-        // 如果用户找不到depart 那么部门显示未知
-        if(count <=0){
+        int count = imDepartmentRsp.getDeptListCount();
+        if (count <= 0) {
             return;
         }
 
-        int loginId = IMLoginManager.instance().getLoginId();
-        if(userId != loginId){
-            logger.e("[fatal error] userId not equels loginId ,cause by onRepDepartment");
+        int loginId = IMLoginManager.getInstance().getLoginId();
+        if (userId != loginId) {
+            logger.e("[fatal error] userId not equels loginId ,cause by handleFetchAllDeptsResp");
             return ;
         }
-        List<IMBaseDefine.DepartInfo> changeList =  imDepartmentRsp.getDeptListList();
+        List<IMBaseDefine.DepartInfo> changeList = imDepartmentRsp.getDeptListList();
         ArrayList<DepartmentEntity> needDb = new ArrayList<>();
 
-        for(IMBaseDefine.DepartInfo  departInfo:changeList){
-            DepartmentEntity entity =  ProtoBuf2JavaBean.getDepartEntity(departInfo);
-            departmentMap.put(entity.getDepartId(),entity);
+        for (IMBaseDefine.DepartInfo departInfo : changeList) {
+            DepartmentEntity entity = ProtoBuf2JavaBean.getDepartEntity(departInfo);
+            deptMap.put(entity.getDepartId(), entity);
             needDb.add(entity);
         }
-        // 部门信息更新
         dbInterface.batchInsertOrUpdateDepart(needDb);
         triggerEvent(UserInfoEvent.USER_INFO_UPDATE);
     }
-
-    /**------------------------部门相关的协议 end------------------------------*/
-
-    /**-----------------------实体 get set 定义-----------------------------------*/
 
     public Map<Integer, UserEntity> getUserMap() {
         return userMap;
     }
 
-    public Map<Integer, DepartmentEntity> getDepartmentMap() {
-        return departmentMap;
+    public Map<Integer, DepartmentEntity> getDeptMap() {
+        return deptMap;
     }
 
-    public boolean isUserDataReady() {
-        return userDataReady;
+    public boolean getIsContactDataReady() {
+        return isContactDataReady;
     }
 
 }

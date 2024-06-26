@@ -1,20 +1,13 @@
 package com.lsx.bigtalk.imservice.event;
 
+import java.util.List;
 
 import com.lsx.bigtalk.DB.entity.GroupEntity;
 
-import java.util.List;
 
-/**
- * @author : yingmu on 14-12-30.
- * @email : yingmu@mogujie.com.
- */
 public class GroupEvent {
-
     private GroupEntity groupEntity;
     private Event event;
-
-    /**很多的场景只是关心改变的类型以及change的Ids*/
     private int changeType;
     private List<Integer> changeList;
 
@@ -22,7 +15,7 @@ public class GroupEvent {
         this.event = event;
     }
 
-    public GroupEvent(Event event,GroupEntity groupEntity){
+    public GroupEvent(Event event, GroupEntity groupEntity) {
         this.groupEntity = groupEntity;
         this.event = event;
     }
@@ -44,37 +37,37 @@ public class GroupEvent {
         SHIELD_GROUP_OK,
         SHIELD_GROUP_TIMEOUT,
         SHIELD_GROUP_FAIL
-
-
-    }
-
-    public int getChangeType() {
-        return changeType;
     }
 
     public void setChangeType(int changeType) {
         this.changeType = changeType;
     }
 
-    public List<Integer> getChangeList() {
-        return changeList;
+    public int getChangeType() {
+        return changeType;
     }
 
     public void setChangeList(List<Integer> changeList) {
         this.changeList = changeList;
     }
 
-    public GroupEntity getGroupEntity() {
-        return groupEntity;
+    public List<Integer> getChangeList() {
+        return changeList;
     }
+
     public void setGroupEntity(GroupEntity groupEntity) {
         this.groupEntity = groupEntity;
     }
 
-    public Event getEvent() {
-        return event;
+    public GroupEntity getGroupEntity() {
+        return groupEntity;
     }
+
     public void setEvent(Event event) {
         this.event = event;
+    }
+
+    public Event getEvent() {
+        return event;
     }
 }

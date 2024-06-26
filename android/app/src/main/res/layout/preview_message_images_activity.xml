@@ -24,7 +24,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:scaleType="center"
-            android:src="@drawable/tt_back_btn" />
+            android:src="@drawable/back_btn" />
 
     </RelativeLayout>
 

@@ -3,6 +3,7 @@ package com.lsx.bigtalk.ui.fragment;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,16 +35,12 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 通讯录 （全部、部门）
- */
+
 public class ContactFragment extends MainFragment implements OnTouchingLetterChangedListener {
     private View curView = null;
     private static Handler uiHandler = null;
     private ListView allContactListView;
     private ListView departmentContactListView;
-    private SortSideBar sortSideBar;
-    private TextView dialog;
 
     private ContactAdapter contactAdapter;
     private DeptAdapter departmentAdapter;
@@ -55,14 +52,14 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
     private final IMServiceConnector imServiceConnector = new IMServiceConnector() {
         @Override
         public void onIMServiceConnected() {
-            logger.d("contactUI#onIMServiceConnected");
+            logger.d("ContactFragment#onIMServiceConnected");
 
             imService = imServiceConnector.getIMService();
             if (imService == null) {
                 logger.e("ContactFragment#onIMServiceConnected# imservice is null!!");
                 return;
             }
-            contactMgr = imService.getContactManager();
+            contactMgr = imService.getIMContactManager();
 
             // 初始化视图
             initAdapter();
@@ -77,8 +74,7 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
             }
         }
     };
-
-
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,15 +91,13 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
         imServiceConnector.disconnect(getActivity());
     }
 
-
-    @SuppressLint("HandlerLeak")
     @Override
     protected void initHandler() {
-        uiHandler = new Handler() {
+        uiHandler = new Handler(Looper.getMainLooper()) {
             @Override
-            public void handleMessage(Message msg) {
+            public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
-                if (msg.what == HandlerConstant.HANDLER_CHANGE_CONTACT_TAB) {
+                if (msg.what == HandlerConstant.CONTACT_TAB_CHANGED) {
                     if (null != msg.obj) {
                         curTabIndex = (Integer) msg.obj;
                         if (0 == curTabIndex) {
@@ -126,23 +120,19 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
             return curView;
         }
         curView = inflater.inflate(R.layout.contact_fragment, baseFragmentLayout);
-        initRes();
+        initView();
         return curView;
     }
-
-    /**
-     * @Description 初始化界面资源
-     */
-    private void initRes() {
-        // 设置顶部标题栏
+    
+    private void initView() {
         showTopTabButtonGroup();
         hideAppBar();
 
         super.init(curView);
         showProgressBar();
 
-        sortSideBar = curView.findViewById(R.id.sidrbar);
-        dialog = curView.findViewById(R.id.dialog);
+        SortSideBar sortSideBar = curView.findViewById(R.id.sidrbar);
+        TextView dialog = curView.findViewById(R.id.dialog);
         sortSideBar.setTextView(dialog);
         sortSideBar.setOnTouchingLetterChangedListener(this);
 
@@ -157,8 +147,8 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
     }
 
     private void initAdapter() {
-        contactAdapter = new ContactAdapter(getActivity(),imService);
-        departmentAdapter = new DeptAdapter(getActivity(),imService);
+        contactAdapter = new ContactAdapter(getActivity(), imService);
+        departmentAdapter = new DeptAdapter(getActivity(), imService);
         allContactListView.setAdapter(contactAdapter);
         departmentContactListView.setAdapter(departmentAdapter);
 
@@ -171,7 +161,7 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
     }
 
     public void locateDepartment(int departmentId) {
-        logger.d("department#locateDepartment id:%s", departmentId);
+        logger.d("ContactFragment#locateDepartment id:%s", departmentId);
 
         if (topTabButtonGroup == null) {
             logger.e("department#TopTabButton is null");
@@ -189,9 +179,9 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
         if (imService == null) {
             return;
         }
-        DepartmentEntity department = imService.getContactManager().findDepartment(departmentId);
+        DepartmentEntity department = imService.getIMContactManager().findDepartment(departmentId);
         if (department == null) {
-            logger.e("department#no such id:%s", departmentId);
+            logger.e("ContactFragment#no such id:%s", departmentId);
             return;
         }
 
@@ -214,45 +204,39 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
         });
     }
 
-
-    /**
-     * 刷新单个entity
-     * 很消耗性能
-     */
     private void renderEntityList() {
         hideProgressBar();
         logger.d("contact#renderEntityList");
 
-        if (contactMgr.isUserDataReady() ) {
+        if (contactMgr.getIsContactDataReady()) {
             renderUserList();
             renderDeptList();
         }
-        if (imService.getGroupManager().isGroupReady()) {
+        if (imService.getIMGroupManager().isGroupDataReady()) {
             renderGroupList();
         }
         showTopSearchBarFrameLayout();
     }
 
 
-    private void renderDeptList(){
-        /**---------------------部门数据的渲染------------------------------------------*/
+    private void renderDeptList() {
         List<UserEntity> departmentList = contactMgr.getDepartmentTabSortedList();
         departmentAdapter.putUserList(departmentList);
     }
 
-    private void renderUserList(){
-        List<UserEntity> contactList = contactMgr.getContactSortedList();
+    private void renderUserList() {
+        List<UserEntity> contactList = contactMgr.getSortedContactList();
         // 没有任何的联系人数据
-        if (contactList.size() <= 0) {
+        if (contactList.isEmpty()) {
             return;
         }
         contactAdapter.putUserList(contactList);
     }
 
     private void renderGroupList() {
-        logger.d("group#onGroupReady");
-        List<GroupEntity> originList = imService.getGroupManager().getNormalGroupSortedList();
-        if(originList.size() <= 0){
+        logger.d("ContactFragment#renderGroupList");
+        List<GroupEntity> originList = imService.getIMGroupManager().getNormalGroupSortedList();
+        if (originList.isEmpty()) {
             return;
         }
         contactAdapter.putGroupList(originList);
@@ -270,9 +254,9 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
     public void onTouchingLetterChanged(String s) {
         int position = -1;
         if (0 == curTabIndex) {
-            position =  contactAdapter.getPositionForSection(s.charAt(0));
+            position = contactAdapter.getPositionForSection(s.charAt(0));
         } else {
-            position =  departmentAdapter.getPositionForSection(s.charAt(0));
+            position = departmentAdapter.getPositionForSection(s.charAt(0));
         }
         if (position != -1) {
             getCurListView().setSelection(position);
@@ -310,8 +294,8 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
     }
 
     public void searchDataReady() {
-        if (imService.getContactManager().isUserDataReady() &&
-                imService.getGroupManager().isGroupReady()) {
+        if (imService.getIMContactManager().getIsContactDataReady() &&
+                imService.getIMGroupManager().isGroupDataReady()) {
             showTopSearchBarFrameLayout();
         }
     }

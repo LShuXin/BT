@@ -2,16 +2,13 @@ package com.lsx.bigtalk.ui.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
+
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.utils.CommonUtil;
-import com.lsx.bigtalk.utils.FileUtil;
 import com.lsx.bigtalk.utils.ImageLoaderUtil;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.FailReason;
@@ -19,66 +16,40 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.imageaware.ImageAware;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
-import com.squareup.okhttp.Cache;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-import com.squareup.okhttp.internal.DiskLruCache;
-import com.squareup.okhttp.internal.Util;
 
-import org.apache.commons.io.IOUtils;
 
-import java.io.FilterInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLDecoder;
-
-/**
- * Created by zhujian on 15/2/13.
- */
-public class BubbleImageView extends ImageView {
-    /**
-     * 图片设置相关
-     */
+public class BubbleImageView extends AppCompatImageView {
     protected String imageUrl = null;
     protected boolean isAttachedOnWindow = false;
-    protected int defaultImageRes = R.drawable.tt_message_image_default;
-
-    protected ImageLoaddingCallback imageLoaddingCallback;
+    protected ImageLoadingCallback imageLoadingCallback;
 
 
     public BubbleImageView(Context context) {
         super(context);
     }
 
-    public BubbleImageView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-    }
-
     public BubbleImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    /* 图片设置相关 */
+    public BubbleImageView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+    }
 
-    public void setImageLoaddingCallback(ImageLoaddingCallback callback) {
-        this.imageLoaddingCallback = callback;
+    public void setImageLoadingCallback(ImageLoadingCallback callback) {
+        this.imageLoadingCallback = callback;
     }
 
     public void setImageUrl(final String url) {
         this.imageUrl = url;
         if (isAttachedOnWindow) {
-            final BubbleImageView view = this;
             if (!TextUtils.isEmpty(this.imageUrl)) {
                 ImageAware imageAware = new ImageViewAware(this, false);
                 ImageLoaderUtil.getImageLoaderInstance().displayImage(this.imageUrl, imageAware, new DisplayImageOptions.Builder()
                         .cacheInMemory(true)
                         .cacheOnDisk(true)
-                        .showImageOnLoading(R.drawable.tt_message_image_default)
-                        .showImageOnFail(R.drawable.tt_message_image_error)
+                        .showImageOnLoading(R.drawable.default_message_image2)
+                        .showImageOnFail(R.drawable.message_image_error)
                         .imageScaleType(ImageScaleType.IN_SAMPLE_INT)
                         .bitmapConfig(Bitmap.Config.RGB_565)
                         .delayBeforeLoading(100)
@@ -86,40 +57,39 @@ public class BubbleImageView extends ImageView {
                     @Override
                     public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                         super.onLoadingComplete(imageUri, view, loadedImage);
-                        if (imageLoaddingCallback != null) {
-
+                        if (imageLoadingCallback != null) {
                             String cachePath = ImageLoaderUtil.getImageLoaderInstance().getDiskCache().get(imageUri).getPath();//这个路径其实已不再更新
-                            imageLoaddingCallback.onLoadingComplete(cachePath, view, loadedImage);
+                            imageLoadingCallback.onLoadingComplete(cachePath, view, loadedImage);
                         }
                     }
 
                     @Override
                     public void onLoadingStarted(String imageUri, View view) {
                         super.onLoadingStarted(imageUri, view);
-                        if (imageLoaddingCallback != null) {
-                            imageLoaddingCallback.onLoadingStarted(imageUri, view);
+                        if (imageLoadingCallback != null) {
+                            imageLoadingCallback.onLoadingStarted(imageUri, view);
                         }
                     }
 
                     @Override
                     public void onLoadingCancelled(String imageUri, View view) {
                         super.onLoadingCancelled(imageUri, view);
-                        if (imageLoaddingCallback != null) {
-                            imageLoaddingCallback.onLoadingCanceled(imageUri, view);
+                        if (imageLoadingCallback != null) {
+                            imageLoadingCallback.onLoadingCanceled(imageUri, view);
                         }
                     }
 
                     @Override
                     public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
                         super.onLoadingFailed(imageUri, view, failReason);
-                        if (imageLoaddingCallback != null) {
-                            imageLoaddingCallback.onLoadingFailed(imageUri, view);
+                        if (imageLoadingCallback != null) {
+                            imageLoadingCallback.onLoadingFailed(imageUri, view);
                         }
                     }
                 });
             }
         } else {
-            this.setImageResource(R.drawable.tt_message_image_default);
+            this.setImageResource(R.drawable.default_message_image2);
         }
     }
 
@@ -136,7 +106,7 @@ public class BubbleImageView extends ImageView {
         ImageLoaderUtil.getImageLoaderInstance().cancelDisplayTask(this);
     }
 
-    public interface ImageLoaddingCallback {
+    public interface ImageLoadingCallback {
         void onLoadingComplete(String imageUri, View view, Bitmap loadedImage);
 
         void onLoadingStarted(String imageUri, View view);

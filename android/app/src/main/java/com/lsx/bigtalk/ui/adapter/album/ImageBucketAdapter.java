@@ -1,5 +1,6 @@
-
 package com.lsx.bigtalk.ui.adapter.album;
+
+import java.util.List;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -14,13 +15,7 @@ import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.ui.adapter.album.BitmapCache.ImageCallback;
 import com.lsx.bigtalk.utils.Logger;
 
-import java.util.List;
 
-/**
- * @Description 相册适配器
- * @author Nana
- * @date 2014-5-9
- */
 public class ImageBucketAdapter extends BaseAdapter {
 
     private final Activity act;
@@ -118,11 +113,11 @@ public class ImageBucketAdapter extends BaseAdapter {
                 logger.e("no images in bucket " + item.bucketName);
             }
             if (position == selectedPosition) {
-                holder.albumArrow.setImageResource(R.drawable.tt_album_arrow_sel);
+                holder.albumArrow.setImageResource(R.drawable.album_arrow_active);
                 holder.name.setTextColor(Color.WHITE);
                 holder.count.setTextColor(Color.WHITE);
             } else {
-                holder.albumArrow.setImageResource(R.drawable.tt_album_arrow);
+                holder.albumArrow.setImageResource(R.drawable.album_arrow);
                 holder.name.setTextColor(Color.BLACK);
                 holder.count.setTextColor(R.color.album_list_item_count_color);
             }

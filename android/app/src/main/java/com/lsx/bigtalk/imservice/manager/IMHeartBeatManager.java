@@ -1,96 +1,86 @@
 package com.lsx.bigtalk.imservice.manager;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.PowerManager;
+
+import androidx.annotation.RequiresApi;
 
 import com.lsx.bigtalk.imservice.callback.Packetlistener;
 import com.lsx.bigtalk.protobuf.IMBaseDefine;
 import com.lsx.bigtalk.protobuf.IMOther;
 import com.lsx.bigtalk.utils.Logger;
 
-/**
- * @author : yingmu on 15-3-26.
- * @email : yingmu@mogujie.com.
- * <p>
- * 备注: 之前采用netty(3.6.6-fianl)支持通道检测IdleStateHandler,发现有些机型
- * 手机休眠之后IdleStateHandler 定时器HashedWheelTimer可能存在被系统停止关闭的现象
- * 所以采用AlarmManager 进行心跳的检测
- * <p>
- * 登陆之后就开始触发心跳检测 【仅仅是在线，重练就会取消的】
- * 退出reset 会释放alarmManager 资源
- */
+
+// send heart beat packet every 4 minutes
+// server will disconnect socket connection if there is no package in 5 minutes
 public class IMHeartBeatManager extends IMManager {
-    // 心跳检测4分钟检测一次，并且发送心跳包
-    // 服务端自身存在通道检测，5分钟没有数据会主动断开通道
-
-    private static final IMHeartBeatManager inst = new IMHeartBeatManager();
-
-    public static IMHeartBeatManager instance() {
-        return inst;
-    }
-
     private final Logger logger = Logger.getLogger(IMHeartBeatManager.class);
-    private final int HEARTBEAT_INTERVAL = 4 * 60 * 1000;
     private final String ACTION_SENDING_HEARTBEAT = "com.lsx.bigtalk.imservice.manager.imheartbeatmanager";
     private PendingIntent pendingIntent;
+    @SuppressLint("StaticFieldLeak")
+    private static IMHeartBeatManager instance;
+
+    public static synchronized IMHeartBeatManager getInstance() {
+        if (null == instance) {
+            instance = new IMHeartBeatManager();
+        }
+
+        return instance;
+    }
 
     @Override
     public void doOnStart() {
-    }
 
-    // 登陆成功之后
-    public void onloginNetSuccess() {
-        logger.e("heartbeat#onLocalNetOk");
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(ACTION_SENDING_HEARTBEAT);
-        logger.d("heartbeat#register actions");
-        ctx.registerReceiver(imReceiver, intentFilter);
-        //获取AlarmManager系统服务
-        scheduleHeartbeat(HEARTBEAT_INTERVAL);
     }
 
     @Override
     public void reset() {
-        logger.d("heartbeat#reset begin");
+        logger.d("IMHeartBeatManager#reset");
         try {
             ctx.unregisterReceiver(imReceiver);
             cancelHeartbeatTimer();
-            logger.d("heartbeat#reset stop");
         } catch (Exception e) {
-            logger.e("heartbeat#reset error:%s", e.getCause());
+            logger.e("IMHeartBeatManager#reset error:%s", e.getCause());
         }
     }
 
-    // MsgServerHandler 直接调用
-    public void onMsgServerDisconn() {
-        logger.w("heartbeat#onChannelDisconn");
+    @SuppressLint("InlinedApi")
+    public void onRemoteLoginOk() {
+        logger.e("IMHeartBeatManager#onRemoteLoginOk");
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ACTION_SENDING_HEARTBEAT);
+        ctx.registerReceiver(imReceiver, intentFilter, Context.RECEIVER_NOT_EXPORTED);
+        int HEARTBEAT_INTERVAL = 4 * 60 * 1000;
+        scheduleHeartbeat(HEARTBEAT_INTERVAL);
+    }
+
+    public void handleMsgServerDisconnected() {
+        logger.w("IMHeartBeatManager#onChannelDisconn");
         cancelHeartbeatTimer();
     }
 
     private void cancelHeartbeatTimer() {
-        logger.w("heartbeat#cancelHeartbeatTimer");
+        logger.w("IMHeartBeatManager#cancelHeartbeatTimer");
         if (pendingIntent == null) {
-            logger.w("heartbeat#pi is null");
             return;
         }
         AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
         am.cancel(pendingIntent);
     }
 
-
     private void scheduleHeartbeat(int seconds) {
-        logger.d("heartbeat#scheduleHeartbeat every %d seconds", seconds);
+        logger.d("IMHeartBeatManager#scheduleHeartbeat");
         if (pendingIntent == null) {
-            logger.w("heartbeat#fill in pendingintent");
             Intent intent = new Intent(ACTION_SENDING_HEARTBEAT);
-            pendingIntent = PendingIntent.getBroadcast(ctx, 0, intent, 0);
+            pendingIntent = PendingIntent.getBroadcast(ctx, 0, intent, PendingIntent.FLAG_IMMUTABLE);
             if (pendingIntent == null) {
-                logger.w("heartbeat#scheduleHeartbeat#pi is null");
                 return;
             }
         }
@@ -99,51 +89,46 @@ public class IMHeartBeatManager extends IMManager {
         am.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + seconds, seconds, pendingIntent);
     }
 
-
-    /**
-     * --------------------boradcast-广播相关-----------------------------
-     */
     private final BroadcastReceiver imReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            logger.w("heartbeat#im#receive action:%s", action);
-            if (action.equals(ACTION_SENDING_HEARTBEAT)) {
+            logger.w("IMHeartBeatManager#imReceiver#receive action:%s", action);
+            if (action != null && action.equals(ACTION_SENDING_HEARTBEAT)) {
                 sendHeartBeatPacket();
             }
         }
     };
 
     public void sendHeartBeatPacket() {
-        logger.d("heartbeat#reqSendHeartbeat");
+        logger.d("IMHeartBeatManager#sendHeartBeatPacket");
         PowerManager pm = (PowerManager) ctx.getSystemService(Context.POWER_SERVICE);
-        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "teamtalk_heartBeat_wakelock");
-        wl.acquire();
+        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "bigtalk:heartBeat_wakelock");
+        wl.acquire(10 * 60 * 1000L);
         try {
             final long timeOut = 5 * 1000;
             IMOther.IMHeartBeat imHeartBeat = IMOther.IMHeartBeat.newBuilder()
                     .build();
             int sid = IMBaseDefine.ServiceID.SID_OTHER_VALUE;
             int cid = IMBaseDefine.OtherCmdID.CID_OTHER_HEARTBEAT_VALUE;
-            IMSocketManager.instance().sendRequest(imHeartBeat, sid, cid, new Packetlistener(timeOut) {
+            IMSocketManager.getInstance().sendRequest(imHeartBeat, sid, cid, new Packetlistener(timeOut) {
                 @Override
                 public void onSuccess(Object response) {
-                    logger.d("heartbeat#心跳成功，链接保活");
+                    logger.d("IMHeartBeatManager#send heart beat packet success");
                 }
 
                 @Override
                 public void onFaild() {
-                    logger.w("heartbeat#心跳包发送失败");
-                    IMSocketManager.instance().onMsgServerDisconn();
+                    logger.w("IMHeartBeatManager#send heart beat packet failed");
+                    IMSocketManager.getInstance().handleMsgServerDisconnected();
                 }
 
                 @Override
                 public void onTimeout() {
-                    logger.w("heartbeat#心跳包发送超时");
-                    IMSocketManager.instance().onMsgServerDisconn();
+                    logger.w("IMHeartBeatManager#send heart beat packet timeout");
+                    IMSocketManager.getInstance().handleMsgServerDisconnected();
                 }
             });
-            logger.d("heartbeat#send packet to server");
         } finally {
             wl.release();
         }

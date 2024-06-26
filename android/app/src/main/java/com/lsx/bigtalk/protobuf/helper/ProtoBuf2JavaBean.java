@@ -8,9 +8,9 @@ import com.lsx.bigtalk.DB.entity.MessageEntity;
 import com.lsx.bigtalk.DB.entity.SessionEntity;
 import com.lsx.bigtalk.DB.entity.UserEntity;
 import com.lsx.bigtalk.config.MessageConstant;
-import com.lsx.bigtalk.imservice.entity.AudioMessage;
-import com.lsx.bigtalk.imservice.entity.MsgAnalyzeEngine;
-import com.lsx.bigtalk.imservice.entity.UnreadEntity;
+import com.lsx.bigtalk.imservice.entity.AudioMessageEntity;
+import com.lsx.bigtalk.imservice.callback.MsgAnalyzeEngine;
+import com.lsx.bigtalk.imservice.entity.UnreadMessageEntity;
 import com.lsx.bigtalk.protobuf.IMBaseDefine;
 import com.lsx.bigtalk.protobuf.IMGroup;
 import com.lsx.bigtalk.protobuf.IMMessage;
@@ -180,14 +180,14 @@ public class ProtoBuf2JavaBean {
     }
 
 
-    public static AudioMessage analyzeAudio(IMBaseDefine.MsgInfo msgInfo) throws JSONException, UnsupportedEncodingException {
-        AudioMessage audioMessage = new AudioMessage();
+    public static AudioMessageEntity analyzeAudio(IMBaseDefine.MsgInfo msgInfo) throws JSONException, UnsupportedEncodingException {
+        AudioMessageEntity audioMessage = new AudioMessageEntity();
         audioMessage.setFromId(msgInfo.getFromSessionId());
         audioMessage.setMsgId(msgInfo.getMsgId());
         audioMessage.setMsgType(getJavaMsgType(msgInfo.getMsgType()));
         audioMessage.setStatus(MessageConstant.MSG_SUCCESS);
         audioMessage.setReadStatus(MessageConstant.AUDIO_UNREAD);
-        audioMessage.setDisplayType(DBConstant.SHOW_AUDIO_TYPE);
+        audioMessage.setDisplayType(DBConstant.SHOW_TYPE_AUDIO);
         audioMessage.setCreated(msgInfo.getCreateTime());
         audioMessage.setUpdated(msgInfo.getCreateTime());
 
@@ -195,7 +195,7 @@ public class ProtoBuf2JavaBean {
 
         byte[] audioStream = bytes.toByteArray();
         if(audioStream.length < 4){
-            audioMessage.setReadStatus(MessageConstant.AUDIO_READED);
+            audioMessage.setReadStatus(MessageConstant.AUDIO_READ);
             audioMessage.setAudioPath("");
             audioMessage.setAudiolength(0);
         }else {
@@ -265,12 +265,12 @@ public class ProtoBuf2JavaBean {
         return messageEntity;
     }
 
-    public static UnreadEntity getUnreadEntity(IMBaseDefine.UnreadInfo pbInfo){
-        UnreadEntity unreadEntity = new UnreadEntity();
+    public static UnreadMessageEntity getUnreadEntity(IMBaseDefine.UnreadInfo pbInfo){
+        UnreadMessageEntity unreadEntity = new UnreadMessageEntity();
         unreadEntity.setSessionType(getJavaSessionType(pbInfo.getSessionType()));
         unreadEntity.setLatestMsgData(pbInfo.getLatestMsgData().toString());
         unreadEntity.setPeerId(pbInfo.getSessionId());
-        unreadEntity.setLaststMsgId(pbInfo.getLatestMsgId());
+        unreadEntity.setLatestMsgId(pbInfo.getLatestMsgId());
         unreadEntity.setUnReadCnt(pbInfo.getUnreadCnt());
         unreadEntity.buildSessionKey();
         return unreadEntity;
@@ -330,7 +330,7 @@ public class ProtoBuf2JavaBean {
             case DEPT_STATUS_OK:
                 return DBConstant.DEPT_STATUS_OK;
             case DEPT_STATUS_DELETE:
-                return DBConstant.DEPT_STATUS_DELETE;
+                return DBConstant.DEPT_STATUS_DELETED;
             default:
                 throw new IllegalArgumentException("getDepartStatus is illegal,cause by " +statusType);
         }

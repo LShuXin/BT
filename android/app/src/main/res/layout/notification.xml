@@ -19,7 +19,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
         android:scaleType="centerInside"
-        android:src="@drawable/tt_logo"
+        android:src="@drawable/logo"
 
         />
 
@@ -44,7 +44,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="5dp"
         android:scaleType="centerInside"
-        android:src="@drawable/tt_login_logo"
+        android:src="@drawable/login_page_logo"
 
         />
 

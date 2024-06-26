@@ -13,7 +13,7 @@ import com.lsx.bigtalk.DB.entity.MessageEntity;
 import com.lsx.bigtalk.DB.entity.UserEntity;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.config.MessageConstant;
-import com.lsx.bigtalk.imservice.entity.ImageMessage;
+import com.lsx.bigtalk.imservice.entity.ImageMessageEntity;
 import com.lsx.bigtalk.ui.widget.BubbleImageView;
 import com.lsx.bigtalk.ui.widget.MGProgressbar;
 import com.lsx.bigtalk.utils.FileUtil;
@@ -43,7 +43,7 @@ public class ImageRenderView extends BaseMsgRenderView {
     }
 
     public static ImageRenderView inflater(Context context,ViewGroup viewGroup,boolean isMine){
-        int resource = isMine?R.layout.mine_image_message_item :R.layout.other_image_message_item;
+        int resource = isMine?R.layout.mine_image_message_item :R.layout.others_image_message_item;
         ImageRenderView imageRenderView = (ImageRenderView) LayoutInflater.from(context).inflate(resource, viewGroup, false);
         imageRenderView.setMine(isMine);
         imageRenderView.setParentView(viewGroup);
@@ -99,12 +99,12 @@ public class ImageRenderView extends BaseMsgRenderView {
                 btnImageListener.onMsgFailure();
             }
         });
-        if(FileUtil.isFileExist(((ImageMessage)entity).getPath()))
+        if(FileUtil.isFileExist(((ImageMessageEntity)entity).getPath()))
         {
-            messageImage.setImageUrl("file://"+((ImageMessage)entity).getPath());
+            messageImage.setImageUrl("file://"+((ImageMessageEntity)entity).getPath());
         }
         else{
-            messageImage.setImageUrl(((ImageMessage)entity).getUrl());
+            messageImage.setImageUrl(((ImageMessageEntity)entity).getUrl());
         }
         imageProgress.hideProgress();
     }
@@ -126,10 +126,10 @@ public class ImageRenderView extends BaseMsgRenderView {
     public void msgSending(final MessageEntity entity) {
         if(isMine())
         {
-            if(FileUtil.isFileExist(((ImageMessage)entity).getPath()))
+            if(FileUtil.isFileExist(((ImageMessageEntity)entity).getPath()))
             {
 
-                messageImage.setImageLoaddingCallback(new BubbleImageView.ImageLoaddingCallback() {
+                messageImage.setImageLoadingCallback(new BubbleImageView.ImageLoadingCallback() {
                     @Override
                     public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
 //                        imageProgress.hideProgress();
@@ -150,7 +150,7 @@ public class ImageRenderView extends BaseMsgRenderView {
                         imageProgress.hideProgress();
                     }
                 });
-                messageImage.setImageUrl("file://"+((ImageMessage)entity).getPath());
+                messageImage.setImageUrl("file://"+((ImageMessageEntity)entity).getPath());
             }
             else
             {
@@ -170,7 +170,7 @@ public class ImageRenderView extends BaseMsgRenderView {
     @Override
     public void msgSuccess(final MessageEntity entity) {
         super.msgSuccess(entity);
-        ImageMessage imageMessage = (ImageMessage)entity;
+        ImageMessageEntity imageMessage = (ImageMessageEntity)entity;
         final String imagePath = imageMessage.getPath();
         final String url = imageMessage.getUrl();
         int loadStatus = imageMessage.getLoadStatus();
@@ -182,7 +182,7 @@ public class ImageRenderView extends BaseMsgRenderView {
 
         switch (loadStatus) {
             case MessageConstant.IMAGE_UNLOAD:{
-                messageImage.setImageLoaddingCallback(new BubbleImageView.ImageLoaddingCallback() {
+                messageImage.setImageLoadingCallback(new BubbleImageView.ImageLoadingCallback() {
                     @Override
                     public void onLoadingComplete(String imageUri, View view, Bitmap bitmap) {
                         if(imageLoadListener!=null)
@@ -230,7 +230,7 @@ public class ImageRenderView extends BaseMsgRenderView {
             }break;
 
             case MessageConstant.IMAGE_LOADED_SUCCESS:{
-                messageImage.setImageLoaddingCallback(new BubbleImageView.ImageLoaddingCallback() {
+                messageImage.setImageLoadingCallback(new BubbleImageView.ImageLoadingCallback() {
                     @Override
                     public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                         imageProgress.hideProgress();
@@ -282,7 +282,7 @@ public class ImageRenderView extends BaseMsgRenderView {
             case MessageConstant.IMAGE_LOADED_FAILURE:{
 //                msgStatusError(imageMessage);
 //                getImageProgress().hideProgress();
-                messageImage.setImageLoaddingCallback(new BubbleImageView.ImageLoaddingCallback() {
+                messageImage.setImageLoadingCallback(new BubbleImageView.ImageLoadingCallback() {
                     @Override
                     public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                         getImageProgress().hideProgress();

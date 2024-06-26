@@ -11,11 +11,10 @@ package com.lsx.bigtalk.imservice.event;
  * 然后cancelEventDelivery
  */
 public class PriorityEvent {
-
     public Object object;
     public Event event;
 
-    public enum  Event{
+    public enum Event {
         MSG_RECEIVED_MESSAGE
     }
 }

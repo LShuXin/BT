@@ -19,7 +19,7 @@ import com.lsx.bigtalk.R;
  * @date 2014-4-10
  */
 public abstract class BTBaseActivity extends Activity {
-    protected ViewGroup appBarLayout;
+    protected ViewGroup baseActivity;
     protected LinearLayout appBarRoot;
     protected ViewGroup appBar;
     protected ImageView topLeftBtnImageView;
@@ -37,24 +37,24 @@ public abstract class BTBaseActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        appBarLayout = (ViewGroup) LayoutInflater.from(this).inflate(
-                R.layout.app_bar, null);
-        appBarRoot = appBarLayout.findViewById(R.id.app_bar_root);
-        appBar = appBarLayout.findViewById(R.id.app_bar);
+        baseActivity = (ViewGroup) LayoutInflater.from(this).inflate(
+                R.layout.base_activity, null);
+        appBarRoot = baseActivity.findViewById(R.id.app_bar_root);
+        appBar = baseActivity.findViewById(R.id.app_bar);
 
-        topLeftBtnImageView = appBarLayout.findViewById(R.id.left_btn);
-        topLeftBtnTitleTextView = appBarLayout.findViewById(R.id.left_txt);
+        topLeftBtnImageView = baseActivity.findViewById(R.id.left_btn);
+        topLeftBtnTitleTextView = baseActivity.findViewById(R.id.left_txt);
 
-        topCenterTitleTextView = appBarLayout.findViewById(R.id.base_activity_title);
+        topCenterTitleTextView = baseActivity.findViewById(R.id.base_activity_title);
 
-        topRightBtnImageView = appBarLayout.findViewById(R.id.right_btn);
+        topRightBtnImageView = baseActivity.findViewById(R.id.right_btn);
 
         topCenterTitleTextView.setVisibility(View.GONE);
         topRightBtnImageView.setVisibility(View.GONE);
         topLeftBtnTitleTextView.setVisibility(View.GONE);
         topLeftBtnImageView.setVisibility(View.GONE);
 
-        setContentView(appBarLayout);
+        setContentView(baseActivity);
     }
 
     /**

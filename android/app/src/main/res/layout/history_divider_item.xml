@@ -20,7 +20,7 @@
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/tt_clock_icon" />
+            android:background="@drawable/clock" />
 
         <TextView
             android:layout_width="wrap_content"

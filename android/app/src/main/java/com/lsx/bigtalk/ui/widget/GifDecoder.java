@@ -1,12 +1,5 @@
 package com.lsx.bigtalk.ui.widget;
 
-/**
- * Created by zhujian on 15/3/9.
- */
-
-import android.graphics.Bitmap;
-import android.util.Log;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,9 +8,13 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
 
+import android.graphics.Bitmap;
+import android.util.Log;
+
+
 /**
  * Reads frame data from a GIF image source and decodes it into individual frames
- * for animation purposes. Image data can be read from either and InputStream source
+ * for animation purposes. Image data can be read from either an InputStream source
  * or a byte[].
  *
  * This class is optimized for running animations with the frames, there

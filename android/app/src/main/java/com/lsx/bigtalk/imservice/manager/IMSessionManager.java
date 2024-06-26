@@ -1,6 +1,13 @@
 package com.lsx.bigtalk.imservice.manager;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
+import android.annotation.SuppressLint;
 import android.text.TextUtils;
 
 import com.lsx.bigtalk.DB.DBInterface;
@@ -11,8 +18,8 @@ import com.lsx.bigtalk.DB.entity.SessionEntity;
 import com.lsx.bigtalk.DB.entity.UserEntity;
 import com.lsx.bigtalk.DB.sp.ConfigurationSp;
 import com.lsx.bigtalk.config.DBConstant;
-import com.lsx.bigtalk.imservice.entity.RecentInfo;
-import com.lsx.bigtalk.imservice.entity.UnreadEntity;
+import com.lsx.bigtalk.imservice.SessionInfo;
+import com.lsx.bigtalk.imservice.entity.UnreadMessageEntity;
 import com.lsx.bigtalk.imservice.event.SessionEvent;
 import com.lsx.bigtalk.protobuf.IMBaseDefine;
 import com.lsx.bigtalk.protobuf.IMBuddy;
@@ -21,49 +28,38 @@ import com.lsx.bigtalk.protobuf.helper.Java2ProtoBuf;
 import com.lsx.bigtalk.protobuf.helper.ProtoBuf2JavaBean;
 import com.lsx.bigtalk.utils.Logger;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-
 import de.greenrobot.event.EventBus;
 
-/**
- * app显示首页
- * 最近联系人列表
- */
+
 public class IMSessionManager extends IMManager {
-    private static final IMSessionManager inst = new IMSessionManager();
+    @SuppressLint("StaticFieldLeak")
+    private static IMSessionManager instance;
     private final Logger logger = Logger.getLogger(IMSessionManager.class);
-    private final IMSocketManager imSocketManager = IMSocketManager.instance();
-    private final IMLoginManager imLoginManager = IMLoginManager.instance();
+    private final IMSocketManager imSocketManager = IMSocketManager.getInstance();
+    private final IMLoginManager imLoginManager = IMLoginManager.getInstance();
     private final DBInterface dbInterface = DBInterface.instance();
-    private final IMGroupManager groupManager = IMGroupManager.instance();
+    private final IMGroupManager groupManager = IMGroupManager.getInstance();
     // key = sessionKey -->  sessionType_peerId
     private final Map<String, SessionEntity> sessionMap = new ConcurrentHashMap<>();
-    //SessionManager 状态字段
     private boolean sessionListReady = false;
 
-    public static IMSessionManager instance() {
-        return inst;
+    public static synchronized IMSessionManager getInstance() {
+        if (null == instance) {
+            instance = new IMSessionManager();
+        }
+        return instance;
     }
 
-    private static void sort(List<RecentInfo> data) {
-        Collections.sort(data, new Comparator<RecentInfo>() {
-            public int compare(RecentInfo o1, RecentInfo o2) {
+    private static void sort(List<SessionInfo> data) {
+        data.sort(new Comparator<SessionInfo>() {
+            public int compare(SessionInfo o1, SessionInfo o2) {
                 Integer a = o1.getUpdateTime();
                 Integer b = o2.getUpdateTime();
 
-                boolean isTopA = o1.isTop();
-                boolean isTopB = o2.isTop();
+                boolean isTopA = o1.getIsSpin();
+                boolean isTopB = o2.getIsSpin();
 
                 if (isTopA == isTopB) {
-                    // 升序
-                    //return a.compareTo(b);
                     // 降序
                     return b.compareTo(a);
                 } else {
@@ -73,13 +69,13 @@ public class IMSessionManager extends IMManager {
                         return 1;
                     }
                 }
-
             }
         });
     }
 
     @Override
     public void doOnStart() {
+
     }
 
     @Override
@@ -88,48 +84,38 @@ public class IMSessionManager extends IMManager {
         sessionMap.clear();
     }
 
-    /**
-     * 实现自身的事件驱动
-     *
-     * @param event
-     */
     public void triggerEvent(SessionEvent event) {
-        if (Objects.requireNonNull(event) == SessionEvent.RECENT_SESSION_LIST_SUCCESS) {
+        if (event == SessionEvent.SESSION_LIST_SUCCESS) {
             sessionListReady = true;
         }
         EventBus.getDefault().post(event);
     }
 
     public void onNormalLoginOk() {
-        logger.d("recent#onLogin Successful");
+        logger.d("IMSessionManager#onNormalLoginOk");
         onLocalLoginOk();
         onLocalNetOk();
     }
 
     public void onLocalLoginOk() {
-        logger.i("session#loadFromDb");
+        logger.i("IMSessionManager#onLocalLoginOk load session from db");
         List<SessionEntity> sessionInfoList = dbInterface.loadAllSession();
         for (SessionEntity sessionInfo : sessionInfoList) {
             sessionMap.put(sessionInfo.getSessionKey(), sessionInfo);
         }
 
-        triggerEvent(SessionEvent.RECENT_SESSION_LIST_SUCCESS);
+        triggerEvent(SessionEvent.SESSION_LIST_SUCCESS);
     }
-
-    /**----------------------------分割线--------------------------------*/
 
     public void onLocalNetOk() {
         int latestUpdateTime = dbInterface.getSessionLastTime();
-        logger.d("session#更新时间:%d", latestUpdateTime);
-        reqGetRecentContacts(latestUpdateTime);
+        logger.d("IMSessionManager#onLocalNetOk fetch session from server, latestUpdateTime:%d", latestUpdateTime);
+        fetchRecentSessions(latestUpdateTime);
     }
 
-    /**
-     * 请求最近回话
-     */
-    private void reqGetRecentContacts(int latestUpdateTime) {
-        logger.i("session#reqGetRecentContacts");
-        int loginId = IMLoginManager.instance().getLoginId();
+    private void fetchRecentSessions(int latestUpdateTime) {
+        logger.i("IMSessionManager#fetchRecentSessions latestUpdateTime:%d", latestUpdateTime);
+        int loginId = IMLoginManager.getInstance().getLoginId();
         IMBuddy.IMRecentContactSessionReq recentContactSessionReq = IMBuddy.IMRecentContactSessionReq
                 .newBuilder()
                 .setLatestUpdateTime(latestUpdateTime)
@@ -140,12 +126,6 @@ public class IMSessionManager extends IMManager {
         imSocketManager.sendRequest(recentContactSessionReq, sid, cid);
     }
 
-    /**
-     * 最近回话返回
-     * 与本地的进行merge
-     *
-     * @param recentContactSessionRsp
-     */
     public void onRepRecentContacts(IMBuddy.IMRecentContactSessionRsp recentContactSessionRsp) {
         logger.i("session#onRepRecentContacts");
         int userId = recentContactSessionRsp.getUserId();
@@ -165,33 +145,33 @@ public class IMSessionManager extends IMManager {
 
         //将最新的session信息保存在DB中
         dbInterface.batchInsertOrUpdateSession(needDb);
-        if (needDb.size() > 0) {
-            triggerEvent(SessionEvent.RECENT_SESSION_LIST_UPDATE);
+        if (!needDb.isEmpty()) {
+            triggerEvent(SessionEvent.SESSION_UPDATE);
         }
     }
 
     /**
      * 请求删除会话
      */
-    public void reqRemoveSession(RecentInfo recentInfo) {
+    public void reqRemoveSession(SessionInfo SessionInfo) {
         logger.i("session#reqRemoveSession");
 
         int loginId = imLoginManager.getLoginId();
-        String sessionKey = recentInfo.getSessionKey();
+        String sessionKey = SessionInfo.getSessionKey();
         /**直接本地先删除,清楚未读消息*/
         if (sessionMap.containsKey(sessionKey)) {
             sessionMap.remove(sessionKey);
-            IMUnreadMsgManager.instance().readUnreadSession(sessionKey);
+            IMUnreadMsgManager.getInstance().readUnreadSession(sessionKey);
             dbInterface.deleteSession(sessionKey);
             ConfigurationSp.instance(ctx, loginId).setSessionTop(sessionKey, false);
-            triggerEvent(SessionEvent.RECENT_SESSION_LIST_UPDATE);
+            triggerEvent(SessionEvent.SESSION_UPDATE);
         }
 
         IMBuddy.IMRemoveSessionReq removeSessionReq = IMBuddy.IMRemoveSessionReq
                 .newBuilder()
                 .setUserId(loginId)
-                .setSessionId(recentInfo.getPeerId())
-                .setSessionType(Java2ProtoBuf.getProtoSessionType(recentInfo.getSessionType()))
+                .setSessionId(SessionInfo.getPeerId())
+                .setSessionType(Java2ProtoBuf.getProtoSessionType(SessionInfo.getSessionType()))
                 .build();
         int sid = IMBaseDefine.ServiceID.SID_BUDDY_LIST_VALUE;
         int cid = IMBaseDefine.BuddyListCmdID.CID_BUDDY_LIST_REMOVE_SESSION_REQ_VALUE;
@@ -229,7 +209,7 @@ public class IMSessionManager extends IMManager {
         ArrayList<SessionEntity> needDb = new ArrayList<>(1);
         needDb.add(sessionEntity);
         dbInterface.batchInsertOrUpdateSession(needDb);
-        triggerEvent(SessionEvent.RECENT_SESSION_LIST_UPDATE);
+        triggerEvent(SessionEvent.SESSION_UPDATE);
     }
 
     /**
@@ -259,7 +239,7 @@ public class IMSessionManager extends IMManager {
             if (sessionEntity.getPeerType() == DBConstant.SESSION_TYPE_GROUP) {
                 GroupEntity groupEntity = groupManager.findGroup(peerId);
                 if (groupEntity == null) {
-                    groupManager.reqGroupDetailInfo(peerId);
+                    groupManager.fetchGroupDetailInfo(peerId);
                 }
             }
         } else {
@@ -278,25 +258,25 @@ public class IMSessionManager extends IMManager {
         dbInterface.batchInsertOrUpdateSession(needDb);
 
         sessionMap.put(sessionEntity.getSessionKey(), sessionEntity);
-        triggerEvent(SessionEvent.RECENT_SESSION_LIST_UPDATE);
+        triggerEvent(SessionEvent.SESSION_UPDATE);
     }
 
     public List<SessionEntity> getRecentSessionList() {
-        List<SessionEntity> recentInfoList = new ArrayList<>(sessionMap.values());
-        return recentInfoList;
+        List<SessionEntity> SessionInfoList = new ArrayList<>(sessionMap.values());
+        return SessionInfoList;
     }
 
-    // 获取最近联系人列表，RecentInfo 是sessionEntity unreadEntity user/group 等等实体的封装
+    // 获取最近联系人列表，SessionInfo 是sessionEntity unreadEntity user/group 等等实体的封装
     // todo every time it has to sort, kind of inefficient, change it
-    public List<RecentInfo> getRecentListInfo() {
+    public List<SessionInfo> getRecentListInfo() {
         /**整理topList*/
-        List<RecentInfo> recentSessionList = new ArrayList<>();
-        int loginId = IMLoginManager.instance().getLoginId();
+        List<SessionInfo> recentSessionList = new ArrayList<>();
+        int loginId = IMLoginManager.getInstance().getLoginId();
 
         List<SessionEntity> sessionList = getRecentSessionList();
-        Map<Integer, UserEntity> userMap = IMContactManager.instance().getUserMap();
-        Map<String, UnreadEntity> unreadMsgMap = IMUnreadMsgManager.instance().getUnreadMsgMap();
-        Map<Integer, GroupEntity> groupEntityMap = IMGroupManager.instance().getGroupMap();
+        Map<Integer, UserEntity> userMap = IMContactManager.getInstance().getUserMap();
+        Map<String, UnreadMessageEntity> unreadMsgMap = IMUnreadMsgManager.getInstance().getUnreadMsgMap();
+        Map<Integer, GroupEntity> groupEntityMap = IMGroupManager.getInstance().getGroupMap();
         HashSet<String> topList = ConfigurationSp.instance(ctx, loginId).getSessionTopList();
 
 
@@ -305,12 +285,12 @@ public class IMSessionManager extends IMManager {
             int peerId = recentSession.getPeerId();
             String sessionKey = recentSession.getSessionKey();
 
-            UnreadEntity unreadEntity = unreadMsgMap.get(sessionKey);
+            UnreadMessageEntity unreadEntity = unreadMsgMap.get(sessionKey);
             if (sessionType == DBConstant.SESSION_TYPE_GROUP) {
                 GroupEntity groupEntity = groupEntityMap.get(peerId);
-                RecentInfo recentInfo = new RecentInfo(recentSession, groupEntity, unreadEntity);
+                SessionInfo SessionInfo = new SessionInfo(recentSession, groupEntity, unreadEntity);
                 if (topList != null && topList.contains(sessionKey)) {
-                    recentInfo.setTop(true);
+                    SessionInfo.setIsSpin(true);
                 }
 
                 //谁说的这条信息，只有群组需要，例如 【XXX:您好】
@@ -318,18 +298,18 @@ public class IMSessionManager extends IMManager {
                 UserEntity talkUser = userMap.get(lastFromId);
                 // 用户已经不存在了
                 if (talkUser != null) {
-                    String oriContent = recentInfo.getLatestMsgData();
+                    String oriContent = SessionInfo.getLatestMsgData();
                     String finalContent = talkUser.getMainName() + ": " + oriContent;
-                    recentInfo.setLatestMsgData(finalContent);
+                    SessionInfo.setLatestMsgData(finalContent);
                 }
-                recentSessionList.add(recentInfo);
+                recentSessionList.add(SessionInfo);
             } else if (sessionType == DBConstant.SESSION_TYPE_SINGLE) {
                 UserEntity userEntity = userMap.get(peerId);
-                RecentInfo recentInfo = new RecentInfo(recentSession, userEntity, unreadEntity);
+                SessionInfo SessionInfo = new SessionInfo(recentSession, userEntity, unreadEntity);
                 if (topList != null && topList.contains(sessionKey)) {
-                    recentInfo.setTop(true);
+                    SessionInfo.setIsSpin(true);
                 }
-                recentSessionList.add(recentInfo);
+                recentSessionList.add(SessionInfo);
             }
         }
         sort(recentSessionList);
@@ -358,11 +338,11 @@ public class IMSessionManager extends IMManager {
         int peerId = Integer.parseInt(sessionInfo[1]);
         switch (peerType) {
             case DBConstant.SESSION_TYPE_SINGLE: {
-                peerEntity = IMContactManager.instance().findContact(peerId);
+                peerEntity = IMContactManager.getInstance().findContact(peerId);
             }
             break;
             case DBConstant.SESSION_TYPE_GROUP: {
-                peerEntity = IMGroupManager.instance().findGroup(peerId);
+                peerEntity = IMGroupManager.getInstance().findGroup(peerId);
             }
             break;
             default:

@@ -7,12 +7,12 @@ import android.text.TextUtils;
 
 import com.lsx.bigtalk.DB.sp.SystemConfigSp;
 import com.lsx.bigtalk.config.SysConstant;
-import com.lsx.bigtalk.imservice.entity.ImageMessage;
+import com.lsx.bigtalk.imservice.entity.ImageMessageEntity;
 import com.lsx.bigtalk.imservice.event.MessageEvent;
 import com.lsx.bigtalk.ui.helper.PhotoHelper;
 import com.lsx.bigtalk.utils.FileUtil;
 import com.lsx.bigtalk.utils.Logger;
-import com.lsx.bigtalk.utils.MoGuHttpClient;
+import com.lsx.bigtalk.utils.HttpClient;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,21 +49,21 @@ public class LoadImageService extends IntentService {
      */
     @Override
     protected void onHandleIntent(Intent intent) {
-        ImageMessage messageInfo = (ImageMessage) intent.getSerializableExtra(SysConstant.UPLOAD_IMAGE_INTENT_PARAMS);
+        ImageMessageEntity messageInfo = (ImageMessageEntity) intent.getSerializableExtra(SysConstant.UPLOAD_IMAGE_INTENT_PARAMS);
         String result = null;
         Bitmap bitmap;
         try {
             File file = new File(messageInfo.getPath());
             if (file.exists() && FileUtil.getExtensionName(messageInfo.getPath()).equalsIgnoreCase(".gif")) {
-                MoGuHttpClient httpClient = new MoGuHttpClient();
+                HttpClient httpClient = new HttpClient();
                 SystemConfigSp.instance().init(getApplicationContext());
-                result = httpClient.uploadImage3(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.MSFSSERVER), FileUtil.File2byte(messageInfo.getPath()), messageInfo.getPath());
+                result = httpClient.uploadImage(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.MSFSSERVER), FileUtil.File2byte(messageInfo.getPath()), messageInfo.getPath());
             } else {
                 bitmap = PhotoHelper.revitionImage(messageInfo.getPath());
                 if (null != bitmap) {
-                    MoGuHttpClient httpClient = new MoGuHttpClient();
+                    HttpClient httpClient = new HttpClient();
                     byte[] bytes = PhotoHelper.getBytes(bitmap);
-                    result = httpClient.uploadImage3(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.MSFSSERVER), bytes, messageInfo.getPath());
+                    result = httpClient.uploadImage(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.MSFSSERVER), bytes, messageInfo.getPath());
                 }
             }
 

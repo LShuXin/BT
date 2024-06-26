@@ -1,6 +1,4 @@
 apply plugin: 'java'
-//apply plugin:'application'
-
 
 repositories {
     google()
@@ -10,7 +8,7 @@ repositories {
 
 dependencies {
     implementation 'de.greenrobot:greendao-generator:2.1.0'
-    implementation 'org.freemarker:freemarker:2.3.20'
+    implementation 'org.freemarker:freemarker:2.3.23'
 }
 
 sourceSets {
@@ -23,4 +21,9 @@ sourceSets {
 
 artifacts {
     archives jar
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }

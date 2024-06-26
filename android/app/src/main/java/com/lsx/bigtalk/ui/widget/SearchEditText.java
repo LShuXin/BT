@@ -38,7 +38,7 @@ public class SearchEditText extends EditText implements
         clearWordsImage = getCompoundDrawables()[2]; 
         if (clearWordsImage == null) { 
             clearWordsImage = getResources() 
-                    .getDrawable(R.drawable.tt_delete_bar);
+                    .getDrawable(R.drawable.delete);
         } 
         clearWordsImage.setBounds(0, 0, clearWordsImage.getIntrinsicWidth(), clearWordsImage.getIntrinsicHeight()); 
         setClearIconVisible(false); 

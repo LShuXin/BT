@@ -74,7 +74,7 @@ public class AudioRecordHandler implements Runnable {
                     endTime = System.currentTimeMillis();
                     recordTime = (endTime - startTime) / 1000.0f;
                     if (recordTime >= SysConstant.MAX_SOUND_RECORD_TIME) {
-                        MessageActivity.getUiHandler().sendEmptyMessage(
+                        MessageActivity.getRecordMsgHandler().sendEmptyMessage(
                                 HandlerConstant.RECORD_AUDIO_TOO_LONG);
                         break;
                     }
@@ -125,7 +125,7 @@ public class AudioRecordHandler implements Runnable {
             Message Msg = new Message();
             Msg.what = HandlerConstant.RECEIVE_MAX_VOLUME;
             Msg.obj = max;
-            MessageActivity.getUiHandler().sendMessage(Msg);
+            MessageActivity.getRecordMsgHandler().sendMessage(Msg);
         } catch (Exception e) {
             logger.e(e.getMessage());
         }

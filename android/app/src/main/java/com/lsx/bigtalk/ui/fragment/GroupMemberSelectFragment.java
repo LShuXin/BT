@@ -32,11 +32,11 @@ import com.lsx.bigtalk.imservice.event.GroupEvent;
 import com.lsx.bigtalk.imservice.support.IMServiceConnector;
 import com.lsx.bigtalk.imservice.manager.IMGroupManager;
 import com.lsx.bigtalk.imservice.service.IMService;
-import com.lsx.bigtalk.ui.adapter.GroupSelectAdapter;
+import com.lsx.bigtalk.ui.adapter.GroupMemberSelectAdapter;
 import com.lsx.bigtalk.ui.widget.SearchEditText;
 import com.lsx.bigtalk.ui.widget.SortSideBar;
 import com.lsx.bigtalk.ui.widget.SortSideBar.OnTouchingLetterChangedListener;
-import com.lsx.bigtalk.utils.IMUIHelper;
+import com.lsx.bigtalk.helper.IMUIHelper;
 import com.lsx.bigtalk.utils.Logger;
 
 import java.util.HashSet;
@@ -65,7 +65,7 @@ public class GroupMemberSelectFragment extends MainFragment
      * 1. 需要两种状态:选中的成员List  --》确定之后才会回话页面或者详情
      * 2. 已经被选的状态 -->已经在群中的成员
      * */
-    private GroupSelectAdapter adapter;
+    private GroupMemberSelectAdapter adapter;
     private ListView contactListView;
 
     private SortSideBar sortSideBar;
@@ -128,7 +128,7 @@ public class GroupMemberSelectFragment extends MainFragment
             }break;
 
             case DBConstant.SESSION_TYPE_SINGLE:{
-                int loginId = imService.getLoginManager().getLoginId();
+                int loginId = imService.getIMLoginManager().getLoginId();
                 alreadyListSet.add(loginId);
                 alreadyListSet.add(peerEntity.getPeerId());
             }break;
@@ -144,7 +144,7 @@ public class GroupMemberSelectFragment extends MainFragment
             imService = imServiceConnector.getIMService();
             Intent intent = getActivity().getIntent();
             curSessionKey = intent.getStringExtra(IntentConstant.KEY_SESSION_KEY);
-            peerEntity = imService.getSessionManager().findPeerEntity(curSessionKey);
+            peerEntity = imService.getIMSessionManager().findPeerEntity(curSessionKey);
             /**已经处于选中状态的list*/
             Set<Integer> alreadyList = getAlreadyCheckList();
             initContactList(alreadyList);
@@ -157,13 +157,13 @@ public class GroupMemberSelectFragment extends MainFragment
 
     private void initContactList(final Set<Integer> alreadyList) {
         // 根据拼音排序
-        adapter = new GroupSelectAdapter(getActivity(),imService);
+        adapter = new GroupMemberSelectAdapter(getActivity());
         contactListView.setAdapter(adapter);
 
         contactListView.setOnItemClickListener(adapter);
         contactListView.setOnItemLongClickListener(adapter);
 
-        List<UserEntity> contactList = imService.getContactManager().getContactSortedList();
+        List<UserEntity> contactList = imService.getIMContactManager().getSortedContactList();
         adapter.setAllUserList(contactList);
         adapter.setAlreadyListSet(alreadyList);
     }
@@ -197,12 +197,12 @@ public class GroupMemberSelectFragment extends MainFragment
                 }
 
                 Set<Integer> checkListSet =  adapter.getCheckListSet();
-                IMGroupManager groupMgr = imService.getGroupManager();
+                IMGroupManager groupMgr = imService.getIMGroupManager();
                 //从个人过来的，创建群，默认自己是加入的，对方的sessionId也是加入的
                 //自己与自己对话，也能创建群的，这个时候要判断，群组成员一定要大于2个
                 int sessionType = peerEntity.getType();
                 if (sessionType == DBConstant.SESSION_TYPE_SINGLE) {
-                    int loginId = imService.getLoginManager().getLoginId();
+                    int loginId = imService.getIMLoginManager().getLoginId();
                     logger.d("tempgroup#loginId:%d", loginId);
                     checkListSet.add(loginId);
                     checkListSet.add(peerEntity.getPeerId());
@@ -210,7 +210,7 @@ public class GroupMemberSelectFragment extends MainFragment
                     ShowDialogForTempGroupname(groupMgr, checkListSet);
                 } else if (sessionType == DBConstant.SESSION_TYPE_GROUP) {
                     showProgressBar();
-                    imService.getGroupManager().reqAddGroupMember(peerEntity.getPeerId(),checkListSet);
+                    imService.getIMGroupManager().reqAddGroupMember(peerEntity.getPeerId(),checkListSet);
                 }
             }
 
@@ -233,7 +233,7 @@ public class GroupMemberSelectFragment extends MainFragment
                         String tempGroupName = editText.getText().toString();
                         tempGroupName = tempGroupName.trim();
                         showProgressBar();
-                        groupMgr.reqCreateTempGroup(tempGroupName,memberList);
+                        groupMgr.createTempGroup(tempGroupName, memberList);
                     }
                 });
                 builder.setNegativeButton(getString(R.string.tt_cancel), new DialogInterface.OnClickListener() {

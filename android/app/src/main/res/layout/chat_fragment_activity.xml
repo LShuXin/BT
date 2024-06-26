@@ -4,9 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/contactFragment"
-        android:name="com.lsx.bigtalk.ui.fragment.ChatFragment"
+        android:name="com.lsx.bigtalk.ui.fragment.SessionFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

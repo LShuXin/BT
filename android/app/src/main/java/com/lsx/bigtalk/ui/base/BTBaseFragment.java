@@ -73,7 +73,7 @@ public abstract class BTBaseFragment extends Fragment {
 		topTabButtonGroupLayout = baseFragmentLayout.findViewById(R.id.contactTopBar);
 		topTabButtonGroup = baseFragmentLayout.findViewById(R.id.contact_tile);
 
- 		topSearchBarFrameLayout = baseFragmentLayout.findViewById(R.id.searchbar);
+		topSearchBarFrameLayout = baseFragmentLayout.findViewById(R.id.searchbar);
 		topSearchBarSearchEditText = baseFragmentLayout.findViewById(R.id.chat_title_search);
 
 		// 默认隐藏控件
@@ -256,7 +256,7 @@ public abstract class BTBaseFragment extends Fragment {
 	}
 
 	protected void initSearch() {
-		setTopRightBtnImage(R.drawable.tt_top_search);
+		setTopRightBtnImage(R.drawable.top_search);
 		topRightBtnImageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
