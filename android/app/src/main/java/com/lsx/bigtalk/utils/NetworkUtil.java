@@ -10,11 +10,11 @@ import java.util.Objects;
 
 
 public class NetworkUtil {
-    /** 网络不可用 */
+    /** network - unavailable */
     public static final int NETWORK_NONE = 0;
-    /** 是wifi连接 */
+    /** network - wifi */
     public static final int NETWORK_WIFI = 1;
-    /** 不是wifi连接 */
+    /** network - others */
     public static final int NETWORK_OTHERS = 2;
 
     public static int getNetWorkType(Application application) {
@@ -39,17 +39,17 @@ public class NetworkUtil {
         if (nw == null) {
             return false;
         };
-        NetworkCapabilities actNw = connectivityManager.getNetworkCapabilities(nw);
-        return actNw != null
+        NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(nw);
+        return null != networkCapabilities
             &&
             (
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
                 ||
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
                 ||
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
+                networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
                 ||
-                actNw.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH)
+                networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH)
             );
     }
 

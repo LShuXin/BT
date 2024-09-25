@@ -1,73 +1,196 @@
-obj/local/x86_64/objs/security/base64.o: jni/base64.cpp \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/stdio.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/sys/cdefs.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/sys/cdefs_elf.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/android/api-level.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/sys/types.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/stdint.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/machine/wchar_limits.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/linux/types.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/asm/types.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/asm-generic/types.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/asm-generic/int-ll64.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/asm/bitsperlong.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/asm-generic/bitsperlong.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/linux/posix_types.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/linux/stddef.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/linux/compiler.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/asm/posix_types.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/asm/posix_types_64.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/asm-generic/posix_types.h \
- /opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/sys/sysmacros.h \
- /opt/adt-bundle/ndk/sources/cxx-stl/gnu-libstdc++/4.9/include/iostream \
- /opt/adt-bundle/ndk/sources/cxx-stl/gnu-libstdc++/4.9/include/cassert \
- /opt/adt-bundle/ndk/sources/cxx-stl/gnu-libstdc++/4.9/include/limits \
- /opt/adt-bundle/ndk/sources/cxx-stl/gnu-libstdc++/4.9/include/stdexcept
+./obj/local/x86_64/objs/security/base64.o: jni/base64.cpp \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/stdio.h \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__config \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/iostream \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/ios \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/iosfwd \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/wchar.h \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__locale \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/string \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/string_view \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__string \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/algorithm \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/initializer_list \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cstddef \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/version \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/type_traits \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cstring \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/string.h \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/utility \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__tuple \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cstdint \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/stdint.h \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__debug \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/memory \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/typeinfo \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/exception \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cstdlib \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/stdlib.h \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/new \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/limits \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/iterator \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__functional_base \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/tuple \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/stdexcept \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/atomic \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__threading_support \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/chrono \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/ctime \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/ratio \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/climits \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/limits.h \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/errno.h \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/functional \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/bit \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cstdio \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cwchar \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cwctype \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cctype \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/ctype.h \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/wctype.h \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/mutex \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__mutex_base \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/system_error \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__errc \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cerrno \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/locale.h \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/support/android/locale_bionic.h \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/streambuf \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/istream \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/ostream \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/locale \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cstdarg \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__bsd_locale_fallbacks.h \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/bitset \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__bit_reference \
+  /Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cassert
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/stdio.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/stdio.h:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/sys/cdefs.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__config:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/sys/cdefs_elf.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/iostream:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/android/api-level.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/ios:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/sys/types.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/iosfwd:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/stdint.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/wchar.h:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/machine/wchar_limits.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__locale:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/linux/types.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/string:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/asm/types.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/string_view:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/asm-generic/types.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__string:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/asm-generic/int-ll64.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/algorithm:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/asm/bitsperlong.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/initializer_list:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/asm-generic/bitsperlong.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cstddef:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/linux/posix_types.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/version:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/linux/stddef.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/type_traits:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/linux/compiler.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cstring:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/asm/posix_types.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/string.h:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/asm/posix_types_64.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/utility:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/asm-generic/posix_types.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__tuple:
 
-/opt/adt-bundle/ndk/platforms/android-L/arch-x86_64/usr/include/sys/sysmacros.h:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cstdint:
 
-/opt/adt-bundle/ndk/sources/cxx-stl/gnu-libstdc++/4.9/include/iostream:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/stdint.h:
 
-/opt/adt-bundle/ndk/sources/cxx-stl/gnu-libstdc++/4.9/include/cassert:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__debug:
 
-/opt/adt-bundle/ndk/sources/cxx-stl/gnu-libstdc++/4.9/include/limits:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/memory:
 
-/opt/adt-bundle/ndk/sources/cxx-stl/gnu-libstdc++/4.9/include/stdexcept:
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/typeinfo:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/exception:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cstdlib:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/stdlib.h:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/new:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/limits:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/iterator:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__functional_base:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/tuple:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/stdexcept:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/atomic:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__threading_support:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/chrono:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/ctime:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/ratio:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/climits:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/limits.h:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/errno.h:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/functional:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/bit:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cstdio:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cwchar:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cwctype:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cctype:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/ctype.h:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/wctype.h:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/mutex:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__mutex_base:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/system_error:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__errc:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cerrno:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/locale.h:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/support/android/locale_bionic.h:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/streambuf:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/istream:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/ostream:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/locale:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cstdarg:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__bsd_locale_fallbacks.h:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/bitset:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/__bit_reference:
+
+/Users/apple/Library/Android/sdk/ndk/23.1.7779620/sources/cxx-stl/llvm-libc++/include/cassert:

@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.lsx.bigtalk.utils.CommonUtil;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.logs.Logger;
 
 
 public class EmojiGridViewAdapter extends BaseAdapter {

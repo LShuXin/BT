@@ -1,7 +1,6 @@
 package com.lsx.bigtalk.ui.adapter;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -21,17 +20,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lsx.bigtalk.DB.entity.MessageEntity;
-import com.lsx.bigtalk.DB.entity.UserEntity;
+import com.lsx.bigtalk.AppConstant;
+import com.lsx.bigtalk.storage.db.entity.MessageEntity;
+import com.lsx.bigtalk.storage.db.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.DBConstant;
-import com.lsx.bigtalk.config.IntentConstant;
-import com.lsx.bigtalk.config.MessageConstant;
-import com.lsx.bigtalk.imservice.entity.AudioMessageEntity;
-import com.lsx.bigtalk.imservice.entity.ImageMessageEntity;
-import com.lsx.bigtalk.imservice.entity.RichTextMessageEntity;
-import com.lsx.bigtalk.imservice.entity.TextMessageEntity;
-import com.lsx.bigtalk.imservice.service.IMService;
+
+
+
+import com.lsx.bigtalk.service.entity.AudioMessageEntity;
+import com.lsx.bigtalk.service.entity.ImageMessageEntity;
+import com.lsx.bigtalk.service.entity.RichTextMessageEntity;
+import com.lsx.bigtalk.service.entity.TextMessageEntity;
+import com.lsx.bigtalk.service.service.IMService;
 import com.lsx.bigtalk.ui.activity.PreviewGifActivity;
 import com.lsx.bigtalk.ui.activity.PreviewMessageImagesActivity;
 import com.lsx.bigtalk.ui.activity.PreviewTextActivity;
@@ -51,7 +51,7 @@ import com.lsx.bigtalk.ui.widget.message.TimeRenderView;
 import com.lsx.bigtalk.utils.CommonUtil;
 import com.lsx.bigtalk.utils.DateUtil;
 import com.lsx.bigtalk.utils.FileUtil;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.logs.Logger;
 
 
 public class MessageAdapter extends BaseAdapter {
@@ -87,14 +87,14 @@ public class MessageAdapter extends BaseAdapter {
                 MessageEntity info = (MessageEntity) obj;
                 boolean isMine = info.getFromId() == loginUser.getPeerId();
                 switch (info.getDisplayType()) {
-                    case DBConstant.SHOW_TYPE_AUDIO:
+                    case AppConstant.DBConstant.SHOW_TYPE_AUDIO:
                     {
                         type = isMine
                                 ? RenderType.MESSAGE_TYPE_MINE_AUDIO
                                 : RenderType.MESSAGE_TYPE_OTHER_AUDIO;
                         break;
                     }
-                    case DBConstant.SHOW_TYPE_IMAGE:
+                    case AppConstant.DBConstant.SHOW_TYPE_IMAGE:
                     {
                         ImageMessageEntity imageMessage = (ImageMessageEntity) info;
                         if (CommonUtil.gifCheck(imageMessage.getUrl())) {
@@ -109,7 +109,7 @@ public class MessageAdapter extends BaseAdapter {
 
                         break;
                     }
-                    case DBConstant.SHOW_TYPE_PLAIN_TEXT:
+                    case AppConstant.DBConstant.SHOW_TYPE_PLAIN_TEXT:
                     {
                         if (info.isGIfEmo()) {
                             type = isMine
@@ -123,7 +123,7 @@ public class MessageAdapter extends BaseAdapter {
 
                         break;
                     }
-                    case DBConstant.SHOW_TYPE_RICH_TEXT:
+                    case AppConstant.DBConstant.SHOW_TYPE_RICH_TEXT:
                     default:
                         break;
                 }
@@ -154,7 +154,7 @@ public class MessageAdapter extends BaseAdapter {
     }
 
     public void addItem(final MessageEntity msg) {
-        if (msg.getDisplayType() == DBConstant.MSG_TYPE_SINGLE_TEXT) {
+        if (msg.getDisplayType() == AppConstant.DBConstant.MSG_TYPE_SINGLE_TEXT) {
             msg.setGIfEmo(isMsgGif(msg));
         }
         int nextTime = msg.getCreated();
@@ -173,7 +173,7 @@ public class MessageAdapter extends BaseAdapter {
             msgObjectList.add(in);
         }
 
-        if (msg.getDisplayType() == DBConstant.SHOW_TYPE_RICH_TEXT) {
+        if (msg.getDisplayType() == AppConstant.DBConstant.SHOW_TYPE_RICH_TEXT) {
             RichTextMessageEntity mixMessage = (RichTextMessageEntity) msg;
             msgObjectList.addAll(mixMessage.getMsgList());
         } else {
@@ -226,7 +226,7 @@ public class MessageAdapter extends BaseAdapter {
         int preTime = 0;
         int nextTime;
         for (MessageEntity msg : historyList) {
-            if (msg.getDisplayType() == DBConstant.MSG_TYPE_SINGLE_TEXT) {
+            if (msg.getDisplayType() == AppConstant.DBConstant.MSG_TYPE_SINGLE_TEXT) {
                 msg.setGIfEmo(isMsgGif(msg));
             }
             nextTime = msg.getCreated();
@@ -236,7 +236,7 @@ public class MessageAdapter extends BaseAdapter {
                 chatList.add(in);
             }
             preTime = nextTime;
-            if (msg.getDisplayType() == DBConstant.SHOW_TYPE_RICH_TEXT) {
+            if (msg.getDisplayType() == AppConstant.DBConstant.SHOW_TYPE_RICH_TEXT) {
                 RichTextMessageEntity mixMessage = (RichTextMessageEntity) msg;
                 chatList.addAll(mixMessage.getMsgList());
             } else {
@@ -271,7 +271,7 @@ public class MessageAdapter extends BaseAdapter {
     }
 
     public void updateItemState(int position, final MessageEntity messageEntity) {
-        imService.getDbInterface().insertOrUpdateMessage(messageEntity);
+        imService.getbtDb().insertOrUpdateMessage(messageEntity);
         notifyDataSetChanged();
     }
 
@@ -333,7 +333,7 @@ public class MessageAdapter extends BaseAdapter {
                  * 2. 图片上传成功，但是发送失败。 点击重新发送??
                  */
                 if (FileUtil.isSdCardAvailuable()) {
-                    imageMessage.setStatus(MessageConstant.MSG_SENDING);
+                    imageMessage.setStatus(AppConstant.MessageConstant.MSG_SENDING);
                     if (imService != null) {
                         imService.getIMMessageManager().resendMessage(imageMessage);
                     }
@@ -347,7 +347,7 @@ public class MessageAdapter extends BaseAdapter {
             public void onMsgSuccess() {
                 Intent intent = new Intent(ctx, PreviewMessageImagesActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(IntentConstant.CUR_MESSAGE, imageMessage);
+                bundle.putSerializable(AppConstant.IntentConstant.CUR_MESSAGE, imageMessage);
                 intent.putExtras(bundle);
                 ctx.startActivity(intent);
                 ((Activity) ctx).overridePendingTransition(R.anim.image_right_enter, R.anim.stay_y);
@@ -357,13 +357,13 @@ public class MessageAdapter extends BaseAdapter {
         imageRenderView.setImageLoadListener(new ImageRenderView.ImageLoadListener() {
             @Override
             public void onLoadComplete(String localPath) {
-                imageMessage.setLoadStatus(MessageConstant.IMAGE_LOADED_SUCCESS);
+                imageMessage.setLoadStatus(AppConstant.MessageConstant.IMAGE_LOADED_SUCCESS);
                 updateItemState(imageMessage);
             }
 
             @Override
             public void onLoadFailed() {
-                imageMessage.setLoadStatus(MessageConstant.IMAGE_LOADED_FAILURE);
+                imageMessage.setLoadStatus(AppConstant.MessageConstant.IMAGE_LOADED_FAILURE);
                 updateItemState(imageMessage);
             }
         });
@@ -374,9 +374,9 @@ public class MessageAdapter extends BaseAdapter {
             public boolean onLongClick(View v) {
                 // 创建一个pop对象，然后 分支判断状态，然后显示需要的内容
                 MessageOperatePopup popup = getPopMenu(parent, new OperateItemClickListener(imageMessage, position));
-                boolean bResend = (imageMessage.getStatus() == MessageConstant.MSG_FAILURE)
-                        || (imageMessage.getLoadStatus() == MessageConstant.IMAGE_UNLOAD);
-                popup.show(messageLayout, DBConstant.SHOW_TYPE_IMAGE, bResend, isMine);
+                boolean bResend = (imageMessage.getStatus() == AppConstant.MessageConstant.MSG_FAILURE)
+                        || (imageMessage.getLoadStatus() == AppConstant.MessageConstant.IMAGE_UNLOAD);
+                popup.show(messageLayout, AppConstant.DBConstant.SHOW_TYPE_IMAGE, bResend, isMine);
                 return true;
             }
         });
@@ -385,7 +385,7 @@ public class MessageAdapter extends BaseAdapter {
             @Override
             public void onClick(View arg0) {
                 MessageOperatePopup popup = getPopMenu(parent, new OperateItemClickListener(imageMessage, position));
-                popup.show(messageLayout, DBConstant.SHOW_TYPE_IMAGE, true, isMine);
+                popup.show(messageLayout, AppConstant.DBConstant.SHOW_TYPE_IMAGE, true, isMine);
             }
         });
 
@@ -409,7 +409,7 @@ public class MessageAdapter extends BaseAdapter {
             public void onClick(View arg0) {
                 final String url = imageMessage.getUrl();
                 Intent intent = new Intent(ctx, PreviewGifActivity.class);
-                intent.putExtra(IntentConstant.PREVIEW_TEXT_CONTENT, url);
+                intent.putExtra(AppConstant.IntentConstant.PREVIEW_TEXT_CONTENT, url);
                 ctx.startActivity(intent);
                 ((Activity) ctx).overridePendingTransition(R.anim.image_right_enter, R.anim.stay_y);
             }
@@ -434,8 +434,8 @@ public class MessageAdapter extends BaseAdapter {
                 @Override
                 public boolean onLongClick(View v) {
                     MessageOperatePopup popup = getPopMenu(parent, new OperateItemClickListener(audioMessage, position));
-                    boolean isResend = audioMessage.getStatus() == MessageConstant.MSG_FAILURE;
-                    popup.show(messageLayout, DBConstant.SHOW_TYPE_AUDIO, isResend, isMine);
+                    boolean isResend = audioMessage.getStatus() == AppConstant.MessageConstant.MSG_FAILURE;
+                    popup.show(messageLayout, AppConstant.DBConstant.SHOW_TYPE_AUDIO, isResend, isMine);
                     return true;
                 }
             });
@@ -445,15 +445,15 @@ public class MessageAdapter extends BaseAdapter {
             @Override
             public void onClick(View arg0) {
                 MessageOperatePopup popup = getPopMenu(parent, new OperateItemClickListener(audioMessage, position));
-                popup.show(messageLayout, DBConstant.SHOW_TYPE_AUDIO, true, isMine);
+                popup.show(messageLayout, AppConstant.DBConstant.SHOW_TYPE_AUDIO, true, isMine);
             }
         });
 
         audioRenderView.setBtnImageListener(new AudioRenderView.BtnImageListener() {
             @Override
             public void onClickUnread() {
-                audioMessage.setReadStatus(MessageConstant.AUDIO_READ);
-                imService.getDbInterface().insertOrUpdateMessage(audioMessage);
+                audioMessage.setReadStatus(AppConstant.MessageConstant.AUDIO_READ);
+                imService.getbtDb().insertOrUpdateMessage(audioMessage);
             }
 
             @Override
@@ -481,7 +481,7 @@ public class MessageAdapter extends BaseAdapter {
             @Override
             public void onClick(View arg0) {
                 MessageOperatePopup popup = getPopMenu(viewGroup, new OperateItemClickListener(textMessage, position));
-                popup.show(textView, DBConstant.SHOW_TYPE_PLAIN_TEXT, true, isMine);
+                popup.show(textView, AppConstant.DBConstant.SHOW_TYPE_PLAIN_TEXT, true, isMine);
             }
         });
 
@@ -490,8 +490,8 @@ public class MessageAdapter extends BaseAdapter {
             public boolean onLongClick(View v) {
                 // 弹窗类型
                 MessageOperatePopup popup = getPopMenu(viewGroup, new OperateItemClickListener(textMessage, position));
-                boolean bResend = textMessage.getStatus() == MessageConstant.MSG_FAILURE;
-                popup.show(textView, DBConstant.SHOW_TYPE_PLAIN_TEXT, bResend, isMine);
+                boolean bResend = textMessage.getStatus() == AppConstant.MessageConstant.MSG_FAILURE;
+                popup.show(textView, AppConstant.DBConstant.SHOW_TYPE_PLAIN_TEXT, bResend, isMine);
                 return true;
             }
         });
@@ -506,7 +506,7 @@ public class MessageAdapter extends BaseAdapter {
             @Override
             public void onDoubleClick(View view) {
                 Intent intent = new Intent(ctx, PreviewTextActivity.class);
-                intent.putExtra(IntentConstant.PREVIEW_TEXT_CONTENT, content);
+                intent.putExtra(AppConstant.IntentConstant.PREVIEW_TEXT_CONTENT, content);
                 ctx.startActivity(intent);
             }
         });
@@ -530,7 +530,7 @@ public class MessageAdapter extends BaseAdapter {
             @Override
             public void onClick(View arg0) {
                 MessageOperatePopup popup = getPopMenu(viewGroup, new OperateItemClickListener(textMessage, position));
-                popup.show(imageView, DBConstant.SHOW_TYPE_GIF, true, isMine);
+                popup.show(imageView, AppConstant.DBConstant.SHOW_TYPE_GIF, true, isMine);
             }
         });
 
@@ -538,8 +538,8 @@ public class MessageAdapter extends BaseAdapter {
             @Override
             public boolean onLongClick(View v) {
                 MessageOperatePopup popup = getPopMenu(viewGroup, new OperateItemClickListener(textMessage, position));
-                boolean bResend = textMessage.getStatus() == MessageConstant.MSG_FAILURE;
-                popup.show(imageView, DBConstant.SHOW_TYPE_GIF, bResend, isMine);
+                boolean bResend = textMessage.getStatus() == AppConstant.MessageConstant.MSG_FAILURE;
+                popup.show(imageView, AppConstant.DBConstant.SHOW_TYPE_GIF, bResend, isMine);
 
                 return true;
             }
@@ -550,7 +550,7 @@ public class MessageAdapter extends BaseAdapter {
             public void onClick(View arg0) {
                 final String content = textMessage.getContent();
                 Intent intent = new Intent(ctx, PreviewGifActivity.class);
-                intent.putExtra(IntentConstant.PREVIEW_TEXT_CONTENT, content);
+                intent.putExtra(AppConstant.IntentConstant.PREVIEW_TEXT_CONTENT, content);
                 ctx.startActivity(intent);
                 ((Activity) ctx).overridePendingTransition(R.anim.image_right_enter, R.anim.stay_y);
             }
@@ -664,15 +664,15 @@ public class MessageAdapter extends BaseAdapter {
         @Override
         public void onResendClick() {
             try {
-                if (mType == DBConstant.SHOW_TYPE_AUDIO
-                        || mType == DBConstant.SHOW_TYPE_PLAIN_TEXT) {
+                if (mType == AppConstant.DBConstant.SHOW_TYPE_AUDIO
+                        || mType == AppConstant.DBConstant.SHOW_TYPE_PLAIN_TEXT) {
 
-                    if (mMsgInfo.getDisplayType() == DBConstant.SHOW_TYPE_AUDIO) {
+                    if (mMsgInfo.getDisplayType() == AppConstant.DBConstant.SHOW_TYPE_AUDIO) {
                         if (mMsgInfo.getSendContent().length < 4) {
                             return;
                         }
                     }
-                } else if (mType == DBConstant.SHOW_TYPE_IMAGE) {
+                } else if (mType == AppConstant.DBConstant.SHOW_TYPE_IMAGE) {
                     logger.d("pic#resend");
                     // 之前的状态是什么 上传没有成功继续上传
                     // 上传成功，发送消息
@@ -682,7 +682,7 @@ public class MessageAdapter extends BaseAdapter {
                         return;
                     }
                 }
-                mMsgInfo.setStatus(MessageConstant.MSG_SENDING);
+                mMsgInfo.setStatus(AppConstant.MessageConstant.MSG_SENDING);
                 msgObjectList.remove(mPosition);
                 addItem(mMsgInfo);
                 if (imService != null) {

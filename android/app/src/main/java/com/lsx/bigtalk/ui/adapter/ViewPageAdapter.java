@@ -9,7 +9,7 @@ import android.widget.GridView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.logs.Logger;
 
 
 public class ViewPageAdapter extends PagerAdapter {

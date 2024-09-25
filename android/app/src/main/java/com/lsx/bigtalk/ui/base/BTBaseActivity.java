@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.hjq.toast.Toaster;
 import com.lsx.bigtalk.R;
 
 /**
@@ -26,7 +27,7 @@ public abstract class BTBaseActivity extends Activity {
     protected TextView topLeftBtnTitleTextView;
     protected ImageView topRightBtnImageView;
     protected TextView topCenterTitleTextView;
-    protected float x1, y1, x2, y2 = 0;
+    protected float pointerBegOffsetX, pointerBegOffsetY, pointerEndOffsetX, pointerEndOffsetY = 0;
 
     /**
      * 初始化页面基础布局，初始化对页面基础布局所涉及组件的引用
@@ -120,5 +121,9 @@ public abstract class BTBaseActivity extends Activity {
             return;
         }
         appBar.setBackgroundResource(resId);
+    }
+
+    public void toast(CharSequence text) {
+        Toaster.show(text);
     }
 }

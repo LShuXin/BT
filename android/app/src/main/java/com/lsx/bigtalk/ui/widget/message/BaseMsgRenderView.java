@@ -9,12 +9,13 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.lsx.bigtalk.DB.entity.MessageEntity;
-import com.lsx.bigtalk.DB.entity.UserEntity;
+import com.lsx.bigtalk.AppConstant;
+import com.lsx.bigtalk.storage.db.entity.MessageEntity;
+import com.lsx.bigtalk.storage.db.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.MessageConstant;
-import com.lsx.bigtalk.config.SysConstant;
-import com.lsx.bigtalk.helper.IMUIHelper;
+
+
+import com.lsx.bigtalk.ui.helper.IMUIHelper;
 import com.lsx.bigtalk.ui.widget.IMBaseImageView;
 
 /**
@@ -54,7 +55,7 @@ public abstract class BaseMsgRenderView extends RelativeLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        portrait = findViewById(R.id.user_portrait);
+        portrait = findViewById(R.id.user_avatar);
         messageFailed = findViewById(R.id.message_state_failed);
         loadingProgressBar = findViewById(R.id.progressBar1);
         name = findViewById(R.id.name);
@@ -99,9 +100,9 @@ public abstract class BaseMsgRenderView extends RelativeLayout {
         int msgStatus = messageEntity.getStatus();
 
         //头像设置
-        portrait.setDefaultImageRes(R.drawable.default_user_avatar);
+        portrait.setDefaultImageRes(R.drawable.image_default_user_avatar);
         portrait.setCorner(5);
-        portrait.setAvatarAppend(SysConstant.AVATAR_APPEND_100);
+        portrait.setAvatarAppend(AppConstant.SysConstant.AVATAR_APPEND_100);
         portrait.setImageUrl(avatar);
         // 设定姓名 应该消息都是有的
        if (!isMine) {
@@ -122,13 +123,13 @@ public abstract class BaseMsgRenderView extends RelativeLayout {
         // 设定三种信息的弹窗类型
         // 判定消息的状态 成功还是失败  todo 具体实现放在子类中
         switch (msgStatus) {
-            case MessageConstant.MSG_FAILURE:
+            case AppConstant.MessageConstant.MSG_FAILURE:
                 msgFailure(messageEntity);
                 break;
-            case MessageConstant.MSG_SUCCESS:
+            case AppConstant.MessageConstant.MSG_SUCCESS:
                 msgSuccess(messageEntity);
                 break;
-            case MessageConstant.MSG_SENDING:
+            case AppConstant.MessageConstant.MSG_SENDING:
                 msgSending(messageEntity);
                 break;
             default:

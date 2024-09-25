@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -27,21 +26,17 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-
 import de.greenrobot.event.EventBus;
-
+import com.lsx.bigtalk.AppConstant;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.ui.adapter.album.ImageGridAdapter;
 import com.lsx.bigtalk.ui.adapter.album.ImageGridAdapter.TextCallback;
 import com.lsx.bigtalk.ui.adapter.album.ImageItem;
-import com.lsx.bigtalk.config.IntentConstant;
-import com.lsx.bigtalk.config.SysConstant;
-import com.lsx.bigtalk.imservice.event.ImageSelectEvent;
-import com.lsx.bigtalk.imservice.service.IMService;
-import com.lsx.bigtalk.imservice.support.IMServiceConnector;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.service.event.ImageSelectEvent;
+import com.lsx.bigtalk.service.service.IMService;
+import com.lsx.bigtalk.service.support.IMServiceConnector;
+import com.lsx.bigtalk.logs.Logger;
 
 
 public class ImageGridActivity extends Activity implements OnTouchListener {
@@ -94,12 +89,12 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         imServiceConnector.connect(this);
-        setContentView(R.layout.image_grid_activity);
+        setContentView(R.layout.image_gridview_activity);
         imageGridActivityWeakRef = new WeakReference<>(this);
         name = (String) getIntent().getSerializableExtra(
-                IntentConstant.EXTRA_ALBUM_NAME);
+                AppConstant.IntentConstant.EXTRA_ALBUM_NAME);
         dataList = (List<ImageItem>) getIntent().getSerializableExtra(
-                IntentConstant.EXTRA_IMAGE_LIST);
+                AppConstant.IntentConstant.EXTRA_IMAGE_LIST);
         initView();
         initAdapter();
     }
@@ -192,7 +187,7 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
                     Intent intent = new Intent(ImageGridActivity.this,
                             PreviewActivity.class);
                     startActivityForResult(intent,
-                            SysConstant.IMAGE_PREVIEW_FROM_ALBUM);
+                            AppConstant.SysConstant.IMAGE_PREVIEW_FROM_ALBUM);
                 } else {
                     Toast.makeText(ImageGridActivity.this,
                             R.string.need_choose_images, Toast.LENGTH_SHORT)
@@ -208,7 +203,7 @@ public class ImageGridActivity extends Activity implements OnTouchListener {
             public void handleMessage(@NonNull Message msg) {
                 if (msg.what == 0) {
                     Toast.makeText(ImageGridActivity.this,
-                            "最多选择" + SysConstant.MAX_SELECT_IMAGE_COUNT + "张图片",
+                            "最多选择" + AppConstant.SysConstant.MAX_SELECT_IMAGE_COUNT + "张图片",
                             Toast.LENGTH_LONG).show();
                 }
             }

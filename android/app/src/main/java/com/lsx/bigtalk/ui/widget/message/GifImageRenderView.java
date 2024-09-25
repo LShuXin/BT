@@ -5,10 +5,10 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.lsx.bigtalk.DB.entity.MessageEntity;
-import com.lsx.bigtalk.DB.entity.UserEntity;
+import com.lsx.bigtalk.storage.db.entity.MessageEntity;
+import com.lsx.bigtalk.storage.db.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.imservice.entity.ImageMessageEntity;
+import com.lsx.bigtalk.service.entity.ImageMessageEntity;
 import com.lsx.bigtalk.ui.widget.GifLoadTask;
 import com.lsx.bigtalk.ui.widget.GifView;
 
@@ -23,7 +23,7 @@ public class GifImageRenderView extends  BaseMsgRenderView {
         return messageContent;
     }
     public static GifImageRenderView inflater(Context context,ViewGroup viewGroup,boolean isMine){
-        int resource = isMine? R.layout.mine_gif_image_message_item :R.layout.others_gif_image_message_item;
+        int resource = isMine? R.layout.mine_gif_message_item_view :R.layout.others_gif_message_item_view;
         GifImageRenderView gifRenderView = (GifImageRenderView) LayoutInflater.from(context).inflate(resource, viewGroup, false);
         gifRenderView.setMine(isMine);
         return gifRenderView;

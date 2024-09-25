@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -9,26 +9,27 @@
         android:background="@android:color/white"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <com.lsx.bigtalk.ui.widget.SearchEditText
             android:id="@+id/filter_edit"
             android:layout_width="fill_parent"
             android:layout_height="23dp"
             android:layout_margin="10dp"
-            android:background="@drawable/search_edit_bg"
-            android:drawableLeft="@drawable/search"
+            android:background="@drawable/bg_group_management_edit_text"
+            android:drawableStart="@drawable/ic_search_normal"
             android:drawablePadding="10dp"
-            android:gravity="left|center_vertical"
+            android:gravity="start|center_vertical"
             android:hint="@string/menu_search"
-            android:paddingLeft="4dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="0dp"
             android:singleLine="true"
             android:textColor="@android:color/black"
             android:textColorHint="@color/default_key_color"
             android:textSize="14sp" />
 
         <GridView
-            android:id="@+id/group_manager_grid"
+            android:id="@+id/group_management_gridview"
             android:layout_width="fill_parent"
             android:layout_height="140dp"
             android:layout_marginBottom="5dp"
@@ -41,7 +42,7 @@
             android:paddingLeft="5dp"
             android:stretchMode="columnWidth"
             android:verticalSpacing="3dp" 
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <View
             android:layout_width="fill_parent"
@@ -51,7 +52,7 @@
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@color/contact_list_item_bk" >
+            android:background="@color/contact_list_item_bk">
 
             <ListView
                 android:id="@+id/all_contact_list"
@@ -65,17 +66,17 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
-                android:background="@drawable/head_toast_bg"
+                android:background="@drawable/bg_toast"
                 android:gravity="center"
                 android:textColor="#ffffffff"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 android:visibility="invisible" />
 
             <com.lsx.bigtalk.ui.widget.SortSideBar
-                android:id="@+id/sidrbar"
+                android:id="@+id/side_bar"
                 android:layout_width="30dp"
                 android:layout_height="fill_parent"
-                android:layout_gravity="right|center"
+                android:layout_gravity="end|center"
                 android:layout_marginBottom="95dp"
                 android:layout_marginTop="75dp" />
         </FrameLayout>
@@ -86,7 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:indeterminateDrawable="@drawable/progress_bar"
+        android:indeterminateDrawable="@drawable/selector_progress_bar"
         android:indeterminateDuration="4000"
         android:visibility="gone" />
 

@@ -15,11 +15,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.lsx.bigtalk.AppConstant;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.ui.adapter.album.BitmapCache.ImageCallback;
-import com.lsx.bigtalk.config.SysConstant;
-import com.lsx.bigtalk.ui.activity.PickPhotoActivity;
-import com.lsx.bigtalk.utils.Logger;
+
+import com.lsx.bigtalk.ui.activity.ImagePickerActivity;
+import com.lsx.bigtalk.logs.Logger;
 
 
 public class ImageGridAdapter extends BaseAdapter {
@@ -110,11 +111,11 @@ public class ImageGridAdapter extends BaseAdapter {
         try {
             if (null == convertView) {
                 holder = new Holder();
-                convertView = View.inflate(activity, R.layout.item_image_grid,
+                convertView = View.inflate(activity, R.layout.gridview_image_item_view,
                         null);
                 holder.iv = convertView.findViewById(R.id.image);
                 holder.selected = convertView
-                        .findViewById(R.id.isselected);
+                        .findViewById(R.id.selectIcon);
                 convertView.setTag(holder);
             } else {
                 holder = (Holder) convertView.getTag();
@@ -150,15 +151,15 @@ public class ImageGridAdapter extends BaseAdapter {
                             item.getImagePath(), callback);
                 } else {
                     holder.iv
-                            .setImageResource(R.drawable.default_album_grid_image);
+                            .setImageResource(R.drawable.image_image_placeholder);
                 }
             }
 
             if (item.isSelected()) {
-                holder.selected.setImageResource(R.drawable.album_img_selected);
+                holder.selected.setImageResource(R.drawable.ic_selected);
             } else {
                 holder.selected
-                        .setImageResource(R.drawable.album_img_unselected);
+                        .setImageResource(R.drawable.ic_unselected);
             }
             holder.iv.setOnClickListener(new OnClickListener() {
 
@@ -166,7 +167,7 @@ public class ImageGridAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     String path = dataList.get(position).getImagePath();
                     Bitmap bmp = cache.getCacheBitmap(path, path);
-                    if (null != bmp && bmp == PickPhotoActivity.bimap) {
+                    if (null != bmp && bmp == ImagePickerActivity.bimap) {
                         Toast.makeText(
                                 activity,
                                 activity.getResources().getString(
@@ -174,11 +175,11 @@ public class ImageGridAdapter extends BaseAdapter {
                                 Toast.LENGTH_LONG).show();
                         return;
                     }
-                    if (selectTotal < SysConstant.MAX_SELECT_IMAGE_COUNT) {
+                    if (selectTotal < AppConstant.SysConstant.MAX_SELECT_IMAGE_COUNT) {
                         item.setSelected(!item.isSelected());
                         if (item.isSelected()) {
                             holder.selected
-                                    .setImageResource(R.drawable.album_img_selected);
+                                    .setImageResource(R.drawable.ic_selected);
                             selectTotal++;
                             if (null != textcallback)
                                 textcallback.onListen(selectTotal);
@@ -186,17 +187,17 @@ public class ImageGridAdapter extends BaseAdapter {
 
                         } else if (!item.isSelected()) {
                             holder.selected
-                                    .setImageResource(R.drawable.album_img_unselected);
+                                    .setImageResource(R.drawable.ic_unselected);
                             selectTotal--;
                             if (null != textcallback)
                                 textcallback.onListen(selectTotal);
                             selectedMap.remove(position);
                         }
-                    } else if (selectTotal >= SysConstant.MAX_SELECT_IMAGE_COUNT) {
+                    } else if (selectTotal >= AppConstant.SysConstant.MAX_SELECT_IMAGE_COUNT) {
                         if (item.isSelected()) {
                             item.setSelected(!item.isSelected());
                             holder.selected
-                                    .setImageResource(R.drawable.album_img_unselected);
+                                    .setImageResource(R.drawable.ic_unselected);
                             selectTotal--;
                             selectedMap.remove(position);
                         } else {

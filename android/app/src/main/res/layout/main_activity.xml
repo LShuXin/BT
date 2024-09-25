@@ -2,67 +2,67 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <fragment
-        android:id="@+id/fragment_chat"
+        android:id="@+id/session_fragment"
         class="com.lsx.bigtalk.ui.fragment.SessionFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />
 
     <fragment
-        android:id="@+id/fragment_contact"
+        android:id="@+id/contact_fragment"
         class="com.lsx.bigtalk.ui.fragment.ContactFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />
 
     <fragment
-        android:id="@+id/fragment_internal"
+        android:id="@+id/finder_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         class="com.lsx.bigtalk.ui.fragment.FinderFragment" />
 
     <fragment
-        android:id="@+id/fragment_my"
-        class="com.lsx.bigtalk.ui.fragment.MyFragment"
+        android:id="@+id/mine_fragment"
+        class="com.lsx.bigtalk.ui.fragment.MineFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/tab_bg"
+        android:layout_height="55dp"
+        android:background="@drawable/bg_main_tab"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
         <com.lsx.bigtalk.ui.widget.NaviTabButton
-            android:id="@+id/tabbutton_chat"
+            android:id="@+id/tab_btn_session"
             android:layout_width="0dip"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <com.lsx.bigtalk.ui.widget.NaviTabButton
-            android:id="@+id/tabbutton_contact"
+            android:id="@+id/tab_btn_contact"
             android:layout_width="0dip"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <com.lsx.bigtalk.ui.widget.NaviTabButton
-            android:id="@+id/tabbutton_internal"
+            android:id="@+id/tab_btn_finder"
             android:layout_width="0dip"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <com.lsx.bigtalk.ui.widget.NaviTabButton
-            android:id="@+id/tabbutton_my"
+            android:id="@+id/tab_btn_mine"
             android:layout_width="0dip"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1" />
     </LinearLayout>
 

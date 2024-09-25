@@ -40,7 +40,7 @@ public class WebViewFragment extends MainFragment {
     private void initRes() {
         // 设置顶部标题栏
         setTopCenterTitleTextBold(requireActivity().getString(R.string.main_inner_net));
-		setTopLeftBtnImage(R.drawable.top_back);
+		setTopLeftBtnImage(R.drawable.ic_back);
 		topLeftContainerLayout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
@@ -49,7 +49,7 @@ public class WebViewFragment extends MainFragment {
 		});
 		setTopLeftText(getResources().getString(R.string.top_left_back));
 
-        WebView webView = curView.findViewById(R.id.webView1);
+        WebView webView = curView.findViewById(R.id.sampleWebView);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(url);
         webView.setVerticalScrollBarEnabled(false);

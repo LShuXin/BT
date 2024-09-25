@@ -1,117 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/default_fragment_bk_color"
-    android:orientation="vertical" >
+    android:layout_height="match_parent"
+    android:background="@color/default_bg_color"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/page_item_bg"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        android:background="@drawable/bg_tile_item"
+        android:orientation="vertical">
 
+        <!-- notification setting item -->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_centerInParent="true"
                 android:padding="15dp"
                 android:text="@string/no_disturb"
+                android:textSize="16sp"
                 android:textColor="@android:color/black" />
 
-            <CheckBox
-                android:id="@+id/NotificationNoDisturbCheckbox"
-                android:layout_width="54dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+            <Switch
+                android:id="@+id/notification_no_disturb_switch"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="18dp"
-                android:button="@color/checkbox_background"
-                android:text=""
-                android:visibility="visible" />
+                android:layout_marginEnd="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:thumb="@drawable/switch_thumb"
+                android:track="@drawable/switch_track_selector"
+                android:showText="false"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
         </RelativeLayout>
 
+        <!-- divider -->
         <View
             android:layout_width="fill_parent"
             android:layout_height="0.5dp"
             android:background="@color/default_line_color" />
 
+        <!-- sound setting item -->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_centerInParent="true"
                 android:padding="15dp"
                 android:text="@string/new_msg_notify_got_sound"
+                android:textSize="16sp"
                 android:textColor="@android:color/black" />
 
-            <CheckBox
-                android:id="@+id/notifyGotSoundCheckBox"
-                android:layout_width="54dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+            <Switch
+                android:id="@+id/notify_got_sound_switch"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="18dp"
-                android:button="@color/checkbox_background"
-                android:text=""
-                android:visibility="visible" />
+                android:layout_marginEnd="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:thumb="@drawable/switch_thumb"
+                android:track="@drawable/switch_track_selector"
+                android:showText="false"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
         </RelativeLayout>
 
+        <!-- divider -->
         <View
             android:layout_width="fill_parent"
             android:layout_height="0.5dp"
             android:background="@color/default_line_color" />
 
+        <!-- vibrate setting item -->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_centerInParent="true"
                 android:padding="15dp"
                 android:text="@string/new_msg_notify_got_vibration"
+                android:textSize="16sp"
                 android:textColor="@android:color/black" />
 
-            <CheckBox
-                android:id="@+id/notifyGotVibrationCheckBox"
-                android:layout_width="54dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+            <Switch
+                android:id="@+id/notify_got_vibration_switch"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="18dp"
-                android:button="@color/checkbox_background"
-                android:text=""
-                android:visibility="visible" />
+                android:layout_marginEnd="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:thumb="@drawable/switch_thumb"
+                android:track="@drawable/switch_track_selector"
+                android:showText="false"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
         </RelativeLayout>
+
     </LinearLayout>
 
-
+    <!-- app version -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/page_item_bg"
-        android:gravity="left"
-        android:orientation="vertical" >
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/transparent"
+        android:gravity="bottom|center_horizontal"
+        android:orientation="vertical"
+        android:elevation="0dp"
+        android:paddingBottom="24dp">
 
         <TextView
             android:id="@+id/version"
@@ -119,7 +135,9 @@
             android:layout_height="wrap_content"
             android:padding="15dp"
             android:text="@string/setting_version"
-            android:textColor="@color/message_time_color" />
+            android:textColor="@color/message_time_color"
+            android:textStyle="italic"
+            android:textSize="11sp" />
     </LinearLayout>
 
 </LinearLayout>

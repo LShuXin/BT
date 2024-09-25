@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lsx.bigtalk.ui.widget.message.TextRenderView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/default_bg"
+    android:paddingBottom="20dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="0dp">
+
+    <!-- user avatar on the left -->
+    <com.lsx.bigtalk.ui.widget.IMBaseImageView
+        android:id="@+id/user_avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/image_default_user_avatar" />
+
+    <!-- other components on the right -->
+    <LinearLayout
+        android:id="@+id/content_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/user_avatar"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="60dp"
+        android:layout_toEndOf="@id/user_avatar"
+        android:orientation="vertical">
+
+        <!-- user nickname on the top -->
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/example_nickname"
+            android:textSize="11sp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:orientation="horizontal">
+
+            <!-- text message content -->
+            <TextView
+                android:id="@+id/message_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_others_message_item_normal"
+                android:gravity="start"
+                android:paddingBottom="8dp"
+                android:paddingStart="18dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="6dp"
+                android:text="@string/example_text_message"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                android:textColorLink="@android:color/black" />
+
+            <!-- message failed icon -->
+            <ImageView
+                android:id="@+id/message_state_failed"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center_vertical"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/message_image_desc"
+                android:src="@drawable/ic_msg_failed"
+                android:visibility="gone" />
+
+            <!-- progress -->
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.lsx.bigtalk.ui.widget.message.TextRenderView>

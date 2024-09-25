@@ -1,6 +1,5 @@
 package com.lsx.bigtalk.ui.fragment;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -14,16 +13,17 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.lsx.bigtalk.DB.entity.DepartmentEntity;
-import com.lsx.bigtalk.DB.entity.GroupEntity;
-import com.lsx.bigtalk.DB.entity.UserEntity;
+import com.lsx.bigtalk.AppConstant;
+import com.lsx.bigtalk.storage.db.entity.DepartmentEntity;
+import com.lsx.bigtalk.storage.db.entity.GroupEntity;
+import com.lsx.bigtalk.storage.db.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.HandlerConstant;
-import com.lsx.bigtalk.imservice.event.GroupEvent;
-import com.lsx.bigtalk.imservice.event.UserInfoEvent;
-import com.lsx.bigtalk.imservice.support.IMServiceConnector;
-import com.lsx.bigtalk.imservice.manager.IMContactManager;
-import com.lsx.bigtalk.imservice.service.IMService;
+
+import com.lsx.bigtalk.service.event.GroupEvent;
+import com.lsx.bigtalk.service.event.ContactEvent;
+import com.lsx.bigtalk.service.support.IMServiceConnector;
+import com.lsx.bigtalk.service.manager.IMContactManager;
+import com.lsx.bigtalk.service.service.IMService;
 import com.lsx.bigtalk.ui.adapter.ContactAdapter;
 import com.lsx.bigtalk.ui.adapter.DeptAdapter;
 import com.lsx.bigtalk.ui.widget.SortSideBar;
@@ -97,7 +97,7 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
             @Override
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
-                if (msg.what == HandlerConstant.CONTACT_TAB_CHANGED) {
+                if (msg.what == AppConstant.HandlerConstant.CONTACT_TAB_CHANGED) {
                     if (null != msg.obj) {
                         curTabIndex = (Integer) msg.obj;
                         if (0 == curTabIndex) {
@@ -131,7 +131,7 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
         super.init(curView);
         showProgressBar();
 
-        SortSideBar sortSideBar = curView.findViewById(R.id.sidrbar);
+        SortSideBar sortSideBar = curView.findViewById(R.id.side_bar);
         TextView dialog = curView.findViewById(R.id.dialog);
         sortSideBar.setTextView(dialog);
         sortSideBar.setOnTouchingLetterChangedListener(this);
@@ -282,10 +282,10 @@ public class ContactFragment extends MainFragment implements OnTouchingLetterCha
         }
     }
 
-    public void onEventMainThread(UserInfoEvent event) {
+    public void onEventMainThread(ContactEvent event) {
         switch (event) {
-            case USER_INFO_UPDATE:
-            case USER_INFO_OK:
+            case CONTACT_INFO_UPDATE:
+            case CONTACT_INFO_OK:
                 renderDeptList();
                 renderUserList();
                 searchDataReady();

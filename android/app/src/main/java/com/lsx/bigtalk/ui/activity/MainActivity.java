@@ -1,26 +1,28 @@
 package com.lsx.bigtalk.ui.activity;
 
+import java.util.Objects;
+
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Window;
 
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import de.greenrobot.event.EventBus;
+
+import com.lsx.bigtalk.AppConstant;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.IntentConstant;
-import com.lsx.bigtalk.imservice.event.LoginStatus;
-import com.lsx.bigtalk.imservice.event.UnreadEvent;
-import com.lsx.bigtalk.imservice.service.IMService;
-import com.lsx.bigtalk.imservice.support.IMServiceConnector;
+import com.lsx.bigtalk.service.event.LoginEvent;
+import com.lsx.bigtalk.service.event.UnreadEvent;
+import com.lsx.bigtalk.service.service.IMService;
+import com.lsx.bigtalk.service.support.IMServiceConnector;
 import com.lsx.bigtalk.ui.fragment.SessionFragment;
 import com.lsx.bigtalk.ui.fragment.ContactFragment;
 import com.lsx.bigtalk.ui.widget.NaviTabButton;
-import com.lsx.bigtalk.utils.Logger;
-
-import java.util.Objects;
-
-import de.greenrobot.event.EventBus;
+import com.lsx.bigtalk.logs.Logger;
 
 
 public class MainActivity extends FragmentActivity {
@@ -36,6 +38,7 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public void onServiceDisconnected() {
+
         }
     };
 
@@ -43,15 +46,12 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        logger.d("main_activity#onCreate savedInstanceState: %s", savedInstanceState);
-        // when crash, this will be called, why?
-        if (savedInstanceState != null) {
-            logger.w("main_activity#onCreate crashed and restarted, just exit");
+        logger.d("MainActivity#onCreate savedInstanceState: %s", savedInstanceState);
+        if (null != savedInstanceState) {
             jumpToLoginPage();
             finish();
         }
 
-        // 在这个地方加可能会有问题吧
         EventBus.getDefault().register(this);
         imServiceConnector.connect(this);
 
@@ -65,14 +65,6 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     public void onBackPressed() {
-        //don't let it exit
-        //super.onBackPressed();
-
-        //nonRoot	If false then this only works if the activity is the root of a task; if true it will work for any activity in a task.
-        //document http://developer.android.com/reference/android/app/Activity.html
-
-        //moveTaskToBack(true);
-
         Intent i = new Intent(Intent.ACTION_MAIN);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.addCategory(Intent.CATEGORY_HOME);
@@ -100,7 +92,7 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onDestroy() {
-        logger.d("main_activity#onDestroy");
+        logger.d("MainActivity#onDestroy");
         EventBus.getDefault().unregister(this);
         imServiceConnector.disconnect(this);
         super.onDestroy();
@@ -108,39 +100,39 @@ public class MainActivity extends FragmentActivity {
 
     private void initFragment() {
         mFragments = new Fragment[4];
-        mFragments[0] = getSupportFragmentManager().findFragmentById(R.id.fragment_chat);
-        mFragments[1] = getSupportFragmentManager().findFragmentById(R.id.fragment_contact);
-        mFragments[2] = getSupportFragmentManager().findFragmentById(R.id.fragment_internal);
-        mFragments[3] = getSupportFragmentManager().findFragmentById(R.id.fragment_my);
+        mFragments[0] = getSupportFragmentManager().findFragmentById(R.id.session_fragment);
+        mFragments[1] = getSupportFragmentManager().findFragmentById(R.id.contact_fragment);
+        mFragments[2] = getSupportFragmentManager().findFragmentById(R.id.finder_fragment);
+        mFragments[3] = getSupportFragmentManager().findFragmentById(R.id.mine_fragment);
     }
 
     private void initTab() {
         mTabButtons = new NaviTabButton[4];
 
-        mTabButtons[0] = findViewById(R.id.tabbutton_chat);
-        mTabButtons[1] = findViewById(R.id.tabbutton_contact);
-        mTabButtons[2] = findViewById(R.id.tabbutton_internal);
-        mTabButtons[3] = findViewById(R.id.tabbutton_my);
+        mTabButtons[0] = findViewById(R.id.tab_btn_session);
+        mTabButtons[1] = findViewById(R.id.tab_btn_contact);
+        mTabButtons[2] = findViewById(R.id.tab_btn_finder);
+        mTabButtons[3] = findViewById(R.id.tab_btn_mine);
 
         mTabButtons[0].setTitle(getString(R.string.main_chat));
         mTabButtons[0].setIndex(0);
-        mTabButtons[0].setSelectedImage(getResources().getDrawable(R.drawable.tab_chat_active));
-        mTabButtons[0].setUnselectedImage(getResources().getDrawable(R.drawable.tab_chat_deactive));
+        mTabButtons[0].setSelectedImage(mGetDrawable(R.drawable.ic_tab_item_session_active));
+        mTabButtons[0].setUnselectedImage(mGetDrawable(R.drawable.ic_tab_item_session_inactive));
 
         mTabButtons[1].setTitle(getString(R.string.main_contact));
         mTabButtons[1].setIndex(1);
-        mTabButtons[1].setSelectedImage(getResources().getDrawable(R.drawable.tab_contact_active));
-        mTabButtons[1].setUnselectedImage(getResources().getDrawable(R.drawable.tab_contact_deactive));
+        mTabButtons[1].setSelectedImage(mGetDrawable(R.drawable.ic_tab_item_contact_active));
+        mTabButtons[1].setUnselectedImage(mGetDrawable(R.drawable.ic_tab_item_contact_inactive));
 
         mTabButtons[2].setTitle(getString(R.string.main_inner_net));
         mTabButtons[2].setIndex(2);
-        mTabButtons[2].setSelectedImage(getResources().getDrawable(R.drawable.finder_active));
-        mTabButtons[2].setUnselectedImage(getResources().getDrawable(R.drawable.finder_deactive));
+        mTabButtons[2].setSelectedImage(mGetDrawable(R.drawable.ic_finder_active));
+        mTabButtons[2].setUnselectedImage(mGetDrawable(R.drawable.ic_finder_inactive));
 
         mTabButtons[3].setTitle(getString(R.string.main_me_tab));
         mTabButtons[3].setIndex(3);
-        mTabButtons[3].setSelectedImage(getResources().getDrawable(R.drawable.tab_me_active));
-        mTabButtons[3].setUnselectedImage(getResources().getDrawable(R.drawable.tab_me_deactive));
+        mTabButtons[3].setSelectedImage(mGetDrawable(R.drawable.ic_tab_item_mine_active));
+        mTabButtons[3].setUnselectedImage(mGetDrawable(R.drawable.ic_tab_item_mine_inactive));
     }
 
     public void setFragmentIndicator(int which) {
@@ -160,72 +152,68 @@ public class MainActivity extends FragmentActivity {
 
         mTabButtons[which].setSelectedButton(true);
     }
-
-    /** 会话 tab 未读消息数 */
+    
     public void setUnreadMessageCnt(int unreadCnt) {
         mTabButtons[0].setUnreadNotify(unreadCnt);
     }
-
-    /** 双击聊天 tab 时直接跳转到含有未读消息的会话位置 */
-    public void chatDoubleListener() {
+    
+    public void handleSessionDoubleClick() {
         setFragmentIndicator(0);
         ((SessionFragment) mFragments[0]).scrollToUnreadPosition();
     }
-
-    /**
-     * 如果传入了部门 ID，则直接跳转到联系人页面的对应部门处
-     * */
+    
     private void handleLocateDepartment(Intent intent) {
-        int departmentIdToLocate = intent.getIntExtra(IntentConstant.KEY_LOCATE_DEPARTMENT, -1);
-        if (departmentIdToLocate == -1) {
+        int departmentIdToLocate = intent.getIntExtra(AppConstant.IntentConstant.KEY_LOCATE_DEPARTMENT, -1);
+        if (-1 == departmentIdToLocate) {
             return;
         }
 
-        logger.d("main_activity#handleLocateDepartment department to locate: %d", departmentIdToLocate);
+        logger.d("MainActivity#handleLocateDepartment, department to locate: %d", departmentIdToLocate);
         setFragmentIndicator(1);
         ContactFragment fragment = (ContactFragment) mFragments[1];
-        if (fragment == null) {
-            logger.e("main_activity#handleLocateDepartment department fragment is null");
+        if (null == fragment) {
+            logger.e("MainActivity#handleLocateDepartment, department fragment is null");
             return;
         }
         fragment.locateDepartment(departmentIdToLocate);
     }
 
-    /** EventBus 事件处理 */
     public void onEventMainThread(UnreadEvent event) {
         switch (event.event) {
-            case SESSION_READ_UNREAD_MSG:
-            case UNREAD_MSG_LIST_OK:
+            case SESSION_UNREAD_MSG_READ:
+            case UNREAD_MSG_LISTED:
             case UNREAD_MSG_RECEIVED:
-                showUnreadMessageCount();
+                updateUnreadMessageCount();
                 break;
         }
     }
 
-    /** 更新未读消息数量 */
-    private void showUnreadMessageCount() {
-        if (imService != null) {
-            int unreadNum = imService.getIMUnReadMsgManager().getTotalUnreadCount();
-            mTabButtons[0].setUnreadNotify(unreadNum);
+    private void updateUnreadMessageCount() {
+        if (null != imService) {
+            int unReadNum = imService.getIMUnReadMsgManager().getTotalUnreadCount();
+            mTabButtons[0].setUnreadNotify(unReadNum);
         }
     }
 
-    public void onEventMainThread(LoginStatus event) {
-        if (Objects.requireNonNull(event) == LoginStatus.LOGIN_OUT) {
+    public void onEventMainThread(LoginEvent event) {
+        if (LoginEvent.LOGIN_OUT == Objects.requireNonNull(event)) {
             handleOnLogout();
         }
     }
 
     private void handleOnLogout() {
-        logger.d("main_activity#handleOnLogout");
+        logger.d("MainActivity#handleOnLogout");
         finish();
-        logger.d("main_activity#handleOnLogout killed self, and start login activity");
         jumpToLoginPage();
     }
 
     private void jumpToLoginPage() {
         Intent intent = new Intent(this, LoginActivity.class);
-        intent.putExtra(IntentConstant.KEY_LOGIN_NOT_AUTO, true);
+        intent.putExtra(AppConstant.IntentConstant.KEY_NOT_AUTO_LOGIN, true);
         startActivity(intent);
+    }
+    
+    private Drawable mGetDrawable(int id) {
+        return ResourcesCompat.getDrawable(getResources(), id, getTheme());
     }
 }

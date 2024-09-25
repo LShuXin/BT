@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/ic_radio_disabled"
+        android:state_enabled="false"
+        android:color="#FF0000" />
+    <item
+        android:drawable="@drawable/ic_radio_default"
+        android:state_checked="false"
+        android:color="#00FF00" />
+    <item
+        android:drawable="@drawable/ic_radio_checked"
+        android:state_checked="true"
+        android:color="#0000FF" />
+</selector>

@@ -2,7 +2,6 @@ package com.lsx.bigtalk.ui.adapter.album;
 
 import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.ref.SoftReference;
 import java.nio.file.Files;
@@ -17,8 +16,8 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
-import com.lsx.bigtalk.ui.activity.PickPhotoActivity;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.ui.activity.ImagePickerActivity;
+import com.lsx.bigtalk.logs.Logger;
 
 
 public class BitmapCache extends Activity {
@@ -109,7 +108,7 @@ public class BitmapCache extends Activity {
 
                     }
                     if (null == thumb) {
-                        thumb = PickPhotoActivity.bimap;
+                        thumb = ImagePickerActivity.bimap;
                     }
                     put(path, thumb);
                     final Bitmap bmpToCallback = thumb;

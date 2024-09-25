@@ -10,8 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import com.lsx.bigtalk.AppConstant;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.HandlerConstant;
+
 import com.lsx.bigtalk.ui.fragment.ContactFragment;
 
 public class TopTabButtonGroup extends FrameLayout {
@@ -45,7 +46,7 @@ public class TopTabButtonGroup extends FrameLayout {
         // 加载布局
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.top_tab_button, this);
+        inflater.inflate(R.layout.tab_button_group_view, this);
 
         tabALLBtn = findViewById(R.id.all_btn);
         tabDepartmentBtn = findViewById(R.id.department_btn);
@@ -57,13 +58,13 @@ public class TopTabButtonGroup extends FrameLayout {
             public void onClick(View v) {
                 Handler handler = ContactFragment.getHandler();
                 Message message = handler.obtainMessage();
-                message.what = HandlerConstant.CONTACT_TAB_CHANGED;
+                message.what = AppConstant.HandlerConstant.CONTACT_TAB_CHANGED;
                 message.obj = 1;
                 handler.sendMessage(message);
 
                 setSelTextColor(1);
-                tabDepartmentBtn.setBackgroundResource(R.drawable.contact_top_right_selected);
-                tabALLBtn.setBackgroundResource(R.drawable.contact_top_left_normal);
+                tabDepartmentBtn.setBackgroundResource(R.drawable.bg_tab_right_selected);
+                tabALLBtn.setBackgroundResource(R.drawable.bg_tab_left_normal);
             }
         });
 
@@ -74,13 +75,13 @@ public class TopTabButtonGroup extends FrameLayout {
             public void onClick(View v) {
                 Handler handler = ContactFragment.getHandler();
                 Message message = handler.obtainMessage();
-                message.what=HandlerConstant.CONTACT_TAB_CHANGED;
+                message.what=AppConstant.HandlerConstant.CONTACT_TAB_CHANGED;
                 message.obj = 0;
                 handler.sendMessage(message);
 
                 setSelTextColor(0);
-                tabALLBtn.setBackgroundResource(R.drawable.contact_top_left_selected);
-                tabDepartmentBtn.setBackgroundResource(R.drawable.contact_top_right_normal);
+                tabALLBtn.setBackgroundResource(R.drawable.bg_tab_left_selected);
+                tabDepartmentBtn.setBackgroundResource(R.drawable.bg_tab_right_normal);
             }
         });
 

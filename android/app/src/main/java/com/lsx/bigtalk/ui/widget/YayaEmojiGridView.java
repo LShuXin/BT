@@ -16,9 +16,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import com.lsx.bigtalk.AppConstant;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.ui.adapter.ViewPageAdapter;
-import com.lsx.bigtalk.config.SysConstant;
+
 import com.lsx.bigtalk.ui.adapter.YayaEmojiGridViewAdapter;
 import com.lsx.bigtalk.ui.helper.Emoparser;
 import com.lsx.bigtalk.utils.CommonUtil;
@@ -89,12 +90,12 @@ public class YayaEmojiGridView extends LinearLayout {
 
     private void initFootDots() {
         viewPagerTotalPagesCount = (int) Math.ceil((double) Emoparser.getInstance(context)
-                .getYayaResIdList().length / (SysConstant.yayaEmojiPageSize - 1));
+                .getYayaResIdList().length / (AppConstant.SysConstant.yayaEmojiPageSize - 1));
 
         // need one more position for something in the end
         // TODO
         int mod = Emoparser.getInstance(context).getResIdList().length
-                % (SysConstant.yayaEmojiPageSize - 1);
+                % (AppConstant.SysConstant.yayaEmojiPageSize - 1);
         if (mod == 1) {
             --viewPagerTotalPagesCount;
         }
@@ -114,7 +115,7 @@ public class YayaEmojiGridView extends LinearLayout {
                             CommonUtil.getElementSzie(context) / 2,
                             5,
                             CommonUtil.getElementSzie(context) / 2);
-                    image.setBackgroundResource(R.drawable.default_emo_dots);
+                    image.setBackgroundResource(R.drawable.ic_emoji_dots);
                     image.setEnabled(false);
                     paginationDotsLayout.addView(image, params);
                 }
@@ -190,7 +191,7 @@ public class YayaEmojiGridView extends LinearLayout {
         gridView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int start = index * SysConstant.yayaEmojiPageSize;
+                int start = index * AppConstant.SysConstant.yayaEmojiPageSize;
                 onYayaEmojiGridViewItemClick.onItemClick(position + start, index);
             }
         });
@@ -199,8 +200,8 @@ public class YayaEmojiGridView extends LinearLayout {
 
     private int[] getGridViewData(int index) {
         ++index;
-        int startPos = (index - 1) * SysConstant.yayaEmojiPageSize;
-        int endPos = index * SysConstant.yayaEmojiPageSize - 1;
+        int startPos = (index - 1) * AppConstant.SysConstant.yayaEmojiPageSize;
+        int endPos = index * AppConstant.SysConstant.yayaEmojiPageSize - 1;
 
         if (endPos > Emoparser.getInstance(context).getYayaResIdList().length) {
             endPos = Emoparser.getInstance(context).getYayaResIdList().length - 1;

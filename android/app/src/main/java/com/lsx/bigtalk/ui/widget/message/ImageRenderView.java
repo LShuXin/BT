@@ -9,15 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.lsx.bigtalk.DB.entity.MessageEntity;
-import com.lsx.bigtalk.DB.entity.UserEntity;
+import com.lsx.bigtalk.storage.db.entity.MessageEntity;
+import com.lsx.bigtalk.storage.db.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.MessageConstant;
-import com.lsx.bigtalk.imservice.entity.ImageMessageEntity;
+import com.lsx.bigtalk.service.entity.ImageMessageEntity;
 import com.lsx.bigtalk.ui.widget.BubbleImageView;
-import com.lsx.bigtalk.ui.widget.MGProgressbar;
+import com.lsx.bigtalk.ui.widget.BTProgressbar;
 import com.lsx.bigtalk.utils.FileUtil;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.logs.Logger;
+import com.lsx.bigtalk.AppConstant;
 
 /**
  * @author : yingmu on 15-1-9.
@@ -36,14 +36,14 @@ public class ImageRenderView extends BaseMsgRenderView {
     /**图片消息体*/
     private BubbleImageView messageImage;
     /** 图片状态指示*/
-    private MGProgressbar imageProgress;
+    private BTProgressbar imageProgress;
 
     public ImageRenderView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     public static ImageRenderView inflater(Context context,ViewGroup viewGroup,boolean isMine){
-        int resource = isMine?R.layout.mine_image_message_item :R.layout.others_image_message_item;
+        int resource = isMine?R.layout.mine_image_message_item_view :R.layout.others_image_message_item_view;
         ImageRenderView imageRenderView = (ImageRenderView) LayoutInflater.from(context).inflate(resource, viewGroup, false);
         imageRenderView.setMine(isMine);
         imageRenderView.setParentView(viewGroup);
@@ -55,7 +55,7 @@ public class ImageRenderView extends BaseMsgRenderView {
         super.onFinishInflate();
         messageLayout = findViewById(R.id.message_layout);
         messageImage = findViewById(R.id.message_image);
-        imageProgress = findViewById(R.id.tt_image_progress);
+        imageProgress = findViewById(R.id.image_loading_progress);
         imageProgress.setShowText(false);
     }
 
@@ -181,7 +181,7 @@ public class ImageRenderView extends BaseMsgRenderView {
         }
 
         switch (loadStatus) {
-            case MessageConstant.IMAGE_UNLOAD:{
+            case AppConstant.MessageConstant.IMAGE_UNLOAD:{
                 messageImage.setImageLoadingCallback(new BubbleImageView.ImageLoadingCallback() {
                     @Override
                     public void onLoadingComplete(String imageUri, View view, Bitmap bitmap) {
@@ -225,11 +225,11 @@ public class ImageRenderView extends BaseMsgRenderView {
                 }
             }break;
 
-            case MessageConstant.IMAGE_LOADING:{
+            case AppConstant.MessageConstant.IMAGE_LOADING:{
 
             }break;
 
-            case MessageConstant.IMAGE_LOADED_SUCCESS:{
+            case AppConstant.MessageConstant.IMAGE_LOADED_SUCCESS:{
                 messageImage.setImageLoadingCallback(new BubbleImageView.ImageLoadingCallback() {
                     @Override
                     public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
@@ -279,7 +279,7 @@ public class ImageRenderView extends BaseMsgRenderView {
             }break;
 
             //todo 图像失败了，允许点击之后重新下载
-            case MessageConstant.IMAGE_LOADED_FAILURE:{
+            case AppConstant.MessageConstant.IMAGE_LOADED_FAILURE:{
 //                msgStatusError(imageMessage);
 //                getImageProgress().hideProgress();
                 messageImage.setImageLoadingCallback(new BubbleImageView.ImageLoadingCallback() {
@@ -348,7 +348,7 @@ public class ImageRenderView extends BaseMsgRenderView {
         return messageImage;
     }
 
-    public MGProgressbar getImageProgress() {
+    public BTProgressbar getImageProgress() {
         return imageProgress;
     }
 

@@ -53,7 +53,7 @@ public class SortSideBar extends View {
 
         if (b.length > 0) {
             BitmapDrawable bmpDraw = (BitmapDrawable) getResources().getDrawable(
-                    R.drawable.contact_search);
+                    R.drawable.ic_search_heavy_bold);
             Bitmap bmp = bmpDraw.getBitmap();
             float left = width / 2 - paint.measureText(b[0]) / 2 - 4;
             canvas.drawBitmap(bmp, left, 0, paint);

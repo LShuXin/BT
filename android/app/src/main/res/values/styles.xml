@@ -22,12 +22,14 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
     <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
+
     <style name="displayImage" parent="android:Theme.Translucent.NoTitleBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
@@ -75,8 +77,8 @@
     </style>
 
     <style name="AnimSpeeker" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/speeker_fade_in</item>
-        <item name="android:windowExitAnimation">@anim/speeker_fade_out</item>
+        <item name="android:windowEnterAnimation">@anim/speaker_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/speaker_fade_out</item>
     </style>
 
     <style name="volumeDialogStyle" parent="@android:style/Theme.Dialog">
@@ -85,7 +87,7 @@
     </style>
     
     <style name="imDialog" parent="android:style/Theme.Dialog">
-        <item name="android:windowBackground">@drawable/dialog_bg</item>
+        <item name="android:windowBackground">@drawable/bg_dialog</item>
         <item name="android:background">@null</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>

@@ -160,7 +160,7 @@ public class MGDialog extends Dialog implements View.OnClickListener {
             dialog.getWindow().getAttributes().gravity = Gravity.CENTER;
             // dialog.getWindow().setWindowAnimations(R.style.PopupAnimation);
 
-            dialogLayout = mInflater.inflate(R.layout.dialog_base, null);
+            dialogLayout = mInflater.inflate(R.layout.dialog_base_view, null);
 
             Button okBtn = dialogLayout
                     .findViewById(R.id.imPositiveButton);

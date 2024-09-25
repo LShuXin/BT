@@ -10,9 +10,9 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/top_bar_default_height"
-        android:background="@drawable/appbar_default_bg"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp" >
+        android:background="@drawable/bg_appbar"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
 
         <!-- 左侧返回按钮 + 文案（比如“返回”） -->
         <RelativeLayout
@@ -20,24 +20,26 @@
             android:layout_height="fill_parent"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:id="@+id/top_left_container" >
+            android:id="@+id/top_left_container">
 
             <ImageView
                 android:id="@+id/left_btn"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginRight="6dp"
-                android:scaleType="center"/>
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="2dp"
+                android:layout_alignParentStart="true"
+                android:scaleType="centerInside" />
 
             <TextView
                 android:id="@+id/left_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_toRightOf="@id/left_btn"
+                android:layout_toEndOf="@id/left_btn"
                 android:gravity="center_vertical"
                 android:textColor="@color/default_title_color"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
         </RelativeLayout>
 
         <!-- 导航栏中间部分，title/搜索框 -->
@@ -45,7 +47,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center" >
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/base_fragment_title"
@@ -63,16 +65,17 @@
             <com.lsx.bigtalk.ui.widget.SearchEditText
                 android:id="@+id/chat_title_search"
                 android:layout_width="fill_parent"
-                android:layout_height="30dp"
+                android:layout_height="32dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/top_search_bg"
-                android:drawableLeft="@drawable/search"
-                android:drawablePadding="10dp"
-                android:gravity="left|center_vertical"
-                android:hint="搜索联系人，部门，会话，群"
-                android:paddingLeft="10dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="8dp"
+                android:background="#dcdde0"
+                android:drawableStart="@drawable/ic_search_normal"
+                android:drawablePadding="0dp"
+                android:gravity="start|center_vertical"
+                android:hint="@string/search_hint"
+                android:paddingStart="10dp"
+                android:paddingEnd="0dp"
                 android:singleLine="true"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/default_key_color"
@@ -86,7 +89,7 @@
             android:layout_height="50dp"
             android:layout_gravity="right|center_vertical"
             android:scaleType="center"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/right_txt"
@@ -97,15 +100,12 @@
             android:textSize="14sp" />
     </FrameLayout>
 
-
-
-
     <!-- 联系人界面导航栏中的 tab -->
 	<FrameLayout
         android:id="@+id/contactTopBar"
         android:layout_width="match_parent"
         android:layout_height="39dp"
-        android:background="@drawable/appbar_default_bg"
+        android:background="@drawable/bg_appbar"
         android:visibility="gone">
 
     	<com.lsx.bigtalk.ui.widget.TopTabButtonGroup
@@ -116,17 +116,13 @@
 	        android:clickable="true" />
     </FrameLayout>	
 
-
-
-
-
     <!-- 搜索页导航栏中的搜索框 -->
     <FrameLayout
         android:id="@+id/searchbar"
         android:layout_width="match_parent"
-        android:layout_height="43dp"
+        android:layout_height="40dp"
         android:background="@android:color/white"
-        android:padding="8dp"
+        android:padding="2dp"
         android:visibility="gone">
 
         <com.lsx.bigtalk.ui.widget.DrawableCenterEditText
@@ -134,9 +130,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/top_search_bg"
-            android:drawableLeft="@drawable/top_search"
-            android:drawablePadding="9dp"
+            android:background="#dcdde0"
+            android:drawableStart="@drawable/ic_search_bold"
+            android:drawablePadding="0dp"
             android:ellipsize="end"
             android:hint="@string/menu_search"
             android:gravity="center_vertical"
@@ -146,14 +142,10 @@
         
     </FrameLayout>
 
-
-
-
-
     <!-- 导航栏底部横线 -->
 	<View
-           	android:layout_width="fill_parent"
-           	android:layout_height="0.5dp"
-           	android:paddingBottom="0dp"
-           	android:background="@drawable/divide_line" />
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:paddingBottom="0dp"
+        android:background="@drawable/bg_horizontal_divider" />
 </LinearLayout>

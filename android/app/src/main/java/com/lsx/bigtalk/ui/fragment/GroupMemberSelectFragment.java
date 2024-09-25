@@ -22,22 +22,23 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.lsx.bigtalk.DB.entity.GroupEntity;
-import com.lsx.bigtalk.DB.entity.PeerEntity;
-import com.lsx.bigtalk.DB.entity.UserEntity;
+import com.lsx.bigtalk.AppConstant;
+import com.lsx.bigtalk.storage.db.entity.GroupEntity;
+import com.lsx.bigtalk.storage.db.entity.PeerEntity;
+import com.lsx.bigtalk.storage.db.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.DBConstant;
-import com.lsx.bigtalk.config.IntentConstant;
-import com.lsx.bigtalk.imservice.event.GroupEvent;
-import com.lsx.bigtalk.imservice.support.IMServiceConnector;
-import com.lsx.bigtalk.imservice.manager.IMGroupManager;
-import com.lsx.bigtalk.imservice.service.IMService;
+
+
+import com.lsx.bigtalk.service.event.GroupEvent;
+import com.lsx.bigtalk.service.support.IMServiceConnector;
+import com.lsx.bigtalk.service.manager.IMGroupManager;
+import com.lsx.bigtalk.service.service.IMService;
 import com.lsx.bigtalk.ui.adapter.GroupMemberSelectAdapter;
 import com.lsx.bigtalk.ui.widget.SearchEditText;
 import com.lsx.bigtalk.ui.widget.SortSideBar;
 import com.lsx.bigtalk.ui.widget.SortSideBar.OnTouchingLetterChangedListener;
-import com.lsx.bigtalk.helper.IMUIHelper;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.ui.helper.IMUIHelper;
+import com.lsx.bigtalk.logs.Logger;
 
 import java.util.HashSet;
 import java.util.List;
@@ -122,12 +123,12 @@ public class GroupMemberSelectFragment extends MainFragment
             //return Collections.emptySet();
         }
         switch (peerEntity.getType()){
-            case DBConstant.SESSION_TYPE_GROUP:{
+            case AppConstant.DBConstant.SESSION_TYPE_GROUP:{
                 GroupEntity entity = (GroupEntity) peerEntity;
                 alreadyListSet.addAll(entity.getlistGroupMemberIds());
             }break;
 
-            case DBConstant.SESSION_TYPE_SINGLE:{
+            case AppConstant.DBConstant.SESSION_TYPE_SINGLE:{
                 int loginId = imService.getIMLoginManager().getLoginId();
                 alreadyListSet.add(loginId);
                 alreadyListSet.add(peerEntity.getPeerId());
@@ -143,7 +144,7 @@ public class GroupMemberSelectFragment extends MainFragment
 
             imService = imServiceConnector.getIMService();
             Intent intent = getActivity().getIntent();
-            curSessionKey = intent.getStringExtra(IntentConstant.KEY_SESSION_KEY);
+            curSessionKey = intent.getStringExtra(AppConstant.IntentConstant.KEY_SESSION_KEY);
             peerEntity = imService.getIMSessionManager().findPeerEntity(curSessionKey);
             /**已经处于选中状态的list*/
             Set<Integer> alreadyList = getAlreadyCheckList();
@@ -201,14 +202,14 @@ public class GroupMemberSelectFragment extends MainFragment
                 //从个人过来的，创建群，默认自己是加入的，对方的sessionId也是加入的
                 //自己与自己对话，也能创建群的，这个时候要判断，群组成员一定要大于2个
                 int sessionType = peerEntity.getType();
-                if (sessionType == DBConstant.SESSION_TYPE_SINGLE) {
+                if (sessionType == AppConstant.DBConstant.SESSION_TYPE_SINGLE) {
                     int loginId = imService.getIMLoginManager().getLoginId();
                     logger.d("tempgroup#loginId:%d", loginId);
                     checkListSet.add(loginId);
                     checkListSet.add(peerEntity.getPeerId());
                     logger.d("tempgroup#memberList size:%d", checkListSet.size());
                     ShowDialogForTempGroupname(groupMgr, checkListSet);
-                } else if (sessionType == DBConstant.SESSION_TYPE_GROUP) {
+                } else if (sessionType == AppConstant.DBConstant.SESSION_TYPE_GROUP) {
                     showProgressBar();
                     imService.getIMGroupManager().reqAddGroupMember(peerEntity.getPeerId(),checkListSet);
                 }
@@ -220,8 +221,8 @@ public class GroupMemberSelectFragment extends MainFragment
                         android.R.style.Theme_Holo_Light_Dialog));
 
                 LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View dialog_view = inflater.inflate(R.layout.custom_dialog, null);
-                final EditText editText = dialog_view.findViewById(R.id.dialog_edit_content);
+                View dialog_view = inflater.inflate(R.layout.edit_dialog_view, null);
+                final EditText editText = dialog_view.findViewById(R.id.dialog_edit_text);
                 TextView textText = dialog_view.findViewById(R.id.dialog_title);
                 textText.setText(R.string.create_temp_group_dialog_title);
                 builder.setView(dialog_view);
@@ -276,7 +277,7 @@ public class GroupMemberSelectFragment extends MainFragment
             }
         });
 
-        sortSideBar = curView.findViewById(R.id.sidrbar);
+        sortSideBar = curView.findViewById(R.id.side_bar);
         sortSideBar.setOnTouchingLetterChangedListener(this);
 
         dialog = curView.findViewById(R.id.dialog);

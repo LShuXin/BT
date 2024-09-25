@@ -1,51 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
+    <!-- https://developer.android.com/reference/android/Manifest.permission -->
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
 
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 这项权限允许应用程序挂载和卸载文件系统，但由于其潜在的滥用风险，Android 平台已经不再允许应用程序直接申请和使用这个权限。-->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <!-- 用于在 Android 应用程序中请求对外部存储（如 SD 卡）的写入访问权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- 请求读取设备电话状态的访问权限 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!-- 允许应用程序获取当前在设备上运行的活动任务列表，包括正在前台和后台运行的应用程序。-->
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <!-- 允许应用程序在 Android 系统中跨用户进行完全的交互。这意味着应用程序可以在不同用户之间进行操作，包括切换用户、访问其他用户的数据和执行特权操作。-->
-    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
-        tools:ignore="ProtectedPermissions" />
-    <!-- 请求震动设备的访问权限 -->
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <!-- 允许应用程序保持设备处于唤醒状态，即使屏幕处于关闭或休眠状态。-->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!-- 允许应用程序直接拨打电话号码，而无需用户确认。-->
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <!-- 授权应用程序读取设备的外部存储（如 SD 卡）上的文件， API 级别小于或等于 18 的设备上生效-->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission
+        android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-feature android:name="android.hardware.camera.any" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
-    <!-- 它允许应用程序在前台运行服务。前台服务是一种在用户可以察觉的情况下执行长时间运行任务的机制。这个权限允许应用程序将服务提升到前台，并且可以在状态栏上显示通知，以便用户知道应用程序正在运行。-->
-    <!-- 前台服务通常用于以下情况：-->
-    <!-- 长时间运行任务： 如果您的应用程序需要执行长时间运行的任务，例如音乐播放、定位追踪、下载等，您可能需要使用前台服务，以便在任务执行期间将服务保持活动状态。-->
-    <!-- 与用户交互： 一些应用程序可能需要在后台运行时与用户进行交互，例如即时消息应用。前台服务允许您在状态栏中显示通知，以便用户可以随时与应用程序进行交互。-->
-    <!-- 保持活动状态： 前台服务可以帮助应用程序在设备处于休眠模式时保持活动状态，以便继续执行任务。-->
-    <!-- 需要注意的是，使用前台服务需要谨慎，因为这会消耗设备资源，包括电池寿命。当应用程序处于前台时，前台服务通常是合理的，但在应用程序转入后台时，应避免滥用前台服务，以免对用户造成不必要的影响。-->
-    <!-- 在清单文件（AndroidManifest.xml）中添加 FOREGROUND_SERVICE 权限声明，然后在代码中使用前台服务。同时，遵循最佳实践，确保提供适当的通知，使用户知道应用程序正在前台运行，并允许用户随时进行交互或停止服务。-->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
-    <!-- 声明应用程序支持的屏幕尺寸配置。这些配置告诉系统应该如何在不同类型和尺寸的屏幕上显示您的应用程序。以下是每个属性的含义：-->
-    <!-- android:anyDensity="true"：表示应用程序支持所有屏幕密度，这意味着系统会自动适配不同的屏幕密度。-->
-    <!-- android:largeScreens="true"：表示应用程序支持较大的屏幕尺寸，如平板电脑等。-->
-    <!-- android:normalScreens="true"：表示应用程序支持一般尺寸的屏幕，这是大多数智能手机的屏幕尺寸。-->
-    <!-- android:resizeable="true"：表示应用程序可以自由调整大小，以适应不同尺寸的屏幕。-->
-    <!-- android:smallScreens="true"：表示应用程序支持较小的屏幕尺寸，如小型智能手机。-->
-    <!-- 这些属性的设置可以影响您的应用程序在不同类型的设备上的显示效果。例如，通过将 android:largeScreens 设置为 true，您的应用程序将会适应较大的平板电脑屏幕。-->
-    <!-- 需要注意的是，尽管您可以声明应用程序支持多种屏幕尺寸和密度，但您仍然需要确保应用程序的布局和资源在不同类型的屏幕上正常显示和适配。在设计和开发应用程序时，建议使用适当的布局和资源文件，以确保在各种屏幕上提供一致的用户体验。-->
-    <!-- 同时，您还可以使用其他配置项来更精细地控制您的应用程序在不同屏幕上的显示方式，例如限制特定屏幕尺寸的支持，或者针对不同屏幕密度提供不同的资源。-->
+    <!-- 授权应用程序读取设备的外部存储（如 SD 卡）上的文件， API 级别小于或等于 18 的设备上生效 -->
+    <!-- 它允许应用程序在前台运行服务。前台服务是一种在用户可以察觉的情况下执行长时间运行任务的机制。这个权限允许应用程序将服务提升到前台，并且可以在状态栏上显示通知，以便用户知道应用程序正在运行。 -->
+    <!-- 前台服务通常用于以下情况： -->
+    <!-- 长时间运行任务： 如果您的应用程序需要执行长时间运行的任务，例如音乐播放、定位追踪、下载等，您可能需要使用前台服务，以便在任务执行期间将服务保持活动状态。 -->
+    <!-- 与用户交互： 一些应用程序可能需要在后台运行时与用户进行交互，例如即时消息应用。前台服务允许您在状态栏中显示通知，以便用户可以随时与应用程序进行交互。 -->
+    <!-- 保持活动状态： 前台服务可以帮助应用程序在设备处于休眠模式时保持活动状态，以便继续执行任务。 -->
+    <!-- 需要注意的是，使用前台服务需要谨慎，因为这会消耗设备资源，包括电池寿命。当应用程序处于前台时，前台服务通常是合理的，但在应用程序转入后台时，应避免滥用前台服务，以免对用户造成不必要的影响。 -->
+    <!-- 在清单文件（AndroidManifest.xml）中添加 FOREGROUND_SERVICE 权限声明，然后在代码中使用前台服务。同时，遵循最佳实践，确保提供适当的通知，使用户知道应用程序正在前台运行，并允许用户随时进行交互或停止服务。 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- 声明应用程序支持的屏幕尺寸配置。这些配置告诉系统应该如何在不同类型和尺寸的屏幕上显示您的应用程序。以下是每个属性的含义： -->
+    <!-- android:anyDensity="true"：表示应用程序支持所有屏幕密度，这意味着系统会自动适配不同的屏幕密度。 -->
+    <!-- android:largeScreens="true"：表示应用程序支持较大的屏幕尺寸，如平板电脑等。 -->
+    <!-- android:normalScreens="true"：表示应用程序支持一般尺寸的屏幕，这是大多数智能手机的屏幕尺寸。 -->
+    <!-- android:resizeable="true"：表示应用程序可以自由调整大小，以适应不同尺寸的屏幕。 -->
+    <!-- android:smallScreens="true"：表示应用程序支持较小的屏幕尺寸，如小型智能手机。 -->
+    <!-- 这些属性的设置可以影响您的应用程序在不同类型的设备上的显示效果。例如，通过将 android:largeScreens 设置为 true，您的应用程序将会适应较大的平板电脑屏幕。 -->
+    <!-- 需要注意的是，尽管您可以声明应用程序支持多种屏幕尺寸和密度，但您仍然需要确保应用程序的布局和资源在不同类型的屏幕上正常显示和适配。在设计和开发应用程序时，建议使用适当的布局和资源文件，以确保在各种屏幕上提供一致的用户体验。 -->
+    <!-- 同时，您还可以使用其他配置项来更精细地控制您的应用程序在不同屏幕上的显示方式，例如限制特定屏幕尺寸的支持，或者针对不同屏幕密度提供不同的资源。 -->
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
@@ -53,164 +51,127 @@
         android:resizeable="true"
         android:smallScreens="true" />
 
-
-    <!-- android:largeHeap="true"：-->
-    <!-- 用于请求应用程序分配更大的内存堆（heap）空间。具体来说，它会告诉 Android 系统允许您的应用程序使用更多的内存来存储对象和数据，从而在某些情况下可以改善应用程序的性能和稳定性。-->
-    <!-- 然而，需要注意以下几点：-->
-    <!-- 谨慎使用： 虽然在某些情况下增加内存堆大小可能有助于改善应用程序的性能，但通常情况下，增加内存堆大小并不是解决性能问题的最佳方法。优化应用程序的代码和资源，以减少内存使用，通常是更好的选择。-->
-    <!-- 潜在风险： 增加内存堆大小可能导致应用程序使用更多的系统资源，从而影响整体系统性能和其他应用程序的运行。此外，较大的堆大小可能会导致垃圾回收（Garbage Collection）的频繁发生，进而影响应用程序的响应性。-->
-    <!-- 不一定生效： 虽然您可以请求更大的内存堆空间，但系统不一定会始终满足您的请求。在某些情况下，系统可能会限制应用程序的内存使用，以确保整体系统的稳定性和性能。-->
-    <!-- 如果您考虑在应用程序中使用 android:largeHeap="true"，请务必谨慎，并在确保真正需要更大的内存堆时才使用。在大多数情况下，优化代码和资源，并遵循最佳实践，是提升应用程序性能的更可靠方法。-->
-    <!-- 如果您发现应用程序在处理大量数据或复杂任务时确实需要更大的内存堆，请进行充分的测试，以确保没有出现不良的影响。-->
-    <!-- android:supportsRtl="true"：-->
-    <!-- 用于声明应用程序是否支持从右到左（RTL）的布局方向-->
     <application
-        android:name=".app.IMApplication"
-        android:icon="@drawable/logo"
-        android:largeHeap="true"
+        android:name=".app.BTApplication"
+        android:icon="@drawable/image_logo_96x96"
         android:label="@string/app_name"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-        android:supportsRtl="true">
+        android:largeHeap="true"
+        android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
+        <activity
+            android:name=".ui.activity.ImageCapturePreviewActivity"
+            android:exported="false"
+            android:label="@string/title_activity_image_capture_preview"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <!-- 告知 XXPermissions 当前项目已经适配了分区存储特性 -->
+        <meta-data
+            android:name="ScopedStorage"
+            android:value="true" />
 
-        <!-- android:configChanges="orientation|keyboardHidden"：-->
-        <!-- 它表示与此布局文件相关联的 Activity 将自行处理与设备方向变化-->
-        <!-- 和键盘可见性变化相关的配置更改，而不会由系统自动重新启动该 Activity。-->
-        <!-- android:launchMode="singleTask"：-->
-        <!-- 用于定义 Activity 的启动模式。Activity 的启动模式决定了在何种情况下以及如何启动该 Activity。在这个特定的情况下，singleTask 是其中一种可能的启动模式。-->
-        <!-- 它意味着：-->
-        <!-- 单任务模式（singleTask）：如果该 Activity 尚未存在于任务栈中，则会创建一个新的任务，并在该任务中启动该 Activity。如果该 Activity 已经存在于任务栈中，-->
-        <!-- 则系统会将任务栈调整为使该 Activity 处于栈顶，同时将任何在该 Activity 之上的其他 Activity 从任务栈中移除。-->
-        <!-- 在单任务模式下，一个任务栈中只能存在一个该 Activity 的实例，这可以用于创建应用程序的主要入口点或某个特定的“启动页”。这也使得通过使用 Intent 启动该 Activity 时，-->
-        <!-- 如果它已经存在于任务栈中，那么它会被调度到前台而不会创建新的实例。-->
-        <!-- 需要注意的是，singleTask 启动模式可能会导致一些复杂的任务栈管理情况，因此在使用时需要谨慎考虑其影响。了解任务和任务栈的概念对于正确使用和理解启动模式非常重要。-->
-        <!-- 其他常见的启动模式包括 standard、singleTop 和 singleInstance。每种模式都有不同的行为和用途，你可以根据你的应用程序需求来选择适当的启动模式。-->
         <activity
             android:name=".ui.activity.MessageActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" >
+            android:launchMode="singleTask" >
         </activity>
-
         <activity
             android:name=".ui.activity.LoginActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-
-            <!-- 这部分定义了 Activity 的启动过滤器，用于指定在什么情况下该 Activity 会成为应用程序的入口点：-->
-            <!-- <action android:name="android.intent.action.MAIN" />：这个 <action> 元素指定了主要-->
-            <!-- 的操作，表示这个 Activity 是应用程序的主要入口点。-->
-            <!-- <category android:name="android.intent.category.LAUNCHER" />：-->
-            <!-- 这个 <category> 元素指定了 Activity 的类别，表示它是一个启动器（Launcher）类别，即应用程序的-->
-            <!-- 图标将显示在设备的主屏幕上，用户可以点击它来启动应用程序。-->
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.activity.ContactFragmentActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:label="@string/contact_name"
-            android:screenOrientation="portrait" >
+            android:label="@string/contact_name" >
         </activity>
         <activity
             android:name=".ui.activity.MainActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" >
-        </activity>
-
-        <!-- android:exported="false"：这个属性指定了服务是否可以被其他应用程序组件（如其他应用的 Activity）访问-->
+            android:launchMode="singleTask" >
+        </activity> <!-- android:exported="false"：这个属性指定了服务是否可以被其他应用程序组件（如其他应用的 Activity）访问 -->
         <service
-            android:name=".imservice.service.IMService"
+            android:name=".service.service.IMService"
             android:exported="false" >
         </service>
-        <service android:name=".imservice.service.LoadImageService" />
+        <service android:name=".service.service.LoadImageService" />
 
         <activity
-            android:name=".ui.activity.PickPhotoActivity"
+            android:name=".ui.activity.ImagePickerActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
             android:name=".ui.activity.ImageGridActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
             android:name=".ui.activity.PreviewActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
             android:name=".ui.activity.PreviewTextActivity"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
             android:name=".ui.activity.PreviewGifActivity"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
             android:name=".ui.activity.UserInfoActivity"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
-            android:name=".ui.activity.GroupManagermentActivity"
-            android:screenOrientation="portrait"
+            android:name=".ui.activity.GroupManagementActivity"
             android:theme="@android:style/Theme.NoTitleBar" >
-        </activity>
-
-        <!-- android:windowSoftInputMode="adjustNothing" -->
-        <!-- 当软键盘弹出时，不会对界面布局进行任何调整。换句话说，界面的内容不会被移动或调整以适应软键盘的出现。这可能会导致软键盘覆盖部分界面内容 -->
+        </activity> <!-- android:windowSoftInputMode="adjustNothing" -->
+        <!-- 当软键盘弹出时，不会对界面布局进行任何调整。换句话说，界 -->
+        <!-- 面的内容不会被移动或调整以适应软键盘的出现。这可能会导致软键盘覆盖部分界面内容 -->
         <activity
             android:name=".ui.activity.GroupMemberSelectActivity"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
             android:name=".ui.activity.SettingActivity"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
             android:name=".ui.activity.SearchActivity"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
             android:name=".ui.activity.WebViewFragmentActivity"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <action android:name="android.intent.action.VIEW" />
 
-                <!-- 这个 <data> 元素定义了要处理的数据的方案（scheme）。在这种情况下，-->
-                <!-- 方案是 com.lsx.bigtalk。这意味着当其他应用发送具有这个方案的 VIEW -->
-                <!-- 意图给你的应用时，这个活动将被调用来处理该意图。-->
                 <data android:scheme="com.lsx.bigtalk" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.activity.ImagePreviewActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" >
-        </activity>
-        <activity
-            android:name=".ui.activity.PreviewMessageImagesActivity"
-            android:screenOrientation="portrait"
-            >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity android:name=".ui.activity.PreviewMessageImagesActivity" />
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.your.package.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

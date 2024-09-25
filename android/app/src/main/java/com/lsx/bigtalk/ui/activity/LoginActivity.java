@@ -16,18 +16,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lsx.bigtalk.DB.sp.LoginSp;
-import com.lsx.bigtalk.DB.sp.SystemConfigSp;
-import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.IntentConstant;
-import com.lsx.bigtalk.helper.IMUIHelper;
-import com.lsx.bigtalk.imservice.event.LoginStatus;
-import com.lsx.bigtalk.imservice.event.SocketEvent;
-import com.lsx.bigtalk.imservice.manager.IMLoginManager;
-import com.lsx.bigtalk.imservice.service.IMService;
 import com.lsx.bigtalk.ui.base.BTBaseActivity;
-import com.lsx.bigtalk.imservice.support.IMServiceConnector;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.AppConstant;
+import com.lsx.bigtalk.storage.sp.BTSp;
+import com.lsx.bigtalk.R;
+import com.lsx.bigtalk.ui.helper.IMUIHelper;
+import com.lsx.bigtalk.service.event.SocketEvent;
+import com.lsx.bigtalk.service.manager.IMLoginManager;
+import com.lsx.bigtalk.service.service.IMService;
+import com.lsx.bigtalk.service.support.IMServiceConnector;
+import com.lsx.bigtalk.service.event.LoginEvent;
+import com.lsx.bigtalk.logs.Logger;
 
 import de.greenrobot.event.EventBus;
 
@@ -50,10 +49,10 @@ public class LoginActivity extends BTBaseActivity {
     private EditText pwdEditText;
     private View loginPage;
     private View splashPage;
-    private View loginStatusView;
+    private View loginEventView;
     private InputMethodManager inputMethodManager;
     private IMService imService;
-    private boolean autoLogin = true;
+    private boolean shouldAutoLogin = true;
     private boolean loginSuccess = false;
 
     private final IMServiceConnector imServiceConnector = new IMServiceConnector() {
@@ -68,41 +67,34 @@ public class LoginActivity extends BTBaseActivity {
             imService = imServiceConnector.getIMService();
             try {
                 do {
-                    if (imService == null) {
+                    if (null == imService) {
                         logger.d("LoginActivity#onIMServiceConnected#imService is null");
                         break;
                     }
                     IMLoginManager imLoginManager = imService.getIMLoginManager();
-                    LoginSp loginSp = imService.getLoginSp();
-                    if (imLoginManager == null || loginSp == null) {
-                        logger.d("LoginActivity#imLoginManager == null || loginSp == null");
+                    BTSp.LoginModel loginModel = BTSp.getInstance().getLoginInfo();
+                    if (null == imLoginManager || null == loginModel) {
+                        logger.d("LoginActivity#null == imLoginManager || null == loginModel");
                         break;
                     }
-
-                    LoginSp.SpLoginIdentity loginIdentity = loginSp.getLoginIdentity();
-                    if (loginIdentity == null) {
-                        logger.d("LoginActivity#loginIdentity == null");
-                        break;
-                    }
-
-                    nameEditText.setText(loginIdentity.getLoginName());
-                    if (TextUtils.isEmpty(loginIdentity.getPwd())) {
+                    
+                    nameEditText.setText(loginModel.getUserName());
+                    if (TextUtils.isEmpty(loginModel.getPassword())) {
                         logger.d("LoginActivity#pwd is empty");
                         break;
                     }
-                    pwdEditText.setText(loginIdentity.getPwd());
+                    pwdEditText.setText(loginModel.getPassword());
 
-                    if (!autoLogin) {
+                    if (!shouldAutoLogin) {
                         break;
                     }
 
-                    autoLogin(loginIdentity);
+                    autoLogin(loginModel);
                     return;
                 } while (false);
 
                 manualLogin();
             } catch (Exception e) {
-                // 任何未知的异常
                 logger.w("LoginActivity#auto/manual login failed: %s", e.getMessage());
                 manualLogin();
             }
@@ -119,18 +111,19 @@ public class LoginActivity extends BTBaseActivity {
         }, 1000);
     }
 
-    private void autoLogin(final LoginSp.SpLoginIdentity loginIdentity) {
+    private void autoLogin(final BTSp.LoginModel loginModel) {
         logger.i("LoginActivity#prepare to auto login");
 
         uiHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 logger.d("LoginActivity#auto login...");
-                if (imService == null || imService.getIMLoginManager() == null) {
+                if (null == imService || null == imService.getIMLoginManager()) {
                     Toast.makeText(LoginActivity.this, getString(R.string.login_failed), Toast.LENGTH_SHORT).show();
                     showLoginPage();
+                    return;
                 }
-                imService.getIMLoginManager().login(loginIdentity);
+                imService.getIMLoginManager().login(loginModel);
             }
         }, 500);
     }
@@ -144,15 +137,14 @@ public class LoginActivity extends BTBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         logger.d("LoginActivity#onCreate");
-
+        shouldAutoLogin = judgeShouldAutoLogin();
         inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        SystemConfigSp.instance().init(getApplicationContext());
-
-        imServiceConnector.connect(LoginActivity.this);
         EventBus.getDefault().register(this);
-
+        imServiceConnector.connect(LoginActivity.this);
         setContentView(R.layout.login_activity);
-
+        splashPage = findViewById(R.id.splash_page);
+        loginPage = findViewById(R.id.login_page);
+        loginEventView = findViewById(R.id.login_status);
         nameEditText = findViewById(R.id.name);
         pwdEditText = findViewById(R.id.password);
         pwdEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -165,32 +157,24 @@ public class LoginActivity extends BTBaseActivity {
                 return false;
             }
         });
-
         findViewById(R.id.login_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                inputMethodManager.hideSoftInputFromWindow(nameEditText.getWindowToken(), 0);
                 inputMethodManager.hideSoftInputFromWindow(pwdEditText.getWindowToken(), 0);
                 attemptLogin();
             }
         });
-
-        loginStatusView = findViewById(R.id.login_status);
-
+        
         initAutoLogin();
     }
 
     private void initAutoLogin() {
         logger.i("LoginActivity#initAutoLogin");
 
-        splashPage = findViewById(R.id.splash_page);
-        loginPage = findViewById(R.id.login_page);
-        autoLogin = shouldAutoLogin();
-
-        splashPage.setVisibility(autoLogin ? View.VISIBLE : View.GONE);
-        loginPage.setVisibility(autoLogin ? View.GONE : View.VISIBLE);
-
+        splashPage.setVisibility(shouldAutoLogin ? View.VISIBLE : View.GONE);
+        loginPage.setVisibility(shouldAutoLogin ? View.GONE : View.VISIBLE);
         loginPage.setOnTouchListener(new OnTouchListener() {
-
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 v.performClick();
@@ -206,7 +190,7 @@ public class LoginActivity extends BTBaseActivity {
             }
         });
 
-        if (autoLogin) {
+        if (shouldAutoLogin) {
             Animation splashAnimation = AnimationUtils.loadAnimation(this, R.anim.splash_fade_in);
             if (splashAnimation == null) {
                 logger.e("LoginActivity#loadAnimation 'login_splash' failed");
@@ -217,10 +201,10 @@ public class LoginActivity extends BTBaseActivity {
         }
     }
 
-    private boolean shouldAutoLogin() {
+    private boolean judgeShouldAutoLogin() {
         Intent intent = getIntent();
         if (intent != null) {
-            boolean notAutoLogin = intent.getBooleanExtra(IntentConstant.KEY_LOGIN_NOT_AUTO, false);
+            boolean notAutoLogin = intent.getBooleanExtra(AppConstant.IntentConstant.KEY_NOT_AUTO_LOGIN, false);
             logger.d("LoginActivity#notAutoLogin:%s", notAutoLogin);
             return !notAutoLogin;
         }
@@ -237,18 +221,18 @@ public class LoginActivity extends BTBaseActivity {
     }
 
     public void attemptLogin() {
-        String loginName = nameEditText.getText().toString();
-        String mPassword = pwdEditText.getText().toString();
+        String userName = nameEditText.getText().toString();
+        String password = pwdEditText.getText().toString();
         boolean cancel = false;
         View focusView = null;
 
-        if (TextUtils.isEmpty(mPassword)) {
+        if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, getString(R.string.error_pwd_required), Toast.LENGTH_SHORT).show();
             focusView = pwdEditText;
             cancel = true;
         }
 
-        if (TextUtils.isEmpty(loginName)) {
+        if (TextUtils.isEmpty(userName)) {
             Toast.makeText(this, getString(R.string.error_name_required), Toast.LENGTH_SHORT).show();
             focusView = nameEditText;
             cancel = true;
@@ -257,11 +241,16 @@ public class LoginActivity extends BTBaseActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
-            loginStatusView.setVisibility(View.VISIBLE);
+            loginEventView.setVisibility(View.VISIBLE);
             if (imService != null) {
-                loginName = loginName.trim();
-                mPassword = mPassword.trim();
-                imService.getIMLoginManager().login(loginName, mPassword);
+                System.out.println(111111111);
+                System.out.println(111111111);
+                System.out.println(111111111);
+                System.out.println(111111111);
+                System.out.println(111111111);
+                userName = userName.trim();
+                password = password.trim();
+                imService.getIMLoginManager().login(userName, password);
             }
         }
     }
@@ -282,10 +271,10 @@ public class LoginActivity extends BTBaseActivity {
         super.onStop();
     }
 
-    public void onEventMainThread(LoginStatus event) {
+    public void onEventMainThread(LoginEvent event) {
         switch (event) {
             case LOCAL_LOGIN_SUCCESS:
-            case LOGIN_OK:
+            case NORMAL_LOGIN_SUCCESS:
             {
                 onLoginSuccess();
                 break;
@@ -317,21 +306,19 @@ public class LoginActivity extends BTBaseActivity {
         LoginActivity.this.finish();
     }
 
-    private void onLoginFailure(LoginStatus event) {
+    private void onLoginFailure(LoginEvent event) {
         logger.e("LoginActivity#onLoginFailure errorCode:%s", event.name());
         showLoginPage();
-        String errorTip = getString(IMUIHelper.getLoginErrorTip(event));
-        logger.d("LoginActivity#onLoginFailure errorTip:%s", errorTip);
-        loginStatusView.setVisibility(View.GONE);
-        Toast.makeText(this, errorTip, Toast.LENGTH_SHORT).show();
+        loginEventView.setVisibility(View.GONE);
+        Toast.makeText(this, getString(IMUIHelper.getLoginErrorTip(event)),
+                Toast.LENGTH_SHORT).show();
     }
 
     private void onSocketFailure(SocketEvent event) {
         logger.e("LoginActivity#onSocketFailure:%s", event.name());
         showLoginPage();
-        String errorTip = getString(IMUIHelper.getSocketErrorTip(event));
-        logger.d("LoginActivity#onSocketFailure errorTip:%s", errorTip);
-        loginStatusView.setVisibility(View.GONE);
-        Toast.makeText(this, errorTip, Toast.LENGTH_SHORT).show();
+        loginEventView.setVisibility(View.GONE);
+        Toast.makeText(this, getString(IMUIHelper.getSocketErrorTip(event)),
+                Toast.LENGTH_SHORT).show();
     }
 }

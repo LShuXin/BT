@@ -14,8 +14,8 @@ import android.widget.ProgressBar;
 import androidx.fragment.app.Fragment;
 
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.imservice.entity.ImageMessageEntity;
-import com.lsx.bigtalk.imservice.service.IMService;
+import com.lsx.bigtalk.service.entity.ImageMessageEntity;
+import com.lsx.bigtalk.service.service.IMService;
 import com.lsx.bigtalk.utils.FileUtil;
 import com.lsx.bigtalk.utils.ImageLoaderUtil;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -65,7 +65,7 @@ public class MessageImageFragment extends Fragment {
                     ((ViewGroup) curView.getParent()).removeView(curView);
                 }
             }
-            curView = inflater.inflate(R.layout.message_image_fragment, null);
+            curView = inflater.inflate(R.layout.image_message_fragment, null);
             initRes(curView);
             initData();
             return curView;
@@ -116,11 +116,11 @@ public class MessageImageFragment extends Fragment {
             ImageLoaderUtil.getImageLoaderInstance().displayImage(imageUrl, view, new DisplayImageOptions.Builder()
                     .cacheInMemory(false)
                     .cacheOnDisk(true)
-                    .showImageOnLoading(R.drawable.default_message_image2)
-                    .showImageOnFail(R.drawable.message_image_error)
+                    .showImageOnLoading(R.drawable.bg_default_message2)
+                    .showImageOnFail(R.drawable.image_image_message_error)
                     .imageScaleType(ImageScaleType.IN_SAMPLE_INT)
                     .bitmapConfig(Bitmap.Config.RGB_565)
-                    .showImageOnFail(R.drawable.message_image_error)
+                    .showImageOnFail(R.drawable.image_image_message_error)
                     .resetViewBeforeLoading(true)
                     .build(), new SimpleImageLoadingListener() {
                 @Override

@@ -19,7 +19,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/splash"
+                android:src="@drawable/image_splash"
                 tools:ignore="ContentDescription" />
         </LinearLayout>
 
@@ -38,7 +38,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="50dp"
                 android:layout_marginTop="80dp"
-                android:src="@drawable/login_page_logo"
+                android:src="@drawable/image_logo_262x262"
                 tools:ignore="ContentDescription" />
 
             <LinearLayout
@@ -59,7 +59,7 @@
                         android:id="@+id/name"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:background="@drawable/text_message_bg"
+                        android:background="@drawable/bg_edit_text"
                         android:hint="@string/prompt_name"
                         android:inputType="text|textPersonName|textEmailAddress"
                         android:maxLines="1"
@@ -81,7 +81,7 @@
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:background="@drawable/text_message_bg"
+                        android:background="@drawable/bg_edit_text"
                         android:hint="@string/prompt_password"
                         android:imeOptions="actionDone"
                         android:imeActionLabel="@string/action_sign_in_short"
@@ -101,7 +101,7 @@
                     android:layout_height="45dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="22dp"
-                    android:background="@drawable/default_btn_bg"
+                    android:background="@drawable/bg_default_btn"
                     android:text="@string/action_sign_in_register"
                     android:textColor="@android:color/white"
                     android:textSize="21sp" />

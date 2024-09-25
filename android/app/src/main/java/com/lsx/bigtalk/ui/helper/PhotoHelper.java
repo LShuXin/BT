@@ -13,11 +13,12 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.lsx.bigtalk.AppConstant;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.SysConstant;
+
 import com.lsx.bigtalk.ui.activity.MessageActivity;
 import com.lsx.bigtalk.utils.CommonUtil;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.logs.Logger;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -168,13 +169,13 @@ public class PhotoHelper {
      */
     public void doTakePhoto(Context context) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        takePhotoSavePath = CommonUtil.getImageSavePath(System
+        takePhotoSavePath = CommonUtil.getImageSavePath(context, System
                 .currentTimeMillis() + ".jpg");
         intent.putExtra(MediaStore.EXTRA_OUTPUT,
                 Uri.fromFile(new File(takePhotoSavePath)));
         // intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
         ((MessageActivity) context).startActivityForResult(intent,
-                SysConstant.CAMERA_FOR_DATA);
+                AppConstant.ResultCodeConstant.CAMERA_FOR_IMAGE);
     }
 
     /**

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string-array name="data">
         <item>阿妹</item>
         <item>阿郎</item>
@@ -46,6 +47,7 @@
         <item>Jack</item>
         <item>~夏先生</item>
     </string-array>
+
     <string-array name="default_emoji_phrase">
         <item>[呵呵]</item>
         <item>[嘻嘻]</item>
@@ -94,6 +96,7 @@
         <item>[8]</item>
         <item>[9]</item>
     </string-array>
+
     <string-array name="yaya_emoji_phrase">
         <item>[牙牙撒花]</item>
         <item>[牙牙尴尬]</item>

@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.ui.activity.ImagePreviewActivity;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.logs.Logger;
 
 
 public class ZoomableImageView extends androidx.appcompat.widget.AppCompatImageView {
@@ -408,7 +408,7 @@ public class ZoomableImageView extends androidx.appcompat.widget.AppCompatImageV
         }
 
         public void setupDialogViews(final Dialog dialog){
-            View dialogLyout = LayoutInflater.from(getContext()).inflate(R.layout.dialog_call, null);
+            View dialogLyout = LayoutInflater.from(getContext()).inflate(R.layout.call_dialog_view, null);
 
             Button callButton = dialogLyout.findViewById(R.id.call);
             callButton.setText(getContext().getText(R.string.save_image));

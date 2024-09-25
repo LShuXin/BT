@@ -5,23 +5,43 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import com.lsx.bigtalk.config.SysConstant;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import com.hjq.permissions.OnPermissionCallback;
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
+import com.hjq.toast.Toaster;
+import com.lsx.bigtalk.AppConstant;
+import com.lsx.bigtalk.R;
+import com.lsx.bigtalk.logs.Logger;
 
 
 public class CommonUtil {
@@ -127,23 +147,41 @@ public class CommonUtil {
     }
 
 
-    public static String getImageSavePath(String fileName) {
-
+    public static String getImageSavePath(Context context, String fileName) {
         if (TextUtils.isEmpty(fileName)) {
             return null;
         }
 
-        final File folder = new File(Environment.getExternalStorageDirectory()
-                .getAbsolutePath()
-                + File.separator
-                + "MGJ-IM"
-                + File.separator
-                + "images");
-        if (!folder.exists()) {
-            folder.mkdirs();
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            File externalStorageDir = Environment.getExternalStorageDirectory();
+            File folder = new File(externalStorageDir.getAbsolutePath() + File.separator + AppConstant.SysConstant.SYSTEM_STORAGE_DIR_NAME + File.separator + "images");
+            if (!folder.exists()) {
+                folder.mkdirs();
+            }
+            return folder.getAbsolutePath() + File.separator + fileName;
+        } else {
+            XXPermissions.with(context)
+                .permission(Permission.WRITE_EXTERNAL_STORAGE)
+                .request(new OnPermissionCallback() {
+                    @Override
+                    public void onGranted(@NonNull List<String> permissions, boolean allGranted) {
+                        // pass
+                    }
+
+                    @Override
+                    public void onDenied(@NonNull List<String> permissions, boolean doNotAskAgain) {
+                        String grantPermissionFailedText = context.getString(R.string.grant_storage_permission_failed);
+                        if (doNotAskAgain) {
+                            Toaster.show(grantPermissionFailedText);
+                            XXPermissions.startPermissionActivity(context, permissions);
+                        } else {
+                            Toaster.show(grantPermissionFailedText);
+                        }
+                    }
+                });
         }
 
-        return folder.getAbsolutePath() + File.separator + fileName;
+        return null;
     }
 
     public static File getImageSavePath() {
@@ -291,21 +329,30 @@ public class CommonUtil {
         return (int) (pxValue / scale + 0.5f);
     }
 
-    public static String getAudioSavePath(int userId) {
-        String path = getSavePath(SysConstant.FILE_SAVE_TYPE_AUDIO) + userId
-                + "_" + System.currentTimeMillis()
-                + ".spx";
-        File file = new File(path);
-        File parent = file.getParentFile();
-        if (parent != null && !parent.exists()) {
-            parent.mkdirs();
+    public static String getAudioSavePath(Context context, int userId) {
+//        String path = getSavePath(AppConstant.SysConstant.FILE_SAVE_TYPE_AUDIO) + userId
+//                + "_" + System.currentTimeMillis()
+//                + ".spx";
+//        File file = new File(path);
+//        File parent = file.getParentFile();
+//        if (parent != null && !parent.exists()) {
+//            parent.mkdirs();
+//        }
+//        return path;
+
+        File externalFilesDir = context.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
+        String fileName = userId + "_" + System.currentTimeMillis();
+        File audioFile = new File(externalFilesDir, fileName + ".spx"); // 这里假设保存为 WAV 格式
+        if (!audioFile.getParentFile().exists()) {
+            audioFile.getParentFile().mkdirs();
         }
-        return path;
+
+        return audioFile.getAbsolutePath();
     }
 
     public static String getSavePath(int type) {
         String path;
-        String floder = (type == SysConstant.FILE_SAVE_TYPE_IMAGE) ? "images"
+        String floder = (type == AppConstant.SysConstant.FILE_SAVE_TYPE_IMAGE) ? "images"
                 : "audio";
         if (CommonUtil.isSDCardExist()) {
             path = Environment.getExternalStorageDirectory().toString()

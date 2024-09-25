@@ -14,7 +14,7 @@ public class Security {
 	
 	public static Security getInstance() {
 		synchronized (Security.class) {
-			if (instance == null) {
+			if (null == instance) {
 				instance = new Security();
 			}
 

@@ -5,14 +5,14 @@ import android.content.Context;
 
 public class ScreenUtil {
     private final Context mCtx;
-    private static ScreenUtil m_pInstance;
+    private static ScreenUtil instance;
 
     public static ScreenUtil instance(Context ctx) {
         synchronized (ScreenUtil.class) {
-            if (null == m_pInstance) {
-                m_pInstance = new ScreenUtil(ctx);
+            if (null == instance) {
+                instance = new ScreenUtil(ctx);
             }
-            return m_pInstance;
+            return instance;
         }
     }
 

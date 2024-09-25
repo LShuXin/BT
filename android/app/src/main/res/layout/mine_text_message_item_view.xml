@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lsx.bigtalk.ui.widget.message.TextRenderView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/default_bg"
+    android:paddingBottom="20dp"
+    android:paddingEnd="10dp"
+    android:paddingStart="0dp">
+
+    <!-- user avatar on the right -->
+    <com.lsx.bigtalk.ui.widget.IMBaseImageView
+        android:id="@+id/user_avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/image_default_user_avatar" />
+
+    <!-- other components on the left -->
+    <LinearLayout
+        android:id="@+id/content_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/user_avatar"
+        android:layout_marginStart="62dp"
+        android:layout_marginEnd="4dp"
+        android:layout_toStartOf="@id/user_avatar"
+        android:orientation="horizontal">
+
+        <!-- message send failed icon -->
+        <ImageView
+            android:id="@+id/message_state_failed"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center_vertical"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/message_image_desc"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_msg_failed"
+            android:visibility="gone" />
+
+        <!-- text message content -->
+        <!-- set "autoLink" attribute to "all" for normal https link function -->
+        <TextView
+            android:id="@+id/message_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_mine_message_item"
+            android:layout_marginTop="2dp"
+            android:gravity="start|center_vertical"
+            android:paddingBottom="8dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="8dp"
+            android:text="@string/example_text_message_content"
+            android:textColor="#ffffff"
+            android:textSize="17sp"
+            android:textColorLink="#ffffff"
+            android:autoLink="all" />
+
+        <!-- send message progress -->
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</com.lsx.bigtalk.ui.widget.message.TextRenderView>

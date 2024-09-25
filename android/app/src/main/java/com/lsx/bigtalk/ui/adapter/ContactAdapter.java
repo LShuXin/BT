@@ -14,15 +14,16 @@ import android.widget.BaseAdapter;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
-import com.lsx.bigtalk.DB.entity.GroupEntity;
-import com.lsx.bigtalk.DB.entity.UserEntity;
+import com.lsx.bigtalk.AppConstant;
+import com.lsx.bigtalk.storage.db.entity.GroupEntity;
+import com.lsx.bigtalk.storage.db.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.SysConstant;
-import com.lsx.bigtalk.imservice.service.IMService;
+
+import com.lsx.bigtalk.service.service.IMService;
 import com.lsx.bigtalk.ui.widget.IMBaseImageView;
 import com.lsx.bigtalk.ui.widget.IMGroupAvatar;
-import com.lsx.bigtalk.helper.IMUIHelper;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.ui.helper.IMUIHelper;
+import com.lsx.bigtalk.logs.Logger;
 import com.lsx.bigtalk.utils.ScreenUtil;
 
 
@@ -231,11 +232,11 @@ public class ContactAdapter extends BaseAdapter implements
         }
         if (view == null) {
             userHolder = new UserHolder();
-            view = LayoutInflater.from(ctx).inflate(R.layout.item_contact, parent,false);
-            userHolder.nameView = view.findViewById(R.id.contact_item_title);
-            userHolder.realNameView = view.findViewById(R.id.contact_realname_title);
+            view = LayoutInflater.from(ctx).inflate(R.layout.contact_list_item_view, parent,false);
+            userHolder.nameView = view.findViewById(R.id.contact_nickname_title);
+            userHolder.realNameView = view.findViewById(R.id.contact_real_name_title);
             userHolder.sectionView = view.findViewById(R.id.contact_category_title);
-            userHolder.avatar = view.findViewById(R.id.contact_portrait);
+            userHolder.avatar = view.findViewById(R.id.contact_avatar);
             userHolder.divider = view.findViewById(R.id.contact_divider);
             view.setTag(userHolder);
         } else {
@@ -243,7 +244,7 @@ public class ContactAdapter extends BaseAdapter implements
         }
 
         userHolder.nameView.setText(userEntity.getMainName());
-        userHolder.avatar.setImageResource(R.drawable.default_user_avatar);
+        userHolder.avatar.setImageResource(R.drawable.image_default_user_avatar);
         userHolder.divider.setVisibility(View.VISIBLE);
         userHolder.sectionView.setVisibility(View.GONE);
 
@@ -269,9 +270,9 @@ public class ContactAdapter extends BaseAdapter implements
             }
         }
 
-        userHolder.avatar.setDefaultImageRes(R.drawable.default_user_avatar);
+        userHolder.avatar.setDefaultImageRes(R.drawable.image_default_user_avatar);
         userHolder.avatar.setCorner(0);
-        userHolder.avatar.setAvatarAppend(SysConstant.AVATAR_APPEND_100);
+        userHolder.avatar.setAvatarAppend(AppConstant.SysConstant.AVATAR_APPEND_100);
         userHolder.avatar.setImageUrl(userEntity.getAvatar());
 
         userHolder.realNameView.setText(userEntity.getRealName());
@@ -288,10 +289,10 @@ public class ContactAdapter extends BaseAdapter implements
         }
         if (view == null) {
             groupHolder = new GroupHolder();
-            view = LayoutInflater.from(ctx).inflate(R.layout.item_contact_group, parent,false);
-            groupHolder.nameView = view.findViewById(R.id.contact_item_title);
+            view = LayoutInflater.from(ctx).inflate(R.layout.group_contact_item_view, parent,false);
+            groupHolder.nameView = view.findViewById(R.id.contact_nickname_title);
             groupHolder.sectionView = view.findViewById(R.id.contact_category_title);
-            groupHolder.avatar = view.findViewById(R.id.contact_portrait);
+            groupHolder.avatar = view.findViewById(R.id.contact_avatar);
             groupHolder.divider = view.findViewById(R.id.contact_divider);
             view.setTag(groupHolder);
         } else {
@@ -328,7 +329,7 @@ public class ContactAdapter extends BaseAdapter implements
         try {
             avatar.setViewSize(ScreenUtil.instance(ctx).dip2px(38));
             avatar.setChildCorner(2);
-            avatar.setAvatarUrlAppend(SysConstant.AVATAR_APPEND_32);
+            avatar.setAvatarUrlAppend(AppConstant.SysConstant.AVATAR_APPEND_32);
             avatar.setParentPadding(3);
             avatar.setAvatarUrls((ArrayList<String>) avatarUrlList);
         } catch (Exception e) {

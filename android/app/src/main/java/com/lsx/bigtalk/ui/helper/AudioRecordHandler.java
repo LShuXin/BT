@@ -1,16 +1,20 @@
-
 package com.lsx.bigtalk.ui.helper;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Message;
 
-import com.lsx.bigtalk.config.HandlerConstant;
-import com.lsx.bigtalk.config.SysConstant;
-import com.lsx.bigtalk.imservice.support.audio.SpeexEncoder;
+import androidx.core.app.ActivityCompat;
+
+import com.lsx.bigtalk.AppConstant;
+
+import com.lsx.bigtalk.service.support.audio.SpeexEncoder;
 import com.lsx.bigtalk.ui.activity.MessageActivity;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.logs.Logger;
 
 public class AudioRecordHandler implements Runnable {
 
@@ -33,9 +37,10 @@ public class AudioRecordHandler implements Runnable {
         this.fileName = fileName;
     }
 
+    @SuppressLint("MissingPermission")
     public void run() {
         try {
-        	logger.d("chat#audio#in audio thread");
+            logger.d("chat#audio#in audio thread");
             SpeexEncoder encoder = new SpeexEncoder(this.fileName);
             Thread encodeThread = new Thread(encoder);
             encoder.setRecording(true);
@@ -73,9 +78,9 @@ public class AudioRecordHandler implements Runnable {
                 while (this.isRecording) {
                     endTime = System.currentTimeMillis();
                     recordTime = (endTime - startTime) / 1000.0f;
-                    if (recordTime >= SysConstant.MAX_SOUND_RECORD_TIME) {
+                    if (recordTime >= AppConstant.SysConstant.MAX_SOUND_RECORD_TIME) {
                         MessageActivity.getRecordMsgHandler().sendEmptyMessage(
-                                HandlerConstant.RECORD_AUDIO_TOO_LONG);
+                                AppConstant.HandlerConstant.RECORD_AUDIO_TOO_LONG);
                         break;
                     }
 
@@ -123,7 +128,7 @@ public class AudioRecordHandler implements Runnable {
                 }
             }
             Message Msg = new Message();
-            Msg.what = HandlerConstant.RECEIVE_MAX_VOLUME;
+            Msg.what = AppConstant.HandlerConstant.RECEIVE_MAX_VOLUME;
             Msg.obj = max;
             MessageActivity.getRecordMsgHandler().sendMessage(Msg);
         } catch (Exception e) {

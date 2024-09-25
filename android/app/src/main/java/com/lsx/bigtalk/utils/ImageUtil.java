@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.util.DisplayMetrics;
 
+import com.lsx.bigtalk.logs.Logger;
 import com.lsx.bigtalk.ui.helper.PhotoHelper;
 
 
