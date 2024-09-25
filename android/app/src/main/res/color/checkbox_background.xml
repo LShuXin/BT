@@ -2,11 +2,11 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:state_enabled="false"
-        android:drawable="@drawable/ratio_unchecked" />
+        android:drawable="@drawable/ic_radio_disabled" />
     <item
         android:state_checked="false"
-        android:drawable="@drawable/ratio_checked" />
+        android:drawable="@drawable/ic_radio_default" />
     <item
         android:state_checked="true"
-        android:drawable="@drawable/checked" />
+        android:drawable="@drawable/ic_checkbox_checked" />
 </selector>

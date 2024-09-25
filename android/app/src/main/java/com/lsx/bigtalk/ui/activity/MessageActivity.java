@@ -1,15 +1,11 @@
 package com.lsx.bigtalk.ui.activity;
 
-import static com.lsx.bigtalk.R.*;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
@@ -26,12 +22,10 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.Selection;
@@ -57,41 +51,37 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-
+import com.hjq.permissions.OnPermissionCallback;
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
+import com.lsx.bigtalk.AppConstant;
+import com.lsx.bigtalk.storage.sp.BTSp;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
-
 import de.greenrobot.event.EventBus;
-
-import com.lsx.bigtalk.DB.entity.GroupEntity;
-import com.lsx.bigtalk.DB.entity.MessageEntity;
-import com.lsx.bigtalk.DB.entity.PeerEntity;
-import com.lsx.bigtalk.DB.entity.UserEntity;
-import com.lsx.bigtalk.DB.sp.SystemConfigSp;
+import com.lsx.bigtalk.storage.db.entity.GroupEntity;
+import com.lsx.bigtalk.storage.db.entity.MessageEntity;
+import com.lsx.bigtalk.storage.db.entity.PeerEntity;
+import com.lsx.bigtalk.storage.db.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.app.IMApplication;
-import com.lsx.bigtalk.config.DBConstant;
-import com.lsx.bigtalk.config.HandlerConstant;
-import com.lsx.bigtalk.config.IntentConstant;
-import com.lsx.bigtalk.config.SysConstant;
-import com.lsx.bigtalk.imservice.entity.AudioMessageEntity;
-import com.lsx.bigtalk.imservice.entity.ImageMessageEntity;
-import com.lsx.bigtalk.imservice.entity.TextMessageEntity;
-import com.lsx.bigtalk.imservice.entity.UnreadMessageEntity;
-import com.lsx.bigtalk.imservice.event.MessageEvent;
-import com.lsx.bigtalk.imservice.event.PriorityEvent;
-import com.lsx.bigtalk.imservice.event.ImageSelectEvent;
-import com.lsx.bigtalk.imservice.manager.IMLoginManager;
-import com.lsx.bigtalk.imservice.manager.IMStackManager;
-import com.lsx.bigtalk.imservice.service.IMService;
-import com.lsx.bigtalk.imservice.support.IMServiceConnector;
+import com.lsx.bigtalk.app.BTApplication;
+import com.lsx.bigtalk.service.entity.AudioMessageEntity;
+import com.lsx.bigtalk.service.entity.ImageMessageEntity;
+import com.lsx.bigtalk.service.entity.TextMessageEntity;
+import com.lsx.bigtalk.service.entity.UnreadMessageEntity;
+import com.lsx.bigtalk.service.event.MessageEvent;
+import com.lsx.bigtalk.service.event.PriorityEvent;
+import com.lsx.bigtalk.service.event.ImageSelectEvent;
+import com.lsx.bigtalk.service.manager.IMLoginManager;
+import com.lsx.bigtalk.StackManager;
+import com.lsx.bigtalk.service.service.IMService;
+import com.lsx.bigtalk.service.support.IMServiceConnector;
 import com.lsx.bigtalk.ui.adapter.MessageAdapter;
 import com.lsx.bigtalk.ui.adapter.album.AlbumHelper;
 import com.lsx.bigtalk.ui.adapter.album.ImageBucket;
@@ -102,11 +92,11 @@ import com.lsx.bigtalk.ui.helper.AudioRecordHandler;
 import com.lsx.bigtalk.ui.helper.Emoparser;
 import com.lsx.bigtalk.ui.widget.CustomEditView;
 import com.lsx.bigtalk.ui.widget.EmojiGridView;
-import com.lsx.bigtalk.ui.widget.MGProgressbar;
+import com.lsx.bigtalk.ui.widget.BTProgressbar;
 import com.lsx.bigtalk.ui.widget.YayaEmojiGridView;
 import com.lsx.bigtalk.utils.CommonUtil;
-import com.lsx.bigtalk.helper.IMUIHelper;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.ui.helper.IMUIHelper;
+import com.lsx.bigtalk.logs.Logger;
 
 
 public class MessageActivity extends BTBaseActivity
@@ -116,7 +106,7 @@ public class MessageActivity extends BTBaseActivity
         OnTouchListener,
         TextWatcher,
         SensorEventListener {
-    
+
     private final Logger logger = Logger.getLogger(MessageActivity.class);
     private static Handler recordMsgHandler = null;
     private PullToRefreshListView pullToRefreshListView = null;
@@ -143,13 +133,10 @@ public class MessageActivity extends BTBaseActivity
 
 
     private List<ImageBucket> albumList = null;
-    MGProgressbar progressbar = null;
-    
+    BTProgressbar progressbar = null;
+
     private SensorManager sensorManager = null;
     private Sensor sensor = null;
-
-
-    private String photoSavePath = "";
 
     private IMService imService;
     private UserEntity loginUserEntity;
@@ -181,7 +168,7 @@ public class MessageActivity extends BTBaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        currentSessionKey = getIntent().getStringExtra(IntentConstant.KEY_SESSION_KEY);
+        currentSessionKey = getIntent().getStringExtra(AppConstant.IntentConstant.KEY_SESSION_KEY);
 
         initSoftInput();
         initImageRelated();
@@ -189,9 +176,9 @@ public class MessageActivity extends BTBaseActivity
         initView();
 
         imServiceConnector.connect(this);
-        EventBus.getDefault().register(this, SysConstant.MESSAGE_EVENTBUS_PRIORITY);
+        EventBus.getDefault().register(this, AppConstant.SysConstant.MESSAGE_EVENTBUS_PRIORITY);
     }
-    
+
     @Override
     protected void onNewIntent(Intent intent) {
         logger.d("MessageActivity#onNewIntent:%s", this);
@@ -201,7 +188,7 @@ public class MessageActivity extends BTBaseActivity
         if (intent == null) {
             return;
         }
-        String newSessionKey = getIntent().getStringExtra(IntentConstant.KEY_SESSION_KEY);
+        String newSessionKey = getIntent().getStringExtra(AppConstant.IntentConstant.KEY_SESSION_KEY);
         if (newSessionKey == null) {
             return;
         }
@@ -216,7 +203,7 @@ public class MessageActivity extends BTBaseActivity
     protected void onResume() {
         logger.d("MessageActivity#onResume");
         super.onResume();
-        IMApplication.gifRunning = true;
+        BTApplication.gifRunning = true;
         historyMsgPageNo = 0;
         // not the first time
         if (imService != null) {
@@ -240,7 +227,7 @@ public class MessageActivity extends BTBaseActivity
 
     @Override
     public void onBackPressed() {
-        IMApplication.gifRunning = false;
+        BTApplication.gifRunning = false;
         cancelToast();
         super.onBackPressed();
     }
@@ -250,12 +237,12 @@ public class MessageActivity extends BTBaseActivity
         if (RESULT_OK != resultCode) {
             return;
         }
-            
+
         switch (requestCode) {
-            case SysConstant.CAMERA_FOR_DATA:
+            case AppConstant.ResultCodeConstant.CAMERA_FOR_IMAGE:
                 handleTakePhotoSuccess(data);
                 break;
-            case SysConstant.ALBUM_FOR_DATA:
+            case AppConstant.ResultCodeConstant.ALBUM_FOR_SINGLE_IMAGE:
                 setIntent(data);
                 break;
         }
@@ -279,7 +266,7 @@ public class MessageActivity extends BTBaseActivity
             mToast.cancel();
         }
     }
-    
+
     private void initData() {
         historyMsgPageNo = 0;
         messageAdapter.clearItem();
@@ -303,24 +290,23 @@ public class MessageActivity extends BTBaseActivity
         filter.addAction("android.intent.action.INPUT_METHOD_CHANGED");
         registerReceiver(inputMethodSwitchBroadcastReceiver, filter);
 
-        SystemConfigSp.instance().init(this);
         String str = Settings.Secure.getString(MessageActivity.this.getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
         String[] strArr = str.split("\\.");
         if (strArr.length >= 3) {
             currentInputMethod = strArr[1];
-            if (SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.DEFAULTINPUTMETHOD).equals(currentInputMethod)) {
-                keyboardHeight = SystemConfigSp.instance().getIntConfig(SystemConfigSp.SysCfgDimension.KEYBOARDHEIGHT);
+            if (BTSp.getInstance().getDefaultInputMethod().equals(currentInputMethod)) {
+                keyboardHeight = BTSp.getInstance().getKeyboardHeight();
             } else {
-                SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.DEFAULTINPUTMETHOD, currentInputMethod);
+                BTSp.getInstance().setDefaultInputMethod(currentInputMethod);
             }
         }
     }
-    
+
     private void setTitleByUser() {
         setTitle(peerEntity.getMainName());
         int sessionType = peerEntity.getType();
         switch (sessionType) {
-            case DBConstant.SESSION_TYPE_GROUP: 
+            case AppConstant.DBConstant.SESSION_TYPE_GROUP:
             {
                 GroupEntity group = (GroupEntity) peerEntity;
                 Set<Integer> memberIds = group.getlistGroupMemberIds();
@@ -330,7 +316,7 @@ public class MessageActivity extends BTBaseActivity
                 }
                 break;
             }
-            case DBConstant.SESSION_TYPE_SINGLE: 
+            case AppConstant.DBConstant.SESSION_TYPE_SINGLE:
             {
                 topCenterTitleTextView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -369,14 +355,14 @@ public class MessageActivity extends BTBaseActivity
             MessageEntity entity = (MessageEntity) event.object;
             if (currentSessionKey.equals(entity.getSessionKey())) {
                 Message message = Message.obtain();
-                message.what = HandlerConstant.MESSAGE_RECEIVED;
+                message.what = AppConstant.HandlerConstant.MESSAGE_RECEIVED;
                 message.obj = entity;
                 recordMsgHandler.sendMessage(message);
                 EventBus.getDefault().cancelEventDelivery(event);
             }
         }
     }
-    
+
     public void onEventMainThread(ImageSelectEvent event) {
         List<ImageItem> itemList = event.getList();
         if (itemList != null && !itemList.isEmpty())
@@ -384,7 +370,7 @@ public class MessageActivity extends BTBaseActivity
             handleChoosePhotoSuccess(itemList);
         }
     }
-    
+
     public void onEventMainThread(MessageEvent event) {
         switch (event.getEvent()) {
             case SEND_MESSAGE_SUCCESS:
@@ -420,37 +406,37 @@ public class MessageActivity extends BTBaseActivity
                 }
                 break;
             }
-                
+
         }
     }
-    
+
     protected void initAudioRelated() {
         recordMsgHandler = new Handler(Looper.getMainLooper()) {
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
                 switch (msg.what) {
-                    case HandlerConstant.RECORD_FINISHED:
+                    case AppConstant.HandlerConstant.RECORD_FINISHED:
                     {
                         onRecordVoiceEnd((Float) msg.obj);
-                        break; 
+                        break;
                     }
-                    case HandlerConstant.PLAY_STOPPED:
+                    case AppConstant.HandlerConstant.PLAY_STOPPED:
                     {
                         // 其他地方处理了
                         // adapter.stopVoicePlayAnim((String) msg.obj);
                         break;
                     }
-                    case HandlerConstant.RECEIVE_MAX_VOLUME:
+                    case AppConstant.HandlerConstant.RECEIVE_MAX_VOLUME:
                     {
                         onReceiveMaxVolume((Integer) msg.obj);
                         break;
                     }
-                    case HandlerConstant.RECORD_AUDIO_TOO_LONG:
+                    case AppConstant.HandlerConstant.RECORD_AUDIO_TOO_LONG:
                     {
                         onRecordLengthReachMax();
                         break;
                     }
-                    case HandlerConstant.MESSAGE_RECEIVED:
+                    case AppConstant.HandlerConstant.MESSAGE_RECEIVED:
                     {
                         MessageEntity entity = (MessageEntity) msg.obj;
                         handleMsgReceived(entity);
@@ -466,11 +452,11 @@ public class MessageActivity extends BTBaseActivity
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
-    
+
     private void handleMsgSendSuccess(MessageEntity messageEntity) {
         messageAdapter.updateItemState(messageEntity);
     }
-    
+
     private void consumeUnreadMsgs() {
         logger.d("MessageActivity#consumeUnreadMsgs");
         UnreadMessageEntity unreadEntity = imService.getIMUnReadMsgManager().findUnread(currentSessionKey);
@@ -484,7 +470,7 @@ public class MessageActivity extends BTBaseActivity
             scrollToBottom();
         }
     }
-    
+
     private void handleMsgReceived(MessageEntity entity) {
         logger.d("MessageActivity#handleMsgReceived");
         imService.getIMUnReadMsgManager().ackReadMsg(entity);
@@ -498,21 +484,21 @@ public class MessageActivity extends BTBaseActivity
             }
         }
     }
-    
+
     private void handleMsgSendFailed(MessageEntity messageEntity) {
         logger.d("MessageActivity#handleMsgSendFailed");
         messageAdapter.updateItemState(messageEntity);
     }
 
-    private void showGroupManageActivity() {
-        Intent i = new Intent(this, GroupManageActivity.class);
-        i.putExtra(IntentConstant.KEY_SESSION_KEY, currentSessionKey);
+    private void showGroupManagementActivity() {
+        Intent i = new Intent(this, GroupManagementActivity.class);
+        i.putExtra(AppConstant.IntentConstant.KEY_SESSION_KEY, currentSessionKey);
         startActivity(i);
     }
 
     private void initImageRelated() {
         Emoparser.getInstance(MessageActivity.this);
-        IMApplication.gifRunning = true;
+        BTApplication.gifRunning = true;
         AlbumHelper albumHelper = AlbumHelper.getHelper(MessageActivity.this);
         albumList = albumHelper.getImagesBucketList(false);
     }
@@ -520,14 +506,13 @@ public class MessageActivity extends BTBaseActivity
     @SuppressLint("ClickableViewAccessibility")
     private void initView() {
         LayoutInflater layoutInflater = LayoutInflater.from(this);
-
         layoutInflater.inflate(R.layout.message_activity, baseActivity);
 
 
         // app bar
-        setTopLeftBtnImage(R.drawable.top_back);
+        setTopLeftBtnImage(R.drawable.ic_back);
         setTopLeftBtnTitleText(getResources().getString(R.string.top_left_back));
-        setTopRightBtnImage(R.drawable.group_manage);
+        setTopRightBtnImage(R.drawable.ic_group_management);
         topLeftBtnImageView.setOnClickListener(this);
         topLeftBtnTitleTextView.setOnClickListener(this);
         topRightBtnImageView.setOnClickListener(this);
@@ -537,11 +522,11 @@ public class MessageActivity extends BTBaseActivity
         pullToRefreshListView = findViewById(R.id.message_list);
         new_msg_tips = findViewById(R.id.new_msg_tips);
         pullToRefreshListView.getRefreshableView().addHeaderView(
-                layoutInflater.inflate(R.layout.message_list_header, pullToRefreshListView.getRefreshableView(), false));
+                layoutInflater.inflate(R.layout.message_list_header_view, pullToRefreshListView.getRefreshableView(), false));
         Drawable loadingDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.pull_to_refresh_indicator, this.getTheme());
         final int indicatorSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 29, getResources().getDisplayMetrics());
         if (null != loadingDrawable) {
-           loadingDrawable.setBounds(new Rect(0, indicatorSize, 0, indicatorSize));
+            loadingDrawable.setBounds(new Rect(0, indicatorSize, 0, indicatorSize));
         }
         pullToRefreshListView.getLoadingLayoutProxy().setLoadingDrawable(loadingDrawable);
         pullToRefreshListView.getRefreshableView().setCacheColorHint(Color.WHITE);
@@ -585,7 +570,7 @@ public class MessageActivity extends BTBaseActivity
 
         recordFlatBtn = findViewById(R.id.record_flat_btn);
         recordFlatBtn.setOnTouchListener(this);
-        messageEditView = findViewById(id.message_editView);
+        messageEditView = findViewById(R.id.message_editView);
         messageEditView.setOnFocusChangeListener(msgEditOnFocusChangeListener);
         messageEditView.setOnClickListener(this);
         messageEditView.addTextChangedListener(this);
@@ -602,22 +587,22 @@ public class MessageActivity extends BTBaseActivity
 
         addPhotoBtn = findViewById(R.id.add_photo_btn);
         addPhotoBtn.setOnClickListener(this);
-        
-        
-        // volumn panel 
+
+
+        // volumn panel
         volumeDialog = new Dialog(this, R.style.volumeDialogStyle);
         volumeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         Objects.requireNonNull(volumeDialog.getWindow()).setFlags(
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        volumeDialog.setContentView(R.layout.volume_dialog);
+        volumeDialog.setContentView(R.layout.recording_dialog_view);
         volumeDialog.setCanceledOnTouchOutside(true);
         volumnImageView = volumeDialog.findViewById(R.id.volume_img);
         volumeBg = volumeDialog.findViewById(R.id.volume_bg);
 
-        
+
         // photo panel
-        photoPanelView = findViewById(id.photo_panel);
+        photoPanelView = findViewById(R.id.photo_panel);
         LayoutParams photoPanelViewLayoutparams = (LayoutParams) photoPanelView.getLayoutParams();
         if (keyboardHeight > 0) {
             photoPanelViewLayoutparams.height = keyboardHeight;
@@ -648,7 +633,7 @@ public class MessageActivity extends BTBaseActivity
 
         // loading
         View view = LayoutInflater.from(MessageActivity.this)
-                .inflate(R.layout.progress_ly, null);
+                .inflate(R.layout.bt_progress_bar_view, null);
         progressbar = view.findViewById(R.id.tt_progress);
         LayoutParams progressBarLayoutParams = new LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -664,7 +649,7 @@ public class MessageActivity extends BTBaseActivity
     public void onConfigurationChanged(@NonNull Configuration config) {
         super.onConfigurationChanged(config);
     }
-    
+
     private void loadHistoryMsg() {
         historyMsgPageNo++;
         List<MessageEntity> msgList = imService.getIMMessageManager().loadHistoryMsg(historyMsgPageNo, currentSessionKey, peerEntity);
@@ -681,8 +666,11 @@ public class MessageActivity extends BTBaseActivity
         logger.d("MessageActivity#pushMsg %d", entityList.size());
         messageAdapter.loadHistoryList(entityList);
     }
-    
+
     public void onRecordLengthReachMax() {
+        if (null == audioRecorderInstance) {
+            return;
+        }
         try {
             if (audioRecorderInstance.isRecording()) {
                 audioRecorderInstance.setRecording(false);
@@ -691,10 +679,10 @@ public class MessageActivity extends BTBaseActivity
                 volumeDialog.dismiss();
             }
 
-            recordFlatBtn.setBackgroundResource(R.drawable.pannel_btn_voiceforward_normal);
+            recordFlatBtn.setBackgroundResource(R.drawable.bg_record_flat_button_normal);
 
-            audioRecorderInstance.setRecordTime(SysConstant.MAX_SOUND_RECORD_TIME);
-            onRecordVoiceEnd(SysConstant.MAX_SOUND_RECORD_TIME);
+            audioRecorderInstance.setRecordTime(AppConstant.SysConstant.MAX_SOUND_RECORD_TIME);
+            onRecordVoiceEnd(AppConstant.SysConstant.MAX_SOUND_RECORD_TIME);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -702,29 +690,32 @@ public class MessageActivity extends BTBaseActivity
 
     private void onReceiveMaxVolume(int voiceValue) {
         if (voiceValue < 200.0) {
-            volumnImageView.setImageResource(R.drawable.volume_01);
+            volumnImageView.setImageResource(R.drawable.image_record_animate_keyframe_01);
         } else if (voiceValue > 200.0 && voiceValue < 600) {
-            volumnImageView.setImageResource(R.drawable.volume_02);
+            volumnImageView.setImageResource(R.drawable.image_record_animate_keyframe_02);
         } else if (voiceValue > 600.0 && voiceValue < 1200) {
-            volumnImageView.setImageResource(R.drawable.volume_03);
+            volumnImageView.setImageResource(R.drawable.image_record_animate_keyframe_03);
         } else if (voiceValue > 1200.0 && voiceValue < 2400) {
-            volumnImageView.setImageResource(R.drawable.volume_04);
+            volumnImageView.setImageResource(R.drawable.image_record_animate_keyframe_04);
         } else if (voiceValue > 2400.0 && voiceValue < 10000) {
-            volumnImageView.setImageResource(R.drawable.volume_05);
+            volumnImageView.setImageResource(R.drawable.image_record_animate_keyframe_05);
         } else if (voiceValue > 10000.0 && voiceValue < 28000.0) {
-            volumnImageView.setImageResource(R.drawable.volume_06);
+            volumnImageView.setImageResource(R.drawable.image_record_animate_keyframe_06);
         } else if (voiceValue > 28000.0) {
-            volumnImageView.setImageResource(R.drawable.volume_07);
+            volumnImageView.setImageResource(R.drawable.image_record_animate_keyframe_07);
         }
     }
 
-    private void handleTakePhotoSuccess(Intent ignored_) {
-        ImageMessageEntity imageMessage = ImageMessageEntity.buildForSend(photoSavePath, loginUserEntity, peerEntity);
+    private void handleTakePhotoSuccess(Intent resultIntent) {
+        ImageMessageEntity imageMessage = ImageMessageEntity.buildForSend(
+            resultIntent.getStringExtra(AppConstant.IntentConstant.KEY_INTENT_IMAGE_CAPTURE_RESULT),
+            loginUserEntity,
+            peerEntity);
         List<ImageMessageEntity> sendList = new ArrayList<>(1);
         sendList.add(imageMessage);
         imService.getIMMessageManager().sendImages(sendList);
         pushMsg(imageMessage);
-        messageEditView.clearFocus();//消除焦点
+        messageEditView.clearFocus();
     }
 
     private void onRecordVoiceEnd(float audioLen) {
@@ -736,7 +727,7 @@ public class MessageActivity extends BTBaseActivity
 
     @Override
     public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-        
+
     }
 
     @Override
@@ -772,7 +763,7 @@ public class MessageActivity extends BTBaseActivity
                 actFinish();
                 break;
             case R.id.right_btn:
-                showGroupManageActivity();
+                showGroupManagementActivity();
                 break;
             case R.id.add_photo_btn:
             {
@@ -811,9 +802,9 @@ public class MessageActivity extends BTBaseActivity
                     Toast.makeText(MessageActivity.this, getResources().getString(R.string.not_found_album), Toast.LENGTH_LONG).show();
                     return;
                 }
-                Intent intent = new Intent(MessageActivity.this, PickPhotoActivity.class);
-                intent.putExtra(IntentConstant.KEY_SESSION_KEY, currentSessionKey);
-                startActivityForResult(intent, SysConstant.ALBUM_FOR_DATA);
+                Intent intent = new Intent(MessageActivity.this, ImagePickerActivity.class);
+                intent.putExtra(AppConstant.IntentConstant.KEY_SESSION_KEY, currentSessionKey);
+                startActivityForResult(intent, AppConstant.ResultCodeConstant.ALBUM_FOR_SINGLE_IMAGE);
 
                 MessageActivity.this.overridePendingTransition(R.anim.album_bottom_enter, R.anim.stay_y);
                 messageEditView.clearFocus();
@@ -822,11 +813,8 @@ public class MessageActivity extends BTBaseActivity
             }
             case R.id.take_photo_btn:
             {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                photoSavePath = CommonUtil.getImageSavePath(System.currentTimeMillis() + ".jpg");
-                assert photoSavePath != null;
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(photoSavePath)));
-                startActivityForResult(intent, SysConstant.CAMERA_FOR_DATA);
+                Intent intent = new Intent(this, ImageCapturePreviewActivity.class);
+                startActivityForResult(intent, AppConstant.ResultCodeConstant.CAMERA_FOR_IMAGE);
                 messageEditView.clearFocus();
                 scrollToBottom();
                 break;
@@ -911,80 +899,123 @@ public class MessageActivity extends BTBaseActivity
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         v.performClick();
-        int id = v.getId();
         scrollToBottom();
-        if (id == R.id.add_record_btn) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-
-                if (AudioPlayerHandler.getInstance().isPlaying()) {
-                    AudioPlayerHandler.getInstance().stopPlayer();
+        
+        switch (v.getId()) {
+            case R.id.record_flat_btn:
+            {
+                if (MotionEvent.ACTION_DOWN == event.getAction()) {
+                    pointerBegOffsetY = event.getY();
+                    tryToRecord();
+                } else if (MotionEvent.ACTION_MOVE == event.getAction()) {
+                    pointerEndOffsetY = event.getY();
+                    setRecordVolumnPanelVisibility();
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    pointerEndOffsetY = event.getY();
+                    setRecordUsageGuidePanelVisibility();
                 }
+                break;
+            }
+            default:
+                break;
+        }
 
-                y1 = event.getY();
-                recordFlatBtn.setBackgroundResource(R.drawable.pannel_btn_voiceforward_pressed);
-                recordFlatBtn.setText(MessageActivity.this.getResources().getString(
-                        R.string.release_to_send_voice));
+        return false;
+    }
 
-                volumnImageView.setImageResource(R.drawable.volume_01);
-                volumnImageView.setVisibility(View.VISIBLE);
-                volumeBg.setBackgroundResource(R.drawable.recordding);
+    private void setRecordUsageGuidePanelVisibility() {
+        if (null != audioRecorderInstance && audioRecorderInstance.isRecording()) {
+            audioRecorderInstance.setRecording(false);
+        }
+        if (volumeDialog.isShowing()) {
+            volumeDialog.dismiss();
+        }
+        recordFlatBtn.setBackgroundResource(R.drawable.bg_record_flat_button_normal);
+        recordFlatBtn.setText(MessageActivity.this.getResources().getString(
+                R.string.tip_for_voice_forward));
+        if (pointerBegOffsetY - pointerEndOffsetY <= 180) {
+            if (null != audioRecorderInstance && audioRecorderInstance.getRecordTime() >= 0.5) {
+                if (audioRecorderInstance.getRecordTime() < AppConstant.SysConstant.MAX_SOUND_RECORD_TIME) {
+                    Message msg = recordMsgHandler.obtainMessage();
+                    msg.what = AppConstant.HandlerConstant.RECORD_FINISHED;
+                    msg.obj = audioRecorderInstance.getRecordTime();
+                    recordMsgHandler.sendMessage(msg);
+                }
+            } else {
+                volumnImageView.setVisibility(View.GONE);
+                volumeBg
+                        .setBackgroundResource(R.drawable.image_record_too_short_tips);
                 volumeDialog.show();
-                audioSavePath = CommonUtil
-                        .getAudioSavePath(IMLoginManager.getInstance().getLoginId());
-
-                // 这个callback很蛋疼，发送消息从MotionEvent.ACTION_UP 判断
-                audioRecorderInstance = new AudioRecordHandler(audioSavePath);
-
-                Thread audioRecorderThread = new Thread(audioRecorderInstance);
-                audioRecorderInstance.setRecording(true);
-                logger.d("message_activity#audio#audio record thread starts");
-                audioRecorderThread.start();
-            } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                y2 = event.getY();
-                if (y1 - y2 > 180) {
-                    volumnImageView.setVisibility(View.GONE);
-                    volumeBg.setBackgroundResource(R.drawable.record_will_cancel);
-                } else {
-                    volumnImageView.setVisibility(View.VISIBLE);
-                    volumeBg.setBackgroundResource(R.drawable.recordding);
-                }
-            } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                y2 = event.getY();
-                if (audioRecorderInstance.isRecording()) {
-                    audioRecorderInstance.setRecording(false);
-                }
-                if (volumeDialog.isShowing()) {
-                    volumeDialog.dismiss();
-                }
-                recordFlatBtn.setBackgroundResource(R.drawable.pannel_btn_voiceforward_normal);
-                recordFlatBtn.setText(MessageActivity.this.getResources().getString(
-                        R.string.tip_for_voice_forward));
-                if (y1 - y2 <= 180) {
-                    if (audioRecorderInstance.getRecordTime() >= 0.5) {
-                        if (audioRecorderInstance.getRecordTime() < SysConstant.MAX_SOUND_RECORD_TIME) {
-                            Message msg = recordMsgHandler.obtainMessage();
-                            msg.what = HandlerConstant.RECORD_FINISHED;
-                            msg.obj = audioRecorderInstance.getRecordTime();
-                            recordMsgHandler.sendMessage(msg);
-                        }
-                    } else {
-                        volumnImageView.setVisibility(View.GONE);
-                        volumeBg
-                                .setBackgroundResource(R.drawable.record_too_short);
-                        volumeDialog.show();
-                        Timer timer = new Timer();
-                        timer.schedule(new TimerTask() {
-                            public void run() {
-                                if (volumeDialog.isShowing())
-                                    volumeDialog.dismiss();
-                                this.cancel();
-                            }
-                        }, 700);
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    public void run() {
+                        if (volumeDialog.isShowing())
+                            volumeDialog.dismiss();
+                        this.cancel();
                     }
-                }
+                }, 700);
             }
         }
-        return false;
+    }
+
+    private void setRecordVolumnPanelVisibility() {
+        if (pointerBegOffsetY - pointerEndOffsetY > 180) {
+            volumnImageView.setVisibility(View.GONE);
+            volumeBg.setBackgroundResource(R.drawable.image_record_remove_finger_to_cancel_tips);
+        } else {
+            volumnImageView.setVisibility(View.VISIBLE);
+            volumeBg.setBackgroundResource(R.drawable.image_record_slide_up_to_cancel_tips);
+        }
+    }
+
+    private void tryToRecord() {
+        if (XXPermissions.isGranted(this, Permission.RECORD_AUDIO)) {
+            startRecord();
+            return;
+        }
+
+        XXPermissions.with(this)
+            .permission(Permission.RECORD_AUDIO)
+            .request(new OnPermissionCallback() {
+                @Override
+                public void onGranted(@NonNull List<String> permissions, boolean allGranted) {
+                    tryToRecord();
+                }
+
+                @Override
+                public void onDenied(@NonNull List<String> permissions, boolean doNotAskAgain) {
+                    if (doNotAskAgain) {
+                        toast(getString(R.string.grant_record_permission_failed_todo));
+                        XXPermissions.startPermissionActivity(MessageActivity.this, permissions);
+                    } else {
+                        toast(getString(R.string.grant_record_permission_failed));
+                    }
+                }
+            });
+    }
+
+    private void startRecord() {
+        audioSavePath = CommonUtil
+                .getAudioSavePath(this, IMLoginManager.getInstance().getLoginId());
+        audioRecorderInstance = new AudioRecordHandler(audioSavePath);
+        Thread audioRecorderThread = new Thread(audioRecorderInstance);
+        audioRecorderInstance.setRecording(true);
+        logger.d("message_activity#audio#audio record thread starts");
+        audioRecorderThread.start();
+
+        if (AudioPlayerHandler.getInstance().isPlaying()) {
+            AudioPlayerHandler.getInstance().stopPlayer();
+        }
+
+
+        recordFlatBtn.setBackgroundResource(R.drawable.bg_record_flat_button_pressed);
+        recordFlatBtn.setText(MessageActivity.this.getResources().getString(
+                R.string.release_to_send_voice));
+
+        volumnImageView.setImageResource(R.drawable.image_record_animate_keyframe_01);
+        volumnImageView.setVisibility(View.VISIBLE);
+        volumeBg.setBackgroundResource(R.drawable.image_record_slide_up_to_cancel_tips);
+        volumeDialog.show();
     }
 
     @Override
@@ -1008,7 +1039,7 @@ public class MessageActivity extends BTBaseActivity
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        
+
     }
 
     @Override
@@ -1027,7 +1058,7 @@ public class MessageActivity extends BTBaseActivity
             sendMsgBtn.setVisibility(View.GONE);
         }
     }
-    
+
     private void scrollToBottom() {
         ListView listView = pullToRefreshListView.getRefreshableView();
         if (listView != null) {
@@ -1071,8 +1102,8 @@ public class MessageActivity extends BTBaseActivity
 
     private void actFinish() {
         inputManager.hideSoftInputFromWindow(messageEditView.getWindowToken(), 0);
-        IMStackManager.getStackManager().popTopActivitiesUntil(MainActivity.class);
-        IMApplication.gifRunning = false;
+        StackManager.getStackManager().popTopActivitiesUntil(MainActivity.class);
+        BTApplication.gifRunning = false;
         MessageActivity.this.finish();
     }
 
@@ -1120,7 +1151,7 @@ public class MessageActivity extends BTBaseActivity
     private final EmojiGridView.OnEmojiGridViewItemClick onEmojiGridViewItemClick = new EmojiGridView.OnEmojiGridViewItemClick() {
         @Override
         public void onItemClick(int facesPos, int viewIndex) {
-            int deleteId = (++viewIndex) * (SysConstant.MSG_PAGE_SIZE - 1);
+            int deleteId = (++viewIndex) * (AppConstant.SysConstant.MSG_PAGE_SIZE - 1);
             if (deleteId > Emoparser.getInstance(MessageActivity.this).getResIdList().length) {
                 deleteId = Emoparser.getInstance(MessageActivity.this).getResIdList().length;
             }
@@ -1184,8 +1215,7 @@ public class MessageActivity extends BTBaseActivity
             if (r.bottom < rootBottom) {
                 //按照键盘高度设置表情框和发送图片按钮框的高度
                 keyboardHeight = rootBottom - r.bottom;
-                SystemConfigSp.instance().init(MessageActivity.this);
-                SystemConfigSp.instance().setIntConfig(SystemConfigSp.SysCfgDimension.KEYBOARDHEIGHT, keyboardHeight);
+                BTSp.getInstance().setKeyboardHeight(keyboardHeight);
                 LayoutParams params = (LayoutParams) photoPanelView.getLayoutParams();
                 params.height = keyboardHeight;
                 LayoutParams params1 = (LayoutParams) emojiPanelView.getLayoutParams();
@@ -1205,7 +1235,7 @@ public class MessageActivity extends BTBaseActivity
                     String strCompany = strArr[1];
                     if (!strCompany.equals(currentInputMethod)) {
                         currentInputMethod = strCompany;
-                        SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.DEFAULTINPUTMETHOD, currentInputMethod);
+                        BTSp.getInstance().setDefaultInputMethod(currentInputMethod);
                         keyboardHeight = 0;
                         photoPanelView.setVisibility(View.GONE);
                         emojiPanelView.setVisibility(View.GONE);

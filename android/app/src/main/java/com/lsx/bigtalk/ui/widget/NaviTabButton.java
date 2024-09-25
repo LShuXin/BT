@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.ui.activity.MainActivity;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.logs.Logger;
 import com.lsx.bigtalk.ui.helper.listener.OnDoubleClickListener;
 
 
@@ -44,7 +44,7 @@ public class NaviTabButton extends FrameLayout {
         this.mContext = context;
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.navi_tab_button, this, true);
+        inflater.inflate(R.layout.nav_tab_button_view, this, true);
         RelativeLayout container = findViewById(R.id.tab_btn_container);
 
         mImage = findViewById(R.id.tab_btn_default);
@@ -56,7 +56,7 @@ public class NaviTabButton extends FrameLayout {
                 @Override
                 public void onDoubleClick(View view) {
                     if (mIndex == 0) {
-                        ((MainActivity) mContext).chatDoubleListener();
+                        ((MainActivity) mContext).handleSessionDoubleClick();
                     }
                 }
 

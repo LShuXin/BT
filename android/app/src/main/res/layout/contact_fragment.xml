@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -9,12 +9,12 @@
         android:background="@color/contact_default_bg"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@color/contact_list_item_bk" >
+            android:background="@color/contact_list_item_bk">
 
             <ListView
                 android:id="@+id/all_contact_list"
@@ -23,7 +23,7 @@
                 android:layout_gravity="center"
                 android:listSelector="@android:color/transparent"
                 android:cacheColorHint="@android:color/transparent"
-                android:divider="@null"/>
+                android:divider="@null" />
 
             <ListView
                 android:id="@+id/department_contact_list"
@@ -40,20 +40,20 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
-                android:background="@drawable/head_toast_bg"
+                android:background="@drawable/bg_toast"
                 android:gravity="center"
                 android:textColor="#ffffffff"
                 android:textSize="30sp"
                 android:visibility="invisible" />
 
             <com.lsx.bigtalk.ui.widget.SortSideBar
-                android:id="@+id/sidrbar"
+                android:id="@+id/side_bar"
                 android:layout_width="30dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="end|center"
                 android:layout_marginBottom="31dp"
                 android:layout_marginTop="28dp" 
-                android:layout_marginEnd="2.5dp"/>
+                android:layout_marginEnd="2.5dp" />
         </FrameLayout>
     </LinearLayout>
 
@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:indeterminateDrawable="@drawable/progress_bar"
+        android:indeterminateDrawable="@drawable/selector_progress_bar"
         android:indeterminateDuration="4000"
         android:visibility="visible" />
 

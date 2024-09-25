@@ -10,8 +10,9 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 
+import com.lsx.bigtalk.AppConstant;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.IntentConstant;
+
 import com.lsx.bigtalk.ui.activity.WebViewFragmentActivity;
 import com.lsx.bigtalk.ui.adapter.FinderAdapter;
 import com.lsx.bigtalk.ui.base.BTBaseFragment;
@@ -49,7 +50,7 @@ public class FinderFragment extends BTBaseFragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String url = mAdapter.getItem(i).getItemUrl();
                 Intent intent = new Intent(FinderFragment.this.getActivity(), WebViewFragmentActivity.class);
-                intent.putExtra(IntentConstant.WEBVIEW_URL, url);
+                intent.putExtra(AppConstant.IntentConstant.WEBVIEW_URL, url);
                 startActivity(intent);
             }
         });

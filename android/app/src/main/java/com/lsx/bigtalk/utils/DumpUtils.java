@@ -2,11 +2,13 @@ package com.lsx.bigtalk.utils;
 
 import android.util.Log;
 
+import com.lsx.bigtalk.logs.Logger;
+
 import java.util.List;
 
 public class DumpUtils {
 	public static void dumpStringList(Logger logger, String desc,
-			List<String> memberList) {
+									  List<String> memberList) {
 		String log = String.format("%s, members:", desc);
 		for (String memberId : memberList) {
 			log += memberId + ",";
@@ -16,7 +18,7 @@ public class DumpUtils {
 	}
 
     public static void dumpIntegerList(Logger logger, String desc,
-                                      List<Integer> memberList) {
+									   List<Integer> memberList) {
         String log = String.format("%s, members:", desc);
         for (int memberId : memberList) {
             log += memberId + ",";
@@ -27,7 +29,7 @@ public class DumpUtils {
 
 	//oneLine for purpose of "tail -f", so you can track them at one line
 	public static void dumpStacktrace(Logger logger, String desc,
-			boolean oneLine) {
+									  boolean oneLine) {
 		String stackTraceString = Log.getStackTraceString(new Throwable());
 
 		if (oneLine) {

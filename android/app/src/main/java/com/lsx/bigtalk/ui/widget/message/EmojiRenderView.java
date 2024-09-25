@@ -7,10 +7,10 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.lsx.bigtalk.DB.entity.MessageEntity;
-import com.lsx.bigtalk.DB.entity.UserEntity;
+import com.lsx.bigtalk.storage.db.entity.MessageEntity;
+import com.lsx.bigtalk.storage.db.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.imservice.entity.TextMessageEntity;
+import com.lsx.bigtalk.service.entity.TextMessageEntity;
 import com.lsx.bigtalk.ui.helper.Emoparser;
 import com.lsx.bigtalk.ui.widget.GifView;
 
@@ -29,7 +29,7 @@ public class EmojiRenderView extends  BaseMsgRenderView {
     private GifView messageContent;
 
     public static EmojiRenderView inflater(Context context,ViewGroup viewGroup,boolean isMine){
-        int resource = isMine?R.layout.mine_emoji_message_item :R.layout.others_emoji_message_item;
+        int resource = isMine?R.layout.mine_emoji_message_item_view :R.layout.others_emoji_message_item_view;
         EmojiRenderView gifRenderView = (EmojiRenderView) LayoutInflater.from(context).inflate(resource, viewGroup, false);
         gifRenderView.setMine(isMine);
         gifRenderView.setParentView(viewGroup);

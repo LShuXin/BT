@@ -14,14 +14,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.lsx.bigtalk.AppConstant;
+import com.lsx.bigtalk.service.support.SessionInfo;
 import com.mogujie.tools.ScreenTools;
-import com.lsx.bigtalk.config.DBConstant;
-import com.lsx.bigtalk.DB.entity.GroupEntity;
+
+import com.lsx.bigtalk.storage.db.entity.GroupEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.SysConstant;
-import com.lsx.bigtalk.imservice.SessionInfo;
+
 import com.lsx.bigtalk.utils.DateUtil;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.logs.Logger;
 import com.lsx.bigtalk.ui.widget.IMBaseImageView;
 import com.lsx.bigtalk.ui.widget.IMGroupAvatar;
 
@@ -64,9 +65,9 @@ public class SessionAdapter extends BaseAdapter {
                 return SESSION_TYPE_INVALID;
             }
             SessionInfo sessionInfo = sessionList.get(position);
-            if (sessionInfo.getSessionType() == DBConstant.SESSION_TYPE_SINGLE) {
+            if (sessionInfo.getSessionType() == AppConstant.DBConstant.SESSION_TYPE_SINGLE) {
                 return SESSION_TYPE_SINGLE;
-            } else if (sessionInfo.getSessionType() == DBConstant.SESSION_TYPE_GROUP) {
+            } else if (sessionInfo.getSessionType() == AppConstant.DBConstant.SESSION_TYPE_GROUP) {
                 return SESSION_TYPE_GROUP;
             } else {
                 return SESSION_TYPE_INVALID;
@@ -107,7 +108,7 @@ public class SessionAdapter extends BaseAdapter {
         String sessionKey = entity.getSessionKey();
         for (SessionInfo sessionInfo : sessionList) {
             if (sessionInfo.getSessionKey().equals(sessionKey)) {
-                sessionInfo.setIsShield(entity.getStatus() == DBConstant.GROUP_STATUS_SHIELD);
+                sessionInfo.setIsShield(entity.getStatus() == AppConstant.DBConstant.GROUP_STATUS_SHIELD);
                 notifyDataSetChanged();
                 break;
             }
@@ -168,15 +169,15 @@ public class SessionAdapter extends BaseAdapter {
         SessionInfo sessionInfo = sessionList.get(position);
         SingleSessionViewHolder holder;
         if (null == convertView) {
-            convertView = mInflater.inflate(R.layout.item_chat, parent, false);
+            convertView = mInflater.inflate(R.layout.session_item_view, parent, false);
             holder = new SingleSessionViewHolder();
-            holder.avatar = convertView.findViewById(R.id.contact_portrait);
-            holder.uname = convertView.findViewById(R.id.shop_name);
+            holder.avatar = convertView.findViewById(R.id.contact_avatar);
+            holder.uname = convertView.findViewById(R.id.contact_name);
             holder.lastContent = convertView.findViewById(R.id.message_body);
             holder.lastTime = convertView.findViewById(R.id.message_time);
-            holder.msgCount = convertView.findViewById(R.id.message_count_notify);
+            holder.msgCount = convertView.findViewById(R.id.unread_message_count);
             holder.noDisturb = convertView.findViewById(R.id.message_time_no_disturb_view);
-            holder.avatar.setImageResource(R.drawable.default_user_avatar);
+            holder.avatar.setImageResource(R.drawable.image_default_user_avatar);
             convertView.setTag(holder);
         } else {
             holder = (SingleSessionViewHolder) convertView.getTag();
@@ -197,13 +198,13 @@ public class SessionAdapter extends BaseAdapter {
         SessionInfo sessionInfo = sessionList.get(position);
         GroupSessionViewHolder holder;
         if (null == convertView) {
-            convertView = mInflater.inflate(R.layout.item_chat_group, parent, false);
+            convertView = mInflater.inflate(R.layout.group_session_item_view, parent, false);
             holder = new GroupSessionViewHolder();
-            holder.avatarLayout = convertView.findViewById(R.id.contact_portrait);
-            holder.uname = convertView.findViewById(R.id.shop_name);
+            holder.avatarLayout = convertView.findViewById(R.id.contact_avatar);
+            holder.uname = convertView.findViewById(R.id.contact_name);
             holder.lastContent = convertView.findViewById(R.id.message_body);
             holder.lastTime = convertView.findViewById(R.id.message_time);
-            holder.msgCount = convertView.findViewById(R.id.message_count_notify);
+            holder.msgCount = convertView.findViewById(R.id.unread_message_count);
             holder.noDisturb = convertView.findViewById(R.id.message_time_no_disturb_view);
             convertView.setTag(holder);
         } else {
@@ -262,9 +263,9 @@ public class SessionAdapter extends BaseAdapter {
             contactViewHolder.msgCount.setVisibility(View.GONE);
         }
         //头像设置
-        contactViewHolder.avatar.setDefaultImageRes(R.drawable.default_user_avatar);
+        contactViewHolder.avatar.setDefaultImageRes(R.drawable.image_default_user_avatar);
         contactViewHolder.avatar.setCorner(8);
-        contactViewHolder.avatar.setAvatarAppend(SysConstant.AVATAR_APPEND_100);
+        contactViewHolder.avatar.setAvatarAppend(AppConstant.SysConstant.AVATAR_APPEND_100);
         contactViewHolder.avatar.setImageUrl(avatarUrl);
         // 设置其它信息
         contactViewHolder.uname.setText(userName);
@@ -286,7 +287,7 @@ public class SessionAdapter extends BaseAdapter {
 
         if (unReadCount > 0) {
             if (sessionInfo.getIsShield()) {
-                groupViewHolder.msgCount.setBackgroundResource(R.drawable.message_botify_no_disturb);
+                groupViewHolder.msgCount.setBackgroundResource(R.drawable.ic_message_notify_no_disturb);
                 groupViewHolder.msgCount.setVisibility(View.VISIBLE);
                 groupViewHolder.msgCount.setText("");
                 ((RelativeLayout.LayoutParams) groupViewHolder.msgCount.getLayoutParams()).leftMargin = ScreenTools.instance(this.mInflater.getContext()).dip2px(-7);
@@ -294,7 +295,7 @@ public class SessionAdapter extends BaseAdapter {
                 groupViewHolder.msgCount.getLayoutParams().width = ScreenTools.instance(this.mInflater.getContext()).dip2px(10);
                 groupViewHolder.msgCount.getLayoutParams().height = ScreenTools.instance(this.mInflater.getContext()).dip2px(10);
             } else {
-                groupViewHolder.msgCount.setBackgroundResource(R.drawable.message_notify);
+                groupViewHolder.msgCount.setBackgroundResource(R.drawable.ic_message_notify);
                 groupViewHolder.msgCount.setVisibility(View.VISIBLE);
                 ((RelativeLayout.LayoutParams) groupViewHolder.msgCount.getLayoutParams()).leftMargin = ScreenTools.instance(this.mInflater.getContext()).dip2px(-10);
                 ((RelativeLayout.LayoutParams) groupViewHolder.msgCount.getLayoutParams()).topMargin = ScreenTools.instance(this.mInflater.getContext()).dip2px(3);
@@ -327,7 +328,7 @@ public class SessionAdapter extends BaseAdapter {
             if (null == avatarUrlList) {
                 return;
             }
-            holder.avatarLayout.setAvatarUrlAppend(SysConstant.AVATAR_APPEND_32);
+            holder.avatarLayout.setAvatarUrlAppend(AppConstant.SysConstant.AVATAR_APPEND_32);
             holder.avatarLayout.setChildCorner(3);
             holder.avatarLayout.setAvatarUrls(new ArrayList<String>(avatarUrlList));
         } catch (Exception e) {

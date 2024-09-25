@@ -5,8 +5,10 @@ import android.graphics.Bitmap;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import com.lsx.bigtalk.AppConstant;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.SysConstant;
+
+import com.lsx.bigtalk.logs.Logger;
 import com.lsx.bigtalk.ui.helper.CircleBitmapDisplayer;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
@@ -36,7 +38,7 @@ public class ImageLoaderUtil {
 
     public static void initImageLoaderConfig(Context context) {
         try {
-            File cacheDir = StorageUtils.getOwnCacheDirectory(context, CommonUtil.getSavePath(SysConstant.FILE_SAVE_TYPE_IMAGE));
+            File cacheDir = StorageUtils.getOwnCacheDirectory(context, CommonUtil.getSavePath(AppConstant.SysConstant.FILE_SAVE_TYPE_IMAGE));
             File reserveCacheDir = StorageUtils.getCacheDirectory(context);
 
             int maxMemory = (int) (Runtime.getRuntime().maxMemory() );
@@ -73,7 +75,7 @@ public class ImageLoaderUtil {
     public static DisplayImageOptions getAvatarOptions(int corner,int defaultRes){
         try {
             if (defaultRes <= 0) {
-                defaultRes = R.drawable.default_user_avatar;
+                defaultRes = R.drawable.image_default_user_avatar;
             }
             if (avatarOptionsMaps.containsKey(defaultRes)) {
                 Map<Integer, DisplayImageOptions> displayOption = avatarOptionsMaps.get(defaultRes);
@@ -122,7 +124,7 @@ public class ImageLoaderUtil {
     public static DisplayImageOptions getAvatarOptions2(int corner,int defaultRes){
         try {
             if (defaultRes <= 0) {
-                defaultRes = R.drawable.default_user_avatar;
+                defaultRes = R.drawable.image_default_user_avatar;
             }
             if (avatarOptionsMaps.containsKey(defaultRes)) {
                 Map<Integer, DisplayImageOptions> displayOption = avatarOptionsMaps.get(defaultRes);

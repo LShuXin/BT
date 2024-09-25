@@ -6,8 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.lsx.bigtalk.AppConstant;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.IntentConstant;
+
 import com.lsx.bigtalk.ui.helper.Emoparser;
 import com.lsx.bigtalk.ui.widget.GifLoadTask;
 import com.lsx.bigtalk.ui.widget.GifView;
@@ -24,11 +25,11 @@ public class PreviewGifActivity extends Activity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.preview_gif_activity);
+        setContentView(R.layout.gif_message_preview_activity);
         gifView = findViewById(R.id.gif);
         backView = findViewById(R.id.back_btn);
         backView.setOnClickListener(this);
-        String content = getIntent().getStringExtra(IntentConstant.PREVIEW_TEXT_CONTENT);
+        String content = getIntent().getStringExtra(AppConstant.IntentConstant.PREVIEW_TEXT_CONTENT);
         if (Emoparser.getInstance(this).isMessageGif(content)) {
             InputStream is = getResources().openRawResource(Emoparser.getInstance(this).getResIdByCharSequence(content));
             int length = 0;

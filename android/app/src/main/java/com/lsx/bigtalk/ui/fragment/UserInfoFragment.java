@@ -13,18 +13,19 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.lsx.bigtalk.DB.entity.DepartmentEntity;
-import com.lsx.bigtalk.DB.entity.UserEntity;
+import com.lsx.bigtalk.AppConstant;
+import com.lsx.bigtalk.storage.db.entity.DepartmentEntity;
+import com.lsx.bigtalk.storage.db.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.DBConstant;
-import com.lsx.bigtalk.config.IntentConstant;
-import com.lsx.bigtalk.config.SysConstant;
-import com.lsx.bigtalk.helper.IMUIHelper;
-import com.lsx.bigtalk.imservice.event.UserInfoEvent;
-import com.lsx.bigtalk.imservice.manager.IMLoginManager;
-import com.lsx.bigtalk.imservice.service.IMService;
+
+
+
+import com.lsx.bigtalk.ui.helper.IMUIHelper;
+import com.lsx.bigtalk.service.event.ContactEvent;
+import com.lsx.bigtalk.service.manager.IMLoginManager;
+import com.lsx.bigtalk.service.service.IMService;
 import com.lsx.bigtalk.ui.activity.ImagePreviewActivity;
-import com.lsx.bigtalk.imservice.support.IMServiceConnector;
+import com.lsx.bigtalk.service.support.IMServiceConnector;
 import com.lsx.bigtalk.ui.widget.IMBaseImageView;
 
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class UserInfoFragment extends MainFragment {
                 return;
             }
 
-            currentUserId = getActivity().getIntent().getIntExtra(IntentConstant.KEY_PEER_ID,0);
+            currentUserId = getActivity().getIntent().getIntExtra(AppConstant.IntentConstant.KEY_PEER_ID,0);
             if(currentUserId == 0){
                 logger.e("detail#intent params error!!");
                 return;
@@ -84,7 +85,7 @@ public class UserInfoFragment extends MainFragment {
 			((ViewGroup) curView.getParent()).removeView(curView);
 			return curView;
 		}
-		curView = inflater.inflate(R.layout.user_detail_fragment, baseFragmentLayout);
+		curView = inflater.inflate(R.layout.userinfo_fragment, baseFragmentLayout);
 		super.init(curView);
 		showProgressBar();
 		initRes();
@@ -95,7 +96,7 @@ public class UserInfoFragment extends MainFragment {
 	public void onResume() {
 		Intent intent = getActivity().getIntent();
 		if (null != intent) {
-			String fromPage = intent.getStringExtra(IntentConstant.USER_DETAIL_PARAM);
+			String fromPage = intent.getStringExtra(AppConstant.IntentConstant.USER_DETAIL_PARAM);
 			setTopLeftText(fromPage);
 		}
 		super.onResume();
@@ -107,7 +108,7 @@ public class UserInfoFragment extends MainFragment {
 	private void initRes() {
 		// 设置标题栏
 		setTopCenterTitleText(getActivity().getString(R.string.page_user_detail));
-		setTopLeftBtnImage(R.drawable.top_back);
+		setTopLeftBtnImage(R.drawable.ic_back);
 		topLeftContainerLayout.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -122,8 +123,8 @@ public class UserInfoFragment extends MainFragment {
 	protected void initHandler() {
 	}
 
-    public void onEventMainThread(UserInfoEvent event){
-		if (Objects.requireNonNull(event) == UserInfoEvent.USER_INFO_UPDATE) {
+    public void onEventMainThread(ContactEvent event){
+		if (Objects.requireNonNull(event) == ContactEvent.CONTACT_INFO_UPDATE) {
 			UserEntity entity = imService.getIMContactManager().findContact(currentUserId);
 			if (currentUser.equals(entity)) {
 				initBaseProfile();
@@ -135,15 +136,15 @@ public class UserInfoFragment extends MainFragment {
 
 	private void initBaseProfile() {
 		logger.d("detail#initBaseProfile");
-        IMBaseImageView portraitImageView = curView.findViewById(R.id.user_portrait);
+        IMBaseImageView portraitImageView = curView.findViewById(R.id.user_avatar);
 
 		setTextViewContent(R.id.nickName, currentUser.getMainName());
 		setTextViewContent(R.id.userName, currentUser.getRealName());
         //头像设置
-        portraitImageView.setDefaultImageRes(R.drawable.default_user_avatar);
+        portraitImageView.setDefaultImageRes(R.drawable.image_default_user_avatar);
         portraitImageView.setCorner(8);
-        portraitImageView.setAvatarAppend(SysConstant.AVATAR_APPEND_200);
-        portraitImageView.setImageResource(R.drawable.default_user_avatar);
+        portraitImageView.setAvatarAppend(AppConstant.SysConstant.AVATAR_APPEND_200);
+        portraitImageView.setImageResource(R.drawable.image_default_user_avatar);
         portraitImageView.setImageUrl(currentUser.getAvatar());
 
 		portraitImageView.setOnClickListener(new View.OnClickListener() {
@@ -151,8 +152,8 @@ public class UserInfoFragment extends MainFragment {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getActivity(), ImagePreviewActivity.class);
-				intent.putExtra(IntentConstant.KEY_AVATAR_URL, currentUser.getAvatar());
-				intent.putExtra(IntentConstant.KEY_IS_IMAGE_CONTACT_AVATAR, true);
+				intent.putExtra(AppConstant.IntentConstant.KEY_AVATAR_URL, currentUser.getAvatar());
+				intent.putExtra(AppConstant.IntentConstant.KEY_IS_IMAGE_CONTACT_AVATAR, true);
 				
 				startActivity(intent);
 			}
@@ -182,7 +183,7 @@ public class UserInfoFragment extends MainFragment {
 		setTextViewContent(R.id.telno, currentUser.getPhone());
 		setTextViewContent(R.id.email, currentUser.getEmail());
 
-		View phoneView = curView.findViewById(R.id.phoneArea);
+		View phoneView = curView.findViewById(R.id.user_phone);
         View emailView = curView.findViewById(R.id.emailArea);
 		IMUIHelper.setViewTouchHightlighted(phoneView);
         IMUIHelper.setViewTouchHightlighted(emailView);
@@ -204,7 +205,6 @@ public class UserInfoFragment extends MainFragment {
                 });
             }
         });
-
 		phoneView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -249,7 +249,7 @@ public class UserInfoFragment extends MainFragment {
 		int textColor = Color.rgb(255, 138, 168); //xiaoxian
 		String text = getString(R.string.sex_female_name);
 
-		if (sex == DBConstant.SEX_MAILE) {
+		if (sex == AppConstant.DBConstant.SEX_MAILE) {
 			textColor = Color.rgb(144, 203, 1);
 			text = getString(R.string.sex_male_name);
 		}

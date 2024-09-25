@@ -16,15 +16,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
-import com.lsx.bigtalk.DB.sp.SystemConfigSp;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.logs.Logger;
+import com.lsx.bigtalk.storage.sp.BTSp;
 
 
 public class FinderAdapter extends BaseAdapter {
@@ -66,9 +65,9 @@ public class FinderAdapter extends BaseAdapter {
             InternalItem info = dataList.get(position);
             ViewHolder holder;
             if (null == convertView) {
-                convertView = LayoutInflater.from(ctx).inflate(R.layout.item_internal_item, parent, false);
+                convertView = LayoutInflater.from(ctx).inflate(R.layout.finder_list_item_view, parent, false);
                 holder = new ViewHolder();
-                holder.title = convertView.findViewById(R.id.tt_internal_item_title);
+                holder.title = convertView.findViewById(R.id.finder_list_item_title);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
@@ -83,32 +82,31 @@ public class FinderAdapter extends BaseAdapter {
 
     public void update() {
         client.setUserAgent("Android-TT");
-        SystemConfigSp.instance().init(ctx.getApplicationContext());
-        client.get(SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.DISCOVERYURI), new BaseJsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int i, Header[] headers, String s, Object o) {
-            }
-
-            @Override
-            public void onFailure(int i, Header[] headers, Throwable throwable, String responseString, Object o) {
-                try {
-                    convertJson2Data();
-                } catch (JSONException e) {
-                    logger.e(e.toString());
-                }
-            }
-
-            @Override
-            protected Object parseResponse(String s, boolean b) throws Throwable {
-                SystemConfigSp.instance().setStrConfig(SystemConfigSp.SysCfgDimension.DISCOVERYDATA, s);
-                convertJson2Data();
-                return null;
-            }
-        });
+//        client.get("DISCOVERYURI", new BaseJsonHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int i, Header[] headers, String s, Object o) {
+//            }
+//
+//            @Override
+//            public void onFailure(int i, Header[] headers, Throwable throwable, String responseString, Object o) {
+//                try {
+//                    convertJson2Data();
+//                } catch (JSONException e) {
+//                    logger.e(e.toString());
+//                }
+//            }
+//
+//            @Override
+//            protected Object parseResponse(String data, boolean b) throws Throwable {
+//                BTSp.getInstance().setDiscoverData(data);
+//                convertJson2Data();
+//                return null;
+//            }
+//        });
     }
 
     private void convertJson2Data() throws JSONException {
-        String strData = SystemConfigSp.instance().getStrConfig(SystemConfigSp.SysCfgDimension.DISCOVERYDATA);
+        String strData = BTSp.getInstance().getDiscoverData();
         if (!TextUtils.isEmpty(strData)) {
             JSONArray jsonArray = new JSONArray(strData);
             int len = jsonArray.length();

@@ -25,8 +25,8 @@ public class IMGroupAvatar extends LinearLayout {
     private int rowCnt = 0;
     private int parentPadding = 0;
     private int childCorner =0;
-    private int defaultChildAvatarRes = R.drawable.default_group_avatar;
-    private int defaultParentAvatarBk = R.drawable.group_avatar_bg;
+    private int defaultChildAvatarRes = R.drawable.image_group_avatar;
+    private int defaultParentAvatarBk = R.drawable.bg_group_avatar;
     private final ArrayList<ImageView> mAvatarImages = new ArrayList<>();
     private final ArrayList<String> mImageUrls = new ArrayList<String>();
 
@@ -133,7 +133,7 @@ public class IMGroupAvatar extends LinearLayout {
                 avatarUrl = mImageUrls.get(currentIndex);
                 avatar.setAvatarAppend(avatarUrlAppend);
 //                avatar.setBackgroundResource(defaultChildAvatarRes);
-                avatar.setImageResource(R.drawable.default_user_avatar);
+                avatar.setImageResource(R.drawable.image_default_user_avatar);
                 avatar.setCorner(ScreenUtil.instance(getContext()).dip2px(childCorner));
                 avatar.setDefaultImageRes(defaultChildAvatarRes);
                 avatar.setImageUrl(avatarUrl);

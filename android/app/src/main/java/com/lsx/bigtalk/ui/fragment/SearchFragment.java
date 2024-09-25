@@ -11,15 +11,15 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 
 import com.mogujie.tools.ScreenTools;
-import com.lsx.bigtalk.DB.entity.DepartmentEntity;
-import com.lsx.bigtalk.DB.entity.GroupEntity;
-import com.lsx.bigtalk.DB.entity.UserEntity;
+import com.lsx.bigtalk.storage.db.entity.DepartmentEntity;
+import com.lsx.bigtalk.storage.db.entity.GroupEntity;
+import com.lsx.bigtalk.storage.db.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.imservice.support.IMServiceConnector;
-import com.lsx.bigtalk.imservice.service.IMService;
+import com.lsx.bigtalk.service.support.IMServiceConnector;
+import com.lsx.bigtalk.service.service.IMService;
 import com.lsx.bigtalk.ui.adapter.SearchResAdapter;
 import com.lsx.bigtalk.ui.base.BTBaseFragment;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.logs.Logger;
 
 import java.util.List;
 
@@ -70,9 +70,9 @@ public class SearchFragment extends BTBaseFragment {
 	}
 
 	private void initTopBar() {
-        setAppBarImage(R.drawable.appbar_default_bg);
+        setAppBarImage(R.drawable.bg_appbar);
 		showTopSearchBar();
-		setTopLeftBtnImage(R.drawable.top_back);
+		setTopLeftBtnImage(R.drawable.ic_back);
 		hideTopRightBtn();
 
         topLeftBtnImageView.setPadding(0, 0, ScreenTools.instance(getActivity()).dip2px(30), 0);

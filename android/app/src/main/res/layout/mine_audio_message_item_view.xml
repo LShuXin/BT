@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lsx.bigtalk.ui.widget.message.AudioRenderView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/default_bg"
+    android:paddingBottom="20dp"
+    android:paddingStart="0dp"
+    android:paddingEnd="10dp">
+
+    <!-- avatar on the right -->
+    <com.lsx.bigtalk.ui.widget.IMBaseImageView
+        android:id="@+id/user_avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/image_default_user_avatar" />
+
+    <!-- other components on the left -->
+    <RelativeLayout
+        android:id="@+id/content_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/user_avatar"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="4dp"
+        android:layout_toStartOf="@id/user_avatar">
+
+        <!-- audio play animation view -->
+        <LinearLayout
+            android:id="@+id/message_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/bg_mine_message_item"
+            android:gravity="end"
+            android:orientation="vertical"
+            android:paddingBottom="13dp"
+            android:paddingStart="13dp"
+            android:paddingEnd="21dp"
+            android:paddingTop="13dp">
+
+            <View
+                android:id="@+id/audio_animation_view"
+                android:layout_width="11dp"
+                android:layout_height="17dp"
+                android:background="@drawable/anim_voice_play_mine" />
+
+        </LinearLayout>
+
+        <!-- audio duration text view-->
+        <TextView
+            android:id="@+id/audio_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/message_layout"
+            android:layout_marginBottom="13dp"
+            android:layout_marginEnd="7dp"
+            android:text=""
+            android:textSize="14sp" />
+
+        <!-- audio unread notify view -->
+        <View
+            android:id="@+id/audio_unread_notify"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_toStartOf="@id/message_layout"
+            android:background="@drawable/ic_unread_message_notify"
+            android:visibility="gone" />
+
+        <!-- audio message send/download failed view -->
+        <ImageView
+            android:id="@+id/message_state_failed"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignBottom="@id/message_layout"
+            android:layout_marginBottom="13dp"
+            android:layout_marginEnd="16dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/message_image_desc"
+            android:src="@drawable/ic_msg_failed"
+            android:visibility="visible" />
+
+        <!-- audio message send/download progress bar -->
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignBottom="@id/message_layout"
+            android:layout_marginBottom="13dp"
+            android:layout_marginEnd="10dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/message_image_desc"
+            android:src="@drawable/ic_msg_failed"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+
+</com.lsx.bigtalk.ui.widget.message.AudioRenderView>

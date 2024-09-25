@@ -19,7 +19,7 @@ import com.lsx.bigtalk.ui.adapter.album.ImageGridAdapter;
 import com.lsx.bigtalk.ui.adapter.album.ImageItem;
 import com.lsx.bigtalk.ui.widget.CustomViewPager;
 import com.lsx.bigtalk.utils.ImageUtil;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.logs.Logger;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -88,7 +88,7 @@ public class PreviewActivity extends Activity
                         adapter.setSelectTotalNum(++selTotal);
                         removePosition.remove(curImagePosition);
                         ImageGridActivity.setSendText(selTotal);
-                        select.setImageResource(R.drawable.album_img_selected);
+                        select.setImageResource(R.drawable.ic_selected);
                     }
                 }
             }
@@ -108,14 +108,15 @@ public class PreviewActivity extends Activity
                 imageView.setLayoutParams(new LayoutParams(10, 10));
                 tips[i] = imageView;
                 if (i == 0) {
-                    tips[i].setBackgroundResource(R.drawable.default_dot_down);
+                    tips[i].setBackgroundResource(R.drawable.ic_dot_down);
                 } else {
-                    tips[i].setBackgroundResource(R.drawable.default_dot_up);
+                    tips[i].setBackgroundResource(R.drawable.ic_dot_up);
                 }
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                         new ViewGroup.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-                layoutParams.leftMargin = 5;
-                layoutParams.rightMargin = 5;
+                layoutParams.leftMargin = 8;
+                layoutParams.rightMargin = 8;
+                layoutParams.bottomMargin = 50;
                 group.addView(imageView, layoutParams);
             }
         }
@@ -166,9 +167,9 @@ public class PreviewActivity extends Activity
             if (++index == position) {
                 curImagePosition = key;// 对应适配器中图片列表的真实位置
                 if (adapter.getSelectMap().get(key).isSelected()) {
-                    select.setImageResource(R.drawable.album_img_selected);
+                    select.setImageResource(R.drawable.ic_selected);
                 } else {
-                    select.setImageResource(R.drawable.album_img_unselected);
+                    select.setImageResource(R.drawable.ic_unselected);
                 }
             }
         }
@@ -206,9 +207,9 @@ public class PreviewActivity extends Activity
     private void setImageBackground(int selectItems) {
         for (int i = 0; i < tips.length; i++) {
             if (i == selectItems) {
-                tips[i].setBackgroundResource(R.drawable.default_dot_down);
+                tips[i].setBackgroundResource(R.drawable.ic_dot_down);
             } else {
-                tips[i].setBackgroundResource(R.drawable.default_dot_up);
+                tips[i].setBackgroundResource(R.drawable.ic_dot_up);
             }
         }
     }

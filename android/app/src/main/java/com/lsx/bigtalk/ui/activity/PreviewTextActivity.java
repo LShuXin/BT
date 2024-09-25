@@ -5,8 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.lsx.bigtalk.AppConstant;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.IntentConstant;
+
 
 
 public class PreviewTextActivity extends Activity {
@@ -15,11 +16,11 @@ public class PreviewTextActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.preview_text_activity);
+        setContentView(R.layout.text_message_preview_activity);
 
         txtContent = findViewById(R.id.content);
 
-        String displayText = getIntent().getStringExtra(IntentConstant.PREVIEW_TEXT_CONTENT);
+        String displayText = getIntent().getStringExtra(AppConstant.IntentConstant.PREVIEW_TEXT_CONTENT);
         txtContent.setText(displayText);
 
         ((View) txtContent.getParent()).setOnClickListener(new View.OnClickListener() {

@@ -14,17 +14,18 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.lsx.bigtalk.DB.entity.GroupEntity;
-import com.lsx.bigtalk.DB.entity.PeerEntity;
-import com.lsx.bigtalk.DB.entity.UserEntity;
+import com.lsx.bigtalk.AppConstant;
+import com.lsx.bigtalk.storage.db.entity.GroupEntity;
+import com.lsx.bigtalk.storage.db.entity.PeerEntity;
+import com.lsx.bigtalk.storage.db.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.DBConstant;
-import com.lsx.bigtalk.config.SysConstant;
-import com.lsx.bigtalk.imservice.manager.IMContactManager;
-import com.lsx.bigtalk.imservice.service.IMService;
+
+
+import com.lsx.bigtalk.service.manager.IMContactManager;
+import com.lsx.bigtalk.service.service.IMService;
 import com.lsx.bigtalk.ui.widget.IMBaseImageView;
-import com.lsx.bigtalk.helper.IMUIHelper;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.ui.helper.IMUIHelper;
+import com.lsx.bigtalk.logs.Logger;
 
 
 public class GroupManageAdapter extends BaseAdapter {
@@ -51,14 +52,14 @@ public class GroupManageAdapter extends BaseAdapter {
         GroupHolder holder;
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.group_manage_grid_item, parent);
+            convertView = inflater.inflate(R.layout.group_management_gridview_item_view, parent);
 
             holder = new GroupHolder();
             holder.imageView = convertView.findViewById(R.id.grid_item_image);
             holder.userTitle = convertView.findViewById(R.id.group_manager_user_title);
             holder.role = convertView.findViewById(R.id.grid_item_image_role);
             holder.deleteImg = convertView.findViewById(R.id.deleteLayout);
-            holder.imageView.setDefaultImageRes(R.drawable.default_user_avatar);
+            holder.imageView.setDefaultImageRes(R.drawable.image_default_user_avatar);
             convertView.setTag(holder);
         } else {
             holder = (GroupHolder)convertView.getTag();
@@ -88,7 +89,7 @@ public class GroupManageAdapter extends BaseAdapter {
             }
 
         } else if (position == memberList.size() && showPlusTag) {
-            setHolder(holder, position, null, R.drawable.group_member_add, "", null);
+            setHolder(holder, position, null, R.drawable.ic_group_member_add, "", null);
             holder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -98,7 +99,7 @@ public class GroupManageAdapter extends BaseAdapter {
             holder.deleteImg.setVisibility(View.INVISIBLE);
 
         } else if (position == memberList.size() + 1 && showMinusTag) {
-            setHolder(holder, position, null, R.drawable.group_member_delete, "", null);
+            setHolder(holder, position, null, R.drawable.ic_group_member_delete, "", null);
             holder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -138,11 +139,11 @@ public class GroupManageAdapter extends BaseAdapter {
 	public void setData() {
         int sessionType = peerEntity.getType();
         switch (sessionType){
-            case DBConstant.SESSION_TYPE_GROUP:{
+            case AppConstant.DBConstant.SESSION_TYPE_GROUP:{
                GroupEntity groupEntity =  (GroupEntity)peerEntity;
                setGroupData(groupEntity);
             }break;
-            case DBConstant.SESSION_TYPE_SINGLE:{
+            case AppConstant.DBConstant.SESSION_TYPE_SINGLE:{
                 setSingleData((UserEntity)peerEntity);
             }break;
         }
@@ -167,7 +168,7 @@ public class GroupManageAdapter extends BaseAdapter {
         }
         //按钮状态的判断
         switch (entity.getGroupType()){
-            case DBConstant.GROUP_TYPE_TEMP:{
+            case AppConstant.DBConstant.GROUP_TYPE_TEMP:{
                 if(loginId == entity.getCreatorId()){
                     showMinusTag = true;
                     showPlusTag = true;
@@ -177,7 +178,7 @@ public class GroupManageAdapter extends BaseAdapter {
                 }
             }
             break;
-            case DBConstant.GROUP_TYPE_NORMAL:{
+            case AppConstant.DBConstant.GROUP_TYPE_NORMAL:{
                 if(loginId == entity.getCreatorId()){
                     // 展示加减
                     showMinusTag = true;
@@ -230,10 +231,10 @@ public class GroupManageAdapter extends BaseAdapter {
 
 		if (null != holder) {
 			if (avatarUrl != null) {
-                holder.imageView.setDefaultImageRes(R.drawable.default_user_avatar);
+                holder.imageView.setDefaultImageRes(R.drawable.image_default_user_avatar);
                 holder.imageView.setCorner(8);
-                holder.imageView.setAvatarAppend(SysConstant.AVATAR_APPEND_120);
-                holder.imageView.setImageResource(R.drawable.default_user_avatar);
+                holder.imageView.setAvatarAppend(AppConstant.SysConstant.AVATAR_APPEND_120);
+                holder.imageView.setImageResource(R.drawable.image_default_user_avatar);
                 holder.imageView.setImageUrl(avatarUrl);
             } else {
                 holder.imageView.setImageId(0);

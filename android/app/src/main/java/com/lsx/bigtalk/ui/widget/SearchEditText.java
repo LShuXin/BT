@@ -11,11 +11,13 @@ import android.view.View.OnFocusChangeListener;
 import android.view.animation.Animation;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
-import android.widget.EditText;
+import androidx.appcompat.widget.AppCompatEditText;
+
+import androidx.core.content.res.ResourcesCompat;
 
 import com.lsx.bigtalk.R;
 
-public class SearchEditText extends EditText implements  
+public class SearchEditText extends AppCompatEditText implements
         OnFocusChangeListener, TextWatcher { 
     private Drawable clearWordsImage; 
  
@@ -37,8 +39,7 @@ public class SearchEditText extends EditText implements
         //获取EditText的DrawableRight,假如没有设置我们就使用默认的图片
         clearWordsImage = getCompoundDrawables()[2]; 
         if (clearWordsImage == null) { 
-            clearWordsImage = getResources() 
-                    .getDrawable(R.drawable.delete);
+            clearWordsImage = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_clear, getContext().getTheme());
         } 
         clearWordsImage.setBounds(0, 0, clearWordsImage.getIntrinsicWidth(), clearWordsImage.getIntrinsicHeight()); 
         setClearIconVisible(false); 

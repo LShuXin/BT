@@ -6,11 +6,12 @@
     android:background="#ebebeb"
     android:orientation="vertical">
 
-   <!-- msg list, expanded -->
+    <!-- msg list, expanded -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1">
+
         <com.handmark.pulltorefresh.library.PullToRefreshListView
             xmlns:ptr="http://schemas.android.com/apk/res-auto"
             android:id="@+id/message_list"
@@ -25,6 +26,7 @@
             ptr:ptrMode="pullFromStart"
             ptr:ptrOverScroll="false" />
 
+        <!-- new msg hint -->
         <TextView
             android:layout_width="58dp"
             android:layout_height="wrap_content"
@@ -38,85 +40,114 @@
             android:gravity="center_vertical|start"
             android:visibility="gone"
             android:textColor="#01aff4"
-            android:background="@drawable/new_msg_bg" />
+            android:background="@drawable/bg_new_msg" />
     </FrameLayout>
 
-    <!-- bottom area, fixed -->
+    <!-- utils bar, fixed at bottom -->
     <RelativeLayout
         android:id="@+id/layout_bottom"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0">
 
+        <!-- editText & button bar -->
         <RelativeLayout
             android:id="@+id/utils_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/pannel_bg"
+            android:background="#f8f8f8"
             android:clickable="true"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:orientation="horizontal"
-            android:paddingBottom="7dp"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
-            android:paddingTop="7dp" >
+            android:paddingBottom="6dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="2dp">
 
+            <!-- add record button: either show add record button or add text button -->
+            <ImageView
+                android:id="@+id/add_record_btn"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_voice"
+                tools:ignore="ContentDescription" />
+
+            <!-- add text button: either show add record button or add text button -->
+            <ImageView
+                android:id="@+id/add_text_btn"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_keyboard"
+                android:visibility="gone"
+                tools:ignore="ContentDescription" />
+
+            <!-- edit text, either show edit text or record button -->
             <com.lsx.bigtalk.ui.widget.CustomEditView
                 android:id="@+id/message_editView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="9dp"
-                android:layout_marginRight="9dp"
-                android:background="@drawable/text_message_bg"
-                android:maxLines="4"
-                android:minHeight="30dp"
+                android:layout_marginStart="9dp"
+                android:layout_marginEnd="56dp"
+                android:background="@android:color/white"
+                android:maxLines="2"
+                android:minHeight="32dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="0dp"
                 android:scrollbars="vertical"
                 android:textColor="@color/default_light_black_color"
                 android:textSize="16sp"
                 android:scrollbarStyle="outsideInset" />
-            
-            <ImageView
-                android:id="@+id/add_record_btn"
-                android:layout_width="31dp"
-                android:layout_height="31dp"
-                android:layout_centerVertical="true"
-                android:src="@drawable/voice_btn"
-                tools:ignore="ContentDescription" />
-            
-            <ImageView
-                android:id="@+id/add_text_btn"
-                android:layout_width="31dp"
-                android:layout_height="31dp"
-                android:layout_centerVertical="true"
-                android:src="@drawable/keyboard_btn"
-                android:visibility="gone"
-                tools:ignore="ContentDescription" />
-            
+
+            <!-- record input button, either show edit text or record button -->
+            <Button
+                style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/record_flat_btn"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_alignBottom="@id/message_editView"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="9dp"
+                android:layout_marginEnd="56dp"
+                android:layout_toStartOf="@id/add_emoji_btn"
+                android:layout_toEndOf="@id/add_text_btn"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:text="@string/tip_for_voice_forward"
+                android:textColor="@color/default_light_black_color"
+                android:elevation="0dp"
+                android:textSize="15sp"
+                android:visibility="gone" />
+
+
+
+            <!-- add photo button: either show "add photo button" + "add emoji button" or "send message button" -->
             <ImageView
                 android:id="@+id/add_photo_btn"
-                android:layout_width="53dp"
-                android:layout_height="31dp"
-                android:layout_alignParentEnd="true"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_toStartOf="@id/add_emoji_btn"
                 android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/add_photo_btn"
+                android:src="@drawable/ic_add_photo_btn"
                 tools:ignore="ContentDescription" />
-            
+
+            <!-- add emoji button: either show "add photo button" + "add emoji button" or "send message button" -->
             <ImageView
                 android:id="@+id/add_emoji_btn"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="60dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/show_emo_btn"
+                android:src="@drawable/selector_toggle_emoji_button"
                 tools:ignore="ContentDescription" />
 
+            <!-- send message button: either show "add photo button" + "add emoji button" or "send message button" -->
             <TextView
                 android:id="@+id/send_message_btn"
                 android:layout_width="53dp"
@@ -124,31 +155,15 @@
                 android:layout_alignBottom="@id/add_record_btn"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/send_btn_bg"
+                android:background="@drawable/bg_send_message_button"
                 android:gravity="center"
                 android:text="@string/send_message"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:visibility="gone" />            
 
-            <Button
-                android:id="@+id/record_flat_btn"
-                android:layout_width="match_parent"
-                android:layout_height="34dp"
-                android:layout_alignBottom="@id/message_editView"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="9dp"
-                android:layout_marginRight="9dp"
-                android:layout_toStartOf="@id/add_emoji_btn"
-                android:layout_toEndOf="@id/add_text_btn"
-                android:background="@drawable/panel_voice_forward"
-                android:gravity="center"
-                android:text="@string/tip_for_voice_forward"
-                android:textColor="@color/default_light_black_color"
-                android:textSize="15sp"
-                android:visibility="gone" />
-        </RelativeLayout>
 
+        </RelativeLayout>
 
         <!-- emoji panel -->
         <LinearLayout
@@ -157,9 +172,50 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/utils_container"
             android:orientation="vertical"
-            android:background="@color/emo_bk_color"
+            android:background="#F2F2F2"
             android:visibility="gone"
             android:gravity="bottom">
+
+            <!-- emoji switch radio group -->
+            <RadioGroup
+                android:id="@+id/emoji_radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:layout_gravity="top"
+                android:orientation="horizontal"
+                android:checkedButton="@+id/tab1"
+                android:background="@color/group_manager_user_title">
+
+                <!-- set button attribute to '@null' to remove default button style -->
+                <!-- not @+id/tab1 but id="@id/tab1" -->
+                <RadioButton
+                    android:id="@id/tab1"
+                    android:tag="tab1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:text="@string/yaya_emo"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:layout_gravity="bottom"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:background="@drawable/selector_emoji_switch_radio"/>
+
+                <RadioButton
+                    android:id="@+id/tab2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:text="@string/default_emo"
+                    android:button="@null"
+                    android:layout_gravity="bottom"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:background="@drawable/selector_emoji_switch_radio" />
+            </RadioGroup>
 
             <View
                 android:layout_width="fill_parent"
@@ -183,46 +239,7 @@
                 android:layout_weight="1"
                 android:visibility="gone" />
 
-            <RadioGroup
-                android:id="@+id/emoji_radio_group"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center_vertical"
-                android:layout_gravity="bottom"
-                android:orientation="horizontal"
-                android:checkedButton="@+id/tab1"
-                android:background="@color/group_manager_user_title">
 
-                <!-- set button attribute to '@null' to remove default button style -->
-                <!-- not @+id/tab1 but id="@id/tab1" -->
-                <RadioButton
-                    android:id="@id/tab1"
-                    android:tag="tab1"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1.0"
-                    android:text="@string/yaya_emo"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:layout_gravity="bottom"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black"
-                    android:background="@drawable/tab_bg_selector"/>
-
-                <RadioButton
-                    android:id="@+id/tab2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1.0"
-                    android:text="@string/default_emo"
-                    android:button="@null"
-                    android:layout_gravity="bottom"
-                    android:gravity="center"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black"
-                    android:background="@drawable/tab_bg_selector" />
-
-            </RadioGroup>
         </LinearLayout>
 
         <!-- take/choose photo panel -->
@@ -246,14 +263,14 @@
                     android:id="@+id/take_photo_btn"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
-                    android:background="@drawable/camera" />
+                    android:background="@drawable/ic_camera" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="8dp"
-                    android:text="@string/take_camera_btn_text"
+                    android:text="@string/take_a_photo"
                     android:textColor="@color/default_light_black_color"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -269,14 +286,14 @@
                     android:id="@+id/choose_photo_btn"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
-                    android:background="@drawable/album" />
+                    android:background="@drawable/ic_album" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="8dp"
-                    android:text="@string/take_photo_btn_text"
+                    android:text="@string/photo"
                     android:textColor="@color/default_light_black_color"
                     android:textSize="13sp" />
             </LinearLayout>

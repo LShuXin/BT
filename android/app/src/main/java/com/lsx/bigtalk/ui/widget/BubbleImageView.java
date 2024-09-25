@@ -48,8 +48,8 @@ public class BubbleImageView extends AppCompatImageView {
                 ImageLoaderUtil.getImageLoaderInstance().displayImage(this.imageUrl, imageAware, new DisplayImageOptions.Builder()
                         .cacheInMemory(true)
                         .cacheOnDisk(true)
-                        .showImageOnLoading(R.drawable.default_message_image2)
-                        .showImageOnFail(R.drawable.message_image_error)
+                        .showImageOnLoading(R.drawable.bg_default_message2)
+                        .showImageOnFail(R.drawable.image_image_message_error)
                         .imageScaleType(ImageScaleType.IN_SAMPLE_INT)
                         .bitmapConfig(Bitmap.Config.RGB_565)
                         .delayBeforeLoading(100)
@@ -89,7 +89,7 @@ public class BubbleImageView extends AppCompatImageView {
                 });
             }
         } else {
-            this.setImageResource(R.drawable.default_message_image2);
+            this.setImageResource(R.drawable.bg_default_message2);
         }
     }
 

@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <!-- 没有网或者正在尝试重连时显示 -->
     <LinearLayout
-        android:id="@+id/layout_no_network"
+        android:id="@+id/layout_poor_network"
         android:layout_width="fill_parent"
         android:layout_height="49dp"
         android:orientation="vertical"
-        android:visibility="gone" >
+        android:visibility="gone">
 
-        <!-- todo eric specify the detail height is not a good option -->
-        <!-- layout_gravity 用于控制控件在其父容器中的位置，而 gravity 用于控制控件内部内容的对齐方式。-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="47dp"
@@ -21,13 +19,13 @@
             android:gravity="center_vertical">
 
             <ImageView
-                android:id="@+id/imageWifi"
+                android:id="@+id/image_wifi"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="25dp"
                 android:layout_alignParentStart="true"
-                android:src="@drawable/warning" />
+                android:src="@drawable/ic_warning" />
 
             <TextView
                 android:id="@+id/disconnect_text"
@@ -35,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="23dp"
-                android:layout_toEndOf="@+id/imageWifi"
+                android:layout_toEndOf="@+id/image_wifi"
                 android:text="@string/no_network"
                 android:textColor="#ABABAB" />
 
@@ -48,7 +46,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="20dp"
                 android:adjustViewBounds="true"
-                android:src = "@drawable/msg_failed" />
+                android:src="@drawable/ic_msg_failed" />
 
         </RelativeLayout>
 
@@ -60,22 +58,25 @@
             android:paddingTop="1dp"
             android:textColor="@color/message_time_color"
             android:textSize="13sp" />
+
     </LinearLayout>
 
     <!-- 会话列表为空时显示 -->
     <LinearLayout
-        android:id="@+id/layout_no_chat"
+        android:id="@+id/layout_no_session"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:orientation="vertical"
         android:gravity="center|center_horizontal"
-        android:layout_below="@+id/layout_no_network"
-        android:visibility="gone" >
+        android:layout_below="@+id/layout_poor_network"
+        android:visibility="gone">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/no_chat"
             android:textColor="#ABABAB" />
+
     </LinearLayout>
 
     <!-- 会话列表 -->
@@ -83,7 +84,7 @@
         android:id="@+id/session_listview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/layout_no_chat"
+        android:layout_below="@+id/layout_no_session"
         android:layout_marginTop="3dp"
         android:background="@android:color/white"
         android:cacheColorHint="@android:color/transparent"
@@ -91,12 +92,13 @@
         android:listSelector="@android:color/transparent"
         android:paddingBottom="0dp" />
 
+    <!-- 会话列表加载进度条 -->
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:indeterminateDrawable="@drawable/progress_bar"
+        android:indeterminateDrawable="@drawable/selector_progress_bar"
         android:indeterminateDuration="4000"
         android:visibility="visible" />
 

@@ -15,6 +15,7 @@
         android:divider="@null"
         android:listSelector="@android:color/transparent"
         android:paddingBottom="0dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,5 +23,6 @@
         android:padding="15dp"
         android:text="@string/setting_version"
         android:textColor="@color/message_time_color"
-        android:textSize="11sp"/>
+        android:textSize="11sp" />
+
 </LinearLayout>

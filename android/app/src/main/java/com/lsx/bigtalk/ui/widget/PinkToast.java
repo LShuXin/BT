@@ -32,7 +32,7 @@ public class PinkToast extends Toast {
 
     public static Toast makeText(Context context, CharSequence text, int duration) {
         Toast result = Toast.makeText(context, text, duration);
-        result.getView().setBackgroundResource(R.drawable.waterfall_refresh_bg);
+        result.getView().setBackgroundResource(R.drawable.bg_waterfall_refresh);
         result.setGravity(Gravity.CENTER, 0, 0);
         TextView tv = (TextView) ((ViewGroup) result.getView()).getChildAt(0);
         ScreenTools tools = ScreenTools.instance(context);
@@ -48,7 +48,7 @@ public class PinkToast extends Toast {
 
     public static Toast makeText(Context context, int id, int duration) {
         Toast result = Toast.makeText(context, id, duration);
-        Objects.requireNonNull(result.getView()).setBackgroundResource(R.drawable.waterfall_refresh_bg);
+        Objects.requireNonNull(result.getView()).setBackgroundResource(R.drawable.bg_waterfall_refresh);
         result.setGravity(Gravity.CENTER, 0, 0);
         TextView tv = (TextView) ((ViewGroup) result.getView()).getChildAt(0);
         ScreenTools tools = ScreenTools.instance(context);

@@ -13,7 +13,7 @@ public class GroupMemberSelectActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        setContentView(R.layout.group_member_select_activity);
+        setContentView(R.layout.group_member_select_fragment_activity);
     }
 
     @Override

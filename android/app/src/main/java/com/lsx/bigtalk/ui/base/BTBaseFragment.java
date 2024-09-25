@@ -16,10 +16,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.hjq.toast.Toaster;
 import com.mogujie.tools.ScreenTools;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.ui.activity.SearchActivity;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.logs.Logger;
 import com.lsx.bigtalk.ui.widget.SearchEditText;
 import com.lsx.bigtalk.ui.widget.TopTabButtonGroup;
 
@@ -256,7 +257,7 @@ public abstract class BTBaseFragment extends Fragment {
 	}
 
 	protected void initSearch() {
-		setTopRightBtnImage(R.drawable.top_search);
+		setTopRightBtnImage(R.drawable.ic_search_bold);
 		topRightBtnImageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
@@ -272,5 +273,10 @@ public abstract class BTBaseFragment extends Fragment {
 	
 	protected void onSearchDataReady() {
 		initSearch();
+	}
+
+
+	public void toast(CharSequence text) {
+		Toaster.show(text);
 	}
 }

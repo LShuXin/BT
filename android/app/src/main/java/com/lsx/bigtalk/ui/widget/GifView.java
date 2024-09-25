@@ -11,7 +11,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.lsx.bigtalk.app.IMApplication;
+import com.lsx.bigtalk.app.BTApplication;
 
 public class GifView extends ImageView implements Runnable {
 
@@ -151,7 +151,7 @@ public class GifView extends ImageView implements Runnable {
                     // it can be InterruptedException or IllegalArgumentException
                 }
             }
-            if (!IMApplication.gifRunning) {
+            if (!BTApplication.gifRunning) {
                 this.clear();
                 return;
             }

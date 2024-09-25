@@ -12,11 +12,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.lsx.bigtalk.AppConstant;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.IntentConstant;
-import com.lsx.bigtalk.imservice.entity.ImageMessageEntity;
-import com.lsx.bigtalk.imservice.service.IMService;
-import com.lsx.bigtalk.imservice.support.IMServiceConnector;
+
+import com.lsx.bigtalk.service.entity.ImageMessageEntity;
+import com.lsx.bigtalk.service.service.IMService;
+import com.lsx.bigtalk.service.support.IMServiceConnector;
 import com.lsx.bigtalk.ui.fragment.MessageImageFragment;
 
 import java.util.ArrayList;
@@ -51,10 +52,10 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.preview_message_images_activity);
+        setContentView(R.layout.image_message_preview_activity);
         imageList = ImageMessageEntity.getImageMessageList();
         try {
-            messageInfo = (ImageMessageEntity) getIntent().getSerializableExtra(IntentConstant.CUR_MESSAGE);
+            messageInfo = (ImageMessageEntity) getIntent().getSerializableExtra(AppConstant.IntentConstant.CUR_MESSAGE);
             initRes();
             imServiceConnector.connect(this);
         } catch (Exception e) {
@@ -135,9 +136,9 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
                 }
                 ImageView imageView = new ImageView(this);
                 if (i == curImagePosition) {
-                    imageView.setBackgroundResource(R.drawable.default_dot_down);
+                    imageView.setBackgroundResource(R.drawable.ic_dot_down);
                 } else {
-                    imageView.setBackgroundResource(R.drawable.default_dot_up);
+                    imageView.setBackgroundResource(R.drawable.ic_dot_up);
                 }
                 tips.add(imageView);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
@@ -164,9 +165,9 @@ public class PreviewMessageImagesActivity extends FragmentActivity implements Vi
             if (null != tips) {
                 for (int i = 0; i < tips.size(); i++) {
                     if (i == position) {
-                        tips.get(i).setBackgroundResource(R.drawable.default_dot_down);
+                        tips.get(i).setBackgroundResource(R.drawable.ic_dot_down);
                     } else {
-                        tips.get(i).setBackgroundResource(R.drawable.default_dot_up);
+                        tips.get(i).setBackgroundResource(R.drawable.ic_dot_up);
                     }
                 }
             }

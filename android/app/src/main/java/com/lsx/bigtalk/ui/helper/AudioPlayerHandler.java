@@ -4,9 +4,9 @@ package com.lsx.bigtalk.ui.helper;
 import android.content.Context;
 import android.media.AudioManager;
 
-import com.lsx.bigtalk.imservice.event.AudioEvent;
-import com.lsx.bigtalk.imservice.support.audio.SpeexDecoder;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.service.event.AudioEvent;
+import com.lsx.bigtalk.service.support.audio.SpeexDecoder;
+import com.lsx.bigtalk.logs.Logger;
 
 import java.io.File;
 import java.util.Objects;

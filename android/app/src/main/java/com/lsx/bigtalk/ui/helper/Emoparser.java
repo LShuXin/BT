@@ -10,7 +10,7 @@ import android.text.style.ImageSpan;
 
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.utils.CommonUtil;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.logs.Logger;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -40,26 +40,26 @@ public class Emoparser {
     private final int DEFAULT_SMILEY_TEXTS = R.array.default_emoji_phrase;
     private final int YAYA_EMO_TEXTS = R.array.yaya_emoji_phrase;
     private final int[] DEFAULT_EMO_RES_IDS = {
-            R.drawable.e0, R.drawable.e1,
-            R.drawable.e2, R.drawable.e3, R.drawable.e4, R.drawable.e5,
-            R.drawable.e6, R.drawable.e7, R.drawable.e8, R.drawable.e9,
-            R.drawable.e10, R.drawable.e11, R.drawable.e12, R.drawable.e13,
-            R.drawable.e14, R.drawable.e15, R.drawable.e16, R.drawable.e17,
-            R.drawable.e18, R.drawable.e19, R.drawable.e20, R.drawable.e21,
-            R.drawable.e22, R.drawable.e23, R.drawable.e24, R.drawable.e25,
-            R.drawable.e26, R.drawable.e27, R.drawable.e28, R.drawable.e29,
-            R.drawable.e30, R.drawable.e31, R.drawable.e32, R.drawable.e33,
-            R.drawable.e34, R.drawable.e35, R.drawable.e36, R.drawable.e37,
-            R.drawable.e38, R.drawable.e39, R.drawable.e40, R.drawable.e41,
-            R.drawable.e42, R.drawable.e43, R.drawable.e44, R.drawable.e45
+            R.drawable.ic_emoji00, R.drawable.ic_emoji01,
+            R.drawable.ic_emoji02, R.drawable.ic_emoji03, R.drawable.ic_emoji04, R.drawable.ic_emoji05,
+            R.drawable.ic_emoji06, R.drawable.ic_emoji07, R.drawable.ic_emoji08, R.drawable.ic_emoji09,
+            R.drawable.ic_emoji10, R.drawable.ic_emoji11, R.drawable.ic_emoji12, R.drawable.ic_emoji13,
+            R.drawable.ic_emoji14, R.drawable.ic_emoji15, R.drawable.ic_emoji16, R.drawable.ic_emoji17,
+            R.drawable.ic_emoji18, R.drawable.ic_emoji19, R.drawable.ic_emoji20, R.drawable.ic_emoji21,
+            R.drawable.ic_emoji22, R.drawable.ic_emoji23, R.drawable.ic_emoji24, R.drawable.ic_emoji25,
+            R.drawable.ic_emoji26, R.drawable.ic_emoji27, R.drawable.ic_emoji28, R.drawable.ic_emoji29,
+            R.drawable.ic_emoji30, R.drawable.ic_emoji31, R.drawable.ic_emoji32, R.drawable.ic_emoji33,
+            R.drawable.ic_emoji34, R.drawable.ic_emoji35, R.drawable.ic_emoji36, R.drawable.ic_emoji37,
+            R.drawable.ic_emoji38, R.drawable.ic_emoji39, R.drawable.ic_emoji40, R.drawable.ic_emoji41,
+            R.drawable.ic_emoji42, R.drawable.ic_emoji43, R.drawable.ic_emoji44, R.drawable.ic_emoji45
     };
 
     private final int[] YAYA_EMO_RES_IDS = {
-            R.drawable.yaya_e1, R.drawable.yaya_e2, R.drawable.yaya_e3, R.drawable.yaya_e4,
-            R.drawable.yaya_e5, R.drawable.yaya_e6, R.drawable.yaya_e7, R.drawable.yaya_e8,
-            R.drawable.yaya_e9, R.drawable.yaya_e10, R.drawable.yaya_e11, R.drawable.yaya_e12,
-            R.drawable.yaya_e13, R.drawable.yaya_e14, R.drawable.yaya_e15, R.drawable.yaya_e16,
-            R.drawable.yaya_e17, R.drawable.yaya_e18, R.drawable.yaya_e19
+            R.drawable.yaya_emoji01, R.drawable.yaya_emoji02, R.drawable.yaya_emoji03, R.drawable.yaya_emoji04,
+            R.drawable.yaya_emoji05, R.drawable.yaya_emoji06, R.drawable.yaya_emoji07, R.drawable.yaya_emoji08,
+            R.drawable.yaya_emoji09, R.drawable.yaya_emoji10, R.drawable.yaya_emoji11, R.drawable.yaya_emoji12,
+            R.drawable.yaya_emoji13, R.drawable.yaya_emoji14, R.drawable.yaya_emoji15, R.drawable.yaya_emoji16,
+            R.drawable.yaya_emoji17, R.drawable.yaya_emoji18, R.drawable.yaya_emoji19
     };
 
     public int[] getResIdList() {

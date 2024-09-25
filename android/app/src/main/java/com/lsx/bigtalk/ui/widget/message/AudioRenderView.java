@@ -10,12 +10,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lsx.bigtalk.DB.entity.MessageEntity;
-import com.lsx.bigtalk.DB.entity.UserEntity;
+import com.lsx.bigtalk.AppConstant;
+import com.lsx.bigtalk.storage.db.entity.MessageEntity;
+import com.lsx.bigtalk.storage.db.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.config.MessageConstant;
+
 import com.lsx.bigtalk.ui.helper.AudioPlayerHandler;
-import com.lsx.bigtalk.imservice.entity.AudioMessageEntity;
+import com.lsx.bigtalk.service.entity.AudioMessageEntity;
 import com.lsx.bigtalk.utils.CommonUtil;
 import com.lsx.bigtalk.utils.ScreenUtil;
 
@@ -53,7 +54,7 @@ public class AudioRenderView extends  BaseMsgRenderView {
 
     public static AudioRenderView inflater(Context ctx,ViewGroup viewGroup,boolean isMine){
 
-        int resoure = isMine?R.layout.mine_audio_message_item :R.layout.others_audio_message_item;
+        int resoure = isMine?R.layout.mine_audio_message_item_view :R.layout.others_audio_message_item_view;
         //tt_other_audio_message_item
         AudioRenderView audioRenderView = (AudioRenderView) LayoutInflater.from(ctx).inflate(resoure,viewGroup,false);
         audioRenderView.setMine(isMine);
@@ -65,7 +66,7 @@ public class AudioRenderView extends  BaseMsgRenderView {
     protected void onFinishInflate() {
         super.onFinishInflate();
         messageLayout= findViewById(R.id.message_layout);
-        audioAnttView = findViewById(R.id.audio_antt_view);
+        audioAnttView = findViewById(R.id.audio_animation_view);
         audioDuration = findViewById(R.id.audio_duration);
         audioUnreadNotify = findViewById(R.id.audio_unread_notify);
     }
@@ -95,13 +96,13 @@ public class AudioRenderView extends  BaseMsgRenderView {
                     return;
                 }
                 switch (audioReadStatus){
-                    case MessageConstant.AUDIO_UNREAD:
+                    case AppConstant.MessageConstant.AUDIO_UNREAD:
                         if(btnImageListener != null){
                             btnImageListener.onClickUnread();
                             audioUnreadNotify.setVisibility(View.GONE);
                         }
                         break;
-                    case MessageConstant.AUDIO_READ:
+                    case AppConstant.MessageConstant.AUDIO_READ:
                         if(btnImageListener != null){
                             btnImageListener.onClickReaded();
                         }
@@ -148,7 +149,7 @@ public class AudioRenderView extends  BaseMsgRenderView {
 
         //针对path 的设定
         if (null != audioPath) {
-            int resource = isMine ? R.drawable.voice_play_mine : R.drawable.voice_play_others;
+            int resource = isMine ? R.drawable.anim_voice_play_mine : R.drawable.anim_voice_play_others;
             audioAnttView.setBackgroundResource(resource);
             AnimationDrawable animationDrawable = (AnimationDrawable) audioAnttView.getBackground();
 
@@ -163,15 +164,15 @@ public class AudioRenderView extends  BaseMsgRenderView {
             }
 
             switch (audioReadStatus){
-                case MessageConstant.AUDIO_READ:
+                case AppConstant.MessageConstant.AUDIO_READ:
                     audioAlreadyRead();
                     break;
-                case MessageConstant.AUDIO_UNREAD:
+                case AppConstant.MessageConstant.AUDIO_UNREAD:
                     audioUnread();
                     break;
             }
 
-            int audioLength =  audioMessage.getAudiolength();
+            int audioLength =  audioMessage.getAudioLength();
             audioDuration.setText(String.valueOf(audioLength) + '"');
             // messageLayout 的长按事件绑定 在上层做掉，有时间了再迁移
 

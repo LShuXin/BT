@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_list_item"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="68dp"
+        android:gravity="center_vertical">
+
+        <!-- session avatar -->
+        <com.lsx.bigtalk.ui.widget.IMBaseImageView
+            android:id="@+id/contact_avatar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="9dp"
+            android:layout_marginStart="10dp"
+            android:scaleType="centerCrop" />
+
+        <!-- session unread message count -->
+        <TextView
+            android:id="@+id/unread_message_count"
+            android:layout_width="wrap_content"
+            android:minWidth="18dp"
+            android:layout_height="18dp"
+            android:layout_toEndOf="@id/contact_avatar"
+            android:background="@drawable/ic_message_notify"
+            android:gravity="center"
+            android:layout_marginStart="-10dp"
+            android:layout_marginTop="3dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp" />
+
+        <!-- session contact name -->
+        <TextView
+            android:id="@+id/contact_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/contact_avatar"
+            android:layout_toEndOf="@id/contact_avatar"
+            android:layout_marginStart="11dp"
+            android:background="@android:color/transparent"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:maxEms="12"
+            android:paddingTop="3dp"
+            android:singleLine="true"
+            android:textColor="@color/contact_name_color"
+            android:textSize="17sp" />
+
+        <!-- session last message -->
+        <TextView
+            android:id="@+id/message_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/contact_avatar"
+            android:layout_marginStart="11dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@id/contact_avatar"
+            android:background="@android:color/transparent"
+            android:ellipsize="end"
+            android:ems="17"
+            android:singleLine="true"
+            android:paddingBottom="3dp"
+            android:textColor="@color/message_body_text_color"
+            android:textSize="14sp" />
+
+        <!-- session last message time -->
+        <TextView
+            android:id="@+id/message_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/contact_name"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/message_time_color"
+            android:textSize="12sp" />
+
+        <!-- session no disturb icon -->
+        <ImageView
+            android:id="@+id/message_time_no_disturb_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@id/message_body"
+            android:src="@drawable/ic_no_disturb"
+            android:layout_marginEnd="10dp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <!-- divider -->
+	<View
+       	android:layout_width="wrap_content"
+       	android:layout_height="0.5dp"
+       	android:layout_marginStart="10dp"
+       	android:paddingTop="1dp"
+       	android:background="@drawable/bg_horizontal_divider" />
+
+</LinearLayout>

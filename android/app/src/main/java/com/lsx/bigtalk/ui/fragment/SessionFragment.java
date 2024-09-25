@@ -24,30 +24,31 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import de.greenrobot.event.EventBus;
+
+import com.lsx.bigtalk.storage.sp.BTSp;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
-import de.greenrobot.event.EventBus;
-
-import com.lsx.bigtalk.config.DBConstant;
-import com.lsx.bigtalk.DB.entity.GroupEntity;
+import com.lsx.bigtalk.AppConstant;
+import com.lsx.bigtalk.service.event.LoginEvent;
+import com.lsx.bigtalk.service.support.SessionInfo;
+import com.lsx.bigtalk.storage.db.entity.GroupEntity;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.ui.adapter.SessionAdapter;
-import com.lsx.bigtalk.helper.IMUIHelper;
-import com.lsx.bigtalk.imservice.SessionInfo;
-import com.lsx.bigtalk.imservice.event.GroupEvent;
-import com.lsx.bigtalk.imservice.event.LoginStatus;
-import com.lsx.bigtalk.imservice.event.ReconnectEvent;
-import com.lsx.bigtalk.imservice.event.SessionEvent;
-import com.lsx.bigtalk.imservice.event.SocketEvent;
-import com.lsx.bigtalk.imservice.event.UnreadEvent;
-import com.lsx.bigtalk.imservice.event.UserInfoEvent;
-import com.lsx.bigtalk.imservice.manager.IMLoginManager;
-import com.lsx.bigtalk.imservice.manager.IMReconnectManager;
-import com.lsx.bigtalk.imservice.manager.IMUnreadMsgManager;
-import com.lsx.bigtalk.imservice.service.IMService;
+import com.lsx.bigtalk.ui.helper.IMUIHelper;
+import com.lsx.bigtalk.service.event.GroupEvent;
+import com.lsx.bigtalk.service.event.ReconnectEvent;
+import com.lsx.bigtalk.service.event.SessionEvent;
+import com.lsx.bigtalk.service.event.SocketEvent;
+import com.lsx.bigtalk.service.event.UnreadEvent;
+import com.lsx.bigtalk.service.event.ContactEvent;
+import com.lsx.bigtalk.service.manager.IMLoginManager;
+import com.lsx.bigtalk.service.manager.IMReconnectManager;
+import com.lsx.bigtalk.service.manager.IMUnreadMsgManager;
+import com.lsx.bigtalk.service.service.IMService;
 import com.lsx.bigtalk.ui.activity.MainActivity;
-import com.lsx.bigtalk.imservice.support.IMServiceConnector;
+import com.lsx.bigtalk.service.support.IMServiceConnector;
 import com.lsx.bigtalk.utils.NetworkUtil;
 
 
@@ -106,11 +107,11 @@ public class SessionFragment extends MainFragment
         }
         curView = inflater.inflate(R.layout.session_fragment, baseFragmentLayout);
         // 多端登陆也在用这个view
-        noNetworkView = curView.findViewById(R.id.layout_no_network);
-        noChatView = curView.findViewById(R.id.layout_no_chat);
+        noNetworkView = curView.findViewById(R.id.layout_poor_network);
+        noChatView = curView.findViewById(R.id.layout_no_session);
         reconnectingProgressBar = curView.findViewById(R.id.progressbar_reconnect);
         displayView = curView.findViewById(R.id.disconnect_text);
-        notifyImage = curView.findViewById(R.id.imageWifi);
+        notifyImage = curView.findViewById(R.id.image_wifi);
 
         super.init(curView);
         // 初始化顶部view
@@ -191,7 +192,7 @@ public class SessionFragment extends MainFragment
         switch (sessionEvent) {
             case SESSION_UPDATE:
             case SESSION_LIST_SUCCESS:
-            case SET_SESSION_SPIN:
+            case SPIN_SESSION_UPDATE:
                 onSessionDataReady();
                 break;
         }
@@ -223,26 +224,26 @@ public class SessionFragment extends MainFragment
     public void onEventMainThread(UnreadEvent event) {
         switch (event.event) {
             case UNREAD_MSG_RECEIVED:
-            case UNREAD_MSG_LIST_OK:
-            case SESSION_READ_UNREAD_MSG:
+            case UNREAD_MSG_LISTED:
+            case SESSION_UNREAD_MSG_READ:
                 onSessionDataReady();
                 break;
         }
     }
 
-    public void onEventMainThread(UserInfoEvent event) {
+    public void onEventMainThread(ContactEvent event) {
         switch (event) {
-            case USER_INFO_UPDATE:
-            case USER_INFO_OK:
+            case CONTACT_INFO_UPDATE:
+            case CONTACT_INFO_OK:
                 onSessionDataReady();
                 searchDataReady();
                 break;
         }
     }
 
-    public void onEventMainThread(LoginStatus LoginStatus) {
-        logger.d("ChatFragment#onEventMainThread LoginStatus: %s", LoginStatus);
-        switch (LoginStatus) {
+    public void onEventMainThread(LoginEvent LoginEvent) {
+        logger.d("ChatFragment#onEventMainThread LoginEvent: %s", LoginEvent);
+        switch (LoginEvent) {
             case LOCAL_LOGIN_SUCCESS:
             case LOGINING:
                 {
@@ -252,8 +253,8 @@ public class SessionFragment extends MainFragment
                 }
                 break;
 
-            case LOCAL_LOGIN_MSG_SERVICE:
-            case LOGIN_OK:
+            case REMOTE_LOGIN_SUCCESS:
+            case NORMAL_LOGIN_SUCCESS:
                 {
                     isManualReconnect = false;
                     noNetworkView.setVisibility(View.GONE);
@@ -262,12 +263,12 @@ public class SessionFragment extends MainFragment
 
             case LOGIN_AUTH_FAILED:
             case LOGIN_INNER_FAILED:
-                onLoginFailure(LoginStatus);
+                onLoginFailure(LoginEvent);
                 break;
 
             case PC_OFFLINE:
             case KICK_PC_SUCCESS:
-                onPCLoginStatusNotify(false);
+                onPCLoginEventNotify(false);
                 break;
 
             case KICK_PC_FAILED:
@@ -275,7 +276,7 @@ public class SessionFragment extends MainFragment
                 break;
 
             case PC_ONLINE:
-                onPCLoginStatusNotify(true);
+                onPCLoginEventNotify(true);
                 break;
 
             default:
@@ -303,7 +304,7 @@ public class SessionFragment extends MainFragment
         }
     }
 
-    private void onLoginFailure(LoginStatus event) {
+    private void onLoginFailure(LoginEvent event) {
         if (!isManualReconnect) {
             return;
         }
@@ -355,12 +356,12 @@ public class SessionFragment extends MainFragment
      *
      * @param isOnline
      */
-    public void onPCLoginStatusNotify(boolean isOnline) {
-        logger.d("chat_fragment#onPCLoginStatusNotify");
+    public void onPCLoginEventNotify(boolean isOnline) {
+        logger.d("chat_fragment#onPCLoginEventNotify");
         if (isOnline) {
             reconnectingProgressBar.setVisibility(View.GONE);
             noNetworkView.setVisibility(View.VISIBLE);
-            notifyImage.setImageResource(R.drawable.pc_notify);
+            notifyImage.setImageResource(R.drawable.ic_pc_notify);
             displayView.setText(R.string.pc_status_notify);
 
             noNetworkView.setOnClickListener(new View.OnClickListener() {
@@ -383,7 +384,7 @@ public class SessionFragment extends MainFragment
         }
 
         if (noNetworkView != null) {
-            notifyImage.setImageResource(R.drawable.warning);
+            notifyImage.setImageResource(R.drawable.ic_warning);
             noNetworkView.setVisibility(View.VISIBLE);
             if (imService != null) {
                 if (imService.getIMLoginManager().getIsKickedOut()) {
@@ -453,7 +454,7 @@ public class SessionFragment extends MainFragment
             logger.e("recent#onItemLongClick null SessionInfo -> position:%d", position);
             return false;
         }
-        if (SessionInfo.getSessionType() == DBConstant.SESSION_TYPE_SINGLE) {
+        if (SessionInfo.getSessionType() == AppConstant.DBConstant.SESSION_TYPE_SINGLE) {
             handleMsgContactItemLongPressed(getActivity(), SessionInfo);
         } else {
             handleGroupItemLongClick(getActivity(), SessionInfo);
@@ -464,7 +465,7 @@ public class SessionFragment extends MainFragment
     private void handleMsgContactItemLongPressed(final Context ctx, final SessionInfo sessionInfo) {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ctx, android.R.style.Theme_Holo_Light_Dialog));
         builder.setTitle(sessionInfo.getName());
-        final boolean isTop = imService.getConfigSp().isTopSession(sessionInfo.getSessionKey());
+        final boolean isTop = BTSp.getInstance().isSessionSpin(sessionInfo.getSessionKey());
 
         int topMessageRes = isTop ? R.string.cancel_top_message : R.string.top_message;
         String[] items = new String[]{ctx.getString(R.string.check_profile),
@@ -482,7 +483,7 @@ public class SessionFragment extends MainFragment
                         imService.getIMSessionManager().reqRemoveSession(sessionInfo);
                         break;
                     case 2: {
-                        imService.getConfigSp().setSessionTop(sessionInfo.getSessionKey(), !isTop);
+                        BTSp.getInstance().setSessionSpin(sessionInfo.getSessionKey(), !isTop);
                     }
                     break;
                 }
@@ -496,7 +497,7 @@ public class SessionFragment extends MainFragment
     private void handleGroupItemLongClick(final Context ctx, final SessionInfo sessionInfo) {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ctx, android.R.style.Theme_Holo_Light_Dialog));
         builder.setTitle(sessionInfo.getName());
-        final boolean isSpin = imService.getConfigSp().isTopSession(sessionInfo.getSessionKey());
+        final boolean isSpin = BTSp.getInstance().isSessionSpin(sessionInfo.getSessionKey());
         final boolean isShield = sessionInfo.getIsShield();
         int spinMessageRes = isSpin ? R.string.cancel_top_message : R.string.top_message;
         int shieldMessageRes = isShield ? R.string.cancel_forbid_group_message : R.string.forbid_group_message;
@@ -508,11 +509,11 @@ public class SessionFragment extends MainFragment
                     case 0:
                         imService.getIMSessionManager().reqRemoveSession(sessionInfo);
                         break;
-                    case 1: 
-                        imService.getConfigSp().setSessionTop(sessionInfo.getSessionKey(), !isSpin);
+                    case 1:
+                        BTSp.getInstance().setSessionSpin(sessionInfo.getSessionKey(), !isSpin);
                         break;
                     case 2:
-                        int shieldType = isShield ? DBConstant.GROUP_STATUS_ONLINE : DBConstant.GROUP_STATUS_SHIELD;
+                        int shieldType = isShield ? AppConstant.DBConstant.GROUP_STATUS_ONLINE : AppConstant.DBConstant.GROUP_STATUS_SHIELD;
                         imService.getIMGroupManager().shieldGroup(sessionInfo.getPeerId(), shieldType);
                         break;
                 }

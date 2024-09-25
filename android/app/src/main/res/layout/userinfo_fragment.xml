@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- page content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/default_bg_color"
+        android:orientation="vertical">
+
+        <!-- user info -->
+        <RelativeLayout
+            android:id="@+id/user_container"
+            android:layout_width="fill_parent"
+            android:layout_height="252.5dp"
+            android:layout_marginTop="0dp"
+            android:background="@color/user_detail_base"
+            android:padding="0dp">
+
+            <com.lsx.bigtalk.ui.widget.IMBaseImageView
+                android:id="@+id/user_avatar"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="25dp"
+                android:layout_centerHorizontal="true"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/nickName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/user_avatar"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nickName"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0dp"
+                android:textColor="@color/default_light_grey_color"
+                android:textSize="14sp" />
+
+
+            <TextView
+                android:id="@+id/sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="8dp"
+                android:gravity="center"
+                android:textColor="#ff71A8"
+                android:textStyle="italic"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <!-- user department info -->
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/contact_list_item_bk"
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="0dp"
+            android:shrinkColumns="1">
+
+            <!-- department -->
+            <TableRow>
+                <TextView
+                    android:layout_height="45dp"
+                    android:layout_column="1"
+                    android:gravity="start|center_vertical"
+                    android:padding="3dip"
+                    android:text="@string/department"
+                    android:textColor="@color/default_key_color"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/department"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="15dp"
+                    android:gravity="start|center_vertical"
+                    android:padding="3dip"
+                    android:text=""
+                    android:textColor="@color/default_value_color"
+                    android:textSize="15sp" />
+            </TableRow>
+
+            <!-- divider -->
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/default_line_color" />
+
+            <!-- phone -->
+            <TableRow
+                android:id="@+id/user_phone"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_height="45dp"
+                    android:layout_column="1"
+                    android:gravity="start|center_vertical"
+                    android:padding="3dip"
+                    android:text="@string/phone"
+                    android:textColor="@color/default_key_color"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/telno"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="15dp"
+                    android:gravity="start|center_vertical"
+                    android:layout_width="fill_parent"
+                    android:padding="3dip"
+                    android:text=""
+                    android:textColor="@color/default_value_color"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:id="@+id/im_phone_pic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/ic_phone"
+                    android:padding="3dip"/>
+            </TableRow>
+
+            <!-- divider -->
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/default_line_color" />
+
+            <!-- birthday -->
+            <TableRow>
+                <TextView
+                    android:layout_height="45dp"
+                    android:layout_column="1"
+                    android:gravity="start|center_vertical"
+                    android:padding="3dip"
+                    android:text="@string/birthday"
+                    android:textColor="@color/default_key_color"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/birthday"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="15dp"
+                    android:gravity="start|center_vertical"
+                    android:padding="3dip"
+                    android:text="@string/_1990_12_12"
+                    android:textColor="@color/default_value_color"
+                    android:textSize="15sp" />
+            </TableRow>
+
+            <!-- divider -->
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/default_line_color" />
+
+            <!-- email -->
+            <TableRow
+                android:id="@+id/emailArea"
+                android:clickable="true">
+                <TextView
+                    android:layout_height="45dp"
+                    android:layout_column="1"
+                    android:gravity="start|center_vertical"
+                    android:padding="3dip"
+                    android:text="@string/email"
+                    android:textColor="@color/default_key_color"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="15dp"
+                    android:gravity="start|center_vertical"
+                    android:padding="3dip"
+                    android:text=""
+                    android:textColor="@color/default_value_color"
+                    android:textSize="15sp" />
+            </TableRow>
+        </TableLayout>
+
+        <!-- chat button -->
+        <Button
+            android:id="@+id/chat_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="45.5dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/bg_default_btn"
+            android:text="@string/chat"
+            android:textColor="@android:color/white"
+            android:textSize="19sp" />
+    </LinearLayout>
+
+    <!-- page loading progress -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateDrawable="@drawable/selector_progress_bar"
+        android:indeterminateDuration="4000"
+        android:visibility="visible" />
+
+</RelativeLayout>

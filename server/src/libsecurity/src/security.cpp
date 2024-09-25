@@ -135,7 +135,11 @@ extern "C" {
         return carr;
     }
     
+<<<<<<< Updated upstream
     jbyteArray Java_com_lsx_bigtalk_Security_EncryptPass(JNIEnv* env, jobject obj, jstring jstr)
+=======
+    jbyteArray Java_com_lsx_bigtalk_Security_EncryptPwd(JNIEnv* env, jobject obj, jstring jstr)
+>>>>>>> Stashed changes
     {
         const char *pInData = env->GetStringUTFChars(jstr, NULL);		//待加密内容,转换格式
         uint32_t nInLen = strlen(pInData);

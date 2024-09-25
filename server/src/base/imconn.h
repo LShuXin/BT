@@ -1,10 +1,3 @@
-/*
- * imconn.h
- *
- *  Created on: 2013-6-5
- *      Author: ziteng
- */
-
 #ifndef IMCONN_H_
 #define IMCONN_H_
 
@@ -27,7 +20,7 @@ public:
 
 	bool IsBusy() { return m_busy; }
 	int SendPdu(CImPdu* pPdu) { return Send(pPdu->GetBuffer(), pPdu->GetLength()); }
-	int Send(void* data, int len);
+	virtual int Send(void* data, int len);
 
 	virtual void OnConnect(net_handle_t handle) { m_handle = handle; }
 	virtual void OnConfirm() {}

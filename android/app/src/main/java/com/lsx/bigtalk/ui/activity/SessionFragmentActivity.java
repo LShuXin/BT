@@ -10,6 +10,6 @@ public class SessionFragmentActivity extends BTBaseFragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chat_fragment_activity);
+        setContentView(R.layout.session_fragment_activity);
     }
 }

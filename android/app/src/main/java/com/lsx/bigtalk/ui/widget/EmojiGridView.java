@@ -16,10 +16,11 @@ import android.widget.LinearLayout;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.lsx.bigtalk.AppConstant;
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.ui.adapter.EmojiGridViewAdapter;
 import com.lsx.bigtalk.ui.adapter.ViewPageAdapter;
-import com.lsx.bigtalk.config.SysConstant;
+
 import com.lsx.bigtalk.ui.helper.Emoparser;
 import com.lsx.bigtalk.utils.CommonUtil;
 
@@ -67,9 +68,9 @@ public class EmojiGridView extends LinearLayout {
 
     private void initFootDots() {
         viewPagerTotalPagesCount = (int) Math.ceil((double) Emoparser.getInstance(context)
-                .getResIdList().length / (SysConstant.emojiPageSize - 1));
+                .getResIdList().length / (AppConstant.SysConstant.emojiPageSize - 1));
         int mod = Emoparser.getInstance(context).getResIdList().length
-                % (SysConstant.emojiPageSize - 1);
+                % (AppConstant.SysConstant.emojiPageSize - 1);
         if (mod == 1) {
             --viewPagerTotalPagesCount;
         }
@@ -90,7 +91,7 @@ public class EmojiGridView extends LinearLayout {
                             CommonUtil.getElementSzie(context) / 2,
                             5,
                             CommonUtil.getElementSzie(context) / 2);
-                    image.setBackgroundResource(R.drawable.default_emo_dots);
+                    image.setBackgroundResource(R.drawable.ic_emoji_dots);
                     image.setEnabled(false);
                     paginationDotsLayout.addView(image, params);
                 }
@@ -153,8 +154,8 @@ public class EmojiGridView extends LinearLayout {
     // index => pageNo
     private int[] getGridViewData(int index) {
         ++index;
-        int startPos = (index - 1) * (SysConstant.emojiPageSize - 1);
-        int endPos = index * (SysConstant.emojiPageSize - 1);
+        int startPos = (index - 1) * (AppConstant.SysConstant.emojiPageSize - 1);
+        int endPos = index * (AppConstant.SysConstant.emojiPageSize - 1);
 
         if (endPos > Emoparser.getInstance(context).getResIdList().length) {
             endPos = Emoparser.getInstance(context).getResIdList().length;
@@ -169,7 +170,7 @@ public class EmojiGridView extends LinearLayout {
             num++;
         }
         if (length > 1) {
-            resourceIds[length - 1] = R.drawable.default_emo_back_normal;
+            resourceIds[length - 1] = R.drawable.ic_emoji_back_normal;
         }
 
         return resourceIds;
@@ -191,7 +192,7 @@ public class EmojiGridView extends LinearLayout {
         gridView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int start = index * (SysConstant.emojiPageSize - 1);
+                int start = index * (AppConstant.SysConstant.emojiPageSize - 1);
                 onEmojiGridViewItemClick.onItemClick(position + start, index);
             }
         });

@@ -10,10 +10,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.lsx.bigtalk.R;
 import com.lsx.bigtalk.ui.adapter.album.BitmapCache.ImageCallback;
-import com.lsx.bigtalk.utils.Logger;
+import com.lsx.bigtalk.logs.Logger;
 
 
 public class ImageBucketAdapter extends BaseAdapter {
@@ -81,7 +80,7 @@ public class ImageBucketAdapter extends BaseAdapter {
         try {
             if (null == convertView) {
                 holder = new Holder();
-                convertView = View.inflate(act, R.layout.item_image_pick, null);
+                convertView = View.inflate(act, R.layout.image_picker_item_view, null);
                 holder.iv = convertView.findViewById(R.id.image);
                 holder.name = convertView.findViewById(R.id.name);
                 holder.count = convertView.findViewById(R.id.count);
@@ -113,11 +112,11 @@ public class ImageBucketAdapter extends BaseAdapter {
                 logger.e("no images in bucket " + item.bucketName);
             }
             if (position == selectedPosition) {
-                holder.albumArrow.setImageResource(R.drawable.album_arrow_active);
+                holder.albumArrow.setImageResource(R.drawable.ic_album_arrow_active);
                 holder.name.setTextColor(Color.WHITE);
                 holder.count.setTextColor(Color.WHITE);
             } else {
-                holder.albumArrow.setImageResource(R.drawable.album_arrow);
+                holder.albumArrow.setImageResource(R.drawable.ic_default_arrow);
                 holder.name.setTextColor(Color.BLACK);
                 holder.count.setTextColor(R.color.album_list_item_count_color);
             }

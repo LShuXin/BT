@@ -1,12 +1,1 @@
-# 即时通讯 Android
-
-
-/**
-* 负责用户信息的请求
-* 为回话页面以及联系人页面提供服务
-*
-* 联系人信息管理
-* 普通用户的version  有总版本
-* 群组没有总version的概念， 每个群有version
-* 具体请参见 服务端具体的pd协议
-  */
+# BigTalk Android Client

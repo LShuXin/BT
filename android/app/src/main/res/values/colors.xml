@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="light_primary">#1f2326</color>
+    <color name="light_onPrimary">#ffffff</color>
+    <color name="light_primaryContainer">#3f4347</color>
+    <color name="light_onPrimaryContainer">#ffffff</color>
+    <color name="light_inversePrimary">#e9ecf1</color>
+    <color name="light_secondary">#212224</color>
+    <color name="light_onSecondary">#ffffff</color>
+    <color name="light_secondaryContainer">#424345</color>
+    <color name="light_onSecondaryContainer">#ffffff</color>
+    <color name="light_tertiary">#262126</color>
+    <color name="light_onTertiary">#ffffff</color>
+    <color name="light_tertiaryContainer">#474147</color>
+    <color name="light_onTertiaryContainer">#ffffff</color>
+    <color name="light_background">#f2f2f2</color>
+    <color name="light_onBackground">#828282</color>
+    <color name="light_onSurface">#000000</color>
+    <color name="light_surfaceVariant">#000000</color>
+    <color name="light_surface">#fcf8f8</color>
+    <color name="light_onSurfaceVariant">#212427</color>
+    <color name="light_surfaceTint">#212427</color>
+    <color name="light_inverseSurface">#313030</color>
+    <color name="light_inverseOnSurface">#ffffff</color>
+    <color name="light_error">#4e0002</color>
+    <color name="light_onError">#ffffff</color>
+    <color name="light_errorContainer">#8c0009</color>
+    <color name="light_onErrorContainer">#ffffff</color>
+    <color name="light_outline">#404346</color>
+    <color name="light_outlineVariant">#404346</color>
+    <color name="light_scrim">#000000</color>
+    <color name="light_surfaceBright">#fcf8f8</color>
+    <color name="light_surfaceDim">#dcd9d9</color>
+    <color name="light_surfaceContainer">#f0eded</color>
+    <color name="light_surfaceContainerHigh">#ebe7e7</color>
+    <color name="light_surfaceContainerHighest">#e5e2e1</color>
+    <color name="light_surfaceContainerLow">#f6f3f3</color>
+    <color name="light_surfaceContainerLowest">#ffffff</color>
+    <color name="light_shadow">#000000</color>
+
+
+    <color name="dark_primary">#f9fbff</color>
+    <color name="dark_onPrimary">#000000</color>
+    <color name="dark_primaryContainer">#c8cbd0</color>
+    <color name="dark_onPrimaryContainer">#000000</color>
+    <color name="dark_inversePrimary">#272a2e</color>
+    <color name="dark_secondary">#fbfafc</color>
+    <color name="dark_onSecondary">#000000</color>
+    <color name="dark_secondaryContainer">#cbcacc</color>
+    <color name="dark_onSecondaryContainer">#000000</color>
+    <color name="dark_tertiary">#fff9fa</color>
+    <color name="dark_onTertiary">#000000</color>
+    <color name="dark_tertiaryContainer">#d2c8cf</color>
+    <color name="dark_onTertiaryContainer">#000000</color>
+    <color name="dark_background">#f2f2f2</color>
+    <color name="dark_onBackground">#828282</color>
+    <color name="dark_onSurface">#ffffff</color>
+    <color name="dark_surfaceVariant">#ffffff</color>
+    <color name="dark_surface">#131314</color>
+    <color name="dark_onSurfaceVariant">#fafbfe</color>
+    <color name="dark_surfaceTint">#fafbfe</color>
+    <color name="dark_inverseSurface">#e5e2e1</color>
+    <color name="dark_inverseOnSurface">#000000</color>
+    <color name="dark_error">#fff9f9</color>
+    <color name="dark_onError">#000000</color>
+    <color name="dark_errorContainer">#ffbab1</color>
+    <color name="dark_onErrorContainer">#000000</color>
+    <color name="dark_outline">#c9cbce</color>
+    <color name="dark_outlineVariant">#c9cbce</color>
+    <color name="dark_scrim">#000000</color>
+    <color name="dark_surfaceBright">#3a3939</color>
+    <color name="dark_surfaceDim">#131314</color>
+    <color name="dark_surfaceContainer">#201f20</color>
+    <color name="dark_surfaceContainerHigh">#2a2a2a</color>
+    <color name="dark_surfaceContainerHighest">#353535</color>
+    <color name="dark_surfaceContainerLow">#1c1b1c</color>
+    <color name="dark_surfaceContainerLowest">#0e0e0e</color>
+    <color name="dark_shadow">#000000</color>
+
+
+
+
+    <color name="default_light_black_color">#424242</color>
+    <color name="txt_hint_color">#999999</color>
+
+    <!-- contact item color -->
+
+    <color name="message_body_text_color">#999999</color>
+    <color name="message_body_nottext_color">#ffee4566</color>
+    <color name="message_time_color">#a0a0a0</color>
+
+    <!-- album -->
+    <color name="list_divider_color">#d1d1d1</color>
+    <color name="album_list_item_count_color">#bcbcbc</color>
+    <color name="user_avatar_bk">#20465A</color>
+
+    <!-- login -->
+    <color name="default_bg">#ffffff</color>
+    <color name="half_transparent_light">#AA000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="login_hint_color">#d4d4d4</color>
+
+    <!-- default -->
+    <color name="default_light_grey_color">#929292</color>
+    <color name="default_blue_color">#01aff4</color>
+    <color name="default_black_color">#000000</color>
+    <color name="default_title_color">#343434</color>
+    <color name="default_bg_color">#f2f2f2</color>
+    <color name="default_fragment_title_bk_color">#f4f5f7</color>
+    <color name="default_fragment_search_bk_color">#e3e4e6</color>
+    <color name="default_value_color">#333333</color>
+    <color name="contact_name_color">#222222</color>
+    <color name="contact_real_name_color">#aaaaaa</color>
+    <color name="default_key_color">#999999</color>
+    <color name="default_line_color">#cccccc</color>
+
+    <!-- contact -->
+    <color name="contact_default_bg">#dedee0</color>
+    <color name="contact_category_title_bk">#f1f0f6</color>
+    <color name="contact_list_item_bk">#ffffff</color>
+    <color name="contact_category_text_color">#858585</color>
+
+    <!-- group manager -->
+    <color name="group_manager_group_title">#010101</color>
+    <color name="group_manager_user_title">#666666</color>
+    <color name="list_item_sel_color">#eaeaea</color>
+
+    <!--user detail-->
+    <color name="user_detail_base">#ececec</color>
+
+</resources>

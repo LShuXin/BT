@@ -44,7 +44,7 @@
     <string name="menu_search">搜索</string>
     <string name="menu_users">用户</string>
     <string name="chat_title">聊天</string>
-    <string name="loading_contacts">加载中...</string>
+    <string name="loading_contacts">加载中…</string>
     <string name="request_unread_msg_faild">请求未读消息失败</string>
     <string name="load_contacts_failed">数据请求失败,请重试</string>
     <string name="get_unread_msg_count_failed">获取未读消息计数失败</string>
@@ -73,12 +73,22 @@
     <string name="login_failed">登陆失败,请重试</string>
     <string name="action_kickout">用户在其他客户端登录</string>
 
-    <string name="app_name">TeamTalk</string>
+    <string name="main_chat">聊天</string>
+    <string name="main_contact">通讯录</string>
+    <string name="main_inner_net">发现</string>
+    <string name="main_me_tab">我的</string>
+    <string name="page_me">我</string>
+    <string name="page_setting">设置</string>
+    <string name="page_user_detail">详细资料</string>
+
+
+
+    <string name="app_name">BigTalk</string>
+
     <string name="message_image_desc">Message Image</string>
     <string name="tip_for_voice_forward">按住 说话</string>
     <string name="release_to_send_voice">松开 结束</string>
     <string name="photo_pop_pick_photo">从相册选择</string>
-    <string name="photo_pop_take_photo">拍照</string>
     <string name="no_gallery">没有找到相册</string>
     <string name="no_sdcard">没有SD卡</string>
     <string name="no_available_dir">没用找到存储目录</string>
@@ -94,8 +104,8 @@
     <string name="send_good_url_btn_text">发送链接</string>
     <string name="loadding_target_info">正在获取对方信息...</string>
     <string name="audio_recorded_so_short">录音时间太短，请重新录制</string>
-    <string name="take_photo_btn_text">照片</string>
-    <string name="take_camera_btn_text">拍照</string>
+    <string name="photo">照片</string>
+    <string name="take_a_photo">拍照</string>
     <string name="kick_tip">您已经被踢下线</string>
     <string name="goods_detail_title">我正在看:</string>
     <string name="goods_now_price_prefix">￥</string>
@@ -128,28 +138,34 @@
     <string name="save_image">保存图片到手机</string>
     <string name="im_service_disconnected">无法连接到后台服务</string>
 
-
-    <string name="main_chat">聊天</string>
-    <string name="main_contact">通讯录</string>
-    <string name="main_inner_net">发现</string>
-    <string name="main_me_tab">我的</string>
-    <string name="page_me">我</string>
-    <string name="page_setting">设置</string>
-    <string name="page_user_detail">详细资料</string>
-
-    <string name="pull_to_refresh_pull_label">下拉刷新~</string>
-    <string name="pull_to_refresh_release_label">释放立即刷新~</string>
-    <string name="pull_to_refresh_refreshing_label">正在刷新…</string>
-
     <!-- Just use standard Pull Down String when pulling up. These can be set for languages which require it -->
     <string name="pull_to_refresh_from_bottom_pull_label">@string/pull_to_refresh_pull_label</string>
     <string name="pull_to_refresh_from_bottom_release_label">@string/pull_to_refresh_release_label</string>
     <string name="pull_to_refresh_from_bottom_refreshing_label">@string/pull_to_refresh_refreshing_label</string>
     <string name="pull_to_refresh_last_refresh">上次更新：</string>
+
     <string name="default_tab_image">default_tab_image</string>
     <string name="_99">99+</string>
     <string name="recent_sessions">聊天</string>
     <string name="new_msg">新消息</string>
     <string name="default_user_name">小明</string>
+    <string name="example_msg_time">11:11</string>
+    <string name="example_text_message_content">哈哈</string>
+    <string name="_6">6</string>
+    <string name="example_nickname">小明</string>
+    <string name="example_text_message">1111111111111</string>
+    <string name="department">部门</string>
+    <string name="phone">手机</string>
+    <string name="birthday">生日</string>
+    <string name="_1990_12_12">1990/12/12</string>
+    <string name="email">邮箱</string>
+    <string name="search_hint">搜索联系人，部门，会话，群</string>
+
+    <string name="grant_camera_permission_failed">获取相机权限失败</string>
+    <string name="grant_storage_permission_failed">获取存储权限失败</string>
+    <string name="title_activity_image_capture_preview">ImageCapturePreviewActivity</string>
+
+    <string name="grant_record_permission_failed">获取录音权限失败</string>
+    <string name="grant_record_permission_failed_todo">录音权限被永久拒绝授权，请手动授予权限</string>
 
 </resources>

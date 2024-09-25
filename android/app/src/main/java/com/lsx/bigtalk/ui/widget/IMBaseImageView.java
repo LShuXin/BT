@@ -22,7 +22,7 @@ public class IMBaseImageView extends ImageView {
     protected int imageId;
     protected boolean isAttachedOnWindow=false;
     protected String avatarAppend= null;
-    protected int defaultImageRes = R.drawable.default_user_avatar;
+    protected int defaultImageRes = R.drawable.image_default_user_avatar;
     protected int corner=0;
 
     public IMBaseImageView(Context context) {

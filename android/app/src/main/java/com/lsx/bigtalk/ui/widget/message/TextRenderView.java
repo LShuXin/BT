@@ -7,10 +7,10 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.lsx.bigtalk.DB.entity.MessageEntity;
-import com.lsx.bigtalk.DB.entity.UserEntity;
+import com.lsx.bigtalk.storage.db.entity.MessageEntity;
+import com.lsx.bigtalk.storage.db.entity.UserEntity;
 import com.lsx.bigtalk.R;
-import com.lsx.bigtalk.imservice.entity.TextMessageEntity;
+import com.lsx.bigtalk.service.entity.TextMessageEntity;
 import com.lsx.bigtalk.ui.helper.Emoparser;
 
 /**
@@ -24,7 +24,7 @@ public class TextRenderView extends BaseMsgRenderView {
     private TextView messageContent;
 
     public static TextRenderView inflater(Context context, ViewGroup viewGroup, boolean isMine) {
-        int resource = isMine ? R.layout.mine_text_message_item : R.layout.others_text_message_item;
+        int resource = isMine ? R.layout.mine_text_message_item_view : R.layout.others_text_message_item_view;
 
         TextRenderView textRenderView = (TextRenderView) LayoutInflater.from(context).inflate(resource, viewGroup, false);
         textRenderView.setMine(isMine);
