@@ -599,3 +599,24 @@ PC登陆通知。
 
 客户端之间的协议，服务端不认识，只做转发。例如“正在输入”这些。
 
+**如何查看自己 Mac 电脑上的 protoc 的安装情况**
+
+```shell
+apples-Mac-mini-1243:~ apple$ which protoc
+/Users/apple/IDE/protoc-3.18.0-osx-x86_64/bin/protoc
+apples-Mac-mini-1243:~ apple$ cd /Users/apple/IDE/protoc-3.18.0-osx-x86_64/
+apples-Mac-mini-1243:protoc-3.18.0-osx-x86_64 apple$ tree -L 2
+.
+├── bin
+│   └── protoc
+├── include
+│   └── google
+└── readme.txt
+
+4 directories, 2 files
+apples-Mac-mini-1243:protoc-3.18.0-osx-x86_64 apple$ 
+
+
+link directory: /Users/apple/IDE/protoc-3.18.0-osx-x86_64/bin
+include directory: /Users/apple/IDE/protoc-3.18.0-osx-x86_64/include
+```

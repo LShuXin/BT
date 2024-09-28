@@ -7,6 +7,7 @@ import com.hjq.toast.Toaster;
 import com.hjq.toast.style.WhiteToastStyle;
 import com.lsx.bigtalk.service.service.IMService;
 import com.lsx.bigtalk.storage.sp.BTSp;
+import com.lsx.bigtalk.utils.FileUtil;
 import com.lsx.bigtalk.utils.ImageLoaderUtil;
 import com.lsx.bigtalk.logs.Logger;
 
@@ -36,6 +37,7 @@ public class BTApplication extends Application {
 
 	private void init() {
 		Toaster.init(this, new WhiteToastStyle());
+		FileUtil.init(getApplicationContext());
         try {
             BTSp.getInstance().init(getApplicationContext());
         } catch (Exception e) {

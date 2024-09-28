@@ -207,9 +207,9 @@ public class ProtoBuf2JavaBean {
             System.arraycopy(audioStream, 0, playTimeByte, 0, 4);
             System.arraycopy(audioStream, 4, audioContent, 0, msgLen - 4);
             int playTime = CommonUtil.byteArray2int(playTimeByte);
-//            String audioSavePath = FileUtil.saveAudioResourceToFile(audioContent, audioMessage.getFromId());
-//            audioMessage.setAudioLength(playTime);
-//            audioMessage.setAudioPath(audioSavePath);
+            String audioSavePath = FileUtil.saveAudioResourceToFile(audioContent, audioMessage.getFromId());
+            audioMessage.setAudioLength(playTime);
+            audioMessage.setAudioPath(audioSavePath);
         }
 
         /**抽离出来 或者用gson*/

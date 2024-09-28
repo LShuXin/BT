@@ -137,9 +137,9 @@ public class AppConstant {
 
         int MSG_PAGE_SIZE = 18;
 
-        String MSG_SERVER_IP = "192.168.1.100";
+        String MSG_SERVER_IP = "192.168.1.101";
         int MSG_SERVER_PORT = 8081;
-        String MSFS_SERVER_ADDRESS = "http://192.168.1.100:8700";
+        String MSFS_SERVER_ADDRESS = "http://192.168.1.101:8700";
 
         String SYSTEM_STORAGE_DIR_NAME = "BT-IM";
     }

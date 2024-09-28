@@ -1,0 +1,1 @@
+docker build -t 1569663570/web_client -f Dockerfile ../../

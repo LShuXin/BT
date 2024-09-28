@@ -28,6 +28,11 @@ public class FileUtil
 {
     public static String SDCardRoot;
     public static File updateFile;
+    public static Context mContext;
+
+    public static void init(Context context) {
+        mContext = context;
+    }
 
     static
     {
@@ -354,9 +359,9 @@ public class FileUtil
     }
 
 
-    public static String saveAudioResourceToFile(Context context, byte[] content, int userId) {
+    public static String saveAudioResourceToFile(byte[] content, int userId) {
         try {
-            String audioSavePath = CommonUtil.getAudioSavePath(context, userId);
+            String audioSavePath = CommonUtil.getAudioSavePath(mContext, userId);
             File file = new File(audioSavePath);
             FileOutputStream fops = new FileOutputStream(file);
             fops.write(content);

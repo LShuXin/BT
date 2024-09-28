@@ -330,19 +330,9 @@ public class CommonUtil {
     }
 
     public static String getAudioSavePath(Context context, int userId) {
-//        String path = getSavePath(AppConstant.SysConstant.FILE_SAVE_TYPE_AUDIO) + userId
-//                + "_" + System.currentTimeMillis()
-//                + ".spx";
-//        File file = new File(path);
-//        File parent = file.getParentFile();
-//        if (parent != null && !parent.exists()) {
-//            parent.mkdirs();
-//        }
-//        return path;
-
         File externalFilesDir = context.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
         String fileName = userId + "_" + System.currentTimeMillis();
-        File audioFile = new File(externalFilesDir, fileName + ".spx"); // 这里假设保存为 WAV 格式
+        File audioFile = new File(externalFilesDir, fileName + ".spx");
         if (!audioFile.getParentFile().exists()) {
             audioFile.getParentFile().mkdirs();
         }

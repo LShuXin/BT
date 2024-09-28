@@ -243,11 +243,6 @@ public class LoginActivity extends BTBaseActivity {
         } else {
             loginEventView.setVisibility(View.VISIBLE);
             if (imService != null) {
-                System.out.println(111111111);
-                System.out.println(111111111);
-                System.out.println(111111111);
-                System.out.println(111111111);
-                System.out.println(111111111);
                 userName = userName.trim();
                 password = password.trim();
                 imService.getIMLoginManager().login(userName, password);
